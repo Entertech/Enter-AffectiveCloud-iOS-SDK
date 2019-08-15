@@ -1,0 +1,28 @@
+PODS:
+  - GzipSwift (5.0.0)
+  - HandyJSON (5.0.0-beta)
+  - Starscream (3.1.0)
+  - SwiftyJSON (5.0.0)
+
+DEPENDENCIES:
+  - GzipSwift
+  - HandyJSON (= 5.0.0-beta)
+  - Starscream
+  - SwiftyJSON
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GzipSwift
+    - HandyJSON
+    - Starscream
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  GzipSwift: 5592f4d62b641e04d06443ba471f8ed76b1363e4
+  HandyJSON: b84ac9904050a0897a0802092b7cb8808e0a4e9a
+  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+
+PODFILE CHECKSUM: 78238043e4f8e9dbc85531bfd2752609be2aa5da
+
+COCOAPODS: 1.6.1
