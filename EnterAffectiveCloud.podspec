@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/EnterTech'
   s.author           = { 'halo_yd' => 'haloqiubei@gmail.com' }
   s.license          = 'LICENSE'
-  s.source           = { :git => 'git@github.com:EnterTech/EnterAffectiveCloud.git', :tag => s.version.to_s }
+  s.source           = { :git => 'git@github.com:Entertech/Enter-AffectiveComputing-iOS-SDK.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
 
