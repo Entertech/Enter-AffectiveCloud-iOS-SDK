@@ -8,5 +8,5 @@ target 'EnterAffectiveCloud' do
 	pod 'HandyJSON', '5.0.0-beta'
   	pod 'SwiftyJSON'
   	pod 'Starscream'
- 	pod 'GzipSwift'
+ 	pod 'GzipSwift' 
 end
