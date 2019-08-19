@@ -125,7 +125,40 @@ func closeCloudService()
 
 ### 示例代码
 
-TODO: 代码
+~~~swift
+import EnterAffectiveCloud
+
+// 初始化情感云
+func setup() {
+    client = CSClient(wss: YOUR_WSS_URL)
+    self.client.delegate = self //implement the delegate
+}
+
+// 在 CSResponseDelegate 代理方法 websocketState(...) 中开启情感云
+func websocketState(client: CSClient, state: CSState) {
+    ...
+    if state == .connected {
+        self.client.startCloudService(appKey: YourAppKey,
+                                      appSecret: YourAppSecret,
+                                      userName: YourUserName,
+                                      uniqueID: yourAppUniqueID)
+    }
+}
+
+...
+
+// restore 操作
+func restoreAction(_ sender: UIButton) {
+    ...
+    self.client.sessionRestore()
+}
+
+// 结束体验，在所有服务结束后需要调用 closeCloudService
+func finishAction(_ sernder: UIButton) {
+    ...
+    self.client.closeCloudService()
+}
+~~~
 
 ### 参数说明
 
@@ -164,6 +197,39 @@ func biodataReport(services: BiodataTypeOptions)
 * `biodataReport(services: BiodataTypeOptions)` 这个方法根据`多选参数`  [BiodataTypeOptions](#jump1)向情感云请求获取生物数据类型报表。
 
 ### 示例代码1
+
+~~~ swift
+import EnterAffectiveCloud
+
+// 开启生物信号
+func startBioataServices() {
+    self.client.biodataInitial(services: [.EEG, .HeartRate])
+    self.client.biodataSubscribe(services: [.eeg_all, .hr_all])
+    ...
+}
+
+// 原始脑电数据：硬件监听方法
+func brainData() {
+    ...
+    self.client.biodataAppend(eegData: data)
+}
+
+// 心率数据： 硬件监听方法
+func hrData() {
+    ...
+    self.client.biodataAppend(hrData: data)
+}
+
+// 结束体验
+func finish() {
+    // generate report
+    self.client.biodataReport(services: [.EEG, .HeartRate])
+    // unsubscribe services
+    self.client.biodataUnsubscribe(services: [.eeg_all, .hr_all])
+    ...
+}
+
+~~~
 
 ### 参数说明1
 
@@ -213,6 +279,23 @@ func emotionClose(services: CSEmotionsAffectiveOptions)
 
 ### 示例代码2 
 
+~~~ swift
+    // 开启情感数据服务
+    func startEmotionServices() {
+        self.client.emotionStart(services: [.attention, .relaxation, .pleasure, .pressure])
+        self.client.emotionSubscribe(services: [.attention, .relaxation, .pressure, .pleasure])
+    }
+    
+    // 结束体验
+    func finish() {
+        ...
+        self.client.emotionReport(services: [.relaxation, .attention, .pressure, .pleasure])
+        self.client.emotionUnsubscribe(services: [.attention, .relaxation, .pressure, .pleasure])
+        self.client.emotionClose(services: [.attention, .relaxation, .pressure, .pleasure])
+        ...
+    }
+~~~
+
 ### 参数说明2
 
 **<span id="jump3">情感数据服务（CSEmotionsAffectiveOptions）</span>**
@@ -252,6 +335,36 @@ func emotionClose(services: CSEmotionsAffectiveOptions)
 | pleasure | 愉悦度服务 |
 | arousal | 激活度服务 |
 
+### <span id = "jump6">获取情感云数据代理(CSResponseDelegate)<span>
 
+`CSResponseDelegate` 用来获取情感云返回数据代理。里面包含四类方法： 
 
+* session 回话相关代理方法
+* biodata 生物数据
+* affective 情感数据
+* error 错误处理
 
+~~~
+// session
+func sessionCreate(response: CSResponseJSONModel)
+func sessionRestore(response: CSResponseJSONModel)
+func sessionClose(response: CSResponseJSONModel)
+
+// biodata
+func biodataInitial(response: CSResponseJSONModel)
+func biodataSubscribe(response: CSResponseJSONModel)
+func biodataUnsubscribe(response: CSResponseJSONModel)
+func biodataUpload(response: CSResponseJSONModel)
+func biodataReport(response: CSResponseJSONModel)
+
+// affective
+func affectiveStart(response: CSResponseJSONModel)
+func affectiveSubscribe(response: CSResponseJSONModel)
+func affectiveUnsubscribe(response: CSResponseJSONModel)
+func affectiveReport(response: CSResponseJSONModel)
+func affectiveFinish(response: CSResponseJSONModel)
+
+// error
+func error(response: CSResponseJSONModel?, error: CSResponseError, message: String?)
+func error(request: CSRequestJSONModel?, error: CSRequestError, message: String?)
+~~~
