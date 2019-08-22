@@ -45,8 +45,8 @@ public class CSClient {
     /// - Parameter appSecret: your app secret from Cloud Service platform
     /// - Parameter userName: your username from Cloud Service platform
     /// - Parameter uniqueID: the unique ID of your app user
-    public func startCloudService(appKey: String, appSecret: String, userName: String, uniqueID: String) {
-        let sign_str = String(format: "app_key=%@&app_secret=%@&username=%@",appKey, appSecret, userName)
+    public func startCloudService(appKey: String, appSecret: String, uniqueID: String) {
+        let sign_str = String(format: "app_key=%@&app_secret=%@",appKey, appSecret)
         let sign = sign_str.hashed(.md5)!.uppercased()
         self.cloudService.sessionCreate(appKey: appKey,
                                         sign: sign,

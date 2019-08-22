@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		B7E125D5230559590072DF22 /* EnterAffectiveCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B7E125E523055A3F0072DF22 /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125DD23055A3F0072DF22 /* CloudServicesProtocol.swift */; };
-		B7E125E623055A3F0072DF22 /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125DE23055A3F0072DF22 /* CloudModels.swift */; };
-		B7E125E723055A3F0072DF22 /* CloudType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125DF23055A3F0072DF22 /* CloudType.swift */; };
-		B7E125E823055A3F0072DF22 /* EmotionalCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125E023055A3F0072DF22 /* EmotionalCloudServices.swift */; };
-		B7E125EA23055A3F0072DF22 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125E323055A3F0072DF22 /* Log.swift */; };
-		B7E125EB23055A3F0072DF22 /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125E423055A3F0072DF22 /* ToolBox+Ex.swift */; };
-		B7E125EF23055A9A0072DF22 /* CSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E125EE23055A9A0072DF22 /* CSClient.swift */; };
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
+		FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */; };
+		FABFA4D4230E84EF00ECD83C /* CSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CF230E84EF00ECD83C /* CSClient.swift */; };
+		FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D0230E84EF00ECD83C /* CloudModels.swift */; };
+		FABFA4D6230E84EF00ECD83C /* CloudType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D1230E84EF00ECD83C /* CloudType.swift */; };
+		FABFA4D7230E84EF00ECD83C /* EmotionalCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D2230E84EF00ECD83C /* EmotionalCloudServices.swift */; };
+		FABFA4DA230E850500ECD83C /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */; };
+		FABFA4DB230E850500ECD83C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D9230E850500ECD83C /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,13 +25,13 @@
 		B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloud.h; sourceTree = "<group>"; };
 		B7E125D4230559590072DF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7E125DD23055A3F0072DF22 /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
-		B7E125DE23055A3F0072DF22 /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
-		B7E125DF23055A3F0072DF22 /* CloudType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudType.swift; sourceTree = "<group>"; };
-		B7E125E023055A3F0072DF22 /* EmotionalCloudServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionalCloudServices.swift; sourceTree = "<group>"; };
-		B7E125E323055A3F0072DF22 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		B7E125E423055A3F0072DF22 /* ToolBox+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ToolBox+Ex.swift"; sourceTree = "<group>"; };
-		B7E125EE23055A9A0072DF22 /* CSClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSClient.swift; sourceTree = "<group>"; };
+		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
+		FABFA4CF230E84EF00ECD83C /* CSClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSClient.swift; sourceTree = "<group>"; };
+		FABFA4D0230E84EF00ECD83C /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
+		FABFA4D1230E84EF00ECD83C /* CloudType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudType.swift; sourceTree = "<group>"; };
+		FABFA4D2230E84EF00ECD83C /* EmotionalCloudServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmotionalCloudServices.swift; sourceTree = "<group>"; };
+		FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ToolBox+Ex.swift"; path = "EnterAffectiveCloud/Global/ToolBox+Ex.swift"; sourceTree = SOURCE_ROOT; };
+		FABFA4D9230E850500ECD83C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = EnterAffectiveCloud/Global/Log.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,6 @@
 				9CBE7FFECE5DBCFEBB753409 /* Pods-EnterAffectiveCloud.debug.xcconfig */,
 				48AD496F0A15A2495CC49592 /* Pods-EnterAffectiveCloud.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -85,7 +84,7 @@
 		B7E125D2230559590072DF22 /* EnterAffectiveCloud */ = {
 			isa = PBXGroup;
 			children = (
-				B7E125DC23055A3F0072DF22 /* Cloud */,
+				FABFA4CD230E84EF00ECD83C /* Cloud */,
 				B7E125E223055A3F0072DF22 /* Global */,
 				B7E125DB230559F60072DF22 /* Support Files */,
 			);
@@ -101,27 +100,26 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
-		B7E125DC23055A3F0072DF22 /* Cloud */ = {
-			isa = PBXGroup;
-			children = (
-				B7E125EE23055A9A0072DF22 /* CSClient.swift */,
-				B7E125DD23055A3F0072DF22 /* CloudServicesProtocol.swift */,
-				B7E125DE23055A3F0072DF22 /* CloudModels.swift */,
-				B7E125DF23055A3F0072DF22 /* CloudType.swift */,
-				B7E125E023055A3F0072DF22 /* EmotionalCloudServices.swift */,
-			);
-			name = Cloud;
-			path = "../../Enter-AffectiveComputing-iOS-SDK/Enter-AffectiveComputing-iOS-SDK/Cloud";
-			sourceTree = "<group>";
-		};
 		B7E125E223055A3F0072DF22 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				B7E125E323055A3F0072DF22 /* Log.swift */,
-				B7E125E423055A3F0072DF22 /* ToolBox+Ex.swift */,
+				FABFA4D9230E850500ECD83C /* Log.swift */,
+				FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */,
 			);
 			name = Global;
 			path = "../../Enter-AffectiveComputing-iOS-SDK/Enter-AffectiveComputing-iOS-SDK/Global";
+			sourceTree = "<group>";
+		};
+		FABFA4CD230E84EF00ECD83C /* Cloud */ = {
+			isa = PBXGroup;
+			children = (
+				FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */,
+				FABFA4CF230E84EF00ECD83C /* CSClient.swift */,
+				FABFA4D0230E84EF00ECD83C /* CloudModels.swift */,
+				FABFA4D1230E84EF00ECD83C /* CloudType.swift */,
+				FABFA4D2230E84EF00ECD83C /* EmotionalCloudServices.swift */,
+			);
+			path = Cloud;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,13 +228,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7E125E523055A3F0072DF22 /* CloudServicesProtocol.swift in Sources */,
-				B7E125E723055A3F0072DF22 /* CloudType.swift in Sources */,
-				B7E125EF23055A9A0072DF22 /* CSClient.swift in Sources */,
-				B7E125EA23055A3F0072DF22 /* Log.swift in Sources */,
-				B7E125E823055A3F0072DF22 /* EmotionalCloudServices.swift in Sources */,
-				B7E125E623055A3F0072DF22 /* CloudModels.swift in Sources */,
-				B7E125EB23055A3F0072DF22 /* ToolBox+Ex.swift in Sources */,
+				FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */,
+				FABFA4D4230E84EF00ECD83C /* CSClient.swift in Sources */,
+				FABFA4DB230E850500ECD83C /* Log.swift in Sources */,
+				FABFA4DA230E850500ECD83C /* ToolBox+Ex.swift in Sources */,
+				FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */,
+				FABFA4D7230E84EF00ECD83C /* EmotionalCloudServices.swift in Sources */,
+				FABFA4D6230E84EF00ECD83C /* CloudType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
