@@ -101,7 +101,9 @@ public class CSClient {
         for element in results {
             let data_int = element.map { Int($0) }
             self.cloudService.biodataUpload(options: .EEG, eegData: data_int)
-            _eegBuffer.removeFirst(_eegBufferSize)
+            if _eegBuffer.count >= _eegBufferSize {
+                _eegBuffer.removeFirst(_eegBufferSize)
+            }
         }
     }
 
@@ -134,7 +136,10 @@ public class CSClient {
             let data_int = element.map { Int($0) }
             DLog("upload hr data")
             self.cloudService.biodataUpload(options: .HeartRate, hrData: data_int)
-            _hrBuffer.removeFirst(_hrBufferSize)
+            if _hrBuffer.count >= _hrBufferSize {
+                _hrBuffer.removeFirst(_hrBufferSize)
+            }
+            
         }
     }
 
