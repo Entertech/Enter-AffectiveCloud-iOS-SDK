@@ -71,7 +71,7 @@ class EmotionalCloudServices: WebSocketServiceProcotol {
         requestModel.kwargs = CSKwargsJSONModel()
         requestModel.kwargs?.app_key = appKey
         requestModel.kwargs?.sign = sign
-        requestModel.kwargs?.userID = userID.hashed(.md5, output: .hex)
+        requestModel.kwargs?.userID = userID.hashed(.md5, output: .hex)!.uppercased()
         requestModel.kwargs?.timeStamp = timestamp
 
         if let jsonstring = requestModel.toJSONString() {
