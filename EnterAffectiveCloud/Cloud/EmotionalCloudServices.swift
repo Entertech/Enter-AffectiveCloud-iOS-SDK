@@ -60,7 +60,7 @@ class EmotionalCloudServices: WebSocketServiceProcotol {
         self.delegate?.websocketDisconnect(client: self.client)
     }
 
-    func sessionCreate(appKey: String, sign: String, userID: String) {
+    func sessionCreate(appKey: String, sign: String, userID: String, timestamp: String) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -72,7 +72,7 @@ class EmotionalCloudServices: WebSocketServiceProcotol {
         requestModel.kwargs?.app_key = appKey
         requestModel.kwargs?.sign = sign
         requestModel.kwargs?.userID = userID.hashed(.md5, output: .hex)
-
+        requestModel.kwargs?.timeStamp = timestamp
 
         if let jsonstring = requestModel.toJSONString() {
             self.webSocketSend(jsonString: jsonstring)

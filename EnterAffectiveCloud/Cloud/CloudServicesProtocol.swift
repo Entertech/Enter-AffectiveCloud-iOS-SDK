@@ -43,7 +43,7 @@ protocol WebSocketServiceProcotol {
     func webSocketConnect()
     func webSocketSend(jsonString data: String)
     func webSocketDisConnect()
-    func sessionCreate(appKey: String, sign: String, userID: String)
+    func sessionCreate(appKey: String, sign: String, userID: String, timestamp: String)
     func sessionRestore()
     func sessionClose()
 }

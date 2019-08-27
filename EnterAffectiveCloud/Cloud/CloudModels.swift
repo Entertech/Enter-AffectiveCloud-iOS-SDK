@@ -34,6 +34,7 @@ class CSKwargsJSONModel: HandyJSON {
     var app_key: String?
     var sign: String?
     var userID: String?
+    var timeStamp: String?
     var device: String?
     var data: CSRequestDataJSONModel?
     var sessionID: String?
@@ -80,6 +81,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.pleasureServices <-- "pleasure"
         mapper <<<
             self.arousalServices <-- "arousal"
+        mapper <<<
+            self.timeStamp <-- "timestamp"
     }
 }
 
