@@ -44,27 +44,27 @@ public class AffectiveCloudClient {
     /// - Parameter appKey: your app key from Cloud Service platform
     /// - Parameter appSecret: your app secret from Cloud Service platform
     /// - Parameter userName: your username from Cloud Service platform
-    /// - Parameter uniqueID: the unique ID of your app user
-    public func startCloudService(appKey: String, appSecret: String, uniqueID: String) {
-        let hashID = uniqueID.hashed(.md5)!.uppercased()
+    /// - Parameter userID: the unique ID of your app user
+    public func createAndAuthenticateSession(appKey: String, appSecret: String, userID: String) {
+        let hashID = userID.hashed(.md5)!.uppercased()
         let timeStamp = "\(Int(Date().timeIntervalSince1970))"
         let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
         let sign = sign_str.hashed(.md5)!.uppercased()
         self.cloudService.sessionCreate(appKey: appKey,
                                         sign: sign,
-                                        userID: uniqueID,
+                                        userID: userID,
                                         timestamp: timeStamp)
     }
 
     /// close cloud service
     /// firstly close biodata and affective services,  secondly close session finally close cloud service.
-    public func closeCloudService() {
+    public func closeSession() {
         self.cloudService.sessionClose()
         self.websocketDisconnect()
     }
 
     /// restore cloud service session
-    public func sessionRestore() {
+    public func restoreSession() {
         self.cloudService.sessionRestore()
     }
 
