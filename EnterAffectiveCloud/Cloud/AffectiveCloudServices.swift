@@ -65,7 +65,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
         }
-        let requestModel = CSRequestJSONModel()
+        let requestModel = AffectiveCloudRequestJSONModel()
         requestModel.services = CSServicesType.session.rawValue
         requestModel.operation = CSSessionOperation.create.rawValue
         requestModel.kwargs = CSKwargsJSONModel()
@@ -87,7 +87,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             self.delegate?.error(client: self.client, request: nil, error: .noSession, message: "CSRequestError: The session id is empty, restore failed! Try restart cloud service.")
             return
         }
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.session.rawValue
         jsonModel.operation = CSSessionOperation.restore.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -105,7 +105,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.session.rawValue
         jsonModel.operation = CSSessionOperation.close.rawValue
         if let jsonString = jsonModel.toJSONString() {
@@ -210,7 +210,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.initial.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -259,7 +259,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.subscribe.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -285,7 +285,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.unsubscribe.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -309,7 +309,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.upload.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -362,7 +362,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         }
 
         let biodataTypes = self.biodataTypeList(with: options)
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.report.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -389,7 +389,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.start.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -415,7 +415,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         self.checkEmotionAffectiveIsInitial(subscribeList: services)
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.subscribe.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -464,7 +464,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
 
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.unsubscribe.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -514,7 +514,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         self.checkEmotionAffectiveIsInitial(affectiveList: services)
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.report.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -538,7 +538,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
             return
         }
 
-        let jsonModel = CSRequestJSONModel()
+        let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.finish.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
@@ -750,7 +750,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
         if let unGzipData = try? data.gunzipped() {
             let text = String(decoding: unGzipData, as: UTF8.self)
             DLog("response data is \(text)")
-            if let responseModel = CSResponseJSONModel.deserialize(from: text) {
+            if let responseModel = AffectiveCloudResponseJSONModel.deserialize(from: text) {
                 if self.handleErrorWithResponse(model: responseModel) { return }
                 self.handleResponse(with: responseModel)
             } else {
@@ -762,7 +762,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
     }
 
     // check response status code, if error return `true`
-    private func handleErrorWithResponse(model: CSResponseJSONModel) -> Bool {
+    private func handleErrorWithResponse(model: AffectiveCloudResponseJSONModel) -> Bool {
         switch model.code {
         case 400:
             self.delegate?.error(client: self.client, response: model, error: .requestException, message: "The Request error!!")
@@ -781,7 +781,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
 
     /// Handle response data
     /// you can get data use `CSResponseDelegate` in your code
-    private func handleResponse(with model: CSResponseJSONModel) {
+    private func handleResponse(with model: AffectiveCloudResponseJSONModel) {
         if let request = model.request {
             switch (request.services, request.operation) {
             case (CSServicesType.session.rawValue, CSSessionOperation.create.rawValue):
@@ -790,7 +790,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     self.session_id = id
                     self.isSessionConnected = true
                 }
-                self.delegate?.sessionCreate(client: self.client, response: model)
+                self.delegate?.sessionCreateAndAuthenticate(client: self.client, response: model)
             case (CSServicesType.session.rawValue, CSSessionOperation.restore.rawValue):
                 self.delegate?.sessionRestore(client: self.client, response: model)
             case (CSServicesType.session.rawValue, CSSessionOperation.close.rawValue):
@@ -800,7 +800,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     let list = biodata.biodataList {
                     self.appendBiodataInitialList(list: list)
                 }
-                self.delegate?.biodataInitial(client: self.client, response: model)
+                self.delegate?.biodataServicesInit(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.subscribe.rawValue):
                 if let data = model.dataModel as? CSBiodataProcessJSONModel {
                     DLog("log biodata subscribe is \(data)")
@@ -816,30 +816,30 @@ extension AffectiveCloudServices: WebSocketDelegate {
 //                    self.appendBiodataSubscribeList(list: list)
 //                }
 
-                self.delegate?.biodataSubscribe(client: self.client, response: model)
+                self.delegate?.biodataServicesSubscribe(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.unsubscribe.rawValue):
-                self.delegate?.biodataUnsubscribe(client: self.client, response: model)
+                self.delegate?.biodataServicesUnsubscribe(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.upload.rawValue):
-                self.delegate?.biodataUpload(client: self.client, response: model)
+                self.delegate?.biodataServicesUpload(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.report.rawValue):
-                self.delegate?.biodataReport(client: self.client, response: model)
+                self.delegate?.biodataServicesReport(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.start.rawValue):
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let list = dataModel.affectiveList {
                     self.appendEmotionAffectiveInitialList(list: list)
                 }
-                self.delegate?.affectiveStart(client: self.client, response: model)
+                self.delegate?.affectiveDataStart(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.subscribe.rawValue):
                 if let dataModel = model.dataModel as? CSAffectiveSubscribeProcessJsonModel {
                     DLog("affective data is \(dataModel.isNil())")
                 }
-                self.delegate?.affectiveSubscribe(client: self.client, response: model)
+                self.delegate?.affectiveDataSubscribe(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.unsubscribe.rawValue):
-                self.delegate?.affectiveUnsubscribe(client: self.client, response: model)
+                self.delegate?.affectiveDataUnsubscribe(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.report.rawValue):
-                self.delegate?.affectiveReport(client: self.client, response: model)
+                self.delegate?.affectiveDataReport(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.finish.rawValue):
-                self.delegate?.affectiveFinish(client: self.client, response: model)
+                self.delegate?.affectiveDataFinish(client: self.client, response: model)
             default:
                 break
             }

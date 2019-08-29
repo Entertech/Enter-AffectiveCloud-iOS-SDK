@@ -336,25 +336,25 @@ func finishAffectiveDataServices(services: AffectiveDataServiceOptions)
 
 ~~~swift
 // session
-func createAndAuthenticateSession(response: affectiveCloudResponseJSONModel)
-func restoreSession(response: affectiveCloudResponseJSONModel)
-func closeSession(response: affectiveCloudResponseJSONModel)
+func sessionCreateAndAuthenticate(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func sessionRestore(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func sessionClose(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
 
 // bioData
-func initBiodataServices(response: affectiveCloudResponseJSONModel)
-func subscribeBiodataServices(response: affectiveCloudResponseJSONModel)
-func unsubscribeBiodataServices(response: affectiveCloudResponseJSONModel)
-func appendBiodata(response: affectiveCloudResponseJSONModel)
-func getBiodataReport(response: affectiveCloudResponseJSONModel)
+func biodataServicesInit(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func biodataServicesSubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func biodataServicesUnsubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func biodataServicesUpload(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func biodataServicesReport(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
 
 // affectiveData
-func startAffectiveDataServices(response: affectiveCloudResponseJSONModel)
-func subscribeAffectiveDataServices(response: affectiveCloudResponseJSONModel)
-func unsubscribeAffectiveDataServices(response: affectiveCloudResponseJSONModel)
-func getAffectiveDataReport(response: affectiveCloudResponseJSONModel)
-func finishAffectiveDataServices(response: affectiveCloudResponseJSONModel)
+func affectiveDataStart(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func affectiveDataSubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func affectiveDataUnsubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func affectiveDataReport(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
+func affectiveDataFinish(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
 
 // error
-func error(response: affectiveCloudResponseJSONModel?, error: affectiveCloudResponseError, message: String?)
-func error(request: affectiveCloudRequestJSONModel?, error: affectiveCloudRequestError, message: String?)
+func error(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel?, error: AffectiveCloudResponseError, message: String?)
+func error(client: AffectiveCloudClient, request: AffectiveCloudRequestJSONModel?, error: AffectiveCloudRequestError, message: String?)
 ~~~

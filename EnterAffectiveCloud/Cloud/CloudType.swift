@@ -42,7 +42,7 @@ public enum CSEmotionOperation: String {
     case finish
 }
 
-public enum CSRequestError: Error {
+public enum AffectiveCloudRequestError: Error {
     case unSocketConnected
     case unStart
     case noBiodataService
@@ -53,7 +53,7 @@ public enum CSRequestError: Error {
     case unKnow
 }
 
-public enum CSResponseError: Error {
+public enum AffectiveCloudResponseError: Error {
     case requestException
     case notFoundServer
     case auth

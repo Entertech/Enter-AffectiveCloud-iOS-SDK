@@ -11,7 +11,7 @@ import HandyJSON
 import SwiftyJSON
 
 //MARK: Request Models
-public class CSRequestJSONModel: HandyJSON {
+public class AffectiveCloudRequestJSONModel: HandyJSON {
     var services: String = ""
     var operation: String = ""
     var kwargs: CSKwargsJSONModel?
@@ -87,9 +87,9 @@ class CSKwargsJSONModel: HandyJSON {
 }
 
 //MARK: Response Models
-public class CSResponseJSONModel: HandyJSON {
+public class AffectiveCloudResponseJSONModel: HandyJSON {
     public var code: Int = 0
-    public var request: CSRequestJSONModel?
+    public var request: AffectiveCloudRequestJSONModel?
     private var data: [String: Any]?
     var message: String?
     public required init() { }
