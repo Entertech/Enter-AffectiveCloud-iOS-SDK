@@ -11,29 +11,29 @@ import SwiftyJSON
 
 /// cloud services response delegate
 /// you can handle or display cloud data in your UI level use this delegate
-public protocol CSResponseDelegate: class {
-    func websocketState(client: CSClient, state: CSState)
-    func websocketConnect(client: CSClient)
-    func websocketDisconnect(client: CSClient)
+public protocol AffectiveCloudResponseDelegate: class {
+    func websocketState(client: AffectiveCloudClient, state: CSState)
+    func websocketConnect(client: AffectiveCloudClient)
+    func websocketDisconnect(client: AffectiveCloudClient)
 
-    func sessionCreate(client: CSClient, response: CSResponseJSONModel)
-    func sessionRestore(client: CSClient, response: CSResponseJSONModel)
-    func sessionClose(client: CSClient, response: CSResponseJSONModel)
+    func sessionCreate(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func sessionRestore(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func sessionClose(client: AffectiveCloudClient, response: CSResponseJSONModel)
 
-    func biodataInitial(client: CSClient, response: CSResponseJSONModel)
-    func biodataSubscribe(client: CSClient, response: CSResponseJSONModel)
-    func biodataUnsubscribe(client: CSClient, response: CSResponseJSONModel)
-    func biodataUpload(client: CSClient, response: CSResponseJSONModel)
-    func biodataReport(client: CSClient, response: CSResponseJSONModel)
+    func biodataInitial(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func biodataSubscribe(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func biodataUnsubscribe(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func biodataUpload(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func biodataReport(client: AffectiveCloudClient, response: CSResponseJSONModel)
 
-    func affectiveStart(client: CSClient, response: CSResponseJSONModel)
-    func affectiveSubscribe(client: CSClient, response: CSResponseJSONModel)
-    func affectiveUnsubscribe(client: CSClient, response: CSResponseJSONModel)
-    func affectiveReport(client: CSClient, response: CSResponseJSONModel)
-    func affectiveFinish(client: CSClient, response: CSResponseJSONModel)
+    func affectiveStart(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func affectiveSubscribe(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func affectiveUnsubscribe(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func affectiveReport(client: AffectiveCloudClient, response: CSResponseJSONModel)
+    func affectiveFinish(client: AffectiveCloudClient, response: CSResponseJSONModel)
 
-    func error(client: CSClient, response: CSResponseJSONModel?, error: CSResponseError, message: String?)
-    func error(client: CSClient, request: CSRequestJSONModel?, error: CSRequestError, message: String?)
+    func error(client: AffectiveCloudClient, response: CSResponseJSONModel?, error: CSResponseError, message: String?)
+    func error(client: AffectiveCloudClient, request: CSRequestJSONModel?, error: CSRequestError, message: String?)
 }
 
 //MARK: websocket services

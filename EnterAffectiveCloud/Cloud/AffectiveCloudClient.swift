@@ -8,22 +8,22 @@
 
 import Foundation
 
-public class CSClient {
-    public weak var delegate: CSResponseDelegate! {
+public class AffectiveCloudClient {
+    public weak var affectiveCloudDelegate: AffectiveCloudResponseDelegate! {
         didSet {
-            self.cloudService.delegate = delegate
+            self.cloudService.delegate = affectiveCloudDelegate
         }
     }
 
-    private let cloudService: EmotionalCloudServices
-    public init(wssURL: URL) {
-        self.cloudService = EmotionalCloudServices(wssURL: wssURL)
+    private let cloudService: AffectiveCloudServices
+    public init(websocketURL: URL) {
+        self.cloudService = AffectiveCloudServices(wssURL: websocketURL)
         self.cloudService.client = self
         self.websocketConnect()
     }
 
-    public init(wss: String) {
-        self.cloudService = EmotionalCloudServices(ws: wss)
+    public init(websocketURLString: String) {
+        self.cloudService = AffectiveCloudServices(ws: websocketURLString)
         self.cloudService.client = self
         self.websocketConnect()
     }

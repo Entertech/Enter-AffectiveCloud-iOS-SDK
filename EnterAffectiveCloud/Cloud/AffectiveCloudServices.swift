@@ -12,10 +12,10 @@ import HandyJSON
 import Gzip
 
 // web socket services
-class EmotionalCloudServices: WebSocketServiceProcotol {
+class AffectiveCloudServices: WebSocketServiceProcotol {
 
     /// receive response data use delegate method
-    weak var delegate: CSResponseDelegate?
+    weak var delegate: AffectiveCloudResponseDelegate?
 
     var isSessionConnected = false
     //MARK: initial websocket
@@ -27,7 +27,7 @@ class EmotionalCloudServices: WebSocketServiceProcotol {
         }
     }
     let socket: WebSocket
-    var client: CSClient!
+    var client: AffectiveCloudClient!
     init(ws: String) {
         self.socket = WebSocket(url: URL(string: ws)!)
         self.socket.delegate = self
@@ -197,7 +197,7 @@ class EmotionalCloudServices: WebSocketServiceProcotol {
 }
 
 //MARK: BiodataServiceProtocol imp
-extension EmotionalCloudServices: BiodataServiceProtocol {
+extension AffectiveCloudServices: BiodataServiceProtocol {
 
     func biodataInitial(options: BiodataTypeOptions) {
         guard self.socket.isConnected else {
@@ -376,7 +376,7 @@ extension EmotionalCloudServices: BiodataServiceProtocol {
 }
 
 //MARK: EmotionServiceProcotol
-extension EmotionalCloudServices: CSEmotionServiceProcotol {
+extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
     func emotionStart(services: CSEmotionsAffectiveOptions) {
         guard self.socket.isConnected else {
@@ -728,7 +728,7 @@ extension EmotionalCloudServices: CSEmotionServiceProcotol {
     }
 }
 
-extension EmotionalCloudServices: WebSocketDelegate {
+extension AffectiveCloudServices: WebSocketDelegate {
     //MARK: web socket delegate
     func websocketDidConnect(socket: WebSocketClient) {
         self.state = .connected
