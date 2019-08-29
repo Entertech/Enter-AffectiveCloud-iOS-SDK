@@ -336,7 +336,7 @@ func finishAffectiveDataServices(services: AffectiveDataServiceOptions)
 * affectiveData 情感数据
 * error 错误处理
 
-~~~
+~~~swift
 // session
 func createAndAuthenticateSession(response: affectiveCloudResponseJSONModel)
 func restoreSession(response: affectiveCloudResponseJSONModel)
