@@ -114,7 +114,7 @@ end
 ```swift
 init(websocketURL: URL)
 var affectiveCloudDelegate: AffectiveCloudResponseDelegate?
-func createAndAuthenticateSession(appKey: String, appSecret: String, userID: String, timestamp: String)
+func createAndAuthenticateSession(appKey: String, appSecret: String, userID: String)
 func restoreSession()
 func closeSession()
 ```
@@ -144,8 +144,7 @@ func websocketState(client: AffectiveCloudClient, state: CSState) {
     if state == .connected {
         self.client.createAndAuthenticateSession(appKey: YourAppKey,
                                       appSecret: YourAppSecret,
-                                      userID: YouruserID,
-                                      timestamp: currentTimestamp)
+                                      userID: YourUserID)
     }
 }
 
@@ -174,8 +173,7 @@ func closeAction(_ sernder: UIButton) {
 |:--:|:--:|:--:|
 | appKey | String | 由我们后台生成的：App Key |
 | appSecret | String | 由我们后台生成的：App Secret|
-| userID | String | 你 app 当前用户的 id，详见[userID](https://docs.affectivecloud.com/🎙接口协议/3.%20会话协议.html#userID) |
-| timestamp | String | 当前的 unix 时间戳 |
+| userID | String | 你 app 当前用户的 id，如手机号、id 号，昵称等，需要保证唯一性。详见[userID](https://docs.affectivecloud.com/🎙接口协议/3.%20会话协议.html#userID) |
 
 
 ## 基础生物数据分析服务
