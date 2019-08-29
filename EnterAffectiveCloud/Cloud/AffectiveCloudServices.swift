@@ -193,7 +193,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
 
     // Extension Properties
     private var biodataInitialList: BiodataTypeOptions?
-    private var emotionAffectiveInitialList: CSEmotionsAffectiveOptions?
+    private var emotionAffectiveInitialList: AffectiveDataServiceOptions?
 }
 
 //MARK: BiodataServiceProtocol imp
@@ -378,7 +378,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
 //MARK: EmotionServiceProcotol
 extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
-    func emotionStart(services: CSEmotionsAffectiveOptions) {
+    func emotionStart(services: AffectiveDataServiceOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -402,7 +402,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
     }
 
-    func emotionSubscribe(services: CSEmotionSubscribeOptions) {
+    func emotionSubscribe(services: AffectiveDataSubscribeOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -452,7 +452,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
     }
 
-    func emotionUnSubscribe(services: CSEmotionSubscribeOptions) {
+    func emotionUnSubscribe(services: AffectiveDataSubscribeOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -501,7 +501,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
     }
 
-    func emotionReport(services: CSEmotionsAffectiveOptions) {
+    func emotionReport(services: AffectiveDataServiceOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -527,7 +527,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
     }
 
-    func emotionClose(services: CSEmotionsAffectiveOptions) {
+    func emotionClose(services: AffectiveDataServiceOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -550,7 +550,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
     }
 
-    private func serviceList(options: CSEmotionsAffectiveOptions) -> [String] {
+    private func serviceList(options: AffectiveDataServiceOptions) -> [String] {
         var list = [String]()
         if options.contains(.attention) {
             list.append("attention")
@@ -618,7 +618,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         return list
     }
 
-    private func subscribeList(options: CSEmotionSubscribeOptions)-> [String] {
+    private func subscribeList(options: AffectiveDataSubscribeOptions)-> [String] {
         var list = [String]()
         if options.contains(.attention) {
             list.append("attention")
@@ -643,7 +643,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         return list
     }
 
-    private func checkEmotionAffectiveIsInitial(subscribeList: CSEmotionSubscribeOptions) {
+    private func checkEmotionAffectiveIsInitial(subscribeList: AffectiveDataSubscribeOptions) {
         if let flag = self.emotionAffectiveInitialList?.contains(.attention),
             subscribeList.contains(.attention) {
             if !flag {
@@ -685,7 +685,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
     }
 
-    private func checkEmotionAffectiveIsInitial(affectiveList: CSEmotionsAffectiveOptions) {
+    private func checkEmotionAffectiveIsInitial(affectiveList: AffectiveDataServiceOptions) {
         if let flag = self.emotionAffectiveInitialList?.contains(.attention),
             affectiveList.contains(.attention) {
             if !flag {
@@ -873,35 +873,35 @@ extension AffectiveCloudServices: WebSocketDelegate {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.relaxation)
             } else {
-                self.emotionAffectiveInitialList = CSEmotionsAffectiveOptions(arrayLiteral: .relaxation)
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .relaxation)
             }
         }
         if list.contains("attention") {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.attention)
             } else {
-                self.emotionAffectiveInitialList = CSEmotionsAffectiveOptions(arrayLiteral: .attention)
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .attention)
             }
         }
         if list.contains("pleasure") {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.pleasure)
             } else {
-                self.emotionAffectiveInitialList = CSEmotionsAffectiveOptions(arrayLiteral: .pleasure)
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .pleasure)
             }
         }
         if list.contains("pressure") {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.pressure)
             } else {
-                self.emotionAffectiveInitialList = CSEmotionsAffectiveOptions(arrayLiteral: .pressure)
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .pressure)
             }
         }
         if list.contains("arousal") {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.arousal)
             } else {
-                self.emotionAffectiveInitialList = CSEmotionsAffectiveOptions(arrayLiteral: .arousal)
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .arousal)
             }
         }
     }

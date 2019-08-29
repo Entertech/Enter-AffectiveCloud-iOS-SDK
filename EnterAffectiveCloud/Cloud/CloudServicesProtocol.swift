@@ -94,38 +94,38 @@ public struct BiodataParameterOptions: OptionSet {
 
 /// Emotional Cloud Services
 protocol CSEmotionServiceProcotol {
-    func emotionStart(services: CSEmotionsAffectiveOptions)
-    func emotionSubscribe(services: CSEmotionSubscribeOptions)
-    func emotionUnSubscribe(services: CSEmotionSubscribeOptions)
-    func emotionReport(services: CSEmotionsAffectiveOptions)
-    func emotionClose(services: CSEmotionsAffectiveOptions)
+    func emotionStart(services: AffectiveDataServiceOptions)
+    func emotionSubscribe(services: AffectiveDataSubscribeOptions)
+    func emotionUnSubscribe(services: AffectiveDataSubscribeOptions)
+    func emotionReport(services: AffectiveDataServiceOptions)
+    func emotionClose(services: AffectiveDataServiceOptions)
 }
 
 //MARK: emotional services and type
-public extension CSEmotionSubscribeOptions {
-    static let attention = CSEmotionSubscribeOptions(rawValue: 1 << 0)
-    static let relaxation = CSEmotionSubscribeOptions(rawValue: 1 << 1)
-    static let pressure = CSEmotionSubscribeOptions(rawValue: 1 << 2)
-    static let pleasure = CSEmotionSubscribeOptions(rawValue: 1 << 3)
-    static let arousal = CSEmotionSubscribeOptions(rawValue: 1 << 4)
+public extension AffectiveDataSubscribeOptions {
+    static let attention = AffectiveDataSubscribeOptions(rawValue: 1 << 0)
+    static let relaxation = AffectiveDataSubscribeOptions(rawValue: 1 << 1)
+    static let pressure = AffectiveDataSubscribeOptions(rawValue: 1 << 2)
+    static let pleasure = AffectiveDataSubscribeOptions(rawValue: 1 << 3)
+    static let arousal = AffectiveDataSubscribeOptions(rawValue: 1 << 4)
 }
 
-public struct CSEmotionSubscribeOptions: OptionSet {
+public struct AffectiveDataSubscribeOptions: OptionSet {
     public let rawValue: Int
     public init(rawValue: Int) {
         self.rawValue = rawValue
     }
 }
 
-public extension CSEmotionsAffectiveOptions {
-    static let attention = CSEmotionsAffectiveOptions(rawValue: 1 << 0)
-    static let relaxation = CSEmotionsAffectiveOptions(rawValue: 1 << 1)
-    static let pressure = CSEmotionsAffectiveOptions(rawValue: 1 << 2)
-    static let pleasure = CSEmotionsAffectiveOptions(rawValue: 1 << 3)
-    static let arousal = CSEmotionsAffectiveOptions(rawValue: 1 << 4)
+public extension AffectiveDataServiceOptions {
+    static let attention = AffectiveDataServiceOptions(rawValue: 1 << 0)
+    static let relaxation = AffectiveDataServiceOptions(rawValue: 1 << 1)
+    static let pressure = AffectiveDataServiceOptions(rawValue: 1 << 2)
+    static let pleasure = AffectiveDataServiceOptions(rawValue: 1 << 3)
+    static let arousal = AffectiveDataServiceOptions(rawValue: 1 << 4)
 }
 
-public struct CSEmotionsAffectiveOptions: OptionSet {
+public struct AffectiveDataServiceOptions: OptionSet {
     public let rawValue: Int
     public init(rawValue: Int) {
         self.rawValue = rawValue

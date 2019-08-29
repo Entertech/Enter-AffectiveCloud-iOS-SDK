@@ -171,34 +171,34 @@ public class AffectiveCloudClient {
 
     /// start emotion(affective) services with parameter
     /// - Parameter services: emotion services list: like: .attention  .relaxation  .pleasure  .pressure and .arousal
-    public func emotionStart(services: CSEmotionsAffectiveOptions) {
+    public func startAffectiveDataServices(services: AffectiveDataServiceOptions) {
         self.cloudService.emotionStart(services: services)
     }
 
     /// generate the report according your service
     /// you will get the report data in `affectiveReport(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: emotion serivce
-    public func emotionReport(services: CSEmotionsAffectiveOptions) {
+    public func getAffectiveDataReport(services: AffectiveDataServiceOptions) {
         self.cloudService.emotionReport(services: services)
     }
 
     /// By subscribing the specificed service
     /// you will get the analyzed data in `affectiveSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: emotion service
-    public func emotionSubscribe(services: CSEmotionSubscribeOptions) {
+    public func subscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
         self.cloudService.emotionSubscribe(services: services)
     }
 
     /// unsubscribe the specificed service
     /// cloud service will stop response the analyzed data with the specified service.
     /// - Parameter services: emotion services
-    public func emotionUnsubscribe(services: CSEmotionSubscribeOptions) {
+    public func unsubscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
         self.cloudService.emotionUnSubscribe(services: services)
     }
 
     /// close emotion service with the sepecified service
     /// - Parameter services: emotion services
-    public func emotionClose(services: CSEmotionsAffectiveOptions) {
+    public func finishAffectiveDataServices(services: AffectiveDataServiceOptions) {
         self.cloudService.emotionClose(services: services)
     }
 }
