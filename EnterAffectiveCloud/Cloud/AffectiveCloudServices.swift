@@ -127,7 +127,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         return servicesList
     }
 
-    private func biodataParamList(with options: BiodataSubscribeOptions) -> Set<String> {
+    private func biodataParamList(with options: BiodataParameterOptions) -> Set<String> {
         var parametersList = Set<String>()
         if options.contains(.eeg_all) {
             parametersList.insert("eegl_wave")
@@ -223,7 +223,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         }
     }
 
-    func biodataSubscribe(parameters options: BiodataSubscribeOptions) {
+    func biodataSubscribe(parameters options: BiodataParameterOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -274,7 +274,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         }
     }
 
-    func biodataUnSubscribe(parameters options: BiodataSubscribeOptions) {
+    func biodataUnSubscribe(parameters options: BiodataParameterOptions) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return

@@ -184,8 +184,8 @@ func closeAction(_ sernder: UIButton) {
 
 ```
 func initBiodataServices(serivices: BiodataTypeOptions)
-func appendBiodata(eegData: [UInt8])
-func appendBiodata(hrData: [UInt8])
+func appendBiodata(eegData: Data)
+func appendBiodata(hrData: Data)
 func subscribeBiodataServices(serivices: BiodataParameterOptions)
 func unsubscribeBiodataServices(serivices: BiodataParameterOptions)
 func getBiodataReport(services: BiodataTypeOptions)

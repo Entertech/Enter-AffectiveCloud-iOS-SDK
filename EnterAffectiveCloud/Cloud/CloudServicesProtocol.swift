@@ -51,8 +51,8 @@ protocol WebSocketServiceProcotol {
 //MARK: biodata service and type
 protocol BiodataServiceProtocol {
     func biodataInitial(options: BiodataTypeOptions)
-    func biodataSubscribe(parameters options: BiodataSubscribeOptions)
-    func biodataUnSubscribe(parameters options: BiodataSubscribeOptions)
+    func biodataSubscribe(parameters options: BiodataParameterOptions)
+    func biodataUnSubscribe(parameters options: BiodataParameterOptions)
     func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?)
     func biodataReport(options: BiodataTypeOptions)
 }
@@ -70,22 +70,22 @@ public struct BiodataTypeOptions: OptionSet {
 }
 
 /// Biodata Parameter options: eg: eegl_wave, eegr_wave, eeg_alpha_power
-public extension BiodataSubscribeOptions {
-    static let eeg_wave_left = BiodataSubscribeOptions(rawValue: 1 << 0)
-    static let eeg_wave_right = BiodataSubscribeOptions(rawValue: 1 << 1)
-    static let eeg_alpha = BiodataSubscribeOptions(rawValue: 1 << 2)
-    static let eeg_beta = BiodataSubscribeOptions(rawValue: 1 << 3)
-    static let eeg_theta = BiodataSubscribeOptions(rawValue: 1 << 4)
-    static let eeg_delta = BiodataSubscribeOptions(rawValue: 1 << 5)
-    static let eeg_gamma = BiodataSubscribeOptions(rawValue: 1 << 6)
-    static let eeg_quality = BiodataSubscribeOptions(rawValue: 1 << 7)
-    static let hr_value = BiodataSubscribeOptions(rawValue: 1 << 8)
-    static let hr_variability = BiodataSubscribeOptions(rawValue: 1 << 9)
-    static let eeg_all = BiodataSubscribeOptions(rawValue: 1 << 10)
-    static let hr_all = BiodataSubscribeOptions(rawValue: 1 << 11)
+public extension BiodataParameterOptions {
+    static let eeg_wave_left = BiodataParameterOptions(rawValue: 1 << 0)
+    static let eeg_wave_right = BiodataParameterOptions(rawValue: 1 << 1)
+    static let eeg_alpha = BiodataParameterOptions(rawValue: 1 << 2)
+    static let eeg_beta = BiodataParameterOptions(rawValue: 1 << 3)
+    static let eeg_theta = BiodataParameterOptions(rawValue: 1 << 4)
+    static let eeg_delta = BiodataParameterOptions(rawValue: 1 << 5)
+    static let eeg_gamma = BiodataParameterOptions(rawValue: 1 << 6)
+    static let eeg_quality = BiodataParameterOptions(rawValue: 1 << 7)
+    static let hr_value = BiodataParameterOptions(rawValue: 1 << 8)
+    static let hr_variability = BiodataParameterOptions(rawValue: 1 << 9)
+    static let eeg_all = BiodataParameterOptions(rawValue: 1 << 10)
+    static let hr_all = BiodataParameterOptions(rawValue: 1 << 11)
 }
 
-public struct BiodataSubscribeOptions: OptionSet {
+public struct BiodataParameterOptions: OptionSet {
     public let rawValue: Int
     public init(rawValue: Int) {
         self.rawValue = rawValue

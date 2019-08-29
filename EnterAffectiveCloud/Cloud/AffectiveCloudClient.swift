@@ -71,7 +71,7 @@ public class AffectiveCloudClient {
     //MARK: - biodata
     /// start biodata services with parameter
     /// - Parameter services: biodata services. ps: .eeg and .hr
-    public func biodataInitial(services: BiodataTypeOptions) {
+    public func initBiodataServices(services: BiodataTypeOptions) {
         self.cloudService.biodataInitial(options: services)
     }
 
@@ -85,7 +85,7 @@ public class AffectiveCloudClient {
     /// Biodata services: .eeg_wave_left、.eeg_wave_right、.eeg_alpha、.eeg_quality and so on.
     /// Affective services: .attention、.relaxtion and .pleasure
     /// - Parameter data: the brain raw data from the hardware
-    public func biodataAppend(eegData: Data) {
+    public func appendBiodata(eegData: Data) {
         guard self.cloudService.socket.isConnected else {
             _eegBuffer.removeAll()
             return
@@ -119,7 +119,7 @@ public class AffectiveCloudClient {
     /// this is necessory if you want to use follow services:
     /// Affective services: .arousal 、.pressure
     /// - Parameter data: the heart data from the hardware
-    public func biodataAppend(hrData: Data) {
+    public func appendBiodata(hrData: Data) {
         guard self.cloudService.socket.isConnected else {
             _hrBuffer.removeAll()
             return
@@ -149,21 +149,21 @@ public class AffectiveCloudClient {
     /// By subscribing the specificed service,
     /// you will get the analyzed data in `biodataSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
-    public func biodataSubscribe(services: BiodataSubscribeOptions) {
+    public func subscribeBiodataServices(services: BiodataParameterOptions) {
         self.cloudService.biodataSubscribe(parameters: services)
     }
 
     /// unsubscribe the specificed service
     /// cloud service will stop response the analyzed data in the service.
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
-    public func biodataUnsubscribe(services: BiodataSubscribeOptions) {
+    public func unsubscribeBiodataServices(services: BiodataParameterOptions) {
         self.cloudService.biodataUnSubscribe(parameters: services)
     }
 
     /// generate the report according your service
     /// you will get the report data in `biodataReport(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
-    public func biodataReport(services: BiodataTypeOptions) {
+    public func getBiodataReport(services: BiodataTypeOptions) {
         self.cloudService.biodataReport(options: services)
     }
 
