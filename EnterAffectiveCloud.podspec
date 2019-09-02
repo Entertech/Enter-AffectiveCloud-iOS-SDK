@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
 
   s.source_files = 'EnterAffectiveCloud/**/*.swift'
-  s.dependency 'HandyJSON', '5.0.0-beta'
+  s.dependency 'HandyJSON', '5.0.0'
   s.dependency 'Starscream'
   s.dependency 'GzipSwift'
   s.dependency 'SwiftyJSON'
