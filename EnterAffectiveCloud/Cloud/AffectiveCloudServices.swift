@@ -199,7 +199,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
 //MARK: BiodataServiceProtocol imp
 extension AffectiveCloudServices: BiodataServiceProtocol {
 
-    func biodataInitial(options: BiodataTypeOptions) {
+    func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?=nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -216,6 +216,9 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         jsonModel.kwargs = CSKwargsJSONModel()
         let biodataTypes = self.biodataTypeList(with: options)
         jsonModel.kwargs?.bioTypes = biodataTypes
+        if let tolerance = tolerance {
+            jsonModel.kwargs?.tolerance = tolerance
+        }
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -422,6 +425,8 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let paramList = self.subscribeList(options: services)
         let attentionParams: [String] = paramList.filter { $0.contains("attention") }
         let relaxationParams: [String]  = paramList.filter { $0.contains("relaxation") }
+        let attentionChildParams: [String] = paramList.filter { $0.contains("attention_chd") }
+        let relaxationChildParams: [String]  = paramList.filter { $0.contains("relaxation_chd") }
         let pressureParams: [String]  = paramList.filter { $0.contains("pressure") }
         let pleasureParams: [String] = paramList.filter { $0.contains("pleasure") }
         let arousalParams: [String] = paramList.filter { $0.contains("arousal") }
@@ -431,6 +436,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if relaxationParams.count > 0 {
             jsonModel.kwargs?.relaxationServices = relaxationParams
+        }
+        
+        if attentionChildParams.count > 0 {
+            jsonModel.kwargs?.attenionChildServieces = attentionChildParams
+        }
+        
+        if relaxationChildParams.count > 0 {
+            jsonModel.kwargs?.relaxationChildServices = relaxationChildParams
         }
 
         if pressureParams.count > 0 {
@@ -471,6 +484,8 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let paramList = self.subscribeList(options: services)
         let attentionParams: [String] = paramList.filter { $0.contains("attention") }
         let relaxationParams: [String]  = paramList.filter { $0.contains("relaxation") }
+        let attentionChildParams: [String] = paramList.filter { $0.contains("attention_chd") }
+        let relaxationChildParams: [String]  = paramList.filter { $0.contains("relaxation_chd") }
         let pressureParams: [String]  = paramList.filter { $0.contains("pressure") }
         let pleasureParams: [String] = paramList.filter { $0.contains("pleasure") }
         let arousalParams: [String] = paramList.filter { $0.contains("arousal") }
@@ -480,6 +495,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if relaxationParams.count > 0 {
             jsonModel.kwargs?.relaxationServices = relaxationParams
+        }
+        
+        if attentionChildParams.count > 0 {
+            jsonModel.kwargs?.attenionChildServieces = attentionChildParams
+        }
+        
+        if relaxationChildParams.count > 0 {
+            jsonModel.kwargs?.relaxationChildServices = relaxationChildParams
         }
 
         if pressureParams.count > 0 {
@@ -559,6 +582,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.relaxation) {
             list.append("relaxation")
         }
+        
+        if options.contains(.attention_child) {
+            list.append("attention_chd")
+        }
+        
+        if options.contains(.relaxation_child) {
+            list.append("relaxation_chd")
+        }
 
         if options.contains(.pressure) {
             list.append("pressure")
@@ -589,6 +620,19 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.attention_curve) {
             list.insert("attention_rec")
         }
+        
+        if options.contains(.attention_child_all) {
+            list.insert("attention_chd_avg")
+            list.insert("attention_chd_rec")
+        }
+        
+        if options.contains(.attention_child_average) {
+            list.insert("attention_chd_avg")
+        }
+        
+        if options.contains(.attention_child_curve) {
+            list.insert("attention_chd_rec")
+        }
 
         if options.contains(.relaxation_all) {
             list.insert("relaxation_avg")
@@ -601,6 +645,19 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if options.contains(.relaxation_curve) {
             list.insert("relaxation_rec")
+        }
+        
+        if options.contains(.relaxation_child_all) {
+            list.insert("relaxation_chd_avg")
+            list.insert("relaxation_chd_rec")
+        }
+        
+        if options.contains(.relaxation_child_average) {
+            list.insert("relaxation_chd_avg")
+        }
+        
+        if options.contains(.relaxation_child_curve) {
+            list.insert("relaxation_chd_rec")
         }
 
         if options.contains(.pressure_all) {
@@ -626,6 +683,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if options.contains(.relaxation) {
             list.append("relaxation")
+        }
+        
+        if options.contains(.attention_child) {
+            list.append("attention_chd")
+        }
+        
+        if options.contains(.relaxation_child) {
+            list.append("relaxation_chd")
         }
 
         if options.contains(.pressure) {
@@ -656,6 +721,22 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
             subscribeList.contains(.relaxation) {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Relaxation unvailable, please start relaxation service first!")
+                return
+            }
+        }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.attention_child),
+            subscribeList.contains(.attention_child) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Attention Child unvailable, please start attention service first!")
+                return
+            }
+        }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.relaxation_child),
+            subscribeList.contains(.relaxation_child) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Relaxation Child unvailable, please start relaxation service first!")
                 return
             }
         }
@@ -698,6 +779,22 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
             affectiveList.contains(.relaxation) {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Relaxation unvailable, generate report failed!")
+                return
+            }
+        }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.attention_child),
+            affectiveList.contains(.attention_child) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Attention child unvailable, generate report failed!")
+                return
+            }
+        }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.relaxation_child),
+            affectiveList.contains(.relaxation_child) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Relaxation child unvailable, generate report failed!")
                 return
             }
         }
@@ -879,6 +976,20 @@ extension AffectiveCloudServices: WebSocketDelegate {
         if list.contains("attention") {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.attention)
+            } else {
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .attention)
+            }
+        }
+        if list.contains("relaxation_chd") {
+            if let _ = self.emotionAffectiveInitialList {
+                self.emotionAffectiveInitialList?.insert(.relaxation_child)
+            } else {
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .relaxation)
+            }
+        }
+        if list.contains("attention_chd") {
+            if let _ = self.emotionAffectiveInitialList {
+                self.emotionAffectiveInitialList?.insert(.attention_child)
             } else {
                 self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .attention)
             }

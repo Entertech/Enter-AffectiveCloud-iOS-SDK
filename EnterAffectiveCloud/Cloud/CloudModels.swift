@@ -31,6 +31,7 @@ public class CSRequestDataJSONModel: HandyJSON {
 
 class CSKwargsJSONModel: HandyJSON {
     var bioTypes: [String]?
+    var tolerance: [String:Any]?
     var app_key: String?
     var sign: String?
     var userID: String?
@@ -47,6 +48,8 @@ class CSKwargsJSONModel: HandyJSON {
     var affectiveTypes: [String]?
     var attenionServieces: [String]?
     var relaxationServices: [String]?
+    var attenionChildServieces: [String]?
+    var relaxationChildServices: [String]?
     var pressureServices: [String]?
     var pleasureServices: [String]?
     var arousalServices: [String]?
@@ -70,11 +73,17 @@ class CSKwargsJSONModel: HandyJSON {
         mapper <<<
             self.bioTypes <-- "bio_data_type"
         mapper <<<
+            self.tolerance <-- "bio_data_toleranc"
+        mapper <<<
             self.affectiveTypes <-- "cloud_services"
         mapper <<<
             self.attenionServieces <-- "attention"
         mapper <<<
             self.relaxationServices <-- "relaxation"
+        mapper <<<
+            self.attenionChildServieces <-- "attention_chd"
+        mapper <<<
+            self.relaxationChildServices <-- "relaxation_chd"
         mapper <<<
             self.pressureServices <-- "pressure"
         mapper <<<
@@ -161,6 +170,8 @@ public class CSResponseDataJSONModel: HandyJSON {
     public var affectiveList: [String]?
     public var attentionServiceList: [String]?
     public var relaxationServiceList: [String]?
+    public var attentionChildServiceList: [String]?
+    public var relaxationChildServiceList: [String]?
     public var pressureServiceList: [String]?
     public var pleasureServiceList: [String]?
     public var arousalServiceList: [String]?
@@ -349,6 +360,8 @@ public class CSBiodataReportHRJsonModel: HandyJSON {
 public class CSAffectiveSubscribeJsonModel: HandyJSON {
     public var attentionList: [String]?
     public var relaxationList: [String]?
+    public var attentionChildList: [String]?
+    public var relaxationChildList: [String]?
     public var pressureList: [String]?
     public var pleasureList: [String]?
     public var arousalList: [String]?
@@ -360,6 +373,10 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
         mapper <<<
             self.relaxationList <-- "sub_relaxation_fields"
         mapper <<<
+            self.attentionChildList <-- "sub_attention_chd_fields"
+        mapper <<<
+            self.relaxationChildList <-- "sub_relaxation_chd_fields"
+        mapper <<<
             self.pressureList <-- "sub_pressure_fields"
         mapper <<<
             self.pleasureList <-- "sub_pleasure_fields"
@@ -370,7 +387,7 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attentionList == nil)&&(self.relaxationList == nil)&&(self.pressureList == nil)&&(self.pleasureList == nil)&&(self.arousalList == nil)
+        return (self.attentionList == nil)&&(self.relaxationList == nil)&&(self.pressureList == nil)&&(self.pleasureList == nil)&&(self.arousalList == nil)&&(self.attentionChildList == nil)&&(self.relaxationChildList == nil)
     }
 }
 
@@ -378,6 +395,8 @@ public class CSAffectiveJsonModel: HandyJSON {
     public required init() {}
     public var attention: Float?
     public var relaxation: Float?
+    public var attentionChild: Float?
+    public var relaxationChild: Float?
     public var pressure: Float?
     public var pleasure: Float?
     public var arousal: Float?
@@ -394,6 +413,8 @@ public class CSAffectiveJsonModel: HandyJSON {
 public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     public var attention: CSAffectiveJsonModel?
     public var relaxation: CSAffectiveJsonModel?
+    public var attentionChild: CSAffectiveJsonModel?
+    public var relaxationChild: CSAffectiveJsonModel?
     public var pressure: CSAffectiveJsonModel?
     public var pleasure: CSAffectiveJsonModel?
     public var arousal: CSAffectiveJsonModel?
@@ -403,7 +424,7 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)
+        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attentionChild?.attentionChild == nil)&&(self.relaxationChild?.relaxationChild == nil)
     }
 }
 
@@ -420,6 +441,8 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
 public class CSAffectiveReportJsonModel: HandyJSON {
     public var attention: CSReportAttentionJsonModel?
     public var relaxation: CSReportRelaxtionJsonModel?
+    public var attentionChild: CSReportAttentionChildJsonModel?
+    public var relaxationChild: CSReportRelaxtionChildJsonModel?
     public var pressure: CSReportPressureJsonModel?
     public var pleasure: CSReportPleasureJsonModel?
     public var arousal: CSReportArousalJsonModel?
@@ -447,6 +470,30 @@ public class CSReportRelaxtionJsonModel: HandyJSON {
             self.average <-- "relaxation_avg"
         mapper <<<
             self.list <-- "relaxation_rec"
+    }
+}
+
+public class CSReportAttentionChildJsonModel: HandyJSON {
+    public var average: Float?
+    public var list: [Float]?
+    public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.average <-- "attention_chd_avg"
+        mapper <<<
+            self.list <-- "attention_chd_rec"
+    }
+}
+
+public class CSReportRelaxtionChildJsonModel: HandyJSON {
+    public var average: Float?
+    public var list: [Float]?
+    public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.average <-- "relaxation_chd_avg"
+        mapper <<<
+            self.list <-- "relaxation_chd_rec"
     }
 }
 

@@ -50,7 +50,7 @@ protocol WebSocketServiceProcotol {
 
 //MARK: biodata service and type
 protocol BiodataServiceProtocol {
-    func biodataInitial(options: BiodataTypeOptions)
+    func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?)
     func biodataSubscribe(parameters options: BiodataParameterOptions)
     func biodataUnSubscribe(parameters options: BiodataParameterOptions)
     func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?)
@@ -108,6 +108,9 @@ public extension AffectiveDataSubscribeOptions {
     static let pressure = AffectiveDataSubscribeOptions(rawValue: 1 << 2)
     static let pleasure = AffectiveDataSubscribeOptions(rawValue: 1 << 3)
     static let arousal = AffectiveDataSubscribeOptions(rawValue: 1 << 4)
+    static let attention_child = AffectiveDataSubscribeOptions(rawValue: 1 << 5)
+    static let relaxation_child = AffectiveDataSubscribeOptions(rawValue: 1 << 6)
+    static let sleep = AffectiveDataSubscribeOptions(rawValue: 1 << 7)
 }
 
 public struct AffectiveDataSubscribeOptions: OptionSet {
@@ -123,6 +126,9 @@ public extension AffectiveDataServiceOptions {
     static let pressure = AffectiveDataServiceOptions(rawValue: 1 << 2)
     static let pleasure = AffectiveDataServiceOptions(rawValue: 1 << 3)
     static let arousal = AffectiveDataServiceOptions(rawValue: 1 << 4)
+    static let attention_child = AffectiveDataServiceOptions(rawValue: 1 << 5)
+    static let relaxation_child = AffectiveDataServiceOptions(rawValue: 1 << 6)
+    static let sleep = AffectiveDataServiceOptions(rawValue: 1 << 7)
 }
 
 public struct AffectiveDataServiceOptions: OptionSet {
@@ -159,4 +165,16 @@ public extension CSAffectiveReportOptions {
     static let arousal_all = CSAffectiveReportOptions(rawValue: 1 << 12)
     static let arousal_average = CSAffectiveReportOptions(rawValue: 1 << 13)
     static let arousal_curve = CSAffectiveReportOptions(rawValue: 1 << 14)
+    
+    static let attention_child_all = CSAffectiveReportOptions(rawValue: 1 << 15)
+    static let attention_child_average = CSAffectiveReportOptions(rawValue: 1 << 16)
+    static let attention_child_curve = CSAffectiveReportOptions(rawValue: 1 << 17)
+    
+    static let relaxation_child_all = CSAffectiveReportOptions(rawValue: 1 << 18)
+    static let relaxation_child_average = CSAffectiveReportOptions(rawValue: 1 << 19)
+    static let relaxation_child_curve = CSAffectiveReportOptions(rawValue: 1 << 20)
+    
+    static let sleep_all = CSAffectiveReportOptions(rawValue: 1 << 21)
+    static let sleep_average = CSAffectiveReportOptions(rawValue: 1 << 22)
+    static let sleep_curve = CSAffectiveReportOptions(rawValue: 1 << 23)
 }

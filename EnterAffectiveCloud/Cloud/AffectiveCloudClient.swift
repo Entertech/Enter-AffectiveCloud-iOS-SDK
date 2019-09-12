@@ -71,8 +71,9 @@ public class AffectiveCloudClient {
     //MARK: - biodata
     /// start biodata services with parameter
     /// - Parameter services: biodata services. ps: .eeg and .hr
-    public func initBiodataServices(services: BiodataTypeOptions) {
-        self.cloudService.biodataInitial(options: services)
+    /// - Parameter tolerance: 0-4 
+    public func initBiodataServices(services: BiodataTypeOptions, _ tolerance: [String:Any]?=nil) {
+        self.cloudService.biodataInitial(options: services, tolerance: tolerance)
     }
 
 
