@@ -73,7 +73,7 @@ class CSKwargsJSONModel: HandyJSON {
         mapper <<<
             self.bioTypes <-- "bio_data_type"
         mapper <<<
-            self.tolerance <-- "bio_data_toleranc"
+            self.tolerance <-- "bio_data_tolerance"
         mapper <<<
             self.affectiveTypes <-- "cloud_services"
         mapper <<<
