@@ -395,8 +395,8 @@ public class CSAffectiveJsonModel: HandyJSON {
     public required init() {}
     public var attention: Float?
     public var relaxation: Float?
-    public var attentionChild: Float?
-    public var relaxationChild: Float?
+    public var attention_chd: Float?
+    public var relaxation_chd: Float?
     public var pressure: Float?
     public var pleasure: Float?
     public var arousal: Float?
@@ -413,8 +413,8 @@ public class CSAffectiveJsonModel: HandyJSON {
 public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     public var attention: CSAffectiveJsonModel?
     public var relaxation: CSAffectiveJsonModel?
-    public var attentionChild: CSAffectiveJsonModel?
-    public var relaxationChild: CSAffectiveJsonModel?
+    public var attention_chd: CSAffectiveJsonModel?
+    public var relaxation_chd: CSAffectiveJsonModel?
     public var pressure: CSAffectiveJsonModel?
     public var pleasure: CSAffectiveJsonModel?
     public var arousal: CSAffectiveJsonModel?
@@ -424,7 +424,7 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attentionChild?.attentionChild == nil)&&(self.relaxationChild?.relaxationChild == nil)
+        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attention_chd?.attention_chd == nil)&&(self.relaxation_chd?.relaxation_chd == nil)
     }
 }
 
