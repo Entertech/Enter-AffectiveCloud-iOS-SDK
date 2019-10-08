@@ -23,6 +23,9 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         didSet {
             if state != oldValue {
                 self.delegate?.websocketState(client: self.client, state: state)
+                
+                NotificationCenter.default.post(name: NSNotification.Name.websocketConnectNotify, object: nil, userInfo: ["connect" : state.rawValue])
+                
             }
         }
     }
@@ -914,12 +917,14 @@ extension AffectiveCloudServices: WebSocketDelegate {
 //                }
 
                 self.delegate?.biodataServicesSubscribe(client: self.client, response: model)
+                NotificationCenter.default.post(name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil, userInfo: ["biodataServicesSubscribe":model])
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.unsubscribe.rawValue):
                 self.delegate?.biodataServicesUnsubscribe(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.upload.rawValue):
                 self.delegate?.biodataServicesUpload(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.report.rawValue):
                 self.delegate?.biodataServicesReport(client: self.client, response: model)
+                NotificationCenter.default.post(name: NSNotification.Name.biodataServicesReportNotify, object: nil, userInfo: ["biodataServicesReport":model])
             case (CSServicesType.affective.rawValue, CSEmotionOperation.start.rawValue):
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let list = dataModel.affectiveList {
@@ -931,10 +936,12 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     DLog("affective data is \(dataModel.isNil())")
                 }
                 self.delegate?.affectiveDataSubscribe(client: self.client, response: model)
+                NotificationCenter.default.post(name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil, userInfo: ["affectiveDataSubscribe":model])
             case (CSServicesType.affective.rawValue, CSEmotionOperation.unsubscribe.rawValue):
                 self.delegate?.affectiveDataUnsubscribe(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.report.rawValue):
                 self.delegate?.affectiveDataReport(client: self.client, response: model)
+                NotificationCenter.default.post(name: NSNotification.Name.affectiveDataReportNotify, object: nil, userInfo: ["affectiveDataReport":model])
             case (CSServicesType.affective.rawValue, CSEmotionOperation.finish.rawValue):
                 self.delegate?.affectiveDataFinish(client: self.client, response: model)
             default:
