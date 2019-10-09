@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		B7E125D5230559590072DF22 /* EnterAffectiveCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
+		FA0A6E7B234D719B00532A46 /* HeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E7A234D719B00532A46 /* HeartRateView.swift */; };
+		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
+		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA55EA57234C273A00C148BF /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 		FA55EA5C234C273A00C148BF /* EnterAffectiveCloudUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA5B234C273A00C148BF /* EnterAffectiveCloudUITests.swift */; };
 		FA55EA5E234C273A00C148BF /* EnterAffectiveCloudUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA55EA69234C6C9F00C148BF /* BiodataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA68234C6C9F00C148BF /* BiodataModel.swift */; };
+		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
 		FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */; };
 		FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */; };
 		FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D0230E84EF00ECD83C /* CloudModels.swift */; };
@@ -23,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FA0A6E7E234D71DF00532A46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7E125C7230559590072DF22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7E125CF230559590072DF22;
+			remoteInfo = EnterAffectiveCloud;
+		};
 		FA55EA58234C273A00C148BF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7E125C7230559590072DF22 /* Project object */;
@@ -32,6 +43,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FA0A6E80234D71DF00532A46 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		48AD496F0A15A2495CC49592 /* Pods-EnterAffectiveCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.release.xcconfig"; sourceTree = "<group>"; };
 		9CBE7FFECE5DBCFEBB753409 /* Pods-EnterAffectiveCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.debug.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -39,6 +64,7 @@
 		B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloud.h; sourceTree = "<group>"; };
 		B7E125D4230559590072DF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA0A6E7A234D719B00532A46 /* HeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateView.swift; sourceTree = "<group>"; };
 		FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloudUI.h; sourceTree = "<group>"; };
 		FA55EA51234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +72,7 @@
 		FA55EA5B234C273A00C148BF /* EnterAffectiveCloudUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudUITests.swift; sourceTree = "<group>"; };
 		FA55EA5D234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA55EA68234C6C9F00C148BF /* BiodataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiodataModel.swift; sourceTree = "<group>"; };
+		FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBox+Ex.swift"; sourceTree = "<group>"; };
 		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
 		FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveCloudClient.swift; sourceTree = "<group>"; };
 		FABFA4D0230E84EF00ECD83C /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
@@ -68,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,14 +178,22 @@
 			path = "../../Enter-AffectiveComputing-iOS-SDK/Enter-AffectiveComputing-iOS-SDK/Global";
 			sourceTree = "<group>";
 		};
+		FA0A6E73234D6F0A00532A46 /* HRView */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A6E7A234D719B00532A46 /* HeartRateView.swift */,
+			);
+			path = HRView;
+			sourceTree = "<group>";
+		};
 		FA55EA4F234C273A00C148BF /* EnterAffectiveCloudUI */ = {
 			isa = PBXGroup;
 			children = (
-				FA55EA67234C289200C148BF /* ViewController */,
 				FA55EA66234C287D00C148BF /* Model */,
 				FA55EA65234C286800C148BF /* View */,
 				FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */,
 				FA55EA51234C273A00C148BF /* Info.plist */,
+				FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */,
 			);
 			path = EnterAffectiveCloudUI;
 			sourceTree = "<group>";
@@ -174,6 +210,7 @@
 		FA55EA65234C286800C148BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA0A6E73234D6F0A00532A46 /* HRView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,13 +221,6 @@
 				FA55EA68234C6C9F00C148BF /* BiodataModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FA55EA67234C289200C148BF /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		FABFA4CD230E84EF00ECD83C /* Cloud */ = {
@@ -254,10 +284,12 @@
 				FA55EA4A234C273A00C148BF /* Sources */,
 				FA55EA4B234C273A00C148BF /* Frameworks */,
 				FA55EA4C234C273A00C148BF /* Resources */,
+				FA0A6E80234D71DF00532A46 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FA0A6E7F234D71DF00532A46 /* PBXTargetDependency */,
 			);
 			name = EnterAffectiveCloudUI;
 			productName = EnterAffectiveCloudUI;
@@ -393,7 +425,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
 				FA55EA69234C6C9F00C148BF /* BiodataModel.swift in Sources */,
+				FA0A6E7B234D719B00532A46 /* HeartRateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +442,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FA0A6E7F234D71DF00532A46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
+			targetProxy = FA0A6E7E234D71DF00532A46 /* PBXContainerItemProxy */;
+		};
 		FA55EA59234C273A00C148BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA55EA4D234C273A00C148BF /* EnterAffectiveCloudUI */;
@@ -543,6 +582,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -558,6 +598,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -571,6 +612,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -586,6 +628,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
