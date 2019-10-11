@@ -36,7 +36,7 @@
 
 ## 结构说明
 
-业务层只需要实例化 `AffectiveCloudClient` 类就可以请求情感云数据，通过代理 `AffectiveCloudResponseDelegate` 来获取情感云分析后的结果。具体 `AffectiveCloudClient` 方法的功能介绍请看 [情感云 SDK API 使用说明](#情感云 SDK-API 使用说明)
+业务层只需要实例化 `AffectiveCloudClient` 类就可以请求情感云数据，通过代理 `AffectiveCloudResponseDelegate` 来获取情感云分析后的结果。具体 `AffectiveCloudClient` 方法的功能介绍请看 [情感云 SDK API 使用说明](#情感云-SDK-API-使用说明)
 
 ![](media/15644764106226/15659273084519.jpg)
 
