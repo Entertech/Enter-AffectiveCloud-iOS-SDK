@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrainwaveView" customModule="EnterAffectiveCloudUI" customModuleProvider="target">
+            <connections>
+                <outlet property="infoButton" destination="rTc-6t-QmZ" id="uFu-nl-WMd"/>
+                <outlet property="leftBrain" destination="z5G-eu-Gov" id="918-NH-tkT"/>
+                <outlet property="leftBrainLabel" destination="sTH-ED-2ip" id="1cA-oW-2Xa"/>
+                <outlet property="leftDot" destination="IY0-5v-STf" id="jAK-3m-HVG"/>
+                <outlet property="rightBrain" destination="NZt-4h-kXA" id="rUY-WU-OKN"/>
+                <outlet property="rightBrainLabel" destination="udC-Cd-oEj" id="zeD-Kl-mm6"/>
+                <outlet property="rightDot" destination="4KJ-Wt-A9c" id="d48-AU-U5J"/>
+                <outlet property="titleLabel" destination="AAn-9l-2KV" id="2bp-Op-Btd"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="323"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real-time Brainwave(EEG)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAn-9l-2KV">
+                    <rect key="frame" x="14" y="16" width="232" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="232" id="Aui-fc-1bI"/>
+                        <constraint firstAttribute="height" constant="22" id="Gli-qb-tdm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTc-6t-QmZ">
+                    <rect key="frame" x="303" y="16" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="700-vc-MhX"/>
+                        <constraint firstAttribute="width" constant="24" id="fSR-VQ-JY5"/>
+                    </constraints>
+                    <state key="normal" image="icon_info_black"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Left Brain (FP1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTH-ED-2ip">
+                    <rect key="frame" x="107" y="48" width="87.5" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="Xsq-nX-1hC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right Brain (FP2)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udC-Cd-oEj">
+                    <rect key="frame" x="230.5" y="48" width="96.5" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="Hzg-2c-mfs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IY0-5v-STf">
+                    <rect key="frame" x="95" y="49.5" width="12" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="A4Y-yh-51i"/>
+                        <constraint firstAttribute="width" constant="12" id="daL-md-dlY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="1" green="0.40000000000000002" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="●" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KJ-Wt-A9c">
+                    <rect key="frame" x="218.5" y="49.5" width="12" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="12" id="Myc-G9-5vp"/>
+                        <constraint firstAttribute="height" constant="12" id="tAY-h4-F1b"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.29411764705882354" green="0.36470588235294116" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z5G-eu-Gov" customClass="EEGView" customModule="EnterAffectiveCloudUI" customModuleProvider="target">
+                    <rect key="frame" x="16" y="80" width="327" height="100"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="dYw-bV-aB7"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZt-4h-kXA" customClass="EEGView" customModule="EnterAffectiveCloudUI" customModuleProvider="target">
+                    <rect key="frame" x="16" y="199" width="327" height="100"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="FxY-WK-7qG"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="Jv2-O5-eRk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.94901960784313721" green="0.95686274509803915" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="z5G-eu-Gov" secondAttribute="trailing" id="0GA-mr-Czl"/>
+                <constraint firstItem="z5G-eu-Gov" firstAttribute="top" secondItem="sTH-ED-2ip" secondAttribute="bottom" constant="20" id="6iq-zE-IW4"/>
+                <constraint firstItem="z5G-eu-Gov" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="A1c-fU-5hK"/>
+                <constraint firstItem="AAn-9l-2KV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="BZb-lW-GcC"/>
+                <constraint firstItem="rTc-6t-QmZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="DpS-0u-C9X"/>
+                <constraint firstItem="AAn-9l-2KV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="JW3-wZ-hDH"/>
+                <constraint firstAttribute="trailing" secondItem="rTc-6t-QmZ" secondAttribute="trailing" constant="16" id="TcN-es-GEZ"/>
+                <constraint firstItem="NZt-4h-kXA" firstAttribute="top" secondItem="z5G-eu-Gov" secondAttribute="bottom" constant="16" id="YuS-97-CQy"/>
+                <constraint firstItem="sTH-ED-2ip" firstAttribute="leading" secondItem="IY0-5v-STf" secondAttribute="trailing" id="bSh-tr-fpQ"/>
+                <constraint firstItem="udC-Cd-oEj" firstAttribute="top" secondItem="rTc-6t-QmZ" secondAttribute="bottom" constant="8" id="dhG-G9-WeX"/>
+                <constraint firstItem="udC-Cd-oEj" firstAttribute="leading" secondItem="4KJ-Wt-A9c" secondAttribute="trailing" id="gqe-dZ-fp1"/>
+                <constraint firstItem="sTH-ED-2ip" firstAttribute="centerY" secondItem="IY0-5v-STf" secondAttribute="centerY" id="hdM-0X-pl8"/>
+                <constraint firstAttribute="trailing" secondItem="NZt-4h-kXA" secondAttribute="trailing" id="imW-Lc-oUr"/>
+                <constraint firstItem="NZt-4h-kXA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="lAU-Wg-G0N"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="udC-Cd-oEj" secondAttribute="trailing" priority="500" constant="16" id="leh-dp-hEl"/>
+                <constraint firstItem="4KJ-Wt-A9c" firstAttribute="leading" secondItem="sTH-ED-2ip" secondAttribute="trailing" constant="24" id="nRM-lS-VyZ"/>
+                <constraint firstItem="IY0-5v-STf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="oHP-WD-37h"/>
+                <constraint firstItem="udC-Cd-oEj" firstAttribute="centerY" secondItem="sTH-ED-2ip" secondAttribute="centerY" id="sxb-mn-khF"/>
+                <constraint firstItem="udC-Cd-oEj" firstAttribute="centerY" secondItem="4KJ-Wt-A9c" secondAttribute="centerY" id="x7u-gW-NES"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="50.000000000000007" y="35.15625"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_info_black" width="24" height="24"/>
+    </resources>
+</document>

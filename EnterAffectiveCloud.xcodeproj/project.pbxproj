@@ -3,19 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */; };
 		B7E125D5230559590072DF22 /* EnterAffectiveCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
-		FA0A6E7B234D719B00532A46 /* HeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E7A234D719B00532A46 /* HeartRateView.swift */; };
+		FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */; };
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
-		FA55EA57234C273A00C148BF /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; platformFilter = ios; };
-		FA55EA5C234C273A00C148BF /* EnterAffectiveCloudUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA5B234C273A00C148BF /* EnterAffectiveCloudUITests.swift */; platformFilter = ios; };
 		FA55EA5E234C273A00C148BF /* EnterAffectiveCloudUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA55EA69234C6C9F00C148BF /* BiodataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA68234C6C9F00C148BF /* BiodataModel.swift */; };
 		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
@@ -27,6 +25,28 @@
 		FABFA4DA230E850500ECD83C /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */; };
 		FABFA4DB230E850500ECD83C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D9230E850500ECD83C /* Log.swift */; };
 		FACEDF89235034FE0016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF88235034FE0016176C /* Assets.xcassets */; };
+		FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */; };
+		FACEDF9023507BAD0016176C /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */; };
+		FACEDF9123507BAD0016176C /* RodDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8E23507BAD0016176C /* RodDot.swift */; };
+		FACEDF9323507D370016176C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9223507D370016176C /* NibLoadable.swift */; };
+		FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */; };
+		FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF98235164720016176C /* RealtimeRelaxationView.swift */; };
+		FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9A23516BD60016176C /* RealtimePressureView.swift */; };
+		FACEDFA0235172F40016176C /* BrainwaveSpectrumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF9E235172F40016176C /* BrainwaveSpectrumView.xib */; };
+		FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */; };
+		FACEDFA62351730A0016176C /* BrainwaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFA32351730A0016176C /* BrainwaveView.xib */; };
+		FACEDFA72351730A0016176C /* EEGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFA42351730A0016176C /* EEGView.swift */; };
+		FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFA52351730A0016176C /* BrainwaveView.swift */; };
+		FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */; };
+		FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFAB2351A1850016176C /* RealtimeBrainwaveView.swift */; };
+		FACEDFE52351BB440016176C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFE42351BB440016176C /* AppDelegate.swift */; };
+		FACEDFE72351BB440016176C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFE62351BB440016176C /* SceneDelegate.swift */; };
+		FACEDFE92351BB440016176C /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFE82351BB440016176C /* FirstViewController.swift */; };
+		FACEDFEB2351BB440016176C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFEA2351BB440016176C /* SecondViewController.swift */; };
+		FACEDFEE2351BB440016176C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEC2351BB440016176C /* Main.storyboard */; };
+		FACEDFF02351BB450016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEF2351BB450016176C /* Assets.xcassets */; };
+		FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFF12351BB450016176C /* LaunchScreen.storyboard */; };
+		FACEDFF82351D0820016176C /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +56,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = B7E125CF230559590072DF22;
 			remoteInfo = EnterAffectiveCloud;
-		};
-		FA55EA58234C273A00C148BF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7E125C7230559590072DF22 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FA55EA4D234C273A00C148BF;
-			remoteInfo = EnterAffectiveCloudUI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -70,14 +83,11 @@
 		B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloud.h; sourceTree = "<group>"; };
 		B7E125D4230559590072DF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.release.xcconfig"; sourceTree = "<group>"; };
-		FA0A6E7A234D719B00532A46 /* HeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateView.swift; sourceTree = "<group>"; };
+		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloudUI.h; sourceTree = "<group>"; };
 		FA55EA51234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA55EA56234C273A00C148BF /* EnterAffectiveCloudUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnterAffectiveCloudUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA55EA5B234C273A00C148BF /* EnterAffectiveCloudUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudUITests.swift; sourceTree = "<group>"; };
-		FA55EA5D234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA55EA68234C6C9F00C148BF /* BiodataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiodataModel.swift; sourceTree = "<group>"; };
 		FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBox+Ex.swift"; sourceTree = "<group>"; };
 		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
@@ -88,6 +98,29 @@
 		FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ToolBox+Ex.swift"; path = "EnterAffectiveCloud/Global/ToolBox+Ex.swift"; sourceTree = SOURCE_ROOT; };
 		FABFA4D9230E850500ECD83C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = EnterAffectiveCloud/Global/Log.swift; sourceTree = SOURCE_ROOT; };
 		FACEDF88235034FE0016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
+		FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
+		FACEDF8E23507BAD0016176C /* RodDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodDot.swift; sourceTree = "<group>"; };
+		FACEDF9223507D370016176C /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAttentionView.swift; sourceTree = "<group>"; };
+		FACEDF98235164720016176C /* RealtimeRelaxationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeRelaxationView.swift; sourceTree = "<group>"; };
+		FACEDF9A23516BD60016176C /* RealtimePressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimePressureView.swift; sourceTree = "<group>"; };
+		FACEDF9E235172F40016176C /* BrainwaveSpectrumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainwaveSpectrumView.xib; sourceTree = "<group>"; };
+		FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainwaveSpectrumView.swift; sourceTree = "<group>"; };
+		FACEDFA32351730A0016176C /* BrainwaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainwaveView.xib; sourceTree = "<group>"; };
+		FACEDFA42351730A0016176C /* EEGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EEGView.swift; sourceTree = "<group>"; };
+		FACEDFA52351730A0016176C /* BrainwaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainwaveView.swift; sourceTree = "<group>"; };
+		FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeBrainwaveSpectrumView.swift; sourceTree = "<group>"; };
+		FACEDFAB2351A1850016176C /* RealtimeBrainwaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeBrainwaveView.swift; sourceTree = "<group>"; };
+		FACEDFE22351BB440016176C /* EnterRealtimeUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnterRealtimeUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FACEDFE42351BB440016176C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FACEDFE62351BB440016176C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FACEDFE82351BB440016176C /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		FACEDFEA2351BB440016176C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		FACEDFED2351BB440016176C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FACEDFEF2351BB450016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FACEDFF22351BB450016176C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FACEDFF42351BB450016176C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,11 +141,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA55EA53234C273A00C148BF /* Frameworks */ = {
+		FACEDFDF2351BB440016176C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA55EA57234C273A00C148BF /* EnterAffectiveCloudUI.framework in Frameworks */,
+				FACEDFF82351D0820016176C /* EnterAffectiveCloudUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +177,7 @@
 			children = (
 				B7E125D2230559590072DF22 /* EnterAffectiveCloud */,
 				FA55EA4F234C273A00C148BF /* EnterAffectiveCloudUI */,
-				FA55EA5A234C273A00C148BF /* EnterAffectiveCloudUITests */,
+				FACEDFE32351BB440016176C /* EnterRealtimeUIDemo */,
 				B7E125D1230559590072DF22 /* Products */,
 				078AEE4D9378B78AC7596C31 /* Pods */,
 				770F7293DC047C78D3D9B171 /* Frameworks */,
@@ -156,7 +189,7 @@
 			children = (
 				B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */,
 				FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */,
-				FA55EA56234C273A00C148BF /* EnterAffectiveCloudUITests.xctest */,
+				FACEDFE22351BB440016176C /* EnterRealtimeUIDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,7 +226,7 @@
 		FA0A6E73234D6F0A00532A46 /* HRView */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A6E7A234D719B00532A46 /* HeartRateView.swift */,
+				FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */,
 			);
 			path = HRView;
 			sourceTree = "<group>";
@@ -211,18 +244,12 @@
 			path = EnterAffectiveCloudUI;
 			sourceTree = "<group>";
 		};
-		FA55EA5A234C273A00C148BF /* EnterAffectiveCloudUITests */ = {
-			isa = PBXGroup;
-			children = (
-				FA55EA5B234C273A00C148BF /* EnterAffectiveCloudUITests.swift */,
-				FA55EA5D234C273A00C148BF /* Info.plist */,
-			);
-			path = EnterAffectiveCloudUITests;
-			sourceTree = "<group>";
-		};
 		FA55EA65234C286800C148BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FACEDFA22351730A0016176C /* Brainwave */,
+				FACEDF9D235172F40016176C /* Spectrum */,
+				FACEDF8A235079C20016176C /* EmotionView */,
 				FACEDF872350100F0016176C /* Base */,
 				FA0A6E73234D6F0A00532A46 /* HRView */,
 			);
@@ -253,8 +280,66 @@
 			isa = PBXGroup;
 			children = (
 				FA0A6E81234D7A6200532A46 /* BaseView.swift */,
+				FACEDF9223507D370016176C /* NibLoadable.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		FACEDF8A235079C20016176C /* EmotionView */ = {
+			isa = PBXGroup;
+			children = (
+				FACEDF8B23507BAD0016176C /* Item */,
+				FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */,
+				FACEDF98235164720016176C /* RealtimeRelaxationView.swift */,
+				FACEDF9A23516BD60016176C /* RealtimePressureView.swift */,
+			);
+			path = EmotionView;
+			sourceTree = "<group>";
+		};
+		FACEDF8B23507BAD0016176C /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */,
+				FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */,
+				FACEDF8E23507BAD0016176C /* RodDot.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		FACEDF9D235172F40016176C /* Spectrum */ = {
+			isa = PBXGroup;
+			children = (
+				FACEDF9E235172F40016176C /* BrainwaveSpectrumView.xib */,
+				FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */,
+				FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */,
+			);
+			path = Spectrum;
+			sourceTree = "<group>";
+		};
+		FACEDFA22351730A0016176C /* Brainwave */ = {
+			isa = PBXGroup;
+			children = (
+				FACEDFA32351730A0016176C /* BrainwaveView.xib */,
+				FACEDFA42351730A0016176C /* EEGView.swift */,
+				FACEDFA52351730A0016176C /* BrainwaveView.swift */,
+				FACEDFAB2351A1850016176C /* RealtimeBrainwaveView.swift */,
+			);
+			path = Brainwave;
+			sourceTree = "<group>";
+		};
+		FACEDFE32351BB440016176C /* EnterRealtimeUIDemo */ = {
+			isa = PBXGroup;
+			children = (
+				FACEDFE42351BB440016176C /* AppDelegate.swift */,
+				FACEDFE62351BB440016176C /* SceneDelegate.swift */,
+				FACEDFE82351BB440016176C /* FirstViewController.swift */,
+				FACEDFEA2351BB440016176C /* SecondViewController.swift */,
+				FACEDFEC2351BB440016176C /* Main.storyboard */,
+				FACEDFEF2351BB450016176C /* Assets.xcassets */,
+				FACEDFF12351BB450016176C /* LaunchScreen.storyboard */,
+				FACEDFF42351BB450016176C /* Info.plist */,
+			);
+			path = EnterRealtimeUIDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,23 +404,22 @@
 			productReference = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		FA55EA55234C273A00C148BF /* EnterAffectiveCloudUITests */ = {
+		FACEDFE12351BB440016176C /* EnterRealtimeUIDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FA55EA64234C273A00C148BF /* Build configuration list for PBXNativeTarget "EnterAffectiveCloudUITests" */;
+			buildConfigurationList = FACEDFF52351BB450016176C /* Build configuration list for PBXNativeTarget "EnterRealtimeUIDemo" */;
 			buildPhases = (
-				FA55EA52234C273A00C148BF /* Sources */,
-				FA55EA53234C273A00C148BF /* Frameworks */,
-				FA55EA54234C273A00C148BF /* Resources */,
+				FACEDFDE2351BB440016176C /* Sources */,
+				FACEDFDF2351BB440016176C /* Frameworks */,
+				FACEDFE02351BB440016176C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FA55EA59234C273A00C148BF /* PBXTargetDependency */,
 			);
-			name = EnterAffectiveCloudUITests;
-			productName = EnterAffectiveCloudUITests;
-			productReference = FA55EA56234C273A00C148BF /* EnterAffectiveCloudUITests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = EnterRealtimeUIDemo;
+			productName = EnterRealtimeUIDemo;
+			productReference = FACEDFE22351BB440016176C /* EnterRealtimeUIDemo.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -355,7 +439,7 @@
 						CreatedOnToolsVersion = 11.1;
 						LastSwiftMigration = 1110;
 					};
-					FA55EA55234C273A00C148BF = {
+					FACEDFE12351BB440016176C = {
 						CreatedOnToolsVersion = 11.1;
 					};
 				};
@@ -375,7 +459,7 @@
 			targets = (
 				B7E125CF230559590072DF22 /* EnterAffectiveCloud */,
 				FA55EA4D234C273A00C148BF /* EnterAffectiveCloudUI */,
-				FA55EA55234C273A00C148BF /* EnterAffectiveCloudUITests */,
+				FACEDFE12351BB440016176C /* EnterRealtimeUIDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -392,14 +476,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACEDFA62351730A0016176C /* BrainwaveView.xib in Resources */,
 				FACEDF89235034FE0016176C /* Assets.xcassets in Resources */,
+				FACEDF9023507BAD0016176C /* SurveyorsRodView.xib in Resources */,
+				FACEDFA0235172F40016176C /* BrainwaveSpectrumView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA55EA54234C273A00C148BF /* Resources */ = {
+		FACEDFE02351BB440016176C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */,
+				FACEDFF02351BB450016176C /* Assets.xcassets in Resources */,
+				FACEDFEE2351BB440016176C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,18 +561,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
+				FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */,
 				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
+				FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */,
+				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,
+				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
+				FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */,
+				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
+				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
 				FA55EA69234C6C9F00C148BF /* BiodataModel.swift in Sources */,
-				FA0A6E7B234D719B00532A46 /* HeartRateView.swift in Sources */,
+				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
+				FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */,
 				FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */,
+				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,
+				FACEDF9123507BAD0016176C /* RodDot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FA55EA52234C273A00C148BF /* Sources */ = {
+		FACEDFDE2351BB440016176C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA55EA5C234C273A00C148BF /* EnterAffectiveCloudUITests.swift in Sources */,
+				FACEDFEB2351BB440016176C /* SecondViewController.swift in Sources */,
+				FACEDFE92351BB440016176C /* FirstViewController.swift in Sources */,
+				FACEDFE52351BB440016176C /* AppDelegate.swift in Sources */,
+				FACEDFE72351BB440016176C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,13 +598,26 @@
 			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
 			targetProxy = FA0A6E7E234D71DF00532A46 /* PBXContainerItemProxy */;
 		};
-		FA55EA59234C273A00C148BF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = FA55EA4D234C273A00C148BF /* EnterAffectiveCloudUI */;
-			targetProxy = FA55EA58234C273A00C148BF /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FACEDFEC2351BB440016176C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FACEDFED2351BB440016176C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FACEDFF12351BB450016176C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FACEDFF22351BB450016176C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		B7E125D6230559590072DF22 /* Debug */ = {
@@ -739,40 +856,38 @@
 			};
 			name = Release;
 		};
-		FA55EA61234C273A00C148BF /* Debug */ = {
+		FACEDFF62351BB450016176C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
-				INFOPLIST_FILE = EnterAffectiveCloudUITests/Info.plist;
+				INFOPLIST_FILE = EnterRealtimeUIDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterRealtimeUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		FA55EA62234C273A00C148BF /* Release */ = {
+		FACEDFF72351BB450016176C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
-				INFOPLIST_FILE = EnterAffectiveCloudUITests/Info.plist;
+				INFOPLIST_FILE = EnterRealtimeUIDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterRealtimeUIDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -809,11 +924,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FA55EA64234C273A00C148BF /* Build configuration list for PBXNativeTarget "EnterAffectiveCloudUITests" */ = {
+		FACEDFF52351BB450016176C /* Build configuration list for PBXNativeTarget "EnterRealtimeUIDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FA55EA61234C273A00C148BF /* Debug */,
-				FA55EA62234C273A00C148BF /* Release */,
+				FACEDFF62351BB450016176C /* Debug */,
+				FACEDFF72351BB450016176C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

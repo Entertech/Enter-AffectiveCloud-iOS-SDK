@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SurveyorsRodView" customModule="Flowtime" customModuleProvider="target">
+            <connections>
+                <outlet property="rodBar" destination="frz-1J-XGD" id="h4y-dt-H9M"/>
+                <outlet property="rodDot" destination="ZVP-Pw-tE6" id="ffq-nL-tgs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="frz-1J-XGD">
+                    <rect key="frame" x="3" y="16" width="306" height="4"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="4" id="Zgn-kI-Ct5"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZVP-Pw-tE6" customClass="RodDot" customModule="Flowtime" customModuleProvider="target">
+                    <rect key="frame" x="154" y="21" width="4" height="4"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="4" id="aRM-5B-ggX"/>
+                        <constraint firstAttribute="width" constant="4" id="fyL-Lp-8sO"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ZVP-Pw-tE6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3Oc-9K-qSQ"/>
+                <constraint firstItem="frz-1J-XGD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="D3R-m3-wv8"/>
+                <constraint firstItem="frz-1J-XGD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="3" id="E47-20-GvN"/>
+                <constraint firstAttribute="trailing" secondItem="frz-1J-XGD" secondAttribute="trailing" constant="3" id="ZcW-YJ-Mkl"/>
+                <constraint firstItem="ZVP-Pw-tE6" firstAttribute="top" secondItem="frz-1J-XGD" secondAttribute="bottom" constant="1" id="xL6-7h-cSa"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-23.188405797101453" y="-241.40625"/>
+        </view>
+    </objects>
+</document>

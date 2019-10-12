@@ -34,9 +34,9 @@ class UpdateHeartRate: HeartRateValueProtocol {
 
             if let eeg = data.hr {
                 if let hr = eeg.hr {
-                    DispatchQueue.main.async {
-                        self.rxHeartRateValue.onNext(Int(hr))
-                    }
+                    
+                    self.rxHeartRateValue.onNext(Int(hr))
+                    
                 }
             }
             return
@@ -84,22 +84,24 @@ class RealtimeHeartRateView: BaseView {
         let updateHeartRate = UpdateHeartRate()
         updateHeartRate.rxHeartRateValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
-            if value > 0 {
-                self.heartRateLabel?.text = "\(value)"
-            } else {
-                self.heartRateLabel?.text = "--"
-            }
-            
-            if value > 0, self.minValue > value {
-                self.minValue = value
-                self.minValueLabel?.text = String(value)
-            }
-            if self.maxValue == 0 {
-                self.maxValue = value
-                self.maxValueLabel?.text = String(self.maxValue)
-            } else if self.maxValue < value {
-                self.maxValue = value
-                self.maxValueLabel?.text = String(self.maxValue)
+            DispatchQueue.main.async {
+                if value > 0 {
+                    self.heartRateLabel?.text = "\(value)"
+                } else {
+                    self.heartRateLabel?.text = "--"
+                }
+                
+                if value > 0, self.minValue > value {
+                    self.minValue = value
+                    self.minValueLabel?.text = String(value)
+                }
+                if self.maxValue == 0 {
+                    self.maxValue = value
+                    self.maxValueLabel?.text = String(self.maxValue)
+                } else if self.maxValue < value {
+                    self.maxValue = value
+                    self.maxValueLabel?.text = String(self.maxValue)
+                }
             }
             
         }, onError: { (error) in
