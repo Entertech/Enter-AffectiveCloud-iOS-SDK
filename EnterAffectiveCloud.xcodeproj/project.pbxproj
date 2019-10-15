@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050B6C818BBC9339BAF001D7 /* Pods_EnterRealtimeUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */; };
 		51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */; };
 		B7E125D5230559590072DF22 /* EnterAffectiveCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
@@ -24,6 +25,8 @@
 		FABFA4D7230E84EF00ECD83C /* AffectiveCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D2230E84EF00ECD83C /* AffectiveCloudServices.swift */; };
 		FABFA4DA230E850500ECD83C /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */; };
 		FABFA4DB230E850500ECD83C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D9230E850500ECD83C /* Log.swift */; };
+		FAC773042355580C00FBFA6A /* heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAC773032355580C00FBFA6A /* heart.gif */; };
+		FAC773062355581500FBFA6A /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAC773052355581500FBFA6A /* loading.gif */; };
 		FACEDF89235034FE0016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF88235034FE0016176C /* Assets.xcassets */; };
 		FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */; };
 		FACEDF9023507BAD0016176C /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */; };
@@ -47,6 +50,7 @@
 		FACEDFF02351BB450016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEF2351BB450016176C /* Assets.xcassets */; };
 		FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFF12351BB450016176C /* LaunchScreen.storyboard */; };
 		FACEDFF82351D0820016176C /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
+		FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,12 +80,14 @@
 /* Begin PBXFileReference section */
 		389833AC424DA775FD22455B /* Pods-EnterAffectiveCloudUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.debug.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.debug.xcconfig"; sourceTree = "<group>"; };
 		48AD496F0A15A2495CC49592 /* Pods-EnterAffectiveCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.release.xcconfig"; sourceTree = "<group>"; };
+		561B4A373E00FDCF9923CE01 /* Pods-EnterRealtimeUIDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterRealtimeUIDemo.debug.xcconfig"; path = "Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CBE7FFECE5DBCFEBB753409 /* Pods-EnterAffectiveCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.debug.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloud.h; sourceTree = "<group>"; };
 		B7E125D4230559590072DF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterRealtimeUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.release.xcconfig"; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -97,6 +103,8 @@
 		FABFA4D2230E84EF00ECD83C /* AffectiveCloudServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveCloudServices.swift; sourceTree = "<group>"; };
 		FABFA4D8230E850500ECD83C /* ToolBox+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ToolBox+Ex.swift"; path = "EnterAffectiveCloud/Global/ToolBox+Ex.swift"; sourceTree = SOURCE_ROOT; };
 		FABFA4D9230E850500ECD83C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = EnterAffectiveCloud/Global/Log.swift; sourceTree = SOURCE_ROOT; };
+		FAC773032355580C00FBFA6A /* heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = heart.gif; sourceTree = "<group>"; };
+		FAC773052355581500FBFA6A /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		FACEDF88235034FE0016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
 		FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
@@ -121,6 +129,7 @@
 		FACEDFEF2351BB450016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FACEDFF22351BB450016176C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FACEDFF42351BB450016176C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterRealtimeUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FACEDFF82351D0820016176C /* EnterAffectiveCloudUI.framework in Frameworks */,
+				050B6C818BBC9339BAF001D7 /* Pods_EnterRealtimeUIDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +169,8 @@
 				48AD496F0A15A2495CC49592 /* Pods-EnterAffectiveCloud.release.xcconfig */,
 				389833AC424DA775FD22455B /* Pods-EnterAffectiveCloudUI.debug.xcconfig */,
 				F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */,
+				561B4A373E00FDCF9923CE01 /* Pods-EnterRealtimeUIDemo.debug.xcconfig */,
+				C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -168,6 +180,7 @@
 			children = (
 				AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */,
 				78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */,
+				FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -226,6 +239,7 @@
 		FA0A6E73234D6F0A00532A46 /* HRView */ = {
 			isa = PBXGroup;
 			children = (
+				FAC773032355580C00FBFA6A /* heart.gif */,
 				FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */,
 			);
 			path = HRView;
@@ -237,8 +251,8 @@
 				FA55EA66234C287D00C148BF /* Model */,
 				FA55EA65234C286800C148BF /* View */,
 				FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */,
-				FA55EA51234C273A00C148BF /* Info.plist */,
 				FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */,
+				FA55EA51234C273A00C148BF /* Info.plist */,
 				FACEDF88235034FE0016176C /* Assets.xcassets */,
 			);
 			path = EnterAffectiveCloudUI;
@@ -280,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				FA0A6E81234D7A6200532A46 /* BaseView.swift */,
+				FAC773052355581500FBFA6A /* loading.gif */,
 				FACEDF9223507D370016176C /* NibLoadable.swift */,
 			);
 			path = Base;
@@ -408,9 +423,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FACEDFF52351BB450016176C /* Build configuration list for PBXNativeTarget "EnterRealtimeUIDemo" */;
 			buildPhases = (
+				92B21C426077EC1595AAC047 /* [CP] Check Pods Manifest.lock */,
 				FACEDFDE2351BB440016176C /* Sources */,
 				FACEDFDF2351BB440016176C /* Frameworks */,
 				FACEDFE02351BB440016176C /* Resources */,
+				B5BE3E2E9D46C413DB0163A1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -476,8 +493,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC773042355580C00FBFA6A /* heart.gif in Resources */,
 				FACEDFA62351730A0016176C /* BrainwaveView.xib in Resources */,
 				FACEDF89235034FE0016176C /* Assets.xcassets in Resources */,
+				FAC773062355581500FBFA6A /* loading.gif in Resources */,
 				FACEDF9023507BAD0016176C /* SurveyorsRodView.xib in Resources */,
 				FACEDFA0235172F40016176C /* BrainwaveSpectrumView.xib in Resources */,
 			);
@@ -487,6 +506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */,
 				FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */,
 				FACEDFF02351BB450016176C /* Assets.xcassets in Resources */,
 				FACEDFEE2351BB440016176C /* Main.storyboard in Resources */,
@@ -496,6 +516,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		92B21C426077EC1595AAC047 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EnterRealtimeUIDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5BE3E2E9D46C413DB0163A1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E27AC80AE713D475DF5C7616 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -858,6 +917,7 @@
 		};
 		FACEDFF62351BB450016176C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 561B4A373E00FDCF9923CE01 /* Pods-EnterRealtimeUIDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -877,6 +937,7 @@
 		};
 		FACEDFF72351BB450016176C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

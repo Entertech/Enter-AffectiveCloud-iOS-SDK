@@ -58,7 +58,7 @@ class BrainwaveSpectrumView: BaseView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        sampleValue(isSample)
+        //sampleValue(isSample)
         maxPercentLength = self.bounds.width / 1.5
     }
     
@@ -267,54 +267,92 @@ class BrainwaveSpectrumView: BaseView {
     func setSpectrum(_ value: Float, _ type: SpectrumType) {
 
         let barLength = value
+        
         switch type {
         case .α:
             alphaValueLabel.text = String(format: "%.1f%%", value * 100)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            if isSample  {
                 self.alphaBar.snp.updateConstraints{
                     $0.width.equalTo((0.01 + CGFloat(barLength / 0.8)) * self.maxPercentLength)
                 }
-                self.layoutIfNeeded()
-            })     
+            } else {
+                
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.alphaBar.snp.updateConstraints{
+                        $0.width.equalTo((0.01 + CGFloat(barLength / 0.8)) * self.maxPercentLength)
+                    }
+                    self.layoutIfNeeded()
+                })
+            }
+                
         case .β:
             betaValueLabel.text = String(format: "%.1f%%", value * 100)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            if isSample  {
                 self.betaBar.snp.updateConstraints{
                     $0.width.equalTo((0.01 + CGFloat(barLength)) * self.maxPercentLength)
                 }
-                self.layoutIfNeeded()
-            }) { (b) in
+            } else {
                 
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.betaBar.snp.updateConstraints{
+                        $0.width.equalTo((0.01 + CGFloat(barLength)) * self.maxPercentLength)
+                    }
+                    self.layoutIfNeeded()
+                }) { (b) in
+                    
+                }
             }
         case .γ:
             gamaValueLabel.text = String(format: "%.1f%%", value * 100)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            if isSample  {
                 self.gamaBar.snp.updateConstraints{
                     $0.width.equalTo((0.01 + CGFloat(barLength / 0.6)) * self.maxPercentLength)
                 }
-                self.layoutIfNeeded()
-            }) { (b) in
+            } else {
+                
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.gamaBar.snp.updateConstraints{
+                        $0.width.equalTo((0.01 + CGFloat(barLength / 0.6)) * self.maxPercentLength)
+                    }
+                    self.layoutIfNeeded()
+                }) { (b) in
+                    
+                }
                 
             }
         case .θ:
             thetaValueLabel.text = String(format: "%.1f%%", value * 100)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            if isSample  {
                 self.thetaBar.snp.updateConstraints{
                     $0.width.equalTo((0.01 + CGFloat(barLength / 0.8)) * self.maxPercentLength)
                 }
-                self.layoutIfNeeded()
-            }) { (b) in
+            } else {
                 
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.thetaBar.snp.updateConstraints{
+                        $0.width.equalTo((0.01 + CGFloat(barLength / 0.8)) * self.maxPercentLength)
+                    }
+                    self.layoutIfNeeded()
+                }) { (b) in
+                    
+                }
             }
         case .δ:
             deltaValueLabel.text = String(format: "%.1f%%", value * 100)
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            if isSample  {
                 self.deltaBar.snp.updateConstraints{
                     $0.width.equalTo((0.01 + CGFloat(barLength / 0.8)) * self.maxPercentLength)
                 }
-                self.layoutIfNeeded()
-            }) { (b) in
+            } else {
                 
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                    self.deltaBar.snp.updateConstraints{
+                        $0.width.equalTo((0.01 + CGFloat(barLength / 0.8)) * self.maxPercentLength)
+                    }
+                    self.layoutIfNeeded()
+                }) { (b) in
+                    
+                }
             }
         }
     }

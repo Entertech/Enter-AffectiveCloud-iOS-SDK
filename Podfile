@@ -16,3 +16,12 @@ target 'EnterAffectiveCloudUI' do
   pod 'SnapKit'
 end
 
+target 'EnterRealtimeUIDemo' do
+  pod 'RxSwift', '5.0'
+  pod 'SnapKit'
+  pod 'GzipSwift'
+  pod 'HandyJSON', '5.0.0'
+  pod 'Starscream'
+  pod 'SwiftyJSON'
+end
+

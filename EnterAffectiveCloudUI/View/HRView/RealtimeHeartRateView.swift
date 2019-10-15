@@ -17,9 +17,10 @@ protocol HeartRateValueProtocol {
 }
 
 class UpdateHeartRate: HeartRateValueProtocol {
-    var rxHeartRateValue = BehaviorSubject<Int>(value: 0)
+    var rxHeartRateValue: BehaviorSubject<Int>
     
-    init() {
+    init(_ initValue: Int = 0) {
+        rxHeartRateValue = BehaviorSubject<Int>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(biodataSubscript(_:)), name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil)
     }
     
@@ -49,14 +50,72 @@ class UpdateHeartRate: HeartRateValueProtocol {
 public class RealtimeHeartRateView: BaseView {
     
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
-    public var textFont = "PingFangSC-Semibold"
-    public var textColor = UIColor.colorWithHexString(hexColor: "171726")
-    public var isShowExtremeValue = true
-    public var isShowInfoIcon = true
-    public var borderRadius: CGFloat = 8.0
-    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF")
+    /// 主色调显示
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
+        didSet {
+            self.titleLabel?.textColor = mainColor.changeAlpha(to: 1.0)
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    /// 字体颜色
+    public var textColor = UIColor.colorWithHexString(hexColor: "171726")  {
+        didSet {
+            let firstTextColor = textColor.changeAlpha(to: 1.0)
+            let secondTextColor = textColor.changeAlpha(to: 0.7)
+            let thirdTextColor = textColor.changeAlpha(to: 0.5)
+            heartRateLabel?.textColor = firstTextColor
+            bpmLabel?.textColor = firstTextColor
+            maxLabel?.textColor = secondTextColor
+            maxValueLabel?.textColor = secondTextColor
+            maxBpmLabel?.textColor = thirdTextColor
+            minLabel?.textColor = secondTextColor
+            minLabel?.textColor = secondTextColor
+            minBpmLabel?.textColor = thirdTextColor
+        }
+    }
+    /// 是否显示最大最小值
+    public var isShowExtremeValue: Bool = true{
+        didSet {
+            maxLabel?.isHidden = !isShowExtremeValue
+            maxBpmLabel?.isHidden = !isShowExtremeValue
+            maxValueLabel?.isHidden = !isShowExtremeValue
+            minLabel?.isHidden = !isShowExtremeValue
+            minBpmLabel?.isHidden = !isShowExtremeValue
+            minValueLabel?.isHidden = !isShowExtremeValue
+            
+        }
+
+    }
+    
+    /// 是否显示信息按钮
+    public var isShowInfoIcon: Bool = true{
+        didSet {
+            infoBtn?.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    /// 圆角
+    public var borderRadius: CGFloat = 8.0  {
+        didSet {
+            bgView.layer.cornerRadius = borderRadius
+            bgView.layer.masksToBounds = true
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            bgView.backgroundColor = bgColor
+        }
+    }
+    
+    /// 信息按钮打开的网页
     public var infoUrlString = "https://www.notion.so/Heart-Rate-4d64215ac50f4520af7ff516c0f0e00b"
+    /// 按钮图片
+    public var buttonImageName: String = "" {
+        didSet {
+            self.infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     
     //MARK:- Private param
     private let titleText = "心率"
@@ -80,22 +139,27 @@ public class RealtimeHeartRateView: BaseView {
     
     public init() {
         super.init(frame: CGRect.zero)
-        observeRealtimeValue()
     }
     
     //MARK:- override function
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        observeRealtimeValue()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    public func observe(with demo: Int) {
+        observeRealtimeValue(demo)
+    }
+    
+    public func observe() {
         observeRealtimeValue()
     }
     
-    private func observeRealtimeValue() {
-        let updateHeartRate = UpdateHeartRate()
+    private func observeRealtimeValue(_ demo: Int = 0) {
+        let updateHeartRate = UpdateHeartRate(demo)
         updateHeartRate.rxHeartRateValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
@@ -124,6 +188,7 @@ public class RealtimeHeartRateView: BaseView {
     }
     
     override func setUI() {
+        
         let changedMainColor = mainColor.changeAlpha(to: 1.0)
         let firstTextColor = textColor.changeAlpha(to: 1.0)
         let secondTextColor = textColor.changeAlpha(to: 0.7)
@@ -161,56 +226,54 @@ public class RealtimeHeartRateView: BaseView {
         heartImageView?.startAnimating()
         bgView.addSubview(heartImageView!)
         
-        if isShowExtremeValue {
-            maxLabel = UILabel()
-            maxLabel?.text = "最大值："
-            maxLabel?.textAlignment = .right
-            maxLabel?.font = UIFont(name: textFont, size: 14)
-            maxLabel?.textColor = secondTextColor
-            bgView.addSubview(maxLabel!)
-            
-            maxValueLabel = UILabel()
-            maxValueLabel?.text = "\(maxValue)"
-            maxValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-            maxValueLabel?.textAlignment = .right
-            maxValueLabel?.textColor = secondTextColor
-            bgView.addSubview(maxValueLabel!)
-            
-            maxBpmLabel = UILabel()
-            maxBpmLabel?.text = "bpm"
-            maxBpmLabel?.textColor = thirdTextColor
-            maxBpmLabel?.font = UIFont.systemFont(ofSize: 12)
-            bgView.addSubview(maxBpmLabel!)
-            
-            minLabel = UILabel()
-            minLabel?.text = "最小值："
-            minLabel?.textAlignment = .right
-            minLabel?.font = UIFont(name: textFont, size: 14)
-            minLabel?.textColor = secondTextColor
-            bgView.addSubview(minLabel!)
-            
-            minValueLabel = UILabel()
-            minValueLabel?.text = "\(minValue)"
-            minValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
-            minValueLabel?.textAlignment = .right
-            minValueLabel?.textColor = secondTextColor
-            bgView.addSubview(minValueLabel!)
-            
-            minBpmLabel = UILabel()
-            minBpmLabel?.text = "bpm"
-            minBpmLabel?.textColor = thirdTextColor
-            minBpmLabel?.font = UIFont.systemFont(ofSize: 12)
-            bgView.addSubview(minBpmLabel!)
-            
-        }
+        maxLabel = UILabel()
+        maxLabel?.text = "最大值："
+        maxLabel?.textAlignment = .right
+        maxLabel?.font = UIFont(name: textFont, size: 14)
+        maxLabel?.textColor = secondTextColor
+        bgView.addSubview(maxLabel!)
         
-        if isShowInfoIcon {
-            infoBtn = UIButton(type: .custom)
-            infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
-            infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
-            bgView.addSubview(infoBtn!)
-        }
+        maxValueLabel = UILabel()
+        maxValueLabel?.text = "\(maxValue)"
+        maxValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        maxValueLabel?.textAlignment = .right
+        maxValueLabel?.textColor = secondTextColor
+        bgView.addSubview(maxValueLabel!)
         
+        maxBpmLabel = UILabel()
+        maxBpmLabel?.text = "bpm"
+        maxBpmLabel?.textColor = thirdTextColor
+        maxBpmLabel?.font = UIFont.systemFont(ofSize: 12)
+        bgView.addSubview(maxBpmLabel!)
+        
+        minLabel = UILabel()
+        minLabel?.text = "最小值："
+        minLabel?.textAlignment = .right
+        minLabel?.font = UIFont(name: textFont, size: 14)
+        minLabel?.textColor = secondTextColor
+        bgView.addSubview(minLabel!)
+        
+        minValueLabel = UILabel()
+        minValueLabel?.text = "\(minValue)"
+        minValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 14)
+        minValueLabel?.textAlignment = .right
+        minValueLabel?.textColor = secondTextColor
+        bgView.addSubview(minValueLabel!)
+        
+        minBpmLabel = UILabel()
+        minBpmLabel?.text = "bpm"
+        minBpmLabel?.textColor = thirdTextColor
+        minBpmLabel?.font = UIFont.systemFont(ofSize: 12)
+        bgView.addSubview(minBpmLabel!)
+        
+    
+    
+    
+        infoBtn = UIButton(type: .custom)
+        infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
+        infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
+        bgView.addSubview(infoBtn!)
+
     }
     
     override func setLayout() {
@@ -255,13 +318,13 @@ public class RealtimeHeartRateView: BaseView {
         }
         
         minValueLabel?.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-16)
-            $0.right.equalTo(minBpmLabel!.snp.leftMargin).offset(-8)
+            $0.centerY.equalTo(minBpmLabel!.snp_centerYWithinMargins)
+            $0.right.equalTo(minBpmLabel!.snp.leftMargin).offset(-16)
         }
         
         minLabel?.snp.makeConstraints {
-            $0.right.equalTo(minValueLabel!.snp.leftMargin).offset(-6)
-            $0.bottom.equalToSuperview().offset(-16)
+            $0.right.equalToSuperview().offset(-68)
+            $0.centerY.equalTo(minBpmLabel!.snp_centerYWithinMargins)
         }
         
         maxBpmLabel?.snp.makeConstraints {
@@ -271,13 +334,13 @@ public class RealtimeHeartRateView: BaseView {
         
         
         maxValueLabel?.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-44)
-            $0.right.equalTo(maxBpmLabel!.snp.leftMargin).offset(-8)
+            $0.centerY.equalTo(maxBpmLabel!.snp_centerYWithinMargins)
+            $0.right.equalTo(maxBpmLabel!.snp.leftMargin).offset(-16)
         }
         
         maxLabel?.snp.makeConstraints {
-            $0.right.equalTo(maxValueLabel!.snp.leftMargin).offset(-6)
-            $0.bottom.equalToSuperview().offset(-44)
+            $0.right.equalToSuperview().offset(-68)
+            $0.centerY.equalTo(maxBpmLabel!.snp_centerYWithinMargins)
         }
     }
     

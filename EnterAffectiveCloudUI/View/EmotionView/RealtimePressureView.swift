@@ -17,9 +17,10 @@ protocol PressureProtocol {
 }
 
 class UpdatePressure: PressureProtocol {
-    var rxPressureValue = BehaviorSubject<Float>(value: 0)
+    var rxPressureValue: BehaviorSubject<Float>
     
-    init() {
+    init(_ initValue: Float = 0) {
+        rxPressureValue = BehaviorSubject<Float>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(affectiveDataSubscript(_:)), name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
     }
     
@@ -46,14 +47,58 @@ public class RealtimePressureView: BaseView {
 
     
     //MARK:- Public param
-    public var DemoValue = 0
-    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
-    public var textFont = "PingFangSC-Semibold"
-    public var textColor = UIColor.colorWithHexString(hexColor: "171726")
-    public var isShowInfoIcon = true
-    public var borderRadius: CGFloat = 8.0
-    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF")
+    /// 主色
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
+        didSet {
+            let firstTextColor = mainColor.changeAlpha(to: 1.0)
+            let secondTextColor = mainColor.changeAlpha(to: 0.5)
+            let thirdTextColor = mainColor.changeAlpha(to: 0.2)
+            titleLabel?.textColor = firstTextColor
+            stateLabel?.textColor = firstTextColor
+            stateLabel?.backgroundColor = thirdTextColor
+            rodView?.setDotColor(firstTextColor)
+            let rangeArray: [CGFloat] = [0, 1, 3.5, 5]
+            rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    /// 文字颜色
+    public var textColor = UIColor.colorWithHexString(hexColor: "171726") {
+        didSet {
+            let valueTextColor = textColor.changeAlpha(to: 1.0)
+            let grayTextColor = textColor.changeAlpha(to: 0.8)
+            pressureValueLabel?.textColor = valueTextColor
+            rodView?.setLabelColor(grayTextColor)
+        }
+    }
+    /// 是否显示按钮
+    public var isShowInfoIcon: Bool = true {
+        didSet {
+            infoBtn?.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    /// 圆角
+    public var borderRadius: CGFloat = 8.0  {
+        didSet {
+            bgView.layer.cornerRadius = borderRadius
+            bgView.layer.masksToBounds = true
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            bgView.backgroundColor = bgColor
+        }
+    }
+    /// 按钮打开的网页
     public var infoUrlString = "https://www.notion.so/Pressure-ee57f4590373442b9107b7ce665e1253"
+    /// 按钮图片
+    public var buttonImageName: String = "" {
+        didSet {
+            self.infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     
     //MARK:- Private param
     private let titleText = "压力值"
@@ -71,21 +116,27 @@ public class RealtimePressureView: BaseView {
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
-        observeRealtimeValue()
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        observeRealtimeValue()
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    public func observe(with demo: Float) {
+        observeRealtimeValue(demo)
+    }
+    
+    public func observe() {
         observeRealtimeValue()
     }
     
-    private func observeRealtimeValue() {
-        let updatePressure = UpdatePressure()
+    
+    private func observeRealtimeValue(_ demo: Float = 0) {
+        let updatePressure = UpdatePressure(demo)
         updatePressure.rxPressureValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
@@ -157,12 +208,12 @@ public class RealtimePressureView: BaseView {
         rodView?.setDotValue(index: 0)
         bgView.addSubview(rodView!)
         
-        if isShowInfoIcon {
-            infoBtn = UIButton(type: .custom)
+      
+        infoBtn = UIButton(type: .custom)
             infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
             infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
             bgView.addSubview(infoBtn!)
-        }
+        
     }
     
     override func setLayout() {
@@ -190,7 +241,7 @@ public class RealtimePressureView: BaseView {
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(pressureValueLabel!.snp.rightMargin).offset(12)
+            $0.left.equalTo(pressureValueLabel!.snp.right).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
             $0.bottom.equalTo(pressureValueLabel!.snp.bottomMargin).offset(-4)

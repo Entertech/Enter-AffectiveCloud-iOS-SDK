@@ -12,6 +12,7 @@ class EEGView: UIView {
     
     var eegArray: [Float]?
     var lineColor: UIColor?
+    var dashLineColor: UIColor? = .gray
     var height: CGFloat = 0
     var width: CGFloat = 0
     var minWidth: CGFloat = 0
@@ -49,7 +50,7 @@ class EEGView: UIView {
         let shaperLayer = CAShapeLayer()
         shaperLayer.lineWidth = 0.8
         shaperLayer.backgroundColor = UIColor.clear.cgColor
-        shaperLayer.strokeColor = UIColor.black.cgColor
+        shaperLayer.strokeColor = dashLineColor!.cgColor
         shaperLayer.path = linePath.cgPath
         self.layer.addSublayer(shaperLayer)
         
@@ -60,7 +61,7 @@ class EEGView: UIView {
             let dashLayer = CAShapeLayer()
             dashLayer.lineWidth = 0.6
             dashLayer.backgroundColor = UIColor.clear.cgColor
-            dashLayer.strokeColor = UIColor.lightGray.cgColor
+            dashLayer.strokeColor = dashLineColor!.cgColor
             dashLayer.path = dashPath.cgPath
             dashLayer.lineJoin = .round
             dashLayer.lineDashPhase = 0

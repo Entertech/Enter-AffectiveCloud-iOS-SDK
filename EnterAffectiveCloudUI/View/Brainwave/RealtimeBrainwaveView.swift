@@ -17,12 +17,17 @@ protocol BrainwaveValueProtocol {
 }
 
 class UpdateBrainwaveValue: BrainwaveValueProtocol {
-    var rxLeftBrainwaveValue = BehaviorSubject<[Float]>(value: [])
+    var rxLeftBrainwaveValue: BehaviorSubject<[Float]>
     
-    var rxRightBrainwaveValue = BehaviorSubject<[Float]>(value: [])
+    var rxRightBrainwaveValue: BehaviorSubject<[Float]>
     
     
     init() {
+        
+        rxLeftBrainwaveValue = BehaviorSubject<[Float]>(value: [])
+        
+        rxRightBrainwaveValue = BehaviorSubject<[Float]>(value: [])
+        
         NotificationCenter.default.addObserver(self, selector: #selector(biodataSubscript(_:)), name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil)
     }
     
@@ -51,15 +56,65 @@ class UpdateBrainwaveValue: BrainwaveValueProtocol {
 
 public class RealtimeBrainwaveView: BaseView {
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "23233A")
-    public var textFont = "PingFangSC-Semibold"
-    public var textColor = UIColor.colorWithHexString(hexColor: "171726")
-    public var isShowInfoIcon = true
-    public var borderRadius: CGFloat = 8.0
-    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF")
-    public var leftBrainwaveLineColor = UIColor.colorWithHexString(hexColor: "FF4852")
-    public var rightBrainwaveLineColor = UIColor.colorWithHexString(hexColor: "0064FF")
+    /// 主色
+    public var mainColor = UIColor.colorWithHexString(hexColor: "23233A") {
+        didSet {
+            let changedMainColor = mainColor.changeAlpha(to: 1.0)
+            brainwaveView.titleLabel.textColor = changedMainColor
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    /// 文字颜色
+    public var textColor:UIColor = UIColor.colorWithHexString(hexColor: "171726") {
+        didSet {
+            let changedTextColor = textColor.changeAlpha(to: 0.5)
+            let secondColor = textColor.changeAlpha(to: 0.2)
+            brainwaveView.leftBrainLabel.textColor = changedTextColor
+            brainwaveView.rightBrainLabel.textColor = changedTextColor
+            brainwaveView.setDashLineColor(secondColor)
+        }
+    }
+    /// 是否 显示按钮
+    public var isShowInfoIcon: Bool = true {
+        didSet {
+            brainwaveView.infoButton.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    /// 圆角
+    public var borderRadius: CGFloat = 8.0 {
+        didSet {
+            brainwaveView.layer.cornerRadius = borderRadius
+            brainwaveView.layer.masksToBounds = true
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            brainwaveView.backgroundColor = bgColor
+        }
+    }
+    /// 左脑颜色
+    public var leftBrainwaveLineColor = UIColor.colorWithHexString(hexColor: "FF4852") {
+        didSet  {
+            brainwaveView.leftDot.backgroundColor = leftBrainwaveLineColor
+           
+        }
+    }
+    /// 右脑颜色
+    public var rightBrainwaveLineColor = UIColor.colorWithHexString(hexColor: "0064FF") {
+        didSet {
+            brainwaveView.rightDot.backgroundColor = rightBrainwaveLineColor
+        }
+    }
+    /// 按钮点击显示的图片
     public var infoUrlString = "https://www.notion.so/EEG-b3a44e9eb01549c29da1d8b2cc7bc08d"
+    /// 按钮图片
+    public var buttonImageName: String = ""  {
+        didSet {
+            brainwaveView.infoButton.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     
     //MARK:- Private param
     private let titleText = "实时脑波"
@@ -70,16 +125,27 @@ public class RealtimeBrainwaveView: BaseView {
     
     public init() {
         super.init(frame: CGRect.zero)
-        observeRealtimeValue()
+        
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        observeRealtimeValue()
+        
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
+        
+    }
+    
+    ///  demo observe
+    public func observe(with left: [Float], right: [Float]) {
+        observeRealtimeValue()
+        setDemo(left: left, right: right)
+    }
+    
+    /// observe eeg data
+    public func observe() {
         observeRealtimeValue()
     }
     
@@ -87,13 +153,19 @@ public class RealtimeBrainwaveView: BaseView {
         let updateBrainwave = UpdateBrainwaveValue()
         updateBrainwave.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
-            self.brainwaveView.setEEGArray(value, .left)
+            if value.count > 10 {
+                self.brainwaveView.setEEGArray(value, .left)
+            }
+            
         }, onError: { (error) in
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
         updateBrainwave.rxRightBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
-            self.brainwaveView.setEEGArray(value, .right)
+            if value.count > 10 {
+                self.brainwaveView.setEEGArray(value, .right)
+            }
+            
         }, onError: { (error) in
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
@@ -145,6 +217,13 @@ public class RealtimeBrainwaveView: BaseView {
         let url = URL(string: infoUrlString)!
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
+    }
+    
+    private func setDemo(left:[Float], right:[Float]) {
+        brainwaveView.leftBrain.setArray(left)
+        brainwaveView.leftData = left
+        brainwaveView.rightBrain.setArray(right)
+        brainwaveView.rightData = right
     }
     
 }

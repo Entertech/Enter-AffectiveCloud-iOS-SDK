@@ -16,10 +16,11 @@ protocol BrainwaveSpectrumValueProtocol {
 }
 
 class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
-    var rxSpectrumValue = BehaviorSubject<(Float, Float, Float, Float, Float)>(value:(0,0,0,0,0))
+    var rxSpectrumValue: BehaviorSubject<(Float, Float, Float, Float, Float)>
     
     
-    init() {
+    init(_ value: (Float, Float, Float, Float, Float) = (0,0,0,0,0)) {
+        rxSpectrumValue = BehaviorSubject<(Float, Float, Float, Float, Float)>(value:value)
         NotificationCenter.default.addObserver(self, selector: #selector(biodataSubscript(_:)), name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil)
     }
     
@@ -45,13 +46,65 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
 
 public class RealtimeBrainwaveSpectrumView: BaseView {
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
-    public var textFont = "PingFangSC-Semibold"
-    public var textColor = UIColor.colorWithHexString(hexColor: "171726")
-    public var isShowInfoIcon = true
-    public var borderRadius: CGFloat = 8.0
-    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF")
+    /// 主色
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff") {
+        didSet {
+            let changedMainColor = mainColor.changeAlpha(to: 1.0)
+            spectrumView.alphaBar.backgroundColor = changedMainColor
+            spectrumView.betaBar.backgroundColor = changedMainColor
+            spectrumView.gamaBar.backgroundColor = changedMainColor
+            spectrumView.thetaBar.backgroundColor = changedMainColor
+            spectrumView.deltaBar.backgroundColor = changedMainColor
+            spectrumView.titleLabel.textColor = changedMainColor
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    /// 文字颜色
+    public var textColor = UIColor.colorWithHexString(hexColor: "171726") {
+        didSet {
+            let firstTextColor = textColor.changeAlpha(to: 1.0)
+            let secondTextColor = textColor.changeAlpha(to: 0.5)
+            spectrumView.alphaLabel.textColor = firstTextColor
+            spectrumView.betaLabel.textColor = firstTextColor
+            spectrumView.gamaLabel.textColor = firstTextColor
+            spectrumView.thetaLabel.textColor = firstTextColor
+            spectrumView.deltaBar.textColor = firstTextColor
+            
+            spectrumView.alphaValueLabel.textColor = secondTextColor
+            spectrumView.betaValueLabel.textColor = secondTextColor
+            spectrumView.gamaValueLabel.textColor = secondTextColor
+            spectrumView.thetaValueLabel.textColor = secondTextColor
+            spectrumView.deltaValueLabel.textColor = secondTextColor
+        }
+    }
+    /// 是否显示按钮
+    public var isShowInfoIcon: Bool = true {
+        didSet {
+            spectrumView.infoButton.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    /// 圆角
+    public var borderRadius: CGFloat = 8.0 {
+        didSet {
+            spectrumView.layer.cornerRadius = borderRadius
+            spectrumView.layer.masksToBounds = true
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            spectrumView.backgroundColor = bgColor
+        }
+    }
+    /// 按钮点击显示的网页
     public var infoUrlString = "https://www.notion.so/Brainwave-Power-4cdadda14a69424790c2d7913ad775ff"
+    /// 按钮图片
+    public var buttonImageName: String = "" {
+        didSet {
+            spectrumView.infoButton.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     
     //MARK:- Private param
     private let titleText = "脑波频谱"
@@ -62,21 +115,27 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     
     public init() {
         super.init(frame: CGRect.zero)
-        observeRealtimeValue()
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        observeRealtimeValue()
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    public func observe(with demo:(Float, Float, Float, Float, Float)) {
+        spectrumView.isSample = true
+        observeRealtimeValue(demo)
+    }
+    
+    public func observe() {
         observeRealtimeValue()
     }
     
-    private func observeRealtimeValue() {
-        let updateSpectrum = UpdateBrainwaveSpectrum()
+    private func observeRealtimeValue(_ demo: (Float, Float, Float, Float, Float) = (0,0,0,0,0)) {
+        let updateSpectrum = UpdateBrainwaveSpectrum(demo)
         updateSpectrum.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
@@ -134,7 +193,6 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     override func setLayout() {
         spectrumView.snp.makeConstraints {
             $0.height.equalTo(232)
-            $0.width.greaterThanOrEqualTo(268).priority(.high)
             $0.left.right.equalToSuperview().priority(.medium)
         }
     }

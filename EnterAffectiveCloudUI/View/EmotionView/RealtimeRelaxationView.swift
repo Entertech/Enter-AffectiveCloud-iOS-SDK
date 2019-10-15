@@ -17,9 +17,10 @@ protocol RelaxationProtocol {
 }
 
 class UpdateRelaxation: RelaxationProtocol {
-    var rxRelaxationValue = BehaviorSubject<Float>(value: 0)
+    var rxRelaxationValue: BehaviorSubject<Float>
     
-    init() {
+    init(_ initValue: Float = 0) {
+        rxRelaxationValue = BehaviorSubject<Float>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(affectiveDataSubscript(_:)), name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
     }
     
@@ -45,13 +46,59 @@ class UpdateRelaxation: RelaxationProtocol {
 public class RealtimeRelaxationView: BaseView {
 
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
-    public var textFont = "PingFangSC-Semibold"
-    public var textColor = UIColor.colorWithHexString(hexColor: "171726")
-    public var isShowInfoIcon = true
-    public var borderRadius: CGFloat = 8.0
-    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF")
+    /// 设置主色
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
+        didSet {
+            let firstTextColor = mainColor.changeAlpha(to: 1.0)
+            let secondTextColor = mainColor.changeAlpha(to: 0.5)
+            let thirdTextColor = mainColor.changeAlpha(to: 0.2)
+            titleLabel?.textColor = firstTextColor
+            stateLabel?.textColor = firstTextColor
+            stateLabel?.backgroundColor = thirdTextColor
+            rodView?.setDotColor(firstTextColor)
+            let rangeArray: [CGFloat] = [0, 60, 80, 100]
+            rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    /// 设置字体颜色
+    public var textColor = UIColor.colorWithHexString(hexColor: "171726") {
+        didSet {
+            let valueTextColor = textColor.changeAlpha(to: 1.0)
+            let grayTextColor = textColor.changeAlpha(to: 0.8)
+            relaxationValueLabel?.textColor = valueTextColor
+            rodView?.setLabelColor(grayTextColor)
+        }
+    }
+    /// 是否显示按钮
+    public var isShowInfoIcon: Bool = true {
+        didSet {
+            infoBtn?.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    
+    /// 圆角边
+    public var borderRadius: CGFloat = 8.0  {
+        didSet {
+            bgView.layer.cornerRadius = borderRadius
+            bgView.layer.masksToBounds = true
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            bgView.backgroundColor = bgColor
+        }
+    }
+    /// 按钮点击显示的网页
     public var infoUrlString = "https://www.notion.so/Relaxation-c9e3b39634a14d2fa47eaed1d55d872b"
+    /// 按钮图片
+    public var buttonImageName: String = "" {
+        didSet {
+            self.infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     
     //MARK:- Private param
     private let titleText = "放松度"
@@ -68,22 +115,30 @@ public class RealtimeRelaxationView: BaseView {
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
-        observeRealtimeValue()
+
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        observeRealtimeValue()
+
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
+
+    }
+    
+    public func observe(with demo: Float) {
+        observeRealtimeValue(demo)
+    }
+    
+    public func observe() {
         observeRealtimeValue()
     }
     
     
-    private func observeRealtimeValue() {
-        let updateRelaxation = UpdateRelaxation()
+    private func observeRealtimeValue(_ demo: Float = 0) {
+        let updateRelaxation = UpdateRelaxation(demo)
         updateRelaxation.rxRelaxationValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
@@ -188,7 +243,7 @@ public class RealtimeRelaxationView: BaseView {
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(relaxationValueLabel!.snp.rightMargin).offset(12)
+            $0.left.equalTo(relaxationValueLabel!.snp.right).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
             $0.bottom.equalTo(relaxationValueLabel!.snp.bottomMargin).offset(-4)

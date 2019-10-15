@@ -91,6 +91,7 @@ class BrainwaveView: BaseView {
         
     }
     
+    
     override func setLayout() {
         titleLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
@@ -106,22 +107,24 @@ class BrainwaveView: BaseView {
         
         rightBrainLabel.snp.makeConstraints {
             $0.right.equalToSuperview().offset(-16)
-            $0.top.equalTo(infoButton.snp_bottomMargin).offset(10)
+            $0.top.equalTo(infoButton.snp_bottom).offset(8)
         }
         
         rightDot.snp.makeConstraints {
-            $0.right.equalTo(rightBrainLabel.snp_leftMargin).offset(-6)
+            $0.width.height.equalTo(8)
+            $0.right.equalTo(rightBrainLabel.snp.left).offset(-10)
             $0.centerY.equalTo(rightBrainLabel.snp_centerYWithinMargins)
         }
         
         leftBrainLabel.snp.makeConstraints {
-            $0.right.equalTo(rightDot.snp_leftMargin).offset(-32)
+            $0.right.equalTo(rightDot.snp.left).offset(-32)
             $0.centerY.equalTo(rightDot.snp_centerYWithinMargins)
         }
         
         leftDot.snp.makeConstraints {
-            $0.right.equalTo(leftBrainLabel.snp_leftMargin).offset(-6)
+            $0.right.equalTo(leftBrainLabel.snp.left).offset(-10)
             $0.centerY.equalTo(leftBrainLabel.snp_centerYWithinMargins)
+            $0.width.height.equalTo(8)
         }
         
         leftBrain.snp.makeConstraints {
@@ -142,6 +145,11 @@ class BrainwaveView: BaseView {
     public func setLineColor(left: UIColor, right: UIColor) {
         leftColor  = left
         rightColor = right
+    }
+    
+    public func setDashLineColor(_ color: UIColor) {
+        leftBrain.dashLineColor = color
+        rightBrain.dashLineColor = color
     }
     
 

@@ -17,9 +17,10 @@ protocol AttentionProtocol {
 }
 
 class UpdateAttention: AttentionProtocol {
-    var rxAttentionValue = BehaviorSubject<Float>(value: 0)
+    var rxAttentionValue: BehaviorSubject<Float>
     
-    init() {
+    init(_ initValue: Float = 0) {
+        rxAttentionValue = BehaviorSubject<Float>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(affectiveDataSubscript(_:)), name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
     }
     
@@ -45,13 +46,60 @@ class UpdateAttention: AttentionProtocol {
 public class RealtimeAttentionView: BaseView {
 
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
-    public var textFont = "PingFangSC-Semibold"
-    public var textColor = UIColor.colorWithHexString(hexColor: "171726")
-    public var isShowInfoIcon = true
-    public var borderRadius: CGFloat = 8.0
-    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF")
+    /// 主色
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
+        didSet {
+            let firstTextColor = mainColor.changeAlpha(to: 1.0)
+            let secondTextColor = mainColor.changeAlpha(to: 0.5)
+            let thirdTextColor = mainColor.changeAlpha(to: 0.2)
+            titleLabel?.textColor = firstTextColor
+            stateLabel?.textColor = firstTextColor
+            stateLabel?.backgroundColor = thirdTextColor
+            rodView?.setDotColor(firstTextColor)
+            let rangeArray: [CGFloat] = [0, 60, 80, 100]
+            rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    
+    /// 文字颜色
+    public var textColor = UIColor.colorWithHexString(hexColor: "171726") {
+        didSet {
+            let valueTextColor = textColor.changeAlpha(to: 1.0)
+            let grayTextColor = textColor.changeAlpha(to: 0.8)
+            attentionValueLabel?.textColor = valueTextColor
+            rodView?.setLabelColor(grayTextColor)
+        }
+    }
+    
+    /// 是否显示按钮
+    public var isShowInfoIcon: Bool = true {
+        didSet {
+            infoBtn?.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    /// 圆角
+    public var borderRadius: CGFloat = 8.0 {
+        didSet {
+            bgView.layer.cornerRadius = borderRadius
+            bgView.layer.masksToBounds = true
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            bgView.backgroundColor = bgColor
+        }
+    }
+    /// 按钮点击后显示的网页地址
     public var infoUrlString = "https://www.notion.so/Attention-84fef81572a848efbf87075ab67f4cfe"
+    /// 按钮图片
+    public var buttonImageName: String = "" {
+        didSet {
+            self.infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     
     //MARK:- Private param
     private let titleText = "注意力"
@@ -82,8 +130,17 @@ public class RealtimeAttentionView: BaseView {
         
     }
     
-    private func observeRealtimeValue() {
-        let updateAttention = UpdateAttention()
+    public func observe(with demo: Float) {
+        observeRealtimeValue(demo)
+    }
+      
+    public func observe() {
+        observeRealtimeValue()
+    }
+      
+    
+    private func observeRealtimeValue(_ demo: Float = 0) {
+        let updateAttention = UpdateAttention(demo)
         updateAttention.rxAttentionValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
@@ -187,7 +244,7 @@ public class RealtimeAttentionView: BaseView {
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(attentionValueLabel!.snp.rightMargin).offset(12)
+            $0.left.equalTo(attentionValueLabel!.snp.right).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
             $0.bottom.equalTo(attentionValueLabel!.snp.bottomMargin).offset(-4)
