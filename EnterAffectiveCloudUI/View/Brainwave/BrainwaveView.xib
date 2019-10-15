@@ -7,18 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrainwaveView" customModule="EnterAffectiveCloudUI" customModuleProvider="target">
-            <connections>
-                <outlet property="infoButton" destination="rTc-6t-QmZ" id="uFu-nl-WMd"/>
-                <outlet property="leftBrain" destination="z5G-eu-Gov" id="918-NH-tkT"/>
-                <outlet property="leftBrainLabel" destination="sTH-ED-2ip" id="1cA-oW-2Xa"/>
-                <outlet property="leftDot" destination="IY0-5v-STf" id="jAK-3m-HVG"/>
-                <outlet property="rightBrain" destination="NZt-4h-kXA" id="rUY-WU-OKN"/>
-                <outlet property="rightBrainLabel" destination="udC-Cd-oEj" id="zeD-Kl-mm6"/>
-                <outlet property="rightDot" destination="4KJ-Wt-A9c" id="d48-AU-U5J"/>
-                <outlet property="titleLabel" destination="AAn-9l-2KV" id="2bp-Op-Btd"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrainwaveView" customModule="EnterAffectiveCloudUI"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="343" height="323"/>

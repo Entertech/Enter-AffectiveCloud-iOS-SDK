@@ -43,9 +43,9 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
     
 }
 
-class RealtimeBrainwaveSpectrumView: BaseView {
+public class RealtimeBrainwaveSpectrumView: BaseView {
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "23233A")
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
     public var textFont = "PingFangSC-Semibold"
     public var textColor = UIColor.colorWithHexString(hexColor: "171726")
     public var isShowInfoIcon = true
@@ -60,8 +60,22 @@ class RealtimeBrainwaveSpectrumView: BaseView {
     //MARK:- Private UI
     private let spectrumView = BrainwaveSpectrumView()
     
-    override init(frame: CGRect) {
+    public init() {
+        super.init(frame: CGRect.zero)
+        observeRealtimeValue()
+    }
+    
+    public override init(frame: CGRect) {
         super.init(frame: frame)
+        observeRealtimeValue()
+    }
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
+        observeRealtimeValue()
+    }
+    
+    private func observeRealtimeValue() {
         let updateSpectrum = UpdateBrainwaveSpectrum()
         updateSpectrum.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
@@ -76,15 +90,7 @@ class RealtimeBrainwaveSpectrumView: BaseView {
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-    
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        spectrumView.updateConstraints()
-    }
+  
     
     override func setUI() {
         let changedMainColor = mainColor.changeAlpha(to: 1.0)
@@ -138,4 +144,6 @@ class RealtimeBrainwaveSpectrumView: BaseView {
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
+    
+   
 }

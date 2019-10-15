@@ -16,6 +16,6 @@ extension NibLoadable where Self : UIView {
         //self(小写) 当前对象
         let loadName = nibname == nil ? "\(self)" : nibname!
         
-          return Bundle.main.loadNibNamed(loadName, owner: nil, options: nil)?.first as! Self
+        return Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI")!.loadNibNamed(loadName, owner: nil, options: nil)?.first as! Self
     }
 }

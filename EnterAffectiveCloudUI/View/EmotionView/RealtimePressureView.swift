@@ -42,11 +42,12 @@ class UpdatePressure: PressureProtocol {
     
 }
 
-class RealtimePressureView: BaseView {
+public class RealtimePressureView: BaseView {
 
     
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "23233A")
+    public var DemoValue = 0
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
     public var textFont = "PingFangSC-Semibold"
     public var textColor = UIColor.colorWithHexString(hexColor: "171726")
     public var isShowInfoIcon = true
@@ -66,10 +67,24 @@ class RealtimePressureView: BaseView {
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
     
+    
     //MARK:- override function
-    override init(frame: CGRect) {
+    public init() {
+        super.init(frame: CGRect.zero)
+        observeRealtimeValue()
+    }
+    
+    public override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        observeRealtimeValue()
+    }
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
+        observeRealtimeValue()
+    }
+    
+    private func observeRealtimeValue() {
         let updatePressure = UpdatePressure()
         updatePressure.rxPressureValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
@@ -94,27 +109,14 @@ class RealtimePressureView: BaseView {
         }, onError: { (error) in
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        
     }
     
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if let rodView = rodView  {
-            rodView.updateConstraints()
-        }
-        
-    }
     
     override func setUI() {
         let valueTextColor = textColor.changeAlpha(to: 1.0)
         let grayTextColor = textColor.changeAlpha(to: 0.8)
         let firstTextColor = mainColor.changeAlpha(to: 1.0)
-        let secondTextColor = mainColor.changeAlpha(to: 0.6)
+        let secondTextColor = mainColor.changeAlpha(to: 0.5)
         let thirdTextColor = mainColor.changeAlpha(to: 0.2)
         
         bgView.backgroundColor = bgColor
@@ -142,7 +144,7 @@ class RealtimePressureView: BaseView {
         stateLabel?.font = UIFont.systemFont(ofSize: 11)
         stateLabel?.textAlignment = .center
         stateLabel?.textColor = firstTextColor
-        stateLabel?.layer.cornerRadius = 12
+        stateLabel?.layer.cornerRadius = 8
         stateLabel?.layer.masksToBounds = true
         bgView.addSubview(stateLabel!)
         
@@ -157,7 +159,7 @@ class RealtimePressureView: BaseView {
         
         if isShowInfoIcon {
             infoBtn = UIButton(type: .custom)
-            infoBtn?.setImage(#imageLiteral(resourceName: "icon_info_black"), for: .normal)
+            infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
             infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
             bgView.addSubview(infoBtn!)
         }
@@ -176,7 +178,7 @@ class RealtimePressureView: BaseView {
         }
         
         infoBtn?.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel!.snp.centerXWithinMargins)
+            $0.centerY.equalTo(titleLabel!.snp.centerYWithinMargins)
             $0.right.equalToSuperview().offset(-16)
             $0.width.equalTo(24)
             $0.height.equalTo(24)
@@ -184,11 +186,11 @@ class RealtimePressureView: BaseView {
         
         pressureValueLabel?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().offset(56)
+            $0.bottom.equalToSuperview().offset(-56)
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(pressureValueLabel!.snp.rightMargin).offset(6)
+            $0.left.equalTo(pressureValueLabel!.snp.rightMargin).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
             $0.bottom.equalTo(pressureValueLabel!.snp.bottomMargin).offset(-4)
@@ -197,9 +199,9 @@ class RealtimePressureView: BaseView {
         
         rodView?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(12)
-            $0.right.equalToSuperview().offset(12)
-            $0.height.equalTo(22)
-            $0.bottom.equalTo(20)
+            $0.right.equalToSuperview().offset(-12)
+            $0.height.equalTo(25)
+            $0.bottom.equalTo(-16)
         }
         
     }

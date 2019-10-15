@@ -17,6 +17,14 @@ class EEGView: UIView {
     var minWidth: CGFloat = 0
     var minHeight: CGFloat = 0
     
+    init() {
+        super.init(frame: CGRect.zero)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         

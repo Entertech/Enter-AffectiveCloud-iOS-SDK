@@ -27,7 +27,10 @@ extension UIColor {
         var cString = hexColor.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         // String should be 6
-        if cString.count < 6 {return .black}
+        if cString.count < 6 {
+            return .black
+            
+        }
         
         if cString.hasPrefix("0X") {
             cString.removeFirst(2)
@@ -72,6 +75,26 @@ extension UIColor {
         var alpha:CGFloat = 0.0
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return UIColor(red: red, green: green, blue: blue, alpha: newAlpha)
+    }
+}
+
+extension UIImage {
+    /// GIF
+    class func resolveGifImage(gif: String) -> [UIImage]{
+        var images:[UIImage] = []
+        let gifPath = Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI")?.path(forResource: gif, ofType: "gif")
+        if gifPath != nil{
+            if let gifData = try? Data(contentsOf: URL.init(fileURLWithPath: gifPath!)){
+                let gifDataSource = CGImageSourceCreateWithData(gifData as CFData, nil)
+                let gifcount = CGImageSourceGetCount(gifDataSource!)
+                for i in 0...gifcount - 1{
+                    let imageRef = CGImageSourceCreateImageAtIndex(gifDataSource!, i, nil)
+                    let image = UIImage(cgImage: imageRef!)
+                    images.append(image)
+                }
+            }
+        }
+        return images
     }
 }
 

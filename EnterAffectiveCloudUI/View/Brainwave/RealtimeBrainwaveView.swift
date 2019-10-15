@@ -49,7 +49,7 @@ class UpdateBrainwaveValue: BrainwaveValueProtocol {
     }
 }
 
-class RealtimeBrainwaveView: BaseView {
+public class RealtimeBrainwaveView: BaseView {
     //MARK:- Public param
     public var mainColor = UIColor.colorWithHexString(hexColor: "23233A")
     public var textFont = "PingFangSC-Semibold"
@@ -68,8 +68,22 @@ class RealtimeBrainwaveView: BaseView {
     //MARK:- Private UI
     private let brainwaveView = BrainwaveView()
     
-    override init(frame: CGRect) {
+    public init() {
+        super.init(frame: CGRect.zero)
+        observeRealtimeValue()
+    }
+    
+    public override init(frame: CGRect) {
         super.init(frame: frame)
+        observeRealtimeValue()
+    }
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
+        observeRealtimeValue()
+    }
+    
+    private func observeRealtimeValue() {
         let updateBrainwave = UpdateBrainwaveValue()
         updateBrainwave.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
@@ -83,17 +97,8 @@ class RealtimeBrainwaveView: BaseView {
         }, onError: { (error) in
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
     }
     
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        brainwaveView.updateConstraints()
-    }
     
     override func setUI() {
         let changedMainColor = mainColor.changeAlpha(to: 1.0)
@@ -117,8 +122,7 @@ class RealtimeBrainwaveView: BaseView {
         brainwaveView.rightBrainLabel.text = "右脑"
         brainwaveView.rightBrainLabel.textColor = changedTextColor
         
-        brainwaveView.leftBrain.setLineColor(leftBrainwaveLineColor)
-        brainwaveView.rightBrain.setLineColor(rightBrainwaveLineColor)
+        brainwaveView.setLineColor(left: leftBrainwaveLineColor, right: rightBrainwaveLineColor)
         
         if !isShowInfoIcon  {
             brainwaveView.infoButton.isHidden = true
@@ -142,4 +146,5 @@ class RealtimeBrainwaveView: BaseView {
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
+    
 }

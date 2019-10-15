@@ -13,20 +13,22 @@ enum LeftOrRightBrain {
     case right
 }
 
-class BrainwaveView: UIView, NibLoadable {
-
-
-    @IBOutlet weak var rightBrainLabel: UILabel!
-    @IBOutlet weak var leftBrainLabel: UILabel!
-    @IBOutlet weak var rightDot: UILabel!
-    @IBOutlet weak var leftDot: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var rightBrain: EEGView!
-    @IBOutlet weak var leftBrain: EEGView!
+class BrainwaveView: BaseView {
     
-    private var leftData: [Float]?
-    private var rightData: [Float]?
+    var leftColor: UIColor?
+    var rightColor: UIColor?
+
+    var rightBrainLabel: UILabel = UILabel()
+    var leftBrainLabel: UILabel = UILabel()
+    var rightDot: UILabel = UILabel()
+    var leftDot: UILabel = UILabel()
+    var titleLabel: UILabel = UILabel()
+    var infoButton: UIButton = UIButton()
+    var rightBrain: EEGView = EEGView()
+    var leftBrain: EEGView = EEGView()
+    
+    public var leftData: [Float]?
+    public var rightData: [Float]?
     
     private let leftLock = NSLock()
     private let rightLock = NSLock()
@@ -36,44 +38,110 @@ class BrainwaveView: UIView, NibLoadable {
     
     init() {
         super.init(frame: CGRect.zero)
-        self.backgroundColor = UIColor.clear
-        let view = BrainwaveView.loadFromNib()
-        self.addSubview(view)
-        view.snp.makeConstraints {
-            $0.right.left.top.bottom.equalToSuperview()
-        }
+ 
         rightData = Array(repeating: 0, count: 200)
         leftData = Array(repeating: 0, count: 200)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        let view = BrainwaveView.loadFromNib()
-        self.addSubview(view)
-        view.snp.makeConstraints {
-            $0.right.left.top.bottom.equalToSuperview()
-        }
+  
         rightData = Array(repeating: 0, count: 200)
         leftData = Array(repeating: 0, count: 200)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = UIColor.clear
-        let view = BrainwaveView.loadFromNib()
-        self.addSubview(view)
-        view.snp.makeConstraints {
-            $0.right.left.top.bottom.equalToSuperview()
-        }
+
         rightData = Array(repeating: 0, count: 200)
         leftData = Array(repeating: 0, count: 200)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        rightBrain.layoutIfNeeded()
-        leftBrain.layoutIfNeeded()
+        if let leftColor = leftColor, let rightColor = rightColor {
+            rightBrain.setLineColor(rightColor)
+            leftBrain.setLineColor(leftColor)
+        }
+    }
+    
+    override func setUI() {
+        self.addSubview(titleLabel)
+        self.addSubview(infoButton)
+        self.addSubview(leftDot)
+        self.addSubview(rightDot)
+        self.addSubview(leftBrainLabel)
+        self.addSubview(rightBrainLabel)
+        self.addSubview(leftBrain)
+        self.addSubview(rightBrain)
+        
+        infoButton.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
+        
+        leftDot.layer.cornerRadius = 4
+        leftDot.layer.masksToBounds = true
+        
+        rightDot.layer.cornerRadius = 4
+        rightDot.layer.masksToBounds = true
+        
+        leftBrainLabel.font = UIFont.systemFont(ofSize: 12)
+        rightBrainLabel.font = UIFont.systemFont(ofSize: 12)
+        
+        leftBrain.backgroundColor = .clear
+        rightBrain.backgroundColor = .clear
+        
+    }
+    
+    override func setLayout() {
+        titleLabel.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().offset(16)
+        }
+        
+        infoButton.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel.snp_centerYWithinMargins)
+            $0.right.equalToSuperview().offset(-16)
+            $0.width.equalTo(24)
+            $0.height.equalTo(24)
+        }
+        
+        rightBrainLabel.snp.makeConstraints {
+            $0.right.equalToSuperview().offset(-16)
+            $0.top.equalTo(infoButton.snp_bottomMargin).offset(10)
+        }
+        
+        rightDot.snp.makeConstraints {
+            $0.right.equalTo(rightBrainLabel.snp_leftMargin).offset(-6)
+            $0.centerY.equalTo(rightBrainLabel.snp_centerYWithinMargins)
+        }
+        
+        leftBrainLabel.snp.makeConstraints {
+            $0.right.equalTo(rightDot.snp_leftMargin).offset(-32)
+            $0.centerY.equalTo(rightDot.snp_centerYWithinMargins)
+        }
+        
+        leftDot.snp.makeConstraints {
+            $0.right.equalTo(leftBrainLabel.snp_leftMargin).offset(-6)
+            $0.centerY.equalTo(leftBrainLabel.snp_centerYWithinMargins)
+        }
+        
+        leftBrain.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.3)
+            $0.top.equalTo(rightBrainLabel.snp_bottomMargin).offset(20)
+        }
+        
+        rightBrain.snp.makeConstraints  {
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.3)
+            $0.top.equalTo(leftBrain.snp_bottomMargin).offset(16)
+        }
+    }
+    
+    public func setLineColor(left: UIColor, right: UIColor) {
+        leftColor  = left
+        rightColor = right
     }
     
 
@@ -136,7 +204,7 @@ class BrainwaveView: UIView, NibLoadable {
     }
     
     
-    private func drawWave(_ leftOrRight: LeftOrRightBrain) {
+    public func drawWave(_ leftOrRight: LeftOrRightBrain) {
         DispatchQueue.main.async {
             switch leftOrRight{
             case .left:

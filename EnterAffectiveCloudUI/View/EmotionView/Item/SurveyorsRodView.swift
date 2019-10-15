@@ -8,41 +8,62 @@
 
 import UIKit
 
-class SurveyorsRodView: UIView, NibLoadable {
+class SurveyorsRodView: BaseView {
 
-    @IBOutlet weak var rodBar: UIView!
-    @IBOutlet weak var rodDot: UIView!
+    var rodBar: UIView = UIView()
+    var rodDot: RodDot = RodDot()
     private var _scaleArray: [Int]?
     private var _textColor: UIColor?
-    var contentView: UIView?
+    private var _rodColor: [UIColor]?
+    private var _interval:[CGFloat]?
+    
+    init() {
+        super.init(frame: CGRect.zero)
+        
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
-        
-        let view = SurveyorsRodView.loadFromNib()
-        self.addSubview(view)
-        contentView = view
-        view.snp.makeConstraints {
-            $0.right.left.top.bottom.equalToSuperview()
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = UIColor.clear
-        
-        let view = SurveyorsRodView.loadFromNib()
-        self.addSubview(view)
-        contentView = view
-        view.snp.makeConstraints {
-            $0.right.left.top.bottom.equalToSuperview()
-        }
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        if let rodColor = _rodColor, let interval = _interval {
+            initBarColor(rodColor, interval)
+            setDotColor(rodColor.last!)
+        }
+        
+        if let array = _scaleArray {
+            setLabel(index: array, _textColor!)
+        }
+    }
+    
+    override func setUI() {
+        rodBar.layer.cornerRadius = 2
+        rodBar.layer.masksToBounds = true
+        rodDot.backgroundColor = .clear
+        self.addSubview(rodBar)
+        self.addSubview(rodDot)
+    }
+    
+    override func setLayout() {
+        rodBar.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(5)
+            $0.right.equalToSuperview().offset(-5)
+            $0.top.equalToSuperview().offset(16)
+            $0.height.equalTo(4)
+        }
+        
+        rodDot.snp.makeConstraints {
+            $0.left.equalTo(rodBar.snp.leftMargin).offset(10)
+            $0.bottom.equalToSuperview()
+            $0.width.equalTo(6)
+            $0.height.equalTo(6)
+        }
     }
     
     public var scaleArray: [Int] {
@@ -51,14 +72,16 @@ class SurveyorsRodView: UIView, NibLoadable {
         }
         set {
             _scaleArray = newValue
-            if let newColor = _textColor {
-                setLabel(index: newValue, newColor)
-            }
             
         }
     }
     
     public func setBarColor(_ colors: [UIColor],_ interval: [CGFloat]) {
+        _rodColor = colors
+        _interval = interval
+    }
+    
+    private func initBarColor(_ colors: [UIColor],_ interval: [CGFloat]) {
         let lineCount = interval.count - 1
         let barWidth = self.bounds.width - 6
         for i in (0..<lineCount) {
@@ -80,16 +103,14 @@ class SurveyorsRodView: UIView, NibLoadable {
     }
     
     public func setDotColor(_ color: UIColor) {
-        let rodDotView = rodDot as! RodDot
+        let rodDotView = rodDot
         rodDotView.fillColor = color
         rodDotView.setNeedsDisplay()
     }
     
     public func setLabelColor(_ color: UIColor) {
         _textColor = color
-        if let array = _scaleArray {
-            setLabel(index: array, color)
-        }
+
     }
     
     private func setLabel(index:[Int], _ color: UIColor) {
@@ -97,10 +118,10 @@ class SurveyorsRodView: UIView, NibLoadable {
         let temp = index.last! - index.first!
         for e in index {
             let originX: CGFloat = CGFloat(e - index.first!) / CGFloat(temp) * viewWidth
-            let scaleLabel = UILabel(frame: CGRect(origin: CGPoint(x:originX + 3 > viewWidth ? originX-3 : originX+3, y:0), size: CGSize(width: 18, height: 12)))
+            let scaleLabel = UILabel(frame: CGRect(origin: CGPoint(x:originX-1, y:0), size: CGSize(width: 18, height: 12)))
             scaleLabel.backgroundColor = UIColor.clear
             scaleLabel.text = String(e)
-            scaleLabel.textAlignment = .left
+            scaleLabel.textAlignment = .center
             scaleLabel.font = UIFont.systemFont(ofSize: 10)
             scaleLabel.textColor = color
             self.addSubview(scaleLabel)
@@ -108,8 +129,8 @@ class SurveyorsRodView: UIView, NibLoadable {
     }
     
     public func setDotValue(index: Float) {
-        let barWidth = (self.bounds.width - 6)
-        rodDot.center.x = (CGFloat(index) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth + 3
+        let barWidth = (self.bounds.width - 10)
+        rodDot.center.x = (CGFloat(index) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth + 5
     }
     
     

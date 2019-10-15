@@ -12,10 +12,14 @@ open class BaseView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        setUI()
+        setLayout()
     }
     
     required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setUI()
+        setLayout()
     }
     
     func setUI() {}
@@ -37,6 +41,59 @@ open class BaseView: UIView {
         }
         
         return nil
+    }
+
+    public func showTip() {
+        dismissMask()
+        let maskView = UIView()
+        maskView.tag = 9999
+        maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
+        self.addSubview(maskView)
+        maskView.snp.makeConstraints {
+            $0.left.right.top.bottom.equalToSuperview()
+        }
+        let tipLabel = UILabel()
+        maskView.addSubview(tipLabel)
+        tipLabel.text = "连接设备以显示实时数据"
+        tipLabel.textColor = .white
+        tipLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        tipLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        self.layoutIfNeeded()
+    }
+    
+    public func showProgress() {
+        dismissMask()
+        let maskView = UIView()
+        maskView.tag = 9999
+        maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
+        self.addSubview(maskView)
+        maskView.snp.makeConstraints {
+            $0.left.right.top.bottom.equalToSuperview()
+        }
+        let imageView = UIImageView()
+        maskView.addSubview(imageView)
+        imageView.animationImages = UIImage.resolveGifImage(gif: "loading")
+        imageView.animationDuration = 2
+        imageView.animationRepeatCount = Int.max
+        imageView.startAnimating()
+        
+        imageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.height.equalTo(36)
+            $0.width.equalTo(36)
+        }
+    }
+    
+    public func dismissMask() {
+        for e in self.subviews {
+            if e.tag == 9999 {
+                e.removeFromSuperview()
+                break
+            }
+        }
     }
 
 }

@@ -46,10 +46,10 @@ class UpdateHeartRate: HeartRateValueProtocol {
     
 }
 
-class RealtimeHeartRateView: BaseView {
+public class RealtimeHeartRateView: BaseView {
     
     //MARK:- Public param
-    public var mainColor = UIColor.colorWithHexString(hexColor: "23233A")
+    public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")
     public var textFont = "PingFangSC-Semibold"
     public var textColor = UIColor.colorWithHexString(hexColor: "171726")
     public var isShowExtremeValue = true
@@ -76,11 +76,25 @@ class RealtimeHeartRateView: BaseView {
     private var maxBpmLabel: UILabel?
     private var minBpmLabel: UILabel?
     private var infoBtn: UIButton?
+    private var heartImageView: UIImageView?
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        observeRealtimeValue()
+    }
     
     //MARK:- override function
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        observeRealtimeValue()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        observeRealtimeValue()
+    }
+    
+    private func observeRealtimeValue() {
         let updateHeartRate = UpdateHeartRate()
         updateHeartRate.rxHeartRateValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
@@ -107,12 +121,6 @@ class RealtimeHeartRateView: BaseView {
         }, onError: { (error) in
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func setUI() {
@@ -145,6 +153,13 @@ class RealtimeHeartRateView: BaseView {
         bpmLabel?.textColor = firstTextColor
         bpmLabel?.font = UIFont.systemFont(ofSize: 16)
         bgView.addSubview(bpmLabel!)
+        
+        heartImageView = UIImageView()
+        heartImageView?.animationImages = UIImage.resolveGifImage(gif: "heart")
+        heartImageView?.animationDuration = 2
+        heartImageView?.animationRepeatCount = Int.max
+        heartImageView?.startAnimating()
+        bgView.addSubview(heartImageView!)
         
         if isShowExtremeValue {
             maxLabel = UILabel()
@@ -191,7 +206,7 @@ class RealtimeHeartRateView: BaseView {
         
         if isShowInfoIcon {
             infoBtn = UIButton(type: .custom)
-            infoBtn?.setImage(#imageLiteral(resourceName: "icon_info_black"), for: .normal)
+            infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
             infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
             bgView.addSubview(infoBtn!)
         }
@@ -215,13 +230,20 @@ class RealtimeHeartRateView: BaseView {
             $0.bottom.equalToSuperview().offset(-18)
         }
         
+        heartImageView?.snp.makeConstraints {
+            $0.height.equalTo(30)
+            $0.width.equalTo(33)
+            $0.bottom.equalTo(bpmLabel!.snp_topMargin).offset(-8)
+            $0.centerX.equalTo(bpmLabel!.snp_centerXWithinMargins)
+        }
+        
         heartRateLabel?.snp.makeConstraints {
-            $0.left.equalTo(bpmLabel!.snp.rightMargin).offset(16)
+            $0.left.equalTo(bpmLabel!.snp.rightMargin).offset(24)
             $0.bottom.equalToSuperview().offset(-16)
         }
             
         infoBtn?.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel!.snp.centerXWithinMargins)
+            $0.centerY.equalTo(titleLabel!.snp_centerYWithinMargins)
             $0.right.equalToSuperview().offset(-16)
             $0.width.equalTo(24)
             $0.height.equalTo(24)
@@ -257,8 +279,6 @@ class RealtimeHeartRateView: BaseView {
             $0.right.equalTo(maxValueLabel!.snp.leftMargin).offset(-6)
             $0.bottom.equalToSuperview().offset(-44)
         }
-        
-        
     }
     
     @objc private func infoBtnTouchUpInside() {
