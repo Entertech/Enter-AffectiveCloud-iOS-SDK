@@ -12,14 +12,14 @@
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="EnterReportUIDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGp-8N-tTl">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1417"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0db-VQ-bef">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1417"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="脑电波频谱占比" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kU-oE-UN5">
                                                 <rect key="frame" x="16" y="76" width="227" height="39"/>
@@ -28,19 +28,47 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3w-bu-fKu" customClass="BrainSpecturmReportView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="123" width="382" height="314"/>
+                                                <rect key="frame" x="16" y="127" width="382" height="314"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="314" id="8hX-y4-Yrs"/>
                                                 </constraints>
                                             </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8I-KS-3CC">
+                                                <rect key="frame" x="16" y="465" width="65" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWz-9S-Gq7" customClass="HeartRateReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="516" width="382" height="285"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="285" id="QO6-KC-ftA"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWV-0h-iy3" customClass="HeartRateVariablityReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="809" width="382" height="260"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="260" id="7hM-WC-099"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
+                                            <constraint firstItem="MWz-9S-Gq7" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="0Jf-Vs-O6k"/>
+                                            <constraint firstItem="E8I-KS-3CC" firstAttribute="top" secondItem="G3w-bu-fKu" secondAttribute="bottom" constant="24" id="6TY-tZ-jg3"/>
+                                            <constraint firstAttribute="bottom" secondItem="PWV-0h-iy3" secondAttribute="bottom" constant="348" id="6no-YX-z6z"/>
+                                            <constraint firstItem="E8I-KS-3CC" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="Mus-Nz-OPD"/>
+                                            <constraint firstAttribute="trailing" secondItem="PWV-0h-iy3" secondAttribute="trailing" constant="16" id="SXw-4e-eA5"/>
+                                            <constraint firstItem="PWV-0h-iy3" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="T9Q-lw-PY6"/>
+                                            <constraint firstItem="PWV-0h-iy3" firstAttribute="top" secondItem="MWz-9S-Gq7" secondAttribute="bottom" constant="8" id="Tou-AP-P2G"/>
                                             <constraint firstItem="1kU-oE-UN5" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="UCn-pC-4C7"/>
-                                            <constraint firstAttribute="bottom" secondItem="G3w-bu-fKu" secondAttribute="bottom" constant="376" id="f3i-tm-D3L"/>
+                                            <constraint firstAttribute="trailing" secondItem="MWz-9S-Gq7" secondAttribute="trailing" constant="16" id="UaP-1B-eV6"/>
                                             <constraint firstItem="G3w-bu-fKu" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="iPf-hR-Ez0"/>
-                                            <constraint firstItem="G3w-bu-fKu" firstAttribute="top" secondItem="1kU-oE-UN5" secondAttribute="bottom" constant="8" id="kHr-v6-cab"/>
+                                            <constraint firstItem="G3w-bu-fKu" firstAttribute="top" secondItem="1kU-oE-UN5" secondAttribute="bottom" constant="12" id="kHr-v6-cab"/>
+                                            <constraint firstItem="MWz-9S-Gq7" firstAttribute="top" secondItem="E8I-KS-3CC" secondAttribute="bottom" constant="12" id="mpt-Q0-UvM"/>
                                             <constraint firstItem="1kU-oE-UN5" firstAttribute="top" secondItem="0db-VQ-bef" secondAttribute="top" constant="76" id="uKH-3V-zI8"/>
                                             <constraint firstAttribute="trailing" secondItem="G3w-bu-fKu" secondAttribute="trailing" constant="16" id="ufU-wr-iEU"/>
                                         </constraints>
@@ -67,7 +95,11 @@
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="1500"/>
                     <connections>
+                        <outlet property="heartRateView" destination="MWz-9S-Gq7" id="9PX-3z-MWN"/>
+                        <outlet property="hrvView" destination="PWV-0h-iy3" id="I9x-0T-q5y"/>
                         <outlet property="spectrumView" destination="G3w-bu-fKu" id="zTE-a9-CFJ"/>
                     </connections>
                 </viewController>

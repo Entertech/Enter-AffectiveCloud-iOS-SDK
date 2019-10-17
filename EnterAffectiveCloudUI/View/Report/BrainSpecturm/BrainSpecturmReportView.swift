@@ -52,14 +52,15 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
         didSet  {
-            yLabel?.textColor = textColor
-            xLabel?.textColor = textColor
-            gamaLabel?.textColor = textColor
-            betaLabel?.textColor = textColor
-            alphaLabel?.textColor = textColor
-            thetaLabel?.textColor = textColor
-            deltaLabel?.textColor = textColor
-            
+            let changedColor = textColor.changeAlpha(to: 0.7)
+            yLabel?.textColor = changedColor
+            xLabel?.textColor = changedColor
+            gamaLabel?.textColor = changedColor
+            betaLabel?.textColor = changedColor
+            alphaLabel?.textColor = changedColor
+            thetaLabel?.textColor = changedColor
+            deltaLabel?.textColor = changedColor
+            chartView?.xAxis.labelTextColor = changedColor
         }
     }
     
@@ -122,9 +123,12 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
     
     override func setUI() {
         self.backgroundColor = .clear
+        let alphaColor = textColor.changeAlpha(to: 0.7)
         
         bgView = UIView()
         bgView?.backgroundColor = bgColor
+        bgView?.layer.cornerRadius = cornerRadius
+        bgView?.layer.masksToBounds = true
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
@@ -142,7 +146,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         yLabel = UILabel.init()
         yLabel?.text = "各个频段脑电波占比 (%)"
         yLabel?.font = UIFont.systemFont(ofSize: 12)
-        yLabel?.textColor = textColor
+        yLabel?.textColor = alphaColor
         yLabel?.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
         yLabel?.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
         bgView?.addSubview(yLabel!)
@@ -151,7 +155,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         xLabel?.text = "时间(分钟)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
-        xLabel?.textColor = textColor
+        xLabel?.textColor = alphaColor
         bgView?.addSubview(xLabel!)
         
         chartView = LineChartView()
@@ -179,6 +183,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         xAxis.labelPosition = .bottom
         xAxis.drawAxisLineEnabled = false
         xAxis.drawGridLinesEnabled = false
+        xAxis.labelTextColor = alphaColor
         
         gamaDot = UIView()
         gamaDot?.backgroundColor = spectrumColors[0]
@@ -212,35 +217,35 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         
         gamaLabel = UILabel()
         gamaLabel?.text = "γ 波"
-        gamaLabel?.textColor = textColor
+        gamaLabel?.textColor = alphaColor
         gamaLabel?.textAlignment = .left
         gamaLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(gamaLabel!)
         
         betaLabel = UILabel()
         betaLabel?.text = "β 波"
-        betaLabel?.textColor = textColor
+        betaLabel?.textColor = alphaColor
         betaLabel?.textAlignment = .left
         betaLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(betaLabel!)
         
         alphaLabel = UILabel()
         alphaLabel?.text = "α 波"
-        alphaLabel?.textColor = textColor
+        alphaLabel?.textColor = alphaColor
         alphaLabel?.textAlignment = .left
         alphaLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(alphaLabel!)
         
         thetaLabel = UILabel()
         thetaLabel?.text = "θ 波"
-        thetaLabel?.textColor = textColor
+        thetaLabel?.textColor = alphaColor
         thetaLabel?.textAlignment = .left
         thetaLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(thetaLabel!)
         
         deltaLabel = UILabel()
         deltaLabel?.text = "δ 波"
-        deltaLabel?.textColor = textColor
+        deltaLabel?.textColor = alphaColor
         deltaLabel?.textAlignment = .left
         deltaLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(deltaLabel!)
@@ -348,6 +353,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         
     }
     
+    //MARK:- Chart Delegate
     func setDataCount(_ waveArray: Array2D<Float>) {
         let yVals1 = setEntry(waveArray, 0)
         let yVals2 = setEntry(waveArray, 1)
@@ -378,6 +384,8 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         return yVals
     }
     
+    
+    //MARK:- Chart Delegate
     private func setDataSet(_ entry: [ChartDataEntry]?, _ index: Int) -> LineChartDataSet {
         var color = UIColor.clear
         switch index {
@@ -420,8 +428,8 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
             if i != 0 {
                 let limit = ChartLimitLine(limit: Double(i), label: "")
                 limit.drawLabelEnabled = false
-                limit.lineColor = .white
-                limit.lineWidth = 1
+                limit.lineColor = textColor.changeAlpha(to: 0.5)
+                limit.lineWidth = 0.5
                 self.chartView?.xAxis.addLimitLine(limit)
             }
             
