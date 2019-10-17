@@ -41,6 +41,7 @@
 		FA934390235714E400544239 /* ReportFileHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438F235714E400544239 /* ReportFileHander.swift */; };
 		FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343922357F48000544239 /* HeartRateReportView.swift */; };
 		FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93439523581B0100544239 /* HeartRateVariablityReportView.swift */; };
+		FA9343992358489800544239 /* AttentionReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343982358489800544239 /* AttentionReportView.swift */; };
 		FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */; };
 		FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */; };
 		FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D0230E84EF00ECD83C /* CloudModels.swift */; };
@@ -160,6 +161,7 @@
 		FA93438F235714E400544239 /* ReportFileHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFileHander.swift; sourceTree = "<group>"; };
 		FA9343922357F48000544239 /* HeartRateReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateReportView.swift; sourceTree = "<group>"; };
 		FA93439523581B0100544239 /* HeartRateVariablityReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateVariablityReportView.swift; sourceTree = "<group>"; };
+		FA9343982358489800544239 /* AttentionReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionReportView.swift; sourceTree = "<group>"; };
 		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
 		FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveCloudClient.swift; sourceTree = "<group>"; };
 		FABFA4D0230E84EF00ECD83C /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
@@ -410,6 +412,21 @@
 			path = HRV;
 			sourceTree = "<group>";
 		};
+		FA934397235845AE00544239 /* Attention */ = {
+			isa = PBXGroup;
+			children = (
+				FA9343982358489800544239 /* AttentionReportView.swift */,
+			);
+			path = Attention;
+			sourceTree = "<group>";
+		};
+		FA93439A2358591500544239 /* Relaxation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Relaxation;
+			sourceTree = "<group>";
+		};
 		FABFA4CD230E84EF00ECD83C /* Cloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +453,8 @@
 		FAC773082355CB1A00FBFA6A /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				FA93439A2358591500544239 /* Relaxation */,
+				FA934397235845AE00544239 /* Attention */,
 				FA93439423581AB200544239 /* HRV */,
 				FA9343912357F43800544239 /* HeartRate */,
 				FAC773092355CB9100FBFA6A /* BrainSpecturm */,
@@ -871,6 +890,7 @@
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
 				FA93437E2357015C00544239 /* FileError.swift in Sources */,
 				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
+				FA9343992358489800544239 /* AttentionReportView.swift in Sources */,
 				FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */,
 				FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */,
 				FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */,

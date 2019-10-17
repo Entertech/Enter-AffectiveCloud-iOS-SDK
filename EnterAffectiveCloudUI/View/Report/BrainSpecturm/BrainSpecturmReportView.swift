@@ -254,8 +254,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
     
     override func setLayout() {
         bgView?.snp.makeConstraints {
-            $0.height.equalTo(314)
-            $0.top.left.right.equalToSuperview()
+            $0.top.left.right.bottom.equalToSuperview()
         }
         
         titleLabel?.snp.makeConstraints {

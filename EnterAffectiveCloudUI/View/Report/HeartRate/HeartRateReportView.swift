@@ -27,7 +27,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         }
     }
     /// 圆角
-    public var cornerRadius: CGFloat = 8 {
+    public var cornerRadius: CGFloat = 0 {
         didSet {
             bgView?.layer.cornerRadius = cornerRadius
             bgView?.layer.masksToBounds = true
@@ -330,8 +330,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
     
     override func setLayout() {
         bgView?.snp.makeConstraints {
-            $0.height.equalTo(285)
-            $0.top.left.right.equalToSuperview()
+            $0.top.left.right.bottom.equalToSuperview()
         }
         
         titleLabel?.snp.makeConstraints {

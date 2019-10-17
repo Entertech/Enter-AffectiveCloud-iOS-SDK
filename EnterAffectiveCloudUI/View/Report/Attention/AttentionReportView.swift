@@ -1,5 +1,5 @@
 //
-//  HeartRateVariablityReportView.swift
+//  AttentionReportView.swift
 //  EnterAffectiveCloudUI
 //
 //  Created by Enter on 2019/10/17.
@@ -11,7 +11,7 @@ import Charts
 import SafariServices
 import SnapKit
 
-public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
+public class AttentionReportView: BaseView, ChartViewDelegate{
 
     //MARK:- Public param
     /// 标题等主色
@@ -27,7 +27,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         }
     }
     /// 圆角
-    public var cornerRadius: CGFloat = 0 {
+    public var cornerRadius: CGFloat = 8 {
         didSet {
             bgView?.layer.cornerRadius = cornerRadius
             bgView?.layer.masksToBounds = true
@@ -56,20 +56,40 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
             let secondColor = textColor.changeAlpha(to: 0.5)
             yLabel?.textColor = changedColor
             xLabel?.textColor = changedColor
-            
             avgLabel?.textColor = changedColor
-            msLabel?.textColor = secondColor
-            chartView?.leftAxis.labelTextColor = changedColor
+            minLabel?.textColor = changedColor
+            maxLabel?.textColor = changedColor
             chartView?.xAxis.labelTextColor = changedColor
+            chartView?.leftAxis.labelTextColor = changedColor
             chartView?.xAxis.gridColor = secondColor
         }
     }
     
-    public var lineColor: UIColor = UIColor.colorWithInt(r: 255, g: 72, b: 82, alpha: 1)
+    public var isShowAvg: Bool = true {
+        didSet {
+            avgLabel?.isHidden = !isShowAvg
+        }
+    }
+    
+    public var isShowMax: Bool = true {
+        didSet {
+            maxLabel?.isHidden = !self.isShowMax
+        }
+    }
+    
+    public var isShowMin: Bool = true {
+        didSet {
+            minLabel?.isHidden = !self.isShowMin
+        }
+    }
+
+    
+    /// 线段和填充的颜色
+    public var lineColor: UIColor = UIColor.colorWithInt(r: 0, g: 217, b: 147, alpha: 1)
     
     //MARK:- Private UI
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private let interval = 0.8
     
     //MARK:- Private UI
     private var bgView: UIView?
@@ -79,7 +99,8 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     private var yLabel: UILabel?
     private var xLabel: UILabel?
     private var avgLabel: UILabel?
-    private var msLabel: UILabel?
+    private var maxLabel: UILabel?
+    private var minLabel: UILabel?
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -106,7 +127,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "心率变异性"
+        titleLabel?.text = "专注度"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -118,7 +139,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         bgView?.addSubview(infoBtn!)
         
         yLabel = UILabel.init()
-        yLabel?.text = "HRV (ms)"
+        yLabel?.text = "专注度"
         yLabel?.font = UIFont.systemFont(ofSize: 12)
         yLabel?.textColor = alphaColor
         yLabel?.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
@@ -135,7 +156,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         chartView = LineChartView()
         chartView?.delegate = self
         chartView?.backgroundColor = .clear
-        chartView?.gridBackgroundColor = .clear
+        chartView?.gridBackgroundColor = .white
         chartView?.drawBordersEnabled = false
         chartView?.chartDescription?.enabled = false
         chartView?.pinchZoomEnabled = false
@@ -144,12 +165,13 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         chartView?.isUserInteractionEnabled = false
         
         let leftAxis = chartView!.leftAxis
-        leftAxis.axisMaximum = 150
+        leftAxis.axisMaximum = 100
         leftAxis.axisMinimum = 0
+        leftAxis.drawGridLinesEnabled = false
+        leftAxis.labelCount = 11
         leftAxis.labelPosition = .insideChart
         leftAxis.labelTextColor = alphaColor
-        leftAxis.drawGridLinesEnabled = false
-        leftAxis.labelCount = 16
+        
         chartView?.rightAxis.enabled = false
         
         let xAxis = chartView!.xAxis
@@ -165,11 +187,15 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         avgLabel?.textColor = alphaColor
         bgView?.addSubview(avgLabel!)
         
-        msLabel = UILabel()
-        msLabel?.text = "ms"
-        msLabel?.font = UIFont.systemFont(ofSize: 12)
-        msLabel?.textColor = secondColor
-        bgView?.addSubview(msLabel!)
+        maxLabel = UILabel()
+        maxLabel?.font = UIFont.systemFont(ofSize: 14)
+        maxLabel?.textColor = alphaColor
+        bgView?.addSubview(maxLabel!)
+        
+        minLabel = UILabel()
+        minLabel?.font = UIFont.systemFont(ofSize: 14)
+        minLabel?.textColor = alphaColor
+        bgView?.addSubview(minLabel!)
     }
     
     override func setLayout() {
@@ -199,18 +225,23 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         chartView?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(32)
             $0.right.equalToSuperview().offset(-16)
-            $0.height.equalTo(135)
+            $0.height.equalTo(180)
             $0.top.equalToSuperview().offset(56)
         }
         
         avgLabel?.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-16)
-            $0.right.equalTo(msLabel!.snp.left).offset(-5)
+            $0.left.equalToSuperview().offset(16)
         }
         
-        msLabel?.snp.makeConstraints {
+        maxLabel?.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-16)
+        }
+        
+        minLabel?.snp.makeConstraints {
             $0.right.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-16)
         }
     }
     
@@ -224,20 +255,25 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         let reader = ReportFileHander.readReportFile(path)
         let service = ReportViewService()
         service.dataOfReport = reader
-        if let hrv = service.model!.heartRateVariability {
-            setDataCount(hrv)
+        if let hr = service.model!.attention {
+            setDataCount(hr)
         }
         
-        if let hrvAvg = service.model!.hrvAvg {
-            avgLabel?.text = "平均：\(hrvAvg)"
+        if let avg = service.model!.attentionAvg {
+            avgLabel?.text = "平均：\(avg)"
+        }
+        
+        if let min = service.model!.attentionMin {
+            minLabel?.text = "最小：\(min)"
+        }
+        
+        if let max = service.model!.attentionMax {
+            maxLabel?.text = "最大：\(max)"
         }
         
     }
     
-    
-    //MARK:- Chart delegate
     private func setDataCount(_ waveArray: [Int]) {
-        var colors: [UIColor] = []
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
@@ -247,37 +283,56 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
                 break
             }
         }
-
+        var uselessVals: [ChartDataEntry] = []
+        for i in stride(from: 0, to: initIndex+1, by: sample) {
+            uselessVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
+        }
         var yVals: [ChartDataEntry] = []
-        var notZero: Int = 0
-        for i in stride(from: 0, to: waveArray.count, by: sample) {
-            if i < initIndex{
-                colors.append(#colorLiteral(red: 0.9490196078, green: 0.9568627451, blue: 0.9843137255, alpha: 1))
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
-            } else {
-                if waveArray[i] == 0 {
-                    colors.append(#colorLiteral(red: 0.9490196078, green: 0.9568627451, blue: 0.9843137255, alpha: 1))
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
-                } else {
-                    notZero = waveArray[i]
-                    colors.append(lineColor)
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
-                }
-                
-            }
+        for i in stride(from: initIndex, to: waveArray.count, by: sample) {
+            
+            yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
             
         }
+        var red:CGFloat   = 0.0
+        var green:CGFloat = 0.0
+        var blue:CGFloat  = 0.0
+        var alpha:CGFloat = 0.0
+        lineColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let components:[CGFloat] = [ red, green, blue, 1,
+                                     red, green, blue, 0.75,
+                                     red, green, blue, 0.5]
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let locations:[CGFloat] = [0.2, 0.5, 1.0]
+        let chartFillColor = CGGradient(colorSpace: colorSpace, colorComponents: components, locations: locations, count: 3)
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
+        set.mode = .cubicBezier
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
-        set.drawFilledEnabled = false
-        set.lineWidth = 2
-        set.colors = colors
+        set.drawFilledEnabled = true
         set.drawValuesEnabled = false
-        let data = LineChartData(dataSet: set)
+        set.lineWidth = 0.5
+        set.setColor(.clear)
+        set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
+        set.fillAlpha = 1.0
+        
+        let uselessSet = LineChartDataSet(entries: uselessVals, label: "")
+        uselessSet.drawCirclesEnabled = false
+        uselessSet.drawCircleHoleEnabled = false
+        uselessSet.drawFilledEnabled = true
+        uselessSet.drawValuesEnabled = false
+        uselessSet.lineWidth = 0.5
+        uselessSet.setColor(.clear)
+        let whiteComponents:[CGFloat] = [ 242.0/255.0, 244.0/255.0, 251.0/255.0, 1,
+                                     ]
+        let whiteColorSpace = CGColorSpaceCreateDeviceRGB()
+        let whiteLocations:[CGFloat] = [1.0]
+        let grayColor = CGGradient(colorSpace: whiteColorSpace, colorComponents: whiteComponents, locations: whiteLocations, count: 1)
+        uselessSet.fill = Fill(linearGradient: grayColor!, angle: 270)
+        uselessSet.fillAlpha = 1.0
+        
+        let data = LineChartData(dataSets: [uselessSet, set])
         chartView?.data = data
-        setLimitLine(yVals.count)
+        setLimitLine(yVals.count+uselessVals.count)
         
     }
     
@@ -289,16 +344,15 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
         }
-        self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time)
-        self.chartView?.leftAxis.valueFormatter = HRVValueFormatter()
-
+        self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time)
+        self.chartView?.leftAxis.valueFormatter = OtherValueFormatter()
         
     }
 }
 
 /// Y轴描述
-public class HRVValueFormatter: NSObject, IAxisValueFormatter {
-    private var labels: [Int : String] = [50: "50", 100: "100", 150: "150"];
+public class OtherValueFormatter: NSObject, IAxisValueFormatter {
+    private var labels: [Int : String] = [25: "25", 50: "50", 75: "75", 100: "100"];
     
     /// 初始化
     ///
@@ -318,7 +372,7 @@ public class HRVValueFormatter: NSObject, IAxisValueFormatter {
 }
 
 /// X轴描述
-public class HRVXValueFormatter: NSObject, IAxisValueFormatter {
+public class OtherXValueFormatter: NSObject, IAxisValueFormatter {
     private var values: [Double] = [];
     
     /// 初始化

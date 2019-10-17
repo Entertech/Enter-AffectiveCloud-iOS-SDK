@@ -12,6 +12,7 @@ import EnterAffectiveCloudUI
 class FirstViewController: UIViewController {
 
 
+    @IBOutlet weak var attentionView: AttentionReportView!
     @IBOutlet weak var hrvView: HeartRateVariablityReportView!
     @IBOutlet weak var heartRateView: HeartRateReportView!
     @IBOutlet weak var spectrumView: BrainSpecturmReportView!
@@ -32,6 +33,7 @@ class FirstViewController: UIViewController {
             spectrumView.setDataFromReportFile(path: samplePath)
             heartRateView.setDataFromReportFile(path: samplePath)
             hrvView.setDataFromReportFile(path: samplePath)
+            attentionView.setDataFromReportFile(path: samplePath)
         }
         
     }
