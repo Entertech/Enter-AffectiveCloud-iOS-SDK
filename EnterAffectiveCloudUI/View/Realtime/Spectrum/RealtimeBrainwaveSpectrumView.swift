@@ -34,7 +34,7 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
         if let data = notification.userInfo!["biodataServicesSubscribe"] as? CSBiodataProcessJSONModel {
             if let eeg = data.eeg {
                 if let _ = eeg.alpha {
-                    rxSpectrumValue.onNext((eeg.alpha!, eeg.belta!, eeg.gamma!, eeg.delta!, eeg.theta!))
+                    rxSpectrumValue.onNext((eeg.gamma!, eeg.belta!, eeg.alpha!, eeg.theta!, eeg.delta!))
                 }
             }
             
@@ -139,11 +139,11 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
         updateSpectrum.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
-                self.spectrumView.setSpectrum(value.0, .α)
+                self.spectrumView.setSpectrum(value.0, .γ)
                 self.spectrumView.setSpectrum(value.1, .β)
-                self.spectrumView.setSpectrum(value.2, .γ)
-                self.spectrumView.setSpectrum(value.3, .δ)
-                self.spectrumView.setSpectrum(value.4, .θ)
+                self.spectrumView.setSpectrum(value.2, .α)
+                self.spectrumView.setSpectrum(value.3, .θ)
+                self.spectrumView.setSpectrum(value.4, .δ)
             }
         }, onError: { (error) in
             print(error.localizedDescription)

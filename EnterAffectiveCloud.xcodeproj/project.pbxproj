@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		050B6C818BBC9339BAF001D7 /* Pods_EnterRealtimeUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */; };
+		06334CCC6A76625AD4F3EF43 /* Pods_EnterReportUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC63DD847B631367B69CBCD6 /* Pods_EnterReportUIDemo.framework */; };
 		51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */; };
 		B7E125D5230559590072DF22 /* EnterAffectiveCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
@@ -16,8 +17,29 @@
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
 		FA55EA5E234C273A00C148BF /* EnterAffectiveCloudUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA55EA69234C6C9F00C148BF /* BiodataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA68234C6C9F00C148BF /* BiodataModel.swift */; };
 		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
+		FA93435B2356E59B00544239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93435A2356E59B00544239 /* AppDelegate.swift */; };
+		FA93435D2356E59B00544239 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93435C2356E59B00544239 /* SceneDelegate.swift */; };
+		FA93435F2356E59B00544239 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93435E2356E59B00544239 /* FirstViewController.swift */; };
+		FA9343612356E59B00544239 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343602356E59B00544239 /* SecondViewController.swift */; };
+		FA9343642356E59B00544239 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9343622356E59B00544239 /* Main.storyboard */; };
+		FA9343662356E59E00544239 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA9343652356E59E00544239 /* Assets.xcassets */; };
+		FA9343692356E59E00544239 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9343672356E59E00544239 /* LaunchScreen.storyboard */; };
+		FA93436E2356E5B500544239 /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
+		FA93436F2356E5B500544239 /* EnterAffectiveCloudUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA9343752356FF1800544239 /* EnterAffectiveCloudReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343742356FF1800544239 /* EnterAffectiveCloudReportData.swift */; };
+		FA9343772356FFCB00544239 /* EnterAffectiveCloudReportFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343762356FFCB00544239 /* EnterAffectiveCloudReportFileReader.swift */; };
+		FA9343792357005900544239 /* DataFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343782357005900544239 /* DataFileReader.swift */; };
+		FA93437C235700CB00544239 /* DataFileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93437B235700CB00544239 /* DataFileProtocol.swift */; };
+		FA93437E2357015C00544239 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93437D2357015C00544239 /* FileError.swift */; };
+		FA9343802357044300544239 /* FragmentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93437F2357044300544239 /* FragmentData.swift */; };
+		FA934382235707C700544239 /* EnterAffectiveCloudFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA934381235707C700544239 /* EnterAffectiveCloudFileWriter.swift */; };
+		FA9343842357092A00544239 /* DataFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343832357092A00544239 /* DataFileWriter.swift */; };
+		FA93438623570A2700544239 /* ReportViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438523570A2700544239 /* ReportViewService.swift */; };
+		FA93438C23570AAD00544239 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438B23570AAD00544239 /* ReportModel.swift */; };
+		FA93438E23570FDD00544239 /* sample.report in Resources */ = {isa = PBXBuildFile; fileRef = FA93438D23570FDD00544239 /* sample.report */; };
+		FA934390235714E400544239 /* ReportFileHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438F235714E400544239 /* ReportFileHander.swift */; };
+		FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343922357F48000544239 /* HeartRateReportView.swift */; };
 		FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */; };
 		FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */; };
 		FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D0230E84EF00ECD83C /* CloudModels.swift */; };
@@ -27,17 +49,15 @@
 		FABFA4DB230E850500ECD83C /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D9230E850500ECD83C /* Log.swift */; };
 		FAC773042355580C00FBFA6A /* heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAC773032355580C00FBFA6A /* heart.gif */; };
 		FAC773062355581500FBFA6A /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAC773052355581500FBFA6A /* loading.gif */; };
+		FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7730A2355CBD800FBFA6A /* BrainSpecturmReportView.swift */; };
 		FACEDF89235034FE0016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF88235034FE0016176C /* Assets.xcassets */; };
 		FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */; };
-		FACEDF9023507BAD0016176C /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */; };
 		FACEDF9123507BAD0016176C /* RodDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8E23507BAD0016176C /* RodDot.swift */; };
 		FACEDF9323507D370016176C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9223507D370016176C /* NibLoadable.swift */; };
 		FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */; };
 		FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF98235164720016176C /* RealtimeRelaxationView.swift */; };
 		FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9A23516BD60016176C /* RealtimePressureView.swift */; };
-		FACEDFA0235172F40016176C /* BrainwaveSpectrumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF9E235172F40016176C /* BrainwaveSpectrumView.xib */; };
 		FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */; };
-		FACEDFA62351730A0016176C /* BrainwaveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFA32351730A0016176C /* BrainwaveView.xib */; };
 		FACEDFA72351730A0016176C /* EEGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFA42351730A0016176C /* EEGView.swift */; };
 		FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFA52351730A0016176C /* BrainwaveView.swift */; };
 		FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */; };
@@ -61,6 +81,13 @@
 			remoteGlobalIDString = B7E125CF230559590072DF22;
 			remoteInfo = EnterAffectiveCloud;
 		};
+		FA9343702356E5B500544239 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7E125C7230559590072DF22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA55EA4D234C273A00C148BF;
+			remoteInfo = EnterAffectiveCloudUI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +102,17 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA9343722356E5B500544239 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA93436F2356E5B500544239 /* EnterAffectiveCloudUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -82,20 +120,44 @@
 		48AD496F0A15A2495CC49592 /* Pods-EnterAffectiveCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.release.xcconfig"; sourceTree = "<group>"; };
 		561B4A373E00FDCF9923CE01 /* Pods-EnterRealtimeUIDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterRealtimeUIDemo.debug.xcconfig"; path = "Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8878BCE31A8439B164647B74 /* Pods-EnterReportUIDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.debug.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9CBE7FFECE5DBCFEBB753409 /* Pods-EnterAffectiveCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.debug.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC63DD847B631367B69CBCD6 /* Pods_EnterReportUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterReportUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloud.h; sourceTree = "<group>"; };
 		B7E125D4230559590072DF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterRealtimeUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.release.xcconfig"; sourceTree = "<group>"; };
+		F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloudUI.h; sourceTree = "<group>"; };
 		FA55EA51234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA55EA68234C6C9F00C148BF /* BiodataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiodataModel.swift; sourceTree = "<group>"; };
 		FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBox+Ex.swift"; sourceTree = "<group>"; };
+		FA9343582356E59B00544239 /* EnterReportUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnterReportUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA93435A2356E59B00544239 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA93435C2356E59B00544239 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FA93435E2356E59B00544239 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		FA9343602356E59B00544239 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		FA9343632356E59B00544239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA9343652356E59E00544239 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FA9343682356E59E00544239 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA93436A2356E59E00544239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA9343742356FF1800544239 /* EnterAffectiveCloudReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudReportData.swift; sourceTree = "<group>"; };
+		FA9343762356FFCB00544239 /* EnterAffectiveCloudReportFileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudReportFileReader.swift; sourceTree = "<group>"; };
+		FA9343782357005900544239 /* DataFileReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFileReader.swift; sourceTree = "<group>"; };
+		FA93437B235700CB00544239 /* DataFileProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFileProtocol.swift; sourceTree = "<group>"; };
+		FA93437D2357015C00544239 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
+		FA93437F2357044300544239 /* FragmentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FragmentData.swift; sourceTree = "<group>"; };
+		FA934381235707C700544239 /* EnterAffectiveCloudFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudFileWriter.swift; sourceTree = "<group>"; };
+		FA9343832357092A00544239 /* DataFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFileWriter.swift; sourceTree = "<group>"; };
+		FA93438523570A2700544239 /* ReportViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewService.swift; sourceTree = "<group>"; };
+		FA93438B23570AAD00544239 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
+		FA93438D23570FDD00544239 /* sample.report */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.report; sourceTree = "<group>"; };
+		FA93438F235714E400544239 /* ReportFileHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFileHander.swift; sourceTree = "<group>"; };
+		FA9343922357F48000544239 /* HeartRateReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateReportView.swift; sourceTree = "<group>"; };
 		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
 		FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveCloudClient.swift; sourceTree = "<group>"; };
 		FABFA4D0230E84EF00ECD83C /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
@@ -105,17 +167,15 @@
 		FABFA4D9230E850500ECD83C /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Log.swift; path = EnterAffectiveCloud/Global/Log.swift; sourceTree = SOURCE_ROOT; };
 		FAC773032355580C00FBFA6A /* heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = heart.gif; sourceTree = "<group>"; };
 		FAC773052355581500FBFA6A /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		FAC7730A2355CBD800FBFA6A /* BrainSpecturmReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainSpecturmReportView.swift; sourceTree = "<group>"; };
 		FACEDF88235034FE0016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
-		FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
 		FACEDF8E23507BAD0016176C /* RodDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodDot.swift; sourceTree = "<group>"; };
 		FACEDF9223507D370016176C /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAttentionView.swift; sourceTree = "<group>"; };
 		FACEDF98235164720016176C /* RealtimeRelaxationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeRelaxationView.swift; sourceTree = "<group>"; };
 		FACEDF9A23516BD60016176C /* RealtimePressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimePressureView.swift; sourceTree = "<group>"; };
-		FACEDF9E235172F40016176C /* BrainwaveSpectrumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainwaveSpectrumView.xib; sourceTree = "<group>"; };
 		FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainwaveSpectrumView.swift; sourceTree = "<group>"; };
-		FACEDFA32351730A0016176C /* BrainwaveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrainwaveView.xib; sourceTree = "<group>"; };
 		FACEDFA42351730A0016176C /* EEGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EEGView.swift; sourceTree = "<group>"; };
 		FACEDFA52351730A0016176C /* BrainwaveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainwaveView.swift; sourceTree = "<group>"; };
 		FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeBrainwaveSpectrumView.swift; sourceTree = "<group>"; };
@@ -150,6 +210,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA9343552356E59B00544239 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA93436E2356E5B500544239 /* EnterAffectiveCloudUI.framework in Frameworks */,
+				06334CCC6A76625AD4F3EF43 /* Pods_EnterReportUIDemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FACEDFDF2351BB440016176C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +240,8 @@
 				F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */,
 				561B4A373E00FDCF9923CE01 /* Pods-EnterRealtimeUIDemo.debug.xcconfig */,
 				C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */,
+				8878BCE31A8439B164647B74 /* Pods-EnterReportUIDemo.debug.xcconfig */,
+				F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -181,6 +252,7 @@
 				AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */,
 				78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */,
 				FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */,
+				AC63DD847B631367B69CBCD6 /* Pods_EnterReportUIDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -191,6 +263,7 @@
 				B7E125D2230559590072DF22 /* EnterAffectiveCloud */,
 				FA55EA4F234C273A00C148BF /* EnterAffectiveCloudUI */,
 				FACEDFE32351BB440016176C /* EnterRealtimeUIDemo */,
+				FA9343592356E59B00544239 /* EnterReportUIDemo */,
 				B7E125D1230559590072DF22 /* Products */,
 				078AEE4D9378B78AC7596C31 /* Pods */,
 				770F7293DC047C78D3D9B171 /* Frameworks */,
@@ -203,6 +276,7 @@
 				B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */,
 				FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */,
 				FACEDFE22351BB440016176C /* EnterRealtimeUIDemo.app */,
+				FA9343582356E59B00544239 /* EnterReportUIDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,7 +322,8 @@
 		FA55EA4F234C273A00C148BF /* EnterAffectiveCloudUI */ = {
 			isa = PBXGroup;
 			children = (
-				FA55EA66234C287D00C148BF /* Model */,
+				FA93438823570A8D00544239 /* Model */,
+				FA9343732356FEA700544239 /* Service */,
 				FA55EA65234C286800C148BF /* View */,
 				FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */,
 				FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */,
@@ -261,21 +336,68 @@
 		FA55EA65234C286800C148BF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FACEDFA22351730A0016176C /* Brainwave */,
-				FACEDF9D235172F40016176C /* Spectrum */,
-				FACEDF8A235079C20016176C /* EmotionView */,
+				FAC773082355CB1A00FBFA6A /* Report */,
+				FAC773072355CADB00FBFA6A /* Realtime */,
 				FACEDF872350100F0016176C /* Base */,
-				FA0A6E73234D6F0A00532A46 /* HRView */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		FA55EA66234C287D00C148BF /* Model */ = {
+		FA9343592356E59B00544239 /* EnterReportUIDemo */ = {
 			isa = PBXGroup;
 			children = (
-				FA55EA68234C6C9F00C148BF /* BiodataModel.swift */,
+				FA93435A2356E59B00544239 /* AppDelegate.swift */,
+				FA93435C2356E59B00544239 /* SceneDelegate.swift */,
+				FA93435E2356E59B00544239 /* FirstViewController.swift */,
+				FA9343602356E59B00544239 /* SecondViewController.swift */,
+				FA9343622356E59B00544239 /* Main.storyboard */,
+				FA9343652356E59E00544239 /* Assets.xcassets */,
+				FA9343672356E59E00544239 /* LaunchScreen.storyboard */,
+				FA93438D23570FDD00544239 /* sample.report */,
+				FA93436A2356E59E00544239 /* Info.plist */,
+			);
+			path = EnterReportUIDemo;
+			sourceTree = "<group>";
+		};
+		FA9343732356FEA700544239 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FA93437A2357005E00544239 /* Base */,
+				FA93438523570A2700544239 /* ReportViewService.swift */,
+				FA93438F235714E400544239 /* ReportFileHander.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		FA93437A2357005E00544239 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				FA9343742356FF1800544239 /* EnterAffectiveCloudReportData.swift */,
+				FA9343762356FFCB00544239 /* EnterAffectiveCloudReportFileReader.swift */,
+				FA934381235707C700544239 /* EnterAffectiveCloudFileWriter.swift */,
+				FA9343782357005900544239 /* DataFileReader.swift */,
+				FA93437B235700CB00544239 /* DataFileProtocol.swift */,
+				FA93437D2357015C00544239 /* FileError.swift */,
+				FA93437F2357044300544239 /* FragmentData.swift */,
+				FA9343832357092A00544239 /* DataFileWriter.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		FA93438823570A8D00544239 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA93438B23570AAD00544239 /* ReportModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FA9343912357F43800544239 /* HeartRate */ = {
+			isa = PBXGroup;
+			children = (
+				FA9343922357F48000544239 /* HeartRateReportView.swift */,
+			);
+			path = HeartRate;
 			sourceTree = "<group>";
 		};
 		FABFA4CD230E84EF00ECD83C /* Cloud */ = {
@@ -288,6 +410,34 @@
 				FABFA4D2230E84EF00ECD83C /* AffectiveCloudServices.swift */,
 			);
 			path = Cloud;
+			sourceTree = "<group>";
+		};
+		FAC773072355CADB00FBFA6A /* Realtime */ = {
+			isa = PBXGroup;
+			children = (
+				FACEDFA22351730A0016176C /* Brainwave */,
+				FACEDF9D235172F40016176C /* Spectrum */,
+				FACEDF8A235079C20016176C /* EmotionView */,
+				FA0A6E73234D6F0A00532A46 /* HRView */,
+			);
+			path = Realtime;
+			sourceTree = "<group>";
+		};
+		FAC773082355CB1A00FBFA6A /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				FA9343912357F43800544239 /* HeartRate */,
+				FAC773092355CB9100FBFA6A /* BrainSpecturm */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		FAC773092355CB9100FBFA6A /* BrainSpecturm */ = {
+			isa = PBXGroup;
+			children = (
+				FAC7730A2355CBD800FBFA6A /* BrainSpecturmReportView.swift */,
+			);
+			path = BrainSpecturm;
 			sourceTree = "<group>";
 		};
 		FACEDF872350100F0016176C /* Base */ = {
@@ -315,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */,
-				FACEDF8D23507BAD0016176C /* SurveyorsRodView.xib */,
 				FACEDF8E23507BAD0016176C /* RodDot.swift */,
 			);
 			path = Item;
@@ -324,7 +473,6 @@
 		FACEDF9D235172F40016176C /* Spectrum */ = {
 			isa = PBXGroup;
 			children = (
-				FACEDF9E235172F40016176C /* BrainwaveSpectrumView.xib */,
 				FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */,
 				FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */,
 			);
@@ -334,7 +482,6 @@
 		FACEDFA22351730A0016176C /* Brainwave */ = {
 			isa = PBXGroup;
 			children = (
-				FACEDFA32351730A0016176C /* BrainwaveView.xib */,
 				FACEDFA42351730A0016176C /* EEGView.swift */,
 				FACEDFA52351730A0016176C /* BrainwaveView.swift */,
 				FACEDFAB2351A1850016176C /* RealtimeBrainwaveView.swift */,
@@ -419,6 +566,27 @@
 			productReference = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		FA9343572356E59B00544239 /* EnterReportUIDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA93436D2356E59E00544239 /* Build configuration list for PBXNativeTarget "EnterReportUIDemo" */;
+			buildPhases = (
+				88C6842FF1EE3ADACDE724FC /* [CP] Check Pods Manifest.lock */,
+				FA9343542356E59B00544239 /* Sources */,
+				FA9343552356E59B00544239 /* Frameworks */,
+				FA9343562356E59B00544239 /* Resources */,
+				FA9343722356E5B500544239 /* Embed Frameworks */,
+				A1DA55DAFFACD1DA389F4B18 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA9343712356E5B500544239 /* PBXTargetDependency */,
+			);
+			name = EnterReportUIDemo;
+			productName = EnterReportUIDemo;
+			productReference = FA9343582356E59B00544239 /* EnterReportUIDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		FACEDFE12351BB440016176C /* EnterRealtimeUIDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FACEDFF52351BB450016176C /* Build configuration list for PBXNativeTarget "EnterRealtimeUIDemo" */;
@@ -456,6 +624,9 @@
 						CreatedOnToolsVersion = 11.1;
 						LastSwiftMigration = 1110;
 					};
+					FA9343572356E59B00544239 = {
+						CreatedOnToolsVersion = 11.1;
+					};
 					FACEDFE12351BB440016176C = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -477,6 +648,7 @@
 				B7E125CF230559590072DF22 /* EnterAffectiveCloud */,
 				FA55EA4D234C273A00C148BF /* EnterAffectiveCloudUI */,
 				FACEDFE12351BB440016176C /* EnterRealtimeUIDemo */,
+				FA9343572356E59B00544239 /* EnterReportUIDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -494,11 +666,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC773042355580C00FBFA6A /* heart.gif in Resources */,
-				FACEDFA62351730A0016176C /* BrainwaveView.xib in Resources */,
 				FACEDF89235034FE0016176C /* Assets.xcassets in Resources */,
 				FAC773062355581500FBFA6A /* loading.gif in Resources */,
-				FACEDF9023507BAD0016176C /* SurveyorsRodView.xib in Resources */,
-				FACEDFA0235172F40016176C /* BrainwaveSpectrumView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA9343562356E59B00544239 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA9343692356E59E00544239 /* LaunchScreen.storyboard in Resources */,
+				FA93438E23570FDD00544239 /* sample.report in Resources */,
+				FA9343662356E59E00544239 /* Assets.xcassets in Resources */,
+				FA9343642356E59B00544239 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +696,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		88C6842FF1EE3ADACDE724FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EnterReportUIDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		92B21C426077EC1595AAC047 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -536,6 +738,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1DA55DAFFACD1DA389F4B18 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B5BE3E2E9D46C413DB0163A1 /* [CP] Embed Pods Frameworks */ = {
@@ -620,21 +839,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA93437C235700CB00544239 /* DataFileProtocol.swift in Sources */,
+				FA934382235707C700544239 /* EnterAffectiveCloudFileWriter.swift in Sources */,
+				FA93438C23570AAD00544239 /* ReportModel.swift in Sources */,
+				FA93438623570A2700544239 /* ReportViewService.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
 				FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */,
 				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
 				FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */,
 				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,
+				FA934390235714E400544239 /* ReportFileHander.swift in Sources */,
 				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
+				FA9343842357092A00544239 /* DataFileWriter.swift in Sources */,
+				FA9343792357005900544239 /* DataFileReader.swift in Sources */,
+				FA9343802357044300544239 /* FragmentData.swift in Sources */,
+				FA9343752356FF1800544239 /* EnterAffectiveCloudReportData.swift in Sources */,
 				FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */,
 				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
-				FA55EA69234C6C9F00C148BF /* BiodataModel.swift in Sources */,
+				FA93437E2357015C00544239 /* FileError.swift in Sources */,
 				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
+				FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */,
 				FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */,
 				FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */,
+				FA9343772356FFCB00544239 /* EnterAffectiveCloudReportFileReader.swift in Sources */,
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,
+				FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */,
 				FACEDF9123507BAD0016176C /* RodDot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA9343542356E59B00544239 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA9343612356E59B00544239 /* SecondViewController.swift in Sources */,
+				FA93435F2356E59B00544239 /* FirstViewController.swift in Sources */,
+				FA93435B2356E59B00544239 /* AppDelegate.swift in Sources */,
+				FA93435D2356E59B00544239 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,9 +899,30 @@
 			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
 			targetProxy = FA0A6E7E234D71DF00532A46 /* PBXContainerItemProxy */;
 		};
+		FA9343712356E5B500544239 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA55EA4D234C273A00C148BF /* EnterAffectiveCloudUI */;
+			targetProxy = FA9343702356E5B500544239 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		FA9343622356E59B00544239 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA9343632356E59B00544239 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FA9343672356E59E00544239 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FA9343682356E59E00544239 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		FACEDFEC2351BB440016176C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -915,6 +1178,46 @@
 			};
 			name = Release;
 		};
+		FA93436B2356E59E00544239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8878BCE31A8439B164647B74 /* Pods-EnterReportUIDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
+				INFOPLIST_FILE = EnterReportUIDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterReportUIDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA93436C2356E59E00544239 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
+				INFOPLIST_FILE = EnterReportUIDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterReportUIDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		FACEDFF62351BB450016176C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 561B4A373E00FDCF9923CE01 /* Pods-EnterRealtimeUIDemo.debug.xcconfig */;
@@ -981,6 +1284,15 @@
 			buildConfigurations = (
 				FA55EA5F234C273A00C148BF /* Debug */,
 				FA55EA60234C273A00C148BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA93436D2356E59E00544239 /* Build configuration list for PBXNativeTarget "EnterReportUIDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA93436B2356E59E00544239 /* Debug */,
+				FA93436C2356E59E00544239 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

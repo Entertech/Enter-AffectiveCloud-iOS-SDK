@@ -14,6 +14,8 @@ end
 target 'EnterAffectiveCloudUI' do
   pod 'RxSwift', '5.0'
   pod 'SnapKit'
+  pod 'Charts'
+  pod 'NaptimeFileProtocol'
 end
 
 target 'EnterRealtimeUIDemo' do
@@ -23,5 +25,15 @@ target 'EnterRealtimeUIDemo' do
   pod 'HandyJSON', '5.0.0'
   pod 'Starscream'
   pod 'SwiftyJSON'
+end
+
+target 'EnterReportUIDemo' do
+  pod 'RxSwift', '5.0'
+  pod 'SnapKit'
+  pod 'GzipSwift'
+  pod 'HandyJSON', '5.0.0'
+  pod 'Starscream'
+  pod 'SwiftyJSON'
+  pod 'Charts'
 end
 

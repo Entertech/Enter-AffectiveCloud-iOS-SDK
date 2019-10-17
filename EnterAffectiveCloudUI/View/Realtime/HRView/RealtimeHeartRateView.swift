@@ -150,10 +150,12 @@ public class RealtimeHeartRateView: BaseView {
         super.init(coder: coder)
     }
     
+    /// 开启监听
+    /// - Parameter demo: demo数据
     public func observe(with demo: Int) {
         observeRealtimeValue(demo)
     }
-    
+    /// 开启监听
     public func observe() {
         observeRealtimeValue()
     }

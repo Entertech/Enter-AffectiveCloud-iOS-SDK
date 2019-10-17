@@ -7,6 +7,39 @@
 //
 
 import UIKit
+import CommonCrypto
+
+func DLog(_ items: Any...) {
+    
+    print("[FLOWTIME DEBUG]: \(items)")
+    
+}
+
+/// 二维数组
+public struct Array2D<T> {
+    public let columns: Int
+    public let rows: Int
+    fileprivate var array: [T]
+    
+    public init(columns: Int, rows: Int, initialValue: T) {
+        self.columns = columns
+        self.rows = rows
+        array = .init(repeating: initialValue, count: rows*columns)
+    }
+    
+    public subscript(column: Int, row: Int) -> T {
+        get {
+            precondition(column < columns, "Column \(column) Index is out of range. Array<T>(columns: \(columns), rows:\(rows))")
+            precondition(row < rows, "Row \(row) Index is out of range. Array<T>(columns: \(columns), rows:\(rows))")
+            return array[row*columns + column]
+        }
+        set {
+            precondition(column < columns, "Column \(column) Index is out of range. Array<T>(columns: \(columns), rows:\(rows))")
+            precondition(row < rows, "Row \(row) Index is out of range. Array<T>(columns: \(columns), rows:\(rows))")
+            array[row*columns + column] = newValue
+        }
+    }
+}
 
 extension Notification.Name {
     /// 通知
@@ -18,7 +51,9 @@ extension Notification.Name {
 }
 
 extension UIColor {
-    
+    static func colorWithInt(r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor {
+        return UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: alpha)
+    }
     
     /// hex to UIColor FFFFFF  -> .white
     /// - Parameter hexColor: hexString like A0B0C0
@@ -98,6 +133,133 @@ extension UIImage {
     }
 }
 
+// MARK: - Array 数组扩展
+extension Array {
+    
+    /// 从数组中返回一个随机元素
+    public var sample: Element? {
+        //如果数组为空，则返回nil
+        guard count > 0 else { return nil }
+        let randomIndex = Int(arc4random_uniform(UInt32(count)))
+        return self[randomIndex]
+    }
+    
+    /// 从数组中从返回指定个数的元素
+    ///
+    /// - Parameters:
+    ///   - size: 希望返回的元素个数
+    ///   - noRepeat: 返回的元素是否不可以重复（默认为false，可以重复）
+    public func sample(size: Int, noRepeat: Bool = false) -> [Element]? {
+        //如果数组为空，则返回nil
+        guard !isEmpty else { return nil }
+        
+        var sampleElements: [Element] = []
+        
+        //返回的元素可以重复的情况
+        if !noRepeat {
+            for _ in 0..<size {
+                sampleElements.append(sample!)
+            }
+        }
+            //返回的元素不可以重复的情况
+        else{
+            //先复制一个新数组
+            var copy = self.map { $0 }
+            for _ in 0..<size {
+                //当元素不能重复时，最多只能返回原数组个数的元素
+                if copy.isEmpty { break }
+                let randomIndex = Int(arc4random_uniform(UInt32(copy.count)))
+                let element = copy[randomIndex]
+                sampleElements.append(element)
+                //每取出一个元素则将其从复制出来的新数组中移除
+                copy.remove(at: randomIndex)
+            }
+        }
+        
+        return sampleElements
+    }
+
+    /**
+     连接数组的所有元素为字符串
+
+     - parameter joinString: 连接字符串
+
+     - returns: 连接后完整字符串
+     */
+    func componentsJoinedByString(_ joinString: String) -> String {
+        return self.map {
+            return String(describing: $0)
+        }.joined(separator: joinString)
+    }
+
+    /**
+     分隔数组为等量的子数组
+
+     - parameter subSize: 子数组的 size
+
+     - returns: 分割后的数组
+     */
+    func splitBy(_ subSize: Int) -> [[Element]] {
+        return stride(from: 0, to: self.count, by: subSize).map { startIndex in
+            let endIndex = startIndex.advanced(by: subSize)
+            return Array(self[startIndex ..< endIndex])
+        }
+    }
+}
+
+// MARK: - NSData 扩展
+extension Data {
+
+    /// 获取完整数据的 range
+    var fullRange: NSRange {
+        return NSMakeRange(0, self.count)
+    }
+
+    /// 获取所有的字节
+    var allBytes: Bytes {
+        return try! self.bytesInRange(self.fullRange)
+    }
+
+    /**
+     获取在某个范围内的字节序列
+
+     - parameter range: NSRange 范围
+
+     - throws: 如果 range 超出范围，可能抛出 `OutOfRangeError`
+
+     - returns: 返回 range 范围内的字节序列
+     */
+    func bytesInRange(_ range: NSRange) throws -> [Byte] {
+        if range.location + range.length > self.count {
+            throw DataFileOutOfRangeError()
+        }
+        var thisBytes: [Byte] = [Byte](repeating: 0, count: range.length)
+        (self as NSData).getBytes(&thisBytes, range: range)
+        return thisBytes
+    }
+
+    /**
+     获取指定位置的字节
+
+     - parameter index: 位置索引
+
+     - throws: 如果 index 超出范围，可能会抛出 `OutOfRangeError`
+
+     - returns: 返回 index 位置的字节
+     */
+    func byteAtIndex(_ index: Int) throws -> Byte {
+        if index >= self.count {
+            throw DataFileOutOfRangeError()
+        }
+        var thisBytes: [Byte] = [0]
+        (self as NSData).getBytes(&thisBytes, range: NSMakeRange(index, 1))
+        return thisBytes[0]
+    }
+}
+
+func unix_time() -> Timestamp {
+    return Timestamp(Date().timeIntervalSince1970)
+}
 
 
 

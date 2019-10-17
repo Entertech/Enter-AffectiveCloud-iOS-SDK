@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
   - GzipSwift (5.0.0)
   - HandyJSON (5.0.0)
   - RxSwift (5.0.0)
@@ -7,6 +10,7 @@ PODS:
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - Charts
   - GzipSwift
   - HandyJSON (= 5.0.0)
   - RxSwift (= 5.0)
@@ -16,6 +20,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Charts
     - GzipSwift
     - HandyJSON
     - RxSwift
@@ -24,6 +29,7 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
   GzipSwift: 5592f4d62b641e04d06443ba471f8ed76b1363e4
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
@@ -31,6 +37,6 @@ SPEC CHECKSUMS:
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 8a07ad91bb18b2793fab35c3afa3ee6b3c05ce91
+PODFILE CHECKSUM: 760d130be62f601e943c2dc69b4d6c4750c0a0c1
 
 COCOAPODS: 1.8.3

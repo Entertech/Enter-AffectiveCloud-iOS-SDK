@@ -1,5 +1,5 @@
 //
-//  RealtimeRelaxationView.swift
+//  RealtimeStressLevelView.swift
 //  EnterAffectiveCloudUI
 //
 //  Created by Enter on 2019/10/12.
@@ -12,28 +12,28 @@ import RxSwift
 import SafariServices
 import EnterAffectiveCloud
 
-protocol RelaxationProtocol {
-    var rxRelaxationValue: BehaviorSubject<Float> {set get}
+protocol PressureProtocol {
+    var rxPressureValue: BehaviorSubject<Float> {set get}
 }
 
-class UpdateRelaxation: RelaxationProtocol {
-    var rxRelaxationValue: BehaviorSubject<Float>
+class UpdatePressure: PressureProtocol {
+    var rxPressureValue: BehaviorSubject<Float>
     
     init(_ initValue: Float = 0) {
-        rxRelaxationValue = BehaviorSubject<Float>(value: initValue)
+        rxPressureValue = BehaviorSubject<Float>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(affectiveDataSubscript(_:)), name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
-        rxRelaxationValue.onCompleted()
+        rxPressureValue.onCompleted()
     }
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
     
         if let data = notification.userInfo!["affectiveDataSubscribe"] as? CSAffectiveSubscribeProcessJsonModel {
-            if let relaxation = data.relaxation?.relaxation {
-                rxRelaxationValue.onNext(relaxation)
+            if let pressure = data.pressure?.pressure {
+                rxPressureValue.onNext(pressure/20.0)
             }
            
             return
@@ -43,10 +43,11 @@ class UpdateRelaxation: RelaxationProtocol {
     
 }
 
-public class RealtimeRelaxationView: BaseView {
+public class RealtimePressureView: BaseView {
 
+    
     //MARK:- Public param
-    /// 设置主色
+    /// 主色
     public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
         didSet {
             let firstTextColor = mainColor.changeAlpha(to: 1.0)
@@ -56,17 +57,17 @@ public class RealtimeRelaxationView: BaseView {
             stateLabel?.textColor = firstTextColor
             stateLabel?.backgroundColor = thirdTextColor
             rodView?.setDotColor(firstTextColor)
-            let rangeArray: [CGFloat] = [0, 60, 80, 100]
+            let rangeArray: [CGFloat] = [0, 1, 3.5, 5]
             rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
         }
     }
     private var textFont = "PingFangSC-Semibold"
-    /// 设置字体颜色
+    /// 文字颜色
     public var textColor = UIColor.colorWithHexString(hexColor: "171726") {
         didSet {
             let valueTextColor = textColor.changeAlpha(to: 1.0)
             let grayTextColor = textColor.changeAlpha(to: 0.8)
-            relaxationValueLabel?.textColor = valueTextColor
+            pressureValueLabel?.textColor = valueTextColor
             rodView?.setLabelColor(grayTextColor)
         }
     }
@@ -77,8 +78,7 @@ public class RealtimeRelaxationView: BaseView {
         }
         
     }
-    
-    /// 圆角边
+    /// 圆角
     public var borderRadius: CGFloat = 8.0  {
         didSet {
             bgView.layer.cornerRadius = borderRadius
@@ -91,8 +91,8 @@ public class RealtimeRelaxationView: BaseView {
             bgView.backgroundColor = bgColor
         }
     }
-    /// 按钮点击显示的网页
-    public var infoUrlString = "https://www.notion.so/Relaxation-c9e3b39634a14d2fa47eaed1d55d872b"
+    /// 按钮打开的网页
+    public var infoUrlString = "https://www.notion.so/Pressure-ee57f4590373442b9107b7ce665e1253"
     /// 按钮图片
     public var buttonImageName: String = "" {
         didSet {
@@ -101,31 +101,29 @@ public class RealtimeRelaxationView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "放松度"
+    private let titleText = "压力值"
     private let disposeBag = DisposeBag()
     
     //MARK:- Private UI
     private var bgView: UIView =  UIView()
     private var titleLabel: UILabel?
-    private var relaxationValueLabel: UILabel?
+    private var pressureValueLabel: UILabel?
     private var stateLabel: UILabel?
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
     
+    
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
-
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
-
     }
     
     public func observe(with demo: Float) {
@@ -138,21 +136,21 @@ public class RealtimeRelaxationView: BaseView {
     
     
     private func observeRealtimeValue(_ demo: Float = 0) {
-        let updateRelaxation = UpdateRelaxation(demo)
-        updateRelaxation.rxRelaxationValue.subscribe(onNext: {[weak self] (value) in
+        let updatePressure = UpdatePressure(demo)
+        updatePressure.rxPressureValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if value > 0 {
-                    self.relaxationValueLabel?.text = "\(value)"
+                    self.pressureValueLabel?.text = "\(Int(value))"
                     self.rodView?.setDotValue(index: Float(value))
                 } else {
-                    self.relaxationValueLabel?.text = "--"
+                    self.pressureValueLabel?.text = "--"
                     self.rodView?.setDotValue(index: 0)
                 }
                 
-                if value > 80 && value <= 100 {
+                if value > 3.5 && value <= 5 {
                     self.stateLabel?.text = "高"
-                } else if value > 60 && value <= 80 {
+                } else if value > 1 && value <= 3.5 {
                     self.stateLabel?.text = "中"
                 } else {
                     self.stateLabel?.text = "低"
@@ -184,12 +182,12 @@ public class RealtimeRelaxationView: BaseView {
         titleLabel?.font = UIFont(name: textFont, size: 14)
         bgView.addSubview(titleLabel!)
         
-        relaxationValueLabel = UILabel()
-        relaxationValueLabel?.text = "--"
-        relaxationValueLabel?.textColor = valueTextColor
-        relaxationValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
-        relaxationValueLabel?.textAlignment = .left
-        bgView.addSubview(relaxationValueLabel!)
+        pressureValueLabel = UILabel()
+        pressureValueLabel?.text = "--"
+        pressureValueLabel?.textColor = valueTextColor
+        pressureValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
+        pressureValueLabel?.textAlignment = .left
+        bgView.addSubview(pressureValueLabel!)
         
         stateLabel = UILabel()
         stateLabel?.backgroundColor = thirdTextColor
@@ -202,20 +200,20 @@ public class RealtimeRelaxationView: BaseView {
         bgView.addSubview(stateLabel!)
         
         rodView = SurveyorsRodView()
-        rodView?.scaleArray = [0, 60, 80, 100]
+        rodView?.scaleArray = [0, 1, 2, 3, 4, 5]
         rodView?.setLabelColor(grayTextColor)
         rodView?.setDotColor(firstTextColor)
-        let rangeArray: [CGFloat] = [0, 60, 80, 100]
+        let rangeArray: [CGFloat] = [0, 1, 3.5, 5]
         rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
         rodView?.setDotValue(index: 0)
         bgView.addSubview(rodView!)
         
-        if isShowInfoIcon {
-            infoBtn = UIButton(type: .custom)
+      
+        infoBtn = UIButton(type: .custom)
             infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
             infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
             bgView.addSubview(infoBtn!)
-        }
+        
     }
     
     override func setLayout() {
@@ -237,16 +235,16 @@ public class RealtimeRelaxationView: BaseView {
             $0.height.equalTo(24)
         }
         
-        relaxationValueLabel?.snp.makeConstraints {
+        pressureValueLabel?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-56)
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(relaxationValueLabel!.snp.right).offset(12)
+            $0.left.equalTo(pressureValueLabel!.snp.right).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
-            $0.bottom.equalTo(relaxationValueLabel!.snp.bottomMargin).offset(-4)
+            $0.bottom.equalTo(pressureValueLabel!.snp.bottomMargin).offset(-4)
         }
         
         

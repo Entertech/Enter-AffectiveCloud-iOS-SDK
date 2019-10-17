@@ -107,7 +107,7 @@ class BrainwaveView: BaseView {
         
         rightBrainLabel.snp.makeConstraints {
             $0.right.equalToSuperview().offset(-16)
-            $0.top.equalTo(infoButton.snp_bottom).offset(8)
+            $0.top.equalTo(infoButton.snp.bottom).offset(8)
         }
         
         rightDot.snp.makeConstraints {
