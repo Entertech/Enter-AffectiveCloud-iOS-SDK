@@ -5,11 +5,13 @@
 * [目录](#目录)
 * [SDK 说明](#SDK-说明)
   * [结构说明](#结构说明)
+  * [安装集成](#安装集成)
+    * [版本需求](#版本需求)
+    * [Cocoapods](#Cocoapods)
+  * [API情感云API使用说明](#情感云API使用说明)
   * [情感云UI](#情感云UI)
     * [实时数据UI](#实时数据UI)
     * [报表数据UI](#报表数据UI)
-  * [安装集成](#安装集成)
-    * [Cocoapods](#Cocoapods)
 
 # SDK 说明
 
@@ -25,6 +27,31 @@
 - `EnterAffectiveCloudUI` 提供了各UI模块用以展示实时数据和报表数据
 
 ![](media/15644764106226/15659273084519.jpg)
+
+## 安装集成
+
+### 版本需求
+- Xcode 10.2
+- Swift 5.0
+
+### Cocoapods
+
+添加下面内容到你的 Podfile。
+
+~~~ruby
+# 指定 pod 仓库源
+source 'git@github.com:EnterTech/PodSpecs.git'
+
+target 'Your Target' do
+    pod 'EnterAffectiveCloud', '~> 1.2.0'
+    pod 'EnterAffectiveCloudUI', '~> 1.2.0'
+end
+~~~
+
+运行 `pod  install` 安装命令.
+
+## 情感云API使用说明
+- [情感云API文档](API-Documents/Enterr-AffectiveCloud-iOS-SDK-API说明.md)
 
 ## 情感云UI
 
@@ -184,28 +211,3 @@
 | buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |
 | borderRadius       | CGFloat | 8                    | 圆角                                      |
 | infoUrlString      | String  | `https://demo.com`   | 按钮打开的说明网页                        |
-
-## 安装集成
-
-### 版本需求
-- Xcode 10.2
-- Swift 5.0
-
-### Cocoapods
-
-添加下面内容到你的 Podfile。
-
-~~~ruby
-# 指定 pod 仓库源
-source 'git@github.com:EnterTech/PodSpecs.git'
-
-target 'Your Target' do
-    pod 'EnterAffectiveCloud', '~> 1.2.0'
-    pod 'EnterAffectiveCloudUI', '~> 1.2.0'
-end
-~~~
-
-运行 `pod  install` 安装命令.
-
-## 情感云 SDK API 使用说明
-- [情感云API文档](API-Documents/Enterr-AffectiveCloud-iOS-SDK-API说明.md)
