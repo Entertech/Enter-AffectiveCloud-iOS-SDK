@@ -65,7 +65,7 @@ class SecondViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        service.show() //必须在layout布局完成之后
+        service.show() //展示数据在layout布局完成之后
     }
 
 

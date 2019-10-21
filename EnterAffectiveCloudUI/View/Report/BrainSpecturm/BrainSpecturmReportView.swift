@@ -460,7 +460,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
 
 
 /// X轴描述
-public class DateValueFormatter: NSObject, IAxisValueFormatter {
+class DateValueFormatter: NSObject, IAxisValueFormatter {
     private var values: [Double] = []
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()
@@ -468,7 +468,7 @@ public class DateValueFormatter: NSObject, IAxisValueFormatter {
     ///
     /// - Parameters:
     ///   - timeStamps: 时间列表
-    public init(_ time:[Int], _ timestamp: Int = 0) {
+    init(_ time:[Int], _ timestamp: Int = 0) {
         super.init()
         
         for e in time {

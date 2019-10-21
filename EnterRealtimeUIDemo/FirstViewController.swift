@@ -27,15 +27,19 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    /**********************************************************************************/
+    /*************observe(with: 65)中的值为demo演示所用，实际使用请直接用observe()*****************/
+    /**********************************************************************************/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        heartLargeView.observe(with: 65) // 开始观察，并赋值展示用初始值
+        heartLargeView.observe(with: 65) // 开始开启监听
         
         heartSmallView.observe(with: 65)
         heartSmallView.isShowExtremeValue = false //不显示最大最小值
         
-        heartNoValueView.observe()
+        heartNoValueView.observe()  // 观察者并且不用赋值初始值
         heartNoValueView.isShowExtremeValue = false
         
         attentionView.observe(with: 39)
@@ -46,6 +50,7 @@ class FirstViewController: UIViewController {
         
         spectrumView.observe(with: (0.59, 0.28, 0.1, 0.02, 0.1))
         
+        // 为eeg脑波复制，创建左右脑数组
         var leftArray: [Float] = []
         for _ in 0...200 {
             let random: Int = Int(arc4random_uniform(200))

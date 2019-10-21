@@ -11,13 +11,14 @@ import UIKit
 public class ReportViewService: NSObject {
     
     public var model: ReportModel = ReportModel()
-    public var isShowed: Bool = false
     public var heartRateView: HeartRateReportView?
     public var hrvView: HeartRateVariablityReportView?
     public var braveWaveView: BrainSpecturmReportView?
     public var attentionView: AttentionReportView?
     public var relaxationView: RelaxationReportView?
     public var pressureView: PressureReportView?
+    
+    private var isShowed: Bool = false
     
     public var dataOfReport: EnterAffectiveCloudReportData? {
         willSet {
@@ -156,6 +157,7 @@ public class ReportViewService: NSObject {
         }
     }
     
+    /// 展示添加的视图，必须在layout之后
     public func show() {
         if !isShowed {
             self.braveWaveView?.setDataFromModel(timestamp: model.timestamp, brainwave: model.brainwave)

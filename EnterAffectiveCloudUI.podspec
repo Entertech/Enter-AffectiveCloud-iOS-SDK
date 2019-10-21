@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
   s.dependency 'RxSwift', '5.0'
   s.dependency 'SnapKit'
   s.dependency 'Charts'
+  s.dependency 'EnterAffectiveCloud'
 end
