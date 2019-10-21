@@ -96,6 +96,7 @@ public struct ReportDigital {
  * 0x13 激活度平均值，值域0-100
  * 0x14 激活度最大值，值域0-100
  * 0x15 激活度最小值，值域0-100
+ * 0x16 时间戳
  */
 public enum ReportScalarType: UInt8 {
     case retained         = 0x00
@@ -120,6 +121,7 @@ public enum ReportScalarType: UInt8 {
     case activateAverage  = 0x13
     case activateMax      = 0x14
     case activateMin      = 0x15
+    case timestamp        = 0x16
 }
 
 /*

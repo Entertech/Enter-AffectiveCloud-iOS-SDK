@@ -37,11 +37,14 @@
 		FA9343842357092A00544239 /* DataFileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343832357092A00544239 /* DataFileWriter.swift */; };
 		FA93438623570A2700544239 /* ReportViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438523570A2700544239 /* ReportViewService.swift */; };
 		FA93438C23570AAD00544239 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438B23570AAD00544239 /* ReportModel.swift */; };
-		FA93438E23570FDD00544239 /* sample.report in Resources */ = {isa = PBXBuildFile; fileRef = FA93438D23570FDD00544239 /* sample.report */; };
 		FA934390235714E400544239 /* ReportFileHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93438F235714E400544239 /* ReportFileHander.swift */; };
 		FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343922357F48000544239 /* HeartRateReportView.swift */; };
 		FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93439523581B0100544239 /* HeartRateVariablityReportView.swift */; };
 		FA9343992358489800544239 /* AttentionReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343982358489800544239 /* AttentionReportView.swift */; };
+		FA93439C2358596E00544239 /* RelaxationReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93439B2358596E00544239 /* RelaxationReportView.swift */; };
+		FA93439F23585BD600544239 /* PressureChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93439E23585BD600544239 /* PressureChart.swift */; };
+		FA9343A123585CDA00544239 /* PressureReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9343A023585CDA00544239 /* PressureReportView.swift */; };
+		FA9343A52358747900544239 /* sample.report in Resources */ = {isa = PBXBuildFile; fileRef = FA9343A42358747900544239 /* sample.report */; };
 		FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */; };
 		FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */; };
 		FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D0230E84EF00ECD83C /* CloudModels.swift */; };
@@ -157,11 +160,14 @@
 		FA9343832357092A00544239 /* DataFileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFileWriter.swift; sourceTree = "<group>"; };
 		FA93438523570A2700544239 /* ReportViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewService.swift; sourceTree = "<group>"; };
 		FA93438B23570AAD00544239 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
-		FA93438D23570FDD00544239 /* sample.report */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.report; sourceTree = "<group>"; };
 		FA93438F235714E400544239 /* ReportFileHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFileHander.swift; sourceTree = "<group>"; };
 		FA9343922357F48000544239 /* HeartRateReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateReportView.swift; sourceTree = "<group>"; };
 		FA93439523581B0100544239 /* HeartRateVariablityReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateVariablityReportView.swift; sourceTree = "<group>"; };
 		FA9343982358489800544239 /* AttentionReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionReportView.swift; sourceTree = "<group>"; };
+		FA93439B2358596E00544239 /* RelaxationReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelaxationReportView.swift; sourceTree = "<group>"; };
+		FA93439E23585BD600544239 /* PressureChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureChart.swift; sourceTree = "<group>"; };
+		FA9343A023585CDA00544239 /* PressureReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureReportView.swift; sourceTree = "<group>"; };
+		FA9343A42358747900544239 /* sample.report */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.report; sourceTree = "<group>"; };
 		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
 		FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveCloudClient.swift; sourceTree = "<group>"; };
 		FABFA4D0230E84EF00ECD83C /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
@@ -350,6 +356,7 @@
 		FA9343592356E59B00544239 /* EnterReportUIDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FA9343A42358747900544239 /* sample.report */,
 				FA93435A2356E59B00544239 /* AppDelegate.swift */,
 				FA93435C2356E59B00544239 /* SceneDelegate.swift */,
 				FA93435E2356E59B00544239 /* FirstViewController.swift */,
@@ -357,7 +364,6 @@
 				FA9343622356E59B00544239 /* Main.storyboard */,
 				FA9343652356E59E00544239 /* Assets.xcassets */,
 				FA9343672356E59E00544239 /* LaunchScreen.storyboard */,
-				FA93438D23570FDD00544239 /* sample.report */,
 				FA93436A2356E59E00544239 /* Info.plist */,
 			);
 			path = EnterReportUIDemo;
@@ -423,8 +429,18 @@
 		FA93439A2358591500544239 /* Relaxation */ = {
 			isa = PBXGroup;
 			children = (
+				FA93439B2358596E00544239 /* RelaxationReportView.swift */,
 			);
 			path = Relaxation;
+			sourceTree = "<group>";
+		};
+		FA93439D23585B9500544239 /* Pressure */ = {
+			isa = PBXGroup;
+			children = (
+				FA93439E23585BD600544239 /* PressureChart.swift */,
+				FA9343A023585CDA00544239 /* PressureReportView.swift */,
+			);
+			path = Pressure;
 			sourceTree = "<group>";
 		};
 		FABFA4CD230E84EF00ECD83C /* Cloud */ = {
@@ -453,6 +469,7 @@
 		FAC773082355CB1A00FBFA6A /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				FA93439D23585B9500544239 /* Pressure */,
 				FA93439A2358591500544239 /* Relaxation */,
 				FA934397235845AE00544239 /* Attention */,
 				FA93439423581AB200544239 /* HRV */,
@@ -706,7 +723,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA9343692356E59E00544239 /* LaunchScreen.storyboard in Resources */,
-				FA93438E23570FDD00544239 /* sample.report in Resources */,
+				FA9343A52358747900544239 /* sample.report in Resources */,
 				FA9343662356E59E00544239 /* Assets.xcassets in Resources */,
 				FA9343642356E59B00544239 /* Main.storyboard in Resources */,
 			);
@@ -872,6 +889,7 @@
 				FA93437C235700CB00544239 /* DataFileProtocol.swift in Sources */,
 				FA934382235707C700544239 /* EnterAffectiveCloudFileWriter.swift in Sources */,
 				FA93438C23570AAD00544239 /* ReportModel.swift in Sources */,
+				FA9343A123585CDA00544239 /* PressureReportView.swift in Sources */,
 				FA93438623570A2700544239 /* ReportViewService.swift in Sources */,
 				FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
@@ -894,6 +912,8 @@
 				FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */,
 				FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */,
 				FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */,
+				FA93439C2358596E00544239 /* RelaxationReportView.swift in Sources */,
+				FA93439F23585BD600544239 /* PressureChart.swift in Sources */,
 				FA9343772356FFCB00544239 /* EnterAffectiveCloudReportFileReader.swift in Sources */,
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,
 				FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */,

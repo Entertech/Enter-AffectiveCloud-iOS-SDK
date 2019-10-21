@@ -41,13 +41,25 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         }
     }
     
+    public var isShowInfoIcon: Bool = false {
+        didSet {
+            infoBtn?.isHidden = !self.isShowInfoIcon
+        }
+    }
+    
     /// 按钮点击显示的网页
-    public var infoUrlString = "https://www.notion.so/Brainwave-Power-4cdadda14a69424790c2d7913ad775ff"
+    public var infoUrlString = "https://www.notion.so/Brainwave-Power-Graph-6f2a784b347d4d7d98b9fd0da89de454"
     /// 采样
     public var sample: Int = 3
     
     /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false
+    public var isAbsoluteTimeAxis: Bool = false {
+        didSet {
+            if self.isAbsoluteTimeAxis {
+                xLabel?.isHidden = true
+            }
+        }
+    }
     
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
@@ -85,9 +97,11 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         }
     }
     
+    
     //MARK:- Private UI
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.4
+    private var timeStamp = 0
     
     //MARK:- Private UI
     private var bgView: UIView?
@@ -277,62 +291,62 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         }
         
         chartView?.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(32)
+            $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.height.equalTo(184)
             $0.top.equalToSuperview().offset(80)
         }
         
         gamaDot?.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(20)
+            $0.right.equalTo(gamaLabel!.snp.left).offset(-4)
             $0.height.width.equalTo(8)
             $0.top.equalToSuperview().offset(62)
         }
         
         gamaLabel?.snp.makeConstraints {
-            $0.centerY.equalTo(gamaDot!.snp.centerY)
-            $0.left.equalTo(gamaDot!.snp.right).offset(4)
+            $0.top.equalToSuperview().offset(60)
+            $0.right.equalTo(betaDot!.snp.left).offset(-35)
         }
         
         betaDot?.snp.makeConstraints {
-            $0.left.equalTo(gamaDot!.snp.right).offset(55)
+            $0.right.equalTo(betaLabel!.snp.left).offset(-4)
             $0.height.width.equalTo(8)
             $0.top.equalToSuperview().offset(62)
         }
         
         betaLabel?.snp.makeConstraints {
-            $0.centerY.equalTo(gamaDot!.snp.centerY)
-            $0.left.equalTo(betaDot!.snp.right).offset(4)
+            $0.top.equalToSuperview().offset(60)
+            $0.right.equalTo(alphaDot!.snp.left).offset(-35)
         }
         
         alphaDot?.snp.makeConstraints {
-            $0.left.equalTo(betaDot!.snp.right).offset(55)
+            $0.right.equalTo(alphaLabel!.snp.left).offset(-4)
             $0.height.width.equalTo(8)
             $0.top.equalToSuperview().offset(62)
         }
         alphaLabel?.snp.makeConstraints {
-            $0.centerY.equalTo(gamaDot!.snp.centerY)
-            $0.left.equalTo(alphaDot!.snp.right).offset(4)
+            $0.top.equalToSuperview().offset(60)
+            $0.right.equalTo(thetaDot!.snp.left).offset(-35)
         }
         
         thetaDot?.snp.makeConstraints {
-            $0.left.equalTo(alphaDot!.snp.right).offset(55)
+            $0.right.equalTo(thetaLabel!.snp.left).offset(-4)
             $0.height.width.equalTo(8)
             $0.top.equalToSuperview().offset(62)
         }
         thetaLabel?.snp.makeConstraints {
-            $0.centerY.equalTo(gamaDot!.snp.centerY)
-            $0.left.equalTo(thetaDot!.snp.right).offset(4)
+            $0.top.equalToSuperview().offset(60)
+            $0.right.equalTo(deltaDot!.snp.left).offset(-35)
         }
         
         deltaDot?.snp.makeConstraints {
-            $0.left.equalTo(thetaDot!.snp.right).offset(55)
+            $0.right.equalTo(deltaLabel!.snp.left).offset(-4)
             $0.height.width.equalTo(8)
             $0.top.equalToSuperview().offset(62)
         }
         deltaLabel?.snp.makeConstraints {
-            $0.centerY.equalTo(gamaDot!.snp.centerY)
-            $0.left.equalTo(deltaDot!.snp.right).offset(4)
+            $0.top.equalToSuperview().offset(60)
+            $0.right.equalToSuperview().offset(-30)
         }
     }
     
@@ -342,14 +356,15 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    public func setDataFromReportFile(path: String) {
-        let reader = ReportFileHander.readReportFile(path)
-        let service = ReportViewService()
-        service.dataOfReport = reader
-        if let brainwave = service.model!.brainwave {
-            setDataCount(brainwave)
+    func setDataFromModel(timestamp: Int?, brainwave: Array2D<Float>?) {
+        
+        if let timestamp = timestamp {
+            timeStamp = timestamp
         }
         
+        if let brainwave = brainwave {
+            setDataCount(brainwave)
+        }
     }
     
     //MARK:- Chart Delegate
@@ -366,7 +381,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         
         let chartData = LineChartData(dataSets: [set1, set2, set3, set4])
         chartData.setDrawValues(false)
-        
+        chartView?.extraLeftOffset = 20
         self.chartView?.data = chartData
         
         setLimitLine(yVals1.count)
@@ -410,7 +425,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         set.setColor(color)
         set.fillAlpha = 1
         set.fillColor = color
-       
+
         set.fillFormatter = DefaultFillFormatter { _,_ -> CGFloat in
             return CGFloat(self.chartView!.leftAxis.axisMaximum)
         }
@@ -428,13 +443,17 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
                 let limit = ChartLimitLine(limit: Double(i), label: "")
                 limit.drawLabelEnabled = false
                 limit.lineColor = textColor.changeAlpha(to: 0.5)
-                limit.lineWidth = 0.5
+                limit.lineWidth = 0.3
                 self.chartView?.xAxis.addLimitLine(limit)
             }
             
         }
         
-        self.chartView?.xAxis.valueFormatter = DateValueFormatter(time)
+        if isAbsoluteTimeAxis {
+            self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
+        } else {
+            self.chartView?.xAxis.valueFormatter = DateValueFormatter(time)
+        }
         
     }
 }
@@ -442,24 +461,37 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
 
 /// X轴描述
 public class DateValueFormatter: NSObject, IAxisValueFormatter {
-    private var values: [Double] = [];
-    
+    private var values: [Double] = []
+    private var timestamp: Int = 0
+    private let dateFormatter = DateFormatter()
     /// 初始化
     ///
     /// - Parameters:
     ///   - timeStamps: 时间列表
-    public init(_ time:[Int]) {
+    public init(_ time:[Int], _ timestamp: Int = 0) {
         super.init()
         
         for e in time {
             values.append(Double(e))
         }
+        self.timestamp = timestamp
+        
+        dateFormatter.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        var date = ""
-        axis?.entries = self.values
-        date = "\(Int(value / 60))"
-        return date
+        if timestamp == 0 {
+            var date = ""
+            axis?.entries = self.values
+            date = "\(Int(value / 60))"
+            return date
+        } else {
+            var time = 0
+            axis?.entries = self.values
+            time = Int(value) + timestamp
+            let date = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            return date
+        }
+        
     }
 }

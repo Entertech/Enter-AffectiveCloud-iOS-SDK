@@ -1,5 +1,5 @@
 //
-//  AttentionReportView.swift
+//  RelaxationReportView.swift
 //  EnterAffectiveCloudUI
 //
 //  Created by Enter on 2019/10/17.
@@ -11,7 +11,7 @@ import Charts
 import SafariServices
 import SnapKit
 
-public class AttentionReportView: BaseView, ChartViewDelegate{
+public class RelaxationReportView: BaseView, ChartViewDelegate {
 
     //MARK:- Public param
     /// 标题等主色
@@ -48,7 +48,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
     }
     
     /// 按钮点击显示的网页
-    public var infoUrlString = "https://www.notion.so/Attention-Graph-8f9fa5017ba74a34866c1977a323960a"
+    public var infoUrlString = "https://www.notion.so/Relaxation-Graph-d04c7d161ca94c6eb9c526cdefe88f02"
     /// 采样
     public var sample: Int = 3
     
@@ -76,12 +76,14 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
             chartView?.xAxis.gridColor = secondColor
         }
     }
+    
     /// 是否显示平均值
     public var isShowAvg: Bool = true {
         didSet {
             avgLabel?.isHidden = !isShowAvg
         }
     }
+    
     /// 是否显示最大值
     public var isShowMax: Bool = true {
         didSet {
@@ -97,7 +99,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
 
     
     /// 线段和填充的颜色
-    public var fillColor: UIColor = UIColor.colorWithInt(r: 0, g: 217, b: 147, alpha: 1)
+    public var fillColor: UIColor = UIColor.colorWithInt(r: 0, g: 100, b: 255, alpha: 1)
     
     //MARK:- Private UI
     private let mainFont = "PingFangSC-Semibold"
@@ -140,7 +142,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "专注度"
+        titleLabel?.text = "放松度"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -152,7 +154,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         bgView?.addSubview(infoBtn!)
         
         yLabel = UILabel.init()
-        yLabel?.text = "专注度"
+        yLabel?.text = "放松度"
         yLabel?.font = UIFont.systemFont(ofSize: 12)
         yLabel?.textColor = alphaColor
         yLabel?.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
@@ -264,13 +266,13 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    func setDataFromModel(timestamp: Int?, attention: [Int]?, avg: Int?, min: Int?, max: Int?) {
+    func setDataFromModel(timestamp: Int?, relaxation: [Int]?, avg: Int?, min: Int?, max: Int?) {
 
         if let timestamp = timestamp {
             timeStamp = timestamp
         }
         
-        if let hr = attention {
+        if let hr = relaxation {
             setDataCount(hr)
         }
         
@@ -360,72 +362,10 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
         }
-        
-        if isAbsoluteTimeAxis {
-            self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time, timeStamp)
-        } else {
-            self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time)
-        }
-        
+        self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time)
         self.chartView?.leftAxis.valueFormatter = OtherValueFormatter()
         
     }
-}
+    
 
-/// Y轴描述
-public class OtherValueFormatter: NSObject, IAxisValueFormatter {
-    private var labels: [Int : String] = [25: "25", 50: "50", 75: "75", 100: "100"];
-    
-    /// 初始化
-    ///
-    /// - Parameters:
-    ///   - timeStamps: 列表
-    public override init() {
-        super.init()
-        
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let date = labels[Int((value).rounded())] ?? ""
-        
-        
-        return date
-    }
-}
-
-/// X轴描述
-public class OtherXValueFormatter: NSObject, IAxisValueFormatter {
-    private var values: [Double] = [];
-    private var timestamp: Int = 0
-    private let dateFormatter = DateFormatter()
-    /// 初始化
-    ///
-    /// - Parameters:
-    ///   - timeStamps: 时间列表
-    public init(_ time:[Int], _ timestamp: Int = 0) {
-        super.init()
-        
-        for e in time {
-            values.append(Double(e))
-        }
-        
-        self.timestamp = timestamp
-        
-        dateFormatter.dateFormat = "HH:mm"
-    }
-    
-    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if timestamp == 0 {
-            var date = ""
-            axis?.entries = self.values
-            date = "\(Int(value / 60))"
-            return date
-        } else {
-            var time = 0
-            axis?.entries = self.values
-            time = Int(value) + timestamp
-            let date = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
-            return date
-        }
-    }
 }

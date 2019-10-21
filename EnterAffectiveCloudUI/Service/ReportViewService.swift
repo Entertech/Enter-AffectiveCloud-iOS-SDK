@@ -8,9 +8,16 @@
 
 import UIKit
 
-class ReportViewService: NSObject {
+public class ReportViewService: NSObject {
     
-    public var model: ReportModel? = ReportModel()
+    public var model: ReportModel = ReportModel()
+    public var isShowed: Bool = false
+    public var heartRateView: HeartRateReportView?
+    public var hrvView: HeartRateVariablityReportView?
+    public var braveWaveView: BrainSpecturmReportView?
+    public var attentionView: AttentionReportView?
+    public var relaxationView: RelaxationReportView?
+    public var pressureView: PressureReportView?
     
     public var dataOfReport: EnterAffectiveCloudReportData? {
         willSet {
@@ -19,25 +26,27 @@ class ReportViewService: NSObject {
                     switch e.type {
 
                     case .hrAverage:
-                        model?.heartRateAvg = Int(e.value)
+                        model.heartRateAvg = Int(e.value)
                     case .hrMax:
-                        model?.heartRateMax = Int(e.value)
+                        model.heartRateMax = Int(e.value)
                     case .hrMin:
-                        model?.heartRateMin  = Int(e.value)
+                        model.heartRateMin  = Int(e.value)
                     case .hrvAverage:
-                        model?.hrvAvg = Int(e.value)
+                        model.hrvAvg = Int(e.value)
                     case .attentionAverage:
-                        model?.attentionAvg = Int(e.value)
+                        model.attentionAvg = Int(e.value)
                     case .attentionMax:
-                        model?.attentionMax = Int(e.value)
+                        model.attentionMax = Int(e.value)
                     case .attentionMin:
-                        model?.attentionMin = Int(e.value)
+                        model.attentionMin = Int(e.value)
                     case .relaxAverage:
-                        model?.relaxationAvg = Int(e.value)
+                        model.relaxationAvg = Int(e.value)
                     case .relaxMax:
-                        model?.relaxationMax = Int(e.value)
+                        model.relaxationMax = Int(e.value)
                     case .relaxMin:
-                        model?.relaxationMin = Int(e.value)
+                        model.relaxationMin = Int(e.value)
+                    case .timestamp:
+                        model.timestamp = Int(e.value)
                     default:
                         break
                     }
@@ -75,7 +84,7 @@ class ReportViewService: NSObject {
                             return tmp
                         })
                         if let array = arrayTemp {
-                            model?.heartRate = array
+                            model.heartRate = array
                         }
                         
                     case .hrv:
@@ -92,7 +101,7 @@ class ReportViewService: NSObject {
                         })
                         
                         if let array = arrayTemp {
-                            model?.heartRateVariability = array
+                            model.heartRateVariability = array
                         }
                     case .attention:
                         let arrayTemp = e.bodyDatas.to(arrayType: Float.self)?.map({ (value) -> Int in
@@ -108,9 +117,9 @@ class ReportViewService: NSObject {
                         })
                         
                         if let array = arrayTemp {
-                            model?.attentionMax = array.max()
-                            model?.attentionMin = array.filter{ $0>0 }.min() ?? 0
-                            model?.attention = array
+                            model.attentionMax = array.max()
+                            model.attentionMin = array.filter{ $0>0 }.min() ?? 0
+                            model.attention = array
                         }
                     case .relax:
                         let arrayTemp = e.bodyDatas.to(arrayType: Float.self)?.map({ (value) -> Int in
@@ -125,14 +134,14 @@ class ReportViewService: NSObject {
                             return tmp
                         })
                         if let array = arrayTemp {
-                            model?.relaxationMax = array.max()
-                            model?.relaxationMin = array.filter{ $0>0 }.min() ?? 0
-                            model?.relaxation = array
+                            model.relaxationMax = array.max()
+                            model.relaxationMin = array.filter{ $0>0 }.min() ?? 0
+                            model.relaxation = array
                         }
                     case .pressure:
                         let arrayTemp = e.bodyDatas.to(arrayType: Float.self)
                         if let array = arrayTemp {
-                            model?.pressure = array
+                            model.pressure = array
                         }
                         
                     default:
@@ -141,10 +150,23 @@ class ReportViewService: NSObject {
                 }
             }
             if let alpha = alphaArray, let beta = betaArray, let theta = thetaArray, let delta = deltaArray, let gama = gamaArray {
-                model?.brainwaveMapping(gama, delta, theta, alpha, beta)
+                model.brainwaveMapping(gama, delta, theta, alpha, beta)
             }
             
         }
+    }
+    
+    public func show() {
+        if !isShowed {
+            self.braveWaveView?.setDataFromModel(timestamp: model.timestamp, brainwave: model.brainwave)
+            self.heartRateView?.setDataFromModel(timestamp: model.timestamp, hr: model.heartRate, hrAvg: model.heartRateAvg, hrMin: model.heartRateMin, hrMax: model.heartRateMax)
+            self.hrvView?.setDataFromModel(timestamp: model.timestamp, hrv: model.heartRateVariability, hrvAvg: model.hrvAvg)
+            self.attentionView?.setDataFromModel(timestamp: model.timestamp, attention: model.attention, avg: model.attentionAvg, min: model.attentionMin, max: model.attentionMax)
+            self.relaxationView?.setDataFromModel(timestamp: model.timestamp, relaxation: model.relaxation, avg: model.relaxationAvg, min: model.relaxationMin, max: model.relaxationMax)
+            self.pressureView?.setDataFromModel(timestamp: model.timestamp, pressure: model.pressure, count: model.pressureCount)
+            isShowed = true
+        }
+        
     }
 
 }

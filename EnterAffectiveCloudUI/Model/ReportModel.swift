@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ReportModel {
+public struct ReportModel {
     var brainwave: Array2D<Float>?
     mutating func brainwaveMapping(_ gama: [Float], _ delta: [Float], _ theta: [Float], _ alpha: [Float], _ beta: [Float]) {
         let arrayCount = gama.count
@@ -70,4 +70,6 @@ struct ReportModel {
         }
     }
     var pressureCount: Int?
+    
+    var timestamp: Int?
 }

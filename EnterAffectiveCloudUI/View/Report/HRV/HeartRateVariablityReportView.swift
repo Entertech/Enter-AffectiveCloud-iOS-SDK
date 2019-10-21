@@ -27,7 +27,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         }
     }
     /// 圆角
-    public var cornerRadius: CGFloat = 0 {
+    public var cornerRadius: CGFloat = 8 {
         didSet {
             bgView?.layer.cornerRadius = cornerRadius
             bgView?.layer.masksToBounds = true
@@ -41,13 +41,25 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         }
     }
     
+    public var isShowInfoIcon: Bool = false {
+        didSet {
+            infoBtn?.isHidden = !self.isShowInfoIcon
+        }
+    }
+    
     /// 按钮点击显示的网页
-    public var infoUrlString = "https://www.notion.so/Brainwave-Power-4cdadda14a69424790c2d7913ad775ff"
+    public var infoUrlString = "https://www.notion.so/HRV-Graph-6f93225bf7934cb8a16eb6ba55da52cb"
     /// 采样
     public var sample: Int = 3
     
     /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false
+    public var isAbsoluteTimeAxis: Bool = false {
+        didSet {
+            if self.isAbsoluteTimeAxis {
+                xLabel?.isHidden = true
+            }
+        }
+    }
     
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
@@ -70,6 +82,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     //MARK:- Private UI
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.4
+    private var timeStamp = 0
     
     //MARK:- Private UI
     private var bgView: UIView?
@@ -154,7 +167,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         
         let xAxis = chartView!.xAxis
         xAxis.drawAxisLineEnabled = false
-        xAxis.gridLineWidth = 0.5
+        xAxis.gridLineWidth = 0.3
         xAxis.labelPosition = .bottom
         xAxis.gridColor = secondColor
         xAxis.labelTextColor = alphaColor
@@ -197,7 +210,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         }
         
         chartView?.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(32)
+            $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.height.equalTo(135)
             $0.top.equalToSuperview().offset(56)
@@ -220,16 +233,21 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    public func setDataFromReportFile(path: String) {
-        let reader = ReportFileHander.readReportFile(path)
-        let service = ReportViewService()
-        service.dataOfReport = reader
-        if let hrv = service.model!.heartRateVariability {
+    func setDataFromModel(timestamp: Int?, hrv: [Int]?, hrvAvg: Int?) {
+        
+        if let timestamp = timestamp {
+            timeStamp = timestamp
+        }
+        
+        if let hrv = hrv {
             setDataCount(hrv)
         }
         
-        if let hrvAvg = service.model!.hrvAvg {
+        if let hrvAvg = hrvAvg {
             avgLabel?.text = "平均：\(hrvAvg)"
+        } else {
+            avgLabel?.isHidden = true
+            msLabel?.isHidden = true
         }
         
     }
@@ -252,11 +270,11 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         var notZero: Int = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
             if i < initIndex{
-                colors.append(#colorLiteral(red: 0.9490196078, green: 0.9568627451, blue: 0.9843137255, alpha: 1))
+                colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
                 if waveArray[i] == 0 {
-                    colors.append(#colorLiteral(red: 0.9490196078, green: 0.9568627451, blue: 0.9843137255, alpha: 1))
+                    colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 } else {
                     notZero = waveArray[i]
@@ -272,10 +290,11 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
-        set.lineWidth = 2
+        set.lineWidth = 3
         set.colors = colors
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
+        chartView?.extraLeftOffset = 20
         chartView?.data = data
         setLimitLine(yVals.count)
         
@@ -289,7 +308,13 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
         }
-        self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time)
+        
+        if isAbsoluteTimeAxis {
+            self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time, timeStamp)
+        } else {
+            self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time)
+        }
+        
         self.chartView?.leftAxis.valueFormatter = HRVValueFormatter()
 
         
@@ -312,7 +337,6 @@ public class HRVValueFormatter: NSObject, IAxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         let date = labels[Int((value).rounded())] ?? ""
         
-        
         return date
     }
 }
@@ -320,23 +344,36 @@ public class HRVValueFormatter: NSObject, IAxisValueFormatter {
 /// X轴描述
 public class HRVXValueFormatter: NSObject, IAxisValueFormatter {
     private var values: [Double] = [];
-    
+    private var timestamp: Int = 0
+    private let dateFormatter = DateFormatter()
     /// 初始化
     ///
     /// - Parameters:
     ///   - timeStamps: 时间列表
-    public init(_ time:[Int]) {
+    public init(_ time:[Int], _ timestamp: Int = 0) {
         super.init()
         
         for e in time {
             values.append(Double(e))
         }
+        
+        self.timestamp = timestamp
+        
+        dateFormatter.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        var date = ""
-        axis?.entries = self.values
-        date = "\(Int(value / 60))"
-        return date
+        if timestamp == 0 {
+            var date = ""
+            axis?.entries = self.values
+            date = "\(Int(value / 60))"
+            return date
+        } else {
+            var time = 0
+            axis?.entries = self.values
+            time = Int(value) + timestamp
+            let date = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            return date
+        }
     }
 }
