@@ -51,7 +51,7 @@ end
 运行 `pod  install` 安装命令.
 
 ## 情感云API使用说明
-- [情感云API文档](API-Documents/Enterr-AffectiveCloud-iOS-SDK-API说明.md)
+- 情感云的API文档请查看：[情感云API文档](API-Documents/Enterr-AffectiveCloud-iOS-SDK-API说明.md)
 
 ## 情感云UI
 
