@@ -15,7 +15,6 @@ target 'EnterAffectiveCloudUI' do
   pod 'RxSwift', '5.0'
   pod 'SnapKit'
   pod 'Charts'
-  pod 'NaptimeFileProtocol'
 end
 
 target 'EnterRealtimeUIDemo' do
