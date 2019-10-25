@@ -149,7 +149,7 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(titleLabel!)
         
         infoBtn = UIButton(type: .custom)
-        infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), with: .none), for: .normal)
+        infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), compatibleWith: nil), for: .normal)
         infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
         bgView?.addSubview(infoBtn!)
         

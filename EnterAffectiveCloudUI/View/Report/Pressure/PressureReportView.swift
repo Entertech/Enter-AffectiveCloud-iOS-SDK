@@ -117,14 +117,14 @@ public class PressureReportView: BaseView {
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "放松度"
+        titleLabel?.text = "压力值"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
         bgView?.addSubview(titleLabel!)
         
         infoBtn = UIButton(type: .custom)
-        infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), with: .none), for: .normal)
+        infoBtn?.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), compatibleWith: nil), for: .normal)
         infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
         bgView?.addSubview(infoBtn!)
         

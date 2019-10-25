@@ -81,7 +81,7 @@ class BrainwaveSpectrumView: BaseView {
         self.addSubview(deltaLabel)
         self.addSubview(deltaValueLabel)
         
-        infoButton.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(for: self.classForCoder), with: .none), for: .normal)
+        infoButton.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), compatibleWith: nil), for: .normal)
         
         alphaLabel.text = "α 波"
         alphaLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
