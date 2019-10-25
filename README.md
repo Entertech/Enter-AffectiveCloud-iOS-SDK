@@ -24,7 +24,7 @@
 ## 结构说明
 
 - `EnterAffectiveCloud` 业务层只需要实例化 `AffectiveCloudClient` 类就可以请求情感云数据，通过代理 `AffectiveCloudResponseDelegate` 来获取情感云分析后的结果。`
-- `EnterAffectiveCloudUI` 提供了各UI模块用以展示实时数据和报表数据
+- `EnterAffectiveCloudUI` 提供了各UI模块用以展示实时数据和报表数据(可选)
 
 ![](media/15644764106226/15659273084519.jpg)
 
@@ -44,7 +44,7 @@ source 'git@github.com:EnterTech/PodSpecs.git'
 
 target 'Your Target' do
     pod 'EnterAffectiveCloud', '~> 1.2.0'
-    pod 'EnterAffectiveCloudUI', '~> 1.2.0'
+    pod 'EnterAffectiveCloudUI', '~> 1.2.0'  #(可选)
 end
 ~~~
 
