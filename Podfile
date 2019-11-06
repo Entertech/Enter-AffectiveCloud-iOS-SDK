@@ -36,3 +36,14 @@ target 'EnterReportUIDemo' do
   pod 'Charts'
 end
 
+target 'EnterAffectiveCloudTests' do
+  pod 'RxSwift', '5.0'
+  pod 'SnapKit'
+  pod 'GzipSwift'
+  pod 'HandyJSON', '5.0.0'
+  pod 'Starscream'
+  pod 'SwiftyJSON'
+  pod 'Charts'
+end
+
+
