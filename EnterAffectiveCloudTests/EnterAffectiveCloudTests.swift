@@ -19,21 +19,71 @@ class EnterAffectiveCloudTests: XCTestCase, AffectiveCloudResponseDelegate {
     var isRestore: Bool = false
     
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        self.aClient = AffectiveCloudClient(websocketURLString: self.testWs)
+        self.aClient?.affectiveCloudDelegate = self
+    
 
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        aClient?.closeSession()
+        aClient?.websocketDisconnect()
     }
 
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        aClient = AffectiveCloudClient(websocketURLString: testWs)
-        aClient?.affectiveCloudDelegate = self
-        aClient?.createAndAuthenticateSession(appKey: kCloudServiceAppKey, appSecret: kCloudServiceAppSecret, userID: "41")
-        //Thread.sleep(forTimeInterval: 100)
+        //var finish  = (false, false)
+
+        let eegPath = Bundle.init(for: EnterAffectiveCloudTests.classForCoder()).path(forResource: "flowtime_eegdata", ofType: "txt")
+        if let eegPath = eegPath  {
+            do {
+                let eegString = try String(contentsOf: URL(fileURLWithPath: eegPath), encoding: .utf8)
+                let eegArray:[String] = eegString.components(separatedBy: ",")
+                let eegValueArray = eegArray.map { (subs) -> Int in
+                    return Int(subs)!
+                }
+                
+                    
+                    for i in stride(from: 0, to: eegValueArray.count-1, by: 600) {
+                        var array: [Int] = []
+                        for j in 0..<600 {
+                            array.append(eegValueArray[i+j])
+                        }
+                        let data = Data(bytes: array, count: 2)
+                        self.aClient?.appendBiodata(eegData: data)
+                        Thread.sleep(forTimeInterval: 0.36)
+                        
+                    }
+                    
+                
+            } catch {
+                print(error)
+            }
+        }
+        
+        let hrPath = Bundle.init(for: EnterAffectiveCloudTests.classForCoder()).path(forResource: "flowtime_hrdata", ofType: "txt")
+        if let hrPath = hrPath  {
+            do {
+                let hrString = try String(contentsOf: URL(fileURLWithPath: hrPath), encoding: .utf8)
+                let hrArray:[String] = hrString.components(separatedBy: ",")
+                let hrValueArray = hrArray.map { (subs) -> Int in
+                    return Int(subs.trimmingCharacters(in: .newlines))!
+                }
+
+                for i in stride(from: 0, to: hrValueArray.count-1, by: 1) {
+                    let array = [hrValueArray[i]]
+                    let data = Data(bytes: array, count: 1)
+                    self.aClient?.appendBiodata(eegData: data)
+                    Thread.sleep(forTimeInterval: 0.2)
+                }
+            } catch {
+                print(error)
+            }
+        }
+
     }
 
     func testPerformanceExample() {
@@ -60,51 +110,13 @@ class EnterAffectiveCloudTests: XCTestCase, AffectiveCloudResponseDelegate {
     }
     
     func sessionCreateAndAuthenticate(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {
-        let eegPath = Bundle.main.path(forResource: "flowtime_eegdata", ofType: "txt")
-        if let eegPath = eegPath  {
-            do {
-                let eegString = try String(contentsOf: URL(fileURLWithPath: eegPath), encoding: .utf8)
-                let eegArray:[String] = eegString.components(separatedBy: ",")
-                let eegValueArray = eegArray.map { (subs) -> Int in
-                    return Int(subs)!
-                }
-                DispatchQueue.global().async {
-                    for i in stride(from: 0, to: eegValueArray.count-1, by: 600) {
-                        var array: [Int] = []
-                        for j in 0..<600 {
-                            array.append(eegValueArray[i+j])
-                        }
-                        let data = Data(bytes: array, count: 2)
-                        client.appendBiodata(eegData: data)
-                        Thread.sleep(forTimeInterval: 0.36)
-                        
-                    }
-                }
-            } catch {
-                print(error)
-            }
-        }
-        
-        let hrPath = Bundle.main.path(forResource: "flowtime_hrdata", ofType: "txt")
-        if let hrPath = hrPath  {
-            do {
-                let hrString = try String(contentsOf: URL(fileURLWithPath: hrPath), encoding: .utf8)
-                let hrArray:[String] = hrString.components(separatedBy: ",")
-                let hrValueArray = hrArray.map { (subs) -> Int in
-                    return Int(subs)!
-                }
-                DispatchQueue.global().async {
-                    for i in stride(from: 0, to: hrValueArray.count-1, by: 1) {
-                        let array = [hrValueArray[i]]
-                        let data = Data(bytes: array, count: 1)
-                        client.appendBiodata(eegData: data)
-                        Thread.sleep(forTimeInterval: 0.2)
-                    }
-                }
-            } catch {
-                print(error)
-            }
-        }
+        // 开启生物信号
+        client.initBiodataServices(services: [.EEG, .HeartRate])
+        client.subscribeBiodataServices(services: [.eeg_all, .hr_all])
+
+        // 开启情感数据
+        client.startAffectiveDataServices(services: [.attention, .relaxation, .pleasure, .pressure])
+        client.subscribeAffectiveDataServices(services: [.attention, .relaxation, .pressure, .pleasure])
     }
     
     func sessionRestore(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {
