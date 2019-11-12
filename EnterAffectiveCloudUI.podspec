@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/EnterTech'
-  s.author           = { 'ET_LINK' => 'like@entertch.cn' }
+  s.author           = { 'Like' => 'ke.liful@gmail.com' }
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.source           = { :git => 'git@github.com:Entertech/Enter-AffectiveComputing-iOS-SDK.git', :tag => s.version.to_s }
 
