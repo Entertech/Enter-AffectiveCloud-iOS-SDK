@@ -150,6 +150,13 @@ public class RealtimeHeartRateView: BaseView {
         super.init(coder: coder)
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if !heartImageView!.isAnimating {
+            heartImageView?.startAnimating()
+        }
+    }
+    
     /// 开启监听
     /// - Parameter demo: demo数据
     public func observe(with demo: Int) {
@@ -225,7 +232,6 @@ public class RealtimeHeartRateView: BaseView {
         heartImageView?.animationImages = UIImage.resolveGifImage(gif: "heart")
         heartImageView?.animationDuration = 2
         heartImageView?.animationRepeatCount = Int.max
-        heartImageView?.startAnimating()
         bgView.addSubview(heartImageView!)
         
         maxLabel = UILabel()

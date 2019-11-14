@@ -13,6 +13,8 @@
 		51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */; };
 		B7E125D5230559590072DF22 /* EnterAffectiveCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
+		FA06078E237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
+		FA06078F237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */; };
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -79,7 +81,6 @@
 		FACEDFEE2351BB440016176C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEC2351BB440016176C /* Main.storyboard */; };
 		FACEDFF02351BB450016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEF2351BB450016176C /* Assets.xcassets */; };
 		FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFF12351BB450016176C /* LaunchScreen.storyboard */; };
-		FACEDFF82351D0820016176C /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 		FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		FA060790237D533100D0BB30 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA06078F237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA0A6E80234D71DF00532A46 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -262,8 +274,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FACEDFF82351D0820016176C /* EnterAffectiveCloudUI.framework in Frameworks */,
 				050B6C818BBC9339BAF001D7 /* Pods_EnterRealtimeUIDemo.framework in Frameworks */,
+				FA06078E237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +720,7 @@
 				FACEDFDF2351BB440016176C /* Frameworks */,
 				FACEDFE02351BB440016176C /* Resources */,
 				B5BE3E2E9D46C413DB0163A1 /* [CP] Embed Pods Frameworks */,
+				FA060790237D533100D0BB30 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -29,7 +29,7 @@ class FirstViewController: UIViewController {
     
     
     /**********************************************************************************/
-    /*************observe(with: 65)中的值为demo演示所用，实际使用请直接用observe()*****************/
+    /*************observe(with: 65)中的65为demo演示所用，实际使用请直接用observe()*****************/
     /**********************************************************************************/
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
