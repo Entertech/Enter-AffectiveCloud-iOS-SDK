@@ -117,7 +117,7 @@ extension UIImage {
     /// GIF
     class func resolveGifImage(gif: String) -> [UIImage]{
         var images:[UIImage] = []
-        let gifPath = Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI")?.path(forResource: gif, ofType: "gif")
+        let gifPath = Bundle.init(identifier: "org.cocoapods.EnterAffectiveCloudUI")?.path(forResource: gif, ofType: "gif")
         if gifPath != nil{
             if let gifData = try? Data(contentsOf: URL.init(fileURLWithPath: gifPath!)){
                 let gifDataSource = CGImageSourceCreateWithData(gifData as CFData, nil)
@@ -130,6 +130,10 @@ extension UIImage {
             }
         }
         return images
+    }
+    
+    class func loadImage(name: String) -> UIImage {
+        return UIImage(named: name, in: Bundle.init(identifier: "org.cocoapods.EnterAffectiveCloudUI"), compatibleWith: nil)!
     }
 }
 

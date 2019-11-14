@@ -75,7 +75,7 @@ class BrainwaveView: BaseView {
         self.addSubview(leftBrain)
         self.addSubview(rightBrain)
         
-        infoButton.setImage(UIImage.init(named: "icon_info_black", in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), compatibleWith: nil), for: .normal)
+        infoButton.setImage(UIImage.loadImage(name: "icon_info_black"), for: .normal)
         
         leftDot.layer.cornerRadius = 4
         leftDot.layer.masksToBounds = true
