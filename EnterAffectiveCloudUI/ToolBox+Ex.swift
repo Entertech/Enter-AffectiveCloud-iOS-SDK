@@ -212,19 +212,5 @@ extension Array {
     }
 }
 
-// MARK: - NSData 扩展
-extension Data {
-
-    /// 获取完整数据的 range
-    var fullRange: NSRange {
-        return NSMakeRange(0, self.count)
-    }
-
-}
-
-func unix_time() -> Timestamp {
-    return Timestamp(Date().timeIntervalSince1970)
-}
-
 
 

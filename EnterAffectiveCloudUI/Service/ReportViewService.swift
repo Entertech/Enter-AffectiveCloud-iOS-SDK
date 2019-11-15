@@ -21,7 +21,7 @@ public class ReportViewService: NSObject {
     
     private var isShowed: Bool = false
     
-    public var dataOfReport: EnterAffectiveCloudReportData? {
+    public var dataOfReport: EnterAffectiveCloud.EnterAffectiveCloudReportData? {
         willSet {
             if let scalars = newValue?.scalars {
                 for e in scalars {
