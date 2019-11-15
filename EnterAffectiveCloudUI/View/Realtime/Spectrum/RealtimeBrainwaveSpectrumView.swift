@@ -31,15 +31,15 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
     
     @objc func biodataSubscript(_ notification: Notification) {
     
-        if let data = notification.userInfo!["biodataServicesSubscribe"] as? CSBiodataProcessJSONModel {
-            if let eeg = data.eeg {
-                if let _ = eeg.alpha {
-                    rxSpectrumValue.onNext((eeg.gamma!, eeg.belta!, eeg.alpha!, eeg.theta!, eeg.delta!))
+        if let value = notification.userInfo!["biodataServicesSubscribe"] as? AffectiveCloudResponseJSONModel {
+            if let data = value.dataModel as? CSBiodataProcessJSONModel {
+                if let eeg = data.eeg {
+                    if let _ = eeg.alpha {
+                        rxSpectrumValue.onNext((eeg.gamma!, eeg.belta!, eeg.alpha!, eeg.theta!, eeg.delta!))
+                    }
                 }
             }
-            
         }
-            
     }
     
 }

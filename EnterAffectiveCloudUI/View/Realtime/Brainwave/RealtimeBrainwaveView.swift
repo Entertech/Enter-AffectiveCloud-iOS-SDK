@@ -39,16 +39,17 @@ class UpdateBrainwaveValue: BrainwaveValueProtocol {
     
     @objc func biodataSubscript(_ notification: Notification) {
     
-        if let data = notification.userInfo!["biodataServicesSubscribe"] as? CSBiodataProcessJSONModel {
-            if let eeg = data.eeg {
-                if let left = eeg.waveLeft {
-                    rxLeftBrainwaveValue.onNext(left)
-                }
-                if let right = eeg.waveRight {
-                    rxRightBrainwaveValue.onNext(right)
+        if let value = notification.userInfo!["biodataServicesSubscribe"] as? AffectiveCloudResponseJSONModel {
+            if let data = value.dataModel as? CSBiodataProcessJSONModel {
+                if let eeg = data.eeg {
+                    if let left = eeg.waveLeft {
+                        rxLeftBrainwaveValue.onNext(left)
+                    }
+                    if let right = eeg.waveRight {
+                        rxRightBrainwaveValue.onNext(right)
+                    }
                 }
             }
-        
         }
             
     }

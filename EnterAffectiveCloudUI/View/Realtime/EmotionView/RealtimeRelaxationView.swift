@@ -31,12 +31,13 @@ class UpdateRelaxation: RelaxationProtocol {
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
     
-        if let data = notification.userInfo!["affectiveDataSubscribe"] as? CSAffectiveSubscribeProcessJsonModel {
-            if let relaxation = data.relaxation?.relaxation {
-                rxRelaxationValue.onNext(relaxation)
+        if let value = notification.userInfo!["affectiveDataSubscribe"] as? AffectiveCloudResponseJSONModel {
+            if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
+                
+                if let relaxation = data.relaxation?.relaxation {
+                    rxRelaxationValue.onNext(relaxation)
+                }
             }
-           
-            return
         }
             
     }

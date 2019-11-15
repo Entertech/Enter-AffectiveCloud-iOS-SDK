@@ -31,16 +31,16 @@ class UpdateHeartRate: HeartRateValueProtocol {
     
     @objc func biodataSubscript(_ notification: Notification) {
     
-        if let data = notification.userInfo!["biodataServicesSubscribe"] as? CSBiodataProcessJSONModel {
-
-            if let eeg = data.hr {
-                if let hr = eeg.hr {
-                    
-                    self.rxHeartRateValue.onNext(Int(hr))
-                    
+        if let value = notification.userInfo!["biodataServicesSubscribe"] as? AffectiveCloudResponseJSONModel {
+            if let data = value.dataModel as? CSBiodataProcessJSONModel {
+                if let eeg = data.hr {
+                    if let hr = eeg.hr {
+                        
+                        self.rxHeartRateValue.onNext(Int(hr))
+                        
+                    }
                 }
             }
-            return
         }
             
     }

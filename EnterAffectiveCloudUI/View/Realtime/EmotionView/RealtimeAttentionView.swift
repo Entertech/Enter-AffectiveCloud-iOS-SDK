@@ -31,12 +31,13 @@ class UpdateAttention: AttentionProtocol {
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
     
-        if let data = notification.userInfo!["affectiveDataSubscribe"] as? CSAffectiveSubscribeProcessJsonModel {
-            if let attention = data.attention?.attention {
-                rxAttentionValue.onNext(attention)
+        if let value = notification.userInfo!["affectiveDataSubscribe"] as? AffectiveCloudResponseJSONModel {
+            if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
+                
+                if let attention = data.attention?.attention {
+                    rxAttentionValue.onNext(attention)
+                }
             }
-           
-            return
         }
             
     }
