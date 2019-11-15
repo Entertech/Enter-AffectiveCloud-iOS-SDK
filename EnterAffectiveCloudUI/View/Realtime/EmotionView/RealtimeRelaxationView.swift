@@ -111,7 +111,7 @@ public class RealtimeRelaxationView: BaseView {
     private var stateLabel: UILabel?
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
-    
+    private var updateRelaxation: UpdateRelaxation?
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
@@ -138,8 +138,8 @@ public class RealtimeRelaxationView: BaseView {
     
     
     private func observeRealtimeValue(_ demo: Float = 0) {
-        let updateRelaxation = UpdateRelaxation(demo)
-        updateRelaxation.rxRelaxationValue.subscribe(onNext: {[weak self] (value) in
+        updateRelaxation = UpdateRelaxation(demo)
+        updateRelaxation?.rxRelaxationValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if value > 0 {

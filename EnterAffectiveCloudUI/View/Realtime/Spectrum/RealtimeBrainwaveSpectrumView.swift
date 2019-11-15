@@ -109,6 +109,7 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     //MARK:- Private param
     private let titleText = "脑波频谱"
     private let disposeBag = DisposeBag()
+    private var updateSpectrum: UpdateBrainwaveSpectrum?
     
     //MARK:- Private UI
     private let spectrumView = BrainwaveSpectrumView()
@@ -135,8 +136,8 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     }
     
     private func observeRealtimeValue(_ demo: (Float, Float, Float, Float, Float) = (0,0,0,0,0)) {
-        let updateSpectrum = UpdateBrainwaveSpectrum(demo)
-        updateSpectrum.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
+        updateSpectrum = UpdateBrainwaveSpectrum(demo)
+        updateSpectrum?.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 self.spectrumView.setSpectrum(value.0, .γ)

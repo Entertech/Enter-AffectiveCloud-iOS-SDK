@@ -111,7 +111,7 @@ public class RealtimePressureView: BaseView {
     private var stateLabel: UILabel?
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
-    
+    private var updatePressure: UpdatePressure?
     
     //MARK:- override function
     public init() {
@@ -136,8 +136,8 @@ public class RealtimePressureView: BaseView {
     
     
     private func observeRealtimeValue(_ demo: Float = 0) {
-        let updatePressure = UpdatePressure(demo)
-        updatePressure.rxPressureValue.subscribe(onNext: {[weak self] (value) in
+        updatePressure = UpdatePressure(demo)
+        updatePressure?.rxPressureValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if value > 0 {

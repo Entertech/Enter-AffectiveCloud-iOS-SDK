@@ -112,7 +112,7 @@ public class RealtimeAttentionView: BaseView {
     private var stateLabel: UILabel?
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
-    
+    private var updateAttention: UpdateAttention?
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
@@ -140,8 +140,8 @@ public class RealtimeAttentionView: BaseView {
       
     
     private func observeRealtimeValue(_ demo: Float = 0) {
-        let updateAttention = UpdateAttention(demo)
-        updateAttention.rxAttentionValue.subscribe(onNext: {[weak self] (value) in
+        updateAttention = UpdateAttention(demo)
+        updateAttention?.rxAttentionValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if value > 0 {

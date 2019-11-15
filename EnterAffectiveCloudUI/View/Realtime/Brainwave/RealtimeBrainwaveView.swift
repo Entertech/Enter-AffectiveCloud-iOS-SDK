@@ -119,7 +119,7 @@ public class RealtimeBrainwaveView: BaseView {
     //MARK:- Private param
     private let titleText = "实时脑波"
     private let disposeBag = DisposeBag()
-    
+    private var updateBrainwave: UpdateBrainwaveValue?
     //MARK:- Private UI
     private let brainwaveView = BrainwaveView()
     
@@ -150,8 +150,8 @@ public class RealtimeBrainwaveView: BaseView {
     }
     
     private func observeRealtimeValue() {
-        let updateBrainwave = UpdateBrainwaveValue()
-        updateBrainwave.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
+        updateBrainwave = UpdateBrainwaveValue()
+        updateBrainwave?.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             if value.count > 10 {
                 self.brainwaveView.setEEGArray(value, .left)
@@ -160,7 +160,7 @@ public class RealtimeBrainwaveView: BaseView {
         }, onError: { (error) in
             print(error.localizedDescription)
             }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
-        updateBrainwave.rxRightBrainwaveValue.subscribe(onNext: {[weak self] (value) in
+        updateBrainwave?.rxRightBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             if value.count > 10 {
                 self.brainwaveView.setEEGArray(value, .right)

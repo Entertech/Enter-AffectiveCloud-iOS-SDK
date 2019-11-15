@@ -136,6 +136,7 @@ public class RealtimeHeartRateView: BaseView {
     private var minBpmLabel: UILabel?
     private var infoBtn: UIButton?
     private var heartImageView: UIImageView?
+    private var updateHeartRate: UpdateHeartRate?
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -168,8 +169,8 @@ public class RealtimeHeartRateView: BaseView {
     }
     
     private func observeRealtimeValue(_ demo: Int = 0) {
-        let updateHeartRate = UpdateHeartRate(demo)
-        updateHeartRate.rxHeartRateValue.subscribe(onNext: {[weak self] (value) in
+        updateHeartRate = UpdateHeartRate(demo)
+        updateHeartRate?.rxHeartRateValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if value > 0 {
