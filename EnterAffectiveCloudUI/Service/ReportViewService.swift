@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EnterAffectiveCloud
 
 public class ReportViewService: NSObject {
     

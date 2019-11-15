@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EnterAffectiveCloudFileWriter: DataFileWriterV2 {
+public class EnterAffectiveCloudFileWriter: DataFileWriterV2 {
     public override init() {
         super.init()
         fileType = 5

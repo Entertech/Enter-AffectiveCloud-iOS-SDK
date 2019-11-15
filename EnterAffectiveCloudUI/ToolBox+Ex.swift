@@ -8,6 +8,7 @@
 
 import UIKit
 import CommonCrypto
+import EnterAffectiveCloud
 
 func DLog(_ items: Any...) {
     
@@ -219,46 +220,6 @@ extension Data {
         return NSMakeRange(0, self.count)
     }
 
-    /// 获取所有的字节
-    var allBytes: Bytes {
-        return try! self.bytesInRange(self.fullRange)
-    }
-
-    /**
-     获取在某个范围内的字节序列
-
-     - parameter range: NSRange 范围
-
-     - throws: 如果 range 超出范围，可能抛出 `OutOfRangeError`
-
-     - returns: 返回 range 范围内的字节序列
-     */
-    func bytesInRange(_ range: NSRange) throws -> [Byte] {
-        if range.location + range.length > self.count {
-            throw DataFileOutOfRangeError()
-        }
-        var thisBytes: [Byte] = [Byte](repeating: 0, count: range.length)
-        (self as NSData).getBytes(&thisBytes, range: range)
-        return thisBytes
-    }
-
-    /**
-     获取指定位置的字节
-
-     - parameter index: 位置索引
-
-     - throws: 如果 index 超出范围，可能会抛出 `OutOfRangeError`
-
-     - returns: 返回 index 位置的字节
-     */
-    func byteAtIndex(_ index: Int) throws -> Byte {
-        if index >= self.count {
-            throw DataFileOutOfRangeError()
-        }
-        var thisBytes: [Byte] = [0]
-        (self as NSData).getBytes(&thisBytes, range: NSMakeRange(index, 1))
-        return thisBytes[0]
-    }
 }
 
 func unix_time() -> Timestamp {

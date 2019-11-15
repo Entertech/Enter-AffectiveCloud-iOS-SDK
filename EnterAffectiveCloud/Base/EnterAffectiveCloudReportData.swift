@@ -160,7 +160,7 @@ extension Data {
         self = Swift.withUnsafeBytes(of: value) { Data($0)}
     }
 
-    func to<T>(type: T.Type) -> T? where T: ExpressibleByIntegerLiteral {
+    public func to<T>(type: T.Type) -> T? where T: ExpressibleByIntegerLiteral {
         var value: T = 0
         guard count >= MemoryLayout.size(ofValue: value) else {
             return nil
@@ -173,7 +173,7 @@ extension Data {
         self = values.withUnsafeBytes { Data($0)}
     }
 
-    func to<T>(arrayType: T.Type) -> [T]? where T: ExpressibleByIntegerLiteral {
+    public func to<T>(arrayType: T.Type) -> [T]? where T: ExpressibleByIntegerLiteral {
         var array = Array<T>(repeating: 0, count: self.count/MemoryLayout<T>.stride)
         _ = array.withUnsafeMutableBytes { copyBytes(to: $0) }
         return array
