@@ -157,13 +157,12 @@ public class RealtimeBrainwaveView: BaseView {
         updateBrainwave?.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             if value.count > 10 {
-                DispatchQueue.main.async {
                     if self.isFirstLeftData {
                         self.isFirstLeftData = false
                         self.dismissMask()
                     }
                     self.brainwaveView.setEEGArray(value, .left)
-                }
+                
             }
             
         }, onError: { (error) in
@@ -172,13 +171,12 @@ public class RealtimeBrainwaveView: BaseView {
         updateBrainwave?.rxRightBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             if value.count > 10 {
-                DispatchQueue.main.async {
                     if self.isFirstRightData {
                         self.isFirstRightData = false
                         self.dismissMask()
                     }
                     self.brainwaveView.setEEGArray(value, .right)
-                }
+                
                 
             }
             
