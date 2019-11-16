@@ -143,7 +143,9 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
             DispatchQueue.main.async {
                 if self.isFirstData {
                     self.isFirstData = false
+                } else  {
                     self.dismissMask()
+                    
                 }
                 self.spectrumView.setSpectrum(value.0, .γ)
                 self.spectrumView.setSpectrum(value.1, .β)

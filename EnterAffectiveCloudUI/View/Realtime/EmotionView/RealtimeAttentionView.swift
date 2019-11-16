@@ -148,6 +148,8 @@ public class RealtimeAttentionView: BaseView {
             DispatchQueue.main.async {
                 if self.isFirstData {
                     self.isFirstData = false
+                    
+                } else {
                     self.dismissMask()
                 }
                 if value > 0 {

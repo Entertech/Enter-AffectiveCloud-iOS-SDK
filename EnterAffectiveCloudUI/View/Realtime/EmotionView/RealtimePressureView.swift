@@ -143,8 +143,10 @@ public class RealtimePressureView: BaseView {
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if self.isFirstData {
-                    self.dismissMask()
                     self.isFirstData = false
+                } else  {
+                    self.dismissMask()
+                    
                 }
                 if value > 0 {
                     self.pressureValueLabel?.text = "\(Int(value))"

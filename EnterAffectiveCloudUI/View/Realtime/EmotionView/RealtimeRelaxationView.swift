@@ -143,8 +143,9 @@ public class RealtimeRelaxationView: BaseView {
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if self.isFirstData {
-                    self.dismissMask()
                     self.isFirstData = false
+                } else {
+                    self.dismissMask()
                 }
                 if value > 0 {
                     self.relaxationValueLabel?.text = "\(Int(value))"
