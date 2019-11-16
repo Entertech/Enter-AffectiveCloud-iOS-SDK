@@ -31,14 +31,14 @@ class UpdateAttention: AttentionProtocol {
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
     
-        if let value = notification.userInfo!["affectiveDataSubscribe"] as? AffectiveCloudResponseJSONModel {
+        let value = notification.userInfo!["affectiveDataSubscribe"] as! AffectiveCloudResponseJSONModel
             if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
                 
                 if let attention = data.attention?.attention {
                     rxAttentionValue.onNext(attention)
                 }
             }
-        }
+        
             
     }
     
@@ -114,6 +114,7 @@ public class RealtimeAttentionView: BaseView {
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
     private var updateAttention: UpdateAttention?
+    private var isFirstData = true
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
@@ -145,6 +146,10 @@ public class RealtimeAttentionView: BaseView {
         updateAttention?.rxAttentionValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
+                if self.isFirstData {
+                    self.isFirstData = false
+                    self.dismissMask()
+                }
                 if value > 0 {
                     self.attentionValueLabel?.text = "\(Int(value))"
                     self.rodView?.setDotValue(index: Float(value))

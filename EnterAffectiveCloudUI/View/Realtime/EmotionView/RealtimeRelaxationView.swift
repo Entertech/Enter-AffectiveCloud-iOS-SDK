@@ -30,16 +30,14 @@ class UpdateRelaxation: RelaxationProtocol {
     }
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
-    
-        if let value = notification.userInfo!["affectiveDataSubscribe"] as? AffectiveCloudResponseJSONModel {
-            if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
-                
-                if let relaxation = data.relaxation?.relaxation {
-                    rxRelaxationValue.onNext(relaxation)
-                }
+        
+        let value = notification.userInfo!["affectiveDataSubscribe"] as! AffectiveCloudResponseJSONModel
+        if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
+            
+            if let relaxation = data.relaxation?.relaxation {
+                rxRelaxationValue.onNext(relaxation)
             }
         }
-            
     }
     
 }
@@ -113,6 +111,7 @@ public class RealtimeRelaxationView: BaseView {
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
     private var updateRelaxation: UpdateRelaxation?
+    private var isFirstData = true
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
@@ -143,6 +142,10 @@ public class RealtimeRelaxationView: BaseView {
         updateRelaxation?.rxRelaxationValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
+                if self.isFirstData {
+                    self.dismissMask()
+                    self.isFirstData = false
+                }
                 if value > 0 {
                     self.relaxationValueLabel?.text = "\(Int(value))"
                     self.rodView?.setDotValue(index: Float(value))

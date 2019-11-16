@@ -31,18 +31,16 @@ class UpdateHeartRate: HeartRateValueProtocol {
     
     @objc func biodataSubscript(_ notification: Notification) {
     
-        if let value = notification.userInfo!["biodataServicesSubscribe"] as? AffectiveCloudResponseJSONModel {
-            if let data = value.dataModel as? CSBiodataProcessJSONModel {
-                if let eeg = data.hr {
-                    if let hr = eeg.hr {
-                        
-                        self.rxHeartRateValue.onNext(Int(hr))
-                        
-                    }
+        let value = notification.userInfo!["biodataServicesSubscribe"] as! AffectiveCloudResponseJSONModel
+        if let data = value.dataModel as? CSBiodataProcessJSONModel {
+            if let eeg = data.hr {
+                if let hr = eeg.hr {
+                    
+                    self.rxHeartRateValue.onNext(Int(hr))
+                    
                 }
             }
         }
-            
     }
     
 }
@@ -137,6 +135,7 @@ public class RealtimeHeartRateView: BaseView {
     private var infoBtn: UIButton?
     private var heartImageView: UIImageView?
     private var updateHeartRate: UpdateHeartRate?
+    private var isFirstData = true
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -173,6 +172,10 @@ public class RealtimeHeartRateView: BaseView {
         updateHeartRate?.rxHeartRateValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
+                if self.isFirstData {
+                    self.isFirstData = false
+                    self.dismissMask()
+                }
                 if value > 0 {
                     self.heartRateLabel?.text = "\(value)"
                 } else {

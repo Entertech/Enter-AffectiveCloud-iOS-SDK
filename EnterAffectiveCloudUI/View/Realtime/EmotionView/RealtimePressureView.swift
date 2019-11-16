@@ -31,14 +31,14 @@ class UpdatePressure: PressureProtocol {
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
     
-        if let value = notification.userInfo!["affectiveDataSubscribe"] as? AffectiveCloudResponseJSONModel {
-            if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
-                
-                if let pressure = data.pressure?.pressure {
-                    rxPressureValue.onNext(pressure)
-                }
+        let value = notification.userInfo!["affectiveDataSubscribe"] as! AffectiveCloudResponseJSONModel
+        if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
+            
+            if let pressure = data.pressure?.pressure {
+                rxPressureValue.onNext(pressure)
             }
         }
+        
             
     }
     
@@ -113,6 +113,7 @@ public class RealtimePressureView: BaseView {
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
     private var updatePressure: UpdatePressure?
+    private var isFirstData = true
     
     //MARK:- override function
     public init() {
@@ -141,6 +142,10 @@ public class RealtimePressureView: BaseView {
         updatePressure?.rxPressureValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
+                if self.isFirstData {
+                    self.dismissMask()
+                    self.isFirstData = false
+                }
                 if value > 0 {
                     self.pressureValueLabel?.text = "\(Int(value))"
                     self.rodView?.setDotValue(index: Float(value))

@@ -31,7 +31,7 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
     
     @objc func biodataSubscript(_ notification: Notification) {
     
-        if let value = notification.userInfo!["biodataServicesSubscribe"] as? AffectiveCloudResponseJSONModel {
+        let value = notification.userInfo!["biodataServicesSubscribe"] as! AffectiveCloudResponseJSONModel
             if let data = value.dataModel as? CSBiodataProcessJSONModel {
                 if let eeg = data.eeg {
                     if let _ = eeg.alpha {
@@ -39,7 +39,7 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
                     }
                 }
             }
-        }
+        
     }
     
 }
@@ -110,6 +110,7 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     private let titleText = "脑波频谱"
     private let disposeBag = DisposeBag()
     private var updateSpectrum: UpdateBrainwaveSpectrum?
+    private var isFirstData = true
     
     //MARK:- Private UI
     private let spectrumView = BrainwaveSpectrumView()
@@ -140,6 +141,10 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
         updateSpectrum?.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
+                if self.isFirstData {
+                    self.isFirstData = false
+                    self.dismissMask()
+                }
                 self.spectrumView.setSpectrum(value.0, .γ)
                 self.spectrumView.setSpectrum(value.1, .β)
                 self.spectrumView.setSpectrum(value.2, .α)

@@ -39,7 +39,7 @@ class UpdateBrainwaveValue: BrainwaveValueProtocol {
     
     @objc func biodataSubscript(_ notification: Notification) {
     
-        if let value = notification.userInfo!["biodataServicesSubscribe"] as? AffectiveCloudResponseJSONModel {
+        let value = notification.userInfo!["biodataServicesSubscribe"] as! AffectiveCloudResponseJSONModel
             if let data = value.dataModel as? CSBiodataProcessJSONModel {
                 if let eeg = data.eeg {
                     if let left = eeg.waveLeft {
@@ -50,7 +50,7 @@ class UpdateBrainwaveValue: BrainwaveValueProtocol {
                     }
                 }
             }
-        }
+        
             
     }
 }
@@ -121,6 +121,8 @@ public class RealtimeBrainwaveView: BaseView {
     private let titleText = "实时脑波"
     private let disposeBag = DisposeBag()
     private var updateBrainwave: UpdateBrainwaveValue?
+    private var isFirstLeftData: Bool = true
+    private var isFirstRightData = true
     //MARK:- Private UI
     private let brainwaveView = BrainwaveView()
     
@@ -155,7 +157,13 @@ public class RealtimeBrainwaveView: BaseView {
         updateBrainwave?.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             if value.count > 10 {
-                self.brainwaveView.setEEGArray(value, .left)
+                DispatchQueue.main.async {
+                    if self.isFirstLeftData {
+                        self.isFirstLeftData = false
+                        self.dismissMask()
+                    }
+                    self.brainwaveView.setEEGArray(value, .left)
+                }
             }
             
         }, onError: { (error) in
@@ -164,7 +172,14 @@ public class RealtimeBrainwaveView: BaseView {
         updateBrainwave?.rxRightBrainwaveValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             if value.count > 10 {
-                self.brainwaveView.setEEGArray(value, .right)
+                DispatchQueue.main.async {
+                    if self.isFirstRightData {
+                        self.isFirstRightData = false
+                        self.dismissMask()
+                    }
+                    self.brainwaveView.setEEGArray(value, .right)
+                }
+                
             }
             
         }, onError: { (error) in
