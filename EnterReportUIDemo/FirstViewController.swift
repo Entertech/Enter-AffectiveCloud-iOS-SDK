@@ -43,14 +43,14 @@ class FirstViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        service.show() // 展示图表必须要在layout完成之后
+        service.show() // 展示图表请在layout完成之后
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // service.show() 
+        // service.show()
 
     }
 

@@ -82,6 +82,7 @@ public class RealtimeRelaxationView: BaseView {
         didSet {
             bgView.layer.cornerRadius = borderRadius
             bgView.layer.masksToBounds = true
+            self.maskCorner = borderRadius
         }
     }
     /// 背景色

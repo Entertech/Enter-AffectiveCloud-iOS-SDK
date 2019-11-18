@@ -9,6 +9,8 @@
 import UIKit
 
 open class BaseView: UIView {
+    
+    var maskCorner: CGFloat = 8.0
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,11 +45,14 @@ open class BaseView: UIView {
         return nil
     }
 
+    /// 设备未连接实时数据无法显示时显示提示
     public func showTip() {
         dismissMask()
         let maskView = UIView()
         maskView.tag = 9999
         maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
+        maskView.layer.cornerRadius = maskCorner
+        maskView.layer.masksToBounds = true
         self.addSubview(maskView)
         maskView.snp.makeConstraints {
             $0.left.right.top.bottom.equalToSuperview()
@@ -69,6 +74,8 @@ open class BaseView: UIView {
         let maskView = UIView()
         maskView.tag = 9999
         maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
+        maskView.layer.cornerRadius = maskCorner
+        maskView.layer.masksToBounds = true
         self.addSubview(maskView)
         maskView.snp.makeConstraints {
             $0.left.right.top.bottom.equalToSuperview()
@@ -94,6 +101,29 @@ open class BaseView: UIView {
                 break
             }
         }
+    }
+    
+    public func showReportTip() {
+        dismissMask()
+        let maskView = UIView()
+        maskView.tag = 9999
+        maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
+        maskView.layer.cornerRadius = maskCorner
+        maskView.layer.masksToBounds = true
+        self.addSubview(maskView)
+        maskView.snp.makeConstraints {
+            $0.left.right.top.bottom.equalToSuperview()
+        }
+        let tipLabel = UILabel()
+        maskView.addSubview(tipLabel)
+        tipLabel.text = "示例数据"
+        tipLabel.textColor = .white
+        tipLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        tipLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        self.layoutIfNeeded()
     }
 
 }

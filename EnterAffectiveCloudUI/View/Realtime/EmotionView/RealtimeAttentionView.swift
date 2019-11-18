@@ -85,6 +85,7 @@ public class RealtimeAttentionView: BaseView {
         didSet {
             bgView.layer.cornerRadius = borderRadius
             bgView.layer.masksToBounds = true
+            self.maskCorner = borderRadius
         }
     }
     /// 背景色
@@ -123,12 +124,10 @@ public class RealtimeAttentionView: BaseView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        observeRealtimeValue()
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
-        observeRealtimeValue()
         
     }
     

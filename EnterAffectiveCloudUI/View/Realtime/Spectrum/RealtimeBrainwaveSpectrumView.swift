@@ -89,6 +89,7 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
         didSet {
             spectrumView.layer.cornerRadius = borderRadius
             spectrumView.layer.masksToBounds = true
+            self.maskCorner = borderRadius
         }
     }
     /// 背景色

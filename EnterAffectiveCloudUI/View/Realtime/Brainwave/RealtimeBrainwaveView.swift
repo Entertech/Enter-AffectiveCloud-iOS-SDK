@@ -87,6 +87,7 @@ public class RealtimeBrainwaveView: BaseView {
         didSet {
             brainwaveView.layer.cornerRadius = borderRadius
             brainwaveView.layer.masksToBounds = true
+            self.maskCorner = borderRadius
         }
     }
     /// 背景色
