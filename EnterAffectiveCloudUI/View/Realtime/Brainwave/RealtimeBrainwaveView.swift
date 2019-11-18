@@ -124,6 +124,7 @@ public class RealtimeBrainwaveView: BaseView {
     private var updateBrainwave: UpdateBrainwaveValue?
     private var isFirstLeftData: Bool = true
     private var isFirstRightData = true
+    private var initData = true
     //MARK:- Private UI
     private let brainwaveView = BrainwaveView()
     
@@ -161,6 +162,11 @@ public class RealtimeBrainwaveView: BaseView {
                 if self.isFirstLeftData {
                     self.isFirstLeftData = false
                 } else  {
+                    if self.initData {
+                        self.initData = false
+                        self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
+                        self.brainwaveView.rightData = Array(repeating: 0, count: 200)
+                    }
                     self.dismissMask()
                 }
                 self.brainwaveView.setEEGArray(value, .left)
@@ -176,7 +182,11 @@ public class RealtimeBrainwaveView: BaseView {
                 if self.isFirstRightData {
                     self.isFirstRightData = false
                 }  else  {
-                    
+                    if self.initData {
+                        self.initData = false
+                        self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
+                        self.brainwaveView.rightData = Array(repeating: 0, count: 200)
+                    }
                     self.dismissMask()
                 }
                 self.brainwaveView.setEEGArray(value, .right)

@@ -137,6 +137,7 @@ public class RealtimeHeartRateView: BaseView {
     private var heartImageView: UIImageView?
     private var updateHeartRate: UpdateHeartRate?
     private var isFirstData = true
+    private var initData = true
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -176,6 +177,11 @@ public class RealtimeHeartRateView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else  {
+                    if self.initData && value > 0 {
+                        self.initData = false
+                        self.minValue = value
+                        self.maxValue = value
+                    }
                     self.dismissMask()
                 }
                 if value > 0 {
@@ -186,7 +192,7 @@ public class RealtimeHeartRateView: BaseView {
                 
                 if value > 0, self.minValue > value {
                     self.minValue = value
-                    self.minValueLabel?.text = String(value)
+                    self.minValueLabel?.text = String(self.minValue)
                 }
                 if self.maxValue == 0 {
                     self.maxValue = value
