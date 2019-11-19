@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EnterAffectiveCloud
 import EnterAffectiveCloudUI
 
 class SecondViewController: UIViewController {

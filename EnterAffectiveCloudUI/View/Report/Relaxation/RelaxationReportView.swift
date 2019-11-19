@@ -291,6 +291,7 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
     }
     
     private func setDataCount(_ waveArray: [Int]) {
+        sample = (waveArray.count / 240 + 1) * 3
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {

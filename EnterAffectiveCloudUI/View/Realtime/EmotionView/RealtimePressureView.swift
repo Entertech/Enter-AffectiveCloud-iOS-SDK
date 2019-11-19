@@ -140,7 +140,7 @@ public class RealtimePressureView: BaseView {
     
     private func observeRealtimeValue(_ demo: Float = 0) {
         updatePressure = UpdatePressure(demo)
-        updatePressure?.rxPressureValue.subscribe(onNext: {[weak self] (value) in
+        updatePressure?.rxPressureValue.subscribe(onNext: {[weak self] (valueOrigin) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if self.isFirstData {
@@ -149,6 +149,7 @@ public class RealtimePressureView: BaseView {
                     self.dismissMask()
                     
                 }
+                let value = valueOrigin / 20.0
                 if value > 0 {
                     self.pressureValueLabel?.text = "\(Int(value))"
                     self.rodView?.setDotValue(index: Float(value))

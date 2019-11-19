@@ -19,6 +19,10 @@
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
+		FA296EA42383C95B001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
+		FA296EA52383C95B001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA296EA82383C963001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
+		FA296EA92383C963001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA55EA5E234C273A00C148BF /* EnterAffectiveCloudUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
 		FA9231A9236BD07B00A50C64 /* EnterAffectiveCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */; };
@@ -92,6 +96,20 @@
 			remoteGlobalIDString = B7E125CF230559590072DF22;
 			remoteInfo = EnterAffectiveCloud;
 		};
+		FA296EA62383C95B001AE33E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7E125C7230559590072DF22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7E125CF230559590072DF22;
+			remoteInfo = EnterAffectiveCloud;
+		};
+		FA296EAA2383C963001AE33E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7E125C7230559590072DF22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B7E125CF230559590072DF22;
+			remoteInfo = EnterAffectiveCloud;
+		};
 		FA9231AC236BD07B00A50C64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7E125C7230559590072DF22 /* Project object */;
@@ -116,6 +134,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				FA06078F237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Embed Frameworks */,
+				FA296EA92383C963001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +157,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				FA93436F2356E5B500544239 /* EnterAffectiveCloudUI.framework in Embed Frameworks */,
+				FA296EA52383C95B001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA93436E2356E5B500544239 /* EnterAffectiveCloudUI.framework in Frameworks */,
+				FA296EA42383C95B001AE33E /* EnterAffectiveCloud.framework in Frameworks */,
 				06334CCC6A76625AD4F3EF43 /* Pods_EnterReportUIDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				050B6C818BBC9339BAF001D7 /* Pods_EnterRealtimeUIDemo.framework in Frameworks */,
+				FA296EA82383C963001AE33E /* EnterAffectiveCloud.framework in Frameworks */,
 				FA06078E237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,6 +727,7 @@
 			);
 			dependencies = (
 				FA9343712356E5B500544239 /* PBXTargetDependency */,
+				FA296EA72383C95B001AE33E /* PBXTargetDependency */,
 			);
 			name = EnterReportUIDemo;
 			productName = EnterReportUIDemo;
@@ -725,6 +748,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FA296EAB2383C963001AE33E /* PBXTargetDependency */,
 			);
 			name = EnterRealtimeUIDemo;
 			productName = EnterRealtimeUIDemo;
@@ -1089,6 +1113,16 @@
 			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
 			targetProxy = FA0A6E7E234D71DF00532A46 /* PBXContainerItemProxy */;
 		};
+		FA296EA72383C95B001AE33E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
+			targetProxy = FA296EA62383C95B001AE33E /* PBXContainerItemProxy */;
+		};
+		FA296EAB2383C963001AE33E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
+			targetProxy = FA296EAA2383C963001AE33E /* PBXContainerItemProxy */;
+		};
 		FA9231AD236BD07B00A50C64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B7E125CF230559590072DF22 /* EnterAffectiveCloud */;
@@ -1263,7 +1297,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 109;
+				CURRENT_PROJECT_VERSION = 110;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1278,7 +1312,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1295,7 +1329,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 109;
+				CURRENT_PROJECT_VERSION = 110;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1310,7 +1344,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1326,7 +1360,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 109;
+				CURRENT_PROJECT_VERSION = 110;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1340,7 +1374,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1357,7 +1391,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 109;
+				CURRENT_PROJECT_VERSION = 110;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1371,7 +1405,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

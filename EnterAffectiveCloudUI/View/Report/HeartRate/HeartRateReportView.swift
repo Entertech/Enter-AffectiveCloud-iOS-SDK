@@ -486,39 +486,52 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         }
         var yVals: [ChartDataEntry] = []
         var yTop: [ChartDataEntry] = []
+        var lastValue = initValue
+        var colors: [UIColor]  = []
         for i in stride(from: 0, to: waveArray.count, by: sample) {
             if i <= initIndex {
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
                 yTop.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
+                colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
             }
             if i > initIndex{
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
-                yTop.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
+                if waveArray[i] == 0 {
+                    colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(lastValue)))
+                    yTop.append(ChartDataEntry(x: Double(i)*interval, y: Double(lastValue)))
+                } else {
+                    colors.append(.clear)
+                    lastValue = waveArray[i]
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
+                    yTop.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
+                }
+                
+
             }
             
         }
         
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .cubicBezier
+        set.mode = .linear
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.drawIconsEnabled = false
         set.drawValuesEnabled = false
-        set.lineWidth = 2
+        set.lineWidth = 3
         
         let data = LineChartData(dataSet: set)
         chartView?.data = data
         
         let set1 = LineChartDataSet(entries: yTop, label: "")
-        set.mode = .cubicBezier
+        set.mode = .linear
         set1.drawCirclesEnabled = false
         set1.drawCircleHoleEnabled = false
         set1.drawFilledEnabled = false
         set1.drawIconsEnabled = false
         set1.drawValuesEnabled = false
-        set1.lineWidth = 1
-        set1.setColor(.clear)
+        set1.lineWidth = 3
+        set1.colors = colors
         let data1 = LineChartData(dataSet: set1)
         chartView?.extraLeftOffset = 20
         topChart?.extraLeftOffset = 20
