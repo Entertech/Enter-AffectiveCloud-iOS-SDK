@@ -12,9 +12,9 @@ import HandyJSON
 
 class EnterAffectiveCloudTests: XCTestCase, AffectiveCloudResponseDelegate {
 
-    let testWs = "wss://server-test.affectivecloud.cn/ws/algorithm/v1/"
-    let kCloudServiceAppKey = "6eabf68e-760e-11e9-bd82-0242ac140006"
-    let kCloudServiceAppSecret = "68a09cf8e4e06718b037c399f040fb7e"
+    let testWs = ""
+    let kCloudServiceAppKey = ""
+    let kCloudServiceAppSecret = ""
     var aClient: AffectiveCloudClient?
     var isRestore: Bool = false
     

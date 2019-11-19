@@ -67,8 +67,9 @@ public class RealtimeHeartRateView: BaseView {
             maxValueLabel?.textColor = secondTextColor
             maxBpmLabel?.textColor = thirdTextColor
             minLabel?.textColor = secondTextColor
-            minLabel?.textColor = secondTextColor
+            minValueLabel?.textColor = secondTextColor
             minBpmLabel?.textColor = thirdTextColor
+            
         }
     }
     /// 是否显示最大最小值
@@ -176,6 +177,8 @@ public class RealtimeHeartRateView: BaseView {
             DispatchQueue.main.async {
                 if self.isFirstData {
                     self.isFirstData = false
+                    self.minValueLabel?.text = "\(value)"
+                    self.maxValueLabel?.text = "\(value)"
                 } else  {
                     if self.initData && value > 0 {
                         self.initData = false
@@ -188,6 +191,10 @@ public class RealtimeHeartRateView: BaseView {
                     self.heartRateLabel?.text = "\(value)"
                 } else {
                     self.heartRateLabel?.text = "--"
+                    if self.initData  {
+                        self.minValueLabel?.text = "--"
+                        self.maxValueLabel?.text = "--"
+                    }
                 }
                 
                 if value > 0, self.minValue > value {
