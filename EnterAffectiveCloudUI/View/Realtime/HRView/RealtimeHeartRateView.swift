@@ -182,6 +182,8 @@ public class RealtimeHeartRateView: BaseView {
                 } else  {
                     if self.initData && value > 0 {
                         self.initData = false
+                        self.minValueLabel?.text = "\(value)"
+                        self.maxValueLabel?.text = "\(value)"
                         self.minValue = value
                         self.maxValue = value
                     }
