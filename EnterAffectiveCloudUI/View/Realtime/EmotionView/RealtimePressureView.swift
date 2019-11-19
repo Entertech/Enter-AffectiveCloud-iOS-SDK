@@ -151,7 +151,7 @@ public class RealtimePressureView: BaseView {
                 }
                 let value = valueOrigin / 20.0
                 if value > 0 {
-                    self.pressureValueLabel?.text = "\(Int(value))"
+                    self.pressureValueLabel?.text = String(format: "%.1f", value)
                     self.rodView?.setDotValue(index: Float(value))
                 } else {
                     self.pressureValueLabel?.text = "--"
