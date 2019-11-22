@@ -17,7 +17,6 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     /// receive response data use delegate method
     weak var delegate: AffectiveCloudResponseDelegate?
 
-    var isSessionConnected = false
     //MARK: initial websocket
     var state: CSState = .none {
         didSet {
@@ -837,8 +836,6 @@ extension AffectiveCloudServices: WebSocketDelegate {
 
     func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
         self.state = .disconnected
-        self.session_id = nil
-        self.isSessionConnected = false
         self.delegate?.websocketDisconnect(client: self.client)
     }
 
@@ -888,7 +885,6 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let id = dataModel.sessionID {
                     self.session_id = id
-                    self.isSessionConnected = true
                 }
                 self.delegate?.sessionCreateAndAuthenticate(client: self.client, response: model)
             case (CSServicesType.session.rawValue, CSSessionOperation.restore.rawValue):
