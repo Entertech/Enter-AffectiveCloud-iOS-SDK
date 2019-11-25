@@ -69,7 +69,7 @@ protocol WebSocketServiceProcotol {
     func webSocketSend(jsonString data: String)
     func webSocketDisConnect()
     func sessionCreate(appKey: String, sign: String, userID: String, timestamp: String)
-    func sessionRestore()
+    func sessionRestore(appKey: String, sign: String, userID: String, timestamp: String)
     func sessionClose()
 }
 

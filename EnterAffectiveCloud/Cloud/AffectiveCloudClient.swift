@@ -64,8 +64,12 @@ public class AffectiveCloudClient {
     }
 
     /// restore cloud service session
-    public func restoreSession() {
-        self.cloudService.sessionRestore()
+    public func restoreSession(appKey: String, appSecret: String, userID: String) {
+        let hashID = userID.hashed(.md5)!.uppercased()
+        let timeStamp = "\(Int(Date().timeIntervalSince1970))"
+        let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
+        let sign = sign_str.hashed(.md5)!.uppercased()
+        self.cloudService.sessionRestore(appKey: appKey, sign: sign, userID: userID, timestamp: timeStamp)
     }
 
     //MARK: - biodata

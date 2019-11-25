@@ -84,7 +84,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     }
 
     private var session_id: String?
-    func sessionRestore() {
+    func sessionRestore(appKey: String, sign: String, userID: String, timestamp: String) {
         guard let session = session_id else {
             self.delegate?.error(client: self.client, request: nil, error: .noSession, message: "CSRequestError: The session id is empty, restore failed! Try restart cloud service.")
             return
@@ -94,6 +94,10 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         jsonModel.operation = CSSessionOperation.restore.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
         jsonModel.kwargs?.sessionID = session
+        jsonModel.kwargs?.app_key = appKey
+        jsonModel.kwargs?.sign = sign
+        jsonModel.kwargs?.userID = userID.hashed(.md5, output: .hex)!.uppercased()
+        jsonModel.kwargs?.timeStamp = timestamp
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
