@@ -257,15 +257,15 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         if let flag = self.biodataInitialList?.contains(.EEG), eegParamList.count > 0 {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: EEG service unavailable: you must init eeg biodata service first!")
+                return
             }
-            return
         }
 
         if let flag = self.biodataInitialList?.contains(.HeartRate), hrParamList.count > 0 {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must init hr biodata service first!")
+                return
             }
-            return
         }
 
         let jsonModel = AffectiveCloudRequestJSONModel()
