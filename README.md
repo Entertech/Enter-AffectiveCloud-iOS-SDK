@@ -2,16 +2,19 @@
 
 # 目录
 
-* [目录](#目录)
-* [SDK 说明](#SDK-说明)
-  * [结构说明](#结构说明)
-  * [安装集成](#安装集成)
-    * [版本需求](#版本需求)
-    * [Cocoapods](#Cocoapods)
-  * [情感云API使用说明](#情感云API使用说明)
-  * [情感云UI](#情感云UI)
-    * [实时数据UI](#实时数据UI)
-    * [报表数据UI](#报表数据UI)
+- [Enter-AffectiveCloud-iOS-SDK](#enter-affectivecloud-ios-sdk)
+- [目录](#%e7%9b%ae%e5%bd%95)
+- [SDK 说明](#sdk-%e8%af%b4%e6%98%8e)
+  - [结构说明](#%e7%bb%93%e6%9e%84%e8%af%b4%e6%98%8e)
+  - [安装集成](#%e5%ae%89%e8%a3%85%e9%9b%86%e6%88%90)
+    - [版本需求](#%e7%89%88%e6%9c%ac%e9%9c%80%e6%b1%82)
+    - [Cocoapods](#cocoapods)
+  - [快速接入](#%e5%bf%ab%e9%80%9f%e6%8e%a5%e5%85%a5)
+  - [情感云API使用说明](#%e6%83%85%e6%84%9f%e4%ba%91api%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e)
+- [情感云数据标准UI](#%e6%83%85%e6%84%9f%e4%ba%91%e6%95%b0%e6%8d%ae%e6%a0%87%e5%87%86ui)
+  - [实时数据UI](#%e5%ae%9e%e6%97%b6%e6%95%b0%e6%8d%aeui)
+  - [报表UI](#%e6%8a%a5%e8%a1%a8ui)
+  - [情感云UI详细API](#%e6%83%85%e6%84%9f%e4%ba%91ui%e8%af%a6%e7%bb%86api)
 
 # SDK 说明
 
@@ -38,176 +41,178 @@
 
 添加下面内容到你的 Podfile。
 
-~~~ruby
+```
 # 指定 pod 仓库源
 source 'git@github.com:EnterTech/PodSpecs.git'
 
 target 'Your Target' do
-    pod 'EnterAffectiveCloud', '~> 1.2.0'
-    pod 'EnterAffectiveCloudUI', '~> 1.2.0'  #(可选)
+    pod 'EnterAffectiveCloud', '~> 1.3.6'
+    pod 'EnterAffectiveCloudUI', '~> 1.3.6'  #(可选)
 end
-~~~
-
+```
 运行 `pod  install` 安装命令.
+
+## 快速接入
+
+**对象初始化**
+
+```swift
+// AffectiveCloudClient对象创建后会自动调用websocketConnect()方法建立连接
+let client = AffectiveCloudClient(websocketURLString: yourURL, appKey: yourAppKey, appSecret: yourSecret, userID: yourLocalID)
+
+```
+
+**服务订阅**
+
+```swift
+// 请求生物信号数据
+self.client.initBiodataServices(services: [.EEG, .HeartRate])
+
+// 请求情感数据
+self.client.startAffectiveDataServices(services: [.attention, .relaxation, .pleasure, .pressure])
+
+// 订阅生物信号
+self.client.subscribeBiodataServices(services: [.eeg_all, .hr_all])
+
+// 订阅情感数据
+self.client.subscribeAffectiveDataServices(services: [.attention, .relaxation, .pressure, .pleasure])
+```
+
+**获取报表**
+
+```swift
+// 获取生物数据报表
+self.client.getBiodataReport(services: [.EEG, .HeartRate])
+
+// 获取情感数据报表
+self.client.getAffectiveDataReport(services: [.relaxation, .attention, .pressure, .pleasure])
+
+```
+
+**实现代理方法**
+
+```swift
+self.client.affectiveCloudDelegate = self
+```
+
+继承`AffectiveCloudResponseDelegate`,并实现以下回调
+
+```swift
+// 生物数据订阅
+func biodataServicesSubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {
+    if response.code != 0 {
+        return
+    }
+        
+    if let data = response.dataModel as? CSBiodataProcessJSONModel {
+        if let eeg = data.eeg {
+        // eeg.waveLeft, eeg.waveRight, eeg.alpha..
+        // 在此获取您需要的脑波数据
+        }
+        if let hr = data.hr {
+        // 在此获取您需要的心率数据
+        }
+    }
+}
+
+// 生物数据报表
+func biodataServicesReport(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {
+    if response.code != 0 {
+        return
+    }
+    if let data = response.dataModel as? CSBiodataReportJsonModel {
+        if let hr = data.hr {
+          // hr, hrv等报表数据
+        }
+        if let eeg = data.eeg {
+          // eeg相关报表数据
+        }
+    }
+}
+
+// 情感数据订阅
+func affectiveDataSubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {
+    if response.code != 0 {
+        return
+    }
+        
+    if let data = response.dataModel as? CSAffectiveSubscribeProcessJsonModel {
+        if let attention = data.attention?.attention {
+            print("attention \(attention)")
+        }
+        if let relaxation = data.relaxation?.relaxation {
+
+        }
+        if let pressure = data.pressure?.pressure {
+
+        }
+    }
+}
+
+// 情感数据报表
+func affectiveDataReport(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)  {
+    guard response.code == 0 else {
+        return
+    }
+    if let report = response.dataModel as? CSAffectiveReportJsonModel {
+        if let attention = report.attention {
+        // array, average
+        }
+        if let relaxation = report.relaxation {
+
+        }
+        if let pressure = report.pressure {
+        }
+    }
+}
+```
+
+**结束情感云**
+
+```swift
+// 结束情感数据服务
+self.client.finishAffectiveDataServices(services: [.attention, .relaxation, .pressure, .pleasure])
+// 关闭会话
+self.client.closeSession()
+
+self.client.websocketDisconnect()
+
+```
 
 ## 情感云API使用说明
 - 情感云的API文档请查看：[情感云API文档](APIDocuments/Enterr-AffectiveCloud-iOS-SDK-API说明.md)
 
-## 情感云UI
+# 情感云数据标准UI
 
-### 实时数据UI
+为了方便用户接入, 我们提供了数据展示UI的标准模版, 分为实时数据UI和报表UI
 
-**RealtimeHeartRateView**
+## 实时数据UI
 
-![image-20191010145121952](img/image-20191010145121952.png)
+在此以心率为例, 展示如何接入实时UI
 
-| 参数               | 类型    | 默认值                         | 说明                                                                                                                                   |
-| ------------------ | ------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| mainColor          | UIColor | `#0064FF`                      | 主色(默认值为RGB显示颜色，如此处对应的是`UIColor(red: 0x23/255.0, green: 0x23/255.0, blue: 0x3a/255.0, alpha: 1)`，alpha必须为1，下同) |
-| textColor          | UIColor | `#FFFFFF`                      | 字体颜色                                                                                                                               |
-| bgColor            | UIColor | `#000000`                      | 背景色                                                                                                                                 |
-| borderRadius       | CGFloat | 8.0                            | 圆角                                                                                                                                   |
-| isShowExtremeValue | Bool    | true                           | 是否显示心率最大最小值                                                                                                                 |
-| isShowInfoIcon     | Bool    | true                           | 是否显示‘说明’图标                                                                                                                     |
-| infoUrlString      | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接                                                                                                                   |
-| buttonImageName    | String  | `"info_button_icon"`           | 按钮图片                                                                                                                               |
+**接入**
 
-**RealtimeAttentionView & RealtimeRelaxationView & RealtimePressureView**
+```swift
+let hrView = RealtimeHeartRateView()
+hrView.bgColor = UIColor(red: 1, green: 229.0/255.0, blue: 231.0/255.0, alpha: 1)
+hrView.mainColor = UIColor(red: 1, green: 72.0/255.0, blue: 82.0/255.0, alpha: 1)
+self.view.addSubview(hrView)
+hrView.snp.makeConstraints {
+  $0.left.right.equalTo(16)
+  $0.hight.equalTo(123) //高度不可定制
+  //...其他约束
+}
 
-![image-20191010145415901](img/image-20191010145415901.png)
+// 开启监听, 开启情感云后会自动更新界面上的心率数据
+hrView.observe()
+```
+**图示**
 
-| 参数            | 类型    | 默认值                         | 说明                 |
-| --------------- | ------- | ------------------------------ | -------------------- |
-| mainColor       | UIColor | `#0064FF`                      | 主色                 |
-| textColor       | UIColor | `#FFFFFF`                      | 字体颜色             |
-| bgColor         | UIColor | `#000000`                      | 背景                 |
-| borderRadius    | CGFloat | 8.0                            | 圆角                 |
-| isShowInfoIcon  | Bool    | true                           | 是否显示‘说明’图标   |
-| infoUrlString   | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接 |
-| buttonImageName | String  | `"info_button_icon"`           | 按钮图片             |
+![hr](img/hr_screenshoot.png)
 
-**RealtimeBrainwaveSpectrumView**
+## 报表UI
 
-![image-20191010150032042](img/image-20191010150032042.png)
+**TODO**
 
-| 参数            | 类型    | 默认值                         | 说明                 |
-| --------------- | ------- | ------------------------------ | -------------------- |
-| mainColor       | UIColor | `#0064FF`                      | 主色                 |
-| textColor       | UIColor | `#FFFFFF`                      | 字体颜色             |
-| textFont        | String  | `"PingFangSC-Semibold"`        | 字体                 |
-| bgColor         | UIColor | `#000000`                      | 背景                 |
-| borderRadius    | CGFloat | 8.0                            | 圆角                 |
-| isShowInfoIcon  | Bool    | true                           | 是否显示‘说明’图标   |
-| infoUrlString   | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接 |
-| buttonImageName | String  | `"info_button_icon"`           | 按钮图片             |
-
-**RealtimeBrainwaveView**
-
-![image-20191010150729231](img/image-20191010150729231.png)
-
-| 参数                    | 类型    | 默认值                         | 说明                 |
-| ----------------------- | ------- | ------------------------------ | -------------------- |
-| mainColor               | UIColor | `#0064FF`                      | 主色                 |
-| textColor               | UIColor | `#FFFFFF`                      | 字体颜色             |
-| textFont                | String  | `"PingFangSC-Semibold"`        | 字体                 |
-| bgColor                 | UIColor | `#000000`                      | 背景                 |
-| borderRadius            | CGFloat | 8.0                            | 圆角                 |
-| isShowInfoIcon          | boolean | true                           | 是否显示‘说明’图标   |
-| leftBrainwaveLineColor  | UIColor | `#FF4852`                      | 左脑波曲线颜色       |
-| rightBrainwaveLineColor | UIColor | `#0064FF`                      | 右脑波曲线颜色       |
-| infoUrlString           | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接 |
-| buttonImageName         | String  | `"info_button_icon"`           | 按钮图片             |
-
-### 报表数据UI
-
-**BrainSpecturmReportView**
-
-![image-20191014140326307](img/image-20191014140326307.png)
-
-| 参数               | 类型      | 默认值                                      | 说明                                      |
-| ------------------ | --------- | ------------------------------------------- | ----------------------------------------- |
-| mainColor          | UIColor   | `#0064FF`                                   | 主色                                      |
-| textColor          | UIColor   | `#FFFFFF`                                   | 字体颜色                                  |
-| bgColor            | UIColor   | `#000000`                                   | 背景                                      |
-| isShowInfoIcon     | Bool      | true                                        | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool      | false                                       | 是否为绝对时间轴                          |
-| sample             | Int       | 3                                           | 采样率，表示几个点采一个，默认3个点采一个 |
-| spectrumColors     | [UIColor] | `[#23233A,#23233A,#23233A,#23233A,#23233A]` | 各个占比颜色，一次对应γ，β，α，θ，δ       |
-| buttonImageName    | String    | `"info_button_icon"`                        | 按钮图片                                  |
-| borderRadius       | CGFloat   | 8                                           | 圆角                                      |
-| infoUrlString      | String    | `https://demo.com`                          | 按钮打开的说明网页                        |
-
-**HeartRateReportView**
-
-![image-20191014141340894](img/image-20191014141340894.png)
-
-| 参数                | 类型      | 默认值                           | 说明                                      |
-| ------------------- | --------- | -------------------------------- | ----------------------------------------- |
-| mainColor           | UIColor   | `#0064FF`                        | 主色                                      |
-| textColor           | UIColor   | `#FFFFFF`                        | 字体颜色                                  |
-| bgColor             | UIColor   | `#000000`                        | 背景                                      |
-| isShowInfoIcon      | Bool      | true                             | 是否显示说明图标                          |
-| isAbsoluteTimeAxis  | Bool      | false                            | 是否为绝对时间轴                          |
-| sample              | Int       | 3                                | 采样率，表示几个点采一个，默认3个点采一个 |
-| isShowAvg           | Bool      | true                             | 是否展示平均值                            |
-| isShowMax           | Bool      | true                             | 是否展示最大值                            |
-| isShowMin           | Bool      | true                             | 是否展示最小值                            |
-| heartRateLineColors | [UIColor] | [`#23233A`, `#23233A`,`#23233A`] | 心率较高曲线颜色(依次为高，中， 低)       |
-| buttonImageName     | String    | `"info_button_icon"`             | 按钮图片                                  |
-| borderRadius        | CGFloat   | 8                                | 圆角                                      |
-| infoUrlString       | String    | `https://demo.com`               | 按钮打开的说明网页                        |
-
-**HeartRateVariablityReportView**
-
-![image-20191014141910905](img/image-20191014141910905.png)
-
-| 参数               | 类型    | 默认值               | 说明                                      |
-| ------------------ | ------- | -------------------- | ----------------------------------------- |
-| mainColor          | UIColor | `#0064FF`            | 主色                                      |
-| textColor          | UIColor | `#FFFFFF`            | 字体颜色                                  |
-| bgColor            | UIColor | `#000000`            | 背景                                      |
-| isShowInfoIcon     | Bool    | true                 | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool    | false                | 是否为绝对时间轴                          |
-| sample             | Int     | 3                    | 采样率，表示几个点采一个，默认3个点采一个 |
-| isShowAvg          | Bool    | true                 | 是否展示平均值                            |
-| lineColor          | UIColor | `#23233A`            | 曲线颜色                                  |
-| buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |
-| borderRadius       | CGFloat | 8                    | 圆角                                      |
-| infoUrlString      | String  | `https://demo.com`   | 按钮打开的说明网页                        |
-
-**RelaxationReportView & AttentionReportView**
-
-![image-20191014142421739](img/image-20191014142421739.png)
-
-| 参数               | 类型    | 默认值               | 说明                                      |
-| ------------------ | ------- | -------------------- | ----------------------------------------- |
-| mainColor          | UIColor | `#0064FF`            | 主色                                      |
-| textColor          | UIColor | `#FFFFFF`            | 字体颜色                                  |
-| bgColor            | UIColor | `#000000`            | 背景                                      |
-| isShowInfoIcon     | Bool    | true                 | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool    | false                | 是否为绝对时间轴                          |
-| sample             | Int     | 3                    | 采样率，表示几个点采一个，默认3个点采一个 |
-| isShowAvg          | Bool    | true                 | 是否展示平均值                            |
-| isShowMax          | Bool    | true                 | 是否展示最大值                            |
-| isShowMin          | Bool    | true                 | 是否展示最小值                            |
-| fillColor          | UIColor | `#23233A`            | 填充颜色                                  |
-| buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |
-| borderRadius       | CGFloat | 8                    | 圆角                                      |
-| infoUrlString      | String  | `https://demo.com`   | 按钮打开的说明网页                        |
-
-**PressureChart**
-
-![image-20191014142733860](img/image-20191014142733860.png)
-
-| 参数               | 类型    | 默认值               | 说明                                      |
-| ------------------ | ------- | -------------------- | ----------------------------------------- |
-| mainColor          | UIColor | `#0064FF`            | 主色                                      |
-| textColor          | UIColor | `#FFFFFF`            | 字体颜色                                  |
-| bgColor            | UIColor | `#000000`            | 背景                                      |
-| isShowInfoIcon     | Bool    | true                 | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool    | false                | 是否为绝对时间轴                          |
-| sample             | Int     | 3                    | 采样率，表示几个点采一个，默认3个点采一个 |
-| chartColor         | UIColor | `#23233A`            | 填充颜色                                  |
-| buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |
-| borderRadius       | CGFloat | 8                    | 圆角                                      |
-| infoUrlString      | String  | `https://demo.com`   | 按钮打开的说明网页                        |
+## 情感云UI详细API
+- 情感云UI的API文档请查看: [情感云UI文档](APIDocuments/AffectiveCloudUI.md)

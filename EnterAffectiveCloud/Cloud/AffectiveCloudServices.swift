@@ -13,6 +13,7 @@ import Gzip
 
 // web socket services
 class AffectiveCloudServices: WebSocketServiceProcotol {
+    
 
     /// receive response data use delegate method
     weak var delegate: AffectiveCloudResponseDelegate?
@@ -28,6 +29,16 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             }
         }
     }
+    var appKey: String? // could key
+    var userID: String?
+    var appSecret: String?
+    var bioService: BiodataTypeOptions?
+    var bioTolerance: [String:Any]?
+    var bioSubscription: BiodataParameterOptions?
+    var affectiveService: AffectiveDataServiceOptions?
+    var affectiveSubscription: AffectiveDataSubscribeOptions?
+    
+    var isSessionCreated = false
     let socket: WebSocket
     var client: AffectiveCloudClient!
     init(ws: String) {
@@ -45,8 +56,6 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     //MARK: WebSocketServiceProcotol
     func webSocketConnect() {
         self.socket.connect()
-        self.delegate?.websocketState(client: self.client, state: .connected)
-        self.delegate?.websocketConnect(client: self.client)
     }
 
     func webSocketSend(jsonString json: String) {
@@ -58,11 +67,16 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
 
     func webSocketDisConnect() {
         self.socket.disconnect()
-        self.delegate?.websocketState(client: self.client, state: .disconnected)
-        self.delegate?.websocketDisconnect(client: self.client)
     }
-
-    func sessionCreate(appKey: String, sign: String, userID: String, timestamp: String) {
+    
+    func sessionCreate() {
+        guard let key = self.appKey, let secret = self.appSecret, let userID = self.userID  else {
+            self.delegate?.error(client: self.client, request: nil, error: .noSession, message: "CSRequestError: The appKey id is empty, session create failed! Try restart cloud service.")
+            return
+        }
+        let timeStamp = "\(Int(Date().timeIntervalSince1970))"
+        let sign = sessionSign(appKey: key, appSecret: secret, userID: userID, timeStamp: timeStamp)
+        
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -71,38 +85,55 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         requestModel.services = CSServicesType.session.rawValue
         requestModel.operation = CSSessionOperation.create.rawValue
         requestModel.kwargs = CSKwargsJSONModel()
-        requestModel.kwargs?.app_key = appKey
+        requestModel.kwargs?.app_key = key
         requestModel.kwargs?.sign = sign
         requestModel.kwargs?.userID = userID.hashed(.md5, output: .hex)!.uppercased()
-        requestModel.kwargs?.timeStamp = timestamp
+        requestModel.kwargs?.timeStamp = timeStamp
 
         if let jsonstring = requestModel.toJSONString() {
             self.webSocketSend(jsonString: jsonstring)
         } else {
             self.delegate?.error(client: self.client, request: requestModel, error: .jsonError, message: "CSRequestError: Json string is nil!")
         }
+        
+    }
+    
+    private func sessionSign(appKey: String, appSecret: String, userID: String, timeStamp: String) -> String {
+
+        let hashID = userID.hashed(.md5)!.uppercased()
+        let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
+        let sign = sign_str.hashed(.md5)!.uppercased()
+        return sign
     }
 
+
     private var session_id: String?
-    func sessionRestore(appKey: String, sign: String, userID: String, timestamp: String) {
-        guard let session = session_id else {
+    func sessionRestore() {
+        
+        guard let session = session_id, let key = self.appKey, let secret = self.appSecret, let userID = self.userID else {
             self.delegate?.error(client: self.client, request: nil, error: .noSession, message: "CSRequestError: The session id is empty, restore failed! Try restart cloud service.")
             return
         }
+        let timeStamp = "\(Int(Date().timeIntervalSince1970))"
+        
+        let sign = sessionSign(appKey: key, appSecret: secret, userID: userID, timeStamp: timeStamp)
+        
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.session.rawValue
         jsonModel.operation = CSSessionOperation.restore.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
         jsonModel.kwargs?.sessionID = session
-        jsonModel.kwargs?.app_key = appKey
+        jsonModel.kwargs?.app_key = key
         jsonModel.kwargs?.sign = sign
         jsonModel.kwargs?.userID = userID.hashed(.md5, output: .hex)!.uppercased()
-        jsonModel.kwargs?.timeStamp = timestamp
+        jsonModel.kwargs?.timeStamp = timeStamp
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
             self.delegate?.error(client: self.client, request: jsonModel, error: .jsonError, message: "CSRequestError: Json string is nil!")
         }
+        
+        
     }
 
     func sessionClose() {
@@ -836,11 +867,19 @@ extension AffectiveCloudServices: WebSocketDelegate {
     func websocketDidConnect(socket: WebSocketClient) {
         self.state = .connected
         self.delegate?.websocketConnect(client: self.client)
+        if let _ = session_id {
+            if !isSessionCreated {
+                sessionRestore()
+            }
+        } else {
+            sessionCreate()
+        }
     }
 
     func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
         self.state = .disconnected
         self.delegate?.websocketDisconnect(client: self.client)
+        self.isSessionCreated = false
     }
 
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
@@ -889,16 +928,40 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let id = dataModel.sessionID {
                     self.session_id = id
+                    self.isSessionCreated = true
+                    if let bioServices = self.bioService  {
+                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance)
+                    }
+                    if let affService = self.affectiveService {
+                        self.emotionStart(services: affService)
+                    }
+                    
                 }
                 self.delegate?.sessionCreateAndAuthenticate(client: self.client, response: model)
             case (CSServicesType.session.rawValue, CSSessionOperation.restore.rawValue):
                 self.delegate?.sessionRestore(client: self.client, response: model)
+                if model.code == 0 {
+                    self.isSessionCreated = true
+                    if let bioServices = self.bioService  {
+                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance)
+                    }
+                    if let affService = self.affectiveService {
+                        self.emotionStart(services: affService)
+                    }
+                }
+                
             case (CSServicesType.session.rawValue, CSSessionOperation.close.rawValue):
                 self.delegate?.sessionClose(client: self.client, response: model)
+                self.isSessionCreated = false
+                self.session_id = nil
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.initial.rawValue):
                 if let biodata = model.dataModel as? CSResponseDataJSONModel,
                     let list = biodata.biodataList {
                     self.appendBiodataInitialList(list: list)
+                    if let subs = self.bioSubscription {
+                        
+                        self.biodataSubscribe(parameters: subs)
+                    }
                 }
                 self.delegate?.biodataServicesInit(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.subscribe.rawValue):
@@ -929,6 +992,9 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let list = dataModel.affectiveList {
                     self.appendEmotionAffectiveInitialList(list: list)
+                    if let subs = self.affectiveSubscription {
+                        self.emotionSubscribe(services: subs)
+                    }
                 }
                 self.delegate?.affectiveDataStart(client: self.client, response: model)
             case (CSServicesType.affective.rawValue, CSEmotionOperation.subscribe.rawValue):

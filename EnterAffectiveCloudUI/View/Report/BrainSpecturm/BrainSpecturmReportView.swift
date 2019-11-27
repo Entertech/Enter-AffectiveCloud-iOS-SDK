@@ -368,7 +368,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
     }
     
     //MARK:- Chart Delegate
-    func setDataCount(_ waveArray: Array2D<Float>) {
+    public func setDataCount(_ waveArray: Array2D<Float>) {
         let yVals1 = setEntry(waveArray, 0)
         let yVals2 = setEntry(waveArray, 1)
         let yVals3 = setEntry(waveArray, 2)

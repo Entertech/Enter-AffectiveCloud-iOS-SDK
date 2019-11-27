@@ -16,15 +16,21 @@ public class AffectiveCloudClient {
     }
 
     private let cloudService: AffectiveCloudServices
-    public init(websocketURL: URL) {
+    public init(websocketURL: URL, appKey: String, appSecret: String, userID: String) {
         self.cloudService = AffectiveCloudServices(wssURL: websocketURL)
         self.cloudService.client = self
+        self.cloudService.appKey = appKey
+        self.cloudService.userID = userID
+        self.cloudService.appSecret = appSecret
         self.websocketConnect()
     }
 
-    public init(websocketURLString: String) {
+    public init(websocketURLString: String, appKey: String, appSecret: String, userID: String) {
         self.cloudService = AffectiveCloudServices(ws: websocketURLString)
         self.cloudService.client = self
+        self.cloudService.appKey = appKey
+        self.cloudService.userID = userID
+        self.cloudService.appSecret = appSecret
         self.websocketConnect()
     }
 
@@ -36,6 +42,14 @@ public class AffectiveCloudClient {
     public func websocketDisconnect() {
         self.cloudService.webSocketDisConnect()
     }
+    
+    public func isWebsocketConnected() -> Bool {
+        if self.cloudService.state == .connected {
+            return true
+        } else {
+            return false
+        }
+    }
 
     //MARK: - session
     /// start cloud service.
@@ -45,31 +59,20 @@ public class AffectiveCloudClient {
     /// - Parameter appSecret: your app secret from Cloud Service platform
     /// - Parameter userName: your username from Cloud Service platform
     /// - Parameter userID: the unique ID of your app user
-    public func createAndAuthenticateSession(appKey: String, appSecret: String, userID: String) {
-        let hashID = userID.hashed(.md5)!.uppercased()
-        let timeStamp = "\(Int(Date().timeIntervalSince1970))"
-        let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
-        let sign = sign_str.hashed(.md5)!.uppercased()
-        self.cloudService.sessionCreate(appKey: appKey,
-                                        sign: sign,
-                                        userID: userID,
-                                        timestamp: timeStamp)
+    public func createAndAuthenticateSession() {
+        self.cloudService.sessionCreate()
     }
 
     /// close cloud service
     /// firstly close biodata and affective services,  secondly close session finally close cloud service.
     public func closeSession() {
         self.cloudService.sessionClose()
-        self.websocketDisconnect()
+        self.cloudService.client = nil
     }
 
     /// restore cloud service session
-    public func restoreSession(appKey: String, appSecret: String, userID: String) {
-        let hashID = userID.hashed(.md5)!.uppercased()
-        let timeStamp = "\(Int(Date().timeIntervalSince1970))"
-        let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
-        let sign = sign_str.hashed(.md5)!.uppercased()
-        self.cloudService.sessionRestore(appKey: appKey, sign: sign, userID: userID, timestamp: timeStamp)
+    public func restoreSession() {
+        self.cloudService.sessionRestore()
     }
 
     //MARK: - biodata
@@ -77,7 +80,9 @@ public class AffectiveCloudClient {
     /// - Parameter services: biodata services. ps: .eeg and .hr
     /// - Parameter tolerance: 0-4 
     public func initBiodataServices(services: BiodataTypeOptions, _ tolerance: [String:Any]?=nil) {
-        self.cloudService.biodataInitial(options: services, tolerance: tolerance)
+        self.cloudService.bioService = services
+        self.cloudService.bioTolerance = tolerance
+        //self.cloudService.biodataInitial(options: services, tolerance: tolerance)
     }
 
 
@@ -155,7 +160,8 @@ public class AffectiveCloudClient {
     /// you will get the analyzed data in `biodataSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func subscribeBiodataServices(services: BiodataParameterOptions) {
-        self.cloudService.biodataSubscribe(parameters: services)
+        //self.cloudService.biodataSubscribe(parameters: services)
+        self.cloudService.bioSubscription = services
     }
 
     /// unsubscribe the specificed service
@@ -177,7 +183,8 @@ public class AffectiveCloudClient {
     /// start emotion(affective) services with parameter
     /// - Parameter services: emotion services list: like: .attention  .relaxation  .pleasure  .pressure and .arousal
     public func startAffectiveDataServices(services: AffectiveDataServiceOptions) {
-        self.cloudService.emotionStart(services: services)
+        //self.cloudService.emotionStart(services: services)
+        self.cloudService.affectiveService = services
     }
 
     /// generate the report according your service
@@ -191,7 +198,8 @@ public class AffectiveCloudClient {
     /// you will get the analyzed data in `affectiveSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: emotion service
     public func subscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
-        self.cloudService.emotionSubscribe(services: services)
+        //self.cloudService.emotionSubscribe(services: services)
+        self.cloudService.affectiveSubscription = services
     }
 
     /// unsubscribe the specificed service

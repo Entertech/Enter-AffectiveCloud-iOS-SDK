@@ -36,31 +36,6 @@ public protocol AffectiveCloudResponseDelegate: class {
     func error(client: AffectiveCloudClient, request: AffectiveCloudRequestJSONModel?, error: AffectiveCloudRequestError, message: String?)
 }
 
-extension AffectiveCloudResponseDelegate {
-
-    func websocketConnect(client: AffectiveCloudClient) {}
-    func websocketDisconnect(client: AffectiveCloudClient) {}
-
-    func sessionCreateAndAuthenticate(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {}
-    func sessionRestore(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel) {}
-    func sessionClose(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)  {}
-
-    func biodataServicesInit(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    //func biodataServicesSubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    func biodataServicesUnsubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    func biodataServicesUpload(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    //func biodataServicesReport(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-
-    func affectiveDataStart(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    //func affectiveDataSubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    func affectiveDataUnsubscribe(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    //func affectiveDataReport(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-    func affectiveDataFinish(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel){}
-
-    func error(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel?, error: AffectiveCloudResponseError, message: String?){}
-    func error(client: AffectiveCloudClient, request: AffectiveCloudRequestJSONModel?, error: AffectiveCloudRequestError, message: String?){}
-}
-
 //MARK: websocket services
 /// this protocol include the services about websocket
 /// and session (this session is customed by our server not web session)
@@ -68,8 +43,8 @@ protocol WebSocketServiceProcotol {
     func webSocketConnect()
     func webSocketSend(jsonString data: String)
     func webSocketDisConnect()
-    func sessionCreate(appKey: String, sign: String, userID: String, timestamp: String)
-    func sessionRestore(appKey: String, sign: String, userID: String, timestamp: String)
+    func sessionCreate()
+    func sessionRestore()
     func sessionClose()
 }
 
