@@ -23,7 +23,21 @@ class PressureChart: UIView {
             return _pressreArray
         }
         set {
-            _pressreArray = newValue
+            if newValue.count > 266 {
+                var allIndexArray: [Int] = []
+                for i in 0..<newValue.count {
+                    allIndexArray.append(i)
+                }
+                let indexArray = allIndexArray.sample(size: 266, noRepeat: true)?.sorted()
+                _pressreArray = []
+                for i in indexArray! {
+                    _pressreArray.append(newValue[i])
+                }
+            } else {
+                _pressreArray = newValue
+            }
+            valueCount = newValue.count
+            
             self.setNeedsDisplay()
         }
     }
@@ -72,7 +86,10 @@ class PressureChart: UIView {
     /// - Parameters:
     ///   - context: context description
     private func drawLabel(_ context: CGContext) {
-        let viewSize = self.frame.size
+        var viewSize = self.frame.size
+        if viewSize.width == 0 {
+            viewSize = CGSize(width: 100, height: 100)
+        }
         let originY: CGFloat = viewSize.height - 16
         let originX: CGFloat = (viewSize.width - 266.0) / 2
         var timestamps: [String] = []

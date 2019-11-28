@@ -24,6 +24,7 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,21 +39,13 @@ class FirstViewController: UIViewController {
             service.relaxationView = relaxationView
             service.pressureView = pressureView
         }
-    
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        service.show() // 展示图表请在layout完成之后
-
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        // service.show()
-
+        service.show(object: self)
+        
     }
 
 

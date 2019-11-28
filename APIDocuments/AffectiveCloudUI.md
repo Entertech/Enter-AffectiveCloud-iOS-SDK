@@ -82,7 +82,6 @@
 | textColor          | UIColor   | `#FFFFFF`                                   | 字体颜色                                  |
 | bgColor            | UIColor   | `#000000`                                   | 背景                                      |
 | isShowInfoIcon     | Bool      | true                                        | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool      | false                                       | 是否为绝对时间轴                          |
 | sample             | Int       | 3                                           | 采样率，表示几个点采一个，默认3个点采一个 |
 | spectrumColors     | [UIColor] | `[#23233A,#23233A,#23233A,#23233A,#23233A]` | 各个占比颜色，一次对应γ，β，α，θ，δ       |
 | buttonImageName    | String    | `"info_button_icon"`                        | 按钮图片                                  |
@@ -99,11 +98,10 @@
 | textColor           | UIColor   | `#FFFFFF`                        | 字体颜色                                  |
 | bgColor             | UIColor   | `#000000`                        | 背景                                      |
 | isShowInfoIcon      | Bool      | true                             | 是否显示说明图标                          |
-| isAbsoluteTimeAxis  | Bool      | false                            | 是否为绝对时间轴                          |
 | sample              | Int       | 3                                | 采样率，表示几个点采一个，默认3个点采一个 |
-| isShowAvg           | Bool      | true                             | 是否展示平均值                            |
-| isShowMax           | Bool      | true                             | 是否展示最大值                            |
-| isShowMin           | Bool      | true                             | 是否展示最小值                            |
+| avgValue           | Int      | nil                             | 展示平均值                            |
+| maxValue           | Int      | nil                             | 展示最大值                            |
+| minValue           | Int      | nil                             |是否展示最小值                            |
 | heartRateLineColors | [UIColor] | [`#23233A`, `#23233A`,`#23233A`] | 心率较高曲线颜色(依次为高，中， 低)       |
 | buttonImageName     | String    | `"info_button_icon"`             | 按钮图片                                  |
 | borderRadius        | CGFloat   | 8                                | 圆角                                      |
@@ -119,9 +117,8 @@
 | textColor          | UIColor | `#FFFFFF`            | 字体颜色                                  |
 | bgColor            | UIColor | `#000000`            | 背景                                      |
 | isShowInfoIcon     | Bool    | true                 | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool    | false                | 是否为绝对时间轴                          |
 | sample             | Int     | 3                    | 采样率，表示几个点采一个，默认3个点采一个 |
-| isShowAvg          | Bool    | true                 | 是否展示平均值                            |
+| avgValue          | Int    | nil                 | 展示平均值                            |
 | lineColor          | UIColor | `#23233A`            | 曲线颜色                                  |
 | buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |
 | borderRadius       | CGFloat | 8                    | 圆角                                      |
@@ -137,11 +134,10 @@
 | textColor          | UIColor | `#FFFFFF`            | 字体颜色                                  |
 | bgColor            | UIColor | `#000000`            | 背景                                      |
 | isShowInfoIcon     | Bool    | true                 | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool    | false                | 是否为绝对时间轴                          |
 | sample             | Int     | 3                    | 采样率，表示几个点采一个，默认3个点采一个 |
-| isShowAvg          | Bool    | true                 | 是否展示平均值                            |
-| isShowMax          | Bool    | true                 | 是否展示最大值                            |
-| isShowMin          | Bool    | true                 | 是否展示最小值                            |
+| avgValue           | Int      | nil                             | 展示平均值                            |
+| maxValue           | Int      | nil                             | 展示最大值                            |
+| minValue           | Int      | nil                             |是否展示最小值                            |
 | fillColor          | UIColor | `#23233A`            | 填充颜色                                  |
 | buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |
 | borderRadius       | CGFloat | 8                    | 圆角                                      |
@@ -157,7 +153,6 @@
 | textColor          | UIColor | `#FFFFFF`            | 字体颜色                                  |
 | bgColor            | UIColor | `#000000`            | 背景                                      |
 | isShowInfoIcon     | Bool    | true                 | 是否显示说明图标                          |
-| isAbsoluteTimeAxis | Bool    | false                | 是否为绝对时间轴                          |
 | sample             | Int     | 3                    | 采样率，表示几个点采一个，默认3个点采一个 |
 | chartColor         | UIColor | `#23233A`            | 填充颜色                                  |
 | buttonImageName    | String  | `"info_button_icon"` | 按钮图片                                  |

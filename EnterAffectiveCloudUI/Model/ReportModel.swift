@@ -9,6 +9,12 @@
 import UIKit
 
 public struct ReportModel {
+    var gama: [Float]?
+    var delta: [Float]?
+    var theta: [Float]?
+    var alpha: [Float]?
+    var beta: [Float]?
+    
     var brainwave: Array2D<Float>?
     mutating func brainwaveMapping(_ gama: [Float], _ delta: [Float], _ theta: [Float], _ alpha: [Float], _ beta: [Float]) {
         let arrayCount = gama.count
@@ -53,23 +59,11 @@ public struct ReportModel {
             return _pressure
         }
         set {
-            if newValue!.count > 266 {
-                var allIndexArray: [Int] = []
-                for i in 0..<newValue!.count {
-                    allIndexArray.append(i)
-                }
-                let indexArray = allIndexArray.sample(size: 266, noRepeat: true)?.sorted()
-                _pressure = []
-                for i in indexArray! {
-                    _pressure?.append(newValue![i])
-                }
-            } else {
-                _pressure = newValue
-            }
-            pressureCount = newValue!.count
+             
+            _pressure = newValue
+            
         }
     }
-    var pressureCount: Int?
     
     var timestamp: Int?
 }

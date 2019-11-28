@@ -52,15 +52,6 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
     /// 采样
     public var sample: Int = 3
     
-    /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false {
-        didSet {
-            if self.isAbsoluteTimeAxis {
-                xLabel?.isHidden = true
-            }
-        }
-    }
-    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
         didSet  {
@@ -356,15 +347,34 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    func setDataFromModel(timestamp: Int?, brainwave: Array2D<Float>?) {
+    public func setDataFromModel(gama: [Float], delta: [Float], theta: [Float], alpha: [Float], beta: [Float], timestamp: Int? = nil) {
         
         if let timestamp = timestamp {
             timeStamp = timestamp
+            xLabel?.isHidden = true
         }
         
-        if let brainwave = brainwave {
-            setDataCount(brainwave)
+        let brainwave = brainwaveMapping(gama, delta, theta, alpha, beta)
+        setDataCount(brainwave)
+        
+    }
+    
+    func brainwaveMapping(_ gama: [Float], _ delta: [Float], _ theta: [Float], _ alpha: [Float], _ beta: [Float]) -> Array2D<Float> {
+        let arrayCount = gama.count
+        var tmpArray = Array2D(columns: arrayCount, rows: 4, initialValue: Float(0.0))
+        for i in 0..<arrayCount {
+            let total = gama[i] + theta[i] + delta[i] + alpha[i] + beta[i]
+            let set1 = delta[i] / total
+            let set2 = (delta[i] + theta[i]) / total
+            let set3 = (delta[i] + alpha[i] + theta[i]) / total
+            let set4 = (total - gama[i]) / total
+            tmpArray[i, 0] = set1 * 100
+            tmpArray[i, 1] = set2 * 100
+            tmpArray[i, 2] = set3 * 100
+            tmpArray[i, 3] = set4 * 100
         }
+        
+        return tmpArray
     }
     
     //MARK:- Chart Delegate
@@ -449,11 +459,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
             
         }
         
-        if isAbsoluteTimeAxis {
-            self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
-        } else {
-            self.chartView?.xAxis.valueFormatter = DateValueFormatter(time)
-        }
+        self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
         
     }
 }

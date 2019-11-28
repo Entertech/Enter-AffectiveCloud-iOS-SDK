@@ -152,22 +152,39 @@ public class ReportViewService: NSObject {
                 }
             }
             if let alpha = alphaArray, let beta = betaArray, let theta = thetaArray, let delta = deltaArray, let gama = gamaArray {
-                model.brainwaveMapping(gama, delta, theta, alpha, beta)
+                //model.brainwaveMapping(gama, delta, theta, alpha, beta)
+                model.alpha = alpha
+                model.beta = beta
+                model.theta = theta
+                model.delta = delta
+                model.gama = gama
             }
             
         }
     }
-    
     /// 展示添加的视图，必须在layout之后
-    public func show() {
+    public func show(object: UIViewController) {
         if !isShowed {
-            self.braveWaveView?.setDataFromModel(timestamp: model.timestamp, brainwave: model.brainwave)
-            self.heartRateView?.setDataFromModel(timestamp: model.timestamp, hr: model.heartRate, hrAvg: model.heartRateAvg, hrMin: model.heartRateMin, hrMax: model.heartRateMax)
-            self.hrvView?.setDataFromModel(timestamp: model.timestamp, hrv: model.heartRateVariability, hrvAvg: model.hrvAvg)
-            self.attentionView?.setDataFromModel(timestamp: model.timestamp, attention: model.attention, avg: model.attentionAvg, min: model.attentionMin, max: model.attentionMax)
-            self.relaxationView?.setDataFromModel(timestamp: model.timestamp, relaxation: model.relaxation, avg: model.relaxationAvg, min: model.relaxationMin, max: model.relaxationMax)
-            self.pressureView?.setDataFromModel(timestamp: model.timestamp, pressure: model.pressure, count: model.pressureCount)
+            if let alpha = model.alpha, let beta = model.beta, let theta = model.theta, let delta = model.delta, let gama = model.gama {
+                self.braveWaveView?.setDataFromModel(gama: gama, delta: delta, theta: theta, alpha: alpha, beta: beta, timestamp: model.timestamp)
+            }
+            self.heartRateView?.setDataFromModel(hr: model.heartRate, timestamp: model.timestamp)
+            self.heartRateView?.avgValue = model.heartRateAvg!
+            self.heartRateView?.maxValue = model.heartRateMax!
+            self.heartRateView?.minValue = model.heartRateMin!
+            self.hrvView?.setDataFromModel(hrv: model.heartRateVariability)
+            self.hrvView?.avgValue = model.hrvAvg!
+            self.attentionView?.setDataFromModel(attention: model.attention)
+            self.attentionView?.maxValue = model.attentionMax!
+            self.attentionView?.minValue = model.attentionMin!
+            self.attentionView?.avgValue = model.attentionAvg!
+            self.relaxationView?.setDataFromModel(relaxation: model.relaxation, timestamp: model.timestamp)
+            self.relaxationView?.maxValue = model.relaxationMax!
+            self.relaxationView?.minValue = model.relaxationMin!
+            self.relaxationView?.avgValue = model.relaxationAvg!
+            self.pressureView?.setDataFromModel(pressure: model.pressure)
             isShowed = true
+            object.view.layoutIfNeeded()
         }
         
     }

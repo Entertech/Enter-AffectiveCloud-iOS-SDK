@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01CE7EF622E93F02E1DCA7C5 /* Pods_EnterAffectiveCloudTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6562EBDF9AE835879423298 /* Pods_EnterAffectiveCloudTests.framework */; };
 		050B6C818BBC9339BAF001D7 /* Pods_EnterRealtimeUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */; };
 		06334CCC6A76625AD4F3EF43 /* Pods_EnterReportUIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC63DD847B631367B69CBCD6 /* Pods_EnterReportUIDemo.framework */; };
 		51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */; };
@@ -171,15 +170,12 @@
 		78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8878BCE31A8439B164647B74 /* Pods-EnterReportUIDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.debug.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		9CBE7FFECE5DBCFEBB753409 /* Pods-EnterAffectiveCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloud.debug.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloud/Pods-EnterAffectiveCloud.debug.xcconfig"; sourceTree = "<group>"; };
-		A4731ECB20C51500E89708C3 /* Pods-EnterAffectiveCloudTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudTests.debug.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudTests/Pods-EnterAffectiveCloudTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC63DD847B631367B69CBCD6 /* Pods_EnterReportUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterReportUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7E125D3230559590072DF22 /* EnterAffectiveCloud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloud.h; sourceTree = "<group>"; };
 		B7E125D4230559590072DF22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterRealtimeUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo.release.xcconfig"; sourceTree = "<group>"; };
-		D6562EBDF9AE835879423298 /* Pods_EnterAffectiveCloudTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterAffectiveCloudTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFE1C3518C2F602C42735BB5 /* Pods-EnterAffectiveCloudTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudTests.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudTests/Pods-EnterAffectiveCloudTests.release.xcconfig"; sourceTree = "<group>"; };
 		F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.release.xcconfig"; sourceTree = "<group>"; };
 		F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
@@ -277,7 +273,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA9231AB236BD07B00A50C64 /* EnterAffectiveCloud.framework in Frameworks */,
-				01CE7EF622E93F02E1DCA7C5 /* Pods_EnterAffectiveCloudTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,8 +310,6 @@
 				C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */,
 				8878BCE31A8439B164647B74 /* Pods-EnterReportUIDemo.debug.xcconfig */,
 				F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */,
-				A4731ECB20C51500E89708C3 /* Pods-EnterAffectiveCloudTests.debug.xcconfig */,
-				EFE1C3518C2F602C42735BB5 /* Pods-EnterAffectiveCloudTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -328,7 +321,6 @@
 				78462F28129C4A930550C163 /* Pods_EnterAffectiveCloudUI.framework */,
 				FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */,
 				AC63DD847B631367B69CBCD6 /* Pods_EnterReportUIDemo.framework */,
-				D6562EBDF9AE835879423298 /* Pods_EnterAffectiveCloudTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -696,11 +688,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA9231B0236BD07B00A50C64 /* Build configuration list for PBXNativeTarget "EnterAffectiveCloudTests" */;
 			buildPhases = (
-				EFF3855E92559A6991C6FE5C /* [CP] Check Pods Manifest.lock */,
 				FA9231A2236BD07B00A50C64 /* Sources */,
 				FA9231A3236BD07B00A50C64 /* Frameworks */,
 				FA9231A4236BD07B00A50C64 /* Resources */,
-				56A531A230E793133770EC3D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -858,23 +848,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		56A531A230E793133770EC3D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EnterAffectiveCloudTests/Pods-EnterAffectiveCloudTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EnterAffectiveCloudTests/Pods-EnterAffectiveCloudTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EnterAffectiveCloudTests/Pods-EnterAffectiveCloudTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		88C6842FF1EE3ADACDE724FC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -969,28 +942,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-EnterAffectiveCloud-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EFF3855E92559A6991C6FE5C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EnterAffectiveCloudTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1417,7 +1368,6 @@
 		};
 		FA9231AE236BD07B00A50C64 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4731ECB20C51500E89708C3 /* Pods-EnterAffectiveCloudTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1437,7 +1387,6 @@
 		};
 		FA9231AF236BD07B00A50C64 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EFE1C3518C2F602C42735BB5 /* Pods-EnterAffectiveCloudTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;

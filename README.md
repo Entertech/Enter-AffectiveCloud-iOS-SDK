@@ -194,6 +194,7 @@ self.client.websocketDisconnect()
 
 ```swift
 let hrView = RealtimeHeartRateView()
+// 设置属性, 相关属性请参阅《情感云UI详细API》
 hrView.bgColor = UIColor(red: 1, green: 229.0/255.0, blue: 231.0/255.0, alpha: 1)
 hrView.mainColor = UIColor(red: 1, green: 72.0/255.0, blue: 82.0/255.0, alpha: 1)
 self.view.addSubview(hrView)
@@ -206,13 +207,55 @@ hrView.snp.makeConstraints {
 // 开启监听, 开启情感云后会自动更新界面上的心率数据
 hrView.observe()
 ```
-**图示**
 
 ![hr](img/hr_screenshoot.png)
 
+**完整图示**
+
+![图示](img/WechatIMG1.jpeg)
+
 ## 报表UI
 
-**TODO**
+在此以注意力报表为例, 展示如何接入报表UI
+
+**接入**
+
+```swift
+
+let attentionReportView = AttentionReportView()
+self.view.addSubview(attentionReportView)
+attentionReportView.snp.makeConstraints {
+  $0.left.right.equalTo(16)
+  $0.hight.equalTo(298) // 高度不可定制
+  //...其他约束
+}
+// 平均值
+attentionReportView.avgValue = 78
+// 最大值
+attentionReportView.maxValue = 99
+// 最小值
+attentionReportView.minValue = 6
+// 图表数组
+attentionReportView.setDataFromModel(attention: intArray)
+
+```
+setDataFromModel 方法有两个参数
+
+| 参数      | 类型     | 说明             |
+| --------- | -------- | ---------------- |
+| attention | Int 数组 | 组成列表的数据   |
+| timestamp | Int      | 情感云的起始时间, 可不设置 |
+
+不传timestamp参数时, X轴坐标
+![attention_no](img/attention_no_timestamp.png)
+
+传入timestamp时, X轴坐标
+![attention](img/attention_with_timstamp.png)
+
+**完整图示**
+
+在暗色模式下,经过定制可作出如下效果
+![暗色模式](img/IMG_5019.JPG)
 
 ## 情感云UI详细API
 - 情感云UI的API文档请查看: [情感云UI文档](APIDocuments/AffectiveCloudUI.md)

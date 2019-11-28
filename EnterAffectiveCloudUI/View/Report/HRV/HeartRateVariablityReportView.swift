@@ -51,15 +51,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     public var infoUrlString = "https://www.notion.so/HRV-Graph-6f93225bf7934cb8a16eb6ba55da52cb"
     /// 采样
     public var sample: Int = 3
-    
-    /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false {
-        didSet {
-            if self.isAbsoluteTimeAxis {
-                xLabel?.isHidden = true
-            }
-        }
-    }
+   
     
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
@@ -74,6 +66,14 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
             chartView?.leftAxis.labelTextColor = changedColor
             chartView?.xAxis.labelTextColor = changedColor
             chartView?.xAxis.gridColor = secondColor
+        }
+    }
+    
+    public var avgValue = 0 {
+        willSet {
+            self.avgLabel?.text = "平均: \(newValue)"
+            self.msLabel?.isHidden = false
+            self.avgLabel?.isHidden = false
         }
     }
     
@@ -182,6 +182,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         msLabel?.text = "ms"
         msLabel?.font = UIFont.systemFont(ofSize: 12)
         msLabel?.textColor = secondColor
+        msLabel?.isHidden = true
         bgView?.addSubview(msLabel!)
     }
     
@@ -233,21 +234,15 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    func setDataFromModel(timestamp: Int?, hrv: [Int]?, hrvAvg: Int?) {
+    public func setDataFromModel(hrv: [Int]?, timestamp: Int? = nil) {
         
         if let timestamp = timestamp {
             timeStamp = timestamp
+            xLabel?.isHidden = true
         }
         
         if let hrv = hrv {
             setDataCount(hrv)
-        }
-        
-        if let hrvAvg = hrvAvg {
-            avgLabel?.text = "平均：\(hrvAvg)"
-        } else {
-            avgLabel?.isHidden = true
-            msLabel?.isHidden = true
         }
         
     }
@@ -309,15 +304,10 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
             time.append(i)
         }
         
-        if isAbsoluteTimeAxis {
-            self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time, timeStamp)
-        } else {
-            self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time)
-        }
-        
+        self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time, timeStamp)
+ 
         self.chartView?.leftAxis.valueFormatter = HRVValueFormatter()
 
-        
     }
 }
 

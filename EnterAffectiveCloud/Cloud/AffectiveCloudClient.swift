@@ -50,6 +50,15 @@ public class AffectiveCloudClient {
             return false
         }
     }
+    
+    public func close() {
+        if let services = cloudService.affectiveService  {
+            finishAffectiveDataServices(services: services)
+            
+        }
+        closeSession()
+        websocketDisconnect()
+    }
 
     //MARK: - session
     /// start cloud service.

@@ -51,15 +51,6 @@ public class PressureReportView: BaseView {
     /// 采样
     public var sample: Int = 3
     
-    /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false {
-        didSet {
-            if self.isAbsoluteTimeAxis {
-                xLabel?.isHidden = true
-            }
-        }
-    }
-    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
         didSet  {
@@ -75,6 +66,12 @@ public class PressureReportView: BaseView {
     public var chartColor: UIColor = UIColor.colorWithInt(r: 255, g: 103, b: 131, alpha: 1) {
         didSet {
             chartView?.chartColor = chartColor
+        }
+    }
+    
+    private var value: Int = 0 {
+        didSet {
+            
         }
     }
     
@@ -206,17 +203,16 @@ public class PressureReportView: BaseView {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    func setDataFromModel(timestamp: Int?, pressure: [Float]?, count: Int?) {
+    public func setDataFromModel(pressure: [Float]?, timestamp: Int? = nil) {
         
         if let timestamp = timestamp {
             timeStamp = timestamp
-            if isAbsoluteTimeAxis {
-                chartView?.timeStamp = timestamp
-            }
+            chartView?.timeStamp = timestamp
+            xLabel?.isHidden = true
         }
         
-        if let value = pressure, let count = count {
-            setChartValue(value, count)
+        if let value = pressure{
+            setChartValue(value)
         }
         
         let layer = CAGradientLayer()
@@ -233,8 +229,7 @@ public class PressureReportView: BaseView {
         
     }
     
-    public func setChartValue(_ value: [Float], _ originCount: Int) {
+    func setChartValue(_ value: [Float]) {
         chartView?.pressureArray = value
-        chartView?.valueCount = originCount
     }
 }

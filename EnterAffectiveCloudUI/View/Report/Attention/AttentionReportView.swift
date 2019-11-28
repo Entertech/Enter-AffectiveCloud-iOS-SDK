@@ -52,15 +52,6 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
     /// 采样
     public var sample: Int = 3
     
-    /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false {
-        didSet {
-            if self.isAbsoluteTimeAxis {
-                xLabel?.isHidden = true
-            }
-        }
-    }
-    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
         didSet  {
@@ -76,22 +67,23 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
             chartView?.xAxis.gridColor = secondColor
         }
     }
-    /// 是否显示平均值
-    public var isShowAvg: Bool = true {
+    
+    public var maxValue: Int = 0 {
         didSet {
-            avgLabel?.isHidden = !isShowAvg
+            maxLabel?.text = "最大: \(maxValue)"
+            
         }
     }
-    /// 是否显示最大值
-    public var isShowMax: Bool = true {
+    
+    public var minValue: Int = 0 {
         didSet {
-            maxLabel?.isHidden = !self.isShowMax
+            minLabel?.text = "最小: \(minValue)"
         }
     }
-    /// 是否显示最小值
-    public var isShowMin: Bool = true {
+    
+    public var avgValue: Int = 0 {
         didSet {
-            minLabel?.isHidden = !self.isShowMin
+            avgLabel?.text = "平均: \(avgValue)"
         }
     }
 
@@ -264,27 +256,17 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    func setDataFromModel(timestamp: Int?, attention: [Int]?, avg: Int?, min: Int?, max: Int?) {
+    public func setDataFromModel(attention: [Int]?, timestamp: Int? = nil) {
 
         if let timestamp = timestamp {
             timeStamp = timestamp
+            xLabel?.isHidden = true
         }
         
         if let hr = attention {
             setDataCount(hr)
         }
-        
-        if let avg = avg {
-            avgLabel?.text = "平均：\(avg)"
-        }
-        
-        if let min = min {
-            minLabel?.text = "最小：\(min)"
-        }
-        
-        if let max = max {
-            maxLabel?.text = "最大：\(max)"
-        }
+
         
     }
     
@@ -361,13 +343,8 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
         }
-        
-        if isAbsoluteTimeAxis {
-            self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time, timeStamp)
-        } else {
-            self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time)
-        }
-        
+
+        self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time, timeStamp)
         self.chartView?.leftAxis.valueFormatter = OtherValueFormatter()
         
     }

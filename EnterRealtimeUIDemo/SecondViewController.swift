@@ -46,7 +46,7 @@ class SecondViewController: UIViewController {
         brainwaveView.observe(with: leftArray, right: rightArray)//开始观察
         
         spectrumView.bgColor = UIColor(red: 229.0/225.0, green: 234.0/255.0, blue: 247.0/255.0, alpha: 1)
-        spectrumView.observe(with: (0.59, 0.28, 0.1, 0.02, 0.1))
+        spectrumView.observe(with: (0.1, 0.28, 0.59, 0.22, 0.1))
         
         heartRateView.bgColor = UIColor(red: 1, green: 229.0/255.0, blue: 231.0/255.0, alpha: 1)
         heartRateView.mainColor = UIColor(red: 1, green: 72.0/255.0, blue: 82.0/255.0, alpha: 1)

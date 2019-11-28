@@ -38,11 +38,9 @@ class SecondViewController: UIViewController {
         super.viewWillAppear(animated)
         let bgColor = UIColor(red: 12.0/255.0, green: 18.0/255.0, blue: 65.0/255.0, alpha: 1)
         brainReportView.bgColor = bgColor
-        brainReportView.isAbsoluteTimeAxis = true //使用现实时间
         brainReportView.textColor = .white
         
         heartReportView.bgColor = bgColor
-        heartReportView.isAbsoluteTimeAxis = true
         heartReportView.textColor = .white
         heartReportView.heartRateLineColors = [
             UIColor(red: 0, green: 217.0/255.0, blue: 147.0/255.0, alpha: 1),
@@ -52,7 +50,6 @@ class SecondViewController: UIViewController {
         
         hrvReportView.bgColor = bgColor
         hrvReportView.textColor = .white
-        hrvReportView.isAbsoluteTimeAxis = true
         
         attentionReportView.bgColor = bgColor
         attentionReportView.textColor =  .white
@@ -62,11 +59,12 @@ class SecondViewController: UIViewController {
         
         pressureReportView.bgColor = bgColor
         pressureReportView.textColor = .white
+        
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        service.show() //展示数据在layout布局完成之后
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        service.show(object: self) 
     }
 
 

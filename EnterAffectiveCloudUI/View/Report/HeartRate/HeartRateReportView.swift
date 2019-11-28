@@ -52,15 +52,6 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
     /// 采样
     public var sample: Int = 3
     
-    /// 是否将时间坐标轴转化为对应时间
-    public var isAbsoluteTimeAxis: Bool = false {
-        didSet {
-            if self.isAbsoluteTimeAxis {
-                xLabel?.isHidden = true
-            }
-        }
-    }
-    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithInt(r: 23, g: 23, b: 38, alpha: 0.7) {
         didSet  {
@@ -99,24 +90,24 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         }
     }
     
-    public var isShowAvg: Bool = true {
-        didSet {
-            avgBpmLabel?.isHidden = !isShowAvg
-            avgLabel?.isHidden = !isShowAvg
+    public var minValue = 0 {
+        willSet {
+            minLabel?.text = "最小: \(newValue)"
+            minBpmLabel?.isHidden = false
         }
     }
     
-    public var isShowMax: Bool = true {
-        didSet {
-            maxLabel?.isHidden = !self.isShowMax
-            avgBpmLabel?.isHidden = !self.isShowMax
+    public var maxValue = 0 {
+        willSet {
+            maxLabel?.text = "最大: \(newValue)"
+            maxBpmLabel?.isHidden = false
         }
     }
     
-    public var isShowMin: Bool = true {
-        didSet {
-            minLabel?.isHidden = !self.isShowMin
-            minBpmLabel?.isHidden = !self.isShowMin
+    public var avgValue = 0 {
+        willSet {
+            avgLabel?.text = "平均: \(newValue)"
+            avgBpmLabel?.isHidden = false
         }
     }
     
@@ -160,6 +151,11 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         super.init(coder: coder)
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+    }
+    
     override func setUI() {
         self.backgroundColor = .clear
         let firstTextColor = textColor.changeAlpha(to: 0.7)
@@ -172,6 +168,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         self.addSubview(bgView!)
         
         chartBackgroundView = UIView()
+        chartBackgroundView?.frame = CGRect(x: 0,y: 0,width: 380,height: 140)
         chartBackgroundView?.backgroundColor  = .clear
         bgView?.addSubview(chartBackgroundView!)
         
@@ -204,6 +201,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         
         //负责彩色
         chartView = LineChartView()
+        chartView?.frame = CGRect(x: 0, y: 0, width: 380, height: 140)
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .clear
         chartView?.drawBordersEnabled = false
@@ -231,6 +229,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         chartBackgroundView?.addSubview(chartView!)
         
         topChart = LineChartView()
+        topChart?.frame = CGRect(x: 0, y: 0, width: 380, height: 140)
         topChart?.backgroundColor = .clear
         topChart?.gridBackgroundColor = .clear
         topChart?.drawBordersEnabled = false
@@ -302,6 +301,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         avgBpmLabel?.font = UIFont.systemFont(ofSize: 12)
         avgBpmLabel?.text = "bpm"
         avgBpmLabel?.textColor = secondTextColor
+        avgBpmLabel?.isHidden = true
         bgView?.addSubview(avgBpmLabel!)
         
         maxLabel = UILabel()
@@ -313,6 +313,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         maxBpmLabel?.font = UIFont.systemFont(ofSize: 12)
         maxBpmLabel?.text = "bpm"
         maxBpmLabel?.textColor = secondTextColor
+        maxBpmLabel?.isHidden = true
         bgView?.addSubview(maxBpmLabel!)
         
         minLabel = UILabel()
@@ -324,6 +325,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         minBpmLabel?.font = UIFont.systemFont(ofSize: 12)
         minBpmLabel?.text = "bpm"
         minBpmLabel?.textColor = secondTextColor
+        minBpmLabel?.isHidden = true
         bgView?.addSubview(minBpmLabel!)
         
     }
@@ -439,35 +441,15 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
-    func setDataFromModel(timestamp: Int?, hr: [Int]?, hrAvg: Int?, hrMin: Int?, hrMax: Int?) {
+    public func setDataFromModel(hr: [Int]?, timestamp: Int? = nil) {
 
         if let timestamp = timestamp {
             timeStamp = timestamp
+            xLabel?.isHidden = true
         }
         
         if let hr = hr {
             setDataCount(hr)
-        }
-        
-        if let hrAvg = hrAvg {
-            avgLabel?.text = "平均：\(hrAvg)"
-        } else {
-            avgLabel?.isHidden = true
-            avgBpmLabel?.isHidden = true
-        }
-        
-        if let hrMin = hrMin {
-            minLabel?.text = "最小：\(hrMin)"
-        } else {
-            minLabel?.isHidden = true
-            minBpmLabel?.isHidden = true
-        }
-        
-        if let hrMax = hrMax {
-            maxLabel?.text = "最大：\(hrMax)"
-        } else {
-            maxLabel?.isHidden = true
-            maxBpmLabel?.isHidden = true
         }
         
     }
@@ -495,7 +477,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
                 colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
             }
             if i > initIndex{
-                if waveArray[i] == 0 {
+                if waveArray[i] < 30 {
                     colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(lastValue)))
                     yTop.append(ChartDataEntry(x: Double(i)*interval, y: Double(lastValue)))
@@ -540,18 +522,16 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = chartView!.bounds
-        if gradientLayer.frame.height == 0 {
-            gradientLayer.frame = CGRect(x: 0, y: 0, width: 380, height: 140)
-        }
-        gradientLayer.colors = [heartRateLineColors[2].cgColor,
-                               heartRateLineColors[1].cgColor,
-                               heartRateLineColors[1].cgColor,
-                               heartRateLineColors[0].cgColor]
+        gradientLayer.colors = [UIColor(red: 248.0/255.0, green: 136.0/255.0, blue: 131.0/255.0, alpha: 1).cgColor,
+                                UIColor(red: 255.0/255.0, green: 185.0/255.0, blue: 82.0/255.0, alpha: 1).cgColor,
+                                UIColor(red: 255.0/255.0, green: 185.0/255.0, blue: 82.0/255.0, alpha: 1).cgColor,
+                                UIColor(red: 255.0/255.0, green: 228.0/255.0, blue: 187.0/255.0, alpha: 1).cgColor]
         gradientLayer.locations = [0.34, 0.35, 0.60, 0.61]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x:0, y:1)
-        chartBackgroundView?.layer.insertSublayer(gradientLayer, at: 0)
-        gradientLayer.mask = chartView!.layer
+        self.chartBackgroundView?.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.mask = chartView?.layer
+
     }
     
     private func setLimitLine(_ valueCount: Int) {
@@ -562,12 +542,8 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
         }
-        
-        if isAbsoluteTimeAxis {
-            self.topChart?.xAxis.valueFormatter = HeartValueFormatter(time, timeStamp)
-        } else {
-            self.topChart?.xAxis.valueFormatter = HeartValueFormatter(time)
-        }
+
+        self.topChart?.xAxis.valueFormatter = HeartValueFormatter(time, timeStamp)
         
         self.topChart?.leftAxis.valueFormatter = HRValueFormatter()
         
