@@ -76,7 +76,6 @@ public class AffectiveCloudClient {
     /// firstly close biodata and affective services,  secondly close session finally close cloud service.
     public func closeSession() {
         self.cloudService.sessionClose()
-        self.cloudService.client = nil
     }
 
     /// restore cloud service session

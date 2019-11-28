@@ -44,13 +44,11 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     init(ws: String) {
         self.socket = WebSocket(url: URL(string: ws)!)
         self.socket.delegate = self
-        self.state = .none
     }
 
     init(wssURL: URL) {
         self.socket = WebSocket(url: wssURL)
         self.socket.delegate = self
-        self.state = .none
     }
 
     //MARK: WebSocketServiceProcotol
@@ -1016,6 +1014,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 NotificationCenter.default.post(name: NSNotification.Name.affectiveDataReportNotify, object: nil, userInfo: ["affectiveDataReport":model])
             case (CSServicesType.affective.rawValue, CSEmotionOperation.finish.rawValue):
                 self.delegate?.affectiveDataFinish(client: self.client, response: model)
+                self.client = nil
             default:
                 break
             }
