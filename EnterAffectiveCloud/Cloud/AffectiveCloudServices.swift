@@ -996,6 +996,9 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let list = dataModel.affectiveList {
                     self.appendEmotionAffectiveInitialList(list: list)
+
+                }
+                if model.code == 0 {
                     if let subs = self.affectiveSubscription {
                         self.emotionSubscribe(services: subs)
                     }
