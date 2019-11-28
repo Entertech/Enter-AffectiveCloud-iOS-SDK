@@ -272,16 +272,16 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             return
         }
 
-        var biodataTypes = [String]()
+        //var biodataTypes = [String]()
         let biodataParamList = self.biodataParamList(with: options)
         let eegParamList: [String] = biodataParamList.filter { $0.contains("eeg") }
         let hrParamList: [String] = biodataParamList.filter { $0.contains("hr") }
-        if eegParamList.count > 0 {
-            biodataTypes.append("eeg")
-        }
-        if hrParamList.count > 0 {
-            biodataTypes.append("hr")
-        }
+//        if eegParamList.count > 0 {
+//            biodataTypes.append("eeg")
+//        }
+//        if hrParamList.count > 0 {
+//            biodataTypes.append("hr")
+//        }
 
         if let flag = self.biodataInitialList?.contains(.EEG), eegParamList.count > 0 {
             if !flag {
@@ -301,7 +301,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.subscribe.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
-        jsonModel.kwargs?.bioTypes = biodataTypes
+        //jsonModel.kwargs?.bioTypes = biodataTypes
         jsonModel.kwargs?.hrParams = hrParamList
         jsonModel.kwargs?.eegParams = eegParamList
 
