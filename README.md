@@ -57,7 +57,7 @@ end
 **对象初始化**
 
 ```swift
-// AffectiveCloudClient对象创建后会自动调用websocketConnect()方法建立连接
+// AffectiveCloudClient对象创建
 let client = AffectiveCloudClient(websocketURLString: yourURL, appKey: yourAppKey, appSecret: yourSecret, userID: yourLocalID)
 
 ```

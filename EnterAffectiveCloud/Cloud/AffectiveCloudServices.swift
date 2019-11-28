@@ -865,6 +865,9 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 extension AffectiveCloudServices: WebSocketDelegate {
     //MARK: web socket delegate
     func websocketDidConnect(socket: WebSocketClient) {
+        if self.state == .connected {
+            return
+        }
         self.state = .connected
         self.delegate?.websocketConnect(client: self.client)
         if let _ = session_id {
@@ -877,6 +880,9 @@ extension AffectiveCloudServices: WebSocketDelegate {
     }
 
     func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        if self.state == .disconnected {
+            return
+        }
         self.state = .disconnected
         self.delegate?.websocketDisconnect(client: self.client)
         self.isSessionCreated = false
