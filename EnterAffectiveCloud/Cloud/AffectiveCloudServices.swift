@@ -1017,7 +1017,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 NotificationCenter.default.post(name: NSNotification.Name.affectiveDataReportNotify, object: nil, userInfo: ["affectiveDataReport":model])
             case (CSServicesType.affective.rawValue, CSEmotionOperation.finish.rawValue):
                 self.delegate?.affectiveDataFinish(client: self.client, response: model)
-                self.client = nil
+                
             default:
                 break
             }

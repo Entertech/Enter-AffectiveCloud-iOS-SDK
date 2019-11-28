@@ -11,40 +11,40 @@ import Foundation
 public class AffectiveCloudClient {
     public weak var affectiveCloudDelegate: AffectiveCloudResponseDelegate! {
         didSet {
-            self.cloudService.delegate = affectiveCloudDelegate
+            self.cloudService?.delegate = affectiveCloudDelegate
         }
     }
 
-    private let cloudService: AffectiveCloudServices
+    private var cloudService: AffectiveCloudServices?
     public init(websocketURL: URL, appKey: String, appSecret: String, userID: String) {
         self.cloudService = AffectiveCloudServices(wssURL: websocketURL)
-        self.cloudService.client = self
-        self.cloudService.appKey = appKey
-        self.cloudService.userID = userID
-        self.cloudService.appSecret = appSecret
+        self.cloudService?.client = self
+        self.cloudService?.appKey = appKey
+        self.cloudService?.userID = userID
+        self.cloudService?.appSecret = appSecret
         self.websocketConnect()
     }
 
     public init(websocketURLString: String, appKey: String, appSecret: String, userID: String) {
         self.cloudService = AffectiveCloudServices(ws: websocketURLString)
-        self.cloudService.client = self
-        self.cloudService.appKey = appKey
-        self.cloudService.userID = userID
-        self.cloudService.appSecret = appSecret
+        self.cloudService?.client = self
+        self.cloudService?.appKey = appKey
+        self.cloudService?.userID = userID
+        self.cloudService?.appSecret = appSecret
         self.websocketConnect()
     }
 
     //MARK: - websocket
     public func websocketConnect() {
-        self.cloudService.webSocketConnect()
+        self.cloudService?.webSocketConnect()
     }
 
     public func websocketDisconnect() {
-        self.cloudService.webSocketDisConnect()
+        self.cloudService?.webSocketDisConnect()
     }
     
     public func isWebsocketConnected() -> Bool {
-        if self.cloudService.state == .connected {
+        if self.cloudService?.state == .connected {
             return true
         } else {
             return false
@@ -52,12 +52,13 @@ public class AffectiveCloudClient {
     }
     
     public func close() {
-        if let services = cloudService.affectiveService  {
+        if let services = cloudService?.affectiveService  {
             finishAffectiveDataServices(services: services)
             
         }
         closeSession()
         websocketDisconnect()
+        self.cloudService = nil
     }
 
     //MARK: - session
@@ -69,18 +70,18 @@ public class AffectiveCloudClient {
     /// - Parameter userName: your username from Cloud Service platform
     /// - Parameter userID: the unique ID of your app user
     public func createAndAuthenticateSession() {
-        self.cloudService.sessionCreate()
+        self.cloudService?.sessionCreate()
     }
 
     /// close cloud service
     /// firstly close biodata and affective services,  secondly close session finally close cloud service.
     public func closeSession() {
-        self.cloudService.sessionClose()
+        self.cloudService?.sessionClose()
     }
 
     /// restore cloud service session
     public func restoreSession() {
-        self.cloudService.sessionRestore()
+        self.cloudService?.sessionRestore()
     }
 
     //MARK: - biodata
@@ -88,8 +89,8 @@ public class AffectiveCloudClient {
     /// - Parameter services: biodata services. ps: .eeg and .hr
     /// - Parameter tolerance: 0-4 
     public func initBiodataServices(services: BiodataTypeOptions, _ tolerance: [String:Any]?=nil) {
-        self.cloudService.bioService = services
-        self.cloudService.bioTolerance = tolerance
+        self.cloudService?.bioService = services
+        self.cloudService?.bioTolerance = tolerance
         //self.cloudService.biodataInitial(options: services, tolerance: tolerance)
     }
 
@@ -104,7 +105,9 @@ public class AffectiveCloudClient {
     /// Affective services: .attention、.relaxtion and .pleasure
     /// - Parameter data: the brain raw data from the hardware
     public func appendBiodata(eegData: Data) {
-        guard self.cloudService.socket.isConnected else {
+        guard let _ = self.cloudService else { return }
+        
+        guard self.cloudService!.socket.isConnected else {
             _eegBuffer.removeAll()
             return
         }
@@ -121,7 +124,7 @@ public class AffectiveCloudClient {
 
         for element in results {
             let data_int = element.map { Int($0) }
-            self.cloudService.biodataUpload(options: .EEG, eegData: data_int)
+            self.cloudService?.biodataUpload(options: .EEG, eegData: data_int)
             if _eegBuffer.count >= _eegBufferSize {
                 _eegBuffer.removeFirst(_eegBufferSize)
             }
@@ -138,7 +141,9 @@ public class AffectiveCloudClient {
     /// Affective services: .arousal 、.pressure
     /// - Parameter data: the heart data from the hardware
     public func appendBiodata(hrData: Data) {
-        guard self.cloudService.socket.isConnected else {
+        guard let _ = self.cloudService else {return}
+        
+        guard self.cloudService!.socket.isConnected else {
             _hrBuffer.removeAll()
             return
         }
@@ -156,7 +161,7 @@ public class AffectiveCloudClient {
         for element in results {
             let data_int = element.map { Int($0) }
             DLog("upload hr data")
-            self.cloudService.biodataUpload(options: .HeartRate, hrData: data_int)
+            self.cloudService?.biodataUpload(options: .HeartRate, hrData: data_int)
             if _hrBuffer.count >= _hrBufferSize {
                 _hrBuffer.removeFirst(_hrBufferSize)
             }
@@ -169,21 +174,21 @@ public class AffectiveCloudClient {
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func subscribeBiodataServices(services: BiodataParameterOptions) {
         //self.cloudService.biodataSubscribe(parameters: services)
-        self.cloudService.bioSubscription = services
+        self.cloudService?.bioSubscription = services
     }
 
     /// unsubscribe the specificed service
     /// cloud service will stop response the analyzed data in the service.
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func unsubscribeBiodataServices(services: BiodataParameterOptions) {
-        self.cloudService.biodataUnSubscribe(parameters: services)
+        self.cloudService?.biodataUnSubscribe(parameters: services)
     }
 
     /// generate the report according your service
     /// you will get the report data in `biodataReport(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func getBiodataReport(services: BiodataTypeOptions) {
-        self.cloudService.biodataReport(options: services)
+        self.cloudService?.biodataReport(options: services)
     }
 
     //MARK: - Emotion
@@ -192,14 +197,14 @@ public class AffectiveCloudClient {
     /// - Parameter services: emotion services list: like: .attention  .relaxation  .pleasure  .pressure and .arousal
     public func startAffectiveDataServices(services: AffectiveDataServiceOptions) {
         //self.cloudService.emotionStart(services: services)
-        self.cloudService.affectiveService = services
+        self.cloudService?.affectiveService = services
     }
 
     /// generate the report according your service
     /// you will get the report data in `affectiveReport(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: emotion serivce
     public func getAffectiveDataReport(services: AffectiveDataServiceOptions) {
-        self.cloudService.emotionReport(services: services)
+        self.cloudService?.emotionReport(services: services)
     }
 
     /// By subscribing the specificed service
@@ -207,19 +212,19 @@ public class AffectiveCloudClient {
     /// - Parameter services: emotion service
     public func subscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
         //self.cloudService.emotionSubscribe(services: services)
-        self.cloudService.affectiveSubscription = services
+        self.cloudService?.affectiveSubscription = services
     }
 
     /// unsubscribe the specificed service
     /// cloud service will stop response the analyzed data with the specified service.
     /// - Parameter services: emotion services
     public func unsubscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
-        self.cloudService.emotionUnSubscribe(services: services)
+        self.cloudService?.emotionUnSubscribe(services: services)
     }
 
     /// close emotion service with the sepecified service
     /// - Parameter services: emotion services
     public func finishAffectiveDataServices(services: AffectiveDataServiceOptions) {
-        self.cloudService.emotionClose(services: services)
+        self.cloudService?.emotionClose(services: services)
     }
 }
