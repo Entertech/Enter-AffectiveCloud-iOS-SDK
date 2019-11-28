@@ -993,10 +993,10 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.delegate?.biodataServicesReport(client: self.client, response: model)
                 NotificationCenter.default.post(name: NSNotification.Name.biodataServicesReportNotify, object: nil, userInfo: ["biodataServicesReport":model])
             case (CSServicesType.affective.rawValue, CSEmotionOperation.start.rawValue):
-                if let dataModel = model.dataModel as? CSResponseDataJSONModel,
-                    let list = dataModel.affectiveList {
-                    self.appendEmotionAffectiveInitialList(list: list)
-
+                if let dataModel = model.dataModel as? CSResponseDataJSONModel{
+                    if let list = dataModel.affectiveList {
+                        self.appendEmotionAffectiveInitialList(list: list)
+                    }
                 }
                 if model.code == 0 {
                     if let subs = self.affectiveSubscription {

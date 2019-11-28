@@ -183,7 +183,7 @@ public class CSResponseDataJSONModel: HandyJSON {
         mapper <<<
             self.biodataList <-- "bio_data_type"
         mapper <<<
-            self.affectiveList <-- "cloud_services"
+            self.affectiveList <-- "cloud_service"
     }
 }
 
