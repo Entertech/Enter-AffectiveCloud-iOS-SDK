@@ -330,9 +330,9 @@
 			children = (
 				B7E125D2230559590072DF22 /* EnterAffectiveCloud */,
 				FA55EA4F234C273A00C148BF /* EnterAffectiveCloudUI */,
-				FACEDFE32351BB440016176C /* EnterRealtimeUIDemo */,
-				FA9343592356E59B00544239 /* EnterReportUIDemo */,
 				FA9231A7236BD07B00A50C64 /* EnterAffectiveCloudTests */,
+				FA9343592356E59B00544239 /* EnterReportUIDemo */,
+				FACEDFE32351BB440016176C /* EnterRealtimeUIDemo */,
 				B7E125D1230559590072DF22 /* Products */,
 				078AEE4D9378B78AC7596C31 /* Pods */,
 				770F7293DC047C78D3D9B171 /* Frameworks */,

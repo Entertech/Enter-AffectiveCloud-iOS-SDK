@@ -215,4 +215,10 @@ extension Array {
 }
 
 
+extension UIView {
+    func copyView() -> Any {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self))! as Any
+    }
+}
+
 

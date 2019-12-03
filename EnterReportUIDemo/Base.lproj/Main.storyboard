@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -160,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1917"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1I-AJ-fBG">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1917"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1946"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="脑电波频谱占比" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDZ-me-Hpn">
                                                 <rect key="frame" x="16" y="76" width="227" height="39"/>
@@ -189,35 +189,35 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeZ-FV-WyN" customClass="HeartRateVariablityReportView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="776" width="382" height="231"/>
+                                                <rect key="frame" x="16" y="776" width="382" height="260"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="231" id="RQG-bQ-WPQ"/>
+                                                    <constraint firstAttribute="height" constant="260" id="RQG-bQ-WPQ"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojm-kF-T35" customClass="AttentionReportView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="1078" width="382" height="298"/>
+                                                <rect key="frame" x="16" y="1107" width="382" height="298"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="298" id="u8i-QR-bX9"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbW-E9-ZkW" customClass="RelaxationReportView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="1384" width="382" height="298"/>
+                                                <rect key="frame" x="16" y="1413" width="382" height="298"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="298" id="1Ap-ln-Z9T"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3AU-ds-lJw" customClass="PressureReportView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="1690" width="382" height="184"/>
+                                                <rect key="frame" x="16" y="1719" width="382" height="184"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="184" id="mSY-7I-Yol"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情绪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fl-P4-Jpn">
-                                                <rect key="frame" x="16" y="1031" width="65" height="39"/>
+                                                <rect key="frame" x="16" y="1060" width="65" height="39"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>

@@ -37,11 +37,13 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     /// 按钮图片
     public var buttonImageName: String = "" {
         didSet {
-            infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+            if buttonImageName != "" {
+                infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+            }
         }
     }
     
-    public var isShowInfoIcon: Bool = false {
+    public var isShowInfoIcon: Bool = true {
         didSet {
             infoBtn?.isHidden = !self.isShowInfoIcon
         }
@@ -78,12 +80,17 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     }
     
     public var lineColor: UIColor = UIColor.colorWithInt(r: 255, g: 72, b: 82, alpha: 1)
+    public var isChartScale = false {
+        willSet {
+            chartView?.scaleXEnabled = newValue
+        }
+    }
     
     //MARK:- Private UI
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.4
     private var timeStamp = 0
-    
+    private var hrvArray: [Int]?
     //MARK:- Private UI
     private var bgView: UIView?
     private var titleLabel: UILabel?
@@ -93,7 +100,8 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     private var xLabel: UILabel?
     private var avgLabel: UILabel?
     private var msLabel: UILabel?
-    
+    private var zoomBtn: UIButton?
+    private var nShowChartView: UIView?
     public init() {
         super.init(frame: CGRect.zero)
     }
@@ -152,17 +160,16 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         chartView?.drawBordersEnabled = false
         chartView?.chartDescription?.enabled = false
         chartView?.pinchZoomEnabled = false
-        chartView?.setScaleEnabled(false)
+        chartView?.scaleXEnabled = false
+        chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
-        chartView?.isUserInteractionEnabled = false
+        chartView?.highlightPerTapEnabled = false
         
         let leftAxis = chartView!.leftAxis
-        leftAxis.axisMaximum = 150
-        leftAxis.axisMinimum = 0
         leftAxis.labelPosition = .insideChart
         leftAxis.labelTextColor = alphaColor
         leftAxis.drawGridLinesEnabled = false
-        leftAxis.labelCount = 16
+        leftAxis.axisMaxLabels = 3
         chartView?.rightAxis.enabled = false
         
         let xAxis = chartView!.xAxis
@@ -171,6 +178,8 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         xAxis.labelPosition = .bottom
         xAxis.gridColor = secondColor
         xAxis.labelTextColor = alphaColor
+        xAxis.axisMaxLabels = 8
+
         bgView?.addSubview(chartView!)
         
         avgLabel = UILabel()
@@ -184,6 +193,11 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         msLabel?.textColor = secondColor
         msLabel?.isHidden = true
         bgView?.addSubview(msLabel!)
+        
+        zoomBtn = UIButton(type: .custom)
+        zoomBtn?.setImage(UIImage.loadImage(name: "icon_info_black"), for: .normal)
+        zoomBtn?.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        bgView?.addSubview(zoomBtn!)
     }
     
     override func setLayout() {
@@ -198,6 +212,11 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         infoBtn?.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel!.snp.centerY)
             $0.right.equalToSuperview().offset(-16)
+        }
+        
+        zoomBtn?.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel!.snp.centerY)
+            $0.right.equalToSuperview().offset(-60)
         }
         
         yLabel?.snp.makeConstraints {
@@ -228,20 +247,112 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         }
     }
     
-    @objc private func infoBtnTouchUpInside() {
+    @objc
+    private func infoBtnTouchUpInside() {
         let url = URL(string: infoUrlString)!
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
+    private var isZoomed = false
+    @objc
+    private func zoomBtnTouchUpInside(sender: UIButton) {
+        if !isZoomed {
+            let vc = self.parentViewController()!
+            vc.navigationController?.setNavigationBarHidden(true, animated: true)
+            let view = vc.view
+            nShowChartView = UIView()
+            nShowChartView?.backgroundColor = .white
+            view?.addSubview(nShowChartView!)
+            
+            
+            let chart = self.copyView() as! HeartRateVariablityReportView
+            nShowChartView?.addSubview(chart)
+            chart.mainColor = self.mainColor
+            chart.bgColor = self.bgColor
+            chart.cornerRadius = self.cornerRadius
+            chart.buttonImageName = self.buttonImageName
+            chart.isShowInfoIcon = self.isShowInfoIcon
+            chart.infoUrlString = self.infoUrlString
+            chart.sample = self.sample
+            chart.textColor = self.textColor
+            chart.avgValue = self.avgValue
+            chart.lineColor = self.lineColor
+            chart.isChartScale = self.isChartScale
+            chart.setDataFromModel(hrv: self.hrvArray, timestamp: self.timeStamp)
+            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
+            chart.isZoomed = true
+            
+            nShowChartView?.snp.makeConstraints {
+                $0.left.right.top.equalToSuperview()
+                $0.bottom.equalTo(view!.safeAreaLayoutGuide)
+            }
+            chart.snp.remakeConstraints {
+                $0.width.equalTo(nShowChartView!.snp.height)
+                $0.height.equalTo(nShowChartView!.snp.width)
+                $0.center.equalToSuperview()
+            }
+            
+            chart.infoBtn?.snp.remakeConstraints {
+                $0.centerY.equalTo(chart.titleLabel!.snp.centerY)
+                $0.right.equalToSuperview().offset(-32)
+            }
+            
+            chart.zoomBtn?.snp.remakeConstraints {
+                $0.centerY.equalTo(chart.titleLabel!.snp.centerY)
+                $0.right.equalToSuperview().offset(-80)
+            }
+            
+            chart.titleLabel?.snp.remakeConstraints{
+                $0.left.equalToSuperview().offset(24)
+                $0.top.equalToSuperview().offset(36)
+            }
+            
+            chart.chartView?.snp.remakeConstraints {
+                $0.left.equalToSuperview().offset(36)
+                $0.right.equalToSuperview().offset(-36)
+                $0.top.equalToSuperview().offset(80)
+                $0.bottom.equalToSuperview().offset(-80)
+            }
+            
+            chart.yLabel?.snp.remakeConstraints {
+                $0.centerX.equalToSuperview().multipliedBy(0.1)
+                $0.centerY.equalToSuperview().multipliedBy(0.9)
+            }
+            
+            chart.xLabel?.snp.remakeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalToSuperview().offset(-50)
+            }
+            
+            chart.avgLabel?.snp.remakeConstraints {
+                $0.bottom.equalToSuperview().offset(-24)
+                $0.right.equalTo(chart.msLabel!.snp.left).offset(-5)
+            }
+            
+            chart.msLabel?.snp.remakeConstraints {
+                $0.bottom.equalToSuperview().offset(-24)
+                $0.right.equalToSuperview().offset(-32)
+            }
+            
+        } else {
+            isZoomed = false
+            self.superview?.removeFromSuperview()
+        }
+        
+    }
+    
+    
     public func setDataFromModel(hrv: [Int]?, timestamp: Int? = nil) {
         
-        if let timestamp = timestamp {
+        if let timestamp = timestamp, timestamp != 0 {
             timeStamp = timestamp
+            
             xLabel?.isHidden = true
         }
         
         if let hrv = hrv {
+            hrvArray = hrv
             setDataCount(hrv)
         }
         
@@ -295,19 +406,40 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         
     }
     
+    private var timeApart: [Int] = []
     private func setLimitLine(_ valueCount: Int) {
         let timeCount = Double(valueCount * sample) * interval
         let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
         
-        var time: [Int] = []
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
-            time.append(i)
+            timeApart.append(i)
         }
         
-        self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(time, timeStamp)
+        chartView?.xAxis.axisMinimum = 0
+        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        
+        self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
  
-        self.chartView?.leftAxis.valueFormatter = HRVValueFormatter()
+        //self.chartView?.leftAxis.valueFormatter = HRVValueFormatter()
 
+    }
+    
+    private var isScaled = false
+    public func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        let lineChart = chartView as! LineChartView
+        if lineChart.scaleX > 1.1{
+            if !isScaled {
+                self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeStamp, true)
+                isScaled = true
+                
+            }
+        } else {
+            if isScaled {
+                self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
+                isScaled = false
+            }
+        }
     }
 }
 
@@ -336,6 +468,7 @@ public class HRVXValueFormatter: NSObject, IAxisValueFormatter {
     private var values: [Double] = [];
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()
+    private var isScaled = false
     /// 初始化
     ///
     /// - Parameters:
@@ -348,15 +481,27 @@ public class HRVXValueFormatter: NSObject, IAxisValueFormatter {
         }
         
         self.timestamp = timestamp
-        
+        isScaled = false
+        dateFormatter.dateFormat = "HH:mm"
+    }
+    
+    public init(_ timestamp: Int = 0, _ isScaled: Bool = false) {
+        self.isScaled = isScaled
+        self.timestamp = timestamp
+               
         dateFormatter.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         if timestamp == 0 {
             var date = ""
-            axis?.entries = self.values
-            date = "\(Int(value / 60))"
+            
+            if isScaled {
+                date = String(format: "%0.1lf", value / 60.0)
+            } else {
+                axis?.entries = self.values
+                date = "\(Int(value / 60))"
+            }
             return date
         } else {
             var time = 0

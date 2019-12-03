@@ -1,15 +1,26 @@
 # 情感云UI
 
-> 情感云UI分两部分, 实时数据展示UI和报表数据UI, 可选用需要的部分
-> 所有UI继承自UIView, 可自己定义需要的Layer, 我们也提供了一些参数给您可以选择UI样式
+> 情感云UI分两部分, 实时数据展示UI和报表数据UI, 可选用需要的部分。
+> 所有UI继承自UIView, 可自己定义需要的Layer, 我们也提供了一些参数给您可以选择UI样式。
 
 - [情感云UI](#%e6%83%85%e6%84%9f%e4%ba%91ui)
   - [实时数据UI](#%e5%ae%9e%e6%97%b6%e6%95%b0%e6%8d%aeui)
+    - [RealtimeHeartRateView](#realtimeheartrateview)
+    - [RealtimeAttentionView & RealtimeRelaxationView & RealtimePressureView](#realtimeattentionview--realtimerelaxationview--realtimepressureview)
+    - [RealtimeBrainwaveSpectrumView](#realtimebrainwavespectrumview)
+    - [RealtimeBrainwaveView](#realtimebrainwaveview)
   - [报表数据UI](#%e6%8a%a5%e8%a1%a8%e6%95%b0%e6%8d%aeui)
+    - [BrainSpecturmReportView](#brainspecturmreportview)
+    - [HeartRateReportView](#heartratereportview)
+    - [HeartRateVariablityReportView](#heartratevariablityreportview)
+    - [RelaxationReportView & AttentionReportView](#relaxationreportview--attentionreportview)
+    - [PressureChart](#pressurechart)
 
 ## 实时数据UI
 
-**RealtimeHeartRateView**
+### RealtimeHeartRateView
+
+合适View高度: 123
 
 ![image-20191010145121952](img/../../img/image-20191010145121952.png)
 
@@ -24,7 +35,9 @@
 | infoUrlString      | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接                                                                                                                   |
 | buttonImageName    | String  | `"info_button_icon"`           | 按钮图片                                                                                                                               |
 
-**RealtimeAttentionView & RealtimeRelaxationView & RealtimePressureView**
+### RealtimeAttentionView & RealtimeRelaxationView & RealtimePressureView
+
+合适View高度: 152
 
 ![image-20191010145415901](img/../../img/image-20191010145415901.png)
 
@@ -38,7 +51,9 @@
 | infoUrlString   | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接 |
 | buttonImageName | String  | `"info_button_icon"`           | 按钮图片             |
 
-**RealtimeBrainwaveSpectrumView**
+### RealtimeBrainwaveSpectrumView
+
+合适View高度: 232
 
 ![image-20191010150032042](img/../../img/image-20191010150032042.png)
 
@@ -53,7 +68,9 @@
 | infoUrlString   | String  | `"https://demo.entertech.com"` | 实时数据说明网页链接 |
 | buttonImageName | String  | `"info_button_icon"`           | 按钮图片             |
 
-**RealtimeBrainwaveView**
+### RealtimeBrainwaveView
+
+合适View高度: 321
 
 ![image-20191010150729231](img/../../img/image-20191010150729231.png)
 
@@ -72,7 +89,11 @@
 
 ## 报表数据UI
 
-**BrainSpecturmReportView**
+### BrainSpecturmReportView
+
+**参数**
+
+合适View高度: 314
 
 ![image-20191014140326307](img/../../img/image-20191014140326307.png)
 
@@ -88,7 +109,10 @@
 | borderRadius       | CGFloat   | 8                                           | 圆角                                      |
 | infoUrlString      | String    | `https://demo.com`                          | 按钮打开的说明网页                        |
 
-**HeartRateReportView**
+
+### HeartRateReportView
+
+合适View高度: 285
 
 ![image-20191014141340894](img/../../img/image-20191014141340894.png)
 
@@ -107,7 +131,9 @@
 | borderRadius        | CGFloat   | 8                                | 圆角                                      |
 | infoUrlString       | String    | `https://demo.com`               | 按钮打开的说明网页                        |
 
-**HeartRateVariablityReportView**
+### HeartRateVariablityReportView
+
+合适View高度: 260
 
 ![image-20191014141910905](img/../../img/image-20191014141910905.png)
 
@@ -124,7 +150,9 @@
 | borderRadius       | CGFloat | 8                    | 圆角                                      |
 | infoUrlString      | String  | `https://demo.com`   | 按钮打开的说明网页                        |
 
-**RelaxationReportView & AttentionReportView**
+### RelaxationReportView & AttentionReportView
+
+合适View高度: 298
 
 ![image-20191014142421739](img/../../img/image-20191014142421739.png)
 
@@ -143,7 +171,9 @@
 | borderRadius       | CGFloat | 8                    | 圆角                                      |
 | infoUrlString      | String  | `https://demo.com`   | 按钮打开的说明网页                        |
 
-**PressureChart**
+### PressureChart
+
+合适View高度: 195
 
 ![image-20191014142733860](img/../../img/image-20191014142733860.png)
 

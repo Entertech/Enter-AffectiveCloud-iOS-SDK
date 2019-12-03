@@ -29,6 +29,13 @@ class FirstViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        spectrumView.setShadow()
+        heartRateView.setShadow()
+        hrvView.setShadow()
+        attentionView.setShadow()
+        relaxationView.setShadow()
+        pressureView.setShadow()
+        
         let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
         if let samplePath = samplePath {
             service.dataOfReport = ReportFileHander.readReportFile(samplePath)
@@ -44,10 +51,21 @@ class FirstViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        hrvView.isChartScale = true
+        attentionView.isChartScale = true
         service.show(object: self)
         
     }
 
 
+}
+
+extension UIView {
+    func setShadow() {
+        self.layer.shadowRadius  = 5.0
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
 }
 

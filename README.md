@@ -212,6 +212,8 @@ hrView.observe()
 
 **完整图示**
 
+可以对每个View进行自定义,如下图
+
 ![图示](img/WechatIMG1.jpeg)
 
 ## 报表UI
@@ -254,8 +256,9 @@ setDataFromModel 方法有两个参数
 
 **完整图示**
 
-在暗色模式下,经过定制可作出如下效果
-![暗色模式](img/IMG_5019.JPG)
+经过定制可作出如下效果
+
+![模式](img/11575274026_.pic.jpg)
 
 ## 情感云UI详细API
 - 情感云UI的API文档请查看: [情感云UI文档](APIDocuments/AffectiveCloudUI.md)
