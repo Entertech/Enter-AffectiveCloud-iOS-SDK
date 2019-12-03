@@ -45,7 +45,7 @@ hrView.observe()
 
 ### 完整图示
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/WechatIMG1.jpeg" width="250">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/WechatIMG1.jpeg" width="300">
 
 
 ## 报表UI
@@ -92,7 +92,7 @@ setDataFromModel 方法有两个参数
 
 经过定制可作出如下效果
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_5034.JPG" width="250">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_5034.JPG" width="300">
 
 ## 情感云UI详细API
 - 情感云UI的API文档请查看: [情感云UI文档](../APIDocuments/AffectiveCloudUI.md)
