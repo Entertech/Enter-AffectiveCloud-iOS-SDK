@@ -39,12 +39,12 @@ hrView.snp.makeConstraints {
 // 开启监听, 开启情感云后会自动更新界面上的心率数据
 hrView.observe()
 ```
-
-![hr](img/hr_screenshoot.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/hr_screenshoot.png" width="300">
 
 ### 完整图示
 
-![图示](img/WechatIMG1.jpeg)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/WechatIMG1.jpeg" width="250">
+
 
 ## 报表UI
 
@@ -79,15 +79,18 @@ setDataFromModel 方法有两个参数
 | timestamp | Int      | 情感云的起始时间, 可不设置 |
 
 不传timestamp参数时, X轴坐标
-![attention_no](img/attention_no_timestamp.png)
+
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/attention_no_timestamp.png" width="300">
 
 传入timestamp时, X轴坐标
-![attention](img/attention_with_timstamp.png)
+
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/attention_with_timstamp.png" width="300">
 
 ### 完整图示
 
 经过定制可作出如下效果
-![加阴影](img/IMG_5034.JPG)
+
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_5034.JPG" width="250">
 
 ## 情感云UI详细API
 - 情感云UI的API文档请查看: [情感云UI文档](../APIDocuments/AffectiveCloudUI.md)
