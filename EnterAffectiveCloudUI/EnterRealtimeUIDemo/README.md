@@ -24,5 +24,4 @@ Demo使用`Cocopods`管理依赖库，使用前要先对工程主目录运行`po
 本工程由storyboard设置UI布局，代码设置参数。
 
 ### 页面展示
-
-![演示1](../../img/IMG_1387CA2E29C4-1.jpeg)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_1387CA2E29C4-1.jpeg" width="300">
