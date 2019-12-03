@@ -35,20 +35,27 @@ class FirstViewController: UIViewController {
         super.viewWillAppear(animated)
         
         heartLargeView.observe(with: 65) // 开始开启监听
+        heartLargeView.setShadow()
         
         heartSmallView.observe(with: 65)
         heartSmallView.isShowExtremeValue = false //不显示最大最小值
+        heartSmallView.setShadow()
         
         heartNoValueView.observe()  // 观察者并且不用赋值初始值
         heartNoValueView.isShowExtremeValue = false
+        heartNoValueView.setShadow()
         
         attentionView.observe(with: 39)
+        attentionView.setShadow()
         
         attentionSmallView.observe(with: 39)
+        attentionSmallView.setShadow()
         
         relaxationView.observe(with: 69)
+        relaxationView.setShadow()
         
-        spectrumView.observe(with: (0.59, 0.28, 0.1, 0.02, 0.1))
+        spectrumView.observe(with: (0.1, 0.28, 0.59, 0.02, 0.1))
+        spectrumView.setShadow()
         
         // 为eeg脑波复制，创建左右脑数组
         var leftArray: [Float] = []
@@ -62,6 +69,7 @@ class FirstViewController: UIViewController {
             rightArray.append(Float(random - 100))
         }
         brainwaveView.observe(with: leftArray, right: rightArray)
+        brainwaveView.setShadow()
         
         tipView.showTip()
         
@@ -69,9 +77,15 @@ class FirstViewController: UIViewController {
         
         
     }
-    
-
-
 
 }
 
+
+extension UIView {
+    func setShadow() {
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 5
+        self.layer.shadowColor  = UIColor.gray.cgColor
+    }
+}
