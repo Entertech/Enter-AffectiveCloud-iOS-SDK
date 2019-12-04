@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '11.0'
   s.swift_version = '5'
-  s.source_files = 'EnterAffectiveCloudUI/**/*.swift'
-  s.resources = "EnterAffectiveCloudUI/**/*.{xcassets,gif}"
+  s.source_files = 'UI/EnterAffectiveCloudUI/**/*.swift'
+  s.resources = "UI/EnterAffectiveCloudUI/**/*.{xcassets,gif}"
   s.dependency 'RxSwift', '5.0'
   s.dependency 'SnapKit'
   s.dependency 'Charts'
