@@ -9,7 +9,7 @@
 import UIKit
 import EnterAffectiveCloudUI
 
-class SecondViewController: UIViewController {
+class SecondRealtimeViewController: UIViewController {
 
     @IBOutlet weak var brainwaveView: RealtimeBrainwaveView!
     @IBOutlet weak var spectrumView: RealtimeBrainwaveSpectrumView!

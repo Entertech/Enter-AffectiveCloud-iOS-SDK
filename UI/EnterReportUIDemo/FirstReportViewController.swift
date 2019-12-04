@@ -10,7 +10,7 @@ import UIKit
 import EnterAffectiveCloud
 import EnterAffectiveCloudUI
 
-class FirstViewController: UIViewController {
+class FirstReportViewController: UIViewController {
 
     private let service = ReportViewService()
     
