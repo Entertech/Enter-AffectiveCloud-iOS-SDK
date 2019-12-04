@@ -40,8 +40,8 @@
 source 'git@github.com:EnterTech/PodSpecs.git'
 
 target 'Your Target' do
-    pod 'EnterAffectiveCloud', '~> 1.3.6'
-    pod 'EnterAffectiveCloudUI', '~> 1.3.6'  #(可选)
+    pod 'EnterAffectiveCloud', '~> 1.3.7'
+    pod 'EnterAffectiveCloudUI', '~> 1.3.7'  #(可选)
 end
 ```
 运行 `pod  install` 安装命令.
