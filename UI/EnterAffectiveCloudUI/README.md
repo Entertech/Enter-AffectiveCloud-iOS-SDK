@@ -14,8 +14,6 @@
 
 ## Demo
 
-## Demo演示
-
 UI库的Demo包含以下组件：
 - [1.实时数据演示Demo](../EnterRealtimeUIDemo/)
 - [2.报表数据演示Demo](../EnterReportUIDemo/)
