@@ -21,9 +21,9 @@
 ## 结构说明
 
 - [EnterAffectiveCloud](EnterAffectiveCloud/)提供了向算法平台提供脑波数据和心率数据的接口，同时可以计算多种情绪值
-- [EnterAffectiveCloudUI](EnterAffectiveCloudUI/) 提供了各UI模块用以展示实时数据和报表数据(可选)。
+- [EnterAffectiveCloudUI](UI/EnterAffectiveCloudUI/) 提供了各UI模块用以展示实时数据和报表数据(可选)。
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/4.png" width="500">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/6.png" width="500">
 
 ## 安装集成
 

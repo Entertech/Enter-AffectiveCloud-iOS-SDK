@@ -3,7 +3,7 @@
 
 ## 结构说明 
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/5.png" width="500">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/7.png" width="500">
 
 UI库：
 - [情感云数据标准UI](EnterAffectiveCloudUI/)

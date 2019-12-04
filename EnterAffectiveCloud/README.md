@@ -31,7 +31,7 @@ let client = AffectiveCloudClient(websocketURLString: yourURL, appKey: yourAppKe
 | websocketURLString | String | 情感云websocket的url字符串            |
 | appKey             | String | 情感云的appKey，向您的合作伙伴获取    |
 | appSecret          | String | 情感云的appSecret，向您的合作伙伴获取 |
-| userID             | String | 您本地App的id字段                     |
+| userID             | String | 您本地App的id字段, 要保证唯一性， 请参考[id](https://docs.affectivecloud.com/%F0%9F%8E%99%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE/3.%20%E4%BC%9A%E8%AF%9D%E5%8D%8F%E8%AE%AE.html#userID)                    |
 
 
 ### 服务订阅
