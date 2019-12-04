@@ -5,6 +5,7 @@
 - [Enter-AffectiveCloud-iOS-SDK](#enter-affectivecloud-ios-sdk)
 - [目录](#%e7%9b%ae%e5%bd%95)
 - [SDK 说明](#sdk-%e8%af%b4%e6%98%8e)
+  - [Demo演示](#Demo演示)
   - [结构说明](#%e7%bb%93%e6%9e%84%e8%af%b4%e6%98%8e)
   - [安装集成](#%e5%ae%89%e8%a3%85%e9%9b%86%e6%88%90)
     - [版本需求](#%e7%89%88%e6%9c%ac%e9%9c%80%e6%b1%82)
@@ -17,6 +18,10 @@
 在开始开发前，请先查看回车情感云的[开发文档](https://docs.affectivecloud.com)，了解情感云平台的架构和所能提供的服务具体说明，确定好你的应用中所需要的服务。你还需要联系管理员注册好测试应用，然后再进行开发。
 
 为了方便你进行 iOS 平台的快速开发，我们提供了情感云快速开发 SDK，通过本 SDK 你可以快速地将情感云的能力集成到你的 app 中。
+
+## Demo演示
+
+[心流](https://github.com/Entertech/Enter-AffectiveCloud-Demo-iOS.git)这个演示应用集成了基础蓝牙功能、蓝牙设备管理界面、情感云SDK、以及自定义的数据展示控件，较好的展示了脑波及心率数据从 硬件中采集到上传情感云实时分析最后产生分析报表及数据展示的整个过程。
 
 ## 结构说明
 
