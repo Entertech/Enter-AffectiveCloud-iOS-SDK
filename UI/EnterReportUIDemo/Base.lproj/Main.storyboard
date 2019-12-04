@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--First-->
+        <scene sceneID="hNz-n2-bh7">
+            <objects>
+                <viewController id="9pv-A4-QxB" customClass="FirstReportViewController" customModule="EnterReportUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGp-8N-tTl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="2051"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0db-VQ-bef">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2017"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="脑电波频谱占比" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kU-oE-UN5">
+                                                <rect key="frame" x="16" y="76" width="227" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3w-bu-fKu" customClass="BrainSpecturmReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="127" width="382" height="314"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="314" id="8hX-y4-Yrs"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心率" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8I-KS-3CC">
+                                                <rect key="frame" x="16" y="465" width="65" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWz-9S-Gq7" customClass="HeartRateReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="516" width="382" height="285"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="285" id="QO6-KC-ftA"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWV-0h-iy3" customClass="HeartRateVariablityReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="809" width="382" height="260"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="260" id="7hM-WC-099"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情绪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Juc-mS-i74">
+                                                <rect key="frame" x="16" y="1093" width="65" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8YP-13-tjJ" customClass="AttentionReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="1140" width="382" height="298"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="298" id="HWc-ha-ePb"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTt-ot-zCr" customClass="RelaxationReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="1446" width="382" height="298"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="298" id="Ric-h0-lZK"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDc-S5-dod" customClass="PressureReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="1752" width="382" height="200"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="n6u-yz-d8p"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="MWz-9S-Gq7" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="0Jf-Vs-O6k"/>
+                                            <constraint firstItem="E8I-KS-3CC" firstAttribute="top" secondItem="G3w-bu-fKu" secondAttribute="bottom" constant="24" id="6TY-tZ-jg3"/>
+                                            <constraint firstItem="eDc-S5-dod" firstAttribute="top" secondItem="yTt-ot-zCr" secondAttribute="bottom" constant="8" id="7cH-iF-LCO"/>
+                                            <constraint firstAttribute="trailing" secondItem="8YP-13-tjJ" secondAttribute="trailing" constant="16" id="8tO-Yv-EAx"/>
+                                            <constraint firstAttribute="trailing" secondItem="eDc-S5-dod" secondAttribute="trailing" constant="16" id="ATD-xh-6k3"/>
+                                            <constraint firstAttribute="trailing" secondItem="yTt-ot-zCr" secondAttribute="trailing" constant="16" id="LPX-sM-UNM"/>
+                                            <constraint firstItem="E8I-KS-3CC" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="Mus-Nz-OPD"/>
+                                            <constraint firstItem="yTt-ot-zCr" firstAttribute="top" secondItem="8YP-13-tjJ" secondAttribute="bottom" constant="8" id="OGA-z0-872"/>
+                                            <constraint firstAttribute="bottom" secondItem="eDc-S5-dod" secondAttribute="bottom" constant="65" id="OIK-to-JW0"/>
+                                            <constraint firstAttribute="trailing" secondItem="PWV-0h-iy3" secondAttribute="trailing" constant="16" id="SXw-4e-eA5"/>
+                                            <constraint firstItem="8YP-13-tjJ" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="Sfk-2g-pHw"/>
+                                            <constraint firstItem="PWV-0h-iy3" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="T9Q-lw-PY6"/>
+                                            <constraint firstItem="PWV-0h-iy3" firstAttribute="top" secondItem="MWz-9S-Gq7" secondAttribute="bottom" constant="8" id="Tou-AP-P2G"/>
+                                            <constraint firstItem="1kU-oE-UN5" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="UCn-pC-4C7"/>
+                                            <constraint firstAttribute="trailing" secondItem="MWz-9S-Gq7" secondAttribute="trailing" constant="16" id="UaP-1B-eV6"/>
+                                            <constraint firstItem="8YP-13-tjJ" firstAttribute="top" secondItem="Juc-mS-i74" secondAttribute="bottom" constant="8" id="bWQ-1b-mzX"/>
+                                            <constraint firstItem="G3w-bu-fKu" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="iPf-hR-Ez0"/>
+                                            <constraint firstItem="yTt-ot-zCr" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="jwE-Fo-vCB"/>
+                                            <constraint firstItem="G3w-bu-fKu" firstAttribute="top" secondItem="1kU-oE-UN5" secondAttribute="bottom" constant="12" id="kHr-v6-cab"/>
+                                            <constraint firstItem="Juc-mS-i74" firstAttribute="top" secondItem="PWV-0h-iy3" secondAttribute="bottom" constant="24" id="mSu-cF-HXq"/>
+                                            <constraint firstItem="MWz-9S-Gq7" firstAttribute="top" secondItem="E8I-KS-3CC" secondAttribute="bottom" constant="12" id="mpt-Q0-UvM"/>
+                                            <constraint firstItem="1kU-oE-UN5" firstAttribute="top" secondItem="0db-VQ-bef" secondAttribute="top" constant="76" id="uKH-3V-zI8"/>
+                                            <constraint firstAttribute="trailing" secondItem="G3w-bu-fKu" secondAttribute="trailing" constant="16" id="ufU-wr-iEU"/>
+                                            <constraint firstItem="eDc-S5-dod" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="vIB-Ix-jbs"/>
+                                            <constraint firstItem="Juc-mS-i74" firstAttribute="leading" secondItem="0db-VQ-bef" secondAttribute="leading" constant="16" id="wVu-rf-Izg"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="0db-VQ-bef" secondAttribute="bottom" id="LkA-kw-Ozh"/>
+                                    <constraint firstItem="0db-VQ-bef" firstAttribute="leading" secondItem="cGp-8N-tTl" secondAttribute="leading" id="Zv9-pN-Lv6"/>
+                                    <constraint firstAttribute="trailing" secondItem="0db-VQ-bef" secondAttribute="trailing" id="bRO-Ji-u4l"/>
+                                    <constraint firstItem="0db-VQ-bef" firstAttribute="top" secondItem="cGp-8N-tTl" secondAttribute="top" id="mn4-lR-AGI"/>
+                                    <constraint firstItem="0db-VQ-bef" firstAttribute="width" secondItem="n1V-yP-lca" secondAttribute="width" id="vz2-iW-xDm"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="1qq-eb-P4x"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="n1V-yP-lca"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cGp-8N-tTl" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="96W-yz-Ajs"/>
+                            <constraint firstAttribute="trailing" secondItem="cGp-8N-tTl" secondAttribute="trailing" id="PGD-xT-ldR"/>
+                            <constraint firstItem="cGp-8N-tTl" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="R2s-Nf-GOy"/>
+                            <constraint firstItem="cGp-8N-tTl" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="iYN-fS-S0j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="2100"/>
+                    <connections>
+                        <outlet property="attentionView" destination="8YP-13-tjJ" id="3Nt-8C-iPN"/>
+                        <outlet property="heartRateView" destination="MWz-9S-Gq7" id="9PX-3z-MWN"/>
+                        <outlet property="hrvView" destination="PWV-0h-iy3" id="I9x-0T-q5y"/>
+                        <outlet property="pressureView" destination="eDc-S5-dod" id="Ou7-Dn-CYN"/>
+                        <outlet property="relaxationView" destination="yTt-ot-zCr" id="XTc-v3-KSD"/>
+                        <outlet property="spectrumView" destination="G3w-bu-fKu" id="zTE-a9-CFJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.27536231884062" y="-320.08928571428572"/>
+        </scene>
+        <!--Second-->
+        <scene sceneID="wg7-f3-ORb">
+            <objects>
+                <viewController id="8rJ-Kc-sve" customClass="SecondReportViewController" customModule="EnterReportUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dba-fc-ZbS">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1951"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1I-AJ-fBG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1917"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="脑电波频谱占比" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDZ-me-Hpn">
+                                                <rect key="frame" x="16" y="76" width="227" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F6T-qw-hn0">
+                                                <rect key="frame" x="16" y="436" width="65" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDi-mE-6OS" customClass="BrainSpecturmReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="123" width="382" height="289"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="289" id="Otm-4Z-giA"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CbR-NR-7m1" customClass="HeartRateReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="483" width="382" height="285"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="285" id="2jx-Fz-zfw"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeZ-FV-WyN" customClass="HeartRateVariablityReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="776" width="382" height="231"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="231" id="RQG-bQ-WPQ"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojm-kF-T35" customClass="AttentionReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="1078" width="382" height="298"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="298" id="u8i-QR-bX9"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbW-E9-ZkW" customClass="RelaxationReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="1384" width="382" height="298"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="298" id="1Ap-ln-Z9T"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3AU-ds-lJw" customClass="PressureReportView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="1690" width="382" height="184"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="184" id="mSY-7I-Yol"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情绪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fl-P4-Jpn">
+                                                <rect key="frame" x="16" y="1031" width="65" height="39"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="ojm-kF-T35" firstAttribute="top" secondItem="1Fl-P4-Jpn" secondAttribute="bottom" constant="8" id="156-gd-V0V"/>
+                                            <constraint firstItem="LbW-E9-ZkW" firstAttribute="top" secondItem="ojm-kF-T35" secondAttribute="bottom" constant="8" id="2Dh-kn-zyC"/>
+                                            <constraint firstItem="F6T-qw-hn0" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="4Wu-88-WOP"/>
+                                            <constraint firstItem="3AU-ds-lJw" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="7Px-sO-jqE"/>
+                                            <constraint firstItem="gDZ-me-Hpn" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="BcL-a7-0nu"/>
+                                            <constraint firstItem="LbW-E9-ZkW" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="I6y-Jn-Whd"/>
+                                            <constraint firstAttribute="bottom" secondItem="3AU-ds-lJw" secondAttribute="bottom" constant="43" id="Jop-wS-KAw"/>
+                                            <constraint firstItem="CbR-NR-7m1" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="RKt-11-0fP"/>
+                                            <constraint firstItem="3AU-ds-lJw" firstAttribute="top" secondItem="LbW-E9-ZkW" secondAttribute="bottom" constant="8" id="Tya-JS-umS"/>
+                                            <constraint firstAttribute="trailing" secondItem="CbR-NR-7m1" secondAttribute="trailing" constant="16" id="U8O-go-78g"/>
+                                            <constraint firstAttribute="trailing" secondItem="LbW-E9-ZkW" secondAttribute="trailing" constant="16" id="V11-aA-OTR"/>
+                                            <constraint firstAttribute="trailing" secondItem="XeZ-FV-WyN" secondAttribute="trailing" constant="16" id="VdF-lr-4Y7"/>
+                                            <constraint firstAttribute="trailing" secondItem="3AU-ds-lJw" secondAttribute="trailing" constant="16" id="X1E-lC-4Me"/>
+                                            <constraint firstItem="kDi-mE-6OS" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="a82-Yz-AUS"/>
+                                            <constraint firstAttribute="trailing" secondItem="kDi-mE-6OS" secondAttribute="trailing" constant="16" id="ceF-ib-UJm"/>
+                                            <constraint firstItem="kDi-mE-6OS" firstAttribute="top" secondItem="gDZ-me-Hpn" secondAttribute="bottom" constant="8" id="dNf-f9-878"/>
+                                            <constraint firstItem="F6T-qw-hn0" firstAttribute="top" secondItem="kDi-mE-6OS" secondAttribute="bottom" constant="24" id="eiO-ky-SCa"/>
+                                            <constraint firstItem="gDZ-me-Hpn" firstAttribute="top" secondItem="n1I-AJ-fBG" secondAttribute="top" constant="76" id="fMS-Ri-rYz"/>
+                                            <constraint firstItem="1Fl-P4-Jpn" firstAttribute="top" secondItem="XeZ-FV-WyN" secondAttribute="bottom" constant="24" id="fej-Nq-tyD"/>
+                                            <constraint firstItem="CbR-NR-7m1" firstAttribute="top" secondItem="F6T-qw-hn0" secondAttribute="bottom" constant="8" id="hM3-25-78m"/>
+                                            <constraint firstItem="ojm-kF-T35" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="nS5-wc-U9Y"/>
+                                            <constraint firstItem="XeZ-FV-WyN" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="p3U-OW-2qR"/>
+                                            <constraint firstAttribute="trailing" secondItem="ojm-kF-T35" secondAttribute="trailing" constant="16" id="rnb-K1-KMg"/>
+                                            <constraint firstItem="XeZ-FV-WyN" firstAttribute="top" secondItem="CbR-NR-7m1" secondAttribute="bottom" constant="8" id="w91-ho-1vt"/>
+                                            <constraint firstItem="1Fl-P4-Jpn" firstAttribute="leading" secondItem="n1I-AJ-fBG" secondAttribute="leading" constant="16" id="zCK-9M-Uoa"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="n1I-AJ-fBG" secondAttribute="bottom" id="IWO-uu-jXh"/>
+                                    <constraint firstItem="n1I-AJ-fBG" firstAttribute="top" secondItem="dba-fc-ZbS" secondAttribute="top" id="OpQ-ES-eXs"/>
+                                    <constraint firstItem="n1I-AJ-fBG" firstAttribute="width" secondItem="dba-fc-ZbS" secondAttribute="width" id="YfN-Bg-WA5"/>
+                                    <constraint firstAttribute="trailing" secondItem="n1I-AJ-fBG" secondAttribute="trailing" id="j0n-Ja-sf3"/>
+                                    <constraint firstItem="n1I-AJ-fBG" firstAttribute="leading" secondItem="dba-fc-ZbS" secondAttribute="leading" id="vqR-AF-YvR"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="rTD-3K-rbj"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Cqj-v7-GEh"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dba-fc-ZbS" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="AuM-9p-vpO"/>
+                            <constraint firstItem="dba-fc-ZbS" firstAttribute="bottom" secondItem="O1u-W8-tvY" secondAttribute="bottom" id="Z73-Vc-L10"/>
+                            <constraint firstItem="dba-fc-ZbS" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="mOy-ge-LJu"/>
+                            <constraint firstItem="dba-fc-ZbS" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="nEi-M2-na4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="2000"/>
+                    <connections>
+                        <outlet property="attentionReportView" destination="ojm-kF-T35" id="Oz7-dV-e7t"/>
+                        <outlet property="brainReportView" destination="kDi-mE-6OS" id="mIR-BY-ATs"/>
+                        <outlet property="heartReportView" destination="CbR-NR-7m1" id="Oj4-at-lzW"/>
+                        <outlet property="hrvReportView" destination="XeZ-FV-WyN" id="xk8-6D-J7b"/>
+                        <outlet property="pressureReportView" destination="3AU-ds-lJw" id="keQ-gK-aRl"/>
+                        <outlet property="relaxationReportView" destination="LbW-E9-ZkW" id="pjh-1h-3Ls"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="790.84821428571422"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="yl2-sM-qoP">
+            <objects>
+                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
+                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-28" y="-320"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
+    </resources>
+</document>
