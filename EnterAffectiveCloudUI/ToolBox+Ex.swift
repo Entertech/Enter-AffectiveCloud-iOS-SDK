@@ -116,10 +116,10 @@ extension UIColor {
 
 extension UIImage {
     /// GIF
-    class func resolveGifImage(gif: String) -> [UIImage]{
+    class func resolveGifImage(gif: String, any: AnyClass) -> [UIImage]{
         var images:[UIImage] = []
-        //let gifPath = Bundle.init(identifier: "org.cocoapods.EnterAffectiveCloudUI")?.path(forResource: gif, ofType: "gif")
-        let gifPath = Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI")?.path(forResource: gif, ofType: "gif")
+        //let gifPath = Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI")?.path(forResource: gif, ofType: "gif")
+        let gifPath = Bundle(for: any).path(forResource: gif, ofType: "gif")
         if gifPath != nil{
             if let gifData = try? Data(contentsOf: URL.init(fileURLWithPath: gifPath!)){
                 let gifDataSource = CGImageSourceCreateWithData(gifData as CFData, nil)
@@ -134,9 +134,9 @@ extension UIImage {
         return images
     }
     
-    class func loadImage(name: String) -> UIImage {
+    class func loadImage(name: String, any: AnyClass) -> UIImage {
         //return UIImage(named: name, in: Bundle.init(identifier: "org.cocoapods.EnterAffectiveCloudUI"), compatibleWith: nil)!
-        return UIImage(named: name, in: Bundle.init(identifier: "cn.entertech.EnterAffectiveCloudUI"), compatibleWith: nil)!
+        return UIImage(named: name, in: Bundle(for: any), compatibleWith: nil)!
     }
 }
 

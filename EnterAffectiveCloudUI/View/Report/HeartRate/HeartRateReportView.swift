@@ -180,7 +180,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(titleLabel!)
         
         infoBtn = UIButton(type: .custom)
-        infoBtn?.setImage(UIImage.loadImage(name: "icon_info_black"), for: .normal)
+        infoBtn?.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         infoBtn?.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
         bgView?.addSubview(infoBtn!)
         

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'EnterAffectiveCloudUI'
-  s.version          = '1.3.5'
+  s.version          = '1.3.6'
   s.summary          = 'Entertech 情感云UI SDK'
   s.description      = <<-DESC
 情感云 SDK关联的UI，可以实时显示注意力、专注度、放松度、愉悦度和压力值等情绪相关的一些数据，也可以显示最终报表。
@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.dependency 'RxSwift', '5.0'
   s.dependency 'SnapKit'
   s.dependency 'Charts'
-  s.dependency 'EnterAffectiveCloud', '1.3.5'
+  s.dependency 'EnterAffectiveCloud', '1.3.6'
 end

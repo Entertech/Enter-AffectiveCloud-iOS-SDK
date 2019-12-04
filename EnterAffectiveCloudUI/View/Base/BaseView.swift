@@ -82,7 +82,7 @@ open class BaseView: UIView {
         }
         let imageView = UIImageView()
         maskView.addSubview(imageView)
-        imageView.animationImages = UIImage.resolveGifImage(gif: "loading")
+        imageView.animationImages = UIImage.resolveGifImage(gif: "loading", any: classForCoder)
         imageView.animationDuration = 2
         imageView.animationRepeatCount = Int.max
         imageView.startAnimating()

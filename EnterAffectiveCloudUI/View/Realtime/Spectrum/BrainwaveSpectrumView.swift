@@ -81,7 +81,7 @@ class BrainwaveSpectrumView: BaseView {
         self.addSubview(deltaLabel)
         self.addSubview(deltaValueLabel)
         
-        infoButton.setImage(UIImage.loadImage(name: "icon_info_black"), for: .normal)
+        infoButton.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         
         alphaLabel.text = "α 波"
         alphaLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
