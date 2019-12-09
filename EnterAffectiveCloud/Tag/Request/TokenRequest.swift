@@ -44,7 +44,7 @@ final public class TokenRequest {
         let username = UsernameModel()
         username.app_key = appKey
         username.sign = sign
-        username.user_id = userId.hashed(.md5)!.uppercased()
+        username.user_id = userId
         username.timestamp = timestamp
         username.version = version
         if let userJson = username.toJSONString() {
