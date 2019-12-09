@@ -32,4 +32,7 @@ final public class AppInfoRequest: NSObject {
         return self.provider.rx.request(.read(version, id)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModel(AppInfoModel.self)
         
     }
+    
+    public required init() {
+    }
 }

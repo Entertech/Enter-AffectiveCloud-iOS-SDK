@@ -28,4 +28,7 @@ final public class TagRequest: NSObject {
         return self.provider.rx.request(.list(version)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModelList(TagModel.self)
     }
     
+    
+    public required init() {
+    }
 }

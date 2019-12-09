@@ -12,6 +12,7 @@ import Moya
 import Alamofire
 
 final public class TokenRequest {
+
     let requestTimeoutClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<TokenAPI>.RequestResultClosure) in
         do {
             var request = try endpoint.urlRequest()
@@ -67,5 +68,8 @@ final public class TokenRequest {
         let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
         let sign = sign_str.hashed(.md5)!.uppercased()
         return sign
+    }
+    
+    public required init() {
     }
 }
