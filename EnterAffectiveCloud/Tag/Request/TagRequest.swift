@@ -11,7 +11,7 @@ import HandyJSON
 import Moya
 import Alamofire
 
-final public class TagRequest: NSObject {
+final public class TagRequest {
     let requestTimeoutClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<TagAPI>.RequestResultClosure) in
         do {
             var request = try endpoint.urlRequest()

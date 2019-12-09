@@ -11,7 +11,7 @@ import HandyJSON
 import Moya
 import Alamofire
 
-final public class AppInfoRequest: NSObject {
+final public class AppInfoRequest {
     let requestTimeoutClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<AppInfoAPI>.RequestResultClosure) in
         do {
             var request = try endpoint.urlRequest()
