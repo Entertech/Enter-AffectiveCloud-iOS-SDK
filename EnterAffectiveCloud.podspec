@@ -18,4 +18,5 @@ Pod::Spec.new do |s|
   s.dependency 'Starscream'
   s.dependency 'GzipSwift'
   s.dependency 'SwiftyJSON'
+  s.dependency 'Moya/RxSwift', '14.0.0-beta.5'
 end
