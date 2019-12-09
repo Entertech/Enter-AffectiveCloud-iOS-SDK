@@ -38,7 +38,7 @@ extension TokenAPI : TargetType {
     }
     
     var headers: [String : String]? {
-        return ["Accpet" : "application/json; version=v1"]
+        return nil
     }
     
 }

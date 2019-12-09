@@ -41,7 +41,7 @@ extension AppInfoAPI: TargetType {
     
     var headers: [String : String]? {
         if let accessToken = TagService.shared.token {
-            return ["Accpet" : "application/json; version=v1", "Authorization" : "JWT "+accessToken]
+            return ["Authorization" : "JWT "+accessToken]
         }
         return nil
     }
