@@ -13,9 +13,9 @@ import Moya
 import HandyJSON
 
 
-class TagService: NSObject {
-    static let shared = TagService()
-    var token: String?
+public class TagService: NSObject {
+    public static let shared = TagService()
+    public var token: String?
 }
 
 extension ObservableType where Element == Response {

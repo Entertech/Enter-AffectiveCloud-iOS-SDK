@@ -418,7 +418,6 @@
 				FA19DF662398FCD80043F679 /* Request */,
 				FA19DF652398FCCD0043F679 /* API */,
 				FA19DF642398FCC40043F679 /* Model */,
-				FA19DF622398F6AC0043F679 /* TagService.swift */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -456,6 +455,7 @@
 		FA19DF67239900930043F679 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				FA19DF622398F6AC0043F679 /* TagService.swift */,
 				FA19DF68239900F40043F679 /* BaseAPI.swift */,
 			);
 			path = Base;
