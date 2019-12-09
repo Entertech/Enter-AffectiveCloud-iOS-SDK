@@ -30,12 +30,12 @@ class FirstReportViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         spectrumView.setShadow()
+        spectrumView.sample = 10
         heartRateView.setShadow()
         hrvView.setShadow()
         attentionView.setShadow()
         relaxationView.setShadow()
         pressureView.setShadow()
-        
         let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
         if let samplePath = samplePath {
             service.dataOfReport = ReportFileHander.readReportFile(samplePath)
@@ -53,6 +53,8 @@ class FirstReportViewController: UIViewController {
         super.viewDidAppear(animated)
         hrvView.isChartScale = true
         attentionView.isChartScale = true
+        spectrumView.isChartScale = true
+        
         service.show(object: self)
         
     }

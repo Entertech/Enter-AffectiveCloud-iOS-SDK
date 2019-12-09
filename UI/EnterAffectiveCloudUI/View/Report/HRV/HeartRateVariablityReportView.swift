@@ -83,6 +83,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     public var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
+            zoomBtn?.isHidden = !newValue
         }
     }
     
@@ -195,8 +196,9 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         bgView?.addSubview(msLabel!)
         
         zoomBtn = UIButton(type: .custom)
-        zoomBtn?.setImage(UIImage.loadImage(name: "icon_info_black"), for: .normal)
+        zoomBtn?.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         zoomBtn?.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        zoomBtn?.isHidden = true
         bgView?.addSubview(zoomBtn!)
     }
     

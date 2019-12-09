@@ -96,6 +96,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
     public var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
+            zoomBtn?.isHidden = !newValue
         }
     }
     
@@ -213,8 +214,9 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         bgView?.addSubview(minLabel!)
         
         zoomBtn = UIButton(type: .custom)
-        zoomBtn?.setImage(UIImage.loadImage(name: "icon_info_black"), for: .normal)
+        zoomBtn?.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         zoomBtn?.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        zoomBtn?.isHidden = true
         bgView?.addSubview(zoomBtn!)
     }
     
@@ -391,7 +393,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
     }
     
     private func setDataCount(_ waveArray: [Int]) {
-        sample = (waveArray.count / 240 + 1) * 3
+        
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {

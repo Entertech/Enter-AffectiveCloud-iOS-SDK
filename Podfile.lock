@@ -1,9 +1,15 @@
 PODS:
+  - Alamofire (5.0.0-rc.3)
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
   - GzipSwift (5.1.1)
   - HandyJSON (5.0.0)
+  - Moya/Core (14.0.0-beta.5):
+    - Alamofire (= 5.0.0-rc.3)
+  - Moya/RxSwift (14.0.0-beta.5):
+    - Moya/Core
+    - RxSwift (~> 5.0)
   - RxSwift (5.0.0)
   - SnapKit (5.0.1)
   - Starscream (3.1.1)
@@ -13,6 +19,8 @@ DEPENDENCIES:
   - Charts
   - GzipSwift
   - HandyJSON (= 5.0.0)
+  - Moya/RxSwift (~> 14.0.0-beta.5)
+  - RxSwift
   - RxSwift (= 5.0)
   - SnapKit
   - Starscream
@@ -20,23 +28,27 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Alamofire
     - Charts
     - GzipSwift
     - HandyJSON
+    - Moya
     - RxSwift
     - SnapKit
     - Starscream
     - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
+  Moya: 2c16c3fe92eda302070213452281b59198f946d8
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 13cbf176eb784d29df491ddee5684dc8422e9a38
+PODFILE CHECKSUM: 5c6d6957d73d4aae852075f63f76ed53134ce7ce
 
 COCOAPODS: 1.8.3

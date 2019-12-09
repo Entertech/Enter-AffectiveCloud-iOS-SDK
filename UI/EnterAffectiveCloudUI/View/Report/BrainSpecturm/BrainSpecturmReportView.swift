@@ -90,12 +90,22 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         }
     }
     
+    public var isChartScale = false {
+        willSet {
+            chartView?.scaleXEnabled = newValue
+            zoomBtn?.isHidden = !newValue
+        }
+    }
     
     //MARK:- Private UI
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.4
     private var timeStamp = 0
-    
+    private var alphaArray: [Float]? = []
+    private var betaArray: [Float]? = []
+    private var gamaArray: [Float]? = []
+    private var deltaArray: [Float]? = []
+    private var thetaArray: [Float]? = []
     //MARK:- Private UI
     private var bgView: UIView?
     private var titleLabel: UILabel?
@@ -113,7 +123,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
     private var thetaLabel: UILabel?
     private var deltaDot: UIView?
     private var deltaLabel: UILabel?
- 
+    private var zoomBtn: UIButton?
 
     public init() {
         super.init(frame: CGRect.zero)
@@ -173,9 +183,10 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         chartView?.drawBordersEnabled = false
         chartView?.chartDescription?.enabled = false
         chartView?.pinchZoomEnabled = false
-        chartView?.isUserInteractionEnabled = false
-        chartView?.setScaleEnabled(false)
+        chartView?.scaleXEnabled = false
+        chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
+        chartView?.highlightPerTapEnabled = false
         bgView?.addSubview(chartView!)
         
         let leftAxis = chartView!.leftAxis
@@ -189,8 +200,9 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         let xAxis = chartView!.xAxis
         xAxis.labelPosition = .bottom
         xAxis.drawAxisLineEnabled = false
-        xAxis.drawGridLinesEnabled = false
+        xAxis.drawGridLinesEnabled = true
         xAxis.labelTextColor = alphaColor
+        xAxis.axisMaxLabels = 8
         
         gamaDot = UIView()
         gamaDot?.backgroundColor = spectrumColors[0]
@@ -257,6 +269,12 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         deltaLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(deltaLabel!)
         
+        zoomBtn = UIButton(type: .custom)
+        zoomBtn?.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
+        zoomBtn?.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        zoomBtn?.isHidden = true
+        bgView?.addSubview(zoomBtn!)
+        
     }
     
     override func setLayout() {
@@ -271,6 +289,11 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         infoBtn?.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel!.snp.centerY)
             $0.right.equalToSuperview().offset(-16)
+        }
+        
+        zoomBtn?.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel!.snp.centerY)
+            $0.right.equalToSuperview().offset(-60)
         }
         
         yLabel?.snp.makeConstraints {
@@ -342,12 +365,92 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
             $0.right.equalToSuperview().offset(-30)
         }
     }
-    
+        
     @objc private func infoBtnTouchUpInside() {
         let url = URL(string: infoUrlString)!
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
+    
+    private var isZoomed = false
+    @objc
+    private func zoomBtnTouchUpInside(sender: UIButton) {
+        
+        if !isZoomed {
+            
+            let vc = self.parentViewController()!
+            vc.navigationController?.setNavigationBarHidden(true, animated: true)
+            let view = vc.view
+            let nShowChartView = UIView()
+            nShowChartView.backgroundColor = .white
+            view?.addSubview(nShowChartView)
+
+
+            let chart = self.copyView() as! BrainSpecturmReportView
+            nShowChartView.addSubview(chart)
+            chart.mainColor = self.mainColor
+            chart.bgColor = self.bgColor
+            chart.cornerRadius = self.cornerRadius
+            chart.buttonImageName = self.buttonImageName
+            chart.isShowInfoIcon = self.isShowInfoIcon
+            chart.infoUrlString = self.infoUrlString
+            chart.sample = self.sample
+            chart.textColor = self.textColor
+            chart.spectrumColors = self.spectrumColors
+            chart.isChartScale = self.isChartScale
+            chart.setDataFromModel(gama: gamaArray!, delta: deltaArray!, theta: thetaArray!, alpha: alphaArray!, beta: betaArray!, timestamp: timeStamp)
+            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
+            chart.isZoomed = true
+
+            nShowChartView.snp.makeConstraints {
+               $0.left.right.top.equalToSuperview()
+               $0.bottom.equalTo(view!.safeAreaLayoutGuide)
+            }
+
+            chart.snp.remakeConstraints {
+               $0.width.equalTo(nShowChartView.snp.height)
+               $0.height.equalTo(nShowChartView.snp.width)
+               $0.center.equalToSuperview()
+            }
+
+            chart.infoBtn?.snp.remakeConstraints {
+               $0.centerY.equalTo(chart.titleLabel!.snp.centerY)
+               $0.right.equalToSuperview().offset(-32)
+            }
+
+            chart.zoomBtn?.snp.remakeConstraints {
+               $0.centerY.equalTo(chart.titleLabel!.snp.centerY)
+               $0.right.equalToSuperview().offset(-80)
+            }
+
+            chart.titleLabel?.snp.remakeConstraints{
+               $0.left.equalToSuperview().offset(24)
+               $0.top.equalToSuperview().offset(36)
+            }
+
+            chart.chartView?.snp.remakeConstraints {
+               $0.left.equalToSuperview().offset(36)
+               $0.right.equalToSuperview().offset(-36)
+               $0.top.equalToSuperview().offset(80)
+               $0.bottom.equalToSuperview().offset(-80)
+            }
+
+            chart.yLabel?.snp.remakeConstraints {
+               $0.centerX.equalToSuperview().multipliedBy(0.1)
+                $0.centerY.equalToSuperview().multipliedBy(0.7)
+            }
+
+            chart.xLabel?.snp.remakeConstraints {
+               $0.centerX.equalToSuperview()
+               $0.bottom.equalToSuperview().offset(-50)
+            }
+        } else {
+           isZoomed = false
+           self.superview?.removeFromSuperview()
+        }
+       
+    }
+    
     
     public func setDataFromModel(gama: [Float], delta: [Float], theta: [Float], alpha: [Float], beta: [Float], timestamp: Int? = nil) {
         
@@ -355,7 +458,11 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
             timeStamp = timestamp
             xLabel?.isHidden = true
         }
-        
+        self.gamaArray = gama
+        self.deltaArray = delta
+        self.thetaArray = theta
+        self.alphaArray = alpha
+        self.betaArray = beta
         let brainwave = brainwaveMapping(gama, delta, theta, alpha, beta)
         setDataCount(brainwave)
         
@@ -443,26 +550,46 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         }
         return set
     }
-    
+    private var time: [Int] = []
     private func setLimitLine(_ valueCount: Int) {
         let timeCount = Double(valueCount * sample) * interval
         let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
         
-        var time: [Int] = []
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
-            if i != 0 {
-                let limit = ChartLimitLine(limit: Double(i), label: "")
-                limit.drawLabelEnabled = false
-                limit.lineColor = textColor.changeAlpha(to: 0.5)
-                limit.lineWidth = 0.3
-                self.chartView?.xAxis.addLimitLine(limit)
-            }
-            
+//            if i != 0 {
+//                let limit = ChartLimitLine(limit: Double(i), label: "")
+//                limit.drawLabelEnabled = false
+//                limit.lineColor = textColor.changeAlpha(to: 0.5)
+//                limit.lineWidth = 0.3
+//                self.chartView?.xAxis.addLimitLine(limit)
+//            }
+//
         }
+        
+        chartView?.xAxis.axisMinimum = 0
+        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
         
         self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
         
+    }
+    
+    private var isScaled = false
+    public func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
+        let lineChart = chartView as! LineChartView
+        if lineChart.scaleX > 1.1{
+            if !isScaled {
+                self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(timeStamp, true)
+                isScaled = true
+                
+            }
+        } else {
+            if isScaled {
+                self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time, timeStamp)
+                isScaled = false
+            }
+        }
     }
 }
 
@@ -472,6 +599,7 @@ class DateValueFormatter: NSObject, IAxisValueFormatter {
     private var values: [Double] = []
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()
+    private var isScaled = false
     /// 初始化
     ///
     /// - Parameters:
@@ -483,15 +611,26 @@ class DateValueFormatter: NSObject, IAxisValueFormatter {
             values.append(Double(e))
         }
         self.timestamp = timestamp
-        
+        isScaled = false
+        dateFormatter.dateFormat = "HH:mm"
+    }
+    
+    public init(_ timestamp: Int = 0, _ isScaled: Bool = false) {
+        self.isScaled = isScaled
+        self.timestamp = timestamp
+               
         dateFormatter.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         if timestamp == 0 {
             var date = ""
-            axis?.entries = self.values
-            date = "\(Int(value / 60))"
+            if isScaled {
+                date = String(format: "%0.1lf", value / 60.0)
+            } else {
+                axis?.entries = self.values
+                date = "\(Int(value / 60))"
+            }
             return date
         } else {
             var time = 0

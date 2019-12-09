@@ -166,7 +166,7 @@ public class ReportViewService: NSObject {
     public func show(object: UIViewController) {
         if !isShowed {
             if let alpha = model.alpha, let beta = model.beta, let theta = model.theta, let delta = model.delta, let gama = model.gama {
-                self.braveWaveView?.setDataFromModel(gama: gama, delta: delta, theta: theta, alpha: alpha, beta: beta, timestamp: model.timestamp)
+                self.braveWaveView?.setDataFromModel(gama: gama, delta: delta, theta: theta, alpha: alpha, beta: beta)
             }
             self.heartRateView?.setDataFromModel(hr: model.heartRate, timestamp: model.timestamp)
             self.heartRateView?.avgValue = model.heartRateAvg!

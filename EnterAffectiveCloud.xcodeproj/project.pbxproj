@@ -18,6 +18,17 @@
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
+		FA19DF632398F6AC0043F679 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF622398F6AC0043F679 /* TagService.swift */; };
+		FA19DF69239900F40043F679 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF68239900F40043F679 /* BaseAPI.swift */; };
+		FA19DF6B2399015D0043F679 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6A2399015D0043F679 /* TokenModel.swift */; };
+		FA19DF6D239902330043F679 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6C239902330043F679 /* TokenAPI.swift */; };
+		FA19DF6F239904430043F679 /* TokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6E239904430043F679 /* TokenRequest.swift */; };
+		FA19DF71239DD95B0043F679 /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF70239DD95B0043F679 /* AppInfoModel.swift */; };
+		FA19DF73239DDAA10043F679 /* AppInfoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF72239DDAA10043F679 /* AppInfoAPI.swift */; };
+		FA19DF75239DE3ED0043F679 /* AppInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF74239DE3ED0043F679 /* AppInfoRequest.swift */; };
+		FA19DF77239DE7160043F679 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF76239DE7160043F679 /* TagModel.swift */; };
+		FA19DF79239DEC7F0043F679 /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF78239DEC7F0043F679 /* TagAPI.swift */; };
+		FA19DF7B239DED290043F679 /* TagRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF7A239DED290043F679 /* TagRequest.swift */; };
 		FA296EA42383C95B001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA296EA52383C95B001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA296EA82383C963001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
@@ -180,6 +191,17 @@
 		F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		FA19DF622398F6AC0043F679 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
+		FA19DF68239900F40043F679 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		FA19DF6A2399015D0043F679 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		FA19DF6C239902330043F679 /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
+		FA19DF6E239904430043F679 /* TokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequest.swift; sourceTree = "<group>"; };
+		FA19DF70239DD95B0043F679 /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
+		FA19DF72239DDAA10043F679 /* AppInfoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoAPI.swift; sourceTree = "<group>"; };
+		FA19DF74239DE3ED0043F679 /* AppInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoRequest.swift; sourceTree = "<group>"; };
+		FA19DF76239DE7160043F679 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		FA19DF78239DEC7F0043F679 /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
+		FA19DF7A239DED290043F679 /* TagRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRequest.swift; sourceTree = "<group>"; };
 		FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloudUI.h; sourceTree = "<group>"; };
 		FA55EA51234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -352,6 +374,7 @@
 		B7E125D2230559590072DF22 /* EnterAffectiveCloud */ = {
 			isa = PBXGroup;
 			children = (
+				FA19DF612398F6750043F679 /* Tag */,
 				FAC3D906237E5442006CE2BC /* Base */,
 				FABFA4CD230E84EF00ECD83C /* Cloud */,
 				B7E125E223055A3F0072DF22 /* Global */,
@@ -386,6 +409,56 @@
 				FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */,
 			);
 			path = HRView;
+			sourceTree = "<group>";
+		};
+		FA19DF612398F6750043F679 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				FA19DF67239900930043F679 /* Base */,
+				FA19DF662398FCD80043F679 /* Request */,
+				FA19DF652398FCCD0043F679 /* API */,
+				FA19DF642398FCC40043F679 /* Model */,
+				FA19DF622398F6AC0043F679 /* TagService.swift */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
+		FA19DF642398FCC40043F679 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA19DF6A2399015D0043F679 /* TokenModel.swift */,
+				FA19DF70239DD95B0043F679 /* AppInfoModel.swift */,
+				FA19DF76239DE7160043F679 /* TagModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA19DF652398FCCD0043F679 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				FA19DF6C239902330043F679 /* TokenAPI.swift */,
+				FA19DF72239DDAA10043F679 /* AppInfoAPI.swift */,
+				FA19DF78239DEC7F0043F679 /* TagAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		FA19DF662398FCD80043F679 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				FA19DF6E239904430043F679 /* TokenRequest.swift */,
+				FA19DF74239DE3ED0043F679 /* AppInfoRequest.swift */,
+				FA19DF7A239DED290043F679 /* TagRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		FA19DF67239900930043F679 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				FA19DF68239900F40043F679 /* BaseAPI.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		FA3D12CB239752E000E96B02 /* UI */ = {
@@ -985,20 +1058,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA19DF6B2399015D0043F679 /* TokenModel.swift in Sources */,
 				FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */,
+				FA19DF6F239904430043F679 /* TokenRequest.swift in Sources */,
+				FA19DF71239DD95B0043F679 /* AppInfoModel.swift in Sources */,
+				FA19DF73239DDAA10043F679 /* AppInfoAPI.swift in Sources */,
 				FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */,
 				FAC3D915237E5442006CE2BC /* EnterAffectiveCloudReportFileReader.swift in Sources */,
+				FA19DF69239900F40043F679 /* BaseAPI.swift in Sources */,
 				FAC3D916237E5442006CE2BC /* DataFileProtocol.swift in Sources */,
 				FABFA4DB230E850500ECD83C /* Log.swift in Sources */,
 				FABFA4DA230E850500ECD83C /* ToolBox+Ex.swift in Sources */,
 				FAC3D917237E5442006CE2BC /* EnterAffectiveCloudReportData.swift in Sources */,
 				FAC3D912237E5442006CE2BC /* DataFileWriter.swift in Sources */,
 				FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */,
+				FA19DF77239DE7160043F679 /* TagModel.swift in Sources */,
+				FA19DF79239DEC7F0043F679 /* TagAPI.swift in Sources */,
 				FAC3D913237E5442006CE2BC /* FragmentData.swift in Sources */,
 				FAC3D914237E5442006CE2BC /* ReportFileHander.swift in Sources */,
 				FAC3D910237E5442006CE2BC /* EnterAffectiveCloudFileWriter.swift in Sources */,
+				FA19DF7B239DED290043F679 /* TagRequest.swift in Sources */,
 				FAC3D918237E5442006CE2BC /* DataFileReader.swift in Sources */,
+				FA19DF632398F6AC0043F679 /* TagService.swift in Sources */,
+				FA19DF6D239902330043F679 /* TokenAPI.swift in Sources */,
 				FABFA4D7230E84EF00ECD83C /* AffectiveCloudServices.swift in Sources */,
+				FA19DF75239DE3ED0043F679 /* AppInfoRequest.swift in Sources */,
 				FABFA4D6230E84EF00ECD83C /* CloudType.swift in Sources */,
 				FAC3D911237E5442006CE2BC /* FileError.swift in Sources */,
 			);

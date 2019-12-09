@@ -105,7 +105,16 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     }
 
 
-    private var session_id: String?
+    var session_id: String?  {
+        willSet {
+            if let value = newValue {
+                UserDefaults.standard.setValue(value, forKey: "ac_session")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "ac_session")
+            }
+            
+        }
+    }
     func sessionRestore() {
         
         guard let session = session_id, let key = self.appKey, let secret = self.appSecret, let userID = self.userID else {
