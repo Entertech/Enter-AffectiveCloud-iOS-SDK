@@ -23,7 +23,8 @@ final public class TokenRequest {
         }
     }
     private let dispose = DisposeBag()
-    private var isSuccess = false
+    /// 0:nil 1:success -1:faild
+    public var state = 0
     lazy var provider = MoyaProvider<TokenAPI>(requestClosure: requestTimeoutClosure)
     
     private lazy var requestToken = {
@@ -53,11 +54,11 @@ final public class TokenRequest {
                 guard let self = self else {return}
                 let err = error as! MoyaError
                 if let errMsg = err.response?.data {
-                    self.isSuccess = false
+                    self.state = -1
                     print(String(data: errMsg, encoding: .utf8) as Any)
                 }
             }, onCompleted: {
-                self.isSuccess = true
+                self.state = 1
             }, onDisposed: nil).disposed(by: dispose)
         }
     }
