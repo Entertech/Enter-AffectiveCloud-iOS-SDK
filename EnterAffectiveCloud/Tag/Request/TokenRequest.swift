@@ -16,7 +16,7 @@ final public class TokenRequest {
     let requestTimeoutClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<TokenAPI>.RequestResultClosure) in
         do {
             var request = try endpoint.urlRequest()
-            request.timeoutInterval = 15
+            request.timeoutInterval = 10
             done(.success(request))
         } catch {
             return

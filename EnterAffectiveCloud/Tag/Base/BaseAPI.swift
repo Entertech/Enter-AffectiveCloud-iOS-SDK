@@ -9,5 +9,5 @@
 import UIKit
 
 public struct BaseAPI {
-    public static let host = ""
+    public static var host = ""
 }
