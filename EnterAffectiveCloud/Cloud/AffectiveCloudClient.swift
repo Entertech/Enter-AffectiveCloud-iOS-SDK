@@ -168,6 +168,12 @@ public class AffectiveCloudClient {
             
         }
     }
+    
+    var sessionId: String? {
+        get {
+            return self.cloudService?.session_id
+        }
+    }
 
     /// By subscribing the specificed service,
     /// you will get the analyzed data in `biodataSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate

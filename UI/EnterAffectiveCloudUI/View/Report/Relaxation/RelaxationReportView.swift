@@ -37,11 +37,13 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
     /// 按钮图片
     public var buttonImageName: String = "" {
         didSet {
-            infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+            if buttonImageName != "" {
+                infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+            }
         }
     }
     
-    public var isShowInfoIcon: Bool = false {
+    public var isShowInfoIcon: Bool = true {
         didSet {
             infoBtn?.isHidden = !self.isShowInfoIcon
         }
@@ -273,7 +275,6 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
     
     
     private func setDataCount(_ waveArray: [Int]) {
-        sample = (waveArray.count / 240 + 1) * 3
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {

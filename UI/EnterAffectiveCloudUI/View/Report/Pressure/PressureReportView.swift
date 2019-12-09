@@ -36,11 +36,13 @@ public class PressureReportView: BaseView {
     /// 按钮图片
     public var buttonImageName: String = "" {
         didSet {
-            infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+            if buttonImageName != "" {
+                infoBtn?.setImage(UIImage(named: buttonImageName), for: .normal)
+            }
         }
     }
     
-    public var isShowInfoIcon: Bool = false {
+    public var isShowInfoIcon: Bool = true {
         didSet {
             infoBtn?.isHidden = !self.isShowInfoIcon
         }

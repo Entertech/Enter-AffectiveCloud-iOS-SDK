@@ -9,6 +9,8 @@ target 'EnterAffectiveCloud' do
   pod 'SwiftyJSON'
   pod 'Starscream'
   pod 'GzipSwift'
+  pod 'Moya/RxSwift', '~> 14.0.0-beta.5'
+  pod 'RxSwift'
 end
 
 target 'EnterAffectiveCloudUI' do
