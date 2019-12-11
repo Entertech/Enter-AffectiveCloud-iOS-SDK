@@ -32,6 +32,7 @@ public enum CSBiodataOperation: String {
     case unsubscribe
     case upload
     case report
+    case submit
 }
 
 public enum CSEmotionOperation: String {

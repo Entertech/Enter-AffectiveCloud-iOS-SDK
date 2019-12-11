@@ -37,6 +37,12 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     var bioSubscription: BiodataParameterOptions?
     var affectiveService: AffectiveDataServiceOptions?
     var affectiveSubscription: AffectiveDataSubscribeOptions?
+    var sex: String?
+    var age: Int?
+    var sn: [String: Any]?
+    var source: [String: Any]?
+    var mode: String?
+    var cased: String?
     
     var isSessionCreated = false
     let socket: WebSocket
@@ -243,7 +249,9 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
 //MARK: BiodataServiceProtocol imp
 extension AffectiveCloudServices: BiodataServiceProtocol {
 
-    func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?=nil) {
+    func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?=nil,
+                        sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
+                        mode: String? = nil, cases: String? = nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -263,6 +271,25 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         if let tolerance = tolerance {
             jsonModel.kwargs?.tolerance = tolerance
         }
+    
+        if sex != nil || age != nil {
+            let user = CSUserInfoJSONModel()
+            user.sex = sex
+            user.age = age
+            jsonModel.kwargs?.storageSettings?.user = user
+        }
+        
+        if mode != nil || cases != nil {
+            let label = CSLabelInfoJSONModel()
+            label.mode = mode
+            label.cased = cases
+        }
+
+        jsonModel.kwargs?.storageSettings?.device = sn
+        jsonModel.kwargs?.storageSettings?.data = source
+        
+        
+  
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -419,6 +446,30 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         } else {
             self.delegate?.error(client: self.client, request: jsonModel, error: .jsonError, message: "CSRequestError: Json string is nil!")
         }
+    }
+    
+    func biodataTagSubmit(recArray: [CSLabelSubmitJSONModel]) {
+        guard self.socket.isConnected else {
+            self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
+            return
+        }
+
+        guard let _ = self.session_id else {
+            self.delegate?.error(client: self.client, request: nil, error: .noSession, message: "CSRequestError: Session is empty,please create session or restore session!")
+            return
+        }
+        
+        let jsonModel = AffectiveCloudRequestJSONModel()
+        jsonModel.services = CSServicesType.biodata.rawValue
+        jsonModel.operation = CSBiodataOperation.upload.rawValue
+        jsonModel.kwargs = CSKwargsJSONModel()
+        jsonModel.kwargs?.rec = recArray
+        if let jsonString = jsonModel.toJSONString() {
+            self.webSocketSend(jsonString: jsonString)
+        } else {
+            self.delegate?.error(client: self.client, request: jsonModel, error: .jsonError, message: "CSRequestError: Json string is nil!")
+        }
+        
     }
 }
 
@@ -943,7 +994,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     self.session_id = id
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance)
+                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)
@@ -956,7 +1007,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if model.code == 0 {
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance)
+                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)

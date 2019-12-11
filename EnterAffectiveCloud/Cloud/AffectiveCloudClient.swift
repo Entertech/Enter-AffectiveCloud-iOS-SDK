@@ -88,12 +88,17 @@ public class AffectiveCloudClient {
     /// start biodata services with parameter
     /// - Parameter services: biodata services. ps: .eeg and .hr
     /// - Parameter tolerance: 0-4 
-    public func initBiodataServices(services: BiodataTypeOptions, _ tolerance: [String:Any]?=nil) {
+    public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil, sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
+    mode: String? = nil, cases: String? = nil) {
         self.cloudService?.bioService = services
         self.cloudService?.bioTolerance = tolerance
-        //self.cloudService.biodataInitial(options: services, tolerance: tolerance)
+        self.cloudService?.sex = sex
+        self.cloudService?.age = age
+        self.cloudService?.sn = sn
+        self.cloudService?.source = source
+        self.cloudService?.mode = mode
+        self.cloudService?.cased = cases
     }
-
 
     /// raw eeg data(the data from hardware) cache
     private var _eegBuffer = Data()
@@ -232,5 +237,9 @@ public class AffectiveCloudClient {
     /// - Parameter services: emotion services
     public func finishAffectiveDataServices(services: AffectiveDataServiceOptions) {
         self.cloudService?.emotionClose(services: services)
+    }
+    
+    public func submitTag(rec: [CSLabelSubmitJSONModel]) {
+        self.cloudService?.biodataTagSubmit(recArray: rec)
     }
 }

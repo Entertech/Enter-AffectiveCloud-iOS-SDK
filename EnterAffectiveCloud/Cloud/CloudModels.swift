@@ -32,6 +32,7 @@ public class CSRequestDataJSONModel: HandyJSON {
 class CSKwargsJSONModel: HandyJSON {
     var bioTypes: [String]?
     var tolerance: [String:Any]?
+    var storageSettings: CSPersonalInfoJSONModel?
     var app_key: String?
     var sign: String?
     var userID: String?
@@ -44,7 +45,7 @@ class CSKwargsJSONModel: HandyJSON {
     var hrParams: [String]?
     var eegData: [Int]?
     var hrData: [Int]?
-
+    var rec: [CSLabelSubmitJSONModel]?
     var affectiveTypes: [String]?
     var attenionServieces: [String]?
     var relaxationServices: [String]?
@@ -92,6 +93,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.arousalServices <-- "arousal"
         mapper <<<
             self.timeStamp <-- "timestamp"
+        mapper <<<
+            self.storageSettings <-- "storage_settings"
     }
 }
 
@@ -532,3 +535,38 @@ public class CSReportArousalJsonModel: HandyJSON {
             self.list <-- "arousal_rec"
     }
 }
+
+public class CSPersonalInfoJSONModel: HandyJSON {
+    var user: CSUserInfoJSONModel?
+    var device: [String: Any]?
+    var data: [String: Any]?
+    var label: CSLabelInfoJSONModel?
+    public required init() { }
+}
+
+public class CSUserInfoJSONModel: HandyJSON {
+    var sex: String?
+    var age: Int?
+    public required init() { }
+}
+
+public class CSLabelInfoJSONModel: HandyJSON {
+    var mode: String?
+    var cased: String?
+    public required init() { }
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.cased <-- "case"
+    }
+}
+
+public class CSLabelSubmitJSONModel: HandyJSON {
+    var st: String? //start time
+    var et: String? //end
+    var tag: [String: Any]?
+    var note: [String]?
+    public required init() { }
+  
+}
+
+
