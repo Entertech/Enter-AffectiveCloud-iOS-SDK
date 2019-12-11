@@ -461,7 +461,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
-        jsonModel.operation = CSBiodataOperation.upload.rawValue
+        jsonModel.operation = CSBiodataOperation.submit.rawValue
         jsonModel.kwargs = CSKwargsJSONModel()
         jsonModel.kwargs?.rec = recArray
         if let jsonString = jsonModel.toJSONString() {
