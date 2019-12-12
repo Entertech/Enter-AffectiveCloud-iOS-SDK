@@ -272,23 +272,25 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             jsonModel.kwargs?.tolerance = tolerance
         }
     
+        let storage = CSPersonalInfoJSONModel()
         if sex != nil || age != nil {
             let user = CSUserInfoJSONModel()
             user.sex = sex
             user.age = age
-            jsonModel.kwargs?.storageSettings?.user = user
+            storage.user = user
         }
         
         if mode != nil || cases != nil {
             let label = CSLabelInfoJSONModel()
             label.mode = mode
             label.cased = cases
+            storage.label = label
         }
 
-        jsonModel.kwargs?.storageSettings?.device = sn
-        jsonModel.kwargs?.storageSettings?.data = source
+        storage.device = sn
+        storage.data = source
         
-        
+        jsonModel.kwargs?.storageSettings = storage
   
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
