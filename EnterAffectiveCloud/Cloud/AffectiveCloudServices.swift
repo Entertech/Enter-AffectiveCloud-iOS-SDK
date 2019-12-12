@@ -1045,6 +1045,8 @@ extension AffectiveCloudServices: WebSocketDelegate {
 
                 self.delegate?.biodataServicesSubscribe(client: self.client, response: model)
                 NotificationCenter.default.post(name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil, userInfo: ["biodataServicesSubscribe":model])
+            case (CSServicesType.biodata.rawValue, CSBiodataOperation.submit.rawValue):
+                NotificationCenter.default.post(name: NSNotification.Name.biodataTagSubmitNotify, object: nil, userInfo: ["biodataTagSubmit":model])
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.unsubscribe.rawValue):
                 self.delegate?.biodataServicesUnsubscribe(client: self.client, response: model)
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.upload.rawValue):

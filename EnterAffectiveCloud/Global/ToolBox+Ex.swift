@@ -114,6 +114,7 @@ extension Notification.Name {
     static let websocketConnectNotify = Notification.Name(rawValue:"websocketConnectNotify")
     static let biodataServicesSubscribeNotify = Notification.Name(rawValue:"biodataServicesSubscribeNotify")
     static let biodataServicesReportNotify = Notification.Name(rawValue:"biodataServicesReportNotify")
+    static let biodataTagSubmitNotify = Notification.Name(rawValue: "biodataTagSubmitNotify")
     static let affectiveDataSubscribeNotify = Notification.Name(rawValue:"affectiveDataSubscribeNotify")
     static let affectiveDataReportNotify = Notification.Name(rawValue:"affectiveDataReportNotify")
 }
