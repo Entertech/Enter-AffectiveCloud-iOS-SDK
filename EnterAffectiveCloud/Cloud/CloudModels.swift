@@ -561,10 +561,10 @@ public class CSLabelInfoJSONModel: HandyJSON {
 }
 
 public class CSLabelSubmitJSONModel: HandyJSON {
-    var st: String? //start time
-    var et: String? //end
-    var tag: [String: Any]?
-    var note: [String]?
+    public var st: String? //start time
+    public var et: String? //end
+    public var tag: [String: Any]?
+    public var note: [String]?
     public required init() { }
   
 }
