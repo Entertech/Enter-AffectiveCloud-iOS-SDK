@@ -45,7 +45,7 @@ public class DimModel: HandyJSON {
     public var id: Int?
     public var name_cn: String?
     public var name_en: String?
-    public var value: Int?
+    public var value: String?
     public var desc: String?
 }
 
