@@ -10,7 +10,7 @@
 
 ## 简介
 
-本工程主要展示了`EnterAffectiveCloudUI`库中的实时数据UI模版
+本工程主要展示了`EnterAffectiveCloudUI`库中的实时数据UI模版。
 
 ## 运行环境
 

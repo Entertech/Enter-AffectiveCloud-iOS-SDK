@@ -10,7 +10,7 @@
 
 ## 简介
 
-本工程主要展示了`EnterAffectiveCloudUI`库中的报表数据UI模版
+本工程主要展示了`EnterAffectiveCloudUI`库中的报表数据UI模版。
 
 ## 运行环境
 
@@ -27,7 +27,7 @@ Demo使用`Cocopods`管理依赖库，使用前要先对工程主目录运行`po
 
 ### 注意事项
 
-由storyboard设置UI布局，代码设置参数。
+由storyboard设置UI布局，代码设置参数
 
 ### 页面展示
 
