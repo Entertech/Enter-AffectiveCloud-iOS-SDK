@@ -28,7 +28,7 @@ UI库的Demo包含以下组件：
 
 ```swift
 let hrView = RealtimeHeartRateView()
-// 设置属性, 相关属性请参阅《情感云UI详细API》
+// 设置属性
 hrView.bgColor = UIColor(red: 1, green: 229.0/255.0, blue: 231.0/255.0, alpha: 1)
 hrView.mainColor = UIColor(red: 1, green: 72.0/255.0, blue: 82.0/255.0, alpha: 1)
 self.view.addSubview(hrView)

@@ -12,7 +12,7 @@
 
 <img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/7.png" width="500">
 
-UI库：
+如何快速接入UI库，请查看：
 - [情感云数据标准UI](EnterAffectiveCloudUI/)
 
 UI库的Demo包含以下组件：

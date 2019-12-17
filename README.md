@@ -5,7 +5,7 @@
 - [Enter-AffectiveCloud-iOS-SDK](#enter-affectivecloud-ios-sdk)
 - [目录](#%e7%9b%ae%e5%bd%95)
 - [SDK 说明](#sdk-%e8%af%b4%e6%98%8e)
-  - [Demo演示](#Demo演示)
+  - [Demo演示](#demo%e6%bc%94%e7%a4%ba)
   - [结构说明](#%e7%bb%93%e6%9e%84%e8%af%b4%e6%98%8e)
   - [安装集成](#%e5%ae%89%e8%a3%85%e9%9b%86%e6%88%90)
     - [版本需求](#%e7%89%88%e6%9c%ac%e9%9c%80%e6%b1%82)
