@@ -42,7 +42,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     var sn: [String: Any]?
     var source: [String: Any]?
     var mode: [Int]?
-    var cased: Int?
+    var cased: [Int]?
     
     var isSessionCreated = false
     let socket: WebSocket
@@ -251,7 +251,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
 
     func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?=nil,
                         sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
-                        mode: [Int]? = nil, cases: Int? = nil) {
+                        mode: [Int]? = nil, cases: [Int]? = nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return

@@ -552,7 +552,7 @@ public class CSUserInfoJSONModel: HandyJSON {
 
 public class CSLabelInfoJSONModel: HandyJSON {
     var mode: [Int]?
-    var cased: Int?
+    var cased: [Int]?
     public required init() { }
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
