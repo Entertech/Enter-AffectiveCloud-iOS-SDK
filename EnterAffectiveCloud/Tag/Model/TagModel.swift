@@ -11,7 +11,7 @@ import HandyJSON
 final public class TagModel: HandyJSON {
     
     public var id: Int?
-    public var model: [TagModeModel]?
+    public var mode: [TagModeModel]?
     public var tag: [TagDescModel]?
     public var name_cn: String?
     public var name_en: String?
