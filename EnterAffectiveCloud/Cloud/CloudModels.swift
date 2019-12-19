@@ -551,8 +551,8 @@ public class CSUserInfoJSONModel: HandyJSON {
 }
 
 public class CSLabelInfoJSONModel: HandyJSON {
-    var mode: String?
-    var cased: String?
+    var mode: [Int]?
+    var cased: Int?
     public required init() { }
     public func mapping(mapper: HelpingMapper) {
         mapper <<<

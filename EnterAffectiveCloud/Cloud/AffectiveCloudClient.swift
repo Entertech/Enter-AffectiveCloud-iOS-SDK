@@ -89,7 +89,7 @@ public class AffectiveCloudClient {
     /// - Parameter services: biodata services. ps: .eeg and .hr
     /// - Parameter tolerance: 0-4 
     public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil, sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
-    mode: String? = nil, cases: String? = nil) {
+    mode: [Int]? = nil, cases: Int? = nil) {
         self.cloudService?.bioService = services
         self.cloudService?.bioTolerance = tolerance
         self.cloudService?.sex = sex
