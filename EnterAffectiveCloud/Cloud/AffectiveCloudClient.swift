@@ -57,7 +57,9 @@ public class AffectiveCloudClient {
             
         }
         closeSession()
-        websocketDisconnect()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+2) {
+            self.websocketDisconnect()
+        }
         self.cloudService = nil
     }
 
