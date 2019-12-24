@@ -50,6 +50,22 @@ self.client.subscribeBiodataServices(services: [.eeg_all, .hr_all])
 self.client.subscribeAffectiveDataServices(services: [.attention, .relaxation, .pressure, .pleasure])
 ```
 
+### 数据传输
+
+```
+// 原始脑电数据：硬件监听方法
+func eegData() {
+    ...
+    self.client.appendBiodata(eegData: data)
+}
+
+// 心率数据： 硬件监听方法
+func hrData() {
+    ...
+    self.client.appendBiodata(hrData: data)
+}
+```
+
 ### 获取报表
 
 ```swift
