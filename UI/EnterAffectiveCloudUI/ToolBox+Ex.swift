@@ -52,13 +52,13 @@ extension Notification.Name {
 }
 
 extension UIColor {
-    static func colorWithInt(r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor {
+    public static func colorWithInt(r: Int, g: Int, b: Int, alpha: CGFloat) -> UIColor {
         return UIColor(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: alpha)
     }
     
     /// hex to UIColor FFFFFF  -> .white
     /// - Parameter hexColor: hexString like A0B0C0
-    static func colorWithHexString(hexColor: String) -> UIColor {
+    public static func colorWithHexString(hexColor: String) -> UIColor {
         
         var cString = hexColor.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -104,7 +104,7 @@ extension UIColor {
         
     }
     
-    func changeAlpha(to newAlpha: CGFloat) -> UIColor {
+    public func changeAlpha(to newAlpha: CGFloat) -> UIColor {
         var red:CGFloat   = 0.0
         var green:CGFloat = 0.0
         var blue:CGFloat  = 0.0
@@ -219,6 +219,30 @@ extension UIView {
     func copyView() -> Any {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self))! as Any
     }
+    
+    func parentViewController() -> UIViewController? {
+
+         var n = self.next
+         
+         while n != nil {
+             
+             if (n is UIViewController) {
+                 
+                 return n as? UIViewController
+             }
+             
+             n = n?.next
+         }
+         
+         return nil
+     }
 }
+
+extension CGFloat {
+    var cleanZero: String {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String("\(self)")
+    }
+}
+
 
 

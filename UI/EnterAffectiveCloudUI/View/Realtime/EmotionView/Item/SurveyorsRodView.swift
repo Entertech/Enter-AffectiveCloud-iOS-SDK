@@ -10,6 +10,7 @@ import UIKit
 
 class SurveyorsRodView: BaseView {
 
+    private var _dotValue:Float = 0
     var rodBar: UIView = UIView()
     var rodDot: RodDot = RodDot()
     private var _scaleArray: [Int]?
@@ -30,15 +31,19 @@ class SurveyorsRodView: BaseView {
         super.init(coder: aDecoder)
     }
     
+    private var isShowed = false
     override func layoutSubviews() {
         super.layoutSubviews()
-        if let rodColor = _rodColor, let interval = _interval {
-            initBarColor(rodColor, interval)
-            setDotColor(rodColor.last!)
-        }
-        
-        if let array = _scaleArray {
-            setLabel(index: array, _textColor!)
+        if !isShowed {
+            if let rodColor = _rodColor, let interval = _interval {
+                initBarColor(rodColor, interval)
+                setDotColor(rodColor.last!)
+            }
+            
+            if let array = _scaleArray {
+                setLabel(index: array, _textColor!)
+            }
+            isShowed = true
         }
     }
     
@@ -51,6 +56,7 @@ class SurveyorsRodView: BaseView {
     }
     
     override func setLayout() {
+        super.setLayout()
         rodBar.snp.makeConstraints {
             $0.left.equalToSuperview().offset(5)
             $0.right.equalToSuperview().offset(-5)
@@ -59,12 +65,18 @@ class SurveyorsRodView: BaseView {
         }
         
         rodDot.snp.makeConstraints {
-            $0.left.equalTo(rodBar.snp.leftMargin).offset(10)
+            $0.centerX.equalTo(rodBar.snp.left).offset(13)
             $0.bottom.equalToSuperview()
             $0.width.equalTo(6)
             $0.height.equalTo(6)
         }
     }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+    }
+    
+    
     
     public var scaleArray: [Int] {
         get {
@@ -126,11 +138,18 @@ class SurveyorsRodView: BaseView {
             scaleLabel.textColor = color
             self.addSubview(scaleLabel)
         }
+        
+        let barWidth = (self.bounds.width - 10)
+        
+        
+        rodDot.snp.updateConstraints {
+            $0.centerX.equalTo(rodBar.snp.left).offset( (CGFloat(_dotValue) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth)
+        }
     }
     
     public func setDotValue(index: Float) {
-        let barWidth = (self.bounds.width - 10)
-        rodDot.center.x = (CGFloat(index) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth + 5
+        _dotValue = index
+
     }
     
     

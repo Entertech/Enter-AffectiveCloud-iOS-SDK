@@ -98,7 +98,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
     private var infoBtn: UIButton?
     private var chartView: LineChartView?
     private var yLabel: UILabel?
-    private var xLabel: UILabel?
+    public var xLabel: UILabel?
     private var avgLabel: UILabel?
     private var msLabel: UILabel?
     private var zoomBtn: UIButton?

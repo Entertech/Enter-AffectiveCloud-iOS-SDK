@@ -27,23 +27,6 @@ open class BaseView: UIView {
     func setUI() {}
     
     func setLayout() {}
-    
-    func parentViewController() -> UIViewController? {
-
-        var n = self.next
-        
-        while n != nil {
-            
-            if (n is UIViewController) {
-                
-                return n as? UIViewController
-            }
-            
-            n = n?.next
-        }
-        
-        return nil
-    }
 
     /// 设备未连接实时数据无法显示时显示提示
     public func showTip() {

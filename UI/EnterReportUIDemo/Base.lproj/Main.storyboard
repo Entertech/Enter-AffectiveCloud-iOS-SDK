@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -15,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGp-8N-tTl">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="2051"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="2017"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0db-VQ-bef">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="2017"/>
@@ -145,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.27536231884062" y="-320.08928571428572"/>
+            <point key="canvasLocation" x="1684" y="-1030"/>
         </scene>
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
@@ -156,7 +157,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dba-fc-ZbS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1951"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1917"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1I-AJ-fBG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1917"/>
@@ -288,6 +289,200 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="790.84821428571422"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="mba-rJ-XjX">
+            <objects>
+                <viewController id="zSA-FO-3aY" customClass="ThirdViewController" customModule="EnterReportUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zha-2X-qzv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPs-2v-b1a">
+                                <rect key="frame" x="0.0" y="20" width="414" height="793"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wly-X2-rsP">
+                                        <rect key="frame" x="0.0" y="20" width="414" height="2000"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdP-HJ-1mC">
+                                                <rect key="frame" x="16" y="44" width="382" height="264"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fig-SV-EG0" customClass="PrivateReportViewHead" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="0.0" y="8" width="382" height="53"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KXG-4b-i5D" customClass="PrivateReportBrainwaveSpectrum" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="0.0" y="69" width="382" height="195"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="264" id="daK-PM-LWM"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zos-QE-Kcx">
+                                                <rect key="frame" x="16" y="324" width="382" height="136"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vii-IV-6Fb" customClass="PrivateReportViewHead" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="17" y="0.0" width="240" height="48"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mus-wa-TPZ" customClass="PrivateReportHRV" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="17" y="56" width="240" height="72"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="136" id="cFC-ec-gcO"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGx-bX-Dpv">
+                                                <rect key="frame" x="16" y="476" width="382" height="136"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F9r-oW-Aal" customClass="PrivateReportViewHead" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="66"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="edl-WO-moa" customClass="PrivateReportHR" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="118" y="74" width="240" height="58"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="136" id="Zwp-9k-WfL"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIk-XR-ouT">
+                                                <rect key="frame" x="16" y="628" width="382" height="276"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yTn-Hj-iMz" customClass="PrivateReportViewHead" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="28" y="8" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z5W-Ux-IVf" customClass="PrivateReportRelaxationAndAttention" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="122" y="144" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="276" id="hZX-5j-w0x"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPY-BO-hLb">
+                                                <rect key="frame" x="16" y="920" width="382" height="218"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3b2-oK-FDV" customClass="PrivateReportViewHead" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="8" y="8" width="194" height="78"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ogp-6l-d0u" customClass="PrivateReportPressure" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="135" y="117" width="194" height="78"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="218" id="NIi-Bc-t1F"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCs-Gs-IAh">
+                                                <rect key="frame" x="16" y="1154" width="382" height="304"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9R8-8W-O18" customClass="PrivateReportViewHead" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="0.0" y="-7" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Dl-u8-DIV" customClass="PrivateAverageView" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="101" y="151" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="304" id="PHA-ke-mjJ"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="vdP-HJ-1mC" firstAttribute="top" secondItem="wly-X2-rsP" secondAttribute="top" constant="44" id="0LE-bN-CSN"/>
+                                            <constraint firstItem="BGx-bX-Dpv" firstAttribute="leading" secondItem="wly-X2-rsP" secondAttribute="leading" constant="16" id="16T-dK-eSo"/>
+                                            <constraint firstAttribute="height" constant="2000" id="1xl-8E-5Ec"/>
+                                            <constraint firstItem="gPY-BO-hLb" firstAttribute="top" secondItem="AIk-XR-ouT" secondAttribute="bottom" constant="16" id="2Qt-cZ-h9i"/>
+                                            <constraint firstAttribute="trailing" secondItem="rCs-Gs-IAh" secondAttribute="trailing" constant="16" id="5z9-3o-Dru"/>
+                                            <constraint firstAttribute="trailing" secondItem="zos-QE-Kcx" secondAttribute="trailing" constant="16" id="8at-c8-qRS"/>
+                                            <constraint firstAttribute="trailing" secondItem="AIk-XR-ouT" secondAttribute="trailing" constant="16" id="9oy-n1-Hpj"/>
+                                            <constraint firstAttribute="trailing" secondItem="vdP-HJ-1mC" secondAttribute="trailing" constant="16" id="MZt-6H-T8J"/>
+                                            <constraint firstItem="rCs-Gs-IAh" firstAttribute="top" secondItem="gPY-BO-hLb" secondAttribute="bottom" constant="16" id="RAy-Gm-QlH"/>
+                                            <constraint firstItem="rCs-Gs-IAh" firstAttribute="leading" secondItem="wly-X2-rsP" secondAttribute="leading" constant="16" id="T8j-qs-AFc"/>
+                                            <constraint firstItem="BGx-bX-Dpv" firstAttribute="top" secondItem="zos-QE-Kcx" secondAttribute="bottom" constant="16" id="UDT-G9-sDi"/>
+                                            <constraint firstItem="gPY-BO-hLb" firstAttribute="leading" secondItem="wly-X2-rsP" secondAttribute="leading" constant="16" id="a5A-6J-JLt"/>
+                                            <constraint firstItem="vdP-HJ-1mC" firstAttribute="leading" secondItem="wly-X2-rsP" secondAttribute="leading" constant="16" id="cWF-ni-614"/>
+                                            <constraint firstAttribute="trailing" secondItem="BGx-bX-Dpv" secondAttribute="trailing" constant="16" id="gbi-Xh-GIh"/>
+                                            <constraint firstAttribute="trailing" secondItem="gPY-BO-hLb" secondAttribute="trailing" constant="16" id="hYt-uD-nUW"/>
+                                            <constraint firstItem="AIk-XR-ouT" firstAttribute="leading" secondItem="wly-X2-rsP" secondAttribute="leading" constant="16" id="kKJ-lw-Va4"/>
+                                            <constraint firstItem="AIk-XR-ouT" firstAttribute="top" secondItem="BGx-bX-Dpv" secondAttribute="bottom" constant="16" id="xvU-0c-hIX"/>
+                                            <constraint firstItem="zos-QE-Kcx" firstAttribute="top" secondItem="vdP-HJ-1mC" secondAttribute="bottom" constant="16" id="xvZ-wX-AES"/>
+                                            <constraint firstItem="zos-QE-Kcx" firstAttribute="leading" secondItem="wly-X2-rsP" secondAttribute="leading" constant="16" id="z7j-wJ-Z1y"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="wly-X2-rsP" secondAttribute="bottom" constant="20" symbolic="YES" id="HjT-EF-pqW"/>
+                                    <constraint firstItem="wly-X2-rsP" firstAttribute="top" secondItem="hPs-2v-b1a" secondAttribute="top" constant="20" symbolic="YES" id="MWg-jJ-Pr4"/>
+                                    <constraint firstAttribute="trailing" secondItem="wly-X2-rsP" secondAttribute="trailing" id="gm0-Ce-qf1"/>
+                                    <constraint firstItem="wly-X2-rsP" firstAttribute="leading" secondItem="rYR-K5-daP" secondAttribute="leading" id="mID-QI-R3z"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="rYR-K5-daP"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="OZj-xd-aPs"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="hPs-2v-b1a" firstAttribute="trailing" secondItem="z14-Bp-Eel" secondAttribute="trailing" id="BN5-56-Aej"/>
+                            <constraint firstItem="wly-X2-rsP" firstAttribute="width" secondItem="Zha-2X-qzv" secondAttribute="width" id="Scg-IS-Dyy"/>
+                            <constraint firstItem="hPs-2v-b1a" firstAttribute="top" secondItem="Zha-2X-qzv" secondAttribute="top" constant="20" symbolic="YES" id="WdX-Mj-FoL"/>
+                            <constraint firstItem="hPs-2v-b1a" firstAttribute="leading" secondItem="z14-Bp-Eel" secondAttribute="leading" id="Zmg-b6-jEm"/>
+                            <constraint firstItem="hPs-2v-b1a" firstAttribute="bottom" secondItem="z14-Bp-Eel" secondAttribute="bottom" id="ePK-Lp-ySx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="z14-Bp-Eel"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="g9a-KM-ZD9"/>
+                    <connections>
+                        <outlet property="bView2" destination="zos-QE-Kcx" id="y8x-sP-Dcs"/>
+                        <outlet property="head1" destination="fig-SV-EG0" id="Li2-Tz-kS0"/>
+                        <outlet property="head2" destination="vii-IV-6Fb" id="5mY-tj-6rg"/>
+                        <outlet property="head3" destination="F9r-oW-Aal" id="gCb-b4-wRs"/>
+                        <outlet property="head4" destination="yTn-Hj-iMz" id="khs-wh-IBk"/>
+                        <outlet property="head5" destination="3b2-oK-FDV" id="UpD-6O-LK9"/>
+                        <outlet property="head6" destination="9R8-8W-O18" id="W7Y-dn-YHm"/>
+                        <outlet property="view1" destination="KXG-4b-i5D" id="FNd-XT-b33"/>
+                        <outlet property="view2" destination="Mus-wa-TPZ" id="2ag-31-WzD"/>
+                        <outlet property="view3" destination="edl-WO-moa" id="lbE-6J-WU4"/>
+                        <outlet property="view4" destination="z5W-Ux-IVf" id="4oY-uo-P7D"/>
+                        <outlet property="view5" destination="Ogp-6l-d0u" id="4gC-VI-b8y"/>
+                        <outlet property="view6" destination="6Dl-u8-DIV" id="Oji-es-10d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rsk-1r-Oj4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-901.44927536231887" y="402.45535714285711"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -300,11 +495,98 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="zSA-FO-3aY" kind="relationship" relationship="viewControllers" id="oef-ZS-TTZ"/>
+                        <segue destination="eRv-Rg-Qwh" kind="relationship" relationship="viewControllers" id="FQG-x1-RO8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-28" y="-320"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="52t-IF-gDQ">
+            <objects>
+                <viewController id="eRv-Rg-Qwh" customClass="ForthViewController" customModule="EnterReportUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tpl-zG-2EP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-s8-Sf7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ed-VS-blr">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1490"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipr-vH-qpr">
+                                                <rect key="frame" x="16" y="16" width="382" height="292"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bf-PE-PMW" customClass="PrivateChartBrainSpectrum" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="33" y="8" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="292" id="kbD-9c-QdM"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XrB-o7-9m7">
+                                                <rect key="frame" x="16" y="324" width="382" height="250"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z7K-QE-UaL" customClass="PrivateReportChartHRV" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="52" y="61" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="250" id="pJG-Lg-ExB"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="ipr-vH-qpr" secondAttribute="trailing" constant="16" id="6mn-y3-PBU"/>
+                                            <constraint firstItem="ipr-vH-qpr" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="J67-Bc-1YH"/>
+                                            <constraint firstItem="XrB-o7-9m7" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="Mfw-6K-I4m"/>
+                                            <constraint firstItem="XrB-o7-9m7" firstAttribute="top" secondItem="ipr-vH-qpr" secondAttribute="bottom" constant="16" id="cyj-ZJ-Fqy"/>
+                                            <constraint firstAttribute="trailing" secondItem="XrB-o7-9m7" secondAttribute="trailing" constant="16" id="hTU-o3-U6L"/>
+                                            <constraint firstItem="ipr-vH-qpr" firstAttribute="top" secondItem="9ed-VS-blr" secondAttribute="top" constant="16" id="iJM-ZP-t7K"/>
+                                            <constraint firstAttribute="width" constant="414" id="pgA-CV-Go5"/>
+                                            <constraint firstAttribute="height" constant="1490" id="su1-LW-BZw"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="9ed-VS-blr" firstAttribute="leading" secondItem="Wpg-s8-Sf7" secondAttribute="leading" id="B0t-2e-dKU"/>
+                                    <constraint firstItem="9ed-VS-blr" firstAttribute="top" secondItem="Wpg-s8-Sf7" secondAttribute="top" id="QAW-Ny-bfj"/>
+                                    <constraint firstAttribute="trailing" secondItem="9ed-VS-blr" secondAttribute="trailing" id="ik9-JU-0ls"/>
+                                    <constraint firstAttribute="bottom" secondItem="9ed-VS-blr" secondAttribute="bottom" id="xL6-Sz-rhs"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="KZy-h4-BCV"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="OQQ-O5-ZFF"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jA6-M6-zXN" firstAttribute="trailing" secondItem="Wpg-s8-Sf7" secondAttribute="trailing" id="6yQ-fR-byD"/>
+                            <constraint firstItem="Wpg-s8-Sf7" firstAttribute="leading" secondItem="jA6-M6-zXN" secondAttribute="leading" id="hpV-vC-TBw"/>
+                            <constraint firstItem="Wpg-s8-Sf7" firstAttribute="top" secondItem="Tpl-zG-2EP" secondAttribute="topMargin" id="rGO-hT-4IM"/>
+                            <constraint firstItem="Wpg-s8-Sf7" firstAttribute="bottom" secondItem="jA6-M6-zXN" secondAttribute="bottom" id="z6Z-ox-boU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jA6-M6-zXN"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Psf-ZG-fTZ"/>
+                    <connections>
+                        <outlet property="brainReportView" destination="4bf-PE-PMW" id="9nr-JU-SH1"/>
+                        <outlet property="hrvView" destination="z7K-QE-UaL" id="Occ-VQ-fgI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bNi-lS-ZwR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140.5797101449277" y="185.49107142857142"/>
         </scene>
     </scenes>
     <resources>

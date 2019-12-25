@@ -9,14 +9,17 @@
 import UIKit
 
 public struct ReportModel {
-    var gama: [Float]?
-    var delta: [Float]?
-    var theta: [Float]?
-    var alpha: [Float]?
-    var beta: [Float]?
+    public init() {
+    }
     
-    var brainwave: Array2D<Float>?
-    mutating func brainwaveMapping(_ gama: [Float], _ delta: [Float], _ theta: [Float], _ alpha: [Float], _ beta: [Float]) {
+    public var gama: [Float]?
+    public var delta: [Float]?
+    public var theta: [Float]?
+    public var alpha: [Float]?
+    public var beta: [Float]?
+    
+    public var brainwave: Array2D<Float>?
+    public mutating func brainwaveMapping(_ gama: [Float], _ delta: [Float], _ theta: [Float], _ alpha: [Float], _ beta: [Float]) {
         let arrayCount = gama.count
         var tmpArray = Array2D(columns: arrayCount, rows: 4, initialValue: Float(0.0))
         for i in 0..<arrayCount {
@@ -35,26 +38,26 @@ public struct ReportModel {
     }
 
     
-    var heartRate: [Int]?
-    var heartRateAvg: Int?
-    var heartRateMax: Int?
-    var heartRateMin: Int?
+    public var heartRate: [Int]?
+    public var heartRateAvg: Int?
+    public var heartRateMax: Int?
+    public var heartRateMin: Int?
     
-    var heartRateVariability: [Int]?
-    var hrvAvg: Int?
+    public var heartRateVariability: [Int]?
+    public var hrvAvg: Int?
     
-    var attention: [Int]?
-    var attentionAvg: Int?
-    var attentionMax: Int?
-    var attentionMin: Int?
+    public var attention: [Int]?
+    public var attentionAvg: Int?
+    public var attentionMax: Int?
+    public var attentionMin: Int?
     
-    var relaxation: [Int]?
-    var relaxationAvg: Int?
-    var relaxationMax: Int?
-    var relaxationMin: Int?
+    public var relaxation: [Int]?
+    public var relaxationAvg: Int?
+    public var relaxationMax: Int?
+    public var relaxationMin: Int?
     
     private var _pressure: [Float]?
-    var pressure: [Float]? {
+    public var pressure: [Float]? {
         get {
             return _pressure
         }
@@ -65,5 +68,5 @@ public struct ReportModel {
         }
     }
     
-    var timestamp: Int?
+    public var timestamp: Int?
 }
