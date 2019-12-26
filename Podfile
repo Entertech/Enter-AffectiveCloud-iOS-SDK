@@ -42,6 +42,3 @@ target 'EnterReportUIDemo' do
   pod 'SwiftyJSON'
   pod 'Charts'
 end
-
-
-
