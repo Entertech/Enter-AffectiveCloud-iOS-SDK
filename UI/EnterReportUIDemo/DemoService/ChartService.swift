@@ -13,12 +13,11 @@ import EnterAffectiveCloudUI
 public class ChartService: NSObject {
     
     public var model: ReportModel = ReportModel()
-    public var heartRateView: HeartRateReportView?
+    public var heartRateView: PrivateReprotChartHR?
     public var hrvView: PrivateReportChartHRV?
     public var braveWaveView: PrivateChartBrainSpectrum?
-    public var attentionView: AttentionReportView?
-    public var relaxationView: RelaxationReportView?
-    public var pressureView: PressureReportView?
+    public var attentionView: PrivateReportChartAttentionAndRelaxation?
+    public var pressureView: PrivateReportChartPressure?
     
     private var isShowed: Bool = false
     
@@ -169,21 +168,17 @@ public class ChartService: NSObject {
             if let alpha = model.alpha, let beta = model.beta, let theta = model.theta, let delta = model.delta, let gama = model.gama {
                 self.braveWaveView?.setDataFromModel(gama: gama, delta: delta, theta: theta, alpha: alpha, beta: beta)
             }
-            self.heartRateView?.setDataFromModel(hr: model.heartRate, timestamp: model.timestamp)
-            self.heartRateView?.avgValue = model.heartRateAvg!
-            self.heartRateView?.maxValue = model.heartRateMax!
-            self.heartRateView?.minValue = model.heartRateMin!
+            self.heartRateView?.setDataFromModel(hr: model.heartRate)
+            self.heartRateView?.hrAvg = model.heartRateAvg!
             self.hrvView?.setDataFromModel(hrv: model.heartRateVariability)
             self.hrvView?.hrvAvg = model.hrvAvg!
-            self.attentionView?.setDataFromModel(attention: model.attention)
-            self.attentionView?.maxValue = model.attentionMax!
-            self.attentionView?.minValue = model.attentionMin!
-            self.attentionView?.avgValue = model.attentionAvg!
-            self.relaxationView?.setDataFromModel(relaxation: model.relaxation, timestamp: model.timestamp)
-            self.relaxationView?.maxValue = model.relaxationMax!
-            self.relaxationView?.minValue = model.relaxationMin!
-            self.relaxationView?.avgValue = model.relaxationAvg!
-            self.pressureView?.setDataFromModel(pressure: model.pressure)
+            self.attentionView?.setDataFromModel(array: model.attention, state: .attention)
+            self.attentionView?.attentionAvg = model.attentionAvg!
+            self.attentionView?.setDataFromModel(array: model.relaxation, state: .relaxation)
+            self.attentionView?.relaxationAvg = model.relaxationAvg!
+            self.pressureView?.setDataFromModel(pressure: model.pressure!)
+            let pressureAvg = Int(model.pressure!.reduce(0, +) / Float(model.pressure!.count))
+            self.pressureView?.pressureAvg = pressureAvg
             isShowed = true
             object.view.layoutIfNeeded()
         }

@@ -9,8 +9,114 @@
 import Charts
 
 class LimitYAxisRenderer: YAxisRenderer {
+    open var entries: [Int]?
     override init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: Transformer?) {
         super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: transformer)
+    }
+
+    /// draws the y-axis labels to the screen
+     open override func renderAxisLabels(context: CGContext)
+     {
+         guard let yAxis = self.axis as? YAxis else { return }
+         
+         if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
+         {
+             return
+         }
+         
+         let xoffset = yAxis.xOffset
+         let yoffset = yAxis.labelFont.lineHeight / 2.5 + yAxis.yOffset
+         
+         let dependency = yAxis.axisDependency
+         let labelPosition = yAxis.labelPosition
+         
+         var xPos = CGFloat(0.0)
+         
+         var textAlign: NSTextAlignment
+         
+         if dependency == .left
+         {
+             if labelPosition == .outsideChart
+             {
+                 textAlign = .right
+                 xPos = viewPortHandler.offsetLeft - xoffset
+             }
+             else
+             {
+                 textAlign = .left
+                 xPos = viewPortHandler.offsetLeft + xoffset
+             }
+             
+         }
+         else
+         {
+             if labelPosition == .outsideChart
+             {
+                 textAlign = .left
+                 xPos = viewPortHandler.contentRight + xoffset
+             }
+             else
+             {
+                 textAlign = .right
+                 xPos = viewPortHandler.contentRight - xoffset
+             }
+         }
+         
+         etDrawYLabels(
+             context: context,
+             fixedPosition: xPos,
+             positions: transformedPositions(),
+             offset: yoffset - yAxis.labelFont.lineHeight,
+             textAlign: textAlign)
+     }
+    
+    override func transformedPositions() -> [CGPoint] {
+        guard let yAxis = self.axis as? YAxis,
+            let transformer = self.transformer, let entries = entries
+            else { return [CGPoint]() }
+        
+        var positions = [CGPoint]()
+        positions.reserveCapacity(yAxis.entryCount)
+        
+        for i in stride(from: 0, to: entries.count, by: 1)
+        {
+            positions.append(CGPoint(x: 0.0, y: Double(entries[i])))
+        }
+
+        transformer.pointValuesToPixel(&positions)
+        
+        return positions
+    }
+    
+ 
+    func etDrawYLabels(
+        context: CGContext,
+        fixedPosition: CGFloat,
+        positions: [CGPoint],
+        offset: CGFloat,
+        textAlign: NSTextAlignment)
+    {
+        guard
+            let yAxis = self.axis as? YAxis, let entries = entries
+            else { return }
+        
+        let labelFont = yAxis.labelFont
+        let labelTextColor = yAxis.labelTextColor
+        
+        let from = 0
+        let to = entries.count
+        
+        for i in stride(from: from, to: to, by: 1)
+        {
+            let text = "\(entries[i])"
+            ChartUtils.drawText(
+                context: context,
+                text: text,
+                point: CGPoint(x: fixedPosition, y: positions[i].y + offset),
+                align: textAlign,
+                attributes: [.font: labelFont, .foregroundColor: labelTextColor]
+            )
+        }
     }
     
     override func renderLimitLines(context: CGContext) {
@@ -82,10 +188,10 @@ class LimitYAxisRenderer: YAxisRenderer {
                 
                 if l.labelPosition == .topRight
                 {
-                    let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset, y: position.y - yOffset, width: 62, height: 22), cornerRadius: 2)
+                    let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 55, y: position.y - yOffset - 4, width: 62, height: 22), cornerRadius: 11)
                     
                     context.addPath(path.cgPath)
-                    context.setFillColor(UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor)
+                    context.setFillColor(UIColor.init(red: 1, green: 1, blue: 1 , alpha: 0.4).cgColor)
                     context.fillPath()
                     
                     ChartUtils.drawText(context: context,
@@ -132,3 +238,29 @@ class LimitYAxisRenderer: YAxisRenderer {
         context.restoreGState()
     }
 }
+/// Y轴描述
+public class YValueFormatter: NSObject, IAxisValueFormatter {
+    private var labels: [Double] = [];
+    
+    /// 初始化
+    ///
+    /// - Parameters:
+    ///   - timeStamps: 列表
+    public override init() {
+        super.init()
+    }
+    
+    public init(values: [Int]) {
+        super.init()
+        for e in values {
+            labels.append(Double(e))
+        }
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        axis?.entryCount 
+        axis?.entries = self.labels
+        return "\(Int(value))"
+    }
+}
+

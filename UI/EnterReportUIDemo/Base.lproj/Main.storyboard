@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -545,15 +545,66 @@
                                                     <constraint firstAttribute="height" constant="250" id="pJG-Lg-ExB"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXv-GZ-BWg">
+                                                <rect key="frame" x="16" y="590" width="382" height="250"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QN3-LZ-qsr" customClass="PrivateReprotChartHR" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="71" y="71" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="250" id="YqI-80-yK2"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSK-7w-naN">
+                                                <rect key="frame" x="16" y="856" width="382" height="250"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGD-WA-EOZ" customClass="PrivateReportChartPressure" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="23" y="61" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="250" id="Wy0-J8-MC7"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIf-0y-U9R">
+                                                <rect key="frame" x="16" y="1122" width="382" height="283"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gB7-sM-Fls" customClass="PrivateReportChartAttentionAndRelaxation" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="90" y="46" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="283" id="71d-52-vl0"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="uIf-0y-U9R" secondAttribute="trailing" constant="16" id="1dK-nW-s86"/>
                                             <constraint firstAttribute="trailing" secondItem="ipr-vH-qpr" secondAttribute="trailing" constant="16" id="6mn-y3-PBU"/>
+                                            <constraint firstItem="uIf-0y-U9R" firstAttribute="top" secondItem="BSK-7w-naN" secondAttribute="bottom" constant="16" id="CFb-b4-f7p"/>
+                                            <constraint firstItem="uIf-0y-U9R" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="DwK-Nn-cgu"/>
                                             <constraint firstItem="ipr-vH-qpr" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="J67-Bc-1YH"/>
                                             <constraint firstItem="XrB-o7-9m7" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="Mfw-6K-I4m"/>
+                                            <constraint firstAttribute="trailing" secondItem="BSK-7w-naN" secondAttribute="trailing" constant="16" id="RNf-Xj-90G"/>
+                                            <constraint firstItem="BSK-7w-naN" firstAttribute="top" secondItem="QXv-GZ-BWg" secondAttribute="bottom" constant="16" id="Umk-VY-RCV"/>
+                                            <constraint firstItem="BSK-7w-naN" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="aOu-qD-HNf"/>
+                                            <constraint firstAttribute="trailing" secondItem="QXv-GZ-BWg" secondAttribute="trailing" constant="16" id="av0-ja-Vtu"/>
                                             <constraint firstItem="XrB-o7-9m7" firstAttribute="top" secondItem="ipr-vH-qpr" secondAttribute="bottom" constant="16" id="cyj-ZJ-Fqy"/>
+                                            <constraint firstItem="QXv-GZ-BWg" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="gX1-bU-Laq"/>
                                             <constraint firstAttribute="trailing" secondItem="XrB-o7-9m7" secondAttribute="trailing" constant="16" id="hTU-o3-U6L"/>
                                             <constraint firstItem="ipr-vH-qpr" firstAttribute="top" secondItem="9ed-VS-blr" secondAttribute="top" constant="16" id="iJM-ZP-t7K"/>
+                                            <constraint firstItem="QXv-GZ-BWg" firstAttribute="top" secondItem="XrB-o7-9m7" secondAttribute="bottom" constant="16" id="iVY-A9-sVh"/>
                                             <constraint firstAttribute="width" constant="414" id="pgA-CV-Go5"/>
                                             <constraint firstAttribute="height" constant="1490" id="su1-LW-BZw"/>
                                         </constraints>
@@ -580,8 +631,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Psf-ZG-fTZ"/>
                     <connections>
+                        <outlet property="arView" destination="gB7-sM-Fls" id="o1a-Rb-qUe"/>
                         <outlet property="brainReportView" destination="4bf-PE-PMW" id="9nr-JU-SH1"/>
+                        <outlet property="hrView" destination="QN3-LZ-qsr" id="f51-NX-vxp"/>
                         <outlet property="hrvView" destination="z7K-QE-UaL" id="Occ-VQ-fgI"/>
+                        <outlet property="pressureView" destination="hGD-WA-EOZ" id="khN-Ub-Axz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bNi-lS-ZwR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

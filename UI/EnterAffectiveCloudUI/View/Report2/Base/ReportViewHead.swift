@@ -55,7 +55,7 @@ public class PrivateReportViewHead: UIView {
         }
         barButton.snp.makeConstraints {
             $0.width.height.equalTo(24)
-            $0.right.equalToSuperview().offset(-16)
+            $0.right.equalToSuperview().offset(-20)
             $0.top.equalToSuperview().offset(11)
         }
         

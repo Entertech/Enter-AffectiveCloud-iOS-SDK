@@ -14,6 +14,9 @@ class ForthViewController: UIViewController {
     private let service = ChartService()
     @IBOutlet weak var brainReportView: PrivateChartBrainSpectrum!
     @IBOutlet weak var hrvView: PrivateReportChartHRV!
+    @IBOutlet weak var hrView: PrivateReprotChartHR!
+    @IBOutlet weak var pressureView: PrivateReportChartPressure!
+    @IBOutlet weak var arView: PrivateReportChartAttentionAndRelaxation!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +25,9 @@ class ForthViewController: UIViewController {
             service.dataOfReport = ReportFileHander.readReportFile(samplePath)
             service.braveWaveView = brainReportView
             service.hrvView = hrvView
+            service.heartRateView = hrView
+            service.pressureView = pressureView
+            service.attentionView = arView
         }
 
         // Do any additional setup after loading the view.

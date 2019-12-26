@@ -439,6 +439,7 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
 
             let chart = PrivateChartBrainSpectrum()
             nShowChartView.addSubview(chart)
+            chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
             chart.sample = self.sample
