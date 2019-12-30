@@ -73,7 +73,7 @@ public class PrivateReportViewHead: UIView {
     func initFunction()  {
         self.backgroundColor = .clear
         
-        barButton.setImage(UIImage.loadImage(name: "rightBack", any: classForCoder), for: .normal)
+        barButton.setImage(UIImage.loadImage(name: "right_back", any: classForCoder), for: .normal)
         self.addSubview(barButton)
     
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
