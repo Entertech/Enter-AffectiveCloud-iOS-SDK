@@ -29,7 +29,7 @@ public class PrivateReportViewHead: UIView {
     }
     
     private let imageView = UIImageView()
-    private let titleLabel = UILabel()
+    public let titleLabel = UILabel()
     public let barButton = UIButton(type: .custom)
     
     public init() {

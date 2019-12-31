@@ -66,7 +66,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     private var averageValue:CGFloat = 0 {
         willSet {
-            averageNumLabel.text = newValue.cleanZero
+            averageNumLabel.text = String(format: "%0.1f", newValue) 
         }
     }
     
