@@ -44,6 +44,9 @@ public class PrivateReportViewHead: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard let _ = self.superview else {
+            return
+        }
         imageView.snp.makeConstraints {
             $0.width.height.equalTo(24)
             $0.left.equalToSuperview().offset(16)
