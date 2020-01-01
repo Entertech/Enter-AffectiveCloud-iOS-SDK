@@ -28,7 +28,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                         numLabel.backgroundColor = currentBarColor.changeAlpha(to: 0.3)
                     } else {
                         bar.backgroundColor = barColor
-                        numLabel.backgroundColor = .clear
+                        numLabel.isHidden = true
                     }
                     
                     bar.layer.cornerRadius = 4
@@ -97,7 +97,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
+        guard let _ = self.superview else { return }
         lastLabel.snp.makeConstraints {
             $0.left.bottom.equalToSuperview()
         }
