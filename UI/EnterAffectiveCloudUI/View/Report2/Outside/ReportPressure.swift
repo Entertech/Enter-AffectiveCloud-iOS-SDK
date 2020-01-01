@@ -58,7 +58,7 @@ public class PrivateReportPressure: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
+        guard let _ = self.superview else { return }
         stateLabel.snp.makeConstraints {
             $0.width.equalTo(39)
             $0.height.equalTo(17)

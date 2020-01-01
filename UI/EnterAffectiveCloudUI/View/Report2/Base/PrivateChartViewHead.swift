@@ -32,6 +32,7 @@ class PrivateChartViewHead: UIView {
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
+        guard let _ = self.superview else { return }
         titleLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.centerY.equalToSuperview()

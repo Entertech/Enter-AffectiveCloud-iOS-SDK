@@ -97,6 +97,7 @@ public class PrivateAverageView: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard let _ = self.superview else { return }
         bgLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(8)
             $0.right.equalToSuperview().offset(-8)

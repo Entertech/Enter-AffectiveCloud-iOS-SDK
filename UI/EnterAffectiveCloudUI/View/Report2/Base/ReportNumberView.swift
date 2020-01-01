@@ -67,6 +67,7 @@ class PrivateReportNumberView: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard let _ = self.superview else { return }
         numberText.snp.makeConstraints {
             $0.width.height.equalTo(55)
             $0.left.top.equalToSuperview()

@@ -68,6 +68,7 @@ public class PrivateReportHRV: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard let _ = self.superview else { return }
         numberView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-16)

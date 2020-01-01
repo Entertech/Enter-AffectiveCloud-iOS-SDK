@@ -44,6 +44,7 @@ public class PrivateReportSemiCircle: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard let _ = self.superview else { return }
         label.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.centerX.equalToSuperview()

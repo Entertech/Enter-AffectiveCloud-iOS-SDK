@@ -107,7 +107,7 @@ public class PrivateReportRelaxationAndAttention: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        
+        guard let _ = self.superview else { return }
         line.snp.makeConstraints {
             $0.height.equalTo(2)
             $0.left.equalToSuperview().offset(16)

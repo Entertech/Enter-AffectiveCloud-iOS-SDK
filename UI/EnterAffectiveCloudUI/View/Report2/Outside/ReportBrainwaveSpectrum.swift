@@ -68,6 +68,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
     
     public override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        guard let _ = self.superview else { return }
         for i in 0..<5 {
 
             dots[i].snp.makeConstraints {
