@@ -14,7 +14,7 @@ class ForthViewController: UIViewController {
     private let service = ChartService()
     @IBOutlet weak var brainReportView: PrivateChartBrainSpectrum!
     @IBOutlet weak var hrvView: PrivateReportChartHRV!
-    @IBOutlet weak var hrView: PrivateReprotChartHR!
+    @IBOutlet weak var hrView: PrivateReportChartHR!
     @IBOutlet weak var pressureView: PrivateReportChartPressure!
     @IBOutlet weak var arView: PrivateReportChartAttentionAndRelaxation!
     override func viewDidLoad() {

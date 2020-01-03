@@ -45,7 +45,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
             setDataCount(values: newValue!)
         }
     }
-    
+    private let roundView = UIView()
     private let chartView: PieChartView = PieChartView()
     private let dots: [UIView] = [UIView(), UIView(), UIView(), UIView(), UIView()]
     private let texts: [UILabel] = [UILabel(), UILabel(), UILabel(), UILabel(), UILabel()]
@@ -82,7 +82,10 @@ public class PrivateReportBrainwaveSpectrum: UIView {
                 $0.centerY.equalTo(dots[i].snp.centerY)
             }
         }
-        
+        roundView.snp.makeConstraints {
+            $0.center.equalTo(chartView.snp.center)
+            $0.width.height.equalTo(90)
+        }
         chartView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(5)
             $0.width.height.equalTo(200)
@@ -114,6 +117,11 @@ public class PrivateReportBrainwaveSpectrum: UIView {
         chartView.drawCenterTextEnabled = false
         chartView.drawSlicesUnderHoleEnabled = false
         chartView.isUserInteractionEnabled = false
+        
+        self.addSubview(roundView)
+        roundView.layer.cornerRadius = 45
+        roundView.backgroundColor = .white
+        self.bringSubviewToFront(roundView)
     }
     
     func setDataCount(values: [Float]) {

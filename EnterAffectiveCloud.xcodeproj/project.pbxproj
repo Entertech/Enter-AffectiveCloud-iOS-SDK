@@ -114,7 +114,7 @@
 		FACEDFF02351BB450016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEF2351BB450016176C /* Assets.xcassets */; };
 		FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFF12351BB450016176C /* LaunchScreen.storyboard */; };
 		FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
-		FAD3C56723B35A65007E9AE1 /* PrivateReprotChartHR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56623B35A65007E9AE1 /* PrivateReprotChartHR.swift */; };
+		FAD3C56723B35A65007E9AE1 /* PrivateReportChartHR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56623B35A65007E9AE1 /* PrivateReportChartHR.swift */; };
 		FAD3C56923B3666F007E9AE1 /* PrivateReportChartPressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56823B3666F007E9AE1 /* PrivateReportChartPressure.swift */; };
 /* End PBXBuildFile section */
 
@@ -307,7 +307,7 @@
 		FACEDFEF2351BB450016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FACEDFF22351BB450016176C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FACEDFF42351BB450016176C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAD3C56623B35A65007E9AE1 /* PrivateReprotChartHR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateReprotChartHR.swift; sourceTree = "<group>"; };
+		FAD3C56623B35A65007E9AE1 /* PrivateReportChartHR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateReportChartHR.swift; sourceTree = "<group>"; };
 		FAD3C56823B3666F007E9AE1 /* PrivateReportChartPressure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateReportChartPressure.swift; sourceTree = "<group>"; };
 		FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterRealtimeUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -668,7 +668,7 @@
 			children = (
 				FAB0BC2223B30A750074C06C /* ReportChartHRV.swift */,
 				FAB0BC1723B1FC6B0074C06C /* ReportBrainSpectrum.swift */,
-				FAD3C56623B35A65007E9AE1 /* PrivateReprotChartHR.swift */,
+				FAD3C56623B35A65007E9AE1 /* PrivateReportChartHR.swift */,
 				FAD3C56823B3666F007E9AE1 /* PrivateReportChartPressure.swift */,
 				FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */,
 			);
@@ -1216,7 +1216,7 @@
 				FA93438623570A2700544239 /* ReportViewService.swift in Sources */,
 				FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
-				FAD3C56723B35A65007E9AE1 /* PrivateReprotChartHR.swift in Sources */,
+				FAD3C56723B35A65007E9AE1 /* PrivateReportChartHR.swift in Sources */,
 				FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */,
 				FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */,
 				FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */,

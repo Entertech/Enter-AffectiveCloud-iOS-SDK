@@ -86,7 +86,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     //MARK:- Private UI
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private let interval = 0.8
     private var timeStamp = 0
     private var attentionArray: [Int]?
     private var relaxationArray: [Int]?
@@ -464,6 +464,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             
         } else {
             let view = self.superview!
+            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
             for e in view.subviews {
                 e.removeFromSuperview()
             }

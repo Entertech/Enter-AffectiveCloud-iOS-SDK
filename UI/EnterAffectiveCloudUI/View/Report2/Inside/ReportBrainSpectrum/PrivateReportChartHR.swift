@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-public class PrivateReprotChartHR: UIView, ChartViewDelegate {
+public class PrivateReportChartHR: UIView, ChartViewDelegate {
 
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682")
 
@@ -252,8 +252,17 @@ public class PrivateReprotChartHR: UIView, ChartViewDelegate {
             labelArray.append(maxLabel-(maxLabel-minLabel)/2)
             labelArray.append(maxLabel)
         } else {
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel)
+            if (maxLabel - (minLabel+5)) % 3 == 0 {
+                labelArray.append(minLabel+5)
+                labelArray.append(maxLabel-(maxLabel-minLabel-5)*2/3)
+                labelArray.append(maxLabel-(maxLabel-minLabel-5)/3)
+                labelArray.append(maxLabel)
+
+            } else if (maxLabel - minLabel-5) % 2 == 0 {
+                labelArray.append(minLabel+5)
+                labelArray.append(maxLabel-(maxLabel-minLabel-5)/2)
+                labelArray.append(maxLabel)
+            }
         }
         yRender?.entries = labelArray
         setLimitLine(yVals.count, labelArray)
@@ -311,7 +320,7 @@ public class PrivateReprotChartHR: UIView, ChartViewDelegate {
              nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
              view?.addSubview(nShowChartView)
              
-             let chart = PrivateReprotChartHR()
+             let chart = PrivateReportChartHR()
              nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
              chart.bgColor = self.bgColor
@@ -336,6 +345,7 @@ public class PrivateReprotChartHR: UIView, ChartViewDelegate {
 
          } else {
              let view = self.superview!
+            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
              for e in view.subviews {
                  e.removeFromSuperview()
              }

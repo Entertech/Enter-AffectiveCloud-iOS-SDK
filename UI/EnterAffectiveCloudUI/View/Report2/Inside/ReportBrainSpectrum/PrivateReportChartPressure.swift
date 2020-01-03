@@ -12,7 +12,7 @@ import Charts
 public class PrivateReportChartPressure: UIView, ChartViewDelegate {
 
     
-    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F")
+    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682")
     
     /// 背景颜色
     public var bgColor: UIColor = .white {
@@ -155,7 +155,6 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         leftAxis.drawGridLinesEnabled = false
         leftAxis.axisMaxLabels = 4
         leftAxis.axisMinLabels = 3
-        leftAxis.labelCount = 4
         leftAxis.axisLineColor = secondColor
         chartView?.rightAxis.enabled = false
         
@@ -255,8 +254,17 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
             labelArray.append(maxLabel-(maxLabel-minLabel)/2)
             labelArray.append(maxLabel)
         } else {
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel)
+            if (maxLabel - (minLabel+5)) % 3 == 0 {
+                labelArray.append(minLabel+5)
+                labelArray.append(maxLabel-(maxLabel-minLabel-5)*2/3)
+                labelArray.append(maxLabel-(maxLabel-minLabel-5)/3)
+                labelArray.append(maxLabel)
+
+            } else if (maxLabel - minLabel-5) % 2 == 0 {
+                labelArray.append(minLabel-5)
+                labelArray.append(maxLabel-(maxLabel-minLabel-5)/2)
+                labelArray.append(maxLabel)
+            }
         }
         yRender?.entries = labelArray
         setLimitLine(yVals.count, labelArray)
@@ -339,6 +347,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
             
         } else {
             let view = self.superview!
+            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
             for e in view.subviews {
                 e.removeFromSuperview()
             }

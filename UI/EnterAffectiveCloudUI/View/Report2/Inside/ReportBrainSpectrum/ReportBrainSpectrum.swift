@@ -475,6 +475,7 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
 
         } else {
             let view = self.superview!
+            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
             for e in view.subviews {
                 e.removeFromSuperview()
             }

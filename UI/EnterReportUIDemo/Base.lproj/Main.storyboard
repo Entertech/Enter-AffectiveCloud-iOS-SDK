@@ -548,7 +548,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QXv-GZ-BWg">
                                                 <rect key="frame" x="16" y="590" width="382" height="250"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QN3-LZ-qsr" customClass="PrivateReprotChartHR" customModule="EnterAffectiveCloudUI">
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QN3-LZ-qsr" customClass="PrivateReportChartHR" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="71" y="71" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

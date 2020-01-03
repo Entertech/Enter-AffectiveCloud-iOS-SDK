@@ -13,7 +13,7 @@ import EnterAffectiveCloudUI
 public class ChartService: NSObject {
     
     public var model: ReportModel = ReportModel()
-    public var heartRateView: PrivateReprotChartHR?
+    public var heartRateView: PrivateReportChartHR?
     public var hrvView: PrivateReportChartHRV?
     public var braveWaveView: PrivateChartBrainSpectrum?
     public var attentionView: PrivateReportChartAttentionAndRelaxation?
