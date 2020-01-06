@@ -28,6 +28,7 @@ public class PrivateReportRelaxationAndAttention: UIView {
         willSet {
             relaxationNumberView.number = newValue
             relaxationCircleView.currentValue = CGFloat(newValue)
+            relaxationCircleView.drawLayer()
             for i in 0..<(relaxationStateArray.count-1) {
                 let range = relaxationStateArray[i]...relaxationStateArray[i+1]
                 if range.contains(newValue) {
@@ -51,6 +52,7 @@ public class PrivateReportRelaxationAndAttention: UIView {
         willSet {
             attentionNumberView.number = newValue
             attentionCircleView.currentValue = CGFloat(newValue)
+            attentionCircleView.drawLayer()
             for i in 0..<(attentionStateArray.count-1) {
                 let range = attentionStateArray[i]...attentionStateArray[i+1]
                 if range.contains(newValue) {

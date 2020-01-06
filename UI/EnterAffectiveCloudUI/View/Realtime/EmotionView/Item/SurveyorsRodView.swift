@@ -149,7 +149,10 @@ class SurveyorsRodView: BaseView {
     
     public func setDotValue(index: Float) {
         _dotValue = index
-
+        let barWidth = (self.bounds.width - 10)
+        rodDot.snp.updateConstraints {
+            $0.centerX.equalTo(rodBar.snp.left).offset( (CGFloat(_dotValue) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth)
+        }
     }
     
     

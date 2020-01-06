@@ -65,6 +65,12 @@ public class PrivateReportSemiCircle: UIView {
     }
     
     func drawLayer() {
+        if let _ = bgLayer.superlayer {
+            bgLayer.removeFromSuperlayer()
+        }
+        if let _ = shapeLayer.superlayer {
+            shapeLayer.removeFromSuperlayer()
+        }
         let w1 = self.bounds.width
         let h1 = self.bounds.height
         circlePath = UIBezierPath.init(arcCenter: CGPoint(x: w1/2, y: h1-5), radius: (w1-10.0)/2, startAngle: CGFloat.pi, endAngle: CGFloat.pi*2, clockwise: true)
@@ -97,7 +103,7 @@ public class ReportSemiCircle2: UIView {
     public var smallValue:CGFloat = 0
     public var currentValue:CGFloat = 0
     
-    public var gradientLayer: CAGradientLayer?
+    public var gradientLayer: CAGradientLayer = CAGradientLayer()
 
     public var isShowLine = true
     
@@ -140,6 +146,15 @@ public class ReportSemiCircle2: UIView {
     }
     
     func drawLayer() {
+        if let _ = bgLayer.superlayer {
+            bgLayer.removeFromSuperlayer()
+        }
+        if let _ = shapeLayer.superlayer {
+            shapeLayer.removeFromSuperlayer()
+        }
+        if let _ = gradientLayer.superlayer {
+            gradientLayer.removeFromSuperlayer()
+        }
         let w1 = self.bounds.width
         let h1 = self.bounds.height
         circlePath = UIBezierPath.init(arcCenter: CGPoint(x: w1/2, y: h1-5), radius: (w1-60.0)/2, startAngle: CGFloat.pi*1.05, endAngle: CGFloat.pi*1.95, clockwise: true)
@@ -164,15 +179,15 @@ public class ReportSemiCircle2: UIView {
         shapeLayer.path = circlePath?.cgPath
         self.layer.addSublayer(shapeLayer)
         
-        gradientLayer = CAGradientLayer()
-        gradientLayer?.frame = self.bounds
-        gradientLayer?.colors = colors
-        gradientLayer?.locations = [0,1]
-        gradientLayer?.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer?.endPoint = CGPoint(x: 1, y: 0)
-        self.layer.addSublayer(gradientLayer!)
         
-        gradientLayer?.mask = shapeLayer
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = colors
+        gradientLayer.locations = [0,1]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        self.layer.addSublayer(gradientLayer)
+        
+        gradientLayer.mask = shapeLayer
         
         if isShowLine {
             let needleLayer = CAShapeLayer()

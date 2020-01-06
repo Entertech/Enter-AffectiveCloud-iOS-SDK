@@ -13,6 +13,7 @@ public class PrivateReportPressure: UIView {
         willSet {
             numLabel.text = "\(newValue)"
             circleView.currentValue = CGFloat(newValue)
+            circleView.drawLayer()
             if newValue >= stateArray[0] && newValue <= stateArray[1] {
                 state = .low
             } else if newValue >= stateArray[1] && newValue <= stateArray[2] {
