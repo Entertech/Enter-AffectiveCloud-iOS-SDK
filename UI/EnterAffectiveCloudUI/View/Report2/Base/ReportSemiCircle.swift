@@ -102,7 +102,7 @@ public class ReportSemiCircle2: UIView {
     public var largeValue:CGFloat = 100
     public var smallValue:CGFloat = 0
     public var currentValue:CGFloat = 0
-    
+    public let needleLayer = CAShapeLayer()
     public var gradientLayer: CAGradientLayer = CAGradientLayer()
 
     public var isShowLine = true
@@ -155,6 +155,9 @@ public class ReportSemiCircle2: UIView {
         if let _ = gradientLayer.superlayer {
             gradientLayer.removeFromSuperlayer()
         }
+        if let _ = needleLayer.superlayer {
+            needleLayer.removeFromSuperlayer()
+        }
         let w1 = self.bounds.width
         let h1 = self.bounds.height
         circlePath = UIBezierPath.init(arcCenter: CGPoint(x: w1/2, y: h1-5), radius: (w1-60.0)/2, startAngle: CGFloat.pi*1.05, endAngle: CGFloat.pi*1.95, clockwise: true)
@@ -190,7 +193,7 @@ public class ReportSemiCircle2: UIView {
         gradientLayer.mask = shapeLayer
         
         if isShowLine {
-            let needleLayer = CAShapeLayer()
+            
             needleLayer.frame = self.bounds
             needleLayer.fillColor = UIColor.clear.cgColor
             needleLayer.lineWidth = 60
