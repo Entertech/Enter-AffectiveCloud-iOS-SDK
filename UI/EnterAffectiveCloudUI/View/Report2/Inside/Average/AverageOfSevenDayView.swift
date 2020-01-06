@@ -15,6 +15,10 @@ public class PrivateAverageOfSevenDayView: UIView {
             if let _ = _values  {
                 
             } else {
+                for i in 0..<valueViews.count {
+                    valueViews[i].removeFromSuperview()
+                    valueLabels[i].removeFromSuperview()
+                }
                 valueViews.removeAll()
                 valueLabels.removeAll()
                 _values = newValue
