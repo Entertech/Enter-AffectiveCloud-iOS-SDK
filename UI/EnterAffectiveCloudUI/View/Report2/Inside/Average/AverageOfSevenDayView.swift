@@ -15,6 +15,8 @@ public class PrivateAverageOfSevenDayView: UIView {
             if let _ = _values  {
                 
             } else {
+                valueViews.removeAll()
+                valueLabels.removeAll()
                 _values = newValue
                 let total = newValue.reduce(0, +)
                 averageValue = CGFloat(total) / CGFloat(newValue.count)
