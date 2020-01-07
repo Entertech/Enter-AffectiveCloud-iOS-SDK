@@ -12,9 +12,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     public var values: [Int] = [] {
         willSet {
-            if let _ = _values  {
-                
-            } else {
+
                 for i in 0..<valueViews.count {
                     valueViews[i].removeFromSuperview()
                     valueLabels[i].removeFromSuperview()
@@ -50,7 +48,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                     valueLabels.append(numLabel)
                 }
                 barLayout()
-            }
+            
 
         }
     }
