@@ -44,7 +44,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
                 texts[i].text = spectrums[i] + " " + "\(Int(newValue![i]*100))%"
             }
             
-            texts[5].text = spectrums[5] + " " + "\(Int(value5))%"
+            texts[4].text = spectrums[4] + " " + "\(Int(value5))%"
             setDataCount(values: newValue!)
         }
     }
