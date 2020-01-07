@@ -182,7 +182,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
                 return Int(value)
             }
             
-            sample = pressure.count / maxDataCount
+            sample = pressure.count / maxDataCount == 0 ? 1 : pressure.count / maxDataCount
             pressureArray = pressure
             setDataCount(intArray)
         }

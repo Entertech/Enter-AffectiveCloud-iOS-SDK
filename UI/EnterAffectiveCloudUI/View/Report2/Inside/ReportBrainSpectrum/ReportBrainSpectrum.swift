@@ -312,7 +312,7 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
     
     func brainwaveMapping(_ gama: [Float], _ delta: [Float], _ theta: [Float], _ alpha: [Float], _ beta: [Float]) -> Array2D<Float> {
         let arrayCount = gama.count
-        sample = arrayCount / maxDataCount
+        sample = arrayCount / maxDataCount == 0 ? 1 : arrayCount / maxDataCount
         var tmpArray = Array2D(columns: arrayCount, rows: 5, initialValue: Float(0.0))
         for i in 0..<arrayCount {
             let total = gama[i] + theta[i] + delta[i] + alpha[i] + beta[i]

@@ -314,7 +314,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         
         if let array = array {
             sample = array.count / maxDataCount
-                
+            sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
             switch state {
             case .attention:
                 attentionArray = array

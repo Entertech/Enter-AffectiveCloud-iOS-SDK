@@ -181,6 +181,7 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
          
          if let hr = hr {
              sample = hr.count / maxDataCount
+            sample = hr.count / maxDataCount == 0 ? 1 : hr.count / maxDataCount
              hrArray = hr
              setDataCount(hr)
          }
