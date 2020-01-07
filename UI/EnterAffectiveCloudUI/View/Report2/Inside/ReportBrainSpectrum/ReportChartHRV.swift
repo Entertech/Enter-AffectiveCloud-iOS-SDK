@@ -328,9 +328,17 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
             chart.isZoomed = true
             chart.hrvAvg = self.hrvAvg
+            let label = UILabel()
+            label.text = "Zoom in on the curve and slide to view it."
+            label.font = UIFont.systemFont(ofSize: 12)
+            chart.addSubview(label)
+            label.snp.makeConstraints {
+                $0.right.equalTo(chart.chartHead!.expandBtn.snp.left).offset(-12)
+                $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
+            }
             nShowChartView.snp.makeConstraints {
-                $0.left.right.top.equalToSuperview()
-                $0.bottom.equalTo(view!.safeAreaLayoutGuide)
+                $0.edges.equalToSuperview()
+                
             }
             
             chart.snp.remakeConstraints {
