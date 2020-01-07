@@ -39,10 +39,10 @@ public class PrivateAverageView: UIView {
                     icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
                     if CGFloat(current) > averageValue {
                         compareText = name == .Meditation ? .longer : .higher
-                        icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
+                        icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
                     } else if CGFloat(current) < averageValue {
                         compareText = name == .Meditation ? .shorter : .lower
-                        icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
+                        icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                     }
                     let text = "The " + name.rawValue + " is " + compareText.rawValue + " the average of last 7 times"
                     let attributedText = NSMutableAttributedString(string:text)
