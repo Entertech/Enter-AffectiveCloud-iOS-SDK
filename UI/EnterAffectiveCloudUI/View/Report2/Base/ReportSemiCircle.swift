@@ -133,11 +133,8 @@ public class ReportSemiCircle2: UIView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-        if let _ = circlePath  {
-            
-        } else  {
-            drawLayer()
-        }
+
+        drawLayer()
 
     }
     

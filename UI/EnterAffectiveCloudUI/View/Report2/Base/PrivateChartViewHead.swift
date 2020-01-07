@@ -37,7 +37,7 @@ class PrivateChartViewHead: UIView {
             $0.left.equalToSuperview().offset(16)
             $0.centerY.equalToSuperview()
         }
-        
+    
         expandBtn.snp.makeConstraints {
             $0.right.equalToSuperview().offset(-16)
             $0.centerY.equalToSuperview()
