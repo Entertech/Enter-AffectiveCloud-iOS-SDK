@@ -38,10 +38,13 @@ public class PrivateReportBrainwaveSpectrum: UIView {
             guard newValue?.count == 5 else {
                 return
             }
-            
-            for i in 0..<5 {
+            var value5 = 100
+            for i in 0..<4 {
+                value5 = value5 - Int(newValue![i]*100)
                 texts[i].text = spectrums[i] + " " + "\(Int(newValue![i]*100))%"
             }
+            
+            texts[5].text = spectrums[5] + " " + "\(Int(value5))%"
             setDataCount(values: newValue!)
         }
     }
