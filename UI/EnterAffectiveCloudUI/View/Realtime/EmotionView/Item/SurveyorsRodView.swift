@@ -48,7 +48,7 @@ class SurveyorsRodView: BaseView {
     }
     
     override func setUI() {
-        rodBar.layer.cornerRadius = 2
+        rodBar.layer.cornerRadius = 3
         rodBar.layer.masksToBounds = true
         rodDot.backgroundColor = .clear
         self.addSubview(rodBar)
@@ -61,14 +61,14 @@ class SurveyorsRodView: BaseView {
             $0.left.equalToSuperview().offset(5)
             $0.right.equalToSuperview().offset(-5)
             $0.top.equalToSuperview().offset(16)
-            $0.height.equalTo(4)
+            $0.height.equalTo(6)
         }
         
         rodDot.snp.makeConstraints {
             $0.centerX.equalTo(rodBar.snp.left).offset(13)
             $0.bottom.equalToSuperview()
-            $0.width.equalTo(6)
-            $0.height.equalTo(6)
+            $0.width.equalTo(10)
+            $0.height.equalTo(8)
         }
     }
     

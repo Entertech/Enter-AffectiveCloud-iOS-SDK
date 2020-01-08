@@ -75,9 +75,9 @@ public class PrivateReportHRV: UIView {
         }
         
         dotView.snp.makeConstraints {
-            $0.centerY.equalTo(numberView.snp.centerY)
+            $0.centerY.equalTo(numberView.snp.centerY).offset(8)
             $0.right.equalToSuperview().offset(-16)
-            $0.height.equalTo(25)
+            $0.height.equalTo(29)
             $0.width.equalTo(180)
         }
         
