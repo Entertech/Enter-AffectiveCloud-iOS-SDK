@@ -261,7 +261,7 @@ public class RealtimeAttentionView: BaseView {
         rodView?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(12)
             $0.right.equalToSuperview().offset(-12)
-            $0.height.equalTo(25)
+            $0.height.equalTo(29)
             $0.bottom.equalTo(-16)
         }
         
