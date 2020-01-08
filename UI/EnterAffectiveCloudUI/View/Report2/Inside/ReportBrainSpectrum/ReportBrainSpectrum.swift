@@ -42,10 +42,10 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
     
     /// 5段脑波频谱的颜色
     public var spectrumColors: [UIColor] = [UIColor.colorWithHexString(hexColor: "#FF6682"),
-                                            UIColor.colorWithHexString(hexColor: "#5E75FF"),
+                                            UIColor.colorWithHexString(hexColor: "#FB9C98"),
                                             UIColor.colorWithHexString(hexColor: "#F7C77E"),
                                             UIColor.colorWithHexString(hexColor: "#5FC695"),
-                                            UIColor.colorWithHexString(hexColor: "#FB9C98")] {
+                                            UIColor.colorWithHexString(hexColor: "#5E75FF")] {
         didSet {
             guard spectrumColors.count == 5 else {
                 print("WARNING: The array 'spectrumColors' needs 5 params")

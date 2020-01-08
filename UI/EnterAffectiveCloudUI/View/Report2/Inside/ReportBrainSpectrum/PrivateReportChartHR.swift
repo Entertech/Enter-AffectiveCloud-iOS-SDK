@@ -50,6 +50,7 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
      
      public var hrAvg: Int = 0 {
          willSet  {
+
              let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
              avgLine.lineDashPhase = 0
              avgLine.lineDashLengths = [8, 4]
@@ -205,19 +206,20 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
         var notZero: Int = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
             if i < initIndex{
-                colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                colors.append(lineColor)
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
-                if minValue > waveArray[i] {
-                    minValue = waveArray[i]
-                }
-                if maxValue < waveArray[i] {
-                    maxValue = waveArray[i]
-                }
+
                 if waveArray[i] <= 40 {
-                    colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                    colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 } else {
+                    if minValue > waveArray[i] {
+                        minValue = waveArray[i]
+                    }
+                    if maxValue < waveArray[i] {
+                        maxValue = waveArray[i]
+                    }
                     notZero = waveArray[i]
                     colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
@@ -231,14 +233,14 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
-        set.lineWidth = 3
+        set.lineWidth = 2
         set.colors = colors
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         chartView?.data = data
         
         var labelArray: [Int] = []
-        let maxLabel = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
+        let maxLabel = (maxValue / 5 + 1) * 5 > 140 ? 140 : (maxValue / 5 + 1) * 5
         let minLabel = (minValue / 5) * 5 < 0 ? 0 : (minValue / 5) * 5
         chartView?.leftAxis.axisMaximum = Double(maxLabel)
         chartView?.leftAxis.axisMinimum = Double(minLabel)

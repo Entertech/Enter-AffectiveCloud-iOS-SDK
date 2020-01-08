@@ -17,11 +17,11 @@ public class PrivateReportBrainwaveSpectrum: UIView {
         }
     }
     
-    public var colorArray: [UIColor] = [UIColor.colorWithHexString(hexColor: "FF6682"),
-                                 UIColor.colorWithHexString(hexColor: "5E75FF"),
-                                 UIColor.colorWithHexString(hexColor: "F7C77E"),
+    public var colorArray: [UIColor] = [UIColor.colorWithHexString(hexColor: "#FF6682"),
+                                 UIColor.colorWithHexString(hexColor: "#FB9C98"),
+                                 UIColor.colorWithHexString(hexColor: "#F7C77E"),
                                  UIColor.colorWithHexString(hexColor: "5FC695"),
-                                 UIColor.colorWithHexString(hexColor: "FB9C98")
+                                 UIColor.colorWithHexString(hexColor: "#5E75FF")
         ] {
         willSet {
             guard newValue.count != 5 else {

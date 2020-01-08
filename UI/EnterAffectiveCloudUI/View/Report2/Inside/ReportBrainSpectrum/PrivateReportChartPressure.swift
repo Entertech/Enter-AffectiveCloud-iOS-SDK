@@ -206,11 +206,11 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         var notZero: Int = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
             if i < initIndex{
-                colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                colors.append(lineColor)
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
                 if waveArray[i] <= 10 {
-                    colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                    colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 } else {
                     if minValue > waveArray[i] {
@@ -232,7 +232,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
-        set.lineWidth = 3
+        set.lineWidth = 2
         set.colors = colors
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)

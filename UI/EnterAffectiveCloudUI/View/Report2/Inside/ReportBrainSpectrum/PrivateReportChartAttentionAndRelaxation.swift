@@ -344,18 +344,19 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
 
         var yVals: [ChartDataEntry] = []
         var notZero: Int = 0
+        let lineColor = state == .attention ? attentionColor : relaxationColor
         for i in stride(from: 0, to: waveArray.count, by: sample) {
             if i < initIndex{
-                colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                colors.append(lineColor)
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
                 if waveArray[i] == checkNum {
-                    colors.append(#colorLiteral(red: 0.9, green: 0.90, blue: 0.90, alpha: 0.7))
+                    colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 } else {
 
                     notZero = state == .attention ? waveArray[i] : waveArray[i] + 100
-                    let lineColor = state == .attention ? attentionColor : relaxationColor
+                    
                     colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 }
