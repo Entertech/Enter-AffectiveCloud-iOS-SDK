@@ -27,6 +27,37 @@ open class BaseView: UIView {
     func setUI() {}
     
     func setLayout() {}
+    
+    
+    
+    open override func didMoveToWindow() {
+        super.didMoveToWindow()
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+
+    }
+    
+    public func restoreAnimation() {
+
+        for e in self.subviews {
+            if e.tag == 9999 {
+                for v in e.subviews {
+                    if v.isKind(of: UIImageView.classForCoder()) {
+                        let iv = v as! UIImageView
+                        if !iv.isAnimating {
+                            iv.startAnimating()
+                        }
+                        break
+                    }
+
+                }
+                break
+            }
+        }
+        
+    }
 
     /// 设备未连接实时数据无法显示时显示提示
     public func showTip() {

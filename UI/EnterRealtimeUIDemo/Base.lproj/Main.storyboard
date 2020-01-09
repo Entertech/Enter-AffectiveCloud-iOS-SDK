@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,13 +10,13 @@
         <!--First-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstReportViewController" customModule="EnterRealtimeUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="FirstRealtimeViewController" customModule="EnterRealtimeUIDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="2400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="0PV-Pj-cpH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="2351"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="2317"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEZ-Yc-c7f">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="2317"/>
@@ -237,8 +238,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="2400"/>
                     <connections>
-                        <outlet property="attentionSmallView" destination="I6o-yV-MOQ" id="q3w-WM-wAm"/>
-                        <outlet property="attentionView" destination="bci-tS-SRA" id="nOK-DM-fiC"/>
+                        <outlet property="attentionSmallView" destination="bci-tS-SRA" id="G4h-mC-wmk"/>
+                        <outlet property="attentionView" destination="I6o-yV-MOQ" id="ZWi-os-CYl"/>
                         <outlet property="brainwaveView" destination="5FI-6E-Etp" id="v8Z-mn-ziV"/>
                         <outlet property="heartLargeView" destination="FcM-fZ-TXE" id="lhK-XP-Iwq"/>
                         <outlet property="heartNoValueView" destination="TAj-v3-T55" id="HFP-Il-rdC"/>
@@ -257,13 +258,13 @@
         <!--Second-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondReportViewController" customModule="EnterRealtimeUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="SecondRealtimeViewController" customModule="EnterRealtimeUIDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Mb-B4-8Cp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1351"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1317"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gif-tX-13j">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1317"/>
