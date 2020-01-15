@@ -18,6 +18,7 @@
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
+		FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */; };
 		FA19DF632398F6AC0043F679 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF622398F6AC0043F679 /* TagService.swift */; };
 		FA19DF69239900F40043F679 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF68239900F40043F679 /* BaseAPI.swift */; };
 		FA19DF6B2399015D0043F679 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6A2399015D0043F679 /* TokenModel.swift */; };
@@ -211,6 +212,7 @@
 		F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHRVView.swift; sourceTree = "<group>"; };
 		FA19DF622398F6AC0043F679 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		FA19DF68239900F40043F679 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		FA19DF6A2399015D0043F679 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			children = (
 				FAC773032355580C00FBFA6A /* heart.gif */,
 				FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */,
+				FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */,
 			);
 			path = HRView;
 			sourceTree = "<group>";
@@ -1225,6 +1228,7 @@
 				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,
 				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
 				FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */,
+				FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */,
 				FAB3E46123AC699500A85129 /* ReportBrainwaveSpectrum.swift in Sources */,
 				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,

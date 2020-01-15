@@ -107,6 +107,12 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
         }
     }
     
+    public var title: String = "" {
+        willSet {
+            spectrumView.titleLabel.text = newValue
+        }
+    }
+    
     //MARK:- Private param
     private let titleText = "脑波频谱"
     private let disposeBag = DisposeBag()

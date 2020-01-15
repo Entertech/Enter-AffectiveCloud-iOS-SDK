@@ -117,6 +117,12 @@ public class RealtimeHeartRateView: BaseView {
         }
     }
     
+    public var title: String = "" {
+        willSet {
+            titleLabel?.text = newValue
+        }
+    }
+    
     //MARK:- Private param
     private let titleText = "心率"
     private var maxValue: Int = 0

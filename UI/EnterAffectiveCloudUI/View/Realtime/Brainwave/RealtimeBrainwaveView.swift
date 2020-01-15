@@ -118,8 +118,14 @@ public class RealtimeBrainwaveView: BaseView {
         }
     }
     
+    public var title: String = "" {
+        willSet {
+            brainwaveView.titleLabel.text = newValue
+        }
+    }
+    
     //MARK:- Private param
-    private let titleText = "实时脑波"
+    private let titleText = "实时脑电波（EEG）"
     private let disposeBag = DisposeBag()
     private var updateBrainwave: UpdateBrainwaveValue?
     private var isFirstLeftData: Bool = true

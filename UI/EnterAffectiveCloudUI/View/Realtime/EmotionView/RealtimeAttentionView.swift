@@ -103,6 +103,12 @@ public class RealtimeAttentionView: BaseView {
         }
     }
     
+    public var title: String = "" {
+        willSet {
+            titleLabel?.text = newValue
+        }
+    }
+    
     //MARK:- Private param
     private let titleText = "注意力"
     private let disposeBag = DisposeBag()

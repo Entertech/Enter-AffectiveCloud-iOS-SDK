@@ -7,7 +7,7 @@ platform :ios, '10.0'
 target 'EnterAffectiveCloud' do
   pod 'HandyJSON'
   pod 'SwiftyJSON'
-  pod 'Starscream'
+  pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
   pod 'Moya/RxSwift', '~> 14.0.0-beta.5'
   pod 'RxSwift'
@@ -19,7 +19,7 @@ target 'EnterAffectiveCloudUI' do
   pod 'Charts'
   pod 'HandyJSON', '5.0.0'
   pod 'SwiftyJSON'
-  pod 'Starscream'
+  pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
 end
 
@@ -28,7 +28,7 @@ target 'EnterRealtimeUIDemo' do
   pod 'SnapKit'
   pod 'GzipSwift'
   pod 'HandyJSON', '5.0.0'
-  pod 'Starscream'
+  pod 'Starscream', '3.1.1'
   pod 'SwiftyJSON'
   pod 'Charts'
 end
@@ -38,7 +38,7 @@ target 'EnterReportUIDemo' do
   pod 'SnapKit'
   pod 'GzipSwift'
   pod 'HandyJSON', '5.0.0'
-  pod 'Starscream'
+  pod 'Starscream', '3.1.1'
   pod 'SwiftyJSON'
   pod 'Charts'
 end

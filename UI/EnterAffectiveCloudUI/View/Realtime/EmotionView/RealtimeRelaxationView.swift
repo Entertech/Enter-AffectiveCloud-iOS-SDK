@@ -100,6 +100,12 @@ public class RealtimeRelaxationView: BaseView {
         }
     }
     
+    public var title: String = "" {
+        willSet {
+            titleLabel?.text = newValue
+        }
+    }
+    
     //MARK:- Private param
     private let titleText = "放松度"
     private let disposeBag = DisposeBag()
@@ -259,7 +265,7 @@ public class RealtimeRelaxationView: BaseView {
         rodView?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(12)
             $0.right.equalToSuperview().offset(-12)
-            $0.height.equalTo(25)
+            $0.height.equalTo(29)
             $0.bottom.equalTo(-16)
         }
         

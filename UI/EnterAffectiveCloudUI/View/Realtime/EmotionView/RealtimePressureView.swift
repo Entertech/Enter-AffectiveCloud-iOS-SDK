@@ -102,6 +102,12 @@ public class RealtimePressureView: BaseView {
         }
     }
     
+    public var title: String = "" {
+        willSet {
+            titleLabel?.text = newValue
+        }
+    }
+    
     //MARK:- Private param
     private let titleText = "压力值"
     private let disposeBag = DisposeBag()
