@@ -38,14 +38,25 @@ public class PrivateReportBrainwaveSpectrum: UIView {
             guard newValue?.count == 5 else {
                 return
             }
-            var value5 = 100
-            for i in 0..<4 {
-                value5 = value5 - Int(newValue![i]*100)
-                texts[i].text = spectrums[i] + " " + "\(Int(newValue![i]*100))%"
+            if newValue![0] == 0 && newValue![1] == 0 {
+                for i in 0...4 {
+                    texts[i].text = spectrums[i] + " " + "0%"
+                }
+                chartView.isHidden = true
+                roundView.isHidden = true
+            } else {
+                chartView.isHidden = false
+                roundView.isHidden = false
+                var value5 = 100
+                for i in 0..<4 {
+                    value5 = value5 - Int(newValue![i]*100)
+                    texts[i].text = spectrums[i] + " " + "\(Int(newValue![i]*100))%"
+                }
+                
+                texts[4].text = spectrums[4] + " " + "\(Int(value5))%"
+                setDataCount(values: newValue!)
             }
-            
-            texts[4].text = spectrums[4] + " " + "\(Int(value5))%"
-            setDataCount(values: newValue!)
+
         }
     }
     private let roundView = UIView()
