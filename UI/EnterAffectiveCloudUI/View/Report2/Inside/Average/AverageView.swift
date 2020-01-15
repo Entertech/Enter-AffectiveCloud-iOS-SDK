@@ -44,7 +44,7 @@ public class PrivateAverageView: UIView {
                         compareText = name == .Meditation ? .shorter : .lower
                         icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                     }
-                    let text = "The " + name.rawValue + " is " + compareText.rawValue + " the average of last 7 times"
+                    let text = "The " + name.rawValue + " is " + compareText.rawValue + " the average of last 7 times."
                     let attributedText = NSMutableAttributedString(string:text)
                     let style = NSMutableParagraphStyle()
                     style.alignment = .left

@@ -16,11 +16,39 @@ protocol HRVValueProtocol {
     var rxHRVValue: BehaviorSubject<Int> {set get}
 }
 
+class UpdateHRV: HRVValueProtocol {
+    var rxHRVValue: BehaviorSubject<Int>
+    
+    init(_ initValue: Int = 0) {
+        rxHRVValue = BehaviorSubject<Int>(value: initValue)
+        NotificationCenter.default.addObserver(self, selector: #selector(biodataSubscript(_:)), name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil)
+        rxHRVValue.onCompleted()
+    }
+    
+    @objc func biodataSubscript(_ notification: Notification) {
+    
+        let value = notification.userInfo!["biodataServicesSubscribe"] as! AffectiveCloudResponseJSONModel
+        if let data = value.dataModel as? CSBiodataProcessJSONModel {
+            if let eeg = data.hr {
+                if let hrv = eeg.hrv {
+                    
+                    self.rxHRVValue.onNext(Int(hrv))
+                }
+            }
+        }
+    }
+    
+}
+
 class RealtimeHRVView: BaseView {
 
        //MARK:- Public param
      /// 主色调显示
-     public var mainColor = UIColor.colorWithHexString(hexColor: "#FF6682")  {
+     public var mainColor = UIColor.colorWithHexString(hexColor: "#FFC56F")  {
          didSet {
              self.titleLabel.textColor = mainColor.changeAlpha(to: 1.0)
          }
@@ -78,14 +106,77 @@ class RealtimeHRVView: BaseView {
     private var width: CGFloat = 0
     private var minWidth: CGFloat = 0
     private var minHeight: CGFloat = 0
+    private let topMargin: CGFloat = 58
+    private let bottomMargin: CGFloat = 22
+    private let leftMargin: CGFloat = 32
+    private let rightMargin: CGFloat = 13
     private var waveArray: [Float]?
+    private var updateHRV: UpdateHRV?
+    private let disposeBag = DisposeBag()
+    private var isFirstData = true
+    private let zeroLabel = UILabel()
+    private let fiftyLabel = UILabel()
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+    }
+    
+    
+    /// 开启监听
+    public func observe() {
+        observeRealtimeValue()
+    }
+    
+    private func observeRealtimeValue(_ demo: Int = 0) {
+        updateHRV = UpdateHRV(demo)
+        updateHRV?.rxHRVValue.subscribe(onNext: {[weak self] (value) in
+            guard let self = self else {return}
+            DispatchQueue.main.async {
+                if self.isFirstData {
+                    self.isFirstData = false
+                } else  {
+                    if value > 0 {
+                        self.appendArray(value)
+                    }
+                    self.dismissMask()
+                }
+
+            }
+            
+        }, onError: { (error) in
+            print(error.localizedDescription)
+            }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+    }
     
     override func setUI() {
         self.addSubview(titleLabel)
         self.addSubview(infoBtn)
+        self.addSubview(zeroLabel)
+        self.addSubview(fiftyLabel)
         
         titleLabel.font = UIFont(name: textFont, size: 14)
         titleLabel.textColor = textColor
+        
+        zeroLabel.text = "0"
+        zeroLabel.font = UIFont.systemFont(ofSize: 12)
+        zeroLabel.textColor = .lightGray
+        zeroLabel.textAlignment = .right
+        
+        fiftyLabel.text = "50"
+        fiftyLabel.font = UIFont.systemFont(ofSize: 12)
+        fiftyLabel.textColor = .lightGray
+        fiftyLabel.textAlignment = .right
     }
     
     override func setLayout() {
@@ -100,21 +191,37 @@ class RealtimeHRVView: BaseView {
             $0.width.equalTo(24)
             $0.height.equalTo(24)
         }
+        
+        zeroLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(22)
+            $0.left.equalToSuperview().offset(6)
+            $0.height.equalTo(14)
+            $0.width.equalTo(20)
+        }
+        
+        fiftyLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(58)
+            $0.left.equalToSuperview().offset(6)
+            $0.height.equalTo(14)
+            $0.width.equalTo(20)
+        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        height = self.bounds.height - 80
-        width = self.bounds.width - 20
+        height = self.bounds.height - topMargin - bottomMargin
+        width = self.bounds.width - leftMargin - rightMargin
         minWidth = width / 200.0
-        minHeight = height / 100
+        minHeight = height / 50
         setLine()
     }
     
     private func setLine() {
+        
         let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: 17, y: 50))
-        linePath.addLine(to: CGPoint(x: 17, y: 50+height))
+        linePath.move(to: CGPoint(x: leftMargin, y: topMargin))
+        linePath.addLine(to: CGPoint(x: leftMargin, y: topMargin+height))
+        linePath.addLine(to: CGPoint(x: leftMargin+width, y:topMargin+height))
         let shaperLayer = CAShapeLayer()
         shaperLayer.lineWidth = 0.8
         shaperLayer.backgroundColor = UIColor.clear.cgColor
@@ -122,10 +229,10 @@ class RealtimeHRVView: BaseView {
         shaperLayer.path = linePath.cgPath
         self.layer.addSublayer(shaperLayer)
         
-        for i in stride(from: 60, to: width, by: 70) {
+        for i in stride(from: 80, to: width, by: 70) {
             let dashPath = UIBezierPath()
-            dashPath.move(to: CGPoint(x: i, y: 50))
-            dashPath.addLine(to: CGPoint(x: i, y: 50+height))
+            dashPath.move(to: CGPoint(x: i, y: topMargin))
+            dashPath.addLine(to: CGPoint(x: i, y: topMargin+height))
             let dashLayer = CAShapeLayer()
             dashLayer.lineWidth = 0.6
             dashLayer.backgroundColor = UIColor.clear.cgColor
@@ -153,7 +260,7 @@ class RealtimeHRVView: BaseView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         if let array = waveArray {
-            let originY = height / 2 + 50
+            let originY = height + topMargin
             var eegNode1: [CGPoint] = Array.init()
             for (index,e) in array.enumerated() {
                 if index > 200 {
@@ -170,7 +277,7 @@ class RealtimeHRVView: BaseView {
             context.setStrokeColor(self.mainColor.cgColor)
             context.setLineWidth(2)
             context.setLineJoin(.round)
-            context.move(to: CGPoint(x: 17, y: originY))
+            context.move(to: CGPoint(x: leftMargin, y: originY))
             context.addLines(between: eegNode1)
             context.strokePath()
         }
