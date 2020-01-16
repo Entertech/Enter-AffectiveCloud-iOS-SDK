@@ -44,7 +44,7 @@ class UpdateHRV: HRVValueProtocol {
     
 }
 
-class RealtimeHRVView: BaseView {
+public class RealtimeHRVView: BaseView {
 
        //MARK:- Public param
      /// 主色调显示
