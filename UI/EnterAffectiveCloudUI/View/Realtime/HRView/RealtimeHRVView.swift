@@ -160,6 +160,7 @@ class RealtimeHRVView: BaseView {
     }
     
     override func setUI() {
+        self.layer.cornerRadius = 8
         self.addSubview(titleLabel)
         self.addSubview(infoBtn)
         self.addSubview(zeroLabel)
@@ -167,6 +168,7 @@ class RealtimeHRVView: BaseView {
         
         titleLabel.font = UIFont(name: textFont, size: 14)
         titleLabel.textColor = textColor
+        titleLabel.text = "心率变异性"
         
         zeroLabel.text = "0"
         zeroLabel.font = UIFont.systemFont(ofSize: 12)
@@ -177,6 +179,9 @@ class RealtimeHRVView: BaseView {
         fiftyLabel.font = UIFont.systemFont(ofSize: 12)
         fiftyLabel.textColor = .lightGray
         fiftyLabel.textAlignment = .right
+        
+        infoBtn.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
+        infoBtn.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
     }
     
     override func setLayout() {
@@ -193,7 +198,7 @@ class RealtimeHRVView: BaseView {
         }
         
         zeroLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(22)
+            $0.bottom.equalToSuperview().offset(-22)
             $0.left.equalToSuperview().offset(6)
             $0.height.equalTo(14)
             $0.width.equalTo(20)
@@ -226,10 +231,12 @@ class RealtimeHRVView: BaseView {
         shaperLayer.lineWidth = 0.8
         shaperLayer.backgroundColor = UIColor.clear.cgColor
         shaperLayer.strokeColor = textColor.cgColor
+        shaperLayer.fillColor = UIColor.clear.cgColor
         shaperLayer.path = linePath.cgPath
+        
         self.layer.addSublayer(shaperLayer)
         
-        for i in stride(from: 80, to: width, by: 70) {
+        for i in stride(from: 80, to: width, by: 90) {
             let dashPath = UIBezierPath()
             dashPath.move(to: CGPoint(x: i, y: topMargin))
             dashPath.addLine(to: CGPoint(x: i, y: topMargin+height))
@@ -283,5 +290,12 @@ class RealtimeHRVView: BaseView {
         }
         
 
+    }
+    
+    
+    @objc private func infoBtnTouchUpInside() {
+        let url = URL(string: infoUrlString)!
+        let sf = SFSafariViewController(url: url)
+        self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
 }
