@@ -177,7 +177,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                 $0.bottom.equalTo(bar.snp.top).offset(-4)
                 $0.centerX.equalTo(bar.snp.centerX)
                 $0.height.equalTo(14)
-                $0.width.equalTo(17)
+                $0.width.greaterThanOrEqualTo(17)
             }
         }
         
@@ -188,7 +188,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                 $0.bottom.equalToSuperview().offset(-64)
             } else {
                 if 28 + ((averageValue-CGFloat(min))/CGFloat(max-min)*100) < 46 {
-                    $0.bottom.equalTo(46)
+                    $0.bottom.equalTo(-46)
                 } else {
                     $0.bottom.equalTo(-28-((averageValue-CGFloat(min))/CGFloat(max-min)*100)).priority(.high)
                 }

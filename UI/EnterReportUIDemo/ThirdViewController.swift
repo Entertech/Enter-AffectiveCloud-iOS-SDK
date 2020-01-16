@@ -69,7 +69,7 @@ class ThirdViewController: UIViewController {
         view6.mainColor = UIColor.blue
         view6.unitText = "mins"
         view6.categoryName = .Meditation
-        view6.values = [28, 17, 29, 30, 31]
+        view6.values = [35, 17, 29, 30, 77]
         
         
     }
