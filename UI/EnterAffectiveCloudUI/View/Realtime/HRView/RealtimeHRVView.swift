@@ -254,14 +254,14 @@ public class RealtimeHRVView: BaseView {
     
     public func appendArray(_ value: Int) {
 
-            if let _ = waveArray {
-                waveArray?.append(Float(value))
-                waveArray?.remove(at: 0)
-            } else {
-                waveArray = Array(repeating: 0.0, count: 200)
-                waveArray?.append(Float(value))
-            }
-
+        if let _ = waveArray {
+            waveArray?.append(Float(value))
+            waveArray?.remove(at: 0)
+        } else {
+            waveArray = Array(repeating: 0.0, count: 200)
+            waveArray?.append(Float(value))
+        }
+        setNeedsDisplay()
     }
     
     override public func draw(_ rect: CGRect) {
