@@ -212,7 +212,7 @@ public class RealtimeHRVView: BaseView {
         }
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         height = self.bounds.height - topMargin - bottomMargin
         width = self.bounds.width - leftMargin - rightMargin
@@ -264,7 +264,7 @@ public class RealtimeHRVView: BaseView {
 
     }
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         super.draw(rect)
         if let array = waveArray {
             let originY = height + topMargin
