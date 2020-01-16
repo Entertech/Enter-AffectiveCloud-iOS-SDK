@@ -110,6 +110,7 @@ public class RealtimeHRVView: BaseView {
     private let bottomMargin: CGFloat = 22
     private let leftMargin: CGFloat = 32
     private let rightMargin: CGFloat = 13
+    private let pointCount = 120
     private var waveArray: [Float]?
     private var updateHRV: UpdateHRV?
     private let disposeBag = DisposeBag()
@@ -216,7 +217,7 @@ public class RealtimeHRVView: BaseView {
         super.layoutSubviews()
         height = self.bounds.height - topMargin - bottomMargin
         width = self.bounds.width - leftMargin - rightMargin
-        minWidth = width / 200.0
+        minWidth = width / CGFloat(pointCount)
         minHeight = height / 50
         setLine()
     }
@@ -270,10 +271,10 @@ public class RealtimeHRVView: BaseView {
             let originY = height + topMargin
             var eegNode1: [CGPoint] = Array.init()
             for (index,e) in array.enumerated() {
-                if index > 200 {
+                if index > pointCount {
                     break
                 }
-                let pointX = 1 + CGFloat(index) * minWidth
+                let pointX = leftMargin + 1 + CGFloat(index) * minWidth
                 let pointY1 = originY - CGFloat(e) * minHeight
                 let node1 = CGPoint(x: pointX, y: pointY1)
                 eegNode1.append(node1)
