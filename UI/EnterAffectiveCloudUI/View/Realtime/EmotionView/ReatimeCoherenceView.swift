@@ -1,9 +1,9 @@
 //
-//  RealtimeAttentionView.swift
+//  ReatimeCoherenceView.swift
 //  EnterAffectiveCloudUI
 //
-//  Created by Enter on 2019/10/11.
-//  Copyright © 2019 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
+//  Created by Enter on 2020/1/16.
+//  Copyright © 2020 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
 import UIKit
@@ -12,42 +12,41 @@ import RxSwift
 import SafariServices
 import EnterAffectiveCloud
 
-protocol AttentionProtocol {
-    var rxAttentionValue: BehaviorSubject<Float> {set get}
+protocol CoherenceProtocol {
+    var rxCoherenceValue: BehaviorSubject<Float> {set get}
 }
 
-class UpdateAttention: AttentionProtocol {
-    var rxAttentionValue: BehaviorSubject<Float>
+class UpdateCoherence: CoherenceProtocol {
+    var rxCoherenceValue: BehaviorSubject<Float>
     
     init(_ initValue: Float = 0) {
-        rxAttentionValue = BehaviorSubject<Float>(value: initValue)
+        rxCoherenceValue = BehaviorSubject<Float>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(affectiveDataSubscript(_:)), name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
-        rxAttentionValue.onCompleted()
+        rxCoherenceValue.onCompleted()
     }
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
-    
-        let value = notification.userInfo!["affectiveDataSubscribe"] as! AffectiveCloudResponseJSONModel
-            if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
-                
-                if let attention = data.attention?.attention {
-                    rxAttentionValue.onNext(attention)
-                }
-            }
         
+        let value = notification.userInfo!["affectiveDataSubscribe"] as! AffectiveCloudResponseJSONModel
+        if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
             
+            if let relaxation = data.coherence?.coherence {
+                rxCoherenceValue.onNext(relaxation)
+            }
+        }
     }
     
 }
 
-public class RealtimeAttentionView: BaseView {
 
+public class ReatimeCoherenceView: BaseView {
+    
     //MARK:- Public param
-    /// 主色
+    /// 设置主色
     public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
         didSet {
             let firstTextColor = mainColor.changeAlpha(to: 1.0)
@@ -62,17 +61,15 @@ public class RealtimeAttentionView: BaseView {
         }
     }
     private var textFont = "PingFangSC-Semibold"
-    
-    /// 文字颜色
+    /// 设置字体颜色
     public var textColor = UIColor.colorWithHexString(hexColor: "171726") {
         didSet {
             let valueTextColor = textColor.changeAlpha(to: 1.0)
             let grayTextColor = textColor.changeAlpha(to: 0.8)
-            attentionValueLabel?.textColor = valueTextColor
+            coherenceValueLabel?.textColor = valueTextColor
             rodView?.setLabelColor(grayTextColor)
         }
     }
-    
     /// 是否显示按钮
     public var isShowInfoIcon: Bool = true {
         didSet {
@@ -80,8 +77,9 @@ public class RealtimeAttentionView: BaseView {
         }
         
     }
-    /// 圆角
-    public var borderRadius: CGFloat = 8.0 {
+    
+    /// 圆角边
+    public var borderRadius: CGFloat = 8.0  {
         didSet {
             bgView.layer.cornerRadius = borderRadius
             bgView.layer.masksToBounds = true
@@ -94,8 +92,8 @@ public class RealtimeAttentionView: BaseView {
             bgView.backgroundColor = bgColor
         }
     }
-    /// 按钮点击后显示的网页地址
-    public var infoUrlString = "https://www.notion.so/Attention-84fef81572a848efbf87075ab67f4cfe"
+    /// 按钮点击显示的网页
+    public var infoUrlString = "https://www.notion.so/Relaxation-c9e3b39634a14d2fa47eaed1d55d872b"
     /// 按钮图片
     public var buttonImageName: String = "" {
         didSet {
@@ -110,26 +108,27 @@ public class RealtimeAttentionView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "注意力"
+    private let titleText = "和谐度"
     private let disposeBag = DisposeBag()
     
     //MARK:- Private UI
     private var bgView: UIView =  UIView()
     private var titleLabel: UILabel?
-    private var attentionValueLabel: UILabel?
+    private var coherenceValueLabel: UILabel?
     private var stateLabel: UILabel?
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
-    private var updateAttention: UpdateAttention?
+    private var updateCoherence: UpdateCoherence?
     private var isFirstData = true
     //MARK:- override function
     public init() {
         super.init(frame: CGRect.zero)
-        //observeRealtimeValue()
+        
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        
     }
     
     required public init?(coder: NSCoder) {
@@ -140,28 +139,27 @@ public class RealtimeAttentionView: BaseView {
     public func observe(with demo: Float) {
         observeRealtimeValue(demo)
     }
-      
+    
     public func observe() {
         observeRealtimeValue()
     }
-      
+    
     
     private func observeRealtimeValue(_ demo: Float = 0) {
-        updateAttention = UpdateAttention(demo)
-        updateAttention?.rxAttentionValue.subscribe(onNext: {[weak self] (value) in
+        updateCoherence = UpdateCoherence(demo)
+        updateCoherence?.rxCoherenceValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if self.isFirstData {
                     self.isFirstData = false
-                    
                 } else {
                     self.dismissMask()
                 }
                 if value > 0 {
-                    self.attentionValueLabel?.text = "\(Int(value))"
+                    self.coherenceValueLabel?.text = "\(Int(value))"
                     self.rodView?.setDotValue(index: Float(value))
                 } else {
-                    self.attentionValueLabel?.text = "--"
+                    self.coherenceValueLabel?.text = "--"
                     self.rodView?.setDotValue(index: 0)
                 }
                 
@@ -174,11 +172,12 @@ public class RealtimeAttentionView: BaseView {
                 }
             }
             
-        }, onError: { (error) in
-            print(error.localizedDescription)
-            }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: { (error) in
+                print(error.localizedDescription)
+        }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-  
+    
+    
     override func setUI() {
         let valueTextColor = textColor.changeAlpha(to: 1.0)
         let grayTextColor = textColor.changeAlpha(to: 0.8)
@@ -198,12 +197,12 @@ public class RealtimeAttentionView: BaseView {
         titleLabel?.font = UIFont(name: textFont, size: 14)
         bgView.addSubview(titleLabel!)
         
-        attentionValueLabel = UILabel()
-        attentionValueLabel?.text = "--"
-        attentionValueLabel?.textColor = valueTextColor
-        attentionValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
-        attentionValueLabel?.textAlignment = .left
-        bgView.addSubview(attentionValueLabel!)
+        coherenceValueLabel = UILabel()
+        coherenceValueLabel?.text = "--"
+        coherenceValueLabel?.textColor = valueTextColor
+        coherenceValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
+        coherenceValueLabel?.textAlignment = .left
+        bgView.addSubview(coherenceValueLabel!)
         
         stateLabel = UILabel()
         stateLabel?.backgroundColor = thirdTextColor
@@ -251,16 +250,16 @@ public class RealtimeAttentionView: BaseView {
             $0.height.equalTo(24)
         }
         
-        attentionValueLabel?.snp.makeConstraints {
+        coherenceValueLabel?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-56)
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(attentionValueLabel!.snp.right).offset(12)
+            $0.left.equalTo(coherenceValueLabel!.snp.right).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
-            $0.bottom.equalTo(attentionValueLabel!.snp.bottomMargin).offset(-4)
+            $0.bottom.equalTo(coherenceValueLabel!.snp.bottomMargin).offset(-4)
         }
         
         
@@ -278,5 +277,6 @@ public class RealtimeAttentionView: BaseView {
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
-    
+
+
 }

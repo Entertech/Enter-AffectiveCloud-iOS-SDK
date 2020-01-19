@@ -37,6 +37,11 @@
 		FA55EA5E234C273A00C148BF /* EnterAffectiveCloudUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
 		FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */; };
+		FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFF9E23D052C700A4B16A /* RealtimeArousalView.swift */; };
+		FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */; };
+		FA6FFFA523D05A0F00A4B16A /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */; };
+		FA6FFFA623D05A0F00A4B16A /* RodDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA323D05A0F00A4B16A /* RodDot.swift */; };
+		FA6FFFA823D0618000A4B16A /* ReatimeCoherenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA723D0618000A4B16A /* ReatimeCoherenceView.swift */; };
 		FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C523ACB387005E4DF7 /* ReportNumberView.swift */; };
 		FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C723B053D5005E4DF7 /* ReportHR.swift */; };
 		FA7689CA23B0595A005E4DF7 /* ReportSemiCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C923B0595A005E4DF7 /* ReportSemiCircle.swift */; };
@@ -93,11 +98,10 @@
 		FAC773042355580C00FBFA6A /* heart.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAC773032355580C00FBFA6A /* heart.gif */; };
 		FAC773062355581500FBFA6A /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAC773052355581500FBFA6A /* loading.gif */; };
 		FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC7730A2355CBD800FBFA6A /* BrainSpecturmReportView.swift */; };
+		FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC9BD6223D3E99400004B70 /* RealtimePleasure.swift */; };
 		FACC8C3223717F340017FA52 /* flowtime_eegdata.txt in Resources */ = {isa = PBXBuildFile; fileRef = FACC8C3123717F340017FA52 /* flowtime_eegdata.txt */; };
 		FACC8C3423717F3C0017FA52 /* flowtime_hrdata.txt in Resources */ = {isa = PBXBuildFile; fileRef = FACC8C3323717F3C0017FA52 /* flowtime_hrdata.txt */; };
 		FACEDF89235034FE0016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDF88235034FE0016176C /* Assets.xcassets */; };
-		FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */; };
-		FACEDF9123507BAD0016176C /* RodDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF8E23507BAD0016176C /* RodDot.swift */; };
 		FACEDF9323507D370016176C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9223507D370016176C /* NibLoadable.swift */; };
 		FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */; };
 		FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACEDF98235164720016176C /* RealtimeRelaxationView.swift */; };
@@ -229,6 +233,11 @@
 		FA55EA51234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBox+Ex.swift"; sourceTree = "<group>"; };
 		FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateReportChartAttentionAndRelaxation.swift; sourceTree = "<group>"; };
+		FA6FFF9E23D052C700A4B16A /* RealtimeArousalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeArousalView.swift; sourceTree = "<group>"; };
+		FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
+		FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
+		FA6FFFA323D05A0F00A4B16A /* RodDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodDot.swift; sourceTree = "<group>"; };
+		FA6FFFA723D0618000A4B16A /* ReatimeCoherenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReatimeCoherenceView.swift; sourceTree = "<group>"; };
 		FA7689C523ACB387005E4DF7 /* ReportNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportNumberView.swift; sourceTree = "<group>"; };
 		FA7689C723B053D5005E4DF7 /* ReportHR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHR.swift; sourceTree = "<group>"; };
 		FA7689C923B0595A005E4DF7 /* ReportSemiCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSemiCircle.swift; sourceTree = "<group>"; };
@@ -286,11 +295,10 @@
 		FAC773032355580C00FBFA6A /* heart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = heart.gif; sourceTree = "<group>"; };
 		FAC773052355581500FBFA6A /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		FAC7730A2355CBD800FBFA6A /* BrainSpecturmReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainSpecturmReportView.swift; sourceTree = "<group>"; };
+		FAC9BD6223D3E99400004B70 /* RealtimePleasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimePleasure.swift; sourceTree = "<group>"; };
 		FACC8C3123717F340017FA52 /* flowtime_eegdata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flowtime_eegdata.txt; sourceTree = "<group>"; };
 		FACC8C3323717F3C0017FA52 /* flowtime_hrdata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flowtime_hrdata.txt; sourceTree = "<group>"; };
 		FACEDF88235034FE0016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
-		FACEDF8E23507BAD0016176C /* RodDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodDot.swift; sourceTree = "<group>"; };
 		FACEDF9223507D370016176C /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeAttentionView.swift; sourceTree = "<group>"; };
 		FACEDF98235164720016176C /* RealtimeRelaxationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeRelaxationView.swift; sourceTree = "<group>"; };
@@ -561,6 +569,16 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		FA6FFFA023D05A0F00A4B16A /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */,
+				FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */,
+				FA6FFFA323D05A0F00A4B16A /* RodDot.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
 		FA7689CF23B0BC90005E4DF7 /* Inside */ = {
 			isa = PBXGroup;
 			children = (
@@ -771,21 +789,15 @@
 		FACEDF8A235079C20016176C /* EmotionView */ = {
 			isa = PBXGroup;
 			children = (
-				FACEDF8B23507BAD0016176C /* Item */,
+				FA6FFFA023D05A0F00A4B16A /* Item */,
 				FACEDF9423507EDD0016176C /* RealtimeAttentionView.swift */,
 				FACEDF98235164720016176C /* RealtimeRelaxationView.swift */,
 				FACEDF9A23516BD60016176C /* RealtimePressureView.swift */,
+				FA6FFF9E23D052C700A4B16A /* RealtimeArousalView.swift */,
+				FA6FFFA723D0618000A4B16A /* ReatimeCoherenceView.swift */,
+				FAC9BD6223D3E99400004B70 /* RealtimePleasure.swift */,
 			);
 			path = EmotionView;
-			sourceTree = "<group>";
-		};
-		FACEDF8B23507BAD0016176C /* Item */ = {
-			isa = PBXGroup;
-			children = (
-				FACEDF8C23507BAD0016176C /* SurveyorsRodView.swift */,
-				FACEDF8E23507BAD0016176C /* RodDot.swift */,
-			);
-			path = Item;
 			sourceTree = "<group>";
 		};
 		FACEDF9D235172F40016176C /* Spectrum */ = {
@@ -1011,6 +1023,7 @@
 				FAC773042355580C00FBFA6A /* heart.gif in Resources */,
 				FACEDF89235034FE0016176C /* Assets.xcassets in Resources */,
 				FAC773062355581500FBFA6A /* loading.gif in Resources */,
+				FA6FFFA523D05A0F00A4B16A /* SurveyorsRodView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,7 +1233,8 @@
 				FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
 				FAD3C56723B35A65007E9AE1 /* PrivateReportChartHR.swift in Sources */,
-				FACEDF8F23507BAD0016176C /* SurveyorsRodView.swift in Sources */,
+				FA6FFFA823D0618000A4B16A /* ReatimeCoherenceView.swift in Sources */,
+				FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */,
 				FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */,
 				FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */,
 				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
@@ -1231,6 +1245,7 @@
 				FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */,
 				FAB3E46123AC699500A85129 /* ReportBrainwaveSpectrum.swift in Sources */,
 				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
+				FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
 				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
 				FAB0BC1523B1E1180074C06C /* AverageView.swift in Sources */,
@@ -1240,6 +1255,7 @@
 				FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */,
 				FAB0BC1823B1FC6B0074C06C /* ReportBrainSpectrum.swift in Sources */,
 				FAB3E45F23AC663000A85129 /* ReportViewHead.swift in Sources */,
+				FA6FFFA623D05A0F00A4B16A /* RodDot.swift in Sources */,
 				FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */,
 				FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */,
 				FAB0BC1A23B20CFF0074C06C /* PrivateChartViewHead.swift in Sources */,
@@ -1249,8 +1265,8 @@
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,
 				FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */,
 				FAB3E46A23ACAD4D00A85129 /* ReportHRV.swift in Sources */,
+				FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */,
 				FA7689CC23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift in Sources */,
-				FACEDF9123507BAD0016176C /* RodDot.swift in Sources */,
 				FA7689CA23B0595A005E4DF7 /* ReportSemiCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

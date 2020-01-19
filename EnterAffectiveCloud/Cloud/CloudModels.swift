@@ -54,6 +54,7 @@ class CSKwargsJSONModel: HandyJSON {
     var pressureServices: [String]?
     var pleasureServices: [String]?
     var arousalServices: [String]?
+    var coherenceServices: [String]?
     required init() { }
 
     func mapping(mapper: HelpingMapper) {
@@ -95,6 +96,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.timeStamp <-- "timestamp"
         mapper <<<
             self.storageSettings <-- "storage_settings"
+        mapper <<<
+            self.coherenceServices <-- "coherence"
     }
 }
 
@@ -178,6 +181,7 @@ public class CSResponseDataJSONModel: HandyJSON {
     public var pressureServiceList: [String]?
     public var pleasureServiceList: [String]?
     public var arousalServiceList: [String]?
+    public var coherenceServiceList: [String]?
 
     public required init() { }
     public func mapping(mapper: HelpingMapper) {
@@ -368,6 +372,7 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
     public var pressureList: [String]?
     public var pleasureList: [String]?
     public var arousalList: [String]?
+    public var coherenceList: [String]?
     public required init() {}
 
     public func mapping(mapper: HelpingMapper) {
@@ -385,12 +390,14 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
             self.pleasureList <-- "sub_pleasure_fields"
         mapper <<<
             self.arousalList <-- "sub_arousal_fields"
+        mapper <<<
+            self.coherenceList <-- "sub_coherence_fields"
     }
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attentionList == nil)&&(self.relaxationList == nil)&&(self.pressureList == nil)&&(self.pleasureList == nil)&&(self.arousalList == nil)&&(self.attentionChildList == nil)&&(self.relaxationChildList == nil)
+        return (self.attentionList == nil)&&(self.relaxationList == nil)&&(self.pressureList == nil)&&(self.pleasureList == nil)&&(self.arousalList == nil)&&(self.attentionChildList == nil)&&(self.relaxationChildList == nil)&&(self.coherenceList == nil)
     }
 }
 
@@ -403,6 +410,7 @@ public class CSAffectiveJsonModel: HandyJSON {
     public var pressure: Float?
     public var pleasure: Float?
     public var arousal: Float?
+    public var coherence: Float?
 }
 
 /* 情感计算实时分析结果
@@ -421,13 +429,14 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     public var pressure: CSAffectiveJsonModel?
     public var pleasure: CSAffectiveJsonModel?
     public var arousal: CSAffectiveJsonModel?
+    public var coherence: CSAffectiveJsonModel?
 
     public required init() {}
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attention_chd?.attention_chd == nil)&&(self.relaxation_chd?.relaxation_chd == nil)
+        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attention_chd?.attention_chd == nil)&&(self.relaxation_chd?.relaxation_chd == nil)&&(self.coherence?.coherence == nil)
     }
 }
 
@@ -449,6 +458,7 @@ public class CSAffectiveReportJsonModel: HandyJSON {
     public var pressure: CSReportPressureJsonModel?
     public var pleasure: CSReportPleasureJsonModel?
     public var arousal: CSReportArousalJsonModel?
+    public var coherence: CSReportCoherenceJsonModel?
     public required init() {}
 }
 
@@ -533,6 +543,18 @@ public class CSReportArousalJsonModel: HandyJSON {
             self.average <-- "arousal_avg"
         mapper <<<
             self.list <-- "arousal_rec"
+    }
+}
+
+public class CSReportCoherenceJsonModel: HandyJSON {
+    public var average: Float?
+    public var list: [Float]?
+    public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.average <-- "coherence_avg"
+        mapper <<<
+            self.list <-- "coherence_rec"
     }
 }
 

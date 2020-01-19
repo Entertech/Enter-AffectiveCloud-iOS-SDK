@@ -217,8 +217,8 @@ class BrainwaveView: BaseView {
             switch leftOrRight{
             case .left:
                 self.leftLock.lock()
-                if self.leftData!.count > 220 {
-                    self.leftData!.removeSubrange(219...(self.leftData!.count-1))
+                if self.leftData!.count > 240 {
+                    self.leftData!.removeSubrange(239...(self.leftData!.count-1))
                 }
                 else if self.leftData!.count < 200 {
                     self.leftData?.append(0)
@@ -228,8 +228,8 @@ class BrainwaveView: BaseView {
                 self.leftLock.unlock()
             case .right:
                 self.rightLock.lock()
-                if self.rightData!.count > 220 {
-                    self.rightData!.removeSubrange(219...(self.rightData!.count-1))
+                if self.rightData!.count > 240 {
+                    self.rightData!.removeSubrange(239...(self.rightData!.count-1))
                 }
                 else if self.rightData!.count < 200 {
                     self.rightData?.append(0)

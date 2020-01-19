@@ -1,9 +1,9 @@
 //
-//  RealtimeAttentionView.swift
+//  RealtimeArousalView.swift
 //  EnterAffectiveCloudUI
 //
-//  Created by Enter on 2019/10/11.
-//  Copyright © 2019 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
+//  Created by Enter on 2020/1/16.
+//  Copyright © 2020 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
 import UIKit
@@ -12,21 +12,21 @@ import RxSwift
 import SafariServices
 import EnterAffectiveCloud
 
-protocol AttentionProtocol {
-    var rxAttentionValue: BehaviorSubject<Float> {set get}
+protocol ArousalProtocol {
+    var rxArousalValue: BehaviorSubject<Float> {set get}
 }
 
-class UpdateAttention: AttentionProtocol {
-    var rxAttentionValue: BehaviorSubject<Float>
+class UpdateArousal: ArousalProtocol {
+    var rxArousalValue: BehaviorSubject<Float>
     
     init(_ initValue: Float = 0) {
-        rxAttentionValue = BehaviorSubject<Float>(value: initValue)
+        rxArousalValue = BehaviorSubject<Float>(value: initValue)
         NotificationCenter.default.addObserver(self, selector: #selector(affectiveDataSubscript(_:)), name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.affectiveDataSubscribeNotify, object: nil)
-        rxAttentionValue.onCompleted()
+        rxArousalValue.onCompleted()
     }
     
     @objc func affectiveDataSubscript(_ notification: Notification) {
@@ -34,8 +34,8 @@ class UpdateAttention: AttentionProtocol {
         let value = notification.userInfo!["affectiveDataSubscribe"] as! AffectiveCloudResponseJSONModel
             if let data = value.dataModel as? CSAffectiveSubscribeProcessJsonModel {
                 
-                if let attention = data.attention?.attention {
-                    rxAttentionValue.onNext(attention)
+                if let attention = data.arousal?.arousal {
+                    rxArousalValue.onNext(attention)
                 }
             }
         
@@ -44,8 +44,7 @@ class UpdateAttention: AttentionProtocol {
     
 }
 
-public class RealtimeAttentionView: BaseView {
-
+public class RealtimeArousalView: BaseView {
     //MARK:- Public param
     /// 主色
     public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
@@ -68,7 +67,7 @@ public class RealtimeAttentionView: BaseView {
         didSet {
             let valueTextColor = textColor.changeAlpha(to: 1.0)
             let grayTextColor = textColor.changeAlpha(to: 0.8)
-            attentionValueLabel?.textColor = valueTextColor
+            arousalValueLabel?.textColor = valueTextColor
             rodView?.setLabelColor(grayTextColor)
         }
     }
@@ -110,17 +109,17 @@ public class RealtimeAttentionView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "注意力"
+    private let titleText = "激活度"
     private let disposeBag = DisposeBag()
     
     //MARK:- Private UI
     private var bgView: UIView =  UIView()
     private var titleLabel: UILabel?
-    private var attentionValueLabel: UILabel?
+    private var arousalValueLabel: UILabel?
     private var stateLabel: UILabel?
     private var infoBtn: UIButton?
     private var rodView: SurveyorsRodView?
-    private var updateAttention: UpdateAttention?
+    private var updateArousal: UpdateArousal?
     private var isFirstData = true
     //MARK:- override function
     public init() {
@@ -140,15 +139,15 @@ public class RealtimeAttentionView: BaseView {
     public func observe(with demo: Float) {
         observeRealtimeValue(demo)
     }
-      
+    
     public func observe() {
         observeRealtimeValue()
     }
+        
       
-    
     private func observeRealtimeValue(_ demo: Float = 0) {
-        updateAttention = UpdateAttention(demo)
-        updateAttention?.rxAttentionValue.subscribe(onNext: {[weak self] (value) in
+        updateArousal = UpdateArousal(demo)
+        updateArousal?.rxArousalValue.subscribe(onNext: {[weak self] (valueOrigin) in
             guard let self = self else {return}
             DispatchQueue.main.async {
                 if self.isFirstData {
@@ -157,28 +156,23 @@ public class RealtimeAttentionView: BaseView {
                 } else {
                     self.dismissMask()
                 }
-                if value > 0 {
-                    self.attentionValueLabel?.text = "\(Int(value))"
-                    self.rodView?.setDotValue(index: Float(value))
-                } else {
-                    self.attentionValueLabel?.text = "--"
-                    self.rodView?.setDotValue(index: 0)
-                }
+                let value = valueOrigin / 25.0 - 2.0
                 
-                if value > 80 && value <= 100 {
+                self.arousalValueLabel?.text = String(format: "%0.1f", value)
+                self.rodView?.setDotValue(index: Float(value))
+                
+                if value > 0 {
                     self.stateLabel?.text = "高"
-                } else if value > 60 && value <= 80 {
-                    self.stateLabel?.text = "中"
                 } else {
                     self.stateLabel?.text = "低"
                 }
             }
             
-        }, onError: { (error) in
-            print(error.localizedDescription)
-            }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: { (error) in
+                print(error.localizedDescription)
+        }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
-  
+    
     override func setUI() {
         let valueTextColor = textColor.changeAlpha(to: 1.0)
         let grayTextColor = textColor.changeAlpha(to: 0.8)
@@ -198,12 +192,12 @@ public class RealtimeAttentionView: BaseView {
         titleLabel?.font = UIFont(name: textFont, size: 14)
         bgView.addSubview(titleLabel!)
         
-        attentionValueLabel = UILabel()
-        attentionValueLabel?.text = "--"
-        attentionValueLabel?.textColor = valueTextColor
-        attentionValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
-        attentionValueLabel?.textAlignment = .left
-        bgView.addSubview(attentionValueLabel!)
+        arousalValueLabel = UILabel()
+        arousalValueLabel?.text = "--"
+        arousalValueLabel?.textColor = valueTextColor
+        arousalValueLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 32)
+        arousalValueLabel?.textAlignment = .left
+        bgView.addSubview(arousalValueLabel!)
         
         stateLabel = UILabel()
         stateLabel?.backgroundColor = thirdTextColor
@@ -216,11 +210,11 @@ public class RealtimeAttentionView: BaseView {
         bgView.addSubview(stateLabel!)
         
         rodView = SurveyorsRodView()
-        rodView?.scaleArray = [0, 60, 80, 100]
+        rodView?.scaleArray = [-2, -1, 0, 1, 2]
         rodView?.setLabelColor(grayTextColor)
         rodView?.setDotColor(firstTextColor)
-        let rangeArray: [CGFloat] = [0, 60, 80, 100]
-        rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
+        let rangeArray: [CGFloat] = [-2, 0, 2]
+        rodView?.setBarColor([thirdTextColor, firstTextColor], rangeArray)
         rodView?.setDotValue(index: 0)
         bgView.addSubview(rodView!)
         
@@ -251,16 +245,16 @@ public class RealtimeAttentionView: BaseView {
             $0.height.equalTo(24)
         }
         
-        attentionValueLabel?.snp.makeConstraints {
+        arousalValueLabel?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-56)
         }
         
         stateLabel?.snp.makeConstraints {
-            $0.left.equalTo(attentionValueLabel!.snp.right).offset(12)
+            $0.left.equalTo(arousalValueLabel!.snp.right).offset(12)
             $0.width.equalTo(24)
             $0.height.equalTo(16)
-            $0.bottom.equalTo(attentionValueLabel!.snp.bottomMargin).offset(-4)
+            $0.bottom.equalTo(arousalValueLabel!.snp.bottomMargin).offset(-4)
         }
         
         
@@ -278,5 +272,5 @@ public class RealtimeAttentionView: BaseView {
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
-    
+      
 }

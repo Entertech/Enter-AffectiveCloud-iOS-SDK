@@ -527,6 +527,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let pressureParams: [String]  = paramList.filter { $0.contains("pressure") }
         let pleasureParams: [String] = paramList.filter { $0.contains("pleasure") }
         let arousalParams: [String] = paramList.filter { $0.contains("arousal") }
+        let coherenceParams: [String] = paramList.filter { $0.contains("coherence")}
         if attentionParams.count > 0 {
             jsonModel.kwargs?.attenionServieces = attentionParams
         }
@@ -553,6 +554,9 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if arousalParams.count > 0 {
             jsonModel.kwargs?.arousalServices = arousalParams
+        }
+        if coherenceParams.count > 0 {
+            jsonModel.kwargs?.coherenceServices = coherenceParams
         }
 
         if let jsonString = jsonModel.toJSONString() {
@@ -586,6 +590,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let pressureParams: [String]  = paramList.filter { $0.contains("pressure") }
         let pleasureParams: [String] = paramList.filter { $0.contains("pleasure") }
         let arousalParams: [String] = paramList.filter { $0.contains("arousal") }
+        let coherenceParams: [String] = paramList.filter { $0.contains("coherence")}
         if attentionParams.count > 0 {
             jsonModel.kwargs?.attenionServieces = attentionParams
         }
@@ -612,6 +617,9 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if arousalParams.count > 0 {
             jsonModel.kwargs?.arousalServices = arousalParams
+        }
+        if coherenceParams.count > 0 {
+            jsonModel.kwargs?.coherenceServices = coherenceParams
         }
 
         if let jsonString = jsonModel.toJSONString() {
@@ -699,6 +707,10 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.arousal) {
             list.append("arousal")
         }
+        
+        if options.contains(.coherence) {
+            list.append("coherence")
+        }
 
         return list
     }
@@ -769,6 +781,16 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.pressure_curve) {
             list.insert("pressure_rec")
         }
+        if options.contains(.coherence_all) {
+            list.insert("coherence_avg")
+            list.insert("coherence_rec")
+        }
+        if options.contains(.coherence_average) {
+            list.insert("coherence_avg")
+        }
+        if options.contains(.coherence_curve) {
+            list.insert("coherence_rec")
+        }
         return list
     }
 
@@ -800,6 +822,10 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
 
         if options.contains(.arousal) {
             list.append("arousal")
+        }
+        
+        if options.contains(.coherence) {
+            list.append("coherence")
         }
 
         return list
@@ -861,6 +887,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                 return
             }
         }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.coherence),
+            subscribeList.contains(.coherence){
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Coherence unvailable, please start coherence service first!")
+                return
+            }
+        }
     }
 
     private func checkEmotionAffectiveIsInitial(affectiveList: AffectiveDataServiceOptions) {
@@ -916,6 +950,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
             affectiveList.contains(.arousal) {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Arousal unvailable, generate report failed!")
+                return
+            }
+        }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.coherence),
+            affectiveList.contains(.coherence){
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Coherence unvailable, please start coherence service first!")
                 return
             }
         }
@@ -1158,6 +1200,14 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.emotionAffectiveInitialList?.insert(.arousal)
             } else {
                 self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .arousal)
+            }
+        }
+        
+        if list.contains("coherence") {
+            if let _ = self.emotionAffectiveInitialList {
+                self.emotionAffectiveInitialList?.insert(.coherence)
+            } else {
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .coherence)
             }
         }
     }
