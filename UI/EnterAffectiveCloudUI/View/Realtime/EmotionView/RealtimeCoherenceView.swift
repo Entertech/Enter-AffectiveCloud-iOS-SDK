@@ -43,7 +43,7 @@ class UpdateCoherence: CoherenceProtocol {
 }
 
 
-public class ReatimeCoherenceView: BaseView {
+public class RealtimeCoherenceView: BaseView {
     
     //MARK:- Public param
     /// 设置主色

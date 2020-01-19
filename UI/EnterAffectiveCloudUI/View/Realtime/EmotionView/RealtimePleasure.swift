@@ -45,7 +45,7 @@ class UpdatePleasure: PleasureProtocol {
     
 }
 
-public class RealtimePleasure: BaseView {
+public class RealtimePleasureView: BaseView {
     //MARK:- Public param
     /// 主色
     public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {

@@ -41,7 +41,7 @@
 		FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */; };
 		FA6FFFA523D05A0F00A4B16A /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */; };
 		FA6FFFA623D05A0F00A4B16A /* RodDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA323D05A0F00A4B16A /* RodDot.swift */; };
-		FA6FFFA823D0618000A4B16A /* ReatimeCoherenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA723D0618000A4B16A /* ReatimeCoherenceView.swift */; };
+		FA6FFFA823D0618000A4B16A /* RealtimeCoherenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA723D0618000A4B16A /* RealtimeCoherenceView.swift */; };
 		FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C523ACB387005E4DF7 /* ReportNumberView.swift */; };
 		FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C723B053D5005E4DF7 /* ReportHR.swift */; };
 		FA7689CA23B0595A005E4DF7 /* ReportSemiCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C923B0595A005E4DF7 /* ReportSemiCircle.swift */; };
@@ -237,7 +237,7 @@
 		FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
 		FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
 		FA6FFFA323D05A0F00A4B16A /* RodDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodDot.swift; sourceTree = "<group>"; };
-		FA6FFFA723D0618000A4B16A /* ReatimeCoherenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReatimeCoherenceView.swift; sourceTree = "<group>"; };
+		FA6FFFA723D0618000A4B16A /* RealtimeCoherenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeCoherenceView.swift; sourceTree = "<group>"; };
 		FA7689C523ACB387005E4DF7 /* ReportNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportNumberView.swift; sourceTree = "<group>"; };
 		FA7689C723B053D5005E4DF7 /* ReportHR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHR.swift; sourceTree = "<group>"; };
 		FA7689C923B0595A005E4DF7 /* ReportSemiCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSemiCircle.swift; sourceTree = "<group>"; };
@@ -794,7 +794,7 @@
 				FACEDF98235164720016176C /* RealtimeRelaxationView.swift */,
 				FACEDF9A23516BD60016176C /* RealtimePressureView.swift */,
 				FA6FFF9E23D052C700A4B16A /* RealtimeArousalView.swift */,
-				FA6FFFA723D0618000A4B16A /* ReatimeCoherenceView.swift */,
+				FA6FFFA723D0618000A4B16A /* RealtimeCoherenceView.swift */,
 				FAC9BD6223D3E99400004B70 /* RealtimePleasure.swift */,
 			);
 			path = EmotionView;
@@ -1233,7 +1233,7 @@
 				FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
 				FAD3C56723B35A65007E9AE1 /* PrivateReportChartHR.swift in Sources */,
-				FA6FFFA823D0618000A4B16A /* ReatimeCoherenceView.swift in Sources */,
+				FA6FFFA823D0618000A4B16A /* RealtimeCoherenceView.swift in Sources */,
 				FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */,
 				FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */,
 				FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */,
