@@ -123,9 +123,6 @@ public class RealtimeHeartRateView: BaseView {
         }
     }
     
-    /// 将最大最小值放在最底下
-    public var minAndMaxOnBottom = false
-    
     //MARK:- Private param
     private let titleText = "心率"
     private var maxValue: Int = 0
@@ -167,6 +164,21 @@ public class RealtimeHeartRateView: BaseView {
         if !heartImageView!.isAnimating {
             heartImageView?.startAnimating()
         }
+    }
+    
+    override public func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if let _ = newWindow {
+            if let _ = heartImageView?.superview {
+                if !heartImageView!.isHidden {
+                    if !heartImageView!.isAnimating {
+                        heartImageView?.startAnimating()
+                    }
+                }
+                
+            }
+        }
+
     }
     
     /// 开启监听
@@ -326,7 +338,13 @@ public class RealtimeHeartRateView: BaseView {
             $0.left.equalToSuperview().offset(16)
             $0.top.equalToSuperview().offset(17)
         }
-        
+            
+        infoBtn?.snp.makeConstraints {
+            $0.centerY.equalTo(titleLabel!.snp_centerYWithinMargins)
+            $0.right.equalToSuperview().offset(-16)
+            $0.width.equalTo(24)
+            $0.height.equalTo(24)
+        }
         bpmLabel?.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-18)
@@ -343,77 +361,38 @@ public class RealtimeHeartRateView: BaseView {
             $0.left.equalTo(bpmLabel!.snp.rightMargin).offset(24)
             $0.bottom.equalToSuperview().offset(-16)
         }
-            
-        infoBtn?.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel!.snp_centerYWithinMargins)
+        
+        minBpmLabel?.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-16)
             $0.right.equalToSuperview().offset(-16)
-            $0.width.equalTo(24)
-            $0.height.equalTo(24)
         }
-        if !minAndMaxOnBottom {
-            minBpmLabel?.snp.makeConstraints {
-                $0.bottom.equalToSuperview().offset(-16)
-                $0.right.equalToSuperview().offset(-16)
-            }
-            
-            minValueLabel?.snp.makeConstraints {
-                $0.centerY.equalTo(minBpmLabel!.snp_centerYWithinMargins)
-                $0.right.equalTo(minBpmLabel!.snp.leftMargin).offset(-16)
-            }
-            
-            minLabel?.snp.makeConstraints {
-                $0.right.equalToSuperview().offset(-68)
-                $0.centerY.equalTo(minBpmLabel!.snp_centerYWithinMargins)
-            }
-            
-            maxBpmLabel?.snp.makeConstraints {
-                $0.bottom.equalToSuperview().offset(-44)
-                $0.right.equalToSuperview().offset(-16)
-            }
-            
-            
-            maxValueLabel?.snp.makeConstraints {
-                $0.centerY.equalTo(maxBpmLabel!.snp_centerYWithinMargins)
-                $0.right.equalTo(maxBpmLabel!.snp.leftMargin).offset(-16)
-            }
-            
-            maxLabel?.snp.makeConstraints {
-                $0.right.equalToSuperview().offset(-68)
-                $0.centerY.equalTo(maxBpmLabel!.snp_centerYWithinMargins)
-            }
-        } else {
-            
-            minBpmLabel?.snp.makeConstraints {
-                $0.left.equalTo(minValueLabel!.snp.right).offset(4)
-                $0.centerY.equalTo(minLabel!.snp.centerY)
-            }
-            
-            minValueLabel?.snp.makeConstraints {
-                $0.centerY.equalTo(minLabel!.snp.centerY)
-                $0.left.equalTo(minLabel!.snp.right).offset(8)
-            }
-            
-            minLabel?.snp.makeConstraints {
-                $0.left.equalToSuperview().offset(16)
-                $0.bottom.equalToSuperview().offset(-45)
-            }
-            
-            maxBpmLabel?.snp.makeConstraints {
-                $0.left.equalTo(maxValueLabel!.snp.right).offset(4)
-                $0.centerY.equalTo(maxLabel!.snp.centerY)
-            }
-            
-            
-            maxValueLabel?.snp.makeConstraints {
-                $0.centerY.equalTo(maxLabel!.snp.centerY)
-                $0.left.equalTo(maxLabel!.snp.right).offset(8)
-            }
-            
-            maxLabel?.snp.makeConstraints {
-                $0.left.equalToSuperview().offset(16)
-                $0.bottom.equalToSuperview().offset(-16)
-            }
+        
+        minValueLabel?.snp.makeConstraints {
+            $0.centerY.equalTo(minBpmLabel!.snp_centerYWithinMargins)
+            $0.right.equalTo(minBpmLabel!.snp.leftMargin).offset(-16)
         }
+        
+        minLabel?.snp.makeConstraints {
+            $0.right.equalToSuperview().offset(-68)
+            $0.centerY.equalTo(minBpmLabel!.snp_centerYWithinMargins)
+        }
+        
+        maxBpmLabel?.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-44)
+            $0.right.equalToSuperview().offset(-16)
+        }
+        
+        
+        maxValueLabel?.snp.makeConstraints {
+            $0.centerY.equalTo(maxBpmLabel!.snp_centerYWithinMargins)
+            $0.right.equalTo(maxBpmLabel!.snp.leftMargin).offset(-16)
+        }
+        
+        maxLabel?.snp.makeConstraints {
+            $0.right.equalToSuperview().offset(-68)
+            $0.centerY.equalTo(maxBpmLabel!.snp_centerYWithinMargins)
+        }
+
     }
     
     @objc private func infoBtnTouchUpInside() {
@@ -422,4 +401,69 @@ public class RealtimeHeartRateView: BaseView {
         self.parentViewController()?.present(sf, animated: true, completion: nil)
     }
     
+    
+    /// 将最大最小值放在最底下
+    public var minAndMaxOnBottom = false {
+        willSet {
+            if newValue {
+                bpmLabel?.snp.removeConstraints()
+                heartImageView?.snp.removeConstraints()
+                heartRateLabel?.snp.removeConstraints()
+                minBpmLabel?.snp.removeConstraints()
+                minValueLabel?.snp.removeConstraints()
+                minLabel?.snp.removeConstraints()
+                maxBpmLabel?.snp.removeConstraints()
+                maxValueLabel?.snp.removeConstraints()
+                maxLabel?.snp.removeConstraints()
+                
+                bpmLabel?.snp.makeConstraints {
+                    $0.left.equalToSuperview().offset(16)
+                    $0.top.equalToSuperview().offset(80)
+                }
+                
+                heartImageView?.snp.makeConstraints {
+                    $0.height.equalTo(30)
+                    $0.width.equalTo(33)
+                    $0.bottom.equalTo(bpmLabel!.snp.top).offset(-2)
+                    $0.centerX.equalTo(bpmLabel!.snp.centerX)
+                }
+                
+                heartRateLabel?.snp.makeConstraints {
+                    $0.left.equalTo(bpmLabel!.snp.right).offset(8)
+                    $0.top.equalToSuperview().offset(48)
+                }
+                
+                minBpmLabel?.snp.makeConstraints {
+                    $0.left.equalTo(minValueLabel!.snp.right).offset(4)
+                    $0.centerY.equalTo(minLabel!.snp.centerY)
+                }
+                
+                minValueLabel?.snp.makeConstraints {
+                    $0.centerY.equalTo(minLabel!.snp.centerY)
+                    $0.left.equalTo(minLabel!.snp.right).offset(8)
+                }
+                
+                minLabel?.snp.makeConstraints {
+                    $0.left.equalToSuperview().offset(16)
+                    $0.bottom.equalToSuperview().offset(-45)
+                }
+                
+                maxBpmLabel?.snp.makeConstraints {
+                    $0.left.equalTo(maxValueLabel!.snp.right).offset(4)
+                    $0.centerY.equalTo(maxLabel!.snp.centerY)
+                }
+                
+                
+                maxValueLabel?.snp.makeConstraints {
+                    $0.centerY.equalTo(maxLabel!.snp.centerY)
+                    $0.left.equalTo(maxLabel!.snp.right).offset(8)
+                }
+                
+                maxLabel?.snp.makeConstraints {
+                    $0.left.equalToSuperview().offset(16)
+                    $0.bottom.equalToSuperview().offset(-16)
+                }
+            }
+        }
+    }
 }
