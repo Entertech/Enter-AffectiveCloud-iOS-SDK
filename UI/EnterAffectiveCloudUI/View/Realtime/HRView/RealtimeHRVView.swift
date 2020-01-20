@@ -48,7 +48,7 @@ public class RealtimeHRVView: BaseView {
 
        //MARK:- Public param
      /// 主色调显示
-     public var mainColor = UIColor.colorWithHexString(hexColor: "#FFC56F")  {
+     public var mainColor = UIColor.colorWithHexString(hexColor: "232323")  {
          didSet {
              self.titleLabel.textColor = mainColor.changeAlpha(to: 1.0)
          }
@@ -57,7 +57,8 @@ public class RealtimeHRVView: BaseView {
      /// 字体颜色
      public var textColor = UIColor.colorWithHexString(hexColor: "232323")  {
          didSet {
-            titleLabel.textColor = textColor
+            self.zeroLabel.textColor = mainColor.changeAlpha(to: 0.4)
+            self.fiftyLabel.textColor = mainColor.changeAlpha(to: 0.4)
              
          }
      }
@@ -98,6 +99,8 @@ public class RealtimeHRVView: BaseView {
              self.infoBtn.setImage(UIImage(named: buttonImageName), for: .normal)
          }
      }
+    //线条颜色
+    public var lineColor = UIColor.systemRed
 
     
     private let titleLabel = UILabel()
@@ -168,17 +171,17 @@ public class RealtimeHRVView: BaseView {
         self.addSubview(fiftyLabel)
         
         titleLabel.font = UIFont(name: textFont, size: 14)
-        titleLabel.textColor = textColor
+        titleLabel.textColor = mainColor
         titleLabel.text = "心率变异性"
         
         zeroLabel.text = "0"
         zeroLabel.font = UIFont.systemFont(ofSize: 12)
-        zeroLabel.textColor = .lightGray
+        zeroLabel.textColor = textColor.changeAlpha(to: 0.4)
         zeroLabel.textAlignment = .right
         
         fiftyLabel.text = "50"
         fiftyLabel.font = UIFont.systemFont(ofSize: 12)
-        fiftyLabel.textColor = .lightGray
+        fiftyLabel.textColor = textColor.changeAlpha(to: 0.4)
         fiftyLabel.textAlignment = .right
         
         infoBtn.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
@@ -282,7 +285,7 @@ public class RealtimeHRVView: BaseView {
             guard let context = UIGraphicsGetCurrentContext() else {
                 return
             }
-            context.setStrokeColor(self.mainColor.cgColor)
+            context.setStrokeColor(self.lineColor.cgColor)
             context.setLineWidth(2)
             context.setLineJoin(.round)
             context.move(to: CGPoint(x: leftMargin, y: originY))
