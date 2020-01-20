@@ -234,9 +234,9 @@ public class RealtimeAttentionView: BaseView {
     
     override func setLayout() {
         bgView.snp.makeConstraints {
-            $0.height.equalTo(152)
-            $0.width.greaterThanOrEqualTo(168).priority(.high)
-            $0.left.right.equalToSuperview().priority(.medium)
+            //$0.height.equalTo(152)
+            //$0.width.greaterThanOrEqualTo(168).priority(.high)
+            $0.edges.equalToSuperview().priority(.medium)
         }
         
         titleLabel?.snp.makeConstraints {

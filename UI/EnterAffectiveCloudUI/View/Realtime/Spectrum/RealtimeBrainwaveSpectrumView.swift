@@ -207,8 +207,8 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     
     override func setLayout() {
         spectrumView.snp.makeConstraints {
-            $0.height.equalTo(232)
-            $0.left.right.equalToSuperview().priority(.medium)
+            //$0.height.equalTo(232)
+            $0.edges.equalToSuperview().priority(.medium)
         }
     }
     

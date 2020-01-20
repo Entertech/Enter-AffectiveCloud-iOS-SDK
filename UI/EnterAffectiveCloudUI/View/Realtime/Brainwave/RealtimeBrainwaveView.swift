@@ -241,9 +241,9 @@ public class RealtimeBrainwaveView: BaseView {
     
     override func setLayout() {
         brainwaveView.snp.makeConstraints {
-            $0.height.equalTo(321)
-            $0.width.greaterThanOrEqualTo(268).priority(.high)
-            $0.left.right.equalToSuperview().priority(.medium)
+            //$0.height.equalTo(321)
+            //$0.width.greaterThanOrEqualTo(268).priority(.high)
+            $0.edges.equalToSuperview().priority(.medium)
         }
     }
     

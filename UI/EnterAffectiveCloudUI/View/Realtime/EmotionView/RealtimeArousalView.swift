@@ -156,16 +156,22 @@ public class RealtimeArousalView: BaseView {
                 } else {
                     self.dismissMask()
                 }
-                let value = valueOrigin / 25.0 - 2.0
-                
-                self.arousalValueLabel?.text = String(format: "%0.1f", value)
-                self.rodView?.setDotValue(index: Float(value))
-                
-                if value > 0 {
-                    self.stateLabel?.text = "高"
+                if valueOrigin != 0 {
+                    let value = valueOrigin / 25.0 - 2.0
+                    
+                    self.arousalValueLabel?.text = String(format: "%0.1f", value)
+                    self.rodView?.setDotValue(index: Float(value))
+                    
+                    if value > 0 {
+                        self.stateLabel?.text = "高"
+                    } else {
+                        self.stateLabel?.text = "低"
+                    }
                 } else {
+                    self.arousalValueLabel?.text = "--"
                     self.stateLabel?.text = "低"
                 }
+
             }
             
             }, onError: { (error) in
@@ -228,9 +234,9 @@ public class RealtimeArousalView: BaseView {
     
     override func setLayout() {
         bgView.snp.makeConstraints {
-            $0.height.equalTo(152)
-            $0.width.greaterThanOrEqualTo(168).priority(.high)
-            $0.left.right.equalToSuperview().priority(.medium)
+//            $0.height.equalTo(152)
+//            $0.width.greaterThanOrEqualTo(168).priority(.high)
+            $0.edges.equalToSuperview().priority(.medium)
         }
         
         titleLabel?.snp.makeConstraints {
