@@ -50,14 +50,13 @@ public class RealtimeArousalView: BaseView {
     public var mainColor = UIColor.colorWithHexString(hexColor: "0064ff")  {
         didSet {
             let firstTextColor = mainColor.changeAlpha(to: 1.0)
-            let secondTextColor = mainColor.changeAlpha(to: 0.5)
             let thirdTextColor = mainColor.changeAlpha(to: 0.2)
             titleLabel?.textColor = firstTextColor
             stateLabel?.textColor = firstTextColor
             stateLabel?.backgroundColor = thirdTextColor
             rodView?.setDotColor(firstTextColor)
-            let rangeArray: [CGFloat] = [0, 60, 80, 100]
-            rodView?.setBarColor([thirdTextColor, secondTextColor, firstTextColor], rangeArray)
+            let rangeArray: [CGFloat] = [-2, 0, 2]
+            rodView?.setBarColor([thirdTextColor, firstTextColor], rangeArray)
         }
     }
     private var textFont = "PingFangSC-Semibold"
@@ -183,7 +182,6 @@ public class RealtimeArousalView: BaseView {
         let valueTextColor = textColor.changeAlpha(to: 1.0)
         let grayTextColor = textColor.changeAlpha(to: 0.8)
         let firstTextColor = mainColor.changeAlpha(to: 1.0)
-        let secondTextColor = mainColor.changeAlpha(to: 0.5)
         let thirdTextColor = mainColor.changeAlpha(to: 0.2)
         
         bgView.backgroundColor = bgColor

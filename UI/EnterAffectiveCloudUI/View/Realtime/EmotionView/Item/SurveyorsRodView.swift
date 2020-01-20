@@ -143,7 +143,7 @@ class SurveyorsRodView: BaseView {
         
         
         rodDot.snp.updateConstraints {
-            $0.centerX.equalTo(rodBar.snp.left).offset( (CGFloat(_dotValue) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth)
+            $0.centerX.equalTo(rodBar.snp.left).offset( (CGFloat(_dotValue) - CGFloat(scaleArray.first!)) / CGFloat(scaleArray.last! - scaleArray.first!) * barWidth + 2)
         }
     }
     
