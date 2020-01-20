@@ -113,6 +113,17 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
         }
     }
     
+    
+    public var lineColors: (UIColor, UIColor, UIColor, UIColor, UIColor) = (UIColor.yellow, UIColor.red, UIColor.green, UIColor.blue, UIColor.black) {
+        willSet {
+            spectrumView.alphaBar.backgroundColor = newValue.1
+            spectrumView.betaBar.backgroundColor = newValue.2
+            spectrumView.gamaBar.backgroundColor = newValue.0
+            spectrumView.thetaBar.backgroundColor = newValue.3
+            spectrumView.deltaBar.backgroundColor = newValue.4
+        }
+    }
+    
     //MARK:- Private param
     private let titleText = "脑波频谱"
     private let disposeBag = DisposeBag()

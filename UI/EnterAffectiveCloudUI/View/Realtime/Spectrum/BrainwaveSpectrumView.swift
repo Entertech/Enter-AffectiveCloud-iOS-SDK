@@ -131,13 +131,14 @@ class BrainwaveSpectrumView: BaseView {
     
     
     override func setLayout() {
+        
         titleLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.top.equalToSuperview().offset(17)
         }
 
         infoButton.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel.snp_centerYWithinMargins)
+            $0.centerY.equalTo(titleLabel.snp.centerY)
             $0.right.equalToSuperview().offset(-16)
             $0.width.equalTo(24)
             $0.height.equalTo(24)
@@ -145,88 +146,93 @@ class BrainwaveSpectrumView: BaseView {
         
         gamaLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(66)
+            //$0.top.equalToSuperview().offset(66)
+            $0.centerY.equalTo(self.snp.bottom).multipliedBy(0.3)
         }
         
         gamaBar.snp.makeConstraints {
-            $0.left.equalTo(gamaLabel.snp.rightMargin).offset(24)
+            $0.left.equalTo(gamaLabel.snp.right).offset(12)
             $0.height.equalTo(4)
             $0.width.equalTo(4)
-            $0.centerY.equalTo(gamaLabel.snp.centerYWithinMargins   ).offset(2)
+            $0.centerY.equalTo(gamaLabel.snp.centerY).offset(2)
         }
         
         gamaValueLabel.snp.makeConstraints {
-            $0.left.equalTo(gamaBar.snp.rightMargin).offset(18)
-            $0.centerY.equalTo(gamaLabel.snp.centerYWithinMargins)
+            $0.left.equalTo(gamaBar.snp.right).offset(8)
+            $0.centerY.equalTo(gamaLabel.snp.centerY)
         }
         
         betaLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(96)
+            //$0.top.equalToSuperview().offset(96)
+            $0.centerY.equalTo(self.snp.bottom).multipliedBy(0.45)
         }
         
         betaBar.snp.makeConstraints {
-            $0.left.equalTo(betaLabel.snp.rightMargin).offset(24)
+            $0.left.equalTo(betaLabel.snp.right).offset(12)
             $0.height.equalTo(4)
             $0.width.equalTo(4)
-            $0.centerY.equalTo(betaLabel.snp.centerYWithinMargins   ).offset(2)
+            $0.centerY.equalTo(betaLabel.snp.centerY   ).offset(2)
         }
         
         betaValueLabel.snp.makeConstraints {
-            $0.left.equalTo(betaBar.snp.rightMargin).offset(18)
-            $0.centerY.equalTo(betaLabel.snp.centerYWithinMargins)
+            $0.left.equalTo(betaBar.snp.right).offset(8)
+            $0.centerY.equalTo(betaLabel.snp.centerY)
         }
         
         alphaLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(128)
+            //$0.top.equalToSuperview().offset(128)
+            $0.centerY.equalTo(self.snp.bottom).multipliedBy(0.6)
         }
         
         alphaBar.snp.makeConstraints {
-            $0.left.equalTo(alphaLabel.snp.rightMargin).offset(24)
+            $0.left.equalTo(alphaLabel.snp.right).offset(12)
             $0.height.equalTo(4)
             $0.width.equalTo(4)
-            $0.centerY.equalTo(alphaLabel.snp.centerYWithinMargins   ).offset(2)
+            $0.centerY.equalTo(alphaLabel.snp.centerY).offset(2)
         }
         
         alphaValueLabel.snp.makeConstraints {
-            $0.left.equalTo(alphaBar.snp.rightMargin).offset(18)
-            $0.centerY.equalTo(alphaLabel.snp.centerYWithinMargins)
+            $0.left.equalTo(alphaBar.snp.right).offset(8)
+            $0.centerY.equalTo(alphaLabel.snp.centerY)
         }
         
         thetaLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(160)
+            //$0.top.equalToSuperview().offset(160)
+            $0.centerY.equalTo(self.snp.bottom).multipliedBy(0.75)
         }
         
         thetaBar.snp.makeConstraints {
-            $0.left.equalTo(thetaLabel.snp.rightMargin).offset(24)
+            $0.left.equalTo(thetaLabel.snp.right).offset(12)
             $0.height.equalTo(4)
             $0.width.equalTo(4)
-            $0.centerY.equalTo(thetaLabel.snp.centerYWithinMargins   ).offset(2)
+            $0.centerY.equalTo(thetaLabel.snp.centerY   ).offset(2)
         }
         
         thetaValueLabel.snp.makeConstraints {
-            $0.left.equalTo(thetaBar.snp.rightMargin).offset(18)
-            $0.centerY.equalTo(thetaLabel.snp.centerYWithinMargins)
+            $0.left.equalTo(thetaBar.snp.right).offset(8)
+            $0.centerY.equalTo(thetaLabel.snp.centerY)
         }
         
         
         deltaLabel.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(192)
+            //$0.top.equalToSuperview().offset(192)
+            $0.centerY.equalTo(self.snp.bottom).multipliedBy(0.90)
         }
         
         deltaBar.snp.makeConstraints {
-            $0.left.equalTo(deltaLabel.snp.rightMargin).offset(24)
+            $0.left.equalTo(deltaLabel.snp.right).offset(12)
             $0.height.equalTo(4)
             $0.width.equalTo(4)
-            $0.centerY.equalTo(deltaLabel.snp.centerYWithinMargins   ).offset(2)
+            $0.centerY.equalTo(deltaLabel.snp.centerY   ).offset(2)
         }
         
         deltaValueLabel.snp.makeConstraints {
-            $0.left.equalTo(deltaBar.snp.rightMargin).offset(18)
-            $0.centerY.equalTo(deltaLabel.snp.centerYWithinMargins)
+            $0.left.equalTo(deltaBar.snp.right).offset(8)
+            $0.centerY.equalTo(deltaLabel.snp.centerY)
         }
         
         
