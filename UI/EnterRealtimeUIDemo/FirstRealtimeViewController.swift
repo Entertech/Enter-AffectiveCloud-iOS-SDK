@@ -11,6 +11,7 @@ import EnterAffectiveCloudUI
 
 class FirstRealtimeViewController: UIViewController {
 
+    @IBOutlet weak var arousalView: RealtimeArousalView!
     @IBOutlet weak var brainwaveView: RealtimeBrainwaveView!
     @IBOutlet weak var spectrumView: RealtimeBrainwaveSpectrumView!
     @IBOutlet weak var pressureView: RealtimePressureView!
@@ -39,6 +40,7 @@ class FirstRealtimeViewController: UIViewController {
         
         heartSmallView.observe(with: 65)
         heartSmallView.isShowExtremeValue = false //不显示最大最小值
+        heartSmallView.minAndMaxOnBottom = true
         heartSmallView.setShadow()
         
         heartNoValueView.observe()  // 观察者并且不用赋值初始值
@@ -54,7 +56,11 @@ class FirstRealtimeViewController: UIViewController {
         relaxationView.observe(with: 69)
         relaxationView.setShadow()
         
+        arousalView.observe(with: 60)
+        arousalView.setShadow()
+        
         spectrumView.observe(with: (0.1, 0.28, 0.59, 0.02, 0.1))
+        spectrumView.bgColor = .white
         spectrumView.setShadow()
         
         // 为eeg脑波复制，创建左右脑数组
@@ -69,6 +75,7 @@ class FirstRealtimeViewController: UIViewController {
             rightArray.append(Float(random - 100))
         }
         brainwaveView.observe(with: leftArray, right: rightArray)
+        brainwaveView.bgColor = .white
         brainwaveView.setShadow()
         
         tipView.showTip()

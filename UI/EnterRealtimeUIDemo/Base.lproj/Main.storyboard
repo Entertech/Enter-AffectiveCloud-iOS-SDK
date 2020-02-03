@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="2317"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEZ-Yc-c7f">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2317"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2577"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="心率" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdT-Xh-bx9">
                                                 <rect key="frame" x="16" y="96" width="65" height="39"/>
@@ -71,26 +71,26 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情感数字面板" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjX-f1-Dj4">
-                                                <rect key="frame" x="16" y="517" width="194" height="39"/>
+                                                <rect key="frame" x="16" y="777" width="194" height="39"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情感数字面板" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIJ-dR-mVb">
-                                                <rect key="frame" x="16" y="572" width="98" height="20"/>
+                                                <rect key="frame" x="16" y="832" width="98" height="20"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bci-tS-SRA" customClass="RealtimeAttentionView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="600" width="382" height="152"/>
+                                                <rect key="frame" x="16" y="860" width="382" height="152"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="152" id="ZXn-yd-9Ph"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6o-yV-MOQ" customClass="RealtimeAttentionView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="760" width="168" height="152"/>
+                                                <rect key="frame" x="16" y="1020" width="168" height="152"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="168" id="SzD-pU-fi8"/>
@@ -98,7 +98,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wZ-dk-iPl" customClass="RealtimeRelaxationView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="230" y="760" width="168" height="152"/>
+                                                <rect key="frame" x="230" y="1020" width="168" height="152"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="168" id="hwm-4b-EMJ"/>
@@ -106,61 +106,75 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjI-ma-PmD" customClass="RealtimePressureView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="920" width="168" height="152"/>
+                                                <rect key="frame" x="16" y="1180" width="168" height="152"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="152" id="NAv-hB-Msd"/>
                                                     <constraint firstAttribute="height" constant="152" id="O7A-nI-4SV"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="168" id="Oud-rk-5bc"/>
                                                     <constraint firstAttribute="width" constant="168" id="f7b-US-xdF"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="脑波频谱 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AOG-eZ-Rol">
-                                                <rect key="frame" x="16" y="1112" width="136" height="39"/>
+                                                <rect key="frame" x="16" y="1372" width="136" height="39"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6P0-Q2-CgN" customClass="RealtimeBrainwaveSpectrumView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="1159" width="382" height="232"/>
+                                                <rect key="frame" x="16" y="1419" width="382" height="232"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="232" id="9ew-TB-Sx2"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实时脑波 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQf-s0-8qc">
-                                                <rect key="frame" x="16" y="1431" width="136" height="39"/>
+                                                <rect key="frame" x="16" y="1691" width="136" height="39"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FI-6E-Etp" customClass="RealtimeBrainwaveView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="1478" width="382" height="321"/>
+                                                <rect key="frame" x="16" y="1738" width="382" height="321"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="321" id="qo7-HW-z1x"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zD7-UP-Ai9">
-                                                <rect key="frame" x="16" y="1839" width="65" height="39"/>
+                                                <rect key="frame" x="16" y="2099" width="65" height="39"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMN-a5-H0X" customClass="RealtimeAttentionView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="1886" width="382" height="152"/>
+                                                <rect key="frame" x="16" y="2146" width="382" height="152"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="152" id="Ifg-J7-ion"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luc-Ed-d9g" customClass="RealtimeAttentionView" customModule="EnterAffectiveCloudUI">
-                                                <rect key="frame" x="16" y="2046" width="382" height="152"/>
+                                                <rect key="frame" x="16" y="2306" width="382" height="152"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="152" id="a3R-qa-KKr"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJW-70-Fxl" customClass="RealtimeHRVView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="16" y="493" width="382" height="260"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGi-F6-w33" customClass="RealtimeArousalView" customModule="EnterAffectiveCloudUI">
+                                                <rect key="frame" x="230" y="1180" width="168" height="128"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="Xce-eT-V0Z"/>
+                                                    <constraint firstAttribute="width" constant="168" id="bHo-5w-tTG"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="EdT-Xh-bx9" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="45b-Zj-5PQ"/>
                                             <constraint firstItem="zD7-UP-Ai9" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="8ON-wD-T4r"/>
@@ -176,10 +190,13 @@
                                             <constraint firstItem="6wZ-dk-iPl" firstAttribute="top" secondItem="bci-tS-SRA" secondAttribute="bottom" constant="8" id="IXf-UF-0sY"/>
                                             <constraint firstItem="AOG-eZ-Rol" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="LOa-jb-KNC"/>
                                             <constraint firstItem="zD7-UP-Ai9" firstAttribute="top" secondItem="5FI-6E-Etp" secondAttribute="bottom" constant="40" id="LeS-M6-45g"/>
+                                            <constraint firstItem="oJW-70-Fxl" firstAttribute="top" secondItem="aKp-Uf-1a5" secondAttribute="bottom" constant="16" id="MSi-3p-oNp"/>
                                             <constraint firstItem="0la-2A-kEW" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="Mra-ra-fkB"/>
+                                            <constraint firstItem="xGi-F6-w33" firstAttribute="top" secondItem="6wZ-dk-iPl" secondAttribute="bottom" constant="8" id="NZ0-Ac-rCL"/>
                                             <constraint firstItem="I6o-yV-MOQ" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="NdB-db-xKq"/>
                                             <constraint firstItem="bci-tS-SRA" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="OsT-Js-3d2"/>
                                             <constraint firstItem="luc-Ed-d9g" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="OyR-X5-Ydi"/>
+                                            <constraint firstItem="oJW-70-Fxl" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="QCL-F1-7yA"/>
                                             <constraint firstItem="WQf-s0-8qc" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="QzI-lU-Q0j"/>
                                             <constraint firstItem="6P0-Q2-CgN" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="R1Z-Cg-LTq"/>
                                             <constraint firstAttribute="trailing" secondItem="IMN-a5-H0X" secondAttribute="trailing" constant="16" id="UvJ-5t-iDK"/>
@@ -200,12 +217,15 @@
                                             <constraint firstAttribute="trailing" secondItem="6P0-Q2-CgN" secondAttribute="trailing" constant="16" id="gQP-Lw-quz"/>
                                             <constraint firstItem="6P0-Q2-CgN" firstAttribute="top" secondItem="AOG-eZ-Rol" secondAttribute="bottom" constant="8" id="gjv-Ah-x1T"/>
                                             <constraint firstAttribute="trailing" secondItem="5FI-6E-Etp" secondAttribute="trailing" constant="16" id="iZ5-5e-agD"/>
+                                            <constraint firstItem="QjX-f1-Dj4" firstAttribute="top" secondItem="oJW-70-Fxl" secondAttribute="bottom" constant="24" id="mYq-Yu-thC"/>
+                                            <constraint firstAttribute="trailing" secondItem="oJW-70-Fxl" secondAttribute="trailing" constant="16" id="pWL-gq-gHX"/>
                                             <constraint firstItem="EdT-Xh-bx9" firstAttribute="top" secondItem="aEZ-Yc-c7f" secondAttribute="top" constant="96" id="qOo-CT-epS"/>
                                             <constraint firstItem="aKp-Uf-1a5" firstAttribute="top" secondItem="4AN-dB-L6g" secondAttribute="bottom" constant="8" id="sLv-9U-gFS"/>
                                             <constraint firstItem="LNh-aP-3IX" firstAttribute="top" secondItem="FcM-fZ-TXE" secondAttribute="bottom" constant="24" id="ske-6A-42C"/>
                                             <constraint firstItem="WQf-s0-8qc" firstAttribute="top" secondItem="6P0-Q2-CgN" secondAttribute="bottom" constant="40" id="tAD-Ao-1Wv"/>
-                                            <constraint firstItem="QjX-f1-Dj4" firstAttribute="top" secondItem="aKp-Uf-1a5" secondAttribute="bottom" constant="40" id="tJa-8D-ISa"/>
+                                            <constraint firstItem="QjX-f1-Dj4" firstAttribute="top" secondItem="aKp-Uf-1a5" secondAttribute="bottom" constant="300" id="tJa-8D-ISa"/>
                                             <constraint firstItem="TAj-v3-T55" firstAttribute="leading" secondItem="LNh-aP-3IX" secondAttribute="leading" id="uC7-mh-OK4"/>
+                                            <constraint firstAttribute="trailing" secondItem="xGi-F6-w33" secondAttribute="trailing" constant="16" id="wB2-Q8-TtW"/>
                                             <constraint firstItem="4AN-dB-L6g" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="xCE-Ng-Cpm"/>
                                             <constraint firstItem="aKp-Uf-1a5" firstAttribute="leading" secondItem="aEZ-Yc-c7f" secondAttribute="leading" constant="16" id="xPx-im-D5z"/>
                                             <constraint firstItem="IMN-a5-H0X" firstAttribute="top" secondItem="zD7-UP-Ai9" secondAttribute="bottom" constant="8" id="xT2-da-gTE"/>
@@ -238,6 +258,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="2400"/>
                     <connections>
+                        <outlet property="arousalView" destination="xGi-F6-w33" id="ZcU-kt-hVj"/>
                         <outlet property="attentionSmallView" destination="bci-tS-SRA" id="G4h-mC-wmk"/>
                         <outlet property="attentionView" destination="I6o-yV-MOQ" id="ZWi-os-CYl"/>
                         <outlet property="brainwaveView" destination="5FI-6E-Etp" id="v8Z-mn-ziV"/>
