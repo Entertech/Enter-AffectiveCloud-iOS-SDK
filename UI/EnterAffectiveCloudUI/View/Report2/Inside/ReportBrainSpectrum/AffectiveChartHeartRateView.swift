@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-public class PrivateReportChartHR: UIView, ChartViewDelegate {
+public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
 
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682")
 
@@ -39,14 +39,20 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
          }
      }
 
-     public var isChartScale = false {
+     private var isChartScale = false {
          willSet {
              chartView?.scaleXEnabled = newValue
              chartHead?.expandBtn.isHidden = !newValue
          }
      }
+    
+    public var title: String = "心率" {
+        willSet {
+            chartHead?.titleText = newValue
+        }
+    }
      
-     public var sample = 3
+     private var sample = 3
      
      public var hrAvg: Int = 0 {
          willSet  {
@@ -123,7 +129,7 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
          self.layer.cornerRadius = cornerRadius
          
          chartHead = PrivateChartViewHead()
-         chartHead?.titleText = "Changes During Meditation"
+         chartHead?.titleText = title
          chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
          self.addSubview(chartHead!)
          
@@ -309,6 +315,7 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
      }
      
      fileprivate var isZoomed = false
+    var isHiddenNavigationBar = false
      @objc
      private func zoomBtnTouchUpInside(sender: UIButton) {
          sender.isEnabled = false
@@ -317,23 +324,31 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
          }
          if !isZoomed {
              let vc = self.parentViewController()!
-             vc.navigationController?.setNavigationBarHidden(true, animated: true)
+             if let navi = vc.navigationController {
+                  if !navi.navigationBar.isHidden {
+                      isHiddenNavigationBar = true
+                      vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                  }
+              }
              let view = vc.view
              let nShowChartView = UIView()
              nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
              view?.addSubview(nShowChartView)
              
-             let chart = PrivateReportChartHR()
+             let chart = AffectiveChartHeartRateView()
              nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
              chart.bgColor = self.bgColor
              chart.cornerRadius = self.cornerRadius
              chart.maxDataCount = 500
              chart.textColor = self.textColor
+            chart.lineColor = self.lineColor
+            chart.title = self.title
              chart.isChartScale = true
              chart.setDataFromModel(hr: hrArray)
              chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
              chart.isZoomed = true
+            chart.isHiddenNavigationBar = isHiddenNavigationBar
              chart.hrAvg = self.hrAvg
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
@@ -344,18 +359,21 @@ public class PrivateReportChartHR: UIView, ChartViewDelegate {
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
             }
              nShowChartView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
+                 $0.left.right.top.equalToSuperview()
+                 $0.bottom.equalTo(view!.safeAreaLayoutGuide)
              }
-
+             
              chart.snp.remakeConstraints {
                  $0.width.equalTo(nShowChartView.snp.height).offset(-88)
                  $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                $0.center.equalToSuperview()
+                 $0.center.equalTo(view!.snp.center)
              }
 
          } else {
              let view = self.superview!
-            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            if isHiddenNavigationBar {
+                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            }
              for e in view.subviews {
                  e.removeFromSuperview()
              }

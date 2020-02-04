@@ -10,7 +10,7 @@ import UIKit
 import Charts
 import SnapKit
 
-public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
+public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
     
     /// 背景颜色
     public var bgColor: UIColor = .white {
@@ -61,14 +61,20 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
         }
     }
     
-    public var isChartScale = false {
+    private var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
             chartHead?.expandBtn.isHidden = !newValue
         }
     }
     
-    public var sample = 3
+    public var title: String = "脑波频谱" {
+        willSet {
+            chartHead?.titleText = newValue
+        }
+    }
+    
+    private var sample = 3
     
     //MARK:- Private
     private var maxDataCount = 100
@@ -184,7 +190,7 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
         self.layer.cornerRadius = cornerRadius
         
         chartHead = PrivateChartViewHead()
-        chartHead?.titleText = "Changes During Meditation"
+        chartHead?.titleText = title
         chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
         self.addSubview(chartHead!)
         
@@ -422,6 +428,7 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
     }
     
     fileprivate var isZoomed = false
+    var isHiddenNavigationBar = false
     @objc
     private func zoomBtnTouchUpInside(sender: UIButton) {
         sender.isEnabled = false
@@ -430,14 +437,19 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
         }
         if !isZoomed {
             let vc = self.parentViewController()!
-            vc.navigationController?.setNavigationBarHidden(true, animated: true)
+            if let navi = vc.navigationController {
+                 if !navi.navigationBar.isHidden {
+                     isHiddenNavigationBar = true
+                     vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                 }
+             }
             let view = vc.view
             let nShowChartView = UIView()
             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
             view?.addSubview(nShowChartView)
 
 
-            let chart = PrivateChartBrainSpectrum()
+            let chart = AffectiveChartBrainSpectrumView()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
@@ -447,6 +459,8 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
             chart.textColor = self.textColor
             chart.spectrumColors = self.spectrumColors
             chart.isChartScale = true
+            chart.isHiddenNavigationBar = isHiddenNavigationBar
+            chart.title = self.title
             chart.setDataFromModel(gama: gamaArray!, delta: deltaArray!, theta: thetaArray!, alpha: alphaArray!, beta: betaArray!, timestamp: timeStamp)
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
             chart.isZoomed = true
@@ -470,18 +484,21 @@ public class PrivateChartBrainSpectrum: UIView, ChartViewDelegate{
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
             }
             nShowChartView.snp.makeConstraints {
-               $0.edges.equalToSuperview()
+                $0.left.right.top.equalToSuperview()
+                $0.bottom.equalTo(view!.safeAreaLayoutGuide)
             }
-
+            
             chart.snp.remakeConstraints {
                 $0.width.equalTo(nShowChartView.snp.height).offset(-88)
                 $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-               $0.center.equalToSuperview()
+                $0.center.equalTo(view!.snp.center)
             }
 
         } else {
             let view = self.superview!
-            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            if isHiddenNavigationBar {
+                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            }
             for e in view.subviews {
                 e.removeFromSuperview()
             }

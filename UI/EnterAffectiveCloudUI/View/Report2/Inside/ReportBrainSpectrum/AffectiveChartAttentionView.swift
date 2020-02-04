@@ -1,17 +1,17 @@
 //
-//  ReportChartHRV.swift
+//  AffectiveChartAttention.swift
 //  EnterAffectiveCloudUI
 //
-//  Created by Enter on 2019/12/25.
-//  Copyright © 2019 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
+//  Created by Enter on 2020/2/3.
+//  Copyright © 2020 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
 import UIKit
 import Charts
 
-public class PrivateReportChartHRV: UIView, ChartViewDelegate {
-    
-    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F")
+public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
+
+    public var lineColor: UIColor = UIColor.colorWithInt(r: 0, g: 217, b: 147, alpha: 1)
     
     /// 背景颜色
     public var bgColor: UIColor = .white {
@@ -39,16 +39,16 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         }
     }
     
-    public var isChartScale = false {
+    private var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
             chartHead?.expandBtn.isHidden = !newValue
         }
     }
     
-    public var sample = 3
+    private var sample = 3
     
-    public var hrvAvg: Int = 0 {
+    public var avg: Int = 0 {
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
             avgLine.lineDashPhase = 0
@@ -60,12 +60,18 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         }
     }
     
+    public var title: String = "注意力" {
+        willSet {
+            chartHead?.titleText = newValue
+        }
+    }
+    
     //MARK:- Private UI
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.4
     private var timeStamp = 0
-    private var hrvArray: [Int]?
+    private var attentionArray: [Int]?
     private var yRender: LimitYAxisRenderer?
     //MARK:- Private UI
     private var chartHead: PrivateChartViewHead?
@@ -122,7 +128,7 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         self.layer.cornerRadius = cornerRadius
         
         chartHead = PrivateChartViewHead()
-        chartHead?.titleText = "Changes During Meditation"
+        chartHead?.titleText = title
         chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
         self.addSubview(chartHead!)
         
@@ -168,7 +174,7 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         self.addSubview(chartView!)
     }
     
-    public func setDataFromModel(hrv: [Int]?, timestamp: Int? = nil) {
+    public func setDataFromModel(attention: [Int]?, timestamp: Int? = nil) {
         
         if let timestamp = timestamp, timestamp != 0 {
             timeStamp = timestamp
@@ -176,16 +182,15 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
             xLabel?.isHidden = true
         }
         
-        if let hrv = hrv {
-            sample = hrv.count / maxDataCount == 0 ? 1 : hrv.count / maxDataCount
-            hrvArray = hrv
-            setDataCount(hrv)
+        if let attention = attention {
+            sample = attention.count / maxDataCount == 0 ? 1 : attention.count / maxDataCount
+            attentionArray = attention
+            setDataCount(attention)
         }
         
     }
     //MARK:- Chart delegate
     private func setDataCount(_ waveArray: [Int]) {
-        var colors: [UIColor] = []
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
@@ -201,11 +206,9 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         var notZero: Int = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
             if i < initIndex{
-                colors.append(lineColor)
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
                 if waveArray[i] == 0 {
-                    colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 } else {
                     if minValue > waveArray[i] {
@@ -215,54 +218,44 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
                         maxValue = waveArray[i]
                     }
                     notZero = waveArray[i]
-                    colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
                 }
                 
             }
             
         }
-        
+        var red:CGFloat   = 0.0
+        var green:CGFloat = 0.0
+        var blue:CGFloat  = 0.0
+        var alpha:CGFloat = 0.0
+        lineColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let components:[CGFloat] = [ red, green, blue, 1,
+                                     red, green, blue, 0.75,
+                                     red, green, blue, 0.5]
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let locations:[CGFloat] = [0.2, 0.5, 1.0]
+        let chartFillColor = CGGradient(colorSpace: colorSpace, colorComponents: components, locations: locations, count: 3)
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
+        set.mode = .cubicBezier
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
-        set.drawFilledEnabled = false
-        set.lineWidth = 2
-        set.colors = colors
+        set.drawFilledEnabled = true
+        set.lineWidth = 1
+        set.setColor(.clear)
+        set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
+        set.fillAlpha = 1.0
         set.drawValuesEnabled = false
+        
         let data = LineChartData(dataSet: set)
         chartView?.data = data
         
-        var labelArray: [Int] = []
-        let maxLabel = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
-        let minLabel = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
+        let labelArray: [Int] = [0, 50, 100]
+        let maxLabel = 100
+        let minLabel = 0
         
         chartView?.leftAxis.axisMaximum = Double(maxLabel)
         chartView?.leftAxis.axisMinimum = Double(minLabel)
-        if (maxLabel - minLabel) % 3 == 0 {
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)*2/3)
-            labelArray.append(maxLabel-(maxLabel-minLabel)/3)
-            labelArray.append(maxLabel)
-
-        } else if (maxLabel - minLabel) % 2 == 0 {
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)/2)
-            labelArray.append(maxLabel)
-        } else {
-            if (maxLabel - (minLabel+5)) % 3 == 0 {
-                labelArray.append(minLabel+5)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)*2/3)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)/3)
-                labelArray.append(maxLabel)
-
-            } else if (maxLabel - minLabel-5) % 2 == 0 {
-                labelArray.append(minLabel-5)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)/2)
-                labelArray.append(maxLabel)
-            }
-        }
+        
         yRender?.entries = labelArray
         setLimitLine(yVals.count, labelArray)
     }
@@ -302,6 +295,7 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
     }
     
     fileprivate var isZoomed = false
+    var isHiddenNavigationBar = false
     @objc
     private func zoomBtnTouchUpInside(sender: UIButton) {
         sender.isEnabled = false
@@ -310,24 +304,32 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         }
         if !isZoomed {
             let vc = self.parentViewController()!
-            vc.navigationController?.setNavigationBarHidden(true, animated: true)
+            if let navi = vc.navigationController {
+                if !navi.navigationBar.isHidden {
+                    isHiddenNavigationBar = true
+                    vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                }
+            }
             let view = vc.view
             let nShowChartView = UIView()
             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
             view?.addSubview(nShowChartView)
             
-            let chart = PrivateReportChartHRV()
+            let chart = AffectiveChartAttentionView()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
+            chart.title = self.title
             chart.maxDataCount = 500
             chart.textColor = self.textColor
+            chart.lineColor = self.lineColor
             chart.isChartScale = true
-            chart.setDataFromModel(hrv: hrvArray)
+            chart.setDataFromModel(attention: attentionArray)
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
             chart.isZoomed = true
-            chart.hrvAvg = self.hrvAvg
+            chart.isHiddenNavigationBar = isHiddenNavigationBar
+            chart.avg = self.avg
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
             label.font = UIFont.systemFont(ofSize: 12)
@@ -337,20 +339,22 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
             }
             nShowChartView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-                
+                $0.left.right.top.equalToSuperview()
+                $0.bottom.equalTo(view!.safeAreaLayoutGuide)
             }
             
             chart.snp.remakeConstraints {
                 $0.width.equalTo(nShowChartView.snp.height).offset(-88)
                 $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                $0.center.equalToSuperview()
+                $0.center.equalTo(view!.snp.center)
             }
-            
         } else {
             
             let view = self.superview!
-            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            if isHiddenNavigationBar {
+                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            }
+
             for e in view.subviews {
                 e.removeFromSuperview()
             }
@@ -358,4 +362,5 @@ public class PrivateReportChartHRV: UIView, ChartViewDelegate {
         }
         
     }
+
 }

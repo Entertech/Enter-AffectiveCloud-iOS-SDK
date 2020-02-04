@@ -34,4 +34,4 @@ Demo使用`Cocopods`管理依赖库，使用前要先对工程主目录运行`po
 
 ### 页面展示
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_A0135F63C3B9-1.jpeg" width="300">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_5034.JPG" width="300">

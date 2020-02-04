@@ -81,7 +81,6 @@ public class RealtimeHRVView: BaseView {
          didSet {
             self.layer.cornerRadius = borderRadius
             self.layer.masksToBounds = true
-             self.maskCorner = borderRadius
          }
      }
      /// 背景色
@@ -139,6 +138,11 @@ public class RealtimeHRVView: BaseView {
     
     /// 开启监听
     public func observe() {
+        observeRealtimeValue()
+    }
+    
+    public func observe(array: [Float]) {
+        waveArray = array
         observeRealtimeValue()
     }
     

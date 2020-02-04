@@ -12,14 +12,15 @@ import EnterAffectiveCloudUI
 
 class ForthViewController: UIViewController {
     private let service = ChartService()
-    @IBOutlet weak var brainReportView: PrivateChartBrainSpectrum!
-    @IBOutlet weak var hrvView: PrivateReportChartHRV!
-    @IBOutlet weak var hrView: PrivateReportChartHR!
-    @IBOutlet weak var pressureView: PrivateReportChartPressure!
-    @IBOutlet weak var arView: PrivateReportChartAttentionAndRelaxation!
+    @IBOutlet weak var brainReportView: AffectiveChartBrainSpectrumView!
+    @IBOutlet weak var hrvView: AffectiveChartHRVView!
+    @IBOutlet weak var hrView: AffectiveChartHeartRateView!
+    @IBOutlet weak var pressureView: AffectiveChartPressureView!
+    @IBOutlet weak var attentionView: AffectiveChartAttentionView!
+    @IBOutlet weak var relaxationView: AffectiveChartRelaxationView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //示例数据
         let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
         if let samplePath = samplePath {
             service.dataOfReport = ReportFileHander.readReportFile(samplePath)
@@ -27,7 +28,8 @@ class ForthViewController: UIViewController {
             service.hrvView = hrvView
             service.heartRateView = hrView
             service.pressureView = pressureView
-            service.attentionView = arView
+            service.attentionView = attentionView
+            service.relaxationView = relaxationView
         }
 
         // Do any additional setup after loading the view.
@@ -40,18 +42,8 @@ class ForthViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //设置值显示数据
         service.show(object: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

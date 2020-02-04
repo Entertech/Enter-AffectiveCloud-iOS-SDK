@@ -11,6 +11,7 @@ import EnterAffectiveCloudUI
 
 class FirstRealtimeViewController: UIViewController {
 
+    @IBOutlet weak var hrvView: RealtimeHRVView!
     @IBOutlet weak var arousalView: RealtimeArousalView!
     @IBOutlet weak var brainwaveView: RealtimeBrainwaveView!
     @IBOutlet weak var spectrumView: RealtimeBrainwaveSpectrumView!
@@ -40,7 +41,6 @@ class FirstRealtimeViewController: UIViewController {
         
         heartSmallView.observe(with: 65)
         heartSmallView.isShowExtremeValue = false //不显示最大最小值
-        heartSmallView.minAndMaxOnBottom = true
         heartSmallView.setShadow()
         
         heartNoValueView.observe()  // 观察者并且不用赋值初始值
@@ -82,7 +82,13 @@ class FirstRealtimeViewController: UIViewController {
         
         progressView.showProgress()
         
-        
+        var hrvArray: [Float] = []
+        for _ in 0...200 {
+            let random: Int = Int(arc4random_uniform(20))
+            hrvArray.append(Float(random))
+        }
+        hrvView.observe(array: hrvArray)
+        hrvView.borderRadius = 8.0
     }
 
 }

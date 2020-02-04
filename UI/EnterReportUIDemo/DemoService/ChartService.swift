@@ -13,11 +13,12 @@ import EnterAffectiveCloudUI
 public class ChartService: NSObject {
     
     public var model: ReportModel = ReportModel()
-    public var heartRateView: PrivateReportChartHR?
-    public var hrvView: PrivateReportChartHRV?
-    public var braveWaveView: PrivateChartBrainSpectrum?
-    public var attentionView: PrivateReportChartAttentionAndRelaxation?
-    public var pressureView: PrivateReportChartPressure?
+    public var heartRateView: AffectiveChartHeartRateView?
+    public var hrvView: AffectiveChartHRVView?
+    public var braveWaveView: AffectiveChartBrainSpectrumView?
+    public var attentionView: AffectiveChartAttentionView?
+    public var pressureView: AffectiveChartPressureView?
+    public var relaxationView: AffectiveChartRelaxationView?
     
     private var isShowed: Bool = false
     
@@ -172,10 +173,10 @@ public class ChartService: NSObject {
             self.heartRateView?.hrAvg = model.heartRateAvg!
             self.hrvView?.setDataFromModel(hrv: model.heartRateVariability)
             self.hrvView?.hrvAvg = model.hrvAvg!
-            self.attentionView?.setDataFromModel(array: model.attention, state: .attention)
-            self.attentionView?.attentionAvg = model.attentionAvg!
-            self.attentionView?.setDataFromModel(array: model.relaxation, state: .relaxation)
-            self.attentionView?.relaxationAvg = model.relaxationAvg!
+            self.attentionView?.setDataFromModel(attention: model.attention)
+            self.attentionView?.avg = model.attentionAvg!
+            self.relaxationView?.setDataFromModel(relaxation: model.relaxation)
+            self.relaxationView?.avg = model.relaxationAvg!
             self.pressureView?.setDataFromModel(pressure: model.pressure!)
             let pressureAvg = Int(model.pressure!.reduce(0, +) / Float(model.pressure!.count))
             self.pressureView?.pressureAvg = pressureAvg

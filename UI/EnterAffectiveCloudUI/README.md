@@ -7,6 +7,7 @@
     - [完整图示](#%e5%ae%8c%e6%95%b4%e5%9b%be%e7%a4%ba)
   - [报表UI](#%e6%8a%a5%e8%a1%a8ui)
     - [接入](#%e6%8e%a5%e5%85%a5-1)
+    - [横向放大报表](#%e6%a8%aa%e5%90%91%e6%94%be%e5%a4%a7%e6%8a%a5%e8%a1%a8)
     - [完整图示](#%e5%ae%8c%e6%95%b4%e5%9b%be%e7%a4%ba-1)
   - [情感云UI详细API](#%e6%83%85%e6%84%9f%e4%ba%91ui%e8%af%a6%e7%bb%86api)
 
@@ -79,19 +80,25 @@ setDataFromModel 方法有两个参数
 | attention | Int 数组 | 组成列表的数据             |
 | timestamp | Int      | 情感云的起始时间, 可不设置 |
 
-不传timestamp参数时, X轴坐标
+不传timestamp参数时, X轴坐标：
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/attention_no_timestamp.png" width="300">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014142421740.png" width="300">
 
-传入timestamp时, X轴坐标
+传入timestamp时, X轴坐标：
 
 <img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/attention_with_timstamp.png" width="300">
 
+### 横向放大报表
+
+点击右上角放大按钮可获得横向报表。
+
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_C67F3DC6DCDB-1.jpeg" width="600">
+
 ### 完整图示
 
-经过定制可作出如下效果
+经过定制可作出如下效果：
 
 <img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_5034.JPG" width="300">
 
 ## 情感云UI详细API
-- 情感云UI的API文档请查看: [情感云UI文档](../APIDocuments/AffectiveCloudUI.md)
+- 情感云UI的API文档请查看: [情感云UI文档](../../APIDocuments/AffectiveCloudUI.md)

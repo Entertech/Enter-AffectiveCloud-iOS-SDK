@@ -1,5 +1,5 @@
 //
-//  PrivateReportChartPressure.swift
+//  ReportChartHRV.swift
 //  EnterAffectiveCloudUI
 //
 //  Created by Enter on 2019/12/25.
@@ -9,10 +9,9 @@
 import UIKit
 import Charts
 
-public class PrivateReportChartPressure: UIView, ChartViewDelegate {
-
+public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     
-    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682")
+    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F")
     
     /// 背景颜色
     public var bgColor: UIColor = .white {
@@ -40,33 +39,39 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         }
     }
     
-    public var isChartScale = false {
+    private var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
             chartHead?.expandBtn.isHidden = !newValue
         }
     }
     
-    public var sample = 3
+    private var sample = 3
     
-    public var pressureAvg: Int = 0 {
+    public var hrvAvg: Int = 0 {
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [8, 4]
             avgLine.lineColor = textColor.changeAlpha(to: 0.5)
-            avgLine.lineWidth = 1
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
+            avgLine.lineWidth = 1
             chartView?.leftAxis.addLimitLine(avgLine)
+        }
+    }
+    
+    public var title: String = "心率变异性（HRV）" {
+        willSet {
+            chartHead?.titleText = newValue
         }
     }
     
     //MARK:- Private UI
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.8
+    private let interval = 0.4
     private var timeStamp = 0
-    private var pressureArray: [Float]?
+    private var hrvArray: [Int]?
     private var yRender: LimitYAxisRenderer?
     //MARK:- Private UI
     private var chartHead: PrivateChartViewHead?
@@ -123,7 +128,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         self.layer.cornerRadius = cornerRadius
         
         chartHead = PrivateChartViewHead()
-        chartHead?.titleText = "Changes During Meditation"
+        chartHead?.titleText = title
         chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
         self.addSubview(chartHead!)
         
@@ -133,9 +138,9 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         xLabel?.font = UIFont.systemFont(ofSize: 12)
         xLabel?.textColor = alphaColor
         self.addSubview(xLabel!)
+        
         chartView = LineChartView()
         yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
-
         chartView?.leftYAxisRenderer = yRender!
         chartView?.delegate = self
         chartView?.backgroundColor = .clear
@@ -154,7 +159,6 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         leftAxis.labelTextColor = alphaColor
         leftAxis.drawGridLinesEnabled = false
         leftAxis.axisMaxLabels = 4
-        leftAxis.axisMinLabels = 3
         leftAxis.axisLineColor = secondColor
         chartView?.rightAxis.enabled = false
         
@@ -166,25 +170,22 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         xAxis.labelTextColor = alphaColor
         xAxis.axisMaxLabels = 8
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
-        
+
         self.addSubview(chartView!)
     }
     
-    public func setDataFromModel(pressure: [Float]?, timestamp: Int? = nil) {
+    public func setDataFromModel(hrv: [Int]?, timestamp: Int? = nil) {
         
         if let timestamp = timestamp, timestamp != 0 {
             timeStamp = timestamp
             
+            xLabel?.isHidden = true
         }
         
-        if let pressure = pressure {
-            let intArray = pressure.map { (value) -> Int in
-                return Int(value)
-            }
-            
-            sample = pressure.count / maxDataCount == 0 ? 1 : pressure.count / maxDataCount
-            pressureArray = pressure
-            setDataCount(intArray)
+        if let hrv = hrv {
+            sample = hrv.count / maxDataCount == 0 ? 1 : hrv.count / maxDataCount
+            hrvArray = hrv
+            setDataCount(hrv)
         }
         
     }
@@ -194,7 +195,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
-            if waveArray[i] > 10 {
+            if waveArray[i] > 0 {
                 initValue = waveArray[i]
                 initIndex = i
                 break
@@ -209,7 +210,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
                 colors.append(lineColor)
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
-                if waveArray[i] <= 10 {
+                if waveArray[i] == 0 {
                     colors.append(lineColor)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                 } else {
@@ -227,6 +228,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
             }
             
         }
+        
         let set = LineChartDataSet(entries: yVals, label: "")
         set.mode = .linear
         set.drawCirclesEnabled = false
@@ -240,7 +242,8 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         
         var labelArray: [Int] = []
         let maxLabel = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
-        let minLabel = (minValue / 5) * 5 < 0 ? 0 : (minValue / 5) * 5
+        let minLabel = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
+        
         chartView?.leftAxis.axisMaximum = Double(maxLabel)
         chartView?.leftAxis.axisMinimum = Double(minLabel)
         if (maxLabel - minLabel) % 3 == 0 {
@@ -268,11 +271,10 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         }
         yRender?.entries = labelArray
         setLimitLine(yVals.count, labelArray)
-        
     }
     
     private var timeApart: [Int] = []
-    private func setLimitLine(_ valueCount: Int, _ yLables: [Int]) {
+    private func setLimitLine(_ valueCount: Int, _ yLabels: [Int]) {
         let timeCount = Double(valueCount * sample) * interval
         let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
         
@@ -283,10 +285,8 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         chartView?.xAxis.axisMinimum = 0
         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
-        
+        //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
-        
-        //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLables)
         
     }
     
@@ -308,6 +308,7 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
     }
     
     fileprivate var isZoomed = false
+    var isHiddenNavigationBar = false
     @objc
     private func zoomBtnTouchUpInside(sender: UIButton) {
         sender.isEnabled = false
@@ -316,24 +317,32 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
         }
         if !isZoomed {
             let vc = self.parentViewController()!
-            vc.navigationController?.setNavigationBarHidden(true, animated: true)
+            if let navi = vc.navigationController {
+                 if !navi.navigationBar.isHidden {
+                     isHiddenNavigationBar = true
+                     vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                 }
+             }
             let view = vc.view
             let nShowChartView = UIView()
             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
             view?.addSubview(nShowChartView)
             
-            let chart = PrivateReportChartPressure()
+            let chart = AffectiveChartHRVView()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
+            chart.lineColor = self.lineColor
             chart.cornerRadius = self.cornerRadius
             chart.maxDataCount = 500
             chart.textColor = self.textColor
             chart.isChartScale = true
-            chart.setDataFromModel(pressure: pressureArray)
+            chart.setDataFromModel(hrv: hrvArray)
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
             chart.isZoomed = true
-            chart.pressureAvg = self.pressureAvg
+            chart.isHiddenNavigationBar = isHiddenNavigationBar
+            chart.hrvAvg = self.hrvAvg
+            chart.title = self.title
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
             label.font = UIFont.systemFont(ofSize: 12)
@@ -343,18 +352,22 @@ public class PrivateReportChartPressure: UIView, ChartViewDelegate {
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
             }
             nShowChartView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
+                $0.left.right.top.equalToSuperview()
+                $0.bottom.equalTo(view!.safeAreaLayoutGuide)
             }
             
             chart.snp.remakeConstraints {
                 $0.width.equalTo(nShowChartView.snp.height).offset(-88)
                 $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                $0.center.equalToSuperview()
+                $0.center.equalTo(view!.snp.center)
             }
             
         } else {
+            
             let view = self.superview!
-            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            if isHiddenNavigationBar {
+                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+            }
             for e in view.subviews {
                 e.removeFromSuperview()
             }
