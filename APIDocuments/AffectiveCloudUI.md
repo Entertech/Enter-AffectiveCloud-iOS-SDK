@@ -50,7 +50,7 @@
 
 合适View高度: 123
 
-![image-20191010145121952](img/../../img/image-20191010145121952.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191010145121952.png" width="300">
 
 | 参数               | 类型    | 默认值                         | 说明                                                                                                                                   |
 | ------------------ | ------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,7 +76,7 @@
 
 合适View高度: 123
 
-![image-20191010145121952](img/../../img/image-20191010145121953.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191010145121953.png" width="300">
 
 | 参数               | 类型    | 默认值                         | 说明                                                                                                                                   |
 | ------------------ | ------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -103,7 +103,7 @@
 
 合适View高度: 152
 
-![image-20191010145415901](img/../../img/image-20191010145415901.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191010145415901.png" width="300">
 
 | 参数            | 类型    | 默认值                         | 说明                 |
 | --------------- | ------- | ------------------------------ | -------------------- |
@@ -128,7 +128,7 @@
 
 合适View高度: 232
 
-![image-20191010150032042](img/../../img/image-20191010150032042.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191010150032042.png" width="300">
 
 | 参数            | 类型    | 默认值                         | 说明                 |
 | --------------- | ------- | ------------------------------ | -------------------- |
@@ -154,7 +154,7 @@
 
 合适View高度: 321
 
-![image-20191010150729231](img/../../img/image-20191010150729231.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191010150729231.png" width="300">
 
 | 参数                    | 类型    | 默认值                         | 说明                 |
 | ----------------------- | ------- | ------------------------------ | -------------------- |
@@ -182,7 +182,7 @@
 
 #### 参数
 
-![image-20191014140326307](img/../../img/image-20191014140326307.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014140326307.png" width="300">
 
 | 参数           | 类型      | 默认值                                      | 说明                                |
 | -------------- | --------- | ------------------------------------------- | ----------------------------------- |
@@ -209,7 +209,7 @@
 
 > AffectiveChartHeartRateView
 
-![image-20191014141340894](img/../../img/image-20191014141340894.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014141340894.png" width="300">
 
 #### 参数
 
@@ -234,7 +234,7 @@
 
 > AffectiveChartHRVView
 
-![image-20191014141910905](img/../../img/image-20191014141910905.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014141910905.png" width="300">
 
 #### 参数
 
@@ -260,7 +260,7 @@
 
 > AffectiveChartRelaxationView
 
-![image-20191014142421739](img/../../img/image-20191014142421739.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014142421739.png" width="300">
 
 #### 参数
 
@@ -286,7 +286,7 @@
 
 > AffectiveChartAttentionView
 
-![image-20191014142421739](img/../../img/image-20191014142421740.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014142421740.png" width="300">
 
 #### 参数
 
@@ -312,7 +312,7 @@
 
 > AffectiveChartPressureView
 
-![image-20191014142733860](img/../../img/image-20191014142733860.png)
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014142733860.png" width="300">
 
 #### 参数
 
