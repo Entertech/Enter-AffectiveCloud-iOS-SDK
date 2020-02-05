@@ -173,7 +173,7 @@ public class ChartService: NSObject {
             self.heartRateView?.hrAvg = model.heartRateAvg!
             self.hrvView?.setDataFromModel(hrv: model.heartRateVariability)
             self.hrvView?.hrvAvg = model.hrvAvg!
-            self.attentionView?.setDataFromModel(attention: model.attention)
+            self.attentionView?.setDataFromModel(attention: model.attention, timestamp: Int(Date().timeIntervalSince1970))
             self.attentionView?.avg = model.attentionAvg!
             self.relaxationView?.setDataFromModel(relaxation: model.relaxation)
             self.relaxationView?.avg = model.relaxationAvg!
