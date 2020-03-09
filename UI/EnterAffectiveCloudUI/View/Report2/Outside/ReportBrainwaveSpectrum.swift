@@ -49,8 +49,8 @@ public class PrivateReportBrainwaveSpectrum: UIView {
                 roundView.isHidden = false
                 var value5 = 100
                 for i in 0..<4 {
-                    value5 = value5 - Int(newValue![i]*100)
-                    texts[i].text = spectrums[i] + " " + "\(Int(newValue![i]*100))%"
+                    value5 = value5 - lroundf(newValue![i]*100)
+                    texts[i].text = spectrums[i] + " " + "\(lroundf(newValue![i]*100))%"
                 }
                 
                 texts[4].text = spectrums[4] + " " + "\(Int(value5))%"

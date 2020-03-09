@@ -433,10 +433,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     var isHiddenNavigationBar = false
     @objc
     private func zoomBtnTouchUpInside(sender: UIButton) {
-        sender.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-            sender.isEnabled = true
-        }
+
         if !isZoomed {
             let vc = self.parentViewController()!
             if let navi = vc.navigationController {
@@ -461,7 +458,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             chart.relaxationColor = self.relaxationColor
             chart.setDataFromModel(array: self.attentionArray, state: .attention)
             chart.setDataFromModel(array: self.relaxationArray, state: .relaxation)
-            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
+            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar

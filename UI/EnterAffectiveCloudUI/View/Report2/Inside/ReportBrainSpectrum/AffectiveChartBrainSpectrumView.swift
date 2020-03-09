@@ -57,7 +57,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             thetaDot?.backgroundColor = spectrumColors[3]
             deltaDot?.backgroundColor = spectrumColors[4]
 
-            chartView?.gridBackgroundColor = spectrumColors[4]
+            chartView?.gridBackgroundColor = .clear
         }
     }
     
@@ -444,10 +444,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
     var isHiddenNavigationBar = false
     @objc
     private func zoomBtnTouchUpInside(sender: UIButton) {
-        sender.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-            sender.isEnabled = true
-        }
+
         if !isZoomed {
             let vc = self.parentViewController()!
             if let navi = vc.navigationController {
@@ -475,7 +472,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.title = self.title
             chart.setDataFromModel(gama: gamaArray!, delta: deltaArray!, theta: thetaArray!, alpha: alphaArray!, beta: betaArray!, timestamp: timeStamp)
-            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
+            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
             chart.isZoomed = true
             
             chart.betaDot?.snp.updateConstraints {

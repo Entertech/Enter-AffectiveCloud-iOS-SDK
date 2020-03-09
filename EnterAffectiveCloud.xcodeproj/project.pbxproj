@@ -682,13 +682,13 @@
 		FAB0BC1623B1FB620074C06C /* ReportBrainSpectrum */ = {
 			isa = PBXGroup;
 			children = (
-				FAB1DF8323E9219C007ADBA3 /* AffectiveChartAttentionView.swift */,
 				FAB0BC2223B30A750074C06C /* AffectiveChartHRVView.swift */,
 				FAB0BC1723B1FC6B0074C06C /* AffectiveChartBrainSpectrumView.swift */,
 				FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */,
 				FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */,
 				FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */,
 				FAB1DF8523E941A9007ADBA3 /* AffectiveChartRelaxationView.swift */,
+				FAB1DF8323E9219C007ADBA3 /* AffectiveChartAttentionView.swift */,
 			);
 			path = ReportBrainSpectrum;
 			sourceTree = "<group>";

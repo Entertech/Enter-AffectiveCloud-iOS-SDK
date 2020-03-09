@@ -318,10 +318,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
     var isHiddenNavigationBar = false
      @objc
      private func zoomBtnTouchUpInside(sender: UIButton) {
-         sender.isEnabled = false
-         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-             sender.isEnabled = true
-         }
+
          if !isZoomed {
              let vc = self.parentViewController()!
              if let navi = vc.navigationController {
@@ -346,7 +343,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
             chart.title = self.title
              chart.isChartScale = true
              chart.setDataFromModel(hr: hrArray)
-             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*3/2))
+             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
              chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
              chart.hrAvg = self.hrAvg
