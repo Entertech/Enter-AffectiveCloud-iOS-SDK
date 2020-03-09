@@ -322,15 +322,28 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         var tmpArray = Array2D(columns: arrayCount, rows: 5, initialValue: Float(0.0))
         for i in 0..<arrayCount {
             let total = gama[i] + theta[i] + delta[i] + alpha[i] + beta[i]
-            let set1 = delta[i] / total
-            let set2 = (delta[i] + theta[i]) / total
-            let set3 = (delta[i] + alpha[i] + theta[i]) / total
-            let set4 = (total - gama[i]) / total
-            tmpArray[i, 0] = 0
-            tmpArray[i, 1] = set1 * 100
-            tmpArray[i, 2] = set2 * 100
-            tmpArray[i, 3] = set3 * 100
-            tmpArray[i, 4] = set4 * 100
+            if total < 0.1 {
+                let set1 = 0.1
+                let set2 = 0.3
+                let set3 = 0.6
+                let set4 = 0.9
+                tmpArray[i, 0] = 0
+                tmpArray[i, 1] = Float(set1 * 100)
+                tmpArray[i, 2] = Float(set2 * 100)
+                tmpArray[i, 3] = Float(set3 * 100)
+                tmpArray[i, 4] = Float(set4 * 100)
+            } else {
+                let set1 = delta[i] / total
+                let set2 = (delta[i] + theta[i]) / total
+                let set3 = (delta[i] + alpha[i] + theta[i]) / total
+                let set4 = (total - gama[i]) / total
+                tmpArray[i, 0] = 0
+                tmpArray[i, 1] = set1 * 100
+                tmpArray[i, 2] = set2 * 100
+                tmpArray[i, 3] = set3 * 100
+                tmpArray[i, 4] = set4 * 100
+            }
+
         }
         
         return tmpArray
