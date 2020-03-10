@@ -494,8 +494,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
             }
             nShowChartView.snp.makeConstraints {
-                $0.left.right.top.equalToSuperview()
-                $0.bottom.equalTo(view!.safeAreaLayoutGuide)
+                $0.edges.equalToSuperview()
             }
             
             chart.snp.remakeConstraints {
