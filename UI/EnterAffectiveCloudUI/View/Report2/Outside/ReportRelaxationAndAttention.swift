@@ -89,8 +89,16 @@ public class PrivateReportRelaxationAndAttention: UIView {
             attentionNumberView.stateColor = newValue
         }
     }
-    private var relaxationStateTextColor = UIColor.colorWithHexString(hexColor: "555b7f")
-    private var attentionStateTextColor = UIColor.colorWithHexString(hexColor: "637f72")
+    public var relaxationStateTextColor = UIColor.colorWithHexString(hexColor: "555b7f") {
+        willSet {
+            relaxationNumberView.stateTextColor = newValue
+        }
+    }
+    public var attentionStateTextColor = UIColor.colorWithHexString(hexColor: "637f72") {
+        willSet {
+            attentionNumberView.stateTextColor = newValue
+        }
+    }
     
     let relaxationNumberView = PrivateReportNumberView()
     public let relaxationCircleView = PrivateReportSemiCircle()

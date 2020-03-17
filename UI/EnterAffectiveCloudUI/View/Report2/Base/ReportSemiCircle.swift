@@ -110,7 +110,7 @@ public class ReportSemiCircle2: UIView {
     public var colors: [Any] = [UIColor.colorWithHexString(hexColor:"5E75FF").cgColor,
                                 UIColor.colorWithHexString(hexColor: "FFB2C0").cgColor]
     
-    public let bgColor = UIColor.colorWithHexString(hexColor: "f1f5f6")
+    public var bgColor = UIColor.colorWithHexString(hexColor: "f1f5f6")
     private let shaperColor = UIColor.colorWithHexString(hexColor: "FFB2C0")
     private var circlePath: UIBezierPath?
     private let bgLayer: CAShapeLayer = CAShapeLayer()

@@ -40,7 +40,11 @@ public class PrivateReportPressure: UIView {
             stateLabel.backgroundColor = newValue
         }
     }
-    private let stateTextColor = UIColor.colorWithHexString(hexColor: "7f5960")
+    public var stateTextColor = UIColor.colorWithHexString(hexColor: "7f5960") {
+        willSet {
+            stateLabel.textColor = newValue
+        }
+    }
     
     public init()  {
         super.init(frame: CGRect.zero)
