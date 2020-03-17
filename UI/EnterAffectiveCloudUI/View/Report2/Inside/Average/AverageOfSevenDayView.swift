@@ -139,17 +139,17 @@ public class PrivateAverageOfSevenDayView: UIView {
         averageLine.layer.masksToBounds = true
         
         averageLabel.text = "Average"
-        averageLabel.textColor = UIColor.colorWithHexString(hexColor: "666666")
+        averageLabel.textColor = UIColor.systemGray
         averageLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         
         averageNumLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         
         unitLabel.font = UIFont.systemFont(ofSize: 12)
-        unitLabel.textColor = UIColor.colorWithHexString(hexColor: "666666")
+        unitLabel.textColor = UIColor.systemGray
         
         lastLabel.font = UIFont.systemFont(ofSize: 12)
         lastLabel.text = "Last 7 times"
-        lastLabel.textColor = UIColor.colorWithHexString(hexColor: "666666")
+        lastLabel.textColor = UIColor.systemGray
 
     }
     
