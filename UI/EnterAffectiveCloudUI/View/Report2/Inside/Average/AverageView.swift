@@ -73,6 +73,12 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var textBgColor: UIColor = .white {
+        willSet {
+            bgLabel.backgroundColor = newValue
+        }
+    }
+    
     public var categoryName: AverageName?
     
     private let bgLabel = UIView()

@@ -63,7 +63,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
     public var bgColor: UIColor = .white {
         willSet {
             roundView.backgroundColor = newValue
-            self.backgroundColor = newValue
+            //self.backgroundColor = newValue
         }
     }
     private let roundView = UIView()
