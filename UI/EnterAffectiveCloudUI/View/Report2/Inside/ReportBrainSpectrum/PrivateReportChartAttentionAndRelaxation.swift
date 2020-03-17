@@ -446,7 +446,12 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             let nShowChartView = UIView()
             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
             view?.addSubview(nShowChartView)
-            
+            if #available(iOS 13.0, *) {
+                nShowChartView.backgroundColor = UIColor.systemBackground
+            } else {
+                // Fallback on earlier versions
+                
+            }
             let chart = PrivateReportChartAttentionAndRelaxation()
             nShowChartView.addSubview(chart)
             chart.bgColor = self.bgColor

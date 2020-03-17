@@ -457,7 +457,12 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             let nShowChartView = UIView()
             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
             view?.addSubview(nShowChartView)
-
+            if #available(iOS 13.0, *) {
+                nShowChartView.backgroundColor = UIColor.systemBackground
+            } else {
+                // Fallback on earlier versions
+                
+            }
 
             let chart = AffectiveChartBrainSpectrumView()
             nShowChartView.addSubview(chart)

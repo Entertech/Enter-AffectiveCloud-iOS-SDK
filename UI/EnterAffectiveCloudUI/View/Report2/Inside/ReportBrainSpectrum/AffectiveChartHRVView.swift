@@ -324,7 +324,12 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             let nShowChartView = UIView()
             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
             view?.addSubview(nShowChartView)
-            
+            if #available(iOS 13.0, *) {
+                nShowChartView.backgroundColor = UIColor.systemBackground
+            } else {
+                // Fallback on earlier versions
+                
+            }
             let chart = AffectiveChartHRVView()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
