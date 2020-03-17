@@ -32,10 +32,14 @@ public class PrivateReportPressure: UIView {
 
     private let numLabel = UILabel()
     private let stateLabel = UILabel()
-    private let circleView = ReportSemiCircle2()
+    public let circleView = ReportSemiCircle2()
     private var stateArray:[Int] = [0 ,20, 70, 100] //放松度等级分段
     
-    private let stateColor = UIColor.colorWithHexString(hexColor: "ffb2c0")
+    public var stateColor = UIColor.colorWithHexString(hexColor: "ffb2c0") {
+        willSet {
+            stateLabel.backgroundColor = newValue
+        }
+    }
     private let stateTextColor = UIColor.colorWithHexString(hexColor: "7f5960")
     
     public init()  {

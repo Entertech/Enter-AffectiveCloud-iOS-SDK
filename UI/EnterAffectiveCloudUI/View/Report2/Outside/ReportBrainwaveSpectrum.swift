@@ -59,6 +59,13 @@ public class PrivateReportBrainwaveSpectrum: UIView {
 
         }
     }
+    
+    public var bgColor: UIColor = .white {
+        willSet {
+            roundView.backgroundColor = newValue
+            self.backgroundColor = newValue
+        }
+    }
     private let roundView = UIView()
     private let chartView: PieChartView = PieChartView()
     private let dots: [UIView] = [UIView(), UIView(), UIView(), UIView(), UIView()]
@@ -134,7 +141,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
         
         self.addSubview(roundView)
         roundView.layer.cornerRadius = 45
-        roundView.backgroundColor = .white
+        roundView.backgroundColor = .clear
         self.bringSubviewToFront(roundView)
     }
     

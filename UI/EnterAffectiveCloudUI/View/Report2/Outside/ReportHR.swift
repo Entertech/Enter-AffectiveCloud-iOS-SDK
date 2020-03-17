@@ -39,12 +39,24 @@ public class PrivateReportHR: UIView {
         }
     }
     
-    let numberView = PrivateReportNumberView()
+    public let numberView = PrivateReportNumberView()
     let dotView = SurveyorsRodView()
     
-    let colors = [UIColor.colorWithHexString(hexColor: "ffb2c0"),
-                  UIColor.colorWithHexString(hexColor: "ff66b2"),
-                  UIColor.colorWithHexString(hexColor: "7f5960")]
+    public var colors = [UIColor.colorWithHexString(hexColor: "ffb2c0"),
+                         UIColor.colorWithHexString(hexColor: "ff66b2"),
+                         UIColor.colorWithHexString(hexColor: "7f5960")] {
+        willSet {
+            numberView.stateColor = newValue[0]
+            dotView.setBarColor(newValue, splitStateArray)
+            dotView.setDotColor(newValue[2])
+        }
+    }
+    
+    public var lineNumColor: UIColor = .white {
+        willSet {
+            dotView.setLabelColor(newValue)
+        }
+    }
     
     let splitStateArray:[CGFloat] = [0 ,20, 80, 100] //等级分段
     private let _splitStateArray = [0 ,20, 80, 100]

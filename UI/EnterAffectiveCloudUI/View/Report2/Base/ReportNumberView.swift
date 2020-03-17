@@ -14,7 +14,7 @@ public enum PrivateReportState: String {
     case high
 }
 
-class PrivateReportNumberView: UIView {
+public class PrivateReportNumberView: UIView {
     
     public var stateTextColor: UIColor = UIColor.colorWithHexString(hexColor: "7F725E") {
         willSet {

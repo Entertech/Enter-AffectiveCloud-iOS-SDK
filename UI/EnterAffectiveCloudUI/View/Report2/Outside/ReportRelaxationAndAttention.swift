@@ -79,18 +79,26 @@ public class PrivateReportRelaxationAndAttention: UIView {
     
     private var attentionStateArray = [0 ,60, 80, 100] //注意力等级分段
     
-    private var relaxationStateColor = UIColor.colorWithHexString(hexColor: "abb7ff")
-    private var attentionStateColor = UIColor.colorWithHexString(hexColor: "c7ffe4")
+    public var relaxationStateColor = UIColor.colorWithHexString(hexColor: "abb7ff") {
+        willSet {
+            relaxationNumberView.stateColor = newValue
+        }
+    }
+    public var attentionStateColor = UIColor.colorWithHexString(hexColor: "c7ffe4") {
+        willSet {
+            attentionNumberView.stateColor = newValue
+        }
+    }
     private var relaxationStateTextColor = UIColor.colorWithHexString(hexColor: "555b7f")
     private var attentionStateTextColor = UIColor.colorWithHexString(hexColor: "637f72")
     
-    private let relaxationNumberView = PrivateReportNumberView()
-    private let relaxationCircleView = PrivateReportSemiCircle()
+    let relaxationNumberView = PrivateReportNumberView()
+    public let relaxationCircleView = PrivateReportSemiCircle()
     
-    private let attentionNumberView = PrivateReportNumberView()
-    private let attentionCircleView = PrivateReportSemiCircle()
+    let attentionNumberView = PrivateReportNumberView()
+    public let attentionCircleView = PrivateReportSemiCircle()
     
-    private let line = UIView()
+    public let line = UIView()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -165,7 +173,7 @@ public class PrivateReportRelaxationAndAttention: UIView {
         attentionNumberView.stateColor = attentionStateColor
         attentionNumberView.stateTextColor = attentionStateTextColor
         
-        line.backgroundColor = UIColor.colorWithHexString(hexColor: "f0f0f0")
+        line.backgroundColor = UIColor.systemGray
         line.layer.cornerRadius = 1
     }
     

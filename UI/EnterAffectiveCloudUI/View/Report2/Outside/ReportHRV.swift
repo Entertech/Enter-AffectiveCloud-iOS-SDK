@@ -39,12 +39,24 @@ public class PrivateReportHRV: UIView {
         }
     }
     
-    let numberView = PrivateReportNumberView()
+    public let numberView = PrivateReportNumberView()
     let dotView = SurveyorsRodView()
     
-    let colors = [UIColor.colorWithHexString(hexColor: "ffe4bb"),
+    public var colors = [UIColor.colorWithHexString(hexColor: "ffe4bb"),
                   UIColor.colorWithHexString(hexColor: "ffc56f"),
-                  UIColor.colorWithHexString(hexColor: "7f725e")]
+                  UIColor.colorWithHexString(hexColor: "ffc56f")] {
+        willSet {
+            numberView.stateColor = newValue[0]
+            dotView.setBarColor(newValue, splitStateArray)
+            dotView.setDotColor(newValue[2])
+        }
+    }
+    
+    public var lineNumColor: UIColor = .white {
+        willSet {
+            dotView.setLabelColor(newValue)
+        }
+    }
     
     let splitStateArray:[CGFloat] = [0 ,30, 50, 70] //等级分段
     
