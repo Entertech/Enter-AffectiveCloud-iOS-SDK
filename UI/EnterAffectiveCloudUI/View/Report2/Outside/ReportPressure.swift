@@ -23,7 +23,7 @@ public class PrivateReportPressure: UIView {
             }
         }
     }
-    
+    // 状态
     public var state: PrivateReportState = .nor{
         willSet {
             stateLabel.text = newValue.rawValue
@@ -32,14 +32,17 @@ public class PrivateReportPressure: UIView {
 
     private let numLabel = UILabel()
     private let stateLabel = UILabel()
-    public let circleView = ReportSemiCircle2()
+    public let circleView = ReportSemiCircle2() // 扇形试图
     private var stateArray:[Int] = [0 ,20, 70, 100] //放松度等级分段
     
+    // 状态文字背景色
     public var stateColor = UIColor.colorWithHexString(hexColor: "ffb2c0") {
         willSet {
             stateLabel.backgroundColor = newValue
         }
     }
+    
+    // 状态文字颜色
     public var stateTextColor = UIColor.colorWithHexString(hexColor: "7f5960") {
         willSet {
             stateLabel.textColor = newValue

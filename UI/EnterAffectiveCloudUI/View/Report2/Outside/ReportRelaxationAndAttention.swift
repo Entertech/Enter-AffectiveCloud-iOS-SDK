@@ -10,20 +10,21 @@ import UIKit
 
 public class PrivateReportRelaxationAndAttention: UIView {
     
+    // 最大值
     public var largeValue = 100 {
         willSet {
             relaxationCircleView.largeValue = CGFloat(newValue)
             attentionCircleView.largeValue = CGFloat(newValue)
         }
     }
-    
+    // 最小值
     public var smallValue = 0 {
         willSet {
             relaxationCircleView.smallValue = CGFloat(newValue)
             attentionCircleView.smallValue = CGFloat(newValue)
         }
     }
-
+    
     public var relaxationValue:Int = 0 {
         willSet {
             relaxationNumberView.number = newValue

@@ -39,7 +39,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             chartView?.xAxis.labelTextColor = secondColor
         }
     }
-    
+    /// 下方单位字体颜色
     public var unitTextColor: UIColor = .black {
         willSet {
             xLabel?.textColor = newValue

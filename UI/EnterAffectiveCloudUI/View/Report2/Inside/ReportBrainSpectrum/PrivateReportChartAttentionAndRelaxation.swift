@@ -47,7 +47,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             chartView?.xAxis.gridColor = secondColor
         }
     }
-    
+    /// 下方单位字体颜色
     public var unitTextColor: UIColor = .black {
         willSet {
             xLabel?.textColor = newValue

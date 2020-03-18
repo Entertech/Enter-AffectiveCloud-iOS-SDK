@@ -39,6 +39,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
         }
     }
     
+    /// 下方单位字体颜色
     public var unitTextColor: UIColor = .black {
         willSet {
             xLabel?.textColor = newValue
@@ -54,6 +55,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
     
     private var sample = 3
     
+    /// 平均值
     public var avg: Int = 0 {
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
