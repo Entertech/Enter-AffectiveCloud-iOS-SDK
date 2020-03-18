@@ -39,8 +39,18 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             xLabel?.textColor = changedColor
             
             chartView?.leftAxis.labelTextColor = changedColor
+            attention0?.textColor = changedColor
+            attention100?.textColor = changedColor
+            relaxation0?.textColor = changedColor
+            relaxation100?.textColor = changedColor
             chartView?.xAxis.labelTextColor = changedColor
             chartView?.xAxis.gridColor = secondColor
+        }
+    }
+    
+    public var unitTextColor: UIColor = .black {
+        willSet {
+            xLabel?.textColor = newValue
         }
     }
     
@@ -70,6 +80,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             avgLine.lineColor = textColor.changeAlpha(to: 0.5)
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             avgLine.lineWidth = 1
+            avgLine.valueTextColor = unitTextColor
             chartView?.leftAxis.addLimitLine(avgLine)
         }
     }

@@ -40,6 +40,12 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
         }
     }
     
+    public var unitTextColor: UIColor = .black {
+        willSet {
+            xLabel?.textColor = newValue
+        }
+    }
+    
     private var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
@@ -56,6 +62,7 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
             avgLine.lineDashLengths = [8, 4]
             avgLine.lineColor = textColor.changeAlpha(to: 0.5)
             avgLine.lineWidth = 1
+            avgLine.valueTextColor = unitTextColor
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             chartView?.leftAxis.addLimitLine(avgLine)
         }

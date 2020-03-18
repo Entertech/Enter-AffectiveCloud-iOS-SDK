@@ -39,6 +39,12 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
         }
     }
     
+    public var unitTextColor: UIColor = .black {
+        willSet {
+            xLabel?.textColor = newValue
+        }
+    }
+    
     private var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
@@ -56,6 +62,7 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
             avgLine.lineColor = textColor.changeAlpha(to: 0.5)
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             avgLine.lineWidth = 1
+            avgLine.valueTextColor = unitTextColor
             chartView?.leftAxis.addLimitLine(avgLine)
         }
     }

@@ -191,7 +191,14 @@ class LimitYAxisRenderer: YAxisRenderer {
                     let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 55, y: position.y - yOffset - 4, width: 62, height: 22), cornerRadius: 11)
                     
                     context.addPath(path.cgPath)
-                    context.setFillColor(UIColor.init(red: 1, green: 1, blue: 1 , alpha: 0.4).cgColor)
+                    if #available(iOS 13.0, *) {
+                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.8).cgColor)
+                        l.valueTextColor = .label
+                    } else {
+                        context.setFillColor(UIColor.white.changeAlpha(to: 0.8).cgColor)
+                        l.valueTextColor = .black
+                        // Fallback on earlier versions
+                    }
                     context.fillPath()
                     
                     ChartUtils.drawText(context: context,

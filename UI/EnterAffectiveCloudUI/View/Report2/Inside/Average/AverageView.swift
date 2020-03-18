@@ -79,6 +79,18 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var numTextColor: UIColor = .white {
+        willSet {
+            chart.numTextColor = newValue
+        }
+    }
+    
+    public var numBgColor: UIColor = .gray {
+        willSet {
+            chart.numBgColor = newValue
+        }
+    }
+    
     public var categoryName: AverageName?
     
     private let bgLabel = UIView()

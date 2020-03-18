@@ -39,6 +39,13 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         }
     }
     
+    public var unitTextColor: UIColor = .black {
+        willSet {
+            xLabel?.textColor = newValue
+        }
+    }
+
+    
     private var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
@@ -55,10 +62,13 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             avgLine.lineDashLengths = [8, 4]
             avgLine.lineColor = textColor.changeAlpha(to: 0.5)
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
+            avgLine.valueTextColor = unitTextColor
             avgLine.lineWidth = 1
             chartView?.leftAxis.addLimitLine(avgLine)
         }
     }
+    
+    
     
     public var title: String = "心率变异性（HRV）" {
         willSet {

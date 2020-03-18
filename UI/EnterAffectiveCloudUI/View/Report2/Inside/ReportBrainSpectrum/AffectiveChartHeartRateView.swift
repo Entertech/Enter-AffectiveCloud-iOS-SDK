@@ -38,6 +38,12 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
              chartView?.xAxis.gridColor = secondColor
          }
      }
+    
+    public var unitTextColor: UIColor = .black {
+        willSet {
+            xLabel?.textColor = newValue
+        }
+    }
 
      private var isChartScale = false {
          willSet {
@@ -56,14 +62,15 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
      
      public var hrAvg: Int = 0 {
          willSet  {
-
-             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
-             avgLine.lineDashPhase = 0
-             avgLine.lineDashLengths = [8, 4]
-             avgLine.lineColor = textColor.changeAlpha(to: 0.5)
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
+            avgLine.lineDashPhase = 0
+            avgLine.lineDashLengths = [8, 4]
+            avgLine.lineColor = textColor.changeAlpha(to: 0.5)
             avgLine.lineWidth = 1
-             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
-             chartView?.leftAxis.addLimitLine(avgLine)
+            avgLine.valueTextColor = unitTextColor
+            avgLine.valueFont = UIFont.systemFont(ofSize: 12)
+            chartView?.leftAxis.addLimitLine(avgLine)
+
          }
      }
      

@@ -29,7 +29,7 @@ public class PrivateAverageOfSevenDayView: UIView {
 
                     if i == 0 {
                         bar.backgroundColor = currentBarColor
-                        numLabel.backgroundColor = currentBarColor.changeAlpha(to: 0.3)
+                        numLabel.backgroundColor = numBgColor
                     } else {
                         bar.backgroundColor = barColor
                         numLabel.isHidden = true
@@ -45,6 +45,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                     numLabel.layer.cornerRadius = 4
                     numLabel.layer.masksToBounds = true
                     numLabel.textAlignment = .center
+                    numLabel.textColor = numTextColor
                     valueLabels.append(numLabel)
                 }
                 barLayout()
@@ -66,7 +67,11 @@ public class PrivateAverageOfSevenDayView: UIView {
         }
     }
     
-    private var barColor = UIColor.colorWithHexString(hexColor: "eaecf1")
+    public var barColor = UIColor.colorWithHexString(hexColor: "eaecf1")
+    
+    public var numBgColor: UIColor = .gray
+    
+    public var numTextColor: UIColor = .white
     
     private var averageValue:CGFloat = 0 {
         willSet {
