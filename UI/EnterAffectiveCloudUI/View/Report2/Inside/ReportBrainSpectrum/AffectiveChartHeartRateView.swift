@@ -105,85 +105,85 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
      }
      
      public override func didMoveToSuperview() {
-         super.didMoveToSuperview()
-         
-         guard let _ = self.superview else {
-             return
-         }
-         
-         xLabel?.snp.makeConstraints {
-             $0.centerX.equalToSuperview()
-             $0.bottom.equalToSuperview().offset(-16)
-         }
-         
-         chartView?.snp.makeConstraints {
-             $0.top.equalTo(chartHead!.snp.bottom).offset(0)
-             $0.right.equalToSuperview().offset(-8)
-             $0.left.equalToSuperview().offset(16)
-             $0.bottom.equalToSuperview().offset(-45)
-         }
-         
-         self.snp.makeConstraints {
-             $0.left.right.bottom.equalToSuperview()
-             $0.height.equalTo(250)
-         }
-     }
-     
-     func initFunction() {
-         let alphaColor = textColor.changeAlpha(to: 0.7)
-         let secondColor = textColor.changeAlpha(to: 0.3)
-         
-         self.layer.cornerRadius = cornerRadius
-         
-         chartHead = PrivateChartViewHead()
-         chartHead?.titleText = title
-         chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
-         self.addSubview(chartHead!)
-         
-         xLabel = UILabel()
-         xLabel?.text = "Time(min)"
-         xLabel?.textAlignment = .center
-         xLabel?.font = UIFont.systemFont(ofSize: 12)
-         xLabel?.textColor = alphaColor
-         self.addSubview(xLabel!)
+        super.didMoveToSuperview()
+        
+        guard let _ = self.superview else {
+            return
+        }
+        
+        xLabel?.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-16)
+        }
+        
+        chartView?.snp.makeConstraints {
+            $0.top.equalTo(chartHead!.snp.bottom).offset(0)
+            $0.right.equalToSuperview().offset(-8)
+            $0.left.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().offset(-45)
+        }
+        
+        self.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(250)
+        }
+    }
+    
+    func initFunction() {
+        let alphaColor = textColor.changeAlpha(to: 0.7)
+        let secondColor = textColor.changeAlpha(to: 0.3)
+        
+        self.layer.cornerRadius = cornerRadius
+        
+        chartHead = PrivateChartViewHead()
+        chartHead?.titleText = title
+        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        self.addSubview(chartHead!)
+        
+        xLabel = UILabel()
+        xLabel?.text = "Time(min)"
+        xLabel?.textAlignment = .center
+        xLabel?.font = UIFont.systemFont(ofSize: 12)
+        xLabel?.textColor = alphaColor
+        self.addSubview(xLabel!)
         
         chartView = LineChartView()
-         yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
-
+        yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
+        
         chartView?.leftYAxisRenderer = yRender!
-         chartView?.delegate = self
-         chartView?.backgroundColor = .clear
-         chartView?.gridBackgroundColor = .clear
-         chartView?.drawBordersEnabled = false
-         chartView?.chartDescription?.enabled = false
-         chartView?.pinchZoomEnabled = false
-         chartView?.scaleXEnabled = false
-         chartView?.scaleYEnabled = false
-         chartView?.legend.enabled = false
-         chartView?.highlightPerTapEnabled = false
-         
-         let leftAxis = chartView!.leftAxis
-         leftAxis.labelPosition = .outsideChart
-         leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
-         leftAxis.labelTextColor = alphaColor
-         leftAxis.drawGridLinesEnabled = false
+        chartView?.delegate = self
+        chartView?.backgroundColor = .clear
+        chartView?.gridBackgroundColor = .clear
+        chartView?.drawBordersEnabled = false
+        chartView?.chartDescription?.enabled = false
+        chartView?.pinchZoomEnabled = false
+        chartView?.scaleXEnabled = false
+        chartView?.scaleYEnabled = false
+        chartView?.legend.enabled = false
+        chartView?.highlightPerTapEnabled = false
+        
+        let leftAxis = chartView!.leftAxis
+        leftAxis.labelPosition = .outsideChart
+        leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        leftAxis.labelTextColor = alphaColor
+        leftAxis.drawGridLinesEnabled = false
         leftAxis.axisMaxLabels = 4
         leftAxis.axisMinLabels = 3
         leftAxis.labelCount = 4
-         leftAxis.axisLineColor = secondColor
-         chartView?.rightAxis.enabled = false
-         
-         let xAxis = chartView!.xAxis
-         xAxis.drawAxisLineEnabled = false
-         xAxis.gridLineWidth = 1
-         xAxis.labelPosition = .bottom
-         xAxis.gridColor = secondColor
-         xAxis.labelTextColor = alphaColor
-         xAxis.axisMaxLabels = 8
-         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
-
-         self.addSubview(chartView!)
-     }
+        leftAxis.axisLineColor = secondColor
+        chartView?.rightAxis.enabled = false
+        
+        let xAxis = chartView!.xAxis
+        xAxis.drawAxisLineEnabled = false
+        xAxis.gridLineWidth = 0.5
+        xAxis.labelPosition = .bottom
+        xAxis.gridColor = secondColor
+        xAxis.labelTextColor = alphaColor
+        xAxis.axisMaxLabels = 8
+        xAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        
+        self.addSubview(chartView!)
+    }
      
      public func setDataFromModel(hr: [Int]?, timestamp: Int? = nil) {
          

@@ -171,7 +171,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
         
         let xAxis = chartView!.xAxis
         xAxis.drawAxisLineEnabled = false
-        xAxis.gridLineWidth = 1
+        xAxis.gridLineWidth = 0.5
         xAxis.labelPosition = .bottom
         xAxis.gridColor = secondColor
         xAxis.labelTextColor = alphaColor

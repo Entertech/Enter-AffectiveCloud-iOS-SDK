@@ -308,7 +308,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         
         let xAxis = chartView!.xAxis
         xAxis.drawAxisLineEnabled = false
-        xAxis.gridLineWidth = 1
+        xAxis.gridLineWidth = 0.5
         xAxis.labelPosition = .bottom
         xAxis.gridColor = thirdColor
         xAxis.labelTextColor = secondColor
