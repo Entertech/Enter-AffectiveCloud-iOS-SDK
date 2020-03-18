@@ -51,6 +51,8 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     public var unitTextColor: UIColor = .black {
         willSet {
             xLabel?.textColor = newValue
+            attentionLabel?.textColor = newValue
+            relaxationLabel?.textColor = newValue
         }
     }
     
