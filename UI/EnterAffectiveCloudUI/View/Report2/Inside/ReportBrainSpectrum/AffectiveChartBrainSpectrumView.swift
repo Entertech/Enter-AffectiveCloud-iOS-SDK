@@ -286,6 +286,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
         chartView?.highlightPerTapEnabled = false
+        chartView?.highlightPerDragEnabled = false
         self.addSubview(chartView!)
         
         let leftAxis = chartView!.leftAxis

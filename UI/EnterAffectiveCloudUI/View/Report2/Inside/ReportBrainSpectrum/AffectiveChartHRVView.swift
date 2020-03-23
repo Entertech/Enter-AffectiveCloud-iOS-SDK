@@ -162,6 +162,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
         chartView?.highlightPerTapEnabled = false
+        chartView?.highlightPerDragEnabled = false
         
         let leftAxis = chartView!.leftAxis
         leftAxis.labelPosition = .outsideChart
