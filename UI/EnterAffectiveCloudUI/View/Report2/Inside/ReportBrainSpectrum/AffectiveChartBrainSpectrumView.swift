@@ -451,6 +451,10 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         set.setColor(color)
         set.fillAlpha = 1
         set.fillColor = color
+        set.highlightEnabled = true
+        set.highlightLineWidth = 2
+        set.highlightColor = textColor.changeAlpha(to: 0.3)
+        set.drawHorizontalHighlightIndicatorEnabled = false
 
         set.fillFormatter = DefaultFillFormatter { _,_ -> CGFloat in
             return CGFloat(self.chartView!.leftAxis.axisMinimum)
