@@ -290,7 +290,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         var maxLabel = 0
         var minLabel = 0
         var bScaleIs2 = false
-        if tempMax5 - tempMin5 < 20 {
+        if tempMax5 - tempMin5 < 10 {
             let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
             let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
             maxLabel = tempMax2
