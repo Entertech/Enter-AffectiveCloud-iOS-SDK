@@ -39,6 +39,13 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         }
     }
     
+    /// highlight 颜色
+    public var highlightLineColor = UIColor.gray {
+        willSet {
+            marker?.lineColor = newValue
+        }
+    }
+    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
         didSet  {
@@ -118,7 +125,6 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     
     private var sample = 3
     //MARK:- Private UI
-    private var bIsAttentionFirst: Bool? = nil// 用于判断哪个值先传入
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.8
@@ -418,15 +424,6 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         }
         
         if let array = array {
-            if bIsAttentionFirst == nil {
-                if state == .attention {
-                    bIsAttentionFirst = true
-                    marker?.bIsFirst = true
-                } else {
-                    bIsAttentionFirst = false
-                    marker?.bIsFirst = false
-                }
-            }
             
             sample = array.count / maxDataCount
             sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
@@ -484,7 +481,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.lineWidth = 2
-        set.colors = colors
+        set.setColor(lineColor)
         set.drawIconsEnabled = true
         set.highlightEnabled = true
         set.highlightLineWidth = 2
@@ -670,13 +667,10 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             index = chartView.data?.dataSets[1].entryIndex(entry: entry)
         }
         if let index = index {
-            if bIsAttentionFirst == true {
-                chartView.data?.dataSets[0].entryForIndex(index)?.icon = rIcon
-                chartView.data?.dataSets[1].entryForIndex(index)?.icon = aIcon
-            } else {
-                chartView.data?.dataSets[0].entryForIndex(index)?.icon = aIcon
-                chartView.data?.dataSets[1].entryForIndex(index)?.icon = rIcon
-            }
+
+            chartView.data?.dataSets[0].entryForIndex(index)?.icon = aIcon
+            chartView.data?.dataSets[1].entryForIndex(index)?.icon = rIcon
+            
 
         }
         

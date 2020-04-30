@@ -14,10 +14,15 @@ class TwoValueMarkerView: MarkerView {
     public var titleLabel: UILabel?
     public var label: UILabel?
     public var dot: UIView?
-    public var bIsFirst = true //用于判断两个数据哪个在前
     public var title2Label: UILabel?
     public var label2: UILabel?
     public var dot2: UIView?
+    public var lineColor: UIColor?{
+        willSet {
+            lineLayer.strokeColor = newValue!.cgColor
+        }
+    }
+    private let lineLayer = CAShapeLayer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,6 +87,11 @@ class TwoValueMarkerView: MarkerView {
         self.addSubview(dot2!)
         
         self.layer.cornerRadius = 4
+        let path = UIBezierPath(roundedRect: CGRect(x: frame.width/2-1, y: frame.height, width: 2, height: 4), cornerRadius: 1)
+        
+        lineLayer.path = path.cgPath
+        lineLayer.strokeColor = UIColor.gray.cgColor
+        self.layer.addSublayer(lineLayer)
         
         self.offset.x = -frame.size.width / 2.0
         self.offset.y = 0
@@ -95,14 +105,10 @@ class TwoValueMarkerView: MarkerView {
         if let index = index {
             let entry1 = chartView?.data?.dataSets[0].entryForIndex(index)
             let entry2 = chartView?.data?.dataSets[1].entryForIndex(index)
-            if bIsFirst {
-                label?.text = String.init(format: "%d", Int(entry2!.y) > 100 ? Int(entry2!.y)-130 : Int(entry2!.y)) //因为一条线高度被加高了,减130
-                label2?.text = String.init(format: "%d", Int(entry1!.y) > 100 ? Int(entry1!.y)-130 : Int(entry1!.y))
 
-            } else {
-                label?.text = String.init(format: "%d", Int(entry1!.y) > 100 ? Int(entry1!.y)-130 : Int(entry1!.y)) //因为一条线高度被加高了,减130
-                label2?.text = String.init(format: "%d", Int(entry2!.y) > 100 ? Int(entry2!.y)-130 : Int(entry2!.y))
-            }
+            label?.text = String.init(format: "%d", Int(entry1!.y) > 100 ? Int(entry1!.y)-130 : Int(entry1!.y)) //因为一条线高度被加高了,减130
+            label2?.text = String.init(format: "%d", Int(entry2!.y) > 100 ? Int(entry2!.y)-130 : Int(entry2!.y))
+            
 
 
         }

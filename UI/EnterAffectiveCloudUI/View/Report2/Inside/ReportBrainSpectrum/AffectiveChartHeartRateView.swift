@@ -48,10 +48,17 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
             marker?.titleLabel?.textColor = changedColor
          }
      }
-    
+    /// title
     public var title: String = "心率" {
         willSet {
             chartHead?.titleText = newValue
+        }
+    }
+    
+    /// highlight 颜色
+    public var highlightLineColor = UIColor.gray {
+        willSet {
+            marker?.lineColor = newValue
         }
     }
      

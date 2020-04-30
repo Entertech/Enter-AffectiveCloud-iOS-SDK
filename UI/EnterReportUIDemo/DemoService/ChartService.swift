@@ -181,9 +181,9 @@ public class ChartService: NSObject {
             self.pressureView?.setDataFromModel(pressure: model.pressure!)
             let pressureAvg = Int(model.pressure!.reduce(0, +) / Float(model.pressure!.count))
             self.pressureView?.pressureAvg = pressureAvg
-            
-            self.rAndaView?.setDataFromModel(array: model.relaxation, state: .relaxation)
             self.rAndaView?.setDataFromModel(array: model.attention, state: .attention)
+            self.rAndaView?.setDataFromModel(array: model.relaxation, state: .relaxation)
+            
             self.rAndaView?.attentionAvg = model.attentionAvg!
             self.rAndaView?.relaxationAvg = model.relaxationAvg!
             isShowed = true

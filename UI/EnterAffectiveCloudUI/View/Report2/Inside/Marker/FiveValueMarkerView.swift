@@ -14,7 +14,12 @@ class FiveValueMarkerView: MarkerView {
     public var titleLabelArray: [UILabel] = []
     public var labelArray: [UILabel] = []
     public var dotArray: [UIView] = []
-
+    public var lineColor: UIColor? {
+        willSet {
+            lineLayer.strokeColor = newValue!.cgColor
+        }
+    }
+    private let lineLayer = CAShapeLayer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,7 +74,10 @@ class FiveValueMarkerView: MarkerView {
 
         }
         self.layer.cornerRadius = 4
+        let path = UIBezierPath(roundedRect: CGRect(x: frame.width/2-1, y: frame.height, width: 2, height: 4), cornerRadius: 1)
         
+        lineLayer.path = path.cgPath
+        lineLayer.strokeColor = UIColor.gray.cgColor
         self.offset.x = -frame.size.width / 2.0
         self.offset.y = 0
     }

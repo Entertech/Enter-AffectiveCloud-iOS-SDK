@@ -69,10 +69,17 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
             marker?.backgroundColor = newValue
         }
     }
-    
+    /// title
     public var title: String = "压力值" {
         willSet {
             chartHead?.titleText = newValue
+        }
+    }
+    
+    /// highlight 颜色
+    public var highlightLineColor = UIColor.gray {
+        willSet {
+            marker?.lineColor = newValue
         }
     }
     

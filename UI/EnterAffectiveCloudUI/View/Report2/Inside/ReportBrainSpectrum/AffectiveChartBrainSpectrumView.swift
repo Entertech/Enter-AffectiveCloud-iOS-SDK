@@ -51,6 +51,13 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
          }
      }
     
+    /// highlight 颜色
+    public var highlightLineColor = UIColor.gray {
+        willSet {
+            marker?.lineColor = newValue
+        }
+    }
+    
     
     /// 5段脑波频谱的颜色
     public var spectrumColors: [UIColor] = [UIColor.colorWithHexString(hexColor: "#FF6682"),

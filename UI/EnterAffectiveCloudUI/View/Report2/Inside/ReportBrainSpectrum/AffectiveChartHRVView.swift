@@ -69,10 +69,16 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             marker?.backgroundColor = newValue
         }
     }
-    
+    /// 标题
     public var title: String = "心率变异性（HRV）" {
         willSet {
             chartHead?.titleText = newValue
+        }
+    }
+    /// highlight 颜色
+    public var highlightLineColor = UIColor.gray {
+        willSet {
+            marker?.lineColor = newValue
         }
     }
     
@@ -276,7 +282,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         set.drawIconsEnabled = true
         set.highlightEnabled = true
         set.highlightLineWidth = 2
-        set.highlightColor = textColor.changeAlpha(to: 0.3)
+        set.highlightColor = highlightLineColor
         set.drawHorizontalHighlightIndicatorEnabled = false
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)

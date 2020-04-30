@@ -14,6 +14,12 @@ class ValueMarkerView: MarkerView {
     public var titleLabel: UILabel?
     public var label: UILabel?
     public var dot: UIView?
+    public var lineColor: UIColor? {
+        willSet {
+            lineLayer.strokeColor = newValue!.cgColor
+        }
+    }
+    private let lineLayer = CAShapeLayer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +57,11 @@ class ValueMarkerView: MarkerView {
         self.addSubview(dot!)
         
         self.layer.cornerRadius = 4
+        let path = UIBezierPath(roundedRect: CGRect(x: frame.width/2-1, y: frame.height, width: 2, height: 4), cornerRadius: 1)
         
+        lineLayer.path = path.cgPath
+        lineLayer.strokeColor = UIColor.gray.cgColor
+        self.layer.addSublayer(lineLayer)
         self.offset.x = -frame.size.width / 2.0
         self.offset.y = 0
     }
@@ -66,7 +76,6 @@ class ValueMarkerView: MarkerView {
         var offset = self.offset
         
         let width = self.bounds.size.width
-        let height = self.bounds.size.height
         
         if point.x + offset.x < 0.0
         {
