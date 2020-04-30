@@ -76,7 +76,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         }
     }
     /// highlight 颜色
-    public var highlightLineColor = UIColor.gray {
+    public var highlightLineColor = UIColor.systemGray {
         willSet {
             marker?.lineColor = newValue
         }

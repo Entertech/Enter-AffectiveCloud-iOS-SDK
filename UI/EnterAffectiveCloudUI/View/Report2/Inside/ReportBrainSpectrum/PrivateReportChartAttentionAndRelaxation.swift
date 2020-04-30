@@ -40,7 +40,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     }
     
     /// highlight 颜色
-    public var highlightLineColor = UIColor.gray {
+    public var highlightLineColor = UIColor.systemGray {
         willSet {
             marker?.lineColor = newValue
         }
@@ -485,7 +485,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         set.drawIconsEnabled = true
         set.highlightEnabled = true
         set.highlightLineWidth = 2
-        set.highlightColor = textColor.changeAlpha(to: 0.3)
+        set.highlightColor = highlightLineColor
         set.drawHorizontalHighlightIndicatorEnabled = false
         set.drawValuesEnabled = false
         if state == .attention {
