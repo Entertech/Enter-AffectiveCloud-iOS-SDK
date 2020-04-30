@@ -11,7 +11,11 @@ import Charts
 
 public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     
-    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F")
+    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F") {
+        willSet {
+            marker?.dot?.backgroundColor = newValue
+        }
+    }
     
     /// 背景颜色
     public var bgColor: UIColor = .white {
@@ -27,48 +31,44 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     }
     
     /// 文字颜色
-    public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
+    public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "11152e") {
         didSet  {
-            let changedColor = textColor.changeAlpha(to: 0.7)
-            let secondColor = textColor.changeAlpha(to: 0.5)
-            xLabel?.textColor = changedColor
+            let changedColor = textColor.changeAlpha(to: 0.6)
+            let secondColor = textColor.changeAlpha(to: 0.2)
+            xLabel?.textColor = self.textColor
             
             chartView?.leftAxis.labelTextColor = changedColor
             chartView?.xAxis.labelTextColor = changedColor
             chartView?.xAxis.gridColor = secondColor
+            chartView?.leftAxis.gridColor = secondColor
+            chartView?.xAxis.axisLineColor = secondColor
+            chartView?.leftAxis.axisLineColor = secondColor
+            
+            marker?.label?.textColor = self.textColor
+            marker?.titleLabel?.textColor = changedColor
         }
     }
-    /// 下方单位字体颜色
-    public var unitTextColor: UIColor = .black {
-        willSet {
-            xLabel?.textColor = newValue
-        }
-    }
+    
 
-    
-    private var isChartScale = false {
-        willSet {
-            chartView?.scaleXEnabled = newValue
-            chartHead?.expandBtn.isHidden = !newValue
-        }
-    }
-    
-    private var sample = 3
-    
+    /// 设置平均值
     public var hrvAvg: Int = 0 {
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [8, 4]
-            avgLine.lineColor = textColor.changeAlpha(to: 0.5)
+            avgLine.lineColor = textColor
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
-            avgLine.valueTextColor = unitTextColor
+            avgLine.valueTextColor = textColor
             avgLine.lineWidth = 1
             chartView?.leftAxis.addLimitLine(avgLine)
         }
     }
-    
-    
+    /// Marker 的背景色
+    public var markerBackgroundColor = UIColor.white {
+        willSet {
+            marker?.backgroundColor = newValue
+        }
+    }
     
     public var title: String = "心率变异性（HRV）" {
         willSet {
@@ -77,19 +77,28 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     }
     
     //MARK:- Private UI
+    private var isChartScale = false {
+        willSet {
+            chartView?.scaleXEnabled = newValue
+            chartHead?.expandBtn.isHidden = !newValue
+        }
+    }
+    
+    private var sample = 3
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
     private let interval = 0.4
     private var timeStamp = 0
     private var hrvArray: [Int]?
     private var yRender: LimitYAxisRenderer?
-    //MARK:- Private UI
     private var chartHead: PrivateChartViewHead?
     private var titleLabel: UILabel?
     private var chartView: LineChartView?
     private var xLabel: UILabel?
     private var msLabel: UILabel?
     private var nShowChartView: UIView?
+    private var marker: ValueMarkerView?
+    private lazy var dotIcon = UIImage.highlightIcon(centerColor: self.lineColor)
     public init() {
         super.init(frame: CGRect.zero)
         initFunction()
@@ -119,10 +128,10 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         }
         
         chartView?.snp.makeConstraints {
-            $0.top.equalTo(chartHead!.snp.bottom).offset(0)
+            $0.top.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(-8)
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().offset(-45)
+            $0.bottom.equalToSuperview().offset(-35)
         }
         
         self.snp.makeConstraints {
@@ -132,21 +141,16 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     }
     
     func initFunction() {
-        let alphaColor = textColor.changeAlpha(to: 0.7)
-        let secondColor = textColor.changeAlpha(to: 0.3)
+        let alphaColor = textColor.changeAlpha(to: 0.6)
+        let secondColor = textColor.changeAlpha(to: 0.2)
         
         self.layer.cornerRadius = cornerRadius
-        
-        chartHead = PrivateChartViewHead()
-        chartHead?.titleText = title
-        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
-        self.addSubview(chartHead!)
         
         xLabel = UILabel()
         xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
-        xLabel?.textColor = alphaColor
+        xLabel?.textColor = textColor
         self.addSubview(xLabel!)
         
         chartView = LineChartView()
@@ -161,28 +165,50 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
+        chartView?.animate(xAxisDuration: 0.5)
+        chartView?.extraTopOffset = 60
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = false
+        chartView?.highlightPerDragEnabled = true
+        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))//添加长按事件
+
+        marker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 47))
+        marker?.chartView = chartView
+        marker?.titleLabel?.text = "HRV"
+        marker?.titleLabel?.textColor = alphaColor
+        marker?.dot?.backgroundColor = lineColor
+        chartView?.marker = marker
         
         let leftAxis = chartView!.leftAxis
         leftAxis.labelPosition = .outsideChart
         leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
         leftAxis.labelTextColor = alphaColor
-        leftAxis.drawGridLinesEnabled = false
-        leftAxis.axisMaxLabels = 4
+        leftAxis.drawGridLinesEnabled = true
+        leftAxis.drawAxisLineEnabled = false
+        leftAxis.gridColor = secondColor
+        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineDashPhase = 1
+        leftAxis.gridLineDashLengths = [3,2]
+        leftAxis.axisMaxLabels = 5
         leftAxis.axisLineColor = secondColor
         chartView?.rightAxis.enabled = false
         
         let xAxis = chartView!.xAxis
-        xAxis.drawAxisLineEnabled = false
         xAxis.gridLineWidth = 0.5
         xAxis.labelPosition = .bottom
-        xAxis.gridColor = secondColor
+        xAxis.axisLineColor = secondColor
         xAxis.labelTextColor = alphaColor
         xAxis.axisMaxLabels = 8
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = true
+        xAxis.axisLineWidth = 1
 
         self.addSubview(chartView!)
+        
+        chartHead = PrivateChartViewHead()
+        chartHead?.titleText = title
+        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        self.addSubview(chartHead!)
     }
     
     public func setDataFromModel(hrv: [Int]?, timestamp: Int? = nil) {
@@ -202,7 +228,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     }
     //MARK:- Chart delegate
     private func setDataCount(_ waveArray: [Int]) {
-        var colors: [UIColor] = []
+        var colors: [UIColor] = [] //废弃
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
@@ -217,14 +243,14 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         var yVals: [ChartDataEntry] = []
         var notZero: Int = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
-            if i < initIndex{
-                colors.append(lineColor)
+            if i < initIndex{  //为0的为无效数据
+                colors.append(.clear) //后期更改需求，不需要分别无效数据颜色
                 yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
             } else {
-                if waveArray[i] == 0 {
-                    colors.append(lineColor)
+                if waveArray[i] == 0 {//为0的为无效数据
+                    colors.append(.clear)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
-                } else {
+                } else { //其他数据颜色不同
                     if minValue > waveArray[i] {
                         minValue = waveArray[i]
                     }
@@ -232,52 +258,70 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
                         maxValue = waveArray[i]
                     }
                     notZero = waveArray[i]
-                    colors.append(lineColor)
+                    colors.append(.clear)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i])))
                 }
                 
             }
             
         }
-        
+        // 设置chart set
         let set = LineChartDataSet(entries: yVals, label: "")
         set.mode = .linear
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.lineWidth = 2
-        set.colors = colors
+        set.setColor(lineColor)
+        set.drawIconsEnabled = true
+        set.highlightEnabled = true
+        set.highlightLineWidth = 2
+        set.highlightColor = textColor.changeAlpha(to: 0.3)
+        set.drawHorizontalHighlightIndicatorEnabled = false
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         chartView?.data = data
         
+        // 设置坐标轴
         var labelArray: [Int] = []
-        let maxLabel = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
-        let minLabel = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
+        let tempMax5 = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
+        let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
         
-        chartView?.leftAxis.axisMaximum = Double(maxLabel)
-        chartView?.leftAxis.axisMinimum = Double(minLabel)
-        if (maxLabel - minLabel) % 3 == 0 {
+        var maxLabel = 0
+        var minLabel = 0
+        var bScaleIs2 = false
+        if tempMax5 - tempMin5 < 20 {
+            let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
+            let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
+            maxLabel = tempMax2
+            minLabel = tempMin2
+            bScaleIs2 = true
+        } else {
+            maxLabel = tempMax5
+            minLabel = tempMin5
+        }
+        if (maxLabel - minLabel) % 4 == 0 {
+            chartView?.leftAxis.axisMaximum = Double(maxLabel)
+            chartView?.leftAxis.axisMinimum = Double(minLabel)
             labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)*2/3)
-            labelArray.append(maxLabel-(maxLabel-minLabel)/3)
-            labelArray.append(maxLabel)
-
-        } else if (maxLabel - minLabel) % 2 == 0 {
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)/2)
+            labelArray.append(maxLabel-(maxLabel-minLabel)*3/4)
+            labelArray.append(maxLabel-(maxLabel-minLabel)*2/4)
+            labelArray.append(maxLabel-(maxLabel-minLabel)*1/4)
             labelArray.append(maxLabel)
         } else {
-            if (maxLabel - (minLabel+5)) % 3 == 0 {
-                labelArray.append(minLabel+5)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)*2/3)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)/3)
-                labelArray.append(maxLabel)
-
-            } else if (maxLabel - minLabel-5) % 2 == 0 {
-                labelArray.append(minLabel-5)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)/2)
-                labelArray.append(maxLabel)
+            let scaled = bScaleIs2 ? 1 : 5
+            for i in (1...10) {
+                let scale = scaled * i
+                if (maxLabel - (minLabel-scale)) % 4 == 0 {
+                    chartView?.leftAxis.axisMaximum = Double(maxLabel)
+                    chartView?.leftAxis.axisMinimum = Double(minLabel-scale)
+                    labelArray.append(minLabel-scale)
+                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*3/4)
+                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*2/4)
+                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*1/4)
+                    labelArray.append(maxLabel)
+                    break
+                }
             }
         }
         yRender?.entries = labelArray
@@ -286,6 +330,9 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     
     private var timeApart: [Int] = []
     private func setLimitLine(_ valueCount: Int, _ yLabels: [Int]) {
+        guard valueCount > 1 else {
+            return
+        }
         let timeCount = Double(valueCount * sample) * interval
         let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
         
@@ -296,6 +343,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         chartView?.xAxis.axisMinimum = 0
         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        chartView?.maxVisibleCount = valueCount + 1
         //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
         
@@ -354,12 +402,14 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
             chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
+            chart.chartView?.highlightPerTapEnabled = false
+            chart.chartView?.highlightPerDragEnabled = true
             chart.hrvAvg = self.hrvAvg
             chart.title = self.title
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
             label.font = UIFont.systemFont(ofSize: 12)
-            chart.addSubview(label)
+            chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {
                 $0.right.equalTo(chart.chartHead!.expandBtn.snp.left).offset(-12)
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
@@ -375,7 +425,6 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             }
             
         } else {
-            
             let view = self.superview!
             if isHiddenNavigationBar {
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -387,4 +436,56 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         }
         
     }
+    
+    @objc
+    private func tapGesture(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if h === nil || h == chartView?.lastHighlighted {
+                chartView?.lastHighlighted = nil
+                chartView?.highlightValue(nil)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartViewDidEndPanning?(chartView!)
+            } else {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
+            }
+        } else if sender.state == .ended {
+            chartView?.lastHighlighted = nil
+            chartView?.highlightValue(nil)
+            chartHead?.isHidden = false
+            chartView?.delegate?.chartViewDidEndPanning?(chartView!)
+        }
+
+    }
+    
+    public func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        chartView.lastHighlighted = nil
+        chartView.highlightValue(nil)
+        chartHead?.isHidden = false
+        
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+        }
+    }
+    
+    public func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        if !chartHead!.isHidden {
+            chartHead?.isHidden = true
+        }
+        
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+        }
+        entry.icon = dotIcon
+    }
+    
+    public func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        chartHead?.isHidden = false
+    }
+    
+    
+
 }

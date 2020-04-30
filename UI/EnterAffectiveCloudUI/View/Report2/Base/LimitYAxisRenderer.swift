@@ -260,7 +260,6 @@ class LimitYAxisRenderer: YAxisRenderer {
 }
 /// Y轴描述
 public class YValueFormatter: NSObject, IAxisValueFormatter {
-    private var labels: [Double] = [];
     
     /// 初始化
     ///
@@ -270,17 +269,9 @@ public class YValueFormatter: NSObject, IAxisValueFormatter {
         super.init()
     }
     
-    public init(values: [Int]) {
-        super.init()
-        for e in values {
-            labels.append(Double(e))
-        }
-    }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        axis?.entryCount 
-        axis?.entries = self.labels
-        return "\(Int(value))"
+        return "\(Int(value))%"
     }
 }
 

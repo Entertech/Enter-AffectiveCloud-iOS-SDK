@@ -19,6 +19,12 @@
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
 		FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */; };
+		FA1690C324556EAB00FADC2B /* EnterColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690C224556EAB00FADC2B /* EnterColors.swift */; };
+		FA1690D224567D8300FADC2B /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690CF24567D8300FADC2B /* BalloonMarker.swift */; };
+		FA1690D324567D8300FADC2B /* ValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D024567D8300FADC2B /* ValueMarkerView.swift */; };
+		FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D5245920E000FADC2B /* HighlightIcon.swift */; };
+		FA1690D82459772B00FADC2B /* TwoValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D72459772B00FADC2B /* TwoValueMarkerView.swift */; };
+		FA1690DA2459909C00FADC2B /* FiveValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D92459909C00FADC2B /* FiveValueMarkerView.swift */; };
 		FA19DF632398F6AC0043F679 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF622398F6AC0043F679 /* TagService.swift */; };
 		FA19DF69239900F40043F679 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF68239900F40043F679 /* BaseAPI.swift */; };
 		FA19DF6B2399015D0043F679 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6A2399015D0043F679 /* TokenModel.swift */; };
@@ -216,6 +222,12 @@
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHRVView.swift; sourceTree = "<group>"; };
+		FA1690C224556EAB00FADC2B /* EnterColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterColors.swift; sourceTree = "<group>"; };
+		FA1690CF24567D8300FADC2B /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		FA1690D024567D8300FADC2B /* ValueMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueMarkerView.swift; sourceTree = "<group>"; };
+		FA1690D5245920E000FADC2B /* HighlightIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightIcon.swift; sourceTree = "<group>"; };
+		FA1690D72459772B00FADC2B /* TwoValueMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoValueMarkerView.swift; sourceTree = "<group>"; };
+		FA1690D92459909C00FADC2B /* FiveValueMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveValueMarkerView.swift; sourceTree = "<group>"; };
 		FA19DF622398F6AC0043F679 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
 		FA19DF68239900F40043F679 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		FA19DF6A2399015D0043F679 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
@@ -460,6 +472,25 @@
 			path = HRView;
 			sourceTree = "<group>";
 		};
+		FA1690CD24567D2700FADC2B /* Marker */ = {
+			isa = PBXGroup;
+			children = (
+				FA1690CF24567D8300FADC2B /* BalloonMarker.swift */,
+				FA1690D024567D8300FADC2B /* ValueMarkerView.swift */,
+				FA1690D72459772B00FADC2B /* TwoValueMarkerView.swift */,
+				FA1690D92459909C00FADC2B /* FiveValueMarkerView.swift */,
+			);
+			path = Marker;
+			sourceTree = "<group>";
+		};
+		FA1690D4245920BF00FADC2B /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				FA1690D5245920E000FADC2B /* HighlightIcon.swift */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
 		FA19DF612398F6750043F679 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +611,8 @@
 		FA7689CF23B0BC90005E4DF7 /* Inside */ = {
 			isa = PBXGroup;
 			children = (
+				FA1690D4245920BF00FADC2B /* Icon */,
+				FA1690CD24567D2700FADC2B /* Marker */,
 				FAB0BC1623B1FB620074C06C /* ReportBrainSpectrum */,
 				FA7689D223B0BFE7005E4DF7 /* Average */,
 			);
@@ -779,6 +812,7 @@
 				FA0A6E81234D7A6200532A46 /* BaseView.swift */,
 				FAC773052355581500FBFA6A /* loading.gif */,
 				FACEDF9223507D370016176C /* NibLoadable.swift */,
+				FA1690C224556EAB00FADC2B /* EnterColors.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1237,10 +1271,15 @@
 				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
 				FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */,
 				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,
+				FA1690C324556EAB00FADC2B /* EnterColors.swift in Sources */,
+				FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */,
 				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
 				FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */,
 				FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */,
+				FA1690D324567D8300FADC2B /* ValueMarkerView.swift in Sources */,
+				FA1690DA2459909C00FADC2B /* FiveValueMarkerView.swift in Sources */,
 				FAB3E46123AC699500A85129 /* ReportBrainwaveSpectrum.swift in Sources */,
+				FA1690D82459772B00FADC2B /* TwoValueMarkerView.swift in Sources */,
 				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
 				FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
@@ -1259,6 +1298,7 @@
 				FAB0BC1A23B20CFF0074C06C /* PrivateChartViewHead.swift in Sources */,
 				FAB1DF8423E9219D007ADBA3 /* AffectiveChartAttentionView.swift in Sources */,
 				FA93439C2358596E00544239 /* RelaxationReportView.swift in Sources */,
+				FA1690D224567D8300FADC2B /* BalloonMarker.swift in Sources */,
 				FA93439F23585BD600544239 /* PressureChart.swift in Sources */,
 				FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */,
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,

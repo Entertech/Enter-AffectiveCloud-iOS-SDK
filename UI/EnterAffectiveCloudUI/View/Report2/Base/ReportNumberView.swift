@@ -9,7 +9,7 @@
 import UIKit
 
 public enum PrivateReportState: String {
-    case nor
+    case nor = "med"
     case low
     case high
 }

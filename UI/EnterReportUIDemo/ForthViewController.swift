@@ -12,6 +12,7 @@ import EnterAffectiveCloudUI
 
 class ForthViewController: UIViewController {
     private let service = ChartService()
+    @IBOutlet weak var attentionAndRelaxationChart: PrivateReportChartAttentionAndRelaxation!
     @IBOutlet weak var brainReportView: AffectiveChartBrainSpectrumView!
     @IBOutlet weak var hrvView: AffectiveChartHRVView!
     @IBOutlet weak var hrView: AffectiveChartHeartRateView!
@@ -30,6 +31,7 @@ class ForthViewController: UIViewController {
             service.pressureView = pressureView
             service.attentionView = attentionView
             service.relaxationView = relaxationView
+            service.rAndaView = attentionAndRelaxationChart
         }
 
         // Do any additional setup after loading the view.

@@ -11,7 +11,11 @@ import Charts
 
 public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
 
-    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682")
+    public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
+       willSet {
+           marker?.dot?.backgroundColor = newValue
+       }
+    }
 
      /// 背景颜色
      public var bgColor: UIColor = .white {
@@ -27,28 +31,21 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
      }
      
      /// 文字颜色
-     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
+     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "11152e") {
          didSet  {
-             let changedColor = textColor.changeAlpha(to: 0.7)
-             let secondColor = textColor.changeAlpha(to: 0.5)
-             xLabel?.textColor = changedColor
-             
-             chartView?.leftAxis.labelTextColor = changedColor
-             chartView?.xAxis.labelTextColor = changedColor
-             chartView?.xAxis.gridColor = secondColor
-         }
-     }
-    /// 下方单位字体颜色
-    public var unitTextColor: UIColor = .black {
-        willSet {
-            xLabel?.textColor = newValue
-        }
-    }
-
-     private var isChartScale = false {
-         willSet {
-             chartView?.scaleXEnabled = newValue
-             chartHead?.expandBtn.isHidden = !newValue
+            let changedColor = textColor.changeAlpha(to: 0.6)
+            let secondColor = textColor.changeAlpha(to: 0.2)
+            xLabel?.textColor = self.textColor
+            
+            chartView?.leftAxis.labelTextColor = changedColor
+            chartView?.xAxis.labelTextColor = changedColor
+            chartView?.xAxis.gridColor = secondColor
+            chartView?.leftAxis.gridColor = secondColor
+            chartView?.xAxis.axisLineColor = secondColor
+            chartView?.leftAxis.axisLineColor = secondColor
+            
+            marker?.label?.textColor = self.textColor
+            marker?.titleLabel?.textColor = changedColor
          }
      }
     
@@ -58,53 +55,66 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         }
     }
      
-     private var sample = 3
-     
-     public var hrAvg: Int = 0 {
-         willSet  {
+    /// 设置平均值
+    public var hrAvg: Int = 0 {
+        willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [8, 4]
-            avgLine.lineColor = textColor.changeAlpha(to: 0.5)
+            avgLine.lineColor = textColor
             avgLine.lineWidth = 1
-            avgLine.valueTextColor = unitTextColor
+            avgLine.valueTextColor = textColor
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             chartView?.leftAxis.addLimitLine(avgLine)
-
-         }
-     }
-     
+            
+        }
+    }
+    
+    /// Marker 的背景色
+    public var markerBackgroundColor = UIColor.white {
+        willSet {
+            marker?.backgroundColor = newValue
+        }
+    }
      //MARK:- Private UI
-     private var maxDataCount = 100
-     private let mainFont = "PingFangSC-Semibold"
-     private let interval = 0.4
-     private var timeStamp = 0
-     private var hrArray: [Int]?
+    private var sample = 3
+    private var isChartScale = false {
+        willSet {
+            chartView?.scaleXEnabled = newValue
+            chartHead?.expandBtn.isHidden = !newValue
+        }
+    }
+    private var maxDataCount = 100
+    private let mainFont = "PingFangSC-Semibold"
+    private let interval = 0.4
+    private var timeStamp = 0
+    private var hrArray: [Int]?
     private var yRender: LimitYAxisRenderer?
-     //MARK:- Private UI
-     private var chartHead: PrivateChartViewHead?
-     private var titleLabel: UILabel?
-     private var chartView: LineChartView?
-     public var xLabel: UILabel?
-     private var msLabel: UILabel?
-     private var nShowChartView: UIView?
-     public init() {
-         super.init(frame: CGRect.zero)
-         initFunction()
-     }
-     
-     public override init(frame: CGRect) {
-         super.init(frame: frame)
-         initFunction()
-     }
-     
-     
-     required public init?(coder: NSCoder) {
-         super.init(coder: coder)
-         initFunction()
-     }
-     
-     public override func didMoveToSuperview() {
+    private var chartHead: PrivateChartViewHead?
+    private var titleLabel: UILabel?
+    private var chartView: LineChartView?
+    public var xLabel: UILabel?
+    private var msLabel: UILabel?
+    private var nShowChartView: UIView?
+    private var marker: ValueMarkerView?
+    private lazy var dotIcon = UIImage.highlightIcon(centerColor: self.lineColor)
+    public init() {
+        super.init(frame: CGRect.zero)
+        initFunction()
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        initFunction()
+    }
+    
+    
+    required public init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initFunction()
+    }
+    
+    public override func didMoveToSuperview() {
         super.didMoveToSuperview()
         
         guard let _ = self.superview else {
@@ -117,10 +127,10 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         }
         
         chartView?.snp.makeConstraints {
-            $0.top.equalTo(chartHead!.snp.bottom).offset(0)
+            $0.top.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(-8)
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().offset(-45)
+            $0.bottom.equalToSuperview().offset(-35)
         }
         
         self.snp.makeConstraints {
@@ -130,26 +140,20 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
     }
     
     func initFunction() {
-        let alphaColor = textColor.changeAlpha(to: 0.7)
-        let secondColor = textColor.changeAlpha(to: 0.3)
+        let alphaColor = textColor.changeAlpha(to: 0.6)
+        let secondColor = textColor.changeAlpha(to: 0.2)
         
         self.layer.cornerRadius = cornerRadius
-        
-        chartHead = PrivateChartViewHead()
-        chartHead?.titleText = title
-        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
-        self.addSubview(chartHead!)
         
         xLabel = UILabel()
         xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
-        xLabel?.textColor = alphaColor
+        xLabel?.textColor = textColor
         self.addSubview(xLabel!)
         
         chartView = LineChartView()
         yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
-        
         chartView?.leftYAxisRenderer = yRender!
         chartView?.delegate = self
         chartView?.backgroundColor = .clear
@@ -160,51 +164,71 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
+        chartView?.animate(xAxisDuration: 0.5)
+        chartView?.extraTopOffset = 60
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = false
+        chartView?.highlightPerDragEnabled = true
+        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))
+        
+        marker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 76, height: 47))
+        marker?.chartView = chartView
+        marker?.titleLabel?.text = "Heart rate"
+        marker?.titleLabel?.textColor = alphaColor
+        marker?.dot?.backgroundColor = lineColor
+        chartView?.marker = marker
         
         let leftAxis = chartView!.leftAxis
         leftAxis.labelPosition = .outsideChart
         leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
         leftAxis.labelTextColor = alphaColor
-        leftAxis.drawGridLinesEnabled = false
-        leftAxis.axisMaxLabels = 4
-        leftAxis.axisMinLabels = 3
-        leftAxis.labelCount = 4
+        leftAxis.drawGridLinesEnabled = true
+        leftAxis.drawAxisLineEnabled = false
+        leftAxis.gridColor = secondColor
+        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineDashPhase = 1
+        leftAxis.gridLineDashLengths = [3,2]
+        leftAxis.labelCount = 5
         leftAxis.axisLineColor = secondColor
         chartView?.rightAxis.enabled = false
         
         let xAxis = chartView!.xAxis
-        xAxis.drawAxisLineEnabled = false
         xAxis.gridLineWidth = 0.5
         xAxis.labelPosition = .bottom
-        xAxis.gridColor = secondColor
+        xAxis.axisLineColor = secondColor
         xAxis.labelTextColor = alphaColor
         xAxis.axisMaxLabels = 8
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        xAxis.drawGridLinesEnabled = false
+        xAxis.drawAxisLineEnabled = true
+        xAxis.axisLineWidth = 1
         
         self.addSubview(chartView!)
+        
+        chartHead = PrivateChartViewHead()
+        chartHead?.titleText = title
+        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        self.addSubview(chartHead!)
     }
-     
-     public func setDataFromModel(hr: [Int]?, timestamp: Int? = nil) {
-         
-         if let timestamp = timestamp, timestamp != 0 {
-             timeStamp = timestamp
-             
-             xLabel?.isHidden = true
-         }
-         
-         if let hr = hr {
-             sample = hr.count / maxDataCount
+    
+    public func setDataFromModel(hr: [Int]?, timestamp: Int? = nil) {
+        
+        if let timestamp = timestamp, timestamp != 0 {
+            timeStamp = timestamp
+            
+            xLabel?.isHidden = true
+        }
+        
+        if let hr = hr {
+            sample = hr.count / maxDataCount
             sample = hr.count / maxDataCount == 0 ? 1 : hr.count / maxDataCount
-             hrArray = hr
-             setDataCount(hr)
-         }
-         
-     }
+            hrArray = hr
+            setDataCount(hr)
+        }
+        
+    }
     //MARK:- Chart delegate
     private func setDataCount(_ waveArray: [Int]) {
-        var colors: [UIColor] = []
+        var colors: [UIColor] = [] //后期更改需求，不需要分别无效数据颜色, 废弃
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
@@ -248,7 +272,12 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.lineWidth = 2
-        set.colors = colors
+        set.setColor(lineColor)
+        set.drawIconsEnabled = true
+        set.highlightEnabled = true
+        set.highlightLineWidth = 2
+        set.highlightColor = textColor.changeAlpha(to: 0.3)
+        set.drawHorizontalHighlightIndicatorEnabled = false
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         chartView?.data = data
@@ -256,29 +285,30 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         var labelArray: [Int] = []
         let maxLabel = (maxValue / 5 + 1) * 5 > 140 ? 140 : (maxValue / 5 + 1) * 5
         let minLabel = (minValue / 5) * 5 < 0 ? 0 : (minValue / 5) * 5
-        chartView?.leftAxis.axisMaximum = Double(maxLabel)
-        chartView?.leftAxis.axisMinimum = Double(minLabel)
-        if (maxLabel - minLabel) % 3 == 0 {
+
+        if (maxLabel - minLabel) % 4 == 0 {
+            chartView?.leftAxis.axisMaximum = Double(maxLabel)
+            chartView?.leftAxis.axisMinimum = Double(minLabel)
             labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)*2/3)
-            labelArray.append(maxLabel-(maxLabel-minLabel)/3)
+            labelArray.append(maxLabel-(maxLabel-minLabel)*3/4)
+            labelArray.append(maxLabel-(maxLabel-minLabel)*2/4)
+            labelArray.append(maxLabel-(maxLabel-minLabel)*1/4)
             labelArray.append(maxLabel)
 
-        } else if (maxLabel - minLabel) % 2 == 0 {
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)/2)
-            labelArray.append(maxLabel)
         } else {
-            if (maxLabel - (minLabel+5)) % 3 == 0 {
-                labelArray.append(minLabel+5)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)*2/3)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)/3)
-                labelArray.append(maxLabel)
-
-            } else if (maxLabel - minLabel-5) % 2 == 0 {
-                labelArray.append(minLabel+5)
-                labelArray.append(maxLabel-(maxLabel-minLabel-5)/2)
-                labelArray.append(maxLabel)
+            let scaled = 5
+            for i in (1...10) {
+                let scale = scaled * i
+                if (maxLabel - (minLabel-scale)) % 4 == 0 {
+                    chartView?.leftAxis.axisMaximum = Double(maxLabel)
+                    chartView?.leftAxis.axisMinimum = Double(minLabel-scale)
+                    labelArray.append(minLabel-scale)
+                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*3/4)
+                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*2/4)
+                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*1/4)
+                    labelArray.append(maxLabel)
+                    break
+                }
             }
         }
         yRender?.entries = labelArray
@@ -286,20 +316,23 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         
     }
     
-     private var timeApart: [Int] = []
+    private var timeApart: [Int] = []
     private func setLimitLine(_ valueCount: Int, _ yLables: [Int]) {
-         let timeCount = Double(valueCount * sample) * interval
-         let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
-
-         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
+        guard valueCount > 1 else {
+            return
+        }
+        let timeCount = Double(valueCount * sample) * interval
+        let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
+        
+        for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             timeApart.append(i)
-         }
-         
-         chartView?.xAxis.axisMinimum = 0
-         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-         chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
-
-         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
+        }
+        
+        chartView?.xAxis.axisMinimum = 0
+        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        chartView?.maxVisibleCount = valueCount + 1
+        self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
 
         //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLables)
 
@@ -322,72 +355,122 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
          }
      }
      
-     fileprivate var isZoomed = false
+    fileprivate var isZoomed = false
     var isHiddenNavigationBar = false
-     @objc
-     private func zoomBtnTouchUpInside(sender: UIButton) {
-
-         if !isZoomed {
-             let vc = self.parentViewController()!
-             if let navi = vc.navigationController {
-                  if !navi.navigationBar.isHidden {
-                      isHiddenNavigationBar = true
-                      vc.navigationController?.setNavigationBarHidden(true, animated: true)
-                  }
-              }
-             let view = vc.view
-             let nShowChartView = UIView()
-             nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
-             view?.addSubview(nShowChartView)
-             if #available(iOS 13.0, *) {
-                 nShowChartView.backgroundColor = UIColor.systemBackground
-             } else {
-                 // Fallback on earlier versions
-                 
-             }
-             let chart = AffectiveChartHeartRateView()
-             nShowChartView.addSubview(chart)
+    @objc
+    private func zoomBtnTouchUpInside(sender: UIButton) {
+        
+        if !isZoomed {
+            let vc = self.parentViewController()!
+            if let navi = vc.navigationController {
+                if !navi.navigationBar.isHidden {
+                    isHiddenNavigationBar = true
+                    vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                }
+            }
+            let view = vc.view
+            let nShowChartView = UIView()
+            nShowChartView.backgroundColor = UIColor.colorWithHexString(hexColor: "#E5E5E5")
+            view?.addSubview(nShowChartView)
+            if #available(iOS 13.0, *) {
+                nShowChartView.backgroundColor = UIColor.systemBackground
+            } else {
+                // Fallback on earlier versions
+                
+            }
+            let chart = AffectiveChartHeartRateView()
+            nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
-             chart.bgColor = self.bgColor
-             chart.cornerRadius = self.cornerRadius
-             chart.maxDataCount = 500
-             chart.textColor = self.textColor
+            chart.bgColor = self.bgColor
+            chart.cornerRadius = self.cornerRadius
+            chart.maxDataCount = 500
+            chart.textColor = self.textColor
             chart.lineColor = self.lineColor
             chart.title = self.title
-             chart.isChartScale = true
-             chart.setDataFromModel(hr: hrArray)
-             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
-             chart.isZoomed = true
+            chart.isChartScale = true
+            chart.setDataFromModel(hr: hrArray)
+            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
+            chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
-             chart.hrAvg = self.hrAvg
+            chart.chartView?.highlightPerTapEnabled = false
+            chart.chartView?.highlightPerDragEnabled = true
+            chart.hrAvg = self.hrAvg
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
             label.font = UIFont.systemFont(ofSize: 12)
-            chart.addSubview(label)
+            chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {
                 $0.right.equalTo(chart.chartHead!.expandBtn.snp.left).offset(-12)
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
             }
-             nShowChartView.snp.makeConstraints {
+            nShowChartView.snp.makeConstraints {
                 $0.edges.equalToSuperview()
-             }
-             
-             chart.snp.remakeConstraints {
-                 $0.width.equalTo(nShowChartView.snp.height).offset(-88)
-                 $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                 $0.center.equalTo(view!.snp.center)
-             }
-
-         } else {
-             let view = self.superview!
+            }
+            
+            chart.snp.remakeConstraints {
+                $0.width.equalTo(nShowChartView.snp.height).offset(-88)
+                $0.height.equalTo(nShowChartView.snp.width).offset(-42)
+                $0.center.equalTo(view!.snp.center)
+            }
+            
+        } else {
+            let view = self.superview!
             if isHiddenNavigationBar {
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
             }
-             for e in view.subviews {
-                 e.removeFromSuperview()
-             }
-             view.removeFromSuperview()
-         }
+            for e in view.subviews {
+                e.removeFromSuperview()
+            }
+            view.removeFromSuperview()
+        }
         
-     }
+    }
+    @objc
+    private func tapGesture(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if h === nil || h == chartView?.lastHighlighted {
+                chartView?.lastHighlighted = nil
+                chartView?.highlightValue(nil)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartViewDidEndPanning?(chartView!)
+            } else {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
+            }
+        } else if sender.state == .ended {
+            chartView?.lastHighlighted = nil
+            chartView?.highlightValue(nil)
+            chartHead?.isHidden = false
+            chartView?.delegate?.chartViewDidEndPanning?(chartView!)
+        }
+
+    }
+    
+    public func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        chartView.lastHighlighted = nil
+        chartView.highlightValue(nil)
+        chartHead?.isHidden = false
+        
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+        }
+    }
+    
+    public func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        if !chartHead!.isHidden {
+            chartHead?.isHidden = true
+        }
+        
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+        }
+        entry.icon = dotIcon
+    }
+    
+    public func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        chartHead?.isHidden = false
+    }
 }

@@ -11,9 +11,9 @@ import CommonCrypto
 import EnterAffectiveCloud
 
 func DLog(_ items: Any...) {
-    
-    print("[FLOWTIME DEBUG]: \(items)")
-    
+    #if DEBUG
+        print("[AffectiveCloud DEBUG \(Date())]: \(items)")
+    #endif
 }
 
 /// 二维数组

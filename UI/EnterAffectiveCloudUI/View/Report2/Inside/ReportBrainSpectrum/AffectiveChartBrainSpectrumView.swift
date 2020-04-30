@@ -28,23 +28,29 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
         didSet  {
-            let changedColor = textColor.changeAlpha(to: 0.7)
-            let secondColor = textColor.changeAlpha(to: 0.5)
-            xLabel?.textColor = changedColor
+            let changedColor = textColor.changeAlpha(to: 0.6)
+            xLabel?.textColor = textColor
             gamaLabel?.textColor = changedColor
             betaLabel?.textColor = changedColor
             alphaLabel?.textColor = changedColor
             thetaLabel?.textColor = changedColor
             deltaLabel?.textColor = changedColor
-            chartView?.xAxis.labelTextColor = secondColor
+            chartView?.xAxis.labelTextColor = changedColor
+            chartView?.leftAxis.labelTextColor = changedColor
+            for i in 0..<5 {
+                marker?.labelArray[i].textColor = textColor
+                marker?.titleLabelArray[i].textColor = changedColor
+            }
         }
     }
-    /// 下方单位字体颜色
-    public var unitTextColor: UIColor = .black {
-        willSet {
-            xLabel?.textColor = newValue
-        }
-    }
+    
+    /// Marker 的背景色
+     public var markerBackgroundColor = UIColor.white {
+         willSet {
+             marker?.backgroundColor = newValue
+         }
+     }
+    
     
     /// 5段脑波频谱的颜色
     public var spectrumColors: [UIColor] = [UIColor.colorWithHexString(hexColor: "#FF6682"),
@@ -62,6 +68,12 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             alphaDot?.backgroundColor = spectrumColors[2]
             thetaDot?.backgroundColor = spectrumColors[3]
             deltaDot?.backgroundColor = spectrumColors[4]
+            
+            marker?.dotArray[0].backgroundColor = spectrumColors[0]
+            marker?.dotArray[1].backgroundColor = spectrumColors[1]
+            marker?.dotArray[2].backgroundColor = spectrumColors[2]
+            marker?.dotArray[3].backgroundColor = spectrumColors[3]
+            marker?.dotArray[4].backgroundColor = spectrumColors[4]
 
             chartView?.gridBackgroundColor = .clear
         }
@@ -107,6 +119,12 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
     private var deltaDot: UIView?
     private var deltaLabel: UILabel?
     private var xLabel: UILabel?
+    private var marker: FiveValueMarkerView?
+    private lazy var gamaIcon = UIImage.highlightIcon(centerColor: self.spectrumColors[0])
+    private lazy var betaIcon = UIImage.highlightIcon(centerColor: self.spectrumColors[1])
+    private lazy var alphaIcon = UIImage.highlightIcon(centerColor: self.spectrumColors[2])
+    private lazy var thetaIcon = UIImage.highlightIcon(centerColor: self.spectrumColors[3])
+    private lazy var deltaIcon = UIImage.highlightIcon(centerColor: self.spectrumColors[4])
     public init() {
         super.init(frame: CGRect.zero)
         initFunction()
@@ -129,27 +147,27 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         }
         gamaDot?.snp.makeConstraints {
             $0.top.equalTo(chartHead!.snp.bottom).offset(13)
-            $0.left.equalToSuperview().offset(24)
+            $0.right.equalToSuperview().offset(-26)
             $0.width.height.equalTo(8)
         }
         betaDot?.snp.makeConstraints {
-            $0.top.equalTo(chartHead!.snp.bottom).offset(53)
-            $0.left.equalToSuperview().offset(24)
+            $0.top.equalTo(chartHead!.snp.bottom).offset(55)
+            $0.right.equalToSuperview().offset(-26)
             $0.width.height.equalTo(8)
         }
         alphaDot?.snp.makeConstraints {
-            $0.top.equalTo(chartHead!.snp.bottom).offset(93)
-            $0.left.equalToSuperview().offset(24)
+            $0.top.equalTo(chartHead!.snp.bottom).offset(96)
+            $0.right.equalToSuperview().offset(-26)
             $0.width.height.equalTo(8)
         }
         thetaDot?.snp.makeConstraints {
-            $0.top.equalTo(chartHead!.snp.bottom).offset(133)
-            $0.left.equalToSuperview().offset(24)
+            $0.top.equalTo(chartHead!.snp.bottom).offset(140)
+            $0.right.equalToSuperview().offset(-26)
             $0.width.height.equalTo(8)
         }
         deltaDot?.snp.makeConstraints {
             $0.bottom.equalTo(chartView!.snp.bottom).offset(-20)
-            $0.left.equalToSuperview().offset(24)
+            $0.right.equalToSuperview().offset(-26)
             $0.width.height.equalTo(8)
         }
         
@@ -180,10 +198,10 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         }
         
         chartView?.snp.makeConstraints {
-            $0.top.equalTo(chartHead!.snp.bottom).offset(0)
-            $0.right.equalToSuperview().offset(-8)
-            $0.left.equalToSuperview().offset(45)
-            $0.bottom.equalToSuperview().offset(-45)
+            $0.top.equalToSuperview().offset(0)
+            $0.right.equalToSuperview().offset(-30)
+            $0.left.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().offset(-35)
         }
         
         self.snp.makeConstraints {
@@ -195,13 +213,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
     private func initFunction() {
         self.layer.cornerRadius = cornerRadius
         
-        chartHead = PrivateChartViewHead()
-        chartHead?.titleText = title
-        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
-        self.addSubview(chartHead!)
-        
-        let alphaColor = textColor.changeAlpha(to: 0.7)
-        let secondColor = textColor.changeAlpha(to: 0.5)
+        let alphaColor = textColor.changeAlpha(to: 0.6)
         gamaDot = UIView()
         gamaDot?.backgroundColor = spectrumColors[0]
         gamaDot?.layer.cornerRadius = 4
@@ -285,27 +297,50 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
         chartView?.legend.enabled = false
+        chartView?.extraTopOffset = 58
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = false
+        chartView?.highlightPerDragEnabled = true
+        chartView?.animate(xAxisDuration: 0.5)
         self.addSubview(chartView!)
         
         let leftAxis = chartView!.leftAxis
         leftAxis.axisMaximum = 100
         leftAxis.axisMinimum = 0
         leftAxis.drawAxisLineEnabled = false
-        leftAxis.drawLabelsEnabled = false
+        leftAxis.drawLabelsEnabled = true
         leftAxis.drawGridLinesEnabled = false
+        leftAxis.setLabelCount(5, force: true)
+        leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
+        leftAxis.labelTextColor = alphaColor
         chartView?.rightAxis.enabled = false
         
         let xAxis = chartView!.xAxis
         xAxis.labelPosition = .bottom
         xAxis.drawAxisLineEnabled = false
-        xAxis.drawGridLinesEnabled = true
-        xAxis.labelTextColor = secondColor
+        xAxis.drawGridLinesEnabled = false
+        xAxis.labelTextColor = alphaColor
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         xAxis.axisMaxLabels = 8
         xAxis.drawAxisLineEnabled = false
         
+        chartHead = PrivateChartViewHead()
+        chartHead?.titleText = title
+        chartHead?.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
+        self.addSubview(chartHead!)
+        
+        marker = FiveValueMarkerView(frame: CGRect(x: 0, y: 0, width: 242, height: 47))
+        marker?.chartView = chartView
+        marker?.titleLabelArray[0].text = "γ"
+        marker?.titleLabelArray[1].text = "β"
+        marker?.titleLabelArray[2].text = "α"
+        marker?.titleLabelArray[3].text = "θ"
+        marker?.titleLabelArray[4].text = "δ"
+        for i in 0..<5 {
+            marker?.dotArray[i].backgroundColor = spectrumColors[i]
+        }
+        
+        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))//添加长按事件
+        chartView?.marker = marker
     }
     
     public func setDataFromModel(gama: [Float], delta: [Float], theta: [Float], alpha: [Float], beta: [Float], timestamp: Int? = nil) {
@@ -334,21 +369,21 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
                 let set2 = 0.3
                 let set3 = 0.6
                 let set4 = 0.9
-                tmpArray[i, 0] = 0
-                tmpArray[i, 1] = Float(set1 * 100)
-                tmpArray[i, 2] = Float(set2 * 100)
-                tmpArray[i, 3] = Float(set3 * 100)
-                tmpArray[i, 4] = Float(set4 * 100)
+                tmpArray[i, 0] = 100
+                tmpArray[i, 1] = Float(set4 * 100)
+                tmpArray[i, 2] = Float(set3 * 100)
+                tmpArray[i, 3] = Float(set2 * 100)
+                tmpArray[i, 4] = Float(set1 * 100)
             } else {
                 let set1 = delta[i] / total
                 let set2 = (delta[i] + theta[i]) / total
                 let set3 = (delta[i] + alpha[i] + theta[i]) / total
                 let set4 = (total - gama[i]) / total
-                tmpArray[i, 0] = 0
-                tmpArray[i, 1] = set1 * 100
-                tmpArray[i, 2] = set2 * 100
-                tmpArray[i, 3] = set3 * 100
-                tmpArray[i, 4] = set4 * 100
+                tmpArray[i, 0] = 100
+                tmpArray[i, 1] = set4 * 100
+                tmpArray[i, 2] = set3 * 100
+                tmpArray[i, 3] = set2 * 100
+                tmpArray[i, 4] = set1 * 100
             }
 
         }
@@ -394,30 +429,31 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         var color = UIColor.clear
         switch index {
         case 0:
-            color = spectrumColors[4]
+            color = spectrumColors[0]
         case 1:
-            color = spectrumColors[3]
+            color = spectrumColors[1]
         case 2:
             color = spectrumColors[2]
         case 3:
-            color = spectrumColors[1]
+            color = spectrumColors[3]
         default:
-            color = spectrumColors[0]
+            color = spectrumColors[4]
         }
         let text = "DataSet \(index)"
         let set = LineChartDataSet.init(entries: entry, label: text)
-        set.mode = .cubicBezier
+        set.mode = .linear
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = true
         set.drawValuesEnabled = false
+        set.drawIconsEnabled = true
         set.lineWidth = 1
         set.setColor(color)
         set.fillAlpha = 1
         set.fillColor = color
 
         set.fillFormatter = DefaultFillFormatter { _,_ -> CGFloat in
-            return CGFloat(self.chartView!.leftAxis.axisMaximum)
+            return CGFloat(self.chartView!.leftAxis.axisMinimum)
         }
         return set
     }
@@ -429,22 +465,15 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
 
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
-                if i != 0 {
-                    let limit = ChartLimitLine(limit: Double(i), label: "")
-                    limit.drawLabelEnabled = false
-                    limit.lineColor = UIColor.colorWithHexString(hexColor: "E9EBF1")
-                    limit.lineWidth = 1
-                    self.chartView?.xAxis.addLimitLine(limit)
-                }
 
         }
 
         chartView?.xAxis.axisMinimum = 0
         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
-
+        chartView?.maxVisibleCount = valueCount * 5 + 1
         self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
-
+        self.chartView?.leftAxis.valueFormatter = YValueFormatter()
     }
     
     fileprivate var isZoomed = false
@@ -500,7 +529,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
             label.font = UIFont.systemFont(ofSize: 12)
-            chart.addSubview(label)
+            chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {
                 $0.right.equalTo(chart.chartHead!.expandBtn.snp.left).offset(-12)
                 $0.centerY.equalTo(chart.chartHead!.expandBtn.snp.centerY)
@@ -526,5 +555,88 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             view.removeFromSuperview()
         }
        
+    }
+    
+    @objc
+    private func tapGesture(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if h === nil || h == chartView?.lastHighlighted {
+                chartView?.lastHighlighted = nil
+                chartView?.highlightValue(nil)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartViewDidEndPanning?(chartView!)
+            } else {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
+            }
+        } else if sender.state == .ended {
+            chartView?.lastHighlighted = nil
+            chartView?.highlightValue(nil)
+            chartHead?.isHidden = false
+            chartView?.delegate?.chartViewDidEndPanning?(chartView!)
+        }
+
+    }
+    //MARK: - 设置chart点击的代理
+    public func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        chartView.lastHighlighted = nil
+        chartView.highlightValue(nil)
+        chartHead?.isHidden = false
+        
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[1].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[2].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[3].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[4].entryForIndex(i)?.icon = nil
+        }
+    }
+    
+    public func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        if !chartHead!.isHidden {
+            chartHead?.isHidden = true
+        }
+        
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[1].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[2].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[3].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[4].entryForIndex(i)?.icon = nil
+        }
+        var index = chartView.data?.dataSets[0].entryIndex(entry: entry)
+        if index == nil || index == -1 {
+            index = chartView.data?.dataSets[1].entryIndex(entry: entry)
+        }
+        if index == nil || index == -1 {
+            index = chartView.data?.dataSets[2].entryIndex(entry: entry)
+        }
+        if index == nil || index == -1 {
+            index = chartView.data?.dataSets[3].entryIndex(entry: entry)
+        }
+        if index == nil || index == -1 {
+            index = chartView.data?.dataSets[4].entryIndex(entry: entry)
+        }
+        
+        if let index = index {
+            chartView.data?.dataSets[0].entryForIndex(index)?.icon = gamaIcon
+            chartView.data?.dataSets[1].entryForIndex(index)?.icon = betaIcon
+            chartView.data?.dataSets[2].entryForIndex(index)?.icon = alphaIcon
+            chartView.data?.dataSets[3].entryForIndex(index)?.icon = thetaIcon
+            chartView.data?.dataSets[4].entryForIndex(index)?.icon = deltaIcon
+        }
+        
+    }
+    
+    public func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        for i in 0..<chartView.data!.dataSets[0].entryCount {
+            chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[1].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[2].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[3].entryForIndex(i)?.icon = nil
+            chartView.data?.dataSets[4].entryForIndex(i)?.icon = nil
+        }
     }
 }

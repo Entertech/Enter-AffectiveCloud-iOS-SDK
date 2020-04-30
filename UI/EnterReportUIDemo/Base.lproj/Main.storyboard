@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ed-VS-blr">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1790"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipr-vH-qpr">
                                                 <rect key="frame" x="16" y="16" width="382" height="292"/>
@@ -122,10 +122,25 @@
                                                     <constraint firstAttribute="height" constant="250" id="lWh-E5-51t"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="go6-EO-e47">
+                                                <rect key="frame" x="16" y="1654" width="382" height="380"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NTv-jy-KLh" customClass="PrivateReportChartAttentionAndRelaxation" customModule="EnterAffectiveCloudUI">
+                                                        <rect key="frame" x="89" y="1" width="240" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="380" id="BTd-ER-jqy"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="uIf-0y-U9R" secondAttribute="trailing" constant="16" id="1dK-nW-s86"/>
+                                            <constraint firstItem="go6-EO-e47" firstAttribute="top" secondItem="1kn-tx-xm8" secondAttribute="bottom" constant="16" id="1p5-Qg-hWJ"/>
                                             <constraint firstAttribute="trailing" secondItem="ipr-vH-qpr" secondAttribute="trailing" constant="16" id="6mn-y3-PBU"/>
                                             <constraint firstItem="1kn-tx-xm8" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="9hv-fg-xs4"/>
                                             <constraint firstItem="uIf-0y-U9R" firstAttribute="top" secondItem="BSK-7w-naN" secondAttribute="bottom" constant="16" id="CFb-b4-f7p"/>
@@ -142,8 +157,10 @@
                                             <constraint firstAttribute="trailing" secondItem="XrB-o7-9m7" secondAttribute="trailing" constant="16" id="hTU-o3-U6L"/>
                                             <constraint firstItem="ipr-vH-qpr" firstAttribute="top" secondItem="9ed-VS-blr" secondAttribute="top" constant="16" id="iJM-ZP-t7K"/>
                                             <constraint firstItem="QXv-GZ-BWg" firstAttribute="top" secondItem="XrB-o7-9m7" secondAttribute="bottom" constant="16" id="iVY-A9-sVh"/>
+                                            <constraint firstItem="go6-EO-e47" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="lr5-Rg-zs0"/>
+                                            <constraint firstAttribute="trailing" secondItem="go6-EO-e47" secondAttribute="trailing" constant="16" id="n9K-kE-dKY"/>
                                             <constraint firstAttribute="width" constant="414" id="pgA-CV-Go5"/>
-                                            <constraint firstAttribute="height" constant="1790" id="su1-LW-BZw"/>
+                                            <constraint firstAttribute="height" constant="2100" id="su1-LW-BZw"/>
                                             <constraint firstAttribute="trailing" secondItem="1kn-tx-xm8" secondAttribute="trailing" constant="16" id="t5d-gA-czx"/>
                                         </constraints>
                                     </view>
@@ -170,6 +187,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="Psf-ZG-fTZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
+                        <outlet property="attentionAndRelaxationChart" destination="NTv-jy-KLh" id="YNH-cT-GEE"/>
                         <outlet property="attentionView" destination="gB7-sM-Fls" id="uiY-BM-din"/>
                         <outlet property="brainReportView" destination="4bf-PE-PMW" id="9nr-JU-SH1"/>
                         <outlet property="hrView" destination="QN3-LZ-qsr" id="f51-NX-vxp"/>
