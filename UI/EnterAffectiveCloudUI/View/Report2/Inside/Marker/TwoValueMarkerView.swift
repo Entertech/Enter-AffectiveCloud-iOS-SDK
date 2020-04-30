@@ -20,6 +20,7 @@ class TwoValueMarkerView: MarkerView {
     public var lineColor: UIColor?{
         willSet {
             lineLayer.strokeColor = newValue!.cgColor
+            lineLayer.fillColor = newValue!.cgColor
         }
     }
     private let lineLayer = CAShapeLayer()
@@ -91,6 +92,7 @@ class TwoValueMarkerView: MarkerView {
         
         lineLayer.path = path.cgPath
         lineLayer.strokeColor = UIColor.gray.cgColor
+        lineLayer.fillColor = UIColor.gray.cgColor
         self.layer.addSublayer(lineLayer)
         
         self.offset.x = -frame.size.width / 2.0
