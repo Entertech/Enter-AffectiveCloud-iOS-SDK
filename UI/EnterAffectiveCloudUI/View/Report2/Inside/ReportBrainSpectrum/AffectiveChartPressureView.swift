@@ -309,16 +309,30 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
             let scaled = 5
             for i in (1...10) {
                 let scale = scaled * i
-                if (maxLabel - (minLabel-scale)) % 4 == 0 {
-                    chartView?.leftAxis.axisMaximum = Double(maxLabel)
-                    chartView?.leftAxis.axisMinimum = Double(minLabel-scale)
-                    labelArray.append(minLabel-scale)
-                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*3/4)
-                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*2/4)
-                    labelArray.append(maxLabel-(maxLabel-minLabel+scale)*1/4)
-                    labelArray.append(maxLabel)
-                    break
+                if (minLabel-scale) < 0 {
+                    if ((maxLabel+scale) - minLabel) % 4 == 0 {
+                        chartView?.leftAxis.axisMaximum = Double(maxLabel+scale)
+                        chartView?.leftAxis.axisMinimum = Double(minLabel)
+                        labelArray.append(minLabel)
+                        labelArray.append((maxLabel+scale)-(maxLabel-minLabel+scale)*3/4)
+                        labelArray.append((maxLabel+scale)-(maxLabel-minLabel+scale)*2/4)
+                        labelArray.append((maxLabel+scale)-(maxLabel-minLabel+scale)*1/4)
+                        labelArray.append(maxLabel+scale)
+                        break
+                    }
+                } else {
+                    if (maxLabel - (minLabel-scale)) % 4 == 0 {
+                        chartView?.leftAxis.axisMaximum = Double(maxLabel)
+                        chartView?.leftAxis.axisMinimum = Double(minLabel-scale)
+                        labelArray.append(minLabel-scale)
+                        labelArray.append(maxLabel-(maxLabel-minLabel+scale)*3/4)
+                        labelArray.append(maxLabel-(maxLabel-minLabel+scale)*2/4)
+                        labelArray.append(maxLabel-(maxLabel-minLabel+scale)*1/4)
+                        labelArray.append(maxLabel)
+                        break
+                    }
                 }
+
             }
         }
         yRender?.entries = labelArray
@@ -393,7 +407,7 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
-            chart.maxDataCount = 500
+            chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.title = self.title

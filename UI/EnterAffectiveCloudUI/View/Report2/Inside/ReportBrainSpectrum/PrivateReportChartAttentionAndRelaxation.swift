@@ -574,7 +574,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             nShowChartView.addSubview(chart)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
-            chart.maxDataCount = 500
+            chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.attentionColor = self.attentionColor

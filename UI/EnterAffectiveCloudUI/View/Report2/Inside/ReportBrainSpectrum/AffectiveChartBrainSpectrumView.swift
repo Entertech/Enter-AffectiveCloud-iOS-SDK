@@ -517,7 +517,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
             chart.sample = self.sample
-            chart.maxDataCount = 300
+            chart.maxDataCount = 2000
             chart.textColor = self.textColor
             chart.spectrumColors = self.spectrumColors
             chart.isChartScale = true
