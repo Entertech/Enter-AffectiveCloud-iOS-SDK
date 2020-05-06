@@ -296,7 +296,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         var maxLabel = 0
         var minLabel = 0
         var bScaleIs2 = false
-        if tempMax5 - tempMin5 < 10 {
+        if tempMax5 - tempMin5 <= 10 {
             let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
             let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
             maxLabel = tempMax2
@@ -315,7 +315,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             labelArray.append(maxLabel-(maxLabel-minLabel)*1/4)
             labelArray.append(maxLabel)
         } else {
-            let scaled = bScaleIs2 ? 1 : 5
+            let scaled = bScaleIs2 ? 2 : 5
             for i in (1...10) {
                 let scale = scaled * i
                 if (minLabel-scale) < 0 {

@@ -289,10 +289,24 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         let data = LineChartData(dataSet: set)
         chartView?.data = data
         
+        //设置坐标轴
         var labelArray: [Int] = []
-        let maxLabel = (maxValue / 5 + 1) * 5 > 140 ? 140 : (maxValue / 5 + 1) * 5
-        let minLabel = (minValue / 5) * 5 < 0 ? 0 : (minValue / 5) * 5
-
+        let tempMax5 = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
+        let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
+        
+        var maxLabel = 0
+        var minLabel = 0
+        var bScaleIs2 = false
+        if tempMax5 - tempMin5 <= 10 {
+            let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
+            let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
+            maxLabel = tempMax2
+            minLabel = tempMin2
+            bScaleIs2 = true
+        } else {
+            maxLabel = tempMax5
+            minLabel = tempMin5
+        }
         if (maxLabel - minLabel) % 4 == 0 {
             chartView?.leftAxis.axisMaximum = Double(maxLabel)
             chartView?.leftAxis.axisMinimum = Double(minLabel)
@@ -301,9 +315,8 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
             labelArray.append(maxLabel-(maxLabel-minLabel)*2/4)
             labelArray.append(maxLabel-(maxLabel-minLabel)*1/4)
             labelArray.append(maxLabel)
-
         } else {
-            let scaled = 5
+            let scaled = bScaleIs2 ? 2 : 5
             for i in (1...10) {
                 let scale = scaled * i
                 if (minLabel-scale) < 0 {
@@ -332,6 +345,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
 
             }
         }
+        
         yRender?.entries = labelArray
         setLimitLine(yVals.count, labelArray)
         
