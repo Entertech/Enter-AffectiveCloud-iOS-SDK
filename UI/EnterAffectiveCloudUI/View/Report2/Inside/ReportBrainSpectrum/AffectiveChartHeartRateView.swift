@@ -297,7 +297,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         var maxLabel = 0
         var minLabel = 0
         var bScaleIs2 = false
-        if (maxValue - minValue) / 4 > 2 {
+        if (maxValue - minValue) / 4 >= 2 {
             maxLabel = tempMax5
             minLabel = tempMin5
         } else {

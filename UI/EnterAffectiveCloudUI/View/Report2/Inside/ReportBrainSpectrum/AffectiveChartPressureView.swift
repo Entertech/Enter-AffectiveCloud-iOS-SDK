@@ -301,27 +301,20 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
         var maxLabel = 0
         var minLabel = 0
         var bScaleIs2 = false
-        if tempMax5 - tempMin5 <= 16 {
+        if (maxValue - minValue) / 4 >= 2 {
+            maxLabel = tempMax5
+            minLabel = tempMin5
+        } else {
             let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
             let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
             maxLabel = tempMax2
             minLabel = tempMin2
             bScaleIs2 = true
-        } else {
-            maxLabel = tempMax5
-            minLabel = tempMin5
         }
-        if (maxLabel - minLabel) % 4 == 0 {
-            chartView?.leftAxis.axisMaximum = Double(maxLabel)
-            chartView?.leftAxis.axisMinimum = Double(minLabel)
-            labelArray.append(minLabel)
-            labelArray.append(maxLabel-(maxLabel-minLabel)*3/4)
-            labelArray.append(maxLabel-(maxLabel-minLabel)*2/4)
-            labelArray.append(maxLabel-(maxLabel-minLabel)*1/4)
-            labelArray.append(maxLabel)
-        } else {
-            let scaled = bScaleIs2 ? 2 : 5
-            for i in (1...10) {
+
+        if !bScaleIs2 {
+            let scaled = 5
+            for i in (0...5) {
                 let scale = scaled * i
                 if (minLabel-scale) < 0 {
                     if ((maxLabel+scale) - minLabel) % 4 == 0 {
@@ -346,8 +339,15 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate {
                         break
                     }
                 }
-
             }
+        } else {
+            chartView?.leftAxis.axisMaximum = Double(minLabel+8)
+            chartView?.leftAxis.axisMinimum = Double(minLabel)
+            labelArray.append(minLabel)
+            labelArray.append(minLabel+2)
+            labelArray.append(minLabel+4)
+            labelArray.append(minLabel+6)
+            labelArray.append(minLabel+8)
         }
         yRender?.entries = labelArray
         setLimitLine(yVals.count, labelArray)
