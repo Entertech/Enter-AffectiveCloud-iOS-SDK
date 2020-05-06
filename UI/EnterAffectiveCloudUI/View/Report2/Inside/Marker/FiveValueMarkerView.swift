@@ -100,12 +100,17 @@ class FiveValueMarkerView: MarkerView {
              index = chartView?.data?.dataSets[4].entryIndex(entry: entry)
         }
         if let index = index, index != -1 {
+            var total: Int = 0
             for i in 0..<5 {
                 var temp: Double = 0
                 if i < 4 {
                     temp += chartView!.data!.dataSets[i+1].entryForIndex(index)!.y
+                    labelArray[i].text = String.init(format: "%d%%", lround(chartView!.data!.dataSets[i].entryForIndex(index)!.y - temp))
+                    total += lround(chartView!.data!.dataSets[i].entryForIndex(index)!.y - temp)
+                } else {
+                    labelArray[i].text = String.init(format: "%d%%", 100-total)
                 }
-                labelArray[i].text = String.init(format: "%d%%", Int(chartView!.data!.dataSets[i].entryForIndex(index)!.y - temp))
+                
             }
         }
 
