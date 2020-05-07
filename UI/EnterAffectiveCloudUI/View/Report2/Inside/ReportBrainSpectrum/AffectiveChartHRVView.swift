@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-public class AffectiveChartHRVView: UIView, ChartViewDelegate {
+public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F") {
         willSet {
@@ -53,9 +53,9 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
     /// 设置平均值
     public var hrvAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "Average: \(newValue)")
             avgLine.lineDashPhase = 0
-            avgLine.lineDashLengths = [8, 4]
+            avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             avgLine.valueTextColor = textColor
@@ -175,8 +175,11 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         chartView?.extraTopOffset = 60
         chartView?.highlightPerTapEnabled = false
         chartView?.highlightPerDragEnabled = true
-        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))//添加长按事件
-
+        let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        pressGesture.delegate = self
+        chartView?.addGestureRecognizer(pressGesture)//添加长按事件
+        
+        //chartView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
         marker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 47))
         marker?.chartView = chartView
         marker?.titleLabel?.text = "HRV"
@@ -201,7 +204,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         let xAxis = chartView!.xAxis
         xAxis.gridLineWidth = 0.5
         xAxis.labelPosition = .bottom
-        xAxis.axisLineColor = secondColor
+        xAxis.axisLineColor = alphaColor
         xAxis.labelTextColor = alphaColor
         xAxis.axisMaxLabels = 8
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
@@ -478,7 +481,6 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
             chartHead?.isHidden = false
             chartView?.delegate?.chartViewDidEndPanning?(chartView!)
         }
-
     }
     
     public func chartViewDidEndPanning(_ chartView: ChartViewBase) {
@@ -506,6 +508,8 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate {
         chartHead?.isHidden = false
     }
     
-    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) )
+    }
 
 }

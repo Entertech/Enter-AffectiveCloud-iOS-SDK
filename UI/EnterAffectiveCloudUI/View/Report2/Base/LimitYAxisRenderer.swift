@@ -188,7 +188,7 @@ class LimitYAxisRenderer: YAxisRenderer {
                 
                 if l.labelPosition == .topRight
                 {
-                    let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 55, y: position.y - yOffset - 4, width: 62, height: 22), cornerRadius: 11)
+                    let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 75, y: position.y - yOffset - 4, width: 82, height: 22), cornerRadius: 11)
                     
                     context.addPath(path.cgPath)
                     if #available(iOS 13.0, *) {

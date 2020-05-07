@@ -10,7 +10,7 @@ import UIKit
 import Charts
 import SnapKit
 
-public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
+public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate{
     
     /// 背景颜色
     public var bgColor: UIColor = .white {
@@ -345,8 +345,9 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
         for i in 0..<5 {
             marker?.dotArray[i].backgroundColor = spectrumColors[i]
         }
-        
-        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))//添加长按事件
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        press.delegate = self
+        chartView?.addGestureRecognizer(press)//添加长按事件
         chartView?.marker = marker
     }
     
@@ -649,5 +650,9 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate{
             chartView.data?.dataSets[3].entryForIndex(i)?.icon = nil
             chartView.data?.dataSets[4].entryForIndex(i)?.icon = nil
         }
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) )
     }
 }

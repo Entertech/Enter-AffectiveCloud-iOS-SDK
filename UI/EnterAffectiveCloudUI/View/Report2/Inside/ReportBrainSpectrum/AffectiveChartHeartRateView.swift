@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
+public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
 
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
        willSet {
@@ -65,9 +65,9 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
     /// 设置平均值
     public var hrAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "Average: \(newValue)")
             avgLine.lineDashPhase = 0
-            avgLine.lineDashLengths = [8, 4]
+            avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor
             avgLine.lineWidth = 1
             avgLine.valueTextColor = textColor
@@ -175,7 +175,9 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         chartView?.extraTopOffset = 60
         chartView?.highlightPerTapEnabled = false
         chartView?.highlightPerDragEnabled = true
-        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        press.delegate = self
+        chartView?.addGestureRecognizer(press)
         
         marker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 76, height: 47))
         marker?.chartView = chartView
@@ -201,7 +203,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
         let xAxis = chartView!.xAxis
         xAxis.gridLineWidth = 0.5
         xAxis.labelPosition = .bottom
-        xAxis.axisLineColor = secondColor
+        xAxis.axisLineColor = alphaColor
         xAxis.labelTextColor = alphaColor
         xAxis.axisMaxLabels = 8
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
@@ -507,5 +509,9 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate {
     
     public func chartValueNothingSelected(_ chartView: ChartViewBase) {
         chartHead?.isHidden = false
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) )
     }
 }

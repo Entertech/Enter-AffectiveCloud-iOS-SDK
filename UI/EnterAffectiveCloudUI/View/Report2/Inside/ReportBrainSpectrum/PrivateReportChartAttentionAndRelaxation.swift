@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate {
+public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     public enum AttentionOrRelaxation: String {
         case attention
         case relaxation
@@ -86,12 +86,12 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     /// 放松度平均值
     public var relaxationAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "Average: \(newValue)")
             if newValue > 70 {
                 avgLine.labelPosition = .bottomRight
             }
             avgLine.lineDashPhase = 0
-            avgLine.lineDashLengths = [8, 4]
+            avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             avgLine.lineWidth = 1
@@ -102,12 +102,12 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     /// 注意力放松度
     public var attentionAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue+130), label: "AVG: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue+130), label: "Average: \(newValue)")
             if newValue > 70 {
                 avgLine.labelPosition = .bottomRight
             }
             avgLine.lineDashPhase = 0
-            avgLine.lineDashLengths = [8, 4]
+            avgLine.lineDashLengths = [4, 2]
             avgLine.lineWidth = 1
             avgLine.lineColor = textColor
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
@@ -322,7 +322,9 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         chartView?.highlightPerTapEnabled = false
         chartView?.highlightPerDragEnabled = true
         chartView?.animate(xAxisDuration: 0.5)
-        chartView?.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:))))//添加长按事件
+        let press = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        press.delegate = self
+        chartView?.addGestureRecognizer(press)//添加长按事件
         chartView?.extraLeftOffset = 26
         
         marker = TwoValueMarkerView(frame: CGRect(x: 0, y: 0, width: 155, height: 47))
@@ -686,5 +688,9 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         relaxationDot?.isHidden = isHidden
         attentionLabel?.isHidden = isHidden
         relaxationLabel?.isHidden = isHidden
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) )
     }
 }
