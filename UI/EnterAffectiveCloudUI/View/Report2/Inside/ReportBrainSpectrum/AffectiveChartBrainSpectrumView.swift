@@ -653,6 +653,6 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) )
+        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder())) || (gestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()))
     }
 }
