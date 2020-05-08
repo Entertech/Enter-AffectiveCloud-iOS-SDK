@@ -41,8 +41,8 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             chartView?.xAxis.labelTextColor = changedColor
             chartView?.xAxis.gridColor = secondColor
             chartView?.leftAxis.gridColor = secondColor
-            chartView?.xAxis.axisLineColor = secondColor
-            chartView?.leftAxis.axisLineColor = secondColor
+            chartView?.xAxis.axisLineColor = changedColor
+            chartView?.leftAxis.axisLineColor = changedColor
             
             marker?.label?.textColor = self.textColor
             marker?.titleLabel?.textColor = changedColor
