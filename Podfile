@@ -16,7 +16,7 @@ end
 target 'EnterAffectiveCloudUI' do
   pod 'RxSwift', '5.0'
   pod 'SnapKit'
-  pod 'Charts'
+  pod 'Charts', '4.4.0'
   pod 'HandyJSON', '5.0.0'
   pod 'SwiftyJSON'
   pod 'Starscream', '3.1.1'

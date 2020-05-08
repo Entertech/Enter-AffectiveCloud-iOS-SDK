@@ -1,8 +1,8 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
-  - Charts (3.4.0):
-    - Charts/Core (= 3.4.0)
-  - Charts/Core (3.4.0)
+  - Charts (3.5.0):
+    - Charts/Core (= 3.5.0)
+  - Charts/Core (3.5.0)
   - GzipSwift (5.1.1)
   - HandyJSON (5.0.0)
   - Moya/Core (14.0.0-beta.6):
@@ -41,7 +41,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
-  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
   HandyJSON: 992f2d661716d6a91de82d0056927bc7813b5770
   Moya: d4821fbcb3e784f34d2f82869e6855057a0b85d1
