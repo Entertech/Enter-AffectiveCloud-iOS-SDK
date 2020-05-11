@@ -37,6 +37,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             deltaLabel?.textColor = changedColor
             chartView?.xAxis.labelTextColor = changedColor
             chartView?.leftAxis.labelTextColor = changedColor
+            
             for i in 0..<5 {
                 marker?.labelArray[i].textColor = textColor
                 marker?.titleLabelArray[i].textColor = changedColor
@@ -525,6 +526,8 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView?.highlightPerTapEnabled = false
             chart.chartView?.highlightPerDragEnabled = false
+            chart.highlightLineColor = self.highlightLineColor
+            chart.markerBackgroundColor = self.markerBackgroundColor
             chart.title = self.title
             chart.setDataFromModel(gama: gamaArray!, delta: deltaArray!, theta: thetaArray!, alpha: alphaArray!, beta: betaArray!, timestamp: timeStamp)
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))

@@ -260,7 +260,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
                 if waveArray[i] == 0 {//为0的为无效数据
                     colors.append(.clear)
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
-                } else { //其他数据颜色不同
+                } else { 
                     if minValue > waveArray[i] {
                         minValue = waveArray[i]
                     }
@@ -294,7 +294,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         
         // 设置坐标轴
         var labelArray: [Int] = []
-        let tempMax5 = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
+        let tempMax5 = (maxValue / 5 + 1) * 5 > 150 ? 150 : (maxValue / 5 + 1) * 5
         let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
         
         var maxLabel = 0
@@ -304,7 +304,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             maxLabel = tempMax5
             minLabel = tempMin5
         } else {
-            let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
+            let tempMax2 = (maxValue / 2 + 1) * 2 > 150 ? 150 : (maxValue / 2 + 1) * 2
             let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
             maxLabel = tempMax2
             minLabel = tempMin2
@@ -428,6 +428,8 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView?.highlightPerTapEnabled = false
             chart.chartView?.highlightPerDragEnabled = false
+            chart.highlightLineColor = self.highlightLineColor
+            chart.markerBackgroundColor = self.markerBackgroundColor
             chart.hrvAvg = self.hrvAvg
             chart.title = self.title
             let label = UILabel()

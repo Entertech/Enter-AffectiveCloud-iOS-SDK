@@ -68,6 +68,10 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             a30Label.textColor = changedColor
             a60Label.textColor = changedColor
             a100Label.textColor = changedColor
+            marker?.label?.textColor = self.textColor
+            marker?.label2?.textColor = self.textColor
+            marker?.titleLabel?.textColor = changedColor
+            marker?.title2Label?.textColor = changedColor
         }
     }
 
@@ -580,6 +584,10 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             chart.isChartScale = true
             chart.attentionColor = self.attentionColor
             chart.relaxationColor = self.relaxationColor
+            chart.highlightLineColor = self.highlightLineColor
+            chart.markerBackgroundColor = self.markerBackgroundColor
+            chart.chartView?.highlightPerTapEnabled = false
+            chart.chartView?.highlightPerDragEnabled = false
             chart.setDataFromModel(array: self.attentionArray, state: .attention)
             chart.setDataFromModel(array: self.relaxationArray, state: .relaxation)
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))

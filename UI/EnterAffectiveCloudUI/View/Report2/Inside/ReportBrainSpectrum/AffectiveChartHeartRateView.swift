@@ -247,7 +247,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
                 break
             }
         }
-        var minValue = 100
+        var minValue = 140
         var maxValue = 0
         var yVals: [ChartDataEntry] = []
         var notZero: Int = 0
@@ -293,7 +293,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
         
         //设置坐标轴
         var labelArray: [Int] = []
-        let tempMax5 = (maxValue / 5 + 1) * 5 > 100 ? 100 : (maxValue / 5 + 1) * 5
+        let tempMax5 = (maxValue / 5 + 1) * 5 > 150 ? 150 : (maxValue / 5 + 1) * 5
         let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
         
         var maxLabel = 0
@@ -303,7 +303,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             maxLabel = tempMax5
             minLabel = tempMin5
         } else {
-            let tempMax2 = (maxValue / 2 + 1) * 2 > 100 ? 100 : (maxValue / 2 + 1) * 2
+            let tempMax2 = (maxValue / 2 + 1) * 2 > 150 ? 150 : (maxValue / 2 + 1) * 2
             let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
             maxLabel = tempMax2
             minLabel = tempMin2
@@ -431,6 +431,8 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView?.highlightPerTapEnabled = false
             chart.chartView?.highlightPerDragEnabled = false
+            chart.highlightLineColor = self.highlightLineColor
+            chart.markerBackgroundColor = self.markerBackgroundColor
             chart.hrAvg = self.hrAvg
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."

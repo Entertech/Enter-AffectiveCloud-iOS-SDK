@@ -433,7 +433,9 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate, UIGestureRec
             chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView?.highlightPerTapEnabled = false
-            chart.chartView?.highlightPerDragEnabled = true
+            chart.chartView?.highlightPerDragEnabled = false
+            chart.highlightLineColor = self.highlightLineColor
+            chart.markerBackgroundColor = self.markerBackgroundColor
             chart.pressureAvg = self.pressureAvg
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
