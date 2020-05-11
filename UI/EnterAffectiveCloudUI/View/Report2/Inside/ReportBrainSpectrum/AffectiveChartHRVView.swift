@@ -104,6 +104,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     private var msLabel: UILabel?
     private var nShowChartView: UIView?
     private var marker: ValueMarkerView?
+    private var panGesture: UIPanGestureRecognizer?
     private lazy var dotIcon = UIImage.highlightIcon(centerColor: self.lineColor)
     public init() {
         super.init(frame: CGRect.zero)
@@ -174,9 +175,9 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         chartView?.animate(xAxisDuration: 0.5)
         chartView?.extraTopOffset = 60
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = true
+        chartView?.highlightPerDragEnabled = false
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        pressGesture.delegate = self
+        //pressGesture.delegate = self
         chartView?.addGestureRecognizer(pressGesture)//添加长按事件
         
         //chartView?.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:))))
@@ -418,7 +419,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             chart.bgColor = self.bgColor
             chart.lineColor = self.lineColor
             chart.cornerRadius = self.cornerRadius
-            chart.maxDataCount = 2000
+            chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.setDataFromModel(hrv: hrvArray)
@@ -426,7 +427,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView?.highlightPerTapEnabled = false
-            chart.chartView?.highlightPerDragEnabled = true
+            chart.chartView?.highlightPerDragEnabled = false
             chart.hrvAvg = self.hrvAvg
             chart.title = self.title
             let label = UILabel()
@@ -475,6 +476,14 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
                 chartHead?.isHidden = true
                 chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
             }
+        } else if sender.state == .changed {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if let h = h {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h)!, highlight: h)
+            }
         } else if sender.state == .ended {
             chartView?.lastHighlighted = nil
             chartView?.highlightValue(nil)
@@ -487,7 +496,6 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         chartView.lastHighlighted = nil
         chartView.highlightValue(nil)
         chartHead?.isHidden = false
-        
         for i in 0..<chartView.data!.dataSets[0].entryCount {
             chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
         }
@@ -497,7 +505,6 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         if !chartHead!.isHidden {
             chartHead?.isHidden = true
         }
-        
         for i in 0..<chartView.data!.dataSets[0].entryCount {
             chartView.data?.dataSets[0].entryForIndex(i)?.icon = nil
         }
@@ -508,8 +515,9 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         chartHead?.isHidden = false
     }
     
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder())) || (gestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()))
-    }
+//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+
+//        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder())) || (gestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()))
+    //}
 
 }

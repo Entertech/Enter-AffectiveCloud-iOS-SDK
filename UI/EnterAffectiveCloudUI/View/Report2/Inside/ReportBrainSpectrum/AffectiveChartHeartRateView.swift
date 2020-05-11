@@ -174,9 +174,9 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
         chartView?.animate(xAxisDuration: 0.5)
         chartView?.extraTopOffset = 60
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = true
+        chartView?.highlightPerDragEnabled = false
         let press = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        press.delegate = self
+
         chartView?.addGestureRecognizer(press)
         
         marker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 76, height: 47))
@@ -420,7 +420,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
-            chart.maxDataCount = 2000
+            chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.lineColor = self.lineColor
             chart.title = self.title
@@ -430,7 +430,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             chart.isZoomed = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView?.highlightPerTapEnabled = false
-            chart.chartView?.highlightPerDragEnabled = true
+            chart.chartView?.highlightPerDragEnabled = false
             chart.hrAvg = self.hrAvg
             let label = UILabel()
             label.text = "Zoom in on the curve and slide to view it."
@@ -477,6 +477,14 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
                 chartHead?.isHidden = true
                 chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
             }
+        } else if sender.state == .changed {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if let h = h {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h)!, highlight: h)
+            }
         } else if sender.state == .ended {
             chartView?.lastHighlighted = nil
             chartView?.highlightValue(nil)
@@ -510,8 +518,5 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
     public func chartValueNothingSelected(_ chartView: ChartViewBase) {
         chartHead?.isHidden = false
     }
-    
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder())) || (gestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()))
-    }
+
 }

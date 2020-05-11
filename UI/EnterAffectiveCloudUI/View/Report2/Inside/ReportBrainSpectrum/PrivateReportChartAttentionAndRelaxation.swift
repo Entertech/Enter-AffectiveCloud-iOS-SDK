@@ -320,10 +320,9 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         chartView?.legend.enabled = false
         chartView?.extraTopOffset = 80
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = true
+        chartView?.highlightPerDragEnabled = false
         chartView?.animate(xAxisDuration: 0.5)
         let press = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        press.delegate = self
         chartView?.addGestureRecognizer(press)//添加长按事件
         chartView?.extraLeftOffset = 26
         
@@ -576,7 +575,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             nShowChartView.addSubview(chart)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
-            chart.maxDataCount = 1000
+            chart.maxDataCount = 500
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.attentionColor = self.attentionColor
@@ -627,7 +626,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             if h === nil || h == chartView?.lastHighlighted {
                 chartView?.lastHighlighted = nil
                 chartView?.highlightValue(nil)
-                setUiHidden(isHidden: false)
+                chartHead?.isHidden = true
                 chartView?.delegate?.chartViewDidEndPanning?(chartView!)
             } else {
                 chartView?.lastHighlighted = h
@@ -635,10 +634,18 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
                 setUiHidden(isHidden: true)
                 chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
             }
+        } else if sender.state == .changed {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if let h = h {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                setUiHidden(isHidden: true)
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h)!, highlight: h)
+            }
         } else if sender.state == .ended {
             chartView?.lastHighlighted = nil
             chartView?.highlightValue(nil)
-            setUiHidden(isHidden: false)
+            setUiHidden(isHidden: true)
             chartView?.delegate?.chartViewDidEndPanning?(chartView!)
         }
 
@@ -690,7 +697,4 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         relaxationLabel?.isHidden = isHidden
     }
     
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()))
-    }
 }

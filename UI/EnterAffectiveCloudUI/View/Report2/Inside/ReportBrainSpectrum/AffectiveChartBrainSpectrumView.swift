@@ -306,7 +306,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
         chartView?.legend.enabled = false
         chartView?.extraTopOffset = 58
         chartView?.highlightPerTapEnabled = false
-        chartView?.highlightPerDragEnabled = true
+        chartView?.highlightPerDragEnabled = false
         chartView?.animate(xAxisDuration: 0.5)
         self.addSubview(chartView!)
         
@@ -346,7 +346,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             marker?.dotArray[i].backgroundColor = spectrumColors[i]
         }
         let press = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        press.delegate = self
+       
         chartView?.addGestureRecognizer(press)//添加长按事件
         chartView?.marker = marker
     }
@@ -518,11 +518,13 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
             chart.sample = self.sample
-            chart.maxDataCount = 2000
+            chart.maxDataCount = 500
             chart.textColor = self.textColor
             chart.spectrumColors = self.spectrumColors
             chart.isChartScale = true
             chart.isHiddenNavigationBar = isHiddenNavigationBar
+            chart.chartView?.highlightPerTapEnabled = false
+            chart.chartView?.highlightPerDragEnabled = false
             chart.title = self.title
             chart.setDataFromModel(gama: gamaArray!, delta: deltaArray!, theta: thetaArray!, alpha: alphaArray!, beta: betaArray!, timestamp: timeStamp)
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
@@ -581,7 +583,16 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             } else {
                 chartView?.lastHighlighted = h
                 chartView?.highlightValue(h)
+                chartHead?.isHidden = true
                 chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
+            }
+        } else if sender.state == .changed {
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            if let h = h {
+                chartView?.lastHighlighted = h
+                chartView?.highlightValue(h)
+                chartHead?.isHidden = true
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h)!, highlight: h)
             }
         } else if sender.state == .ended {
             chartView?.lastHighlighted = nil
@@ -652,7 +663,5 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
         }
     }
     
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return (gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder())) || (gestureRecognizer.isKind(of: UIPanGestureRecognizer.classForCoder()) && otherGestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()))
-    }
+
 }
