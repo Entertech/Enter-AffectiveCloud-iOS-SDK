@@ -160,6 +160,10 @@ public class RealtimeBrainwaveView: BaseView {
         observeRealtimeValue()
     }
     
+    public func stopTimer() {
+        brainwaveView.stopTimer()
+    }
+    
     private func observeRealtimeValue() {
         updateBrainwave = UpdateBrainwaveValue()
         updateBrainwave?.rxLeftBrainwaveValue.subscribe(onNext: {[weak self] (value) in
