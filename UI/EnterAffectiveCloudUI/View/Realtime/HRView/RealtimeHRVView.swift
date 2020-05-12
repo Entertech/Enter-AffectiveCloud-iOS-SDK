@@ -45,62 +45,55 @@ class UpdateHRV: HRVValueProtocol {
 }
 
 public class RealtimeHRVView: BaseView {
-
-       //MARK:- Public param
-     /// 主色调显示
-     public var mainColor = UIColor.colorWithHexString(hexColor: "232323")  {
-         didSet {
-             self.titleLabel.textColor = mainColor.changeAlpha(to: 1.0)
-         }
-     }
-     private var textFont = "PingFangSC-Semibold"
-     /// 字体颜色
-     public var textColor = UIColor.colorWithHexString(hexColor: "232323")  {
-         didSet {
-            self.zeroLabel.textColor = mainColor.changeAlpha(to: 0.4)
-            self.fiftyLabel.textColor = mainColor.changeAlpha(to: 0.4)
-             
-         }
-     }
+    //MARK:- Public param
+    /// 主色调显示
+    public var mainColor = UIColor.colorWithHexString(hexColor: "232323")  {
+        didSet {
+            self.titleLabel.textColor = mainColor.changeAlpha(to: 1.0)
+        }
+    }
+    private var textFont = "PingFangSC-Semibold"
+    /// 字体颜色
+    public var textColor = UIColor.colorWithHexString(hexColor: "232323")
     
     public var title: String = "" {
         willSet {
             titleLabel.text = newValue
         }
     }
-     
-     /// 是否显示信息按钮
-     public var isShowInfoIcon: Bool = true{
-         didSet {
-             infoBtn.isHidden = !isShowInfoIcon
-         }
-         
-     }
-     /// 圆角
-     public var borderRadius: CGFloat = 8.0  {
-         didSet {
+    
+    /// 是否显示信息按钮
+    public var isShowInfoIcon: Bool = true{
+        didSet {
+            infoBtn.isHidden = !isShowInfoIcon
+        }
+        
+    }
+    /// 圆角
+    public var borderRadius: CGFloat = 8.0  {
+        didSet {
             self.layer.cornerRadius = borderRadius
             self.layer.masksToBounds = true
-         }
-     }
-     /// 背景色
-     public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
-         didSet {
-             self.backgroundColor = bgColor
-         }
-     }
-     
-     /// 信息按钮打开的网页
-     public var infoUrlString = "https://www.notion.so/Heart-Rate-4d64215ac50f4520af7ff516c0f0e00b"
-     /// 按钮图片
-     public var buttonImageName: String = "" {
-         didSet {
-             self.infoBtn.setImage(UIImage(named: buttonImageName), for: .normal)
-         }
-     }
+        }
+    }
+    /// 背景色
+    public var bgColor = UIColor.colorWithHexString(hexColor: "FFFFFF") {
+        didSet {
+            self.backgroundColor = bgColor
+        }
+    }
+    
+    /// 信息按钮打开的网页
+    public var infoUrlString = "https://www.notion.so/Heart-Rate-4d64215ac50f4520af7ff516c0f0e00b"
+    /// 按钮图片
+    public var buttonImageName: String = "" {
+        didSet {
+            self.infoBtn.setImage(UIImage(named: buttonImageName), for: .normal)
+        }
+    }
     //线条颜色
     public var lineColor = UIColor.systemRed
-
+    
     
     private let titleLabel = UILabel()
     private let infoBtn = UIButton()
@@ -110,16 +103,15 @@ public class RealtimeHRVView: BaseView {
     private var minHeight: CGFloat = 0
     private let topMargin: CGFloat = 58
     private let bottomMargin: CGFloat = 22
-    private let leftMargin: CGFloat = 32
-    private let rightMargin: CGFloat = 13
+    private let leftMargin: CGFloat = 16
+    private let rightMargin: CGFloat = 0
     private let pointCount = 120
+    private var yAxis:CGFloat = 30 // Y轴的动态坐标
     private var waveArray: [Float]?
     private var updateHRV: UpdateHRV?
     private let disposeBag = DisposeBag()
     private var isFirstData = true
-    private let zeroLabel = UILabel()
-    private let fiftyLabel = UILabel()
-    
+    private var drawLineTimer: Timer?
     public init() {
         super.init(frame: CGRect.zero)
         
@@ -159,34 +151,22 @@ public class RealtimeHRVView: BaseView {
                     }
                     self.dismissMask()
                 }
-
+                
             }
             
-        }, onError: { (error) in
-            print(error.localizedDescription)
-            }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
+            }, onError: { (error) in
+                print(error.localizedDescription)
+        }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
     }
     
     override func setUI() {
         self.layer.cornerRadius = 8
         self.addSubview(titleLabel)
         self.addSubview(infoBtn)
-        self.addSubview(zeroLabel)
-        self.addSubview(fiftyLabel)
         
         titleLabel.font = UIFont(name: textFont, size: 14)
         titleLabel.textColor = mainColor
         titleLabel.text = "心率变异性"
-        
-        zeroLabel.text = "0"
-        zeroLabel.font = UIFont.systemFont(ofSize: 12)
-        zeroLabel.textColor = textColor.changeAlpha(to: 0.4)
-        zeroLabel.textAlignment = .right
-        
-        fiftyLabel.text = "50"
-        fiftyLabel.font = UIFont.systemFont(ofSize: 12)
-        fiftyLabel.textColor = textColor.changeAlpha(to: 0.4)
-        fiftyLabel.textAlignment = .right
         
         infoBtn.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         infoBtn.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
@@ -204,20 +184,6 @@ public class RealtimeHRVView: BaseView {
             $0.width.equalTo(24)
             $0.height.equalTo(24)
         }
-        
-        zeroLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-22)
-            $0.left.equalToSuperview().offset(6)
-            $0.height.equalTo(14)
-            $0.width.equalTo(20)
-        }
-        
-        fiftyLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(58)
-            $0.left.equalToSuperview().offset(6)
-            $0.height.equalTo(14)
-            $0.width.equalTo(20)
-        }
     }
     
     override public func layoutSubviews() {
@@ -225,7 +191,7 @@ public class RealtimeHRVView: BaseView {
         height = self.bounds.height - topMargin - bottomMargin
         width = self.bounds.width - leftMargin - rightMargin
         minWidth = width / CGFloat(pointCount)
-        minHeight = height / 50
+        minHeight = height / yAxis
         setLine()
     }
     
@@ -236,7 +202,7 @@ public class RealtimeHRVView: BaseView {
         linePath.addLine(to: CGPoint(x: leftMargin, y: topMargin+height))
         linePath.addLine(to: CGPoint(x: leftMargin+width, y:topMargin+height))
         let shaperLayer = CAShapeLayer()
-        shaperLayer.lineWidth = 0.8
+        shaperLayer.lineWidth = 1
         shaperLayer.backgroundColor = UIColor.clear.cgColor
         shaperLayer.strokeColor = textColor.cgColor
         shaperLayer.fillColor = UIColor.clear.cgColor
@@ -261,15 +227,44 @@ public class RealtimeHRVView: BaseView {
     }
     
     public func appendArray(_ value: Int) {
-
-        if let _ = waveArray {
-            waveArray?.append(Float(value))
-            waveArray?.remove(at: 0)
-        } else {
-            waveArray = Array(repeating: 0.0, count: 200)
-            waveArray?.append(Float(value))
+        
+//        if let _ = waveArray {
+//            waveArray?.append(Float(value))
+//            waveArray?.remove(at: 0)
+//        } else {
+//            waveArray = Array(repeating: 0.0, count: 200)
+//            waveArray?.append(Float(value))
+//        }
+        if waveArray == nil {
+            waveArray = Array(repeating: 0.0, count: 120)
         }
-        setNeedsDisplay()
+        if drawLineTimer == nil {
+            drawLineTimer = Timer.init(timeInterval: 0.4, target: self, selector: #selector(timerAction(_:)), userInfo: nil, repeats: true)
+            RunLoop.current.add(drawLineTimer!, forMode: .common)
+            drawLineTimer?.fire()
+        }
+        // 动态Y
+        waveArray?.append(Float(value))
+        if yAxis == 30.0 {
+            if value > 30 {
+                yAxis = CGFloat(value)
+            }
+        } else {
+            if waveArray!.max()! <= 30.0 {
+                yAxis = 30.0
+            } else {
+                yAxis = CGFloat(waveArray!.max()!)
+            }
+        }
+        minHeight = height / yAxis
+    }
+    
+    public func stopTimer() {
+        if let timer = drawLineTimer {
+            if timer.isValid {
+                timer.invalidate()
+            }
+        }
     }
     
     override public func draw(_ rect: CGRect) {
@@ -297,13 +292,23 @@ public class RealtimeHRVView: BaseView {
             context.strokePath()
         }
         
-
+        
     }
-    
     
     @objc private func infoBtnTouchUpInside() {
         let url = URL(string: infoUrlString)!
         let sf = SFSafariViewController(url: url)
         self.parentViewController()?.present(sf, animated: true, completion: nil)
+    }
+    
+    @objc
+    private func timerAction(_ timer: Timer) {
+        guard let _ = waveArray else {return}
+        waveArray?.remove(at: 0)
+        if waveArray!.count < pointCount {
+            waveArray!.append(waveArray!.last!)
+        }
+        
+        setNeedsDisplay()
     }
 }
