@@ -74,7 +74,7 @@ open class BaseView: UIView {
     }
 
     /// 设备未连接实时数据无法显示时显示提示
-    public func showTip() {
+    public func showTip(text: String = "连接设备以显示实时数据") {
         dismissMask()
         let maskView = UIView()
         maskView.tag = 9999
@@ -87,7 +87,7 @@ open class BaseView: UIView {
         }
         let tipLabel = UILabel()
         maskView.addSubview(tipLabel)
-        tipLabel.text = "连接设备以显示实时数据"
+        tipLabel.text = text
         tipLabel.textColor = .white
         tipLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         tipLabel.snp.makeConstraints {
