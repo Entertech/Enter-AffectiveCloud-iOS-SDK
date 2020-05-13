@@ -177,7 +177,9 @@ public class RealtimeBrainwaveView: BaseView {
                         self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
                         self.brainwaveView.rightData = Array(repeating: 0, count: 200)
                     }
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                 }
                 self.brainwaveView.setEEGArray(value, .left)
                 
@@ -197,7 +199,9 @@ public class RealtimeBrainwaveView: BaseView {
                         self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
                         self.brainwaveView.rightData = Array(repeating: 0, count: 200)
                     }
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                 }
                 self.brainwaveView.setEEGArray(value, .right)
                 

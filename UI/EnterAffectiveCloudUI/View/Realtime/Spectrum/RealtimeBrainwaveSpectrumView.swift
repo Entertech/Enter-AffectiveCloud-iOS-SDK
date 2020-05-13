@@ -162,7 +162,9 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else  {
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                     
                 }
                 self.spectrumView.setSpectrum(value.0, .γ)

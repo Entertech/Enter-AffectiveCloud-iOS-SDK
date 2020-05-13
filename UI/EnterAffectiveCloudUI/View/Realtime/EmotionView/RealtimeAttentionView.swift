@@ -155,7 +155,10 @@ public class RealtimeAttentionView: BaseView {
                     self.isFirstData = false
                     
                 } else {
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
+
                 }
                 if value > 0 {
                     self.attentionValueLabel?.text = "\(Int(value))"

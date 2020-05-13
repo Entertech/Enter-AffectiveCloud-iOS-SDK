@@ -153,7 +153,9 @@ public class RealtimeArousalView: BaseView {
                     self.isFirstData = false
                     
                 } else {
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                 }
                 if valueOrigin != 0 {
                     let value = valueOrigin / 25.0 - 2.0

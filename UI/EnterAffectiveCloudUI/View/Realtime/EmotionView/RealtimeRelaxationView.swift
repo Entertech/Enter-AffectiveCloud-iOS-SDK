@@ -152,7 +152,9 @@ public class RealtimeRelaxationView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else {
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                 }
                 if value > 0 {
                     self.relaxationValueLabel?.text = "\(Int(value))"

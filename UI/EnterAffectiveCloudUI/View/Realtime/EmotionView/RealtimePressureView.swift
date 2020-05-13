@@ -152,7 +152,9 @@ public class RealtimePressureView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else  {
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                     
                 }
                 let value = valueOrigin / 20.0

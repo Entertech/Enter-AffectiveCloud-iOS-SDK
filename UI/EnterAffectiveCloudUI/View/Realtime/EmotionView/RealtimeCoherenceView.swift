@@ -153,7 +153,9 @@ public class RealtimeCoherenceView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else {
-                    self.dismissMask()
+                    if self.bIsNeedUpdateMask {
+                        self.dismissMask()
+                    }
                 }
                 if value > 0 {
                     self.coherenceValueLabel?.text = "\(Int(value))"

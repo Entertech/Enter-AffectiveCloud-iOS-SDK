@@ -11,6 +11,7 @@ import UIKit
 open class BaseView: UIView {
     
     var maskCorner: CGFloat = 8.0
+    open var bIsNeedUpdateMask = true
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,6 +77,7 @@ open class BaseView: UIView {
     /// 设备未连接实时数据无法显示时显示提示
     public func showTip(text: String = "连接设备以显示实时数据") {
         dismissMask()
+        bIsNeedUpdateMask = false
         let maskView = UIView()
         maskView.tag = 9999
         maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
@@ -99,6 +101,7 @@ open class BaseView: UIView {
     
     public func showProgress() {
         dismissMask()
+        bIsNeedUpdateMask = true
         let maskView = UIView()
         maskView.tag = 9999
         maskView.backgroundColor = UIColor.init(white: 0, alpha: 0.6)
