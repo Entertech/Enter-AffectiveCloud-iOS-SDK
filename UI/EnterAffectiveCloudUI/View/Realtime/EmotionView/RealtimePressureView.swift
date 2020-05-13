@@ -152,7 +152,7 @@ public class RealtimePressureView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else  {
-                    if value > 0 {
+                    if valueOrigin > 0 {
                         if self.bIsNeedUpdateMask {
                             self.dismissMask()
                         }
