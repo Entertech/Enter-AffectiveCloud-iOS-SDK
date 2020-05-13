@@ -208,7 +208,11 @@ public class RealtimeHeartRateView: BaseView {
                         self.minValue = value
                         self.maxValue = value
                     }
-                    self.dismissMask()
+                    if value > 0 {
+                        if self.bIsNeedUpdateMask {
+                            self.dismissMask()
+                        }
+                    }
                 }
                 if value > 0 {
                     self.heartRateLabel?.text = "\(value)"

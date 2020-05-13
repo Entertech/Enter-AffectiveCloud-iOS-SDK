@@ -153,8 +153,10 @@ public class RealtimeArousalView: BaseView {
                     self.isFirstData = false
                     
                 } else {
-                    if self.bIsNeedUpdateMask {
-                        self.dismissMask()
+                    if valueOrigin > 0 {
+                        if self.bIsNeedUpdateMask {
+                            self.dismissMask()
+                        }
                     }
                 }
                 if valueOrigin != 0 {

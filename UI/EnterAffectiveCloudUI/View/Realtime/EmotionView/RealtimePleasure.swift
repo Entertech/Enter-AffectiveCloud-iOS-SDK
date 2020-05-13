@@ -151,9 +151,12 @@ public class RealtimePleasureView: BaseView {
                 if self.isFirstData {
                     self.isFirstData = false
                 } else  {
-                    if self.bIsNeedUpdateMask {
-                        self.dismissMask()
+                    if valueOrigin > 0 {
+                        if self.bIsNeedUpdateMask {
+                            self.dismissMask()
+                        }
                     }
+
                     
                 }
                 let value = valueOrigin / 20.0

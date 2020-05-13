@@ -148,8 +148,10 @@ public class RealtimeHRVView: BaseView {
                 } else  {
                     if value > 0 {
                         self.appendArray(value)
+                        if self.bIsNeedUpdateMask {
+                            self.dismissMask()
+                        }
                     }
-                    self.dismissMask()
                 }
                 
             }
