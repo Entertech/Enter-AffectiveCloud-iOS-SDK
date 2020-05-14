@@ -40,6 +40,8 @@
 		FA296EA52383C95B001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA296EA82383C963001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA296EA92383C963001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA3ADDAC246D19FD00ADA921 /* ReportCoherence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3ADDAB246D19FD00ADA921 /* ReportCoherence.swift */; };
+		FA3ADDAE246D1D9500ADA921 /* AffectiveChartCoherenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3ADDAD246D1D9500ADA921 /* AffectiveChartCoherenceView.swift */; };
 		FA55EA5E234C273A00C148BF /* EnterAffectiveCloudUI.h in Headers */ = {isa = PBXBuildFile; fileRef = FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
 		FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */; };
@@ -239,6 +241,8 @@
 		FA19DF76239DE7160043F679 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		FA19DF78239DEC7F0043F679 /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
 		FA19DF7A239DED290043F679 /* TagRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRequest.swift; sourceTree = "<group>"; };
+		FA3ADDAB246D19FD00ADA921 /* ReportCoherence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportCoherence.swift; sourceTree = "<group>"; };
+		FA3ADDAD246D1D9500ADA921 /* AffectiveChartCoherenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartCoherenceView.swift; sourceTree = "<group>"; };
 		FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EnterAffectiveCloudUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA55EA50234C273A00C148BF /* EnterAffectiveCloudUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterAffectiveCloudUI.h; sourceTree = "<group>"; };
 		FA55EA51234C273A00C148BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -722,6 +726,7 @@
 				FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */,
 				FAB1DF8523E941A9007ADBA3 /* AffectiveChartRelaxationView.swift */,
 				FAB1DF8323E9219C007ADBA3 /* AffectiveChartAttentionView.swift */,
+				FA3ADDAD246D1D9500ADA921 /* AffectiveChartCoherenceView.swift */,
 			);
 			path = ReportBrainSpectrum;
 			sourceTree = "<group>";
@@ -742,6 +747,7 @@
 				FA7689C723B053D5005E4DF7 /* ReportHR.swift */,
 				FA7689CB23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift */,
 				FA7689CD23B08ABC005E4DF7 /* ReportPressure.swift */,
+				FA3ADDAB246D19FD00ADA921 /* ReportCoherence.swift */,
 			);
 			path = Outside;
 			sourceTree = "<group>";
@@ -1267,7 +1273,9 @@
 				FA6FFFA823D0618000A4B16A /* RealtimeCoherenceView.swift in Sources */,
 				FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */,
 				FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */,
+				FA3ADDAE246D1D9500ADA921 /* AffectiveChartCoherenceView.swift in Sources */,
 				FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */,
+				FA3ADDAC246D19FD00ADA921 /* ReportCoherence.swift in Sources */,
 				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
 				FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */,
 				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,

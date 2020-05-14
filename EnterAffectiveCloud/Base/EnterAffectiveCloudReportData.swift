@@ -97,6 +97,7 @@ public struct ReportDigital {
  * 0x14 激活度最大值，值域0-100
  * 0x15 激活度最小值，值域0-100
  * 0x16 时间戳
+ * 0x17 和谐度，值域0-100
  */
 public enum ReportScalarType: UInt8 {
     case retained         = 0x00
@@ -122,6 +123,7 @@ public enum ReportScalarType: UInt8 {
     case activateMax      = 0x14
     case activateMin      = 0x15
     case timestamp        = 0x16
+    case coherenceAverage = 0x17
 }
 
 /*
@@ -138,6 +140,7 @@ public enum ReportScalarType: UInt8 {
  * 0xfa 压力值全程记录[0, 100]
  * 0xfb 愉悦度全程记录[0, 100]
  * 0xfc 激活度全程记录[0, 100]
+ * 0xfd 和谐度全程记录[0, 100]
  */
 public enum ReportDigitalType: UInt8 {
     case retained = 0xf0
@@ -153,6 +156,7 @@ public enum ReportDigitalType: UInt8 {
     case pressure = 0xfa
     case pleasure = 0xfb
     case activate = 0xfc
+    case coherence = 0xfd
 }
 
 extension Data {
