@@ -114,6 +114,7 @@ public class AffectiveCloudClient {
     /// - Parameter data: the brain raw data from the hardware
     public func appendBiodata(eegData: Data) {
         guard let _ = self.cloudService else { return }
+        guard let _ = self.sessionId else {return}
         
         guard self.cloudService!.socket.isConnected else {
             _eegBuffer.removeAll()
