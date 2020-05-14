@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReportCoherence: UIView {
+public class ReportCoherence: UIView {
 
     public var corner: CGFloat = 0 {
         willSet {

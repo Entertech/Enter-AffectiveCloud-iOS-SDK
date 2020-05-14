@@ -151,7 +151,7 @@ public class AffectiveCloudClient {
     /// - Parameter data: the heart data from the hardware
     public func appendBiodata(hrData: Data) {
         guard let _ = self.cloudService else {return}
-        
+        guard let _ = self.sessionId else {return}
         guard self.cloudService!.socket.isConnected else {
             _hrBuffer.removeAll()
             return
