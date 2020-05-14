@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class AffectiveChartCoherenceView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
+public class AffectiveChartCoherenceView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#0064ff") {
         willSet {
