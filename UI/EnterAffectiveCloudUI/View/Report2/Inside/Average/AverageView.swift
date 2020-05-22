@@ -33,14 +33,15 @@ public class PrivateAverageView: UIView {
                 chart.values = newValue
                 if let name = categoryName {
                     let total = newValue.reduce(0, +)
-                    let averageValue = CGFloat(total) / CGFloat(newValue.count)
+                    let averageValueTemp = Float(total) / Float(newValue.count)
+                    let averageValue = lroundf(averageValueTemp)
                     let current = newValue.first!
                     var compareText = AverageCompare.equal
                     icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
-                    if CGFloat(current) > averageValue {
+                    if current > averageValue {
                         compareText = name == .Meditation ? .longer : .higher
                         icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
-                    } else if CGFloat(current) < averageValue {
+                    } else if current < averageValue {
                         compareText = name == .Meditation ? .shorter : .lower
                         icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                     }

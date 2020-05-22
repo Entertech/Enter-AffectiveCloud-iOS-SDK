@@ -21,12 +21,11 @@ public class PrivateAverageOfSevenDayView: UIView {
                 valueLabels.removeAll()
                 _values = newValue
                 let total = newValue.reduce(0, +)
-                averageValue = CGFloat(total) / CGFloat(newValue.count)
+                averageValue = lroundf(Float(total) / Float(newValue.count))
                 for (i,_) in newValue.enumerated() {
                     let bar = UIView()
                     let numLabel = UILabel()
                     // 设置bar
-
                     if i == 0 {
                         bar.backgroundColor = currentBarColor
                         numLabel.backgroundColor = numBgColor
@@ -73,9 +72,9 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     public var numTextColor: UIColor = .white
     
-    private var averageValue:CGFloat = 0 {
+    private var averageValue:Int = 0 {
         willSet {
-            averageNumLabel.text = String(format: "%0.1f", newValue) 
+            averageNumLabel.text = "\(newValue)"
         }
     }
     
@@ -192,10 +191,10 @@ public class PrivateAverageOfSevenDayView: UIView {
             if max == min {
                 $0.bottom.equalToSuperview().offset(-64)
             } else {
-                if 28 + ((averageValue-CGFloat(min))/CGFloat(max-min)*100) < 46 {
+                if 28 + ((Float(averageValue)-Float(min))/Float(max-min)*100) < 46 {
                     $0.bottom.equalTo(-46)
                 } else {
-                    $0.bottom.equalTo(-28-((averageValue-CGFloat(min))/CGFloat(max-min)*100)).priority(.high)
+                    $0.bottom.equalTo(-28-((Float(averageValue)-Float(min))/Float(max-min)*100)).priority(.high)
                 }
 
             }
