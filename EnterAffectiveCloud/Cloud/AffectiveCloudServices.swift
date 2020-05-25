@@ -986,7 +986,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
             return
         }
         self.state = .disconnected
-        self.delegate?.websocketDisconnect(client: self.client)
+        self.delegate?.websocketDisconnect(client: self.client, error: error)
         self.isSessionCreated = false
     }
 

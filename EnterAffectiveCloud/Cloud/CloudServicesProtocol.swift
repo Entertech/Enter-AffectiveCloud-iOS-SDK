@@ -14,7 +14,7 @@ import SwiftyJSON
 public protocol AffectiveCloudResponseDelegate: class {
     func websocketState(client: AffectiveCloudClient, state: CSState)
     func websocketConnect(client: AffectiveCloudClient)
-    func websocketDisconnect(client: AffectiveCloudClient)
+    func websocketDisconnect(client: AffectiveCloudClient, error: Error?)
 
     func sessionCreateAndAuthenticate(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
     func sessionRestore(client: AffectiveCloudClient, response: AffectiveCloudResponseJSONModel)
