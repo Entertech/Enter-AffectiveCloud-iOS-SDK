@@ -153,9 +153,7 @@ public class RealtimeHRVView: BaseView {
                         }
                     }
                 }
-                
             }
-            
             }, onError: { (error) in
                 print(error.localizedDescription)
         }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)
