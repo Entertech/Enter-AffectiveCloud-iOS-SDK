@@ -1013,13 +1013,16 @@ extension AffectiveCloudServices: WebSocketDelegate {
     private func handleErrorWithResponse(model: AffectiveCloudResponseJSONModel) -> Bool {
         switch model.code {
         case 400:
-            self.delegate?.error(client: self.client, response: model, error: .requestException, message: "The Request error!!")
+            self.delegate?.error(client: self.client, response: model, error: .requestException, message: "Request exception!!")
             return true
         case 404:
-            self.delegate?.error(client: self.client, response: model, error: .notFoundServer, message: "Can't found Server!")
+            self.delegate?.error(client: self.client, response: model, error: .notFoundServer, message: "Service not exist!")
             return true
         case 407:
             self.delegate?.error(client: self.client, response: model, error: .auth, message: "The app_key or sign error!")
+            return true
+        case 401..<5000:
+            self.delegate?.error(client: self.client, response: model, error: .unKnow, message: "Error Code: \(model.code), \(model.message ?? "Unknow error")")
             return true
         default:
             break
