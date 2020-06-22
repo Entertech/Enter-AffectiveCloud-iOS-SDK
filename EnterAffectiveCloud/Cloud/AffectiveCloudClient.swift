@@ -92,16 +92,21 @@ public class AffectiveCloudClient {
     /// - Parameters:
     ///   - services: biodata services. ps: .eeg and .hr
     ///   - tolerance: 0-4
-    ///   - sex: user's gender for experiment, do not use
-    ///   - age: user's age for experiment, do not use
-    ///   - sn: user's series number for experiment, do not use
-    ///   - source: source description for experiment, do not use
-    ///   - mode: mode description for experiment, do not use
-    ///   - cases: cases description for experiment, do not use
-    public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil, sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
-    mode: [Int]? = nil, cases: [Int]? = nil) {
+    public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil) {
         self.cloudService?.bioService = services
         self.cloudService?.bioTolerance = tolerance
+    }
+    
+    /// set up experiment param
+    /// - Parameters:
+    ///   - sex: user's gender for experiment
+    ///   - age: user's age for experiment
+    ///   - sn: user's series number for experiment
+    ///   - source: source description for experiment
+    ///   - mode: mode description for experiment
+    ///   - cases: cases description for experiment
+    public func initExperimentService(sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
+    mode: [Int]? = nil, cases: [Int]? = nil) {
         self.cloudService?.sex = sex
         self.cloudService?.age = age
         self.cloudService?.sn = sn

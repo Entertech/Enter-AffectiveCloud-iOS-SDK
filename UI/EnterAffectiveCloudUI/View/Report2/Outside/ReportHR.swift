@@ -58,10 +58,10 @@ public class PrivateReportHR: UIView {
         }
     }
     
-    let splitStateArray:[CGFloat] = [0 ,20, 80, 100] //等级分段
-    private let _splitStateArray = [0 ,20, 80, 100]
+    let splitStateArray:[CGFloat] = [50 ,60, 80, 100] //等级分段
+    private let _splitStateArray = [50 ,60, 80, 100]
     
-    let scaleArray = [0, 20, 40, 60, 80, 100] //刻度
+    let scaleArray = [50, 60, 80, 100] //刻度
     
     
     public init() {

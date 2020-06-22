@@ -101,7 +101,7 @@ class EnterAffectiveCloudTests: XCTestCase, AffectiveCloudResponseDelegate {
         if isRestore {
             client.restoreSession()
         } else {
-            client.createAndAuthenticateSession(appKey: kCloudServiceAppKey, appSecret: kCloudServiceAppSecret, userID: "1")
+            //client.createAndAuthenticateSession
         }
     }
     
