@@ -357,7 +357,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
             return
         }
         let timeCount = Double(valueCount * sample) * interval
-        let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
+        let minTime = (Int(timeCount) / 30 / 8 + 1) * 30
         
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             timeApart.append(i)
