@@ -239,7 +239,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
         var initValue = 0
         var initIndex = 0
         for i in stride(from: 0, to: waveArray.count, by: sample) {
-            if waveArray[i] > 40 {
+            if waveArray[i] > 0 {
                 initValue = waveArray[i]
                 initIndex = i
                 break
@@ -365,7 +365,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
         
         chartView?.xAxis.axisMinimum = 0
         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-        chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        //chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
         chartView?.maxVisibleCount = valueCount + 1
         self.chartView?.xAxis.valueFormatter = AttentionPrivateXValueFormatter(timeApart, timeStamp)
 
