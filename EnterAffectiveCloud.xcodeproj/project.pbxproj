@@ -86,6 +86,7 @@
 		FAB3E45F23AC663000A85129 /* ReportViewHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3E45E23AC663000A85129 /* ReportViewHead.swift */; };
 		FAB3E46123AC699500A85129 /* ReportBrainwaveSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3E46023AC699500A85129 /* ReportBrainwaveSpectrum.swift */; };
 		FAB3E46A23ACAD4D00A85129 /* ReportHRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3E46923ACAD4D00A85129 /* ReportHRV.swift */; };
+		FAB523B924A2E03900563048 /* PrivateReportChartAttention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB523B824A2E03900563048 /* PrivateReportChartAttention.swift */; };
 		FABFA4D3230E84EF00ECD83C /* CloudServicesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */; };
 		FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */; };
 		FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABFA4D0230E84EF00ECD83C /* CloudModels.swift */; };
@@ -290,6 +291,7 @@
 		FAB3E45E23AC663000A85129 /* ReportViewHead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewHead.swift; sourceTree = "<group>"; };
 		FAB3E46023AC699500A85129 /* ReportBrainwaveSpectrum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBrainwaveSpectrum.swift; sourceTree = "<group>"; };
 		FAB3E46923ACAD4D00A85129 /* ReportHRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHRV.swift; sourceTree = "<group>"; };
+		FAB523B824A2E03900563048 /* PrivateReportChartAttention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateReportChartAttention.swift; sourceTree = "<group>"; };
 		FABFA4CE230E84EF00ECD83C /* CloudServicesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudServicesProtocol.swift; sourceTree = "<group>"; };
 		FABFA4CF230E84EF00ECD83C /* AffectiveCloudClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveCloudClient.swift; sourceTree = "<group>"; };
 		FABFA4D0230E84EF00ECD83C /* CloudModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudModels.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				FAB1DF8523E941A9007ADBA3 /* AffectiveChartRelaxationView.swift */,
 				FAB1DF8323E9219C007ADBA3 /* AffectiveChartAttentionView.swift */,
 				FA3ADDAD246D1D9500ADA921 /* AffectiveChartCoherenceView.swift */,
+				FAB523B824A2E03900563048 /* PrivateReportChartAttention.swift */,
 			);
 			path = ReportBrainSpectrum;
 			sourceTree = "<group>";
@@ -1273,6 +1276,7 @@
 				FA6FFFA823D0618000A4B16A /* RealtimeCoherenceView.swift in Sources */,
 				FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */,
 				FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */,
+				FAB523B924A2E03900563048 /* PrivateReportChartAttention.swift in Sources */,
 				FA3ADDAE246D1D9500ADA921 /* AffectiveChartCoherenceView.swift in Sources */,
 				FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */,
 				FA3ADDAC246D19FD00ADA921 /* ReportCoherence.swift in Sources */,
