@@ -92,7 +92,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
     }
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private let interval = 0.8
     private var timeStamp = 0
     private var hrArray: [Int]?
     private var yRender: LimitYAxisRenderer?
