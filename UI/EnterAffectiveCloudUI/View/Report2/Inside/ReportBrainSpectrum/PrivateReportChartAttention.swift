@@ -413,7 +413,7 @@ class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRecognize
                 // Fallback on earlier versions
                 
             }
-            let chart = AffectiveChartHeartRateView()
+            let chart = PrivateReportChartAttention()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
