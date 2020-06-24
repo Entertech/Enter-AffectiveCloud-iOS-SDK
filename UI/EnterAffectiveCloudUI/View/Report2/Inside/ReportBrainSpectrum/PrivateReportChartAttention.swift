@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
+public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#4B5DCC") {
        willSet {
            marker?.dot?.backgroundColor = newValue
