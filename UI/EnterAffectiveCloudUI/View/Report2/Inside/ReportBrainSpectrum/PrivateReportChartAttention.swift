@@ -98,7 +98,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
     private var yRender: LimitYAxisRenderer?
     private var chartHead: PrivateChartViewHead?
     private var titleLabel: UILabel?
-    private var chartView: LineChartView?
+    public var chartView: LineChartView?
     public var xLabel: UILabel?
     private var msLabel: UILabel?
     private var nShowChartView: UIView?
