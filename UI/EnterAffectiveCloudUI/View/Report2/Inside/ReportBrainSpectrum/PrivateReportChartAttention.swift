@@ -84,7 +84,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
     }
      //MARK:- Private UI
     private var sample = 3
-    private var isChartScale = false {
+    public var isChartScale = false {
         willSet {
             chartView?.scaleXEnabled = newValue
             chartHead?.expandBtn.isHidden = !newValue
@@ -96,7 +96,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
     private var timeStamp = 0
     private var hrArray: [Int]?
     private var yRender: LimitYAxisRenderer?
-    public var chartHead: PrivateChartViewHead?
+    private var chartHead: PrivateChartViewHead?
     private var titleLabel: UILabel?
     private var chartView: LineChartView?
     public var xLabel: UILabel?
