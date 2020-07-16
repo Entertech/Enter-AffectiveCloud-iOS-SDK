@@ -66,25 +66,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     }
 
     func webSocketSend(jsonString json: String) {
-        if bIsLog {
-            if let url = logUrlStr {
-                if logUrl == nil {
-                    logUrl = URL.init(fileURLWithPath: url)
-                }
-                if FileManager.default.fileExists(atPath: url) {
-                    DispatchQueue.global().async {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                        let logStr = "\(formatter.string(from: Date())) \(json) \n"
-                        do {
-                            try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
-                        } catch {
-                            
-                        }
-                    }
-                }
-            }
-        }
+        logService(log: json)
         //compressed data with gzip
         if let data = json.data(using: .utf8), let compressData =  try? data.gzipped() {
             self.socket.write(data: compressData)
@@ -991,18 +973,17 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                 if logUrl == nil {
                     logUrl = URL.init(fileURLWithPath: url)
                 }
-                if FileManager.default.fileExists(atPath: url) {
-                    DispatchQueue.global().async {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                        let logStr = "\(formatter.string(from: Date())) \(log) \n"
-                        do {
-                            try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
-                        } catch {
-                            
-                        }
+                DispatchQueue.global().async {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let logStr = "\(formatter.string(from: Date())) \(log) \n"
+                    do {
+                        try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
+                    } catch {
+                        
                     }
                 }
+                
             }
         }
     }
