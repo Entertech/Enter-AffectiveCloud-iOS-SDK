@@ -60,7 +60,7 @@ public class ReportFileHander: NSObject {
     }
     
     static var cacheDirectory: String {
-        let path = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         return path
     }
 }
