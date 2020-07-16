@@ -29,6 +29,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             }
         }
     }
+    var bIsLog: Bool = false
     var appKey: String? // could key
     var userID: String?
     var appSecret: String?
@@ -47,6 +48,8 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     var isSessionCreated = false
     let socket: WebSocket
     var client: AffectiveCloudClient!
+    var logUrlStr: String?
+    var logUrl: URL?
     init(ws: String) {
         self.socket = WebSocket(url: URL(string: ws)!)
         self.socket.delegate = self
@@ -63,6 +66,25 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     }
 
     func webSocketSend(jsonString json: String) {
+        if bIsLog {
+            if let url = logUrlStr {
+                if logUrl == nil {
+                    logUrl = URL.init(fileURLWithPath: url)
+                }
+                if FileManager.default.fileExists(atPath: url) {
+                    DispatchQueue.global().async {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let logStr = "\(formatter.string(from: Date())) \(json) \n"
+                        do {
+                            try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
+                        } catch {
+                            
+                        }
+                    }
+                }
+            }
+        }
         //compressed data with gzip
         if let data = json.data(using: .utf8), let compressData =  try? data.gzipped() {
             self.socket.write(data: compressData)
@@ -962,6 +984,28 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
             }
         }
     }
+    
+    func logService(log: String) {
+        if bIsLog {
+            if let url = logUrlStr {
+                if logUrl == nil {
+                    logUrl = URL.init(fileURLWithPath: url)
+                }
+                if FileManager.default.fileExists(atPath: url) {
+                    DispatchQueue.global().async {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let logStr = "\(formatter.string(from: Date())) \(log) \n"
+                        do {
+                            try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
+                        } catch {
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension AffectiveCloudServices: WebSocketDelegate {
@@ -979,6 +1023,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
         } else {
             sessionCreate()
         }
+        logService(log: "WS Connect")
     }
 
     func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
@@ -988,6 +1033,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
         self.state = .disconnected
         self.delegate?.websocketDisconnect(client: self.client, error: error)
         self.isSessionCreated = false
+        logService(log: "WS Disconnect")
     }
 
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
@@ -1033,11 +1079,19 @@ extension AffectiveCloudServices: WebSocketDelegate {
     /// Handle response data
     /// you can get data use `CSResponseDelegate` in your code
     private func handleResponse(with model: AffectiveCloudResponseJSONModel) {
+        self.logService(log: model.toJSONString() ?? "Nothing")
         if let request = model.request {
             switch (request.services, request.operation) {
             case (CSServicesType.session.rawValue, CSSessionOperation.create.rawValue):
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let id = dataModel.sessionID {
+                    if bIsLog {
+                        logUrlStr = ReportFileHander.cacheDirectory + "/Log/\(id)"
+                        if !FileManager.default.fileExists(atPath: logUrlStr!) {
+                            FileManager.default.createFile(atPath: logUrlStr!, contents: nil, attributes: [.protectionKey: FileProtectionType.none])
+                        }
+                    }
+                    
                     self.session_id = id
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
@@ -1065,6 +1119,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.delegate?.sessionClose(client: self.client, response: model)
                 self.isSessionCreated = false
                 self.session_id = nil
+                self.logUrlStr = nil
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.initial.rawValue):
                 if let biodata = model.dataModel as? CSResponseDataJSONModel,
                     let list = biodata.biodataList {

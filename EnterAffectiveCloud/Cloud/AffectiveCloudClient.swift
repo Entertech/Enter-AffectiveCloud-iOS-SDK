@@ -14,6 +14,12 @@ public class AffectiveCloudClient {
             self.cloudService?.delegate = affectiveCloudDelegate
         }
     }
+    
+    public var bIsLog = false {
+        willSet {
+            self.cloudService?.bIsLog = newValue
+        }
+    }
 
     private var cloudService: AffectiveCloudServices?
     public init(websocketURL: URL, appKey: String, appSecret: String, userID: String) {
