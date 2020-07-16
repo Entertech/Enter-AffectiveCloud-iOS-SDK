@@ -978,9 +978,10 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     let logStr = "\(formatter.string(from: Date())) \(log) \n"
                     do {
-                        try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
+                        //try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
+                        try logStr.write(toFile: url, atomically: true, encoding: .utf8)
                     } catch {
-                        
+                        print("log erorr")
                     }
                 }
                 
