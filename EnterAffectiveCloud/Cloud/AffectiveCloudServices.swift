@@ -980,9 +980,11 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                     do {
                         //try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
                         try logStr.write(toFile: url, atomically: true, encoding: .utf8)
-                    } catch {
-                        print("log erorr")
+                    } catch let error as Error {
+                        print("log erorr \(error.localizedDescription)")
                     }
+                    
+                
                 }
                 
             }
