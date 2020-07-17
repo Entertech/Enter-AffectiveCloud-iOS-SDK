@@ -977,9 +977,10 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
                     let logStr = "\(formatter.string(from: Date())) \(log) \n"
+                    let data = Data(logStr.utf8)
                     do {
-                        //try logStr.write(to: self.logUrl!, atomically: true, encoding: .utf8)
-                        try logStr.write(toFile: url, atomically: true, encoding: .utf8)
+                        try data.write(to: self.logUrl!, options: .atomic)
+                        //try logStr.write(toFile: url, atomically: true, encoding: .utf8)
                     } catch let error as Error {
                         print("log erorr \(error.localizedDescription)")
                     }
@@ -1069,14 +1070,6 @@ extension AffectiveCloudServices: WebSocketDelegate {
             case (CSServicesType.session.rawValue, CSSessionOperation.create.rawValue):
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let id = dataModel.sessionID {
-                    if bIsLog {
-                        logUrlStr = ReportFileHander.cacheDirectory + "/Log/\(id)"
-                        if !FileManager.default.fileExists(atPath: logUrlStr!) {
-                            if !FileManager.default.createFile(atPath: logUrlStr!, contents: nil, attributes: nil) {
-                                print("文件创建失败")
-                            }
-                        }
-                    }
                     
                     self.session_id = id
                     self.isSessionCreated = true
