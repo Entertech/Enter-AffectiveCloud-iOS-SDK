@@ -1072,7 +1072,9 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     if bIsLog {
                         logUrlStr = ReportFileHander.cacheDirectory + "/Log/\(id)"
                         if !FileManager.default.fileExists(atPath: logUrlStr!) {
-                            FileManager.default.createFile(atPath: logUrlStr!, contents: nil, attributes: [.protectionKey: FileProtectionType.none])
+                            if !FileManager.default.createFile(atPath: logUrlStr!, contents: nil, attributes: nil) {
+                                print("文件创建失败")
+                            }
                         }
                     }
                     
