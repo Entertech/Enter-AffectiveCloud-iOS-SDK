@@ -1070,7 +1070,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
             case (CSServicesType.session.rawValue, CSSessionOperation.create.rawValue):
                 if let dataModel = model.dataModel as? CSResponseDataJSONModel,
                     let id = dataModel.sessionID {
-                    
+                    self.logUrlStr = id
                     self.session_id = id
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
