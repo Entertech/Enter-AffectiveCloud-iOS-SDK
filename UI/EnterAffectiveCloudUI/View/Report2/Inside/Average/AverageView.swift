@@ -8,24 +8,29 @@
 
 import UIKit
 
+public enum AverageName: String {
+    case Attention
+    case Relaxation
+    case Pressure
+    case Heart
+    case HRV
+    case Meditation = "meditation time"
+}
+
+public enum AverageCompare: String {
+    case higher = "higher than"
+    case lower = "lower than"
+    case equal = "the same as"
+    case shorter = "shorter than"
+    case longer = "longer than"
+}
+
+public enum LanguageEnum {
+    case en
+    case ch
+}
+
 public class PrivateAverageView: UIView {
-    
-    public enum AverageName: String {
-        case Attention
-        case Relaxation
-        case Pressure
-        case Heart
-        case HRV
-        case Meditation = "meditation time"
-    }
-    
-    enum AverageCompare: String {
-        case higher = "higher than"
-        case lower = "lower than"
-        case equal = "the same as"
-        case shorter = "shorter than"
-        case longer = "longer than"
-    }
     
     public var values: [Int] = [] {
         willSet {
@@ -45,16 +50,7 @@ public class PrivateAverageView: UIView {
                         compareText = name == .Meditation ? .shorter : .lower
                         icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                     }
-                    let text = "The " + name.rawValue + " is " + compareText.rawValue + " the average of last 7 times."
-                    let attributedText = NSMutableAttributedString(string:text)
-                    let style = NSMutableParagraphStyle()
-                    style.alignment = .left
-                    style.lineSpacing = 5
-                    attributedText.addAttribute(
-                        kCTParagraphStyleAttributeName as NSAttributedString.Key,
-                        value: style,
-                        range: NSMakeRange(0, attributedText.length))
-                    label.attributedText = attributedText
+
                 }
 
             }
@@ -97,6 +93,8 @@ public class PrivateAverageView: UIView {
             chart.barColor = newValue
         }
     }
+    
+    public var language: LanguageEnum = .en
     
     public var categoryName: AverageName?
     
@@ -170,5 +168,25 @@ public class PrivateAverageView: UIView {
         label.font = UIFont.systemFont(ofSize: 16)
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
+    }
+    
+    func setCompareText(name: String, compare: String) {
+        var text = ""
+        switch language {
+        case .en:
+            text = "The " + name + " is " + compare + " the average of last 7 times."
+        case .ch:
+            text = "本次" + name + compare + "过去7次的平均值"
+        }
+        
+        let attributedText = NSMutableAttributedString(string:text)
+        let style = NSMutableParagraphStyle()
+        style.alignment = .left
+        style.lineSpacing = 5
+        attributedText.addAttribute(
+            kCTParagraphStyleAttributeName as NSAttributedString.Key,
+            value: style,
+            range: NSMakeRange(0, attributedText.length))
+        label.attributedText = attributedText
     }
 }

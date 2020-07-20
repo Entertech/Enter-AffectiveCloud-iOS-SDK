@@ -50,15 +50,17 @@ public class PrivateReportBrainwaveSpectrum: UIView {
                 var value5 = 100
                 for i in 0..<4 {
                     value5 = value5 - lroundf(newValue![i]*100)
-                    texts[i].text = spectrums[i] + " " + "\(lroundf(newValue![i]*100))%"
+                    texts[i].text = spectrums[i] + waveText + " " + "\(lroundf(newValue![i]*100))%"
                 }
                 
-                texts[4].text = spectrums[4] + " " + "\(Int(value5))%"
+                texts[4].text = spectrums[4] + waveText + " " + "\(Int(value5))%"
                 setDataCount(values: newValue!)
             }
 
         }
     }
+    
+    public var waveText = "wave"
     
     public var bgColor: UIColor = .white {
         willSet {
@@ -70,7 +72,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
     private let chartView: PieChartView = PieChartView()
     private let dots: [UIView] = [UIView(), UIView(), UIView(), UIView(), UIView()]
     private let texts: [UILabel] = [UILabel(), UILabel(), UILabel(), UILabel(), UILabel()]
-    private let spectrums = ["γ wave", "β wave", "α wave", "θ wave", "δ wave"]
+    private let spectrums = ["γ ", "β ", "α ", "θ ", "δ "]
     
     public init() {
         super.init(frame: CGRect.zero)

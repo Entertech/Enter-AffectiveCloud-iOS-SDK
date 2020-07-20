@@ -66,6 +66,18 @@ public class PrivateAverageOfSevenDayView: UIView {
         }
     }
     
+    public var averageText = "Average" {
+        willSet {
+            averageLabel.text = newValue
+        }
+    }
+    
+    public var lastSevenTime = "Last 7 times" {
+        willSet {
+            lastLabel.text = newValue
+        }
+    }
+    
     public var barColor = UIColor.colorWithHexString(hexColor: "eaecf1")
     
     public var numBgColor: UIColor = .gray
