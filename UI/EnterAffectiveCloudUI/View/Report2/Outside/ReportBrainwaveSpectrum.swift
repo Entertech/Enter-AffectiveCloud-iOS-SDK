@@ -40,7 +40,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
             }
             if newValue![0] == 0 && newValue![1] == 0 {
                 for i in 0...4 {
-                    texts[i].text = spectrums[i] + " " + "0%"
+                    texts[i].text = spectrums[i] + waveText + " " + "0%"
                 }
                 chartView.isHidden = true
                 roundView.isHidden = true
@@ -52,16 +52,12 @@ public class PrivateReportBrainwaveSpectrum: UIView {
                     value5 = value5 - lroundf(newValue![i]*100)
                     texts[i].text = spectrums[i] + waveText + " " + "\(lroundf(newValue![i]*100))%"
                 }
-                
                 texts[4].text = spectrums[4] + waveText + " " + "\(Int(value5))%"
                 setDataCount(values: newValue!)
             }
-
         }
     }
-    
     public var waveText = "wave"
-    
     public var bgColor: UIColor = .white {
         willSet {
             roundView.backgroundColor = newValue

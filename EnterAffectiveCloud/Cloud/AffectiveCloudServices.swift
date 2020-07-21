@@ -149,8 +149,6 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         } else {
             self.delegate?.error(client: self.client, request: jsonModel, error: .jsonError, message: "CSRequestError: Json string is nil!")
         }
-        
-        
     }
 
     func sessionClose() {
