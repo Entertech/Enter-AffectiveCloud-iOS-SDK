@@ -26,6 +26,13 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
         }
     }
     
+    /// x坐标说明文字
+    public var xLabelText = "Time(min)" {
+        willSet {
+            xLabel?.text = newValue
+        }
+    }
+    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
         didSet  {

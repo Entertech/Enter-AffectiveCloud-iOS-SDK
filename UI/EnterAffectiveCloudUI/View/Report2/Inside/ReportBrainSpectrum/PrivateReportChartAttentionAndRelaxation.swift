@@ -45,6 +45,24 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             marker?.lineColor = newValue
         }
     }
+    /// x坐标说明文字
+    public var xLabelText = "Time(min)" {
+        willSet {
+            xLabel?.text = newValue
+        }
+    }
+    
+    public var attentionLabelText = "Attention" {
+        willSet {
+            attentionLabel?.text = newValue
+        }
+    }
+    
+    public var relaxationLabelText = "Relaxation" {
+        willSet {
+            relaxationLabel?.text = newValue
+        }
+    }
     
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
@@ -87,10 +105,14 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             chartHead?.titleText = newValue
         }
     }
+    
+    
+    /// 平均值的文案
+    public var averageText = "Average"
     /// 放松度平均值
     public var relaxationAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "Average: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "\(averageText): \(newValue)")
             if newValue > 70 {
                 avgLine.labelPosition = .bottomRight
             }
@@ -106,7 +128,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     /// 注意力放松度
     public var attentionAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue+130), label: "Average: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue+130), label: "\(averageText): \(newValue)")
             if newValue > 70 {
                 avgLine.labelPosition = .bottomRight
             }

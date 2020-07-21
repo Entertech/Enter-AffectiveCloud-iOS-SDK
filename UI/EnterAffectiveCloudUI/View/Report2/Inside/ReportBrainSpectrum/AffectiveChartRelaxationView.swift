@@ -26,6 +26,13 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
         }
     }
     
+    /// x坐标说明文字
+    public var xLabelText = "Time(min)" {
+        willSet {
+            xLabel?.text = newValue
+        }
+    }
+    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
         didSet  {
@@ -54,6 +61,10 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
     
     private var sample = 3
     
+    /// 平均值的文案
+    public var averageText = "Average"
+    
+    /// 平均值
     public var avg: Int = 0 {
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "AVG: \(newValue)")

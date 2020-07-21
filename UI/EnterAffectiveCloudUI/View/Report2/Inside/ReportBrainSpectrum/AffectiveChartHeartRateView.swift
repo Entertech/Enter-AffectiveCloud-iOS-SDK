@@ -29,6 +29,12 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
              self.layer.cornerRadius = cornerRadius
          }
      }
+    /// x坐标说明文字
+    public var xLabelText = "Time(min)" {
+        willSet {
+            xLabel?.text = newValue
+        }
+    }
      
      /// 文字颜色
      public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "11152e") {
@@ -61,11 +67,14 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             marker?.lineColor = newValue
         }
     }
+    
+    /// 平均值的文案
+    public var averageText = "Average"
      
     /// 设置平均值
     public var hrAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "Average: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "\(averageText): \(newValue)")
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor

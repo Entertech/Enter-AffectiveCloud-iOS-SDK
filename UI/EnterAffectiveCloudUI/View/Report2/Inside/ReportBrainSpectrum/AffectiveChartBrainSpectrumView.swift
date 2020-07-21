@@ -44,6 +44,12 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             }
         }
     }
+    /// x坐标说明文字
+    public var xLabelText = "Time(min)" {
+        willSet {
+            xLabel?.text = newValue
+        }
+    }
     
     /// Marker 的背景色
      public var markerBackgroundColor = UIColor.white {

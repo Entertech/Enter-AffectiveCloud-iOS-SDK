@@ -49,11 +49,13 @@ public class AffectiveChartCoherenceView: UIView, ChartViewDelegate, UIGestureRe
         }
     }
     
+    /// 平均值的文案
+    public var averageText = "Average"
 
     /// 设置平均值
     public var hrvAvg: Int = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "Average: \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: "\(averageText): \(newValue)")
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor
@@ -73,6 +75,13 @@ public class AffectiveChartCoherenceView: UIView, ChartViewDelegate, UIGestureRe
     public var title: String = "和谐度" {
         willSet {
             chartHead?.titleText = newValue
+        }
+    }
+    
+    /// x坐标说明文字
+    public var xLabelText = "Time(min)" {
+        willSet {
+            xLabel?.text = newValue
         }
     }
     /// highlight 颜色
