@@ -17,6 +17,25 @@ public enum AverageName: String {
     case Meditation = "meditation time"
 }
 
+extension AverageName {
+    var ch: String {
+        switch self {
+        case .Attention:
+            return "注意力"
+        case .Relaxation:
+            return "放松度"
+        case .Pressure:
+            return "压力值"
+        case .Heart:
+            return "心率"
+        case .HRV:
+            return "心率变异性"
+        case .Meditation:
+            return "训练时长"
+        }
+    }
+}
+
 public enum AverageCompare: String {
     case higher = "higher than"
     case lower = "lower than"
@@ -25,10 +44,28 @@ public enum AverageCompare: String {
     case longer = "longer than"
 }
 
+extension AverageCompare {
+    var ch: String {
+        switch self {
+        case .higher:
+            return "高于"
+        case .lower:
+            return "低于"
+        case .equal:
+            return "等于"
+        case .shorter:
+            return "低于"
+        case .longer:
+            return "高于"
+        }
+    }
+}
+
 public enum LanguageEnum {
     case en
     case ch
 }
+
 
 public class PrivateAverageView: UIView {
     
@@ -50,7 +87,12 @@ public class PrivateAverageView: UIView {
                         compareText = name == .Meditation ? .shorter : .lower
                         icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                     }
-
+                    if language == .en {
+                        self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
+                    } else {
+                        self.setCompareText(name: name.ch, compare: compareText.ch)
+                    }
+                    
                 }
 
             }
@@ -64,9 +106,21 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    public var unitText:String = "" {
+    public var unitText:String = "ms" {
         willSet {
             chart.unitText = newValue
+        }
+    }
+    
+    public var lastSevenTime = "Last 7 times" {
+        willSet {
+            chart.lastSevenTime = newValue
+        }
+    }
+    
+    public var averageText = "Average" {
+        willSet {
+            chart.averageText = newValue
         }
     }
     
