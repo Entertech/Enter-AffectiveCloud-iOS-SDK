@@ -26,10 +26,15 @@ public class PrivateReportPressure: UIView {
     // 状态
     public var state: PrivateReportState = .nor{
         willSet {
-            stateLabel.text = newValue.rawValue
+            if language == .ch {
+                stateLabel.text = newValue.ch
+            } else {
+                stateLabel.text = newValue.rawValue
+            }
+            
         }
     }
-
+    public var language = LanguageEnum.en
     private let numLabel = UILabel()
     private let stateLabel = UILabel()
     public let circleView = ReportSemiCircle2() // 扇形试图
