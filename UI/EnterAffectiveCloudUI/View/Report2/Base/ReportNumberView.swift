@@ -57,7 +57,7 @@ public class PrivateReportNumberView: UIView {
     
     public var state: PrivateReportState = .nor {
         willSet {
-            if state == LanguageEnum.ch {
+            if language == LanguageEnum.ch {
                 stateText.text = newValue.ch
             } else {
                 stateText.text = newValue.rawValue
