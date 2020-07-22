@@ -101,10 +101,10 @@ public class PrivateReportRelaxationAndAttention: UIView {
         }
     }
     
-    let relaxationNumberView = PrivateReportNumberView()
+    public let relaxationNumberView = PrivateReportNumberView()
     public let relaxationCircleView = PrivateReportSemiCircle()
     
-    let attentionNumberView = PrivateReportNumberView()
+    public let attentionNumberView = PrivateReportNumberView()
     public let attentionCircleView = PrivateReportSemiCircle()
     
     public let line = UIView()
