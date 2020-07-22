@@ -14,6 +14,19 @@ public enum PrivateReportState: String {
     case high
 }
 
+extension PrivateReportState {
+    var ch: String {
+        switch self {
+        case .nor:
+            return "中等"
+        case .low:
+            return "低"
+        case .high:
+            return "高"
+        }
+    }
+}
+
 public class PrivateReportNumberView: UIView {
     
     public var stateTextColor: UIColor = UIColor.colorWithHexString(hexColor: "7F725E") {
@@ -40,9 +53,16 @@ public class PrivateReportNumberView: UIView {
         }
     }
     
+    public var language = LanguageEnum.en
+    
     public var state: PrivateReportState = .nor {
         willSet {
-            stateText.text = newValue.rawValue
+            if state == LanguageEnum.ch {
+                stateText.text = newValue.ch
+            } else {
+                stateText.text = newValue.rawValue
+            }
+            
         }
     }
     
