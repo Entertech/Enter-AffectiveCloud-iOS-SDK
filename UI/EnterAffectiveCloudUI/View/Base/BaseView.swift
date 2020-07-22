@@ -9,9 +9,15 @@
 import UIKit
 
 open class BaseView: UIView {
+    private enum BaseviewState {
+        case clear
+        case animation
+        case text
+    }
     
     var maskCorner: CGFloat = 8.0
     open var bIsNeedUpdateMask = true
+    private var viewState = BaseviewState.clear
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,9 +103,13 @@ open class BaseView: UIView {
         }
         
         self.layoutIfNeeded()
+        viewState = .text
     }
     
     public func showProgress() {
+        guard viewState != .animation else {
+            return
+        }
         dismissMask()
         bIsNeedUpdateMask = true
         let maskView = UIView()
@@ -123,6 +133,7 @@ open class BaseView: UIView {
             $0.height.equalTo(36)
             $0.width.equalTo(36)
         }
+        viewState = .animation
     }
     
     public func dismissMask() {
@@ -132,6 +143,7 @@ open class BaseView: UIView {
                 break
             }
         }
+        viewState = .clear
     }
     
     public func showReportTip() {
