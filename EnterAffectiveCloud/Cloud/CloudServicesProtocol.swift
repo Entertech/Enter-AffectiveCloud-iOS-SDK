@@ -72,18 +72,18 @@ public struct BiodataTypeOptions: OptionSet {
 
 /// Biodata Parameter options: eg: eegl_wave, eegr_wave, eeg_alpha_power
 public extension BiodataParameterOptions {
-    static let eeg_wave_left = BiodataParameterOptions(rawValue: 1 << 0)
-    static let eeg_wave_right = BiodataParameterOptions(rawValue: 1 << 1)
-    static let eeg_alpha = BiodataParameterOptions(rawValue: 1 << 2)
-    static let eeg_beta = BiodataParameterOptions(rawValue: 1 << 3)
-    static let eeg_theta = BiodataParameterOptions(rawValue: 1 << 4)
-    static let eeg_delta = BiodataParameterOptions(rawValue: 1 << 5)
-    static let eeg_gamma = BiodataParameterOptions(rawValue: 1 << 6)
-    static let eeg_quality = BiodataParameterOptions(rawValue: 1 << 7)
-    static let hr_value = BiodataParameterOptions(rawValue: 1 << 8)
-    static let hr_variability = BiodataParameterOptions(rawValue: 1 << 9)
-    static let eeg_all = BiodataParameterOptions(rawValue: 1 << 10)
-    static let hr_all = BiodataParameterOptions(rawValue: 1 << 11)
+//    static let eeg_wave_left = BiodataParameterOptions(rawValue: 1 << 0)
+//    static let eeg_wave_right = BiodataParameterOptions(rawValue: 1 << 1)
+//    static let eeg_alpha = BiodataParameterOptions(rawValue: 1 << 2)
+//    static let eeg_beta = BiodataParameterOptions(rawValue: 1 << 3)
+//    static let eeg_theta = BiodataParameterOptions(rawValue: 1 << 4)
+//    static let eeg_delta = BiodataParameterOptions(rawValue: 1 << 5)
+//    static let eeg_gamma = BiodataParameterOptions(rawValue: 1 << 6)
+//    static let eeg_quality = BiodataParameterOptions(rawValue: 1 << 7)
+//    static let hr_value = BiodataParameterOptions(rawValue: 1 << 8)
+//    static let hr_variability = BiodataParameterOptions(rawValue: 1 << 9)
+    static let eeg = BiodataParameterOptions(rawValue: 1 << 0)
+    static let hr = BiodataParameterOptions(rawValue: 1 << 1)
 }
 
 public struct BiodataParameterOptions: OptionSet {

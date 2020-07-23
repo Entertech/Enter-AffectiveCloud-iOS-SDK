@@ -60,6 +60,7 @@ public class PrivateAverageOfSevenDayView: UIView {
             }
         }
     }
+    
     public var unitText = "ms" {
         willSet {
             unitLabel.text = newValue

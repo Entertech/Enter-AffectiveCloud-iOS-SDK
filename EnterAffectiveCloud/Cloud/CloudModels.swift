@@ -37,12 +37,12 @@ class CSKwargsJSONModel: HandyJSON {
     var sign: String?
     var userID: String?
     var timeStamp: String?
+    var uploadCycle: Int?
+    var args: [String]?
     var device: String?
     var data: CSRequestDataJSONModel?
     var sessionID: String?
     var reportType: String?
-    var eegParams: [String]?
-    var hrParams: [String]?
     var eegData: [Int]?
     var hrData: [Int]?
     var rec: [CSLabelSubmitJSONModel]?
@@ -62,10 +62,6 @@ class CSKwargsJSONModel: HandyJSON {
             self.reportType <-- "gr"
         mapper <<<
             self.sessionID <-- "session_id"
-        mapper <<<
-            self.eegParams <-- "eeg"
-        mapper <<<
-            self.hrParams <-- "hr"
         mapper <<<
             self.eegData <-- "eeg"
         mapper <<<
@@ -94,6 +90,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.arousalServices <-- "arousal"
         mapper <<<
             self.timeStamp <-- "timestamp"
+        mapper <<<
+            self.uploadCycle <-- "upload_cycle"
         mapper <<<
             self.storageSettings <-- "storage_settings"
         mapper <<<

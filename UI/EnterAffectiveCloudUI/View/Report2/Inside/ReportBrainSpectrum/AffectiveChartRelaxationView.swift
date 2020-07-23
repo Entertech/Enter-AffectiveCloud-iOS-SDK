@@ -10,7 +10,18 @@ import UIKit
 import Charts
 
 public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if uploadCycle == 0 {
+                interval = 0.4
+            } else {
+                interval = 0.6 * Double(newValue)
+            }
+        }
+    }
     
+    /// 图表线颜色
     public var lineColor: UIColor = UIColor.colorWithInt(r: 0, g: 100, b: 255, alpha: 1)
     
     /// 背景颜色
@@ -87,11 +98,10 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
     //MARK:- Private UI
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private var interval = 1.8
     private var timeStamp = 0
     private var relaxationArray: [Int]?
     private var yRender: LimitYAxisRenderer?
-    //MARK:- Private UI
     private var chartHead: PrivateChartViewHead?
     private var titleLabel: UILabel?
     private var chartView: LineChartView?

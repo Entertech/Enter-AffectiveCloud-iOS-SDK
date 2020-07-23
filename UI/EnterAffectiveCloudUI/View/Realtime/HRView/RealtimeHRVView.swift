@@ -45,6 +45,17 @@ class UpdateHRV: HRVValueProtocol {
 }
 
 public class RealtimeHRVView: BaseView {
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if uploadCycle == 0 {
+                interval = 0.4
+            } else {
+                interval = 0.6 * Double(newValue)
+            }
+        }
+    }
+    
     //MARK:- Public param
     /// 主色调显示
     public var mainColor = UIColor.colorWithHexString(hexColor: "232323")  {
@@ -94,7 +105,7 @@ public class RealtimeHRVView: BaseView {
     //线条颜色
     public var lineColor = UIColor.systemRed
     
-    
+    private var interval = 1.8
     private let titleLabel = UILabel()
     private let infoBtn = UIButton()
     private var height: CGFloat = 0
@@ -126,7 +137,6 @@ public class RealtimeHRVView: BaseView {
         super.init(coder: coder)
         
     }
-    
     
     /// 开启监听
     public func observe() {
@@ -227,19 +237,12 @@ public class RealtimeHRVView: BaseView {
     }
     
     public func appendArray(_ value: Int) {
-        
-//        if let _ = waveArray {
-//            waveArray?.append(Float(value))
-//            waveArray?.remove(at: 0)
-//        } else {
-//            waveArray = Array(repeating: 0.0, count: 200)
-//            waveArray?.append(Float(value))
-//        }
+
         if waveArray == nil {
             waveArray = Array(repeating: 0.0, count: 120)
         }
         if drawLineTimer == nil {
-            drawLineTimer = Timer.init(timeInterval: 0.4, target: self, selector: #selector(timerAction(_:)), userInfo: nil, repeats: true)
+            drawLineTimer = Timer.init(timeInterval: 0.2, target: self, selector: #selector(timerAction(_:)), userInfo: nil, repeats: true)
             RunLoop.current.add(drawLineTimer!, forMode: .common)
             drawLineTimer?.fire()
         }

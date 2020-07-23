@@ -11,7 +11,16 @@ import Charts
 import SnapKit
 
 public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate{
-    
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if uploadCycle == 0 {
+                interval = 0.4
+            } else {
+                interval = 0.6 * Double(newValue)
+            }
+        }
+    }
     /// 背景颜色
     public var bgColor: UIColor = .white {
         didSet {
@@ -111,7 +120,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
     //MARK:- Private
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private var interval = 1.8
     private var timeStamp = 0
     private var alphaArray: [Float]? = []
     private var betaArray: [Float]? = []

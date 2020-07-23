@@ -11,6 +11,18 @@ import Charts
 
 public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if uploadCycle == 0 {
+                interval = 0.4
+            } else {
+                interval = 0.6 * Double(newValue)
+            }
+        }
+    }
+    
+    /// 图表线颜色
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F") {
         willSet {
             marker?.dot?.backgroundColor = newValue
@@ -101,7 +113,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     private var sample = 3
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private var interval = 1.8
     private var timeStamp = 0
     private var hrvArray: [Int]?
     private var yRender: LimitYAxisRenderer?
