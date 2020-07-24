@@ -15,6 +15,7 @@ public class AffectiveCloudRequestJSONModel: HandyJSON {
     var services: String = ""
     var operation: String = ""
     var kwargs: CSKwargsJSONModel?
+    var args: [String]?
     public required init() { }
 
     public func mapping(mapper: HelpingMapper) {
@@ -38,7 +39,6 @@ class CSKwargsJSONModel: HandyJSON {
     var userID: String?
     var timeStamp: String?
     var uploadCycle: Int?
-    var args: [String]?
     var device: String?
     var data: CSRequestDataJSONModel?
     var sessionID: String?

@@ -280,8 +280,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.subscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
-        jsonModel.kwargs?.args = biodataList
+        jsonModel.args = biodataList
 
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
@@ -304,8 +303,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.unsubscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
-        jsonModel.kwargs?.args = self.biodataSubscribeList(with: options)
+        jsonModel.args = self.biodataSubscribeList(with: options)
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -457,9 +455,8 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.subscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
         let paramList = self.emotionSubscribeList(options: services)
-        jsonModel.kwargs?.args = paramList
+        jsonModel.args = paramList
  
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
@@ -483,9 +480,8 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.unsubscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
         let paramList = self.emotionSubscribeList(options: services)
-        jsonModel.kwargs?.args = paramList
+        jsonModel.args = paramList
 
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
