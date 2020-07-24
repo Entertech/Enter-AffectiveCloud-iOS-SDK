@@ -281,7 +281,7 @@ public class CSBiodataEEGJsonModel: HandyJSON {
  */
 public class CSBiodataHRJsonModel: HandyJSON {
     public var hr: Float?
-    public var hrv: Float?
+    public var hrv: [Float]?
     public required init() {}
 }
 
