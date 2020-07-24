@@ -152,11 +152,9 @@ class BrainwaveView: BaseView {
         rightBrain.dashLineColor = color
     }
     
-
-    private let drawingWaveSample = 10
     public func setEEGArray(_ data: [Float],_ leftOrRight: LeftOrRightBrain) {
         
-        let margin = max(data.count / 10, 1)
+        let margin = 10
         for index in stride(from: 0, to: data.count, by: margin) {
             var value = data[index]
             if value > 300 {
