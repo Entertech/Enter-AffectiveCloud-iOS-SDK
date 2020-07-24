@@ -99,7 +99,14 @@ public class AffectiveCloudClient {
     ///   - services: biodata services. ps: .eeg and .hr
     ///   - tolerance: 0-4
     public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil, uploadCycle:UInt = 3) {
-        self.cloudService?.uploadCycle = Int(3) 
+        self.cloudService?.uploadCycle = Int(uploadCycle)
+        if uploadCycle == 0 {
+            _hrBufferSize = 2
+            _eegBufferSize = 600
+        } else {
+            _hrBufferSize = minHrCycle * Int(uploadCycle)
+            _eegBufferSize = minEegCycle * Int(uploadCycle)
+        }
         self.cloudService?.bioService = services
         self.cloudService?.bioTolerance = tolerance
     }
@@ -122,10 +129,11 @@ public class AffectiveCloudClient {
         self.cloudService?.cased = cases
     }
 
+    private var minEegCycle = 1000
     /// raw eeg data(the data from hardware) cache
     private var _eegBuffer = Data()
     /// the standard size of eeg data that upload to cloud service
-    private let _eegBufferSize = 600
+    private var _eegBufferSize = 3000
     /// Append brain raw data to cloud service from your hardware
     /// this is necessory if you want to use follow services:
     /// Biodata services: .eeg_wave_left、.eeg_wave_right、.eeg_alpha、.eeg_quality and so on.
@@ -160,10 +168,11 @@ public class AffectiveCloudClient {
     }
 
 
+    private var minHrCycle = 3
     /// raw heart rate data(the data from hardware) cache
     private var _hrBuffer = Data()
     /// the standard size of heart rate that upload to cloud service
-    private let _hrBufferSize = 2
+    private var _hrBufferSize = 9
     /// Append heart rate data to cloud service from your hardware
     /// this is necessory if you want to use follow services:
     /// Affective services: .arousal 、.pressure
