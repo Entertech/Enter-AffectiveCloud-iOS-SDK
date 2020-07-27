@@ -10,16 +10,33 @@ import UIKit
 import Charts
 
 public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
+    
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if uploadCycle == 0 {
+                interval = 0.4
+            } else {
+                interval = 0.6 * Double(newValue)
+            }
+        }
+    }
+    
+    
+    /// 注意力和放松度
     public enum AttentionOrRelaxation: String {
         case attention
         case relaxation
     }
     
+    /// 注意力线条颜色
     public var attentionColor: UIColor = UIColor.colorWithHexString(hexColor: "#5FC695") {
         willSet {
             marker?.dot?.backgroundColor = newValue
         }
     }
+    
+    /// 放松度线条颜色
     public var relaxationColor: UIColor = UIColor.colorWithHexString(hexColor: "#4B5DCC") {
         willSet {
             marker?.dot2?.backgroundColor = newValue
@@ -153,7 +170,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     //MARK:- Private UI
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.8
+    private var interval = 1.8
     private var timeStamp = 0
     private var attentionArray: [Int]?
     private var relaxationArray: [Int]?
