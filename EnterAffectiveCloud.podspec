@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   s.dependency 'GzipSwift'
   s.dependency 'SwiftyJSON'
   s.dependency 'Moya/RxSwift', '~> 14.0.0'
-  s.dependency 'RxSwift', '~> 5.0.0'
+  s.dependency 'RxSwift'
 end
