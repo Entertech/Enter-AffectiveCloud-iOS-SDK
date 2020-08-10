@@ -64,7 +64,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             marker?.lineColor = newValue
         }
     }
-    
+    public var zoomText = "Zoom in on the curve and slide to view it."
     
     /// 5段脑波频谱的颜色
     public var spectrumColors: [UIColor] = [UIColor.colorWithHexString(hexColor: "#FF6682"),
@@ -550,7 +550,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
                 $0.top.equalTo(chart.chartHead!.snp.bottom).offset(193)
             }
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {

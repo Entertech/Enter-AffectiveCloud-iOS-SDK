@@ -90,6 +90,8 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         }
     }
     
+    public var zoomText = "Zoom in on the curve and slide to view it."
+    
     //MARK:- Private UI
     private var isChartScale = false {
         willSet {
@@ -441,7 +443,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             chart.hrvAvg = self.hrvAvg
             chart.title = self.title
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {

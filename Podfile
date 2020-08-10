@@ -1,11 +1,11 @@
-
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
 platform :ios, '10.0'
 
 target 'EnterAffectiveCloud' do
-  pod 'HandyJSON'
+  pod 'HandyJSON', '5.0.3-beta'
   pod 'SwiftyJSON'
   pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
@@ -17,7 +17,7 @@ target 'EnterAffectiveCloudUI' do
   pod 'RxSwift', '5.1'
   pod 'SnapKit'
   pod 'Charts', '3.4.0'
-  pod 'HandyJSON', '5.0.0'
+  pod 'HandyJSON', '5.0.3-beta'
   pod 'SwiftyJSON'
   pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
@@ -27,7 +27,7 @@ target 'EnterRealtimeUIDemo' do
   pod 'RxSwift', '5.1'
   pod 'SnapKit'
   pod 'GzipSwift'
-  pod 'HandyJSON', '5.0.0'
+  pod 'HandyJSON', '5.0.3-beta'
   pod 'Starscream', '3.1.1'
   pod 'SwiftyJSON'
   pod 'Charts'
@@ -37,7 +37,7 @@ target 'EnterReportUIDemo' do
   pod 'RxSwift', '5.1'
   pod 'SnapKit'
   pod 'GzipSwift'
-  pod 'HandyJSON', '5.0.0'
+  pod 'HandyJSON', '5.0.3-beta'
   pod 'Starscream', '3.1.1'
   pod 'SwiftyJSON'
   pod 'Charts'

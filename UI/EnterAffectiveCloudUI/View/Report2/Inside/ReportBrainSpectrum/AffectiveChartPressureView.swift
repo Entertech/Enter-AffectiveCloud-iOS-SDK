@@ -93,6 +93,8 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate, UIGestureRec
         }
     }
     
+    public var zoomText = "Zoom in on the curve and slide to view it."
+    
     //MARK:- Private UI
     private var isChartScale = false {
         willSet {
@@ -448,7 +450,7 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate, UIGestureRec
             chart.markerBackgroundColor = self.markerBackgroundColor
             chart.pressureAvg = self.pressureAvg
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {
