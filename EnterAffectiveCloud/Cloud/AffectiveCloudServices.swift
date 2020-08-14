@@ -74,7 +74,8 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     }
 
     func webSocketDisConnect() {
-        self.socket.disconnect()
+        //self.socket.disconnect()
+        self.socket.disconnect(forceTimeout: 1, closeCode: CloseCode.normal.rawValue)
     }
     
     func sessionCreate() {
