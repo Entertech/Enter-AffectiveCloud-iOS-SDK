@@ -216,10 +216,28 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     func barLayout() {
         let barCount = valueViews.count
-        let min = _values!.min()!
-        let max = _values!.max()!
+        var min: Float = 0
+        var max: Float = 0
+        if let valuesArray = _values {
+            min = Float(valuesArray.min() ?? 0)
+            max = Float(valuesArray.max() ?? 100)
+        }
+        if let valuesArray = _floatValues {
+            min = valuesArray.min() ?? 0
+            max = valuesArray.max() ?? 100
+        }
+//        let min = _values!.min()!
+//        let max = _values!.max()!
         for i in 0..<barCount {
-            let value = _values![barCount-1-i]
+            //let value = _values![barCount-1-i]
+            var value: Float = 0
+            if let valuesArray = _values {
+                value = Float(valuesArray[barCount-1-i])
+            }
+            if let valuesArray = _floatValues {
+                value = valuesArray[barCount-1-i]
+            }
+            
             let label = valueLabels[barCount-1-i] // 顺序是倒着的
             let bar = valueViews[barCount-1-i]
             self.addSubview(bar)
@@ -228,7 +246,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                 $0.bottom.equalToSuperview()
                 $0.right.equalToSuperview().offset(-182+29*i)
                 $0.width.equalTo(17)
-                if max == min {
+                if max == min{
                     $0.height.equalTo(64)
                 } else  {
                     $0.height.equalTo(28+Float(value-min)/Float(max-min)*100)
