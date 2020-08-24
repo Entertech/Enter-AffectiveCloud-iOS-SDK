@@ -53,7 +53,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     public var averageText = "Average"
 
     /// 设置平均值
-    public var hrvAvg: Int = 0 {
+    public var hrvAvg: Float = 0 {
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "\(averageText): \(newValue)")
             avgLine.lineDashPhase = 0
