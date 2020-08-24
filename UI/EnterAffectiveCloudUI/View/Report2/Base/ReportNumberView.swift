@@ -49,7 +49,7 @@ public class PrivateReportNumberView: UIView {
     
     public var numberFloat: Float = 0 {
         willSet {
-            numberText.text = String(format: ".1%f", newValue)
+            numberText.text = String(format: "%.1f", newValue)
         }
     }
     
