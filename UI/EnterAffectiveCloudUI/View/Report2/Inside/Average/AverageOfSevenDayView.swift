@@ -80,7 +80,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                     
                     // 设置bar上面的label
                     numLabel.font = UIFont.systemFont(ofSize: 11)
-                    numLabel.text = String.init(format: "%.1d", newValue[i])
+                    numLabel.text = String.init(format: "%.1f", newValue[i])
                     numLabel.layer.cornerRadius = 4
                     numLabel.layer.masksToBounds = true
                     numLabel.textAlignment = .center
@@ -124,7 +124,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     private var averageFloatValue:Float = 0 {
         willSet {
-            averageNumLabel.text = String.init(format: "%.1d", newValue)
+            averageNumLabel.text = String.init(format: "%.1f", newValue)
         }
     }
     
