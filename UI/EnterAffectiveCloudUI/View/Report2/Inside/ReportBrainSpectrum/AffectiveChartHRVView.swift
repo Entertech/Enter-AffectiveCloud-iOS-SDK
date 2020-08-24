@@ -55,7 +55,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     /// 设置平均值
     public var hrvAvg: Float = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: String.init(format: "%s %.1f", averageText, newValue))
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: String.init(format: "%@: %.1f", averageText, newValue))
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor
