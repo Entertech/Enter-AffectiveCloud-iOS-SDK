@@ -48,8 +48,46 @@ public class PrivateAverageOfSevenDayView: UIView {
                     valueLabels.append(numLabel)
                 }
                 barLayout()
-            
-
+        }
+    }
+    
+    public var floatValues: [Float] = [] {
+        willSet {
+                for i in 0..<valueViews.count {
+                    valueViews[i].removeFromSuperview()
+                    valueLabels[i].removeFromSuperview()
+                }
+                valueViews.removeAll()
+                valueLabels.removeAll()
+                _floatValues = newValue
+                let total = newValue.reduce(0, +)
+                averageFloatValue = Float(total) / Float(newValue.count)
+                for (i,_) in newValue.enumerated() {
+                    let bar = UIView()
+                    let numLabel = UILabel()
+                    // 设置bar
+                    if i == 0 {
+                        bar.backgroundColor = currentBarColor
+                        numLabel.backgroundColor = numBgColor
+                    } else {
+                        bar.backgroundColor = barColor
+                        numLabel.isHidden = true
+                    }
+                    
+                    bar.layer.cornerRadius = 4
+                    bar.layer.masksToBounds = true
+                    valueViews.append(bar)
+                    
+                    // 设置bar上面的label
+                    numLabel.font = UIFont.systemFont(ofSize: 11)
+                    numLabel.text = String.init(format: "%.1d", newValue[i])
+                    numLabel.layer.cornerRadius = 4
+                    numLabel.layer.masksToBounds = true
+                    numLabel.textAlignment = .center
+                    numLabel.textColor = numTextColor
+                    valueLabels.append(numLabel)
+                }
+                barLayout()
         }
     }
     
@@ -84,6 +122,12 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     public var numTextColor: UIColor = .white
     
+    private var averageFloatValue:Float = 0 {
+        willSet {
+            averageNumLabel.text = String.init(format: "%.1d", newValue)
+        }
+    }
+    
     private var averageValue:Int = 0 {
         willSet {
             averageNumLabel.text = "\(newValue)"
@@ -99,6 +143,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     private let unitLabel = UILabel()
     private let lastLabel = UILabel()
     private var _values: [Int]?
+    private var _floatValues: [Float]?
 
     public init() {
         super.init(frame: CGRect.zero)
