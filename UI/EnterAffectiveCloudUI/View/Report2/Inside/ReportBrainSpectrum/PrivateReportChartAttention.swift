@@ -35,6 +35,8 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
             xLabel?.text = newValue
         }
     }
+    
+    public var zoomText = "Zoom in on the curve and slide to view it."
      
      /// 文字颜色
      public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "11152e") {
@@ -440,7 +442,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
             chart.markerBackgroundColor = self.markerBackgroundColor
             chart.hrAvg = self.hrAvg
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {

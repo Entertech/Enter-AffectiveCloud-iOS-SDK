@@ -44,7 +44,7 @@ public struct ReportModel {
     public var heartRateMin: Int?
     
     public var heartRateVariability: [Int]?
-    public var hrvAvg: Int?
+    public var hrvAvg: Float?
     
     public var attention: [Int]?
     public var attentionAvg: Int?

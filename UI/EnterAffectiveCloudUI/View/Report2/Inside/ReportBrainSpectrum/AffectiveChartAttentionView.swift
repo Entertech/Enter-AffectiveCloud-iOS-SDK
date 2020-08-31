@@ -44,6 +44,8 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
         }
     }
     
+    public var zoomText = "Zoom in on the curve and slide to view it."
+    
     /// 文字颜色
     public var textColor: UIColor = UIColor.colorWithHexString(hexColor: "333333") {
         didSet  {
@@ -359,7 +361,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.avg = self.avg
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.addSubview(label)
             label.snp.makeConstraints {

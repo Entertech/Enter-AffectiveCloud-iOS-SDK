@@ -56,6 +56,8 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
             chartView?.xAxis.gridColor = secondColor
         }
     }
+    public var zoomText = "Zoom in on the curve and slide to view it."
+    
     /// 下方单位字体颜色
     public var unitTextColor: UIColor = .black {
         willSet {
@@ -361,7 +363,7 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.avg = self.avg
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.addSubview(label)
             label.snp.makeConstraints {

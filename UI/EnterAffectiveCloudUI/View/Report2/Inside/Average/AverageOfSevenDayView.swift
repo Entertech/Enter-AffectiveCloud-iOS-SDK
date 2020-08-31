@@ -48,8 +48,46 @@ public class PrivateAverageOfSevenDayView: UIView {
                     valueLabels.append(numLabel)
                 }
                 barLayout()
-            
-
+        }
+    }
+    
+    public var floatValues: [Float] = [] {
+        willSet {
+                for i in 0..<valueViews.count {
+                    valueViews[i].removeFromSuperview()
+                    valueLabels[i].removeFromSuperview()
+                }
+                valueViews.removeAll()
+                valueLabels.removeAll()
+                _floatValues = newValue
+                let total = newValue.reduce(0, +)
+                averageFloatValue = Float(total) / Float(newValue.count)
+                for (i,_) in newValue.enumerated() {
+                    let bar = UIView()
+                    let numLabel = UILabel()
+                    // 设置bar
+                    if i == 0 {
+                        bar.backgroundColor = currentBarColor
+                        numLabel.backgroundColor = numBgColor
+                    } else {
+                        bar.backgroundColor = barColor
+                        numLabel.isHidden = true
+                    }
+                    
+                    bar.layer.cornerRadius = 4
+                    bar.layer.masksToBounds = true
+                    valueViews.append(bar)
+                    
+                    // 设置bar上面的label
+                    numLabel.font = UIFont.systemFont(ofSize: 11)
+                    numLabel.text = String.init(format: "%.1f", newValue[i])
+                    numLabel.layer.cornerRadius = 4
+                    numLabel.layer.masksToBounds = true
+                    numLabel.textAlignment = .center
+                    numLabel.textColor = numTextColor
+                    valueLabels.append(numLabel)
+                }
+                barLayout()
         }
     }
     
@@ -85,6 +123,12 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     public var numTextColor: UIColor = .white
     
+    private var averageFloatValue:Float = 0 {
+        willSet {
+            averageNumLabel.text = String.init(format: "%.1f", newValue)
+        }
+    }
+    
     private var averageValue:Int = 0 {
         willSet {
             averageNumLabel.text = "\(newValue)"
@@ -100,6 +144,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     private let unitLabel = UILabel()
     private let lastLabel = UILabel()
     private var _values: [Int]?
+    private var _floatValues: [Float]?
 
     public init() {
         super.init(frame: CGRect.zero)
@@ -172,10 +217,28 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     func barLayout() {
         let barCount = valueViews.count
-        let min = _values!.min()!
-        let max = _values!.max()!
+        var min: Float = 0
+        var max: Float = 0
+        if let valuesArray = _values {
+            min = Float(valuesArray.min() ?? 0)
+            max = Float(valuesArray.max() ?? 100)
+        }
+        if let valuesArray = _floatValues {
+            min = valuesArray.min() ?? 0
+            max = valuesArray.max() ?? 100
+        }
+//        let min = _values!.min()!
+//        let max = _values!.max()!
         for i in 0..<barCount {
-            let value = _values![barCount-1-i]
+            //let value = _values![barCount-1-i]
+            var value: Float = 0
+            if let valuesArray = _values {
+                value = Float(valuesArray[barCount-1-i])
+            }
+            if let valuesArray = _floatValues {
+                value = valuesArray[barCount-1-i]
+            }
+            
             let label = valueLabels[barCount-1-i] // 顺序是倒着的
             let bar = valueViews[barCount-1-i]
             self.addSubview(bar)
@@ -184,7 +247,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                 $0.bottom.equalToSuperview()
                 $0.right.equalToSuperview().offset(-182+29*i)
                 $0.width.equalTo(17)
-                if max == min {
+                if max == min{
                     $0.height.equalTo(64)
                 } else  {
                     $0.height.equalTo(28+Float(value-min)/Float(max-min)*100)

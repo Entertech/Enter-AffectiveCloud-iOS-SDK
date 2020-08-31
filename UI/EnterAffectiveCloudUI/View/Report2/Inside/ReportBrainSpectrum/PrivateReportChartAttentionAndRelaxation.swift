@@ -69,6 +69,8 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         }
     }
     
+    public var zoomText = "Zoom in on the curve and slide to view it."
+    
     public var attentionLabelText = "Attention" {
         willSet {
             attentionLabel?.text = newValue
@@ -636,7 +638,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             chart.attentionAvg = self.attentionAvg
             chart.relaxationAvg = self.relaxationAvg
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {

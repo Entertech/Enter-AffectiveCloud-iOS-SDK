@@ -98,6 +98,8 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
         }
     }
     
+    public var zoomText = "Zoom in on the curve and slide to view it."
+    
     /// Marker 的背景色
     public var markerBackgroundColor = UIColor.white {
         willSet {
@@ -456,7 +458,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             chart.markerBackgroundColor = self.markerBackgroundColor
             chart.hrAvg = self.hrAvg
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {

@@ -100,6 +100,37 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var floatValues: [Float] = [] {
+        willSet {
+            if newValue.count > 0 {
+                chart.floatValues = newValue
+                if let name = categoryName {
+                    let total = newValue.reduce(0, +)
+                    let averageValueTemp = Float(total) / Float(newValue.count)
+                    let averageValue = averageValueTemp
+                    let current = newValue.first!
+                    var compareText = AverageCompare.equal
+                    icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
+                    if current > averageValue {
+                        compareText = name == .Meditation ? .longer : .higher
+                        icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
+                    } else if current < averageValue {
+                        compareText = name == .Meditation ? .shorter : .lower
+                        icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
+                    }
+                    if language == .en {
+                        self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
+                    } else {
+                        self.setCompareText(name: name.ch, compare: compareText.ch)
+                    }
+                    
+                }
+
+            }
+
+        }
+    }
+    
     public var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
         willSet {
             chart.currentBarColor = newValue

@@ -47,6 +47,12 @@ public class PrivateReportNumberView: UIView {
         }
     }
     
+    public var numberFloat: Float = 0 {
+        willSet {
+            numberText.text = String(format: "%.1f", newValue)
+        }
+    }
+    
     public var unitString = "" {
         willSet {
             unitText.text = newValue

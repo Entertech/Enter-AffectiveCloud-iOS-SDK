@@ -71,7 +71,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         }
     }
     
-    public var avgValue = 0 {
+    public var avgValue: Float = 0 {
         willSet {
             self.avgLabel?.text = "平均: \(newValue)"
             self.msLabel?.isHidden = false

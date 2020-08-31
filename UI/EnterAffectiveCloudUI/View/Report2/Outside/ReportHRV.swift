@@ -16,13 +16,13 @@ public class PrivateReportHRV: UIView {
         }
     }
     
-    public var value: Int = 0 {
+    public var value: Float = 0 {
         willSet {
-            numberView.number = newValue
+            numberView.numberFloat = newValue
             dotView.setDotValue(index: Float(newValue))
             for i in 0..<(scaleArray.count-1) {
-                let range = scaleArray[i]...scaleArray[i+1]
-                if range.contains(newValue) {
+                let range = scaleArray[i]..<scaleArray[i+1]
+                if range.contains(lroundf(value)) {
                     switch i {
                     case 0:
                         numberView.state = .low

@@ -34,7 +34,7 @@ public class ReportViewService: NSObject {
                     case .hrMin:
                         model.heartRateMin  = Int(e.value)
                     case .hrvAverage:
-                        model.hrvAvg = Int(e.value)
+                        model.hrvAvg = e.value
                     case .attentionAverage:
                         model.attentionAvg = Int(e.value)
                     case .attentionMax:

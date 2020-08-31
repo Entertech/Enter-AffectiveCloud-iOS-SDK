@@ -65,9 +65,9 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     public var averageText = "Average"
 
     /// 设置平均值
-    public var hrvAvg: Int = 0 {
+    public var hrvAvg: Float = 0 {
         willSet  {
-            let avgLine = ChartLimitLine(limit: Double(newValue), label: "\(averageText): \(newValue)")
+            let avgLine = ChartLimitLine(limit: Double(newValue), label: String.init(format: "%@: %.1f", averageText, newValue))
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [4, 2]
             avgLine.lineColor = textColor
@@ -101,6 +101,8 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             marker?.lineColor = newValue
         }
     }
+    
+    public var zoomText = "Zoom in on the curve and slide to view it."
     
     //MARK:- Private UI
     private var isChartScale = false {
@@ -453,7 +455,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             chart.hrvAvg = self.hrvAvg
             chart.title = self.title
             let label = UILabel()
-            label.text = "Zoom in on the curve and slide to view it."
+            label.text = zoomText
             label.font = UIFont.systemFont(ofSize: 12)
             chart.chartHead?.addSubview(label)
             label.snp.makeConstraints {
