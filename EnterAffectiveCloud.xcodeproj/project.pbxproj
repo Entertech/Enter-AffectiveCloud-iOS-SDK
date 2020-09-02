@@ -56,6 +56,8 @@
 		FA7689CC23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689CB23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift */; };
 		FA7689CE23B08ABC005E4DF7 /* ReportPressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689CD23B08ABC005E4DF7 /* ReportPressure.swift */; };
 		FA7689D123B0BD72005E4DF7 /* AverageOfSevenDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689D023B0BD72005E4DF7 /* AverageOfSevenDayView.swift */; };
+		FA7D326624FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */; };
+		FA7D326824FDED21005792D3 /* LeftAndRightSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */; };
 		FA9231A9236BD07B00A50C64 /* EnterAffectiveCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */; };
 		FA9231AB236BD07B00A50C64 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA93435B2356E59B00544239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93435A2356E59B00544239 /* AppDelegate.swift */; };
@@ -260,6 +262,8 @@
 		FA7689CB23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRelaxationAndAttention.swift; sourceTree = "<group>"; };
 		FA7689CD23B08ABC005E4DF7 /* ReportPressure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPressure.swift; sourceTree = "<group>"; };
 		FA7689D023B0BD72005E4DF7 /* AverageOfSevenDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageOfSevenDayView.swift; sourceTree = "<group>"; };
+		FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeLeftAndRightSpectrumView.swift; sourceTree = "<group>"; };
+		FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAndRightSpectrumView.swift; sourceTree = "<group>"; };
 		FA9231A6236BD07B00A50C64 /* EnterAffectiveCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnterAffectiveCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudTests.swift; sourceTree = "<group>"; };
 		FA9231AA236BD07B00A50C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -844,7 +848,9 @@
 			isa = PBXGroup;
 			children = (
 				FACEDF9F235172F40016176C /* BrainwaveSpectrumView.swift */,
+				FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */,
 				FACEDFA923517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift */,
+				FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */,
 			);
 			path = Spectrum;
 			sourceTree = "<group>";
@@ -1013,7 +1019,7 @@
 					};
 					FA55EA4D234C273A00C148BF = {
 						CreatedOnToolsVersion = 11.1;
-						LastSwiftMigration = 1110;
+						LastSwiftMigration = 1160;
 					};
 					FA9231A5236BD07B00A50C64 = {
 						CreatedOnToolsVersion = 11.1;
@@ -1286,6 +1292,7 @@
 				FA1690C324556EAB00FADC2B /* EnterColors.swift in Sources */,
 				FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */,
 				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
+				FA7D326624FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift in Sources */,
 				FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */,
 				FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */,
 				FA1690D324567D8300FADC2B /* ValueMarkerView.swift in Sources */,
@@ -1317,6 +1324,7 @@
 				FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */,
 				FAB3E46A23ACAD4D00A85129 /* ReportHRV.swift in Sources */,
 				FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */,
+				FA7D326824FDED21005792D3 /* LeftAndRightSpectrumView.swift in Sources */,
 				FA7689CC23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift in Sources */,
 				FA7689CA23B0595A005E4DF7 /* ReportSemiCircle.swift in Sources */,
 			);

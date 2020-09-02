@@ -83,7 +83,7 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
             spectrumView.betaLabel.textColor = firstTextColor
             spectrumView.gamaLabel.textColor = firstTextColor
             spectrumView.thetaLabel.textColor = firstTextColor
-            spectrumView.deltaBar.textColor = firstTextColor
+            spectrumView.deltaLabel.textColor = firstTextColor
             
             spectrumView.alphaValueLabel.textColor = secondTextColor
             spectrumView.betaValueLabel.textColor = secondTextColor
