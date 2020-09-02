@@ -205,7 +205,7 @@ class LeftAndRightSpectrumView: UIView {
             $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.gamaLabel.snp.centerY)
             $0.height.equalTo(4)
-            $0.width.greaterThanOrEqualTo(4)
+            $0.width.equalTo(4)
         }
         
         lgamaValueLabel.snp.makeConstraints {
@@ -227,7 +227,7 @@ class LeftAndRightSpectrumView: UIView {
         
         lbetaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.greaterThanOrEqualTo(4)
+            $0.width.equalTo(4)
             $0.right.equalTo(self.betaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.betaLabel.snp.centerY)
         }
@@ -251,7 +251,7 @@ class LeftAndRightSpectrumView: UIView {
         
         lalphaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.greaterThanOrEqualTo(4)
+            $0.width.equalTo(4)
             $0.right.equalTo(self.alphaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.alphaLabel.snp.centerY)
         }
@@ -275,7 +275,7 @@ class LeftAndRightSpectrumView: UIView {
         
         lthetaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.greaterThanOrEqualTo(4)
+            $0.width.equalTo(4)
             $0.right.equalTo(self.thetaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.thetaLabel.snp.centerY)
         }
@@ -299,7 +299,7 @@ class LeftAndRightSpectrumView: UIView {
         
         ldeltaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.greaterThanOrEqualTo(4)
+            $0.width.equalTo(4)
             $0.right.equalTo(self.deltaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.deltaLabel.snp.centerY)
         }
@@ -342,14 +342,18 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
 
                 lalphaValueLabel.text = String(format: "%.1f%%", value * 100)
-                
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lalphaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.lalphaBar.snp.updateConstraints {
+                        $0.width.equalTo(lenth)
+                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                    }
+                    self.layoutIfNeeded()
                 })
+
             case .right:
                 ralphaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.ralphaBar.snp.updateConstraints{
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.ralphaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
                     }
                     self.layoutIfNeeded()
@@ -369,14 +373,18 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
 
                 lbetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lbetaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.lbetaBar.snp.updateConstraints {
+                        $0.width.equalTo(lenth)
+                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                    }
+                    self.layoutIfNeeded()
                 })
 
             case .right:
                 rbetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.rbetaBar.snp.updateConstraints{
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.rbetaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
                     }
                     self.layoutIfNeeded()
@@ -394,15 +402,20 @@ class LeftAndRightSpectrumView: UIView {
             }
             switch category {
             case .left:
+
                 lgamaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lgamaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.lgamaBar.snp.updateConstraints {
+                        $0.width.equalTo(lenth)
+                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                    }
+                    self.layoutIfNeeded()
                 })
 
             case .right:
                 rgamaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.rgamaBar.snp.updateConstraints{
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.rgamaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
                     }
                     self.layoutIfNeeded()
@@ -421,14 +434,18 @@ class LeftAndRightSpectrumView: UIView {
             switch category {
             case .left:
                 lthetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lthetaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.lthetaBar.snp.updateConstraints {
+                        $0.width.equalTo(lenth)
+                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                    }
+                    self.layoutIfNeeded()
                 })
 
             case .right:
                 rthetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.rthetaBar.snp.updateConstraints{
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.rthetaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
                     }
                     self.layoutIfNeeded()
@@ -447,14 +464,18 @@ class LeftAndRightSpectrumView: UIView {
             switch category {
             case .left:
                 ldeltaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.ldeltaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.ldeltaBar.snp.updateConstraints {
+                        $0.width.equalTo(lenth)
+                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                    }
+                    self.layoutIfNeeded()
                 })
 
             case .right:
                 rdeltaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.rdeltaBar.snp.updateConstraints{
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                    self.rdeltaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
                     }
                     self.layoutIfNeeded()
