@@ -109,18 +109,23 @@ class LeftAndRightSpectrumView: UIView {
         
         lalphaBar.layer.cornerRadius = 2
         lalphaBar.layer.masksToBounds = true
+        lalphaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lbetaBar.layer.cornerRadius = 2
         lbetaBar.layer.masksToBounds = true
+        lbetaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lgamaBar.layer.cornerRadius = 2
         lgamaBar.layer.masksToBounds = true
+        lgamaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         ldeltaBar.layer.cornerRadius = 2
         ldeltaBar.layer.masksToBounds = true
+        ldeltaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lthetaBar.layer.cornerRadius = 2
         lthetaBar.layer.masksToBounds = true
+        lthetaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lalphaValueLabel.text = "00%"
         lbetaValueLabel.text = "00%"
