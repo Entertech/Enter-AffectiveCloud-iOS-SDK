@@ -343,10 +343,7 @@ class LeftAndRightSpectrumView: UIView {
 
                 lalphaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lalphaBar.snp.updateConstraints{
-                        $0.width.equalTo(lenth)
-                    }
-                    self.layoutIfNeeded()
+                    self.lalphaBar.frame = CGRect(x: 0,y: 0,width: lenth,height: 4)
                 })
 
             case .right:
@@ -373,10 +370,7 @@ class LeftAndRightSpectrumView: UIView {
 
                 lbetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lbetaBar.snp.updateConstraints{
-                        $0.width.equalTo(lenth)
-                    }
-                    self.layoutIfNeeded()
+                    self.lbetaBar.frame = CGRect(x: 0,y: 0,width: lenth,height: 4)
                 })
 
             case .right:
@@ -403,10 +397,7 @@ class LeftAndRightSpectrumView: UIView {
 
                 lgamaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lgamaBar.snp.updateConstraints{
-                        $0.width.equalTo(lenth)
-                    }
-                    self.layoutIfNeeded()
+                    self.lgamaBar.frame = CGRect(x: 0,y: 0,width: lenth,height: 4)
                 })
 
             case .right:
@@ -432,10 +423,7 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
                 lthetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.lthetaBar.snp.updateConstraints{
-                        $0.width.equalTo(lenth)
-                    }
-                    self.layoutIfNeeded()
+                    self.lthetaBar.frame = CGRect(x: 0,y: 0,width: lenth,height: 4)
                 })
 
             case .right:
@@ -461,10 +449,7 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
                 ldeltaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
-                    self.ldeltaBar.snp.updateConstraints{
-                        $0.width.equalTo(lenth)
-                    }
-                    self.layoutIfNeeded()
+                    self.ldeltaBar.frame = CGRect(x: 0,y: 0,width: lenth,height: 4)
                 })
 
             case .right:
