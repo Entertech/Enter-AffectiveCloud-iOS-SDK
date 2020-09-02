@@ -342,8 +342,9 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
 
                 lalphaValueLabel.text = String(format: "%.1f%%", value * 100)
+                self.lalphaBar.bounds.size.width = length
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.lalphaBar.bounds.size.width = length
+                    self.lalphaBar.transform = CGAffineTransform.init(scaleX: 1, y: 1)
                 })
 
             case .right:
