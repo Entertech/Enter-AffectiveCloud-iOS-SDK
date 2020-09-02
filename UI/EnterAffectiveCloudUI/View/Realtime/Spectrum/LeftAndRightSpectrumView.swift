@@ -345,7 +345,7 @@ class LeftAndRightSpectrumView: UIView {
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.lalphaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                        $0.right.equalTo(self.alphaLabel.snp.left).offset(-4)
                     }
                     self.layoutIfNeeded()
                 })
@@ -376,7 +376,7 @@ class LeftAndRightSpectrumView: UIView {
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.lbetaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                        $0.right.equalTo(self.betaLabel.snp.left).offset(-4)
                     }
                     self.layoutIfNeeded()
                 })
@@ -437,7 +437,7 @@ class LeftAndRightSpectrumView: UIView {
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.lthetaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                        $0.right.equalTo(self.thetaLabel.snp.left).offset(-4)
                     }
                     self.layoutIfNeeded()
                 })
@@ -467,7 +467,7 @@ class LeftAndRightSpectrumView: UIView {
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.ldeltaBar.snp.updateConstraints {
                         $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
+                        $0.right.equalTo(self.deltaLabel.snp.left).offset(-4)
                     }
                     self.layoutIfNeeded()
                 })
