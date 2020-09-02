@@ -205,7 +205,7 @@ class LeftAndRightSpectrumView: UIView {
             $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.gamaLabel.snp.centerY)
             $0.height.equalTo(4)
-            $0.width.equalTo(4)
+            $0.width.greaterThanOrEqualTo(4)
         }
         
         lgamaValueLabel.snp.makeConstraints {
@@ -227,7 +227,7 @@ class LeftAndRightSpectrumView: UIView {
         
         lbetaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.equalTo(4)
+            $0.width.greaterThanOrEqualTo(4)
             $0.right.equalTo(self.betaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.betaLabel.snp.centerY)
         }
@@ -251,7 +251,7 @@ class LeftAndRightSpectrumView: UIView {
         
         lalphaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.equalTo(4)
+            $0.width.greaterThanOrEqualTo(4)
             $0.right.equalTo(self.alphaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.alphaLabel.snp.centerY)
         }
@@ -275,7 +275,7 @@ class LeftAndRightSpectrumView: UIView {
         
         lthetaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.equalTo(4)
+            $0.width.greaterThanOrEqualTo(4)
             $0.right.equalTo(self.thetaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.thetaLabel.snp.centerY)
         }
@@ -299,7 +299,7 @@ class LeftAndRightSpectrumView: UIView {
         
         ldeltaBar.snp.makeConstraints {
             $0.height.equalTo(4)
-            $0.width.equalTo(4)
+            $0.width.greaterThanOrEqualTo(4)
             $0.right.equalTo(self.deltaLabel.snp.left).offset(-4)
             $0.centerY.equalTo(self.deltaLabel.snp.centerY)
         }
@@ -345,7 +345,6 @@ class LeftAndRightSpectrumView: UIView {
                 
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lalphaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
-                    self.layoutIfNeeded()
                 })
             case .right:
                 ralphaValueLabel.text = String(format: "%.1f%%", value * 100)
@@ -372,7 +371,6 @@ class LeftAndRightSpectrumView: UIView {
                 lbetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lbetaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
-                    self.layoutIfNeeded()
                 })
 
             case .right:
@@ -399,7 +397,6 @@ class LeftAndRightSpectrumView: UIView {
                 lgamaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lgamaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
-                    self.layoutIfNeeded()
                 })
 
             case .right:
@@ -426,7 +423,6 @@ class LeftAndRightSpectrumView: UIView {
                 lthetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lthetaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
-                    self.layoutIfNeeded()
                 })
 
             case .right:
@@ -453,7 +449,6 @@ class LeftAndRightSpectrumView: UIView {
                 ldeltaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.ldeltaBar.bounds = CGRect(x: 0,y: 0,width: lenth,height: 4)
-                    self.layoutIfNeeded()
                 })
 
             case .right:
