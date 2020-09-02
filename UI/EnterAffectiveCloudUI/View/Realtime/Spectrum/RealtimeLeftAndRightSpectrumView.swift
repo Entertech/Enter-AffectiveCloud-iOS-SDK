@@ -11,7 +11,7 @@ import RxSwift
 import SafariServices
 import EnterAffectiveCloud
 
-class RealtimeLeftAndRightSpectrumView: BaseView {
+public class RealtimeLeftAndRightSpectrumView: BaseView {
 
     //MARK:- Public param
     /// 主色

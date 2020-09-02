@@ -54,9 +54,7 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
                 }
                 
             }
-        
     }
-    
 }
 
 public class RealtimeBrainwaveSpectrumView: BaseView {
