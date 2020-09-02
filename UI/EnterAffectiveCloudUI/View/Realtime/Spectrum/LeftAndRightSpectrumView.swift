@@ -109,23 +109,18 @@ class LeftAndRightSpectrumView: UIView {
         
         lalphaBar.layer.cornerRadius = 2
         lalphaBar.layer.masksToBounds = true
-        lalphaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lbetaBar.layer.cornerRadius = 2
         lbetaBar.layer.masksToBounds = true
-        lbetaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lgamaBar.layer.cornerRadius = 2
         lgamaBar.layer.masksToBounds = true
-        lgamaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         ldeltaBar.layer.cornerRadius = 2
         ldeltaBar.layer.masksToBounds = true
-        ldeltaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lthetaBar.layer.cornerRadius = 2
         lthetaBar.layer.masksToBounds = true
-        lthetaBar.layer.anchorPoint = CGPoint(x: 1, y: 0)
         
         lalphaValueLabel.text = "00%"
         lbetaValueLabel.text = "00%"
@@ -347,7 +342,7 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
 
                 lalphaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lalphaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -356,7 +351,7 @@ class LeftAndRightSpectrumView: UIView {
 
             case .right:
                 ralphaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.ralphaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -377,7 +372,7 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
 
                 lbetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lbetaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -386,7 +381,7 @@ class LeftAndRightSpectrumView: UIView {
 
             case .right:
                 rbetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.rbetaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -407,7 +402,7 @@ class LeftAndRightSpectrumView: UIView {
             case .left:
 
                 lgamaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lgamaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -416,7 +411,7 @@ class LeftAndRightSpectrumView: UIView {
 
             case .right:
                 rgamaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.rgamaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -436,7 +431,7 @@ class LeftAndRightSpectrumView: UIView {
             switch category {
             case .left:
                 lthetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.lthetaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -445,7 +440,7 @@ class LeftAndRightSpectrumView: UIView {
 
             case .right:
                 rthetaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.rthetaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -465,7 +460,7 @@ class LeftAndRightSpectrumView: UIView {
             switch category {
             case .left:
                 ldeltaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.ldeltaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
@@ -474,7 +469,7 @@ class LeftAndRightSpectrumView: UIView {
 
             case .right:
                 rdeltaValueLabel.text = String(format: "%.1f%%", value * 100)
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, options: .curveEaseInOut, animations: {
                     self.rdeltaBar.snp.updateConstraints{
                         $0.width.equalTo(lenth)
                     }
