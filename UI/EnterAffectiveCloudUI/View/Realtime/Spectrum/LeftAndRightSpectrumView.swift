@@ -325,7 +325,7 @@ class LeftAndRightSpectrumView: UIView {
     
     func setSpectrum(_ value: Float, _ type: SpectrumType, _ category: SpectrumCategory) {
 
-        let barLength = CGFloat(value)
+        let barLength = CGFloat(value) * 100
         
         switch type {
         case .α:
@@ -334,6 +334,9 @@ class LeftAndRightSpectrumView: UIView {
                 lenth = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
             } else {
                 lenth = barLength / 40.0 * maxPercentLength * scale
+                if lenth < 4 {
+                    lenth = 4
+                }
             }
             switch category {
             case .left:
