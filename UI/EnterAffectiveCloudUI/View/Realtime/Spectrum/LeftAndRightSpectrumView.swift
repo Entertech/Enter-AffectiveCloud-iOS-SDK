@@ -329,13 +329,13 @@ class LeftAndRightSpectrumView: UIView {
         
         switch type {
         case .α:
-            var lenth = maxPercentLength
+            var length = maxPercentLength
             if barLength / 40 > 1 {
-                lenth = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
+                length = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
             } else {
-                lenth = barLength / 40.0 * maxPercentLength * scale
-                if lenth < 4 {
-                    lenth = 4
+                length = barLength / 40.0 * maxPercentLength * scale
+                if length < 4 {
+                    length = 4
                 }
             }
             switch category {
@@ -343,18 +343,14 @@ class LeftAndRightSpectrumView: UIView {
 
                 lalphaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.lalphaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.alphaLabel.snp.left).offset(-4)
-                    }
-                    self.layoutIfNeeded()
+                    self.lalphaBar.bounds.size.width = length
                 })
 
             case .right:
                 ralphaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.ralphaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
+                        $0.width.equalTo(length)
                     }
                     self.layoutIfNeeded()
                 })
@@ -363,29 +359,28 @@ class LeftAndRightSpectrumView: UIView {
             }
 
         case .β:
-            var lenth = maxPercentLength
+            var length = maxPercentLength
             if barLength / 50 > 1 {
-                lenth = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 50.0) / 50.0
+                length = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 50.0) / 50.0
             } else {
-                lenth = barLength / 50.0 * maxPercentLength * scale
+                length = barLength / 50.0 * maxPercentLength * scale
+                if length < 4 {
+                    length = 4
+                }
             }
             switch category {
             case .left:
 
                 lbetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.lbetaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.betaLabel.snp.left).offset(-4)
-                    }
-                    self.layoutIfNeeded()
+                    self.lbetaBar.bounds.size.width = length
                 })
 
             case .right:
                 rbetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.rbetaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
+                        $0.width.equalTo(length)
                     }
                     self.layoutIfNeeded()
                 })
@@ -394,29 +389,28 @@ class LeftAndRightSpectrumView: UIView {
             }
             
         case .γ:
-            var lenth = maxPercentLength
+            var length = maxPercentLength
             if barLength / 30 > 1 {
-                lenth = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 30.0) / 70.0
+                length = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 30.0) / 70.0
             } else {
-                lenth = barLength / 30.0 * maxPercentLength * scale
+                length = barLength / 30.0 * maxPercentLength * scale
+                if length < 4 {
+                    length = 4
+                }
             }
             switch category {
             case .left:
 
                 lgamaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.lgamaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.gamaLabel.snp.left).offset(-4)
-                    }
-                    self.layoutIfNeeded()
+                    self.lgamaBar.bounds.size.width = length
                 })
 
             case .right:
                 rgamaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.rgamaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
+                        $0.width.equalTo(length)
                     }
                     self.layoutIfNeeded()
                 })
@@ -425,28 +419,27 @@ class LeftAndRightSpectrumView: UIView {
             }
             
         case .θ:
-            var lenth = maxPercentLength
+            var length = maxPercentLength
             if barLength / 40 > 1 {
-                lenth = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
+                length = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
             } else {
-                lenth = barLength / 40.0 * maxPercentLength * scale
+                length = barLength / 40.0 * maxPercentLength * scale
+                if length < 4 {
+                    length = 4
+                }
             }
             switch category {
             case .left:
                 lthetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.lthetaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.thetaLabel.snp.left).offset(-4)
-                    }
-                    self.layoutIfNeeded()
+                    self.lthetaBar.bounds.size.width = length
                 })
 
             case .right:
                 rthetaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.rthetaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
+                        $0.width.equalTo(length)
                     }
                     self.layoutIfNeeded()
                 })
@@ -455,28 +448,27 @@ class LeftAndRightSpectrumView: UIView {
             }
             
         case .δ:
-            var lenth = maxPercentLength
+            var length = maxPercentLength
             if barLength / 40 > 1 {
-                lenth = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
+                length = maxPercentLength * scale + maxPercentLength * (1 - scale) * (barLength - 40.0) / 60.0
             } else {
-                lenth = barLength / 40.0 * maxPercentLength * scale
+                length = barLength / 40.0 * maxPercentLength * scale
+                if length < 4 {
+                    length = 4
+                }
             }
             switch category {
             case .left:
                 ldeltaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
-                    self.ldeltaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
-                        $0.right.equalTo(self.deltaLabel.snp.left).offset(-4)
-                    }
-                    self.layoutIfNeeded()
+                    self.ldeltaBar.bounds.size.width = length
                 })
 
             case .right:
                 rdeltaValueLabel.text = String(format: "%.1f%%", value * 100)
                 UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
                     self.rdeltaBar.snp.updateConstraints {
-                        $0.width.equalTo(lenth)
+                        $0.width.equalTo(length)
                     }
                     self.layoutIfNeeded()
                 })
