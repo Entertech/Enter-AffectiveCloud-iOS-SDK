@@ -11,6 +11,8 @@ import Charts
 
 public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     
+    public var interval: Double = 0.4
+    
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F") {
         willSet {
             marker?.dot?.backgroundColor = newValue
@@ -103,7 +105,6 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     private var sample = 3
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.2
     private var timeStamp = 0
     private var hrvArray: [Int]?
     private var yRender: LimitYAxisRenderer?
