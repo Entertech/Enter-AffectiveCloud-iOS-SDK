@@ -103,7 +103,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     private var sample = 3
     private var maxDataCount = 100
     private let mainFont = "PingFangSC-Semibold"
-    private let interval = 0.4
+    private let interval = 0.2
     private var timeStamp = 0
     private var hrvArray: [Int]?
     private var yRender: LimitYAxisRenderer?
