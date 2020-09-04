@@ -98,7 +98,7 @@ public class AffectiveCloudClient {
     /// - Parameters:
     ///   - services: biodata services. ps: .eeg and .hr
     ///   - tolerance: 0-4
-    public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil, uploadCycle:UInt = 3) {
+    public func initBiodataServices(services: BiodataTypeOptions, tolerance: [String:Any]?=nil, uploadCycle:UInt = 3, additional: [String:Any]?=nil) {
         self.cloudService?.uploadCycle = Int(uploadCycle)
         if uploadCycle == 0 {
             _hrBufferSize = 2
@@ -109,6 +109,7 @@ public class AffectiveCloudClient {
         }
         self.cloudService?.bioService = services
         self.cloudService?.bioTolerance = tolerance
+        self.cloudService?.bioAdditional = additional
     }
     
     /// set up experiment param

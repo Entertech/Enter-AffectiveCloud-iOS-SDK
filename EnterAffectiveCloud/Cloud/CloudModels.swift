@@ -33,6 +33,7 @@ public class CSRequestDataJSONModel: HandyJSON {
 class CSKwargsJSONModel: HandyJSON {
     var bioTypes: [String]?
     var tolerance: [String:Any]?
+    var additional: [String:Any]?
     var storageSettings: CSPersonalInfoJSONModel?
     var app_key: String?
     var sign: String?
@@ -72,6 +73,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.bioTypes <-- "bio_data_type"
         mapper <<<
             self.tolerance <-- "bio_data_tolerance"
+        mapper <<<
+            self.additional <-- "additional_data"
         mapper <<<
             self.affectiveTypes <-- "cloud_services"
         mapper <<<

@@ -35,6 +35,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     var appSecret: String?
     var bioService: BiodataTypeOptions?
     var bioTolerance: [String:Any]?
+    var bioAdditional: [String:Any]?
     var bioSubscription: BiodataParameterOptions?
     var affectiveService: AffectiveDataServiceOptions?
     var affectiveSubscription: AffectiveDataSubscribeOptions?
@@ -215,9 +216,15 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
 //MARK: BiodataServiceProtocol imp
 extension AffectiveCloudServices: BiodataServiceProtocol {
 
-    func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?=nil,
-                        sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
-                        mode: [Int]? = nil, cases: [Int]? = nil) {
+    func biodataInitial(options: BiodataTypeOptions,
+                        tolerance: [String:Any]?=nil,
+                        additional: [String:Any]?=nil,
+                        sex: String? = nil,
+                        age: Int? = nil,
+                        sn: [String: Any]? = nil,
+                        source: [String: Any]? = nil,
+                        mode: [Int]? = nil,
+                        cases: [Int]? = nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -236,6 +243,9 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         jsonModel.kwargs?.bioTypes = biodataTypes
         if let tolerance = tolerance {
             jsonModel.kwargs?.tolerance = tolerance
+        }
+        if let additional = additional {
+            jsonModel.kwargs?.additional = additional
         }
     
         let storage = CSPersonalInfoJSONModel()
