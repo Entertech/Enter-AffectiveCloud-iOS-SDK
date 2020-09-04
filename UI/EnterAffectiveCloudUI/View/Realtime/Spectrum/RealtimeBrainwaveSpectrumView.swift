@@ -15,15 +15,8 @@ protocol BrainwaveSpectrumValueProtocol {
     var rxSpectrumValue: BehaviorSubject<(Float, Float, Float, Float, Float)> {set get}
 }
 
-public enum SpectrumCategory {
-    case left
-    case right
-    case total
-}
-
 class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
 
-    var spectrumType: SpectrumCategory = .total
     var rxSpectrumValue: BehaviorSubject<(Float, Float, Float, Float, Float)>
     
     
@@ -42,17 +35,10 @@ class UpdateBrainwaveSpectrum: BrainwaveSpectrumValueProtocol {
         let value = notification.userInfo!["biodataServicesSubscribe"] as! AffectiveCloudResponseJSONModel
             if let data = value.dataModel as? CSBiodataProcessJSONModel {
                 if let eeg = data.eeg {
-                    if let _ = eeg.alpha, spectrumType == .total {
+                    if let _ = eeg.alpha {
                         rxSpectrumValue.onNext((eeg.gamma!, eeg.belta!, eeg.alpha!, eeg.theta!, eeg.delta!))
                     }
-                    if let _ = eeg.alphaLeft, spectrumType == .left {
-                        rxSpectrumValue.onNext((eeg.gammaLeft!, eeg.beltaLeft!, eeg.alphaLeft!, eeg.thetaLeft!, eeg.deltaLeft!))
-                    }
-                    if let _ = eeg.alphaRight, spectrumType == .right {
-                        rxSpectrumValue.onNext((eeg.gammaRight!, eeg.beltaRight!, eeg.alphaRight!, eeg.thetaRight!, eeg.deltaRight!))
-                    }
                 }
-                
             }
         
     }
@@ -92,8 +78,6 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
             spectrumView.deltaValueLabel.textColor = secondTextColor
         }
     }
-    
-    public var spectrumType: SpectrumCategory = .total
     
     /// 是否显示按钮
     public var isShowInfoIcon: Bool = true {
@@ -174,7 +158,6 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     
     private func observeRealtimeValue(_ demo: (Float, Float, Float, Float, Float) = (0,0,0,0,0)) {
         updateSpectrum = UpdateBrainwaveSpectrum(demo)
-        updateSpectrum?.spectrumType = self.spectrumType
         updateSpectrum?.rxSpectrumValue.subscribe(onNext: {[weak self] (value) in
             guard let self = self else {return}
             DispatchQueue.main.async {
