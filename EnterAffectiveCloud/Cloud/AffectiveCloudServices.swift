@@ -942,7 +942,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     self.session_id = id
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
+                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, additional: self.bioAdditional, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)
@@ -955,7 +955,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if model.code == 0 {
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
+                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, additional: self.bioAdditional, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)
