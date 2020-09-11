@@ -44,7 +44,7 @@ self.client.initBiodataServices(services: [.EEG, .HeartRate], uploadCycle:3 )
 self.client.startAffectiveDataServices(services: [.attention, .relaxation, .pleasure, .pressure])
 
 // 订阅生物信号
-self.client.subscribeBiodataServices(services: [.eeg_all, .hr_all])
+self.client.subscribeBiodataServices(services: [.eeg, .hr])
 
 // 订阅情感数据
 self.client.subscribeAffectiveDataServices(services: [.attention, .relaxation, .pressure, .pleasure])
