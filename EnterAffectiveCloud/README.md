@@ -37,8 +37,8 @@ let client = AffectiveCloudClient(websocketURLString: yourURL, appKey: yourAppKe
 ### 服务订阅
 
 ```swift
-// 请求生物信号数据
-self.client.initBiodataServices(services: [.EEG, .HeartRate])
+// 请求生物信号数据, uploadCycle为情感云计算周期，详情请查看情感云文档初始化生物数据部分
+self.client.initBiodataServices(services: [.EEG, .HeartRate], uploadCycle:3 )
 
 // 请求情感数据
 self.client.startAffectiveDataServices(services: [.attention, .relaxation, .pleasure, .pressure])
