@@ -140,7 +140,7 @@ func closeAction(_ sernder: UIButton) {
 生物数据（EEG、HR等）的基础分析服务。此部分数据为情感计算服务的数据基础。需要先初始化并上传生物数据，才能进行情感计算服务。
 
 ```
-func initBiodataServices(serivices: BiodataTypeOptions)
+func initBiodataServices(serivices: BiodataTypeOptions, uploadCycle: UInt = 3)
 func appendBiodata(eegData: Data)
 func appendBiodata(hrData: Data)
 func subscribeBiodataServices(serivices: BiodataParameterOptions)
@@ -150,7 +150,7 @@ func getBiodataReport(services: BiodataTypeOptions)
 
 ### 方法说明
 
-* `initBiodataServices(serivices: BiodataTypeOptions)`  这个方法根据`多选参数`  [BiodataTypeOptions](#jump1) 用来初始化基础生物数据分析服务，目前有两种生物数据：`脑电数据`和`心率数据`。同时这个方法也是后面所有服务的基础(**必须调用这个才有后面的服务**)。
+* `initBiodataServices(serivices: BiodataTypeOptions, uploadCycle: UInt)`  这个方法根据`多选参数`  [BiodataTypeOptions](#jump1) 用来初始化基础生物数据分析服务，目前有两种生物数据：`脑电数据`和`心率数据`。同时这个方法也是后面所有服务的基础(**必须调用这个才有后面的服务**)。uploadCycle请参照[生物数据基础分析服务协议](https://docs.affectivecloud.com/%F0%9F%8E%99%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE/3.%20%E4%BC%9A%E8%AF%9D%E5%8D%8F%E8%AE%AE.html)
 * `appendBiodata(eegData: Data)` 这个方法向情感云添加硬件采集到的脑电数据，然后再由情感云中的算法分析，并返回相应的脑电服务数据。可以在 `EnterBioModuleBLE` 的脑电数据回调中直接调用。
 * `appendBiodata(hrData: Data)` 这个方法向情感云添加硬件采集到的心率数据，然后再由情感云中的算法分析，并返回相应的心率服务数据。可以在 `EnterBioModuleBLE` 的脑电数据回调中直接调用。
 * `subscribeBiodataServices(serivices: BiodataParameterOptions)` 这个方法根据`多选参数`  [BiodataParameterOptions](#jump2) 请求情感云实时获取基础生物数据分析服务，以订阅的方式获取想要的数据分析服务。订阅后根据代理`AffectiveCloudResponseDelegate` 获取服务数据。
@@ -165,7 +165,7 @@ import EnterAffectiveCloud
 // 开始基础生物数据分析
 func startBiodataServices() {
     self.client.initBiodataServices(services: [.EEG, .HeartRate]) #初始化服务
-    self.client.subscribeBiodataServices(services: [.eeg_all, .hr_all]) #订阅服务
+    self.client.subscribeBiodataServices(services: [.eeg, .hr]) #订阅服务
     ...
 }
 
@@ -183,7 +183,7 @@ func hrData() {
 
 // 取消订阅服务数据
 func unsubscribeBiodataServices() {
-    self.client.unsubscribeBiodataServices(services: [.eeg_all, .hr_all])
+    self.client.unsubscribeBiodataServices(services: [.eeg, .hr])
     ...
 }
 
