@@ -136,26 +136,26 @@ public class PrivateReportRelaxationAndAttention: UIView {
         
         relaxationNumberView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalTo(line.snp.top).offset(-25)
+            $0.bottom.equalToSuperview().offset(-25)
         }
         
         relaxationCircleView.snp.makeConstraints {
             $0.height.equalTo(70)
             $0.width.equalTo(130)
             $0.right.equalToSuperview().offset(-16)
-            $0.bottom.equalTo(line.snp.top).offset(-25)
+            $0.bottom.equalToSuperview().offset(-25)
         }
         
         attentionNumberView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().offset(-25)
+            $0.bottom.equalTo(line.snp.top).offset(-25)
         }
         
         attentionCircleView.snp.makeConstraints {
             $0.height.equalTo(70)
             $0.width.equalTo(130)
             $0.right.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-25)
+            $0.bottom.equalTo(line.snp.top).offset(-25)
         }
         
         self.snp.makeConstraints {
