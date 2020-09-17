@@ -58,9 +58,9 @@ public class PrivateReportHRV: UIView {
         }
     }
     
-    let splitStateArray:[CGFloat] = [0 ,7, 20, 50] //等级分段
+    public var splitStateArray:[CGFloat] = [0 ,7, 20, 50] //等级分段
     
-    let scaleArray = [0, 7, 20, 50] //刻度
+    public var scaleArray = [0, 7, 20, 50] //刻度
     
     
     public init() {

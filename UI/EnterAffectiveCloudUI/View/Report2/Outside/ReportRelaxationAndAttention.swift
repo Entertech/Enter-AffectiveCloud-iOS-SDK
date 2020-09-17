@@ -76,9 +76,9 @@ public class PrivateReportRelaxationAndAttention: UIView {
     public var relaxationColor = UIColor.colorWithHexString(hexColor: "5e75ff")
     public var attentionColor = UIColor.colorWithHexString(hexColor: "5fc695")
     
-    private var relaxationStateArray = [0 ,60, 80, 100] //放松度等级分段
+    public var relaxationStateArray = [0 ,60, 80, 100] //放松度等级分段
     
-    private var attentionStateArray = [0 ,60, 80, 100] //注意力等级分段
+    public var attentionStateArray = [0 ,60, 80, 100] //注意力等级分段
     
     public var relaxationStateColor = UIColor.colorWithHexString(hexColor: "abb7ff") {
         willSet {
