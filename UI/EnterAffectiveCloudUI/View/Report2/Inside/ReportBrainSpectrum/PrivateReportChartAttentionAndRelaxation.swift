@@ -523,7 +523,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             relaxationSet = set
         }
         chartData(valCount: yVals.count)
-        yRender?.entries = [30, 60, 90, 160, 190, 230]
+        yRender?.entries = [30, 70, 100, 160, 200, 230]
     }
     
     private func chartData(valCount: Int) {
