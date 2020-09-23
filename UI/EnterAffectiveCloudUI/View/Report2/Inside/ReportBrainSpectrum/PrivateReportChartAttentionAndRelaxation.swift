@@ -257,14 +257,14 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             $0.left.equalToSuperview()
             $0.height.equalTo(15)
             $0.width.equalTo(23)
-            $0.top.equalToSuperview().offset(248)
+            $0.top.equalToSuperview().offset(244)
         }
         
         r90Label.snp.makeConstraints {
             $0.left.equalToSuperview()
             $0.height.equalTo(15)
             $0.width.equalTo(23)
-            $0.top.equalToSuperview().offset(216)
+            $0.top.equalToSuperview().offset(212)
         }
         
         a0Label.snp.makeConstraints {
@@ -284,7 +284,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             $0.left.equalToSuperview()
             $0.height.equalTo(15)
             $0.width.equalTo(23)
-            $0.top.equalToSuperview().offset(109)
+            $0.top.equalToSuperview().offset(105)
         }
         a100Label.snp.makeConstraints {
             $0.left.equalToSuperview()
