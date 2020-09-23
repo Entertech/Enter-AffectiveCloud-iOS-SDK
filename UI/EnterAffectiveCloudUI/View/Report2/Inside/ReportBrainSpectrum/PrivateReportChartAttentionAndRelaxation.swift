@@ -417,11 +417,11 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         a100Label.textAlignment = .right
         r0Label.text = "0"
         r30Label.text = "30"
-        r60Label.text = "60"
-        r90Label.text = "90"
+        r60Label.text = "70"
+        r90Label.text = "100"
         a0Label.text = "0"
         a30Label.text = "30"
-        a60Label.text = "60"
+        a60Label.text = "70"
         a100Label.text = "100"
         r0Label.textColor = alphaColor
         r30Label.textColor = alphaColor
