@@ -58,9 +58,9 @@ public class ReportCoherence: UIView {
         }
     }
     
-    let splitStateArray:[CGFloat] = [0 ,20, 60, 100] //等级分段
+    public var splitStateArray:[CGFloat] = [0 ,20, 60, 100] //等级分段
     
-    let scaleArray = [0, 20, 60, 100] //刻度
+    public var scaleArray = [0, 20, 60, 100] //刻度
     
     
     public init() {

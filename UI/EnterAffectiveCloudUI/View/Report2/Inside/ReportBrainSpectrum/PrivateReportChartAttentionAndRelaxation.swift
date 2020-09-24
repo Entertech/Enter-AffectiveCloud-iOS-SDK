@@ -274,14 +274,14 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             $0.left.equalToSuperview()
             $0.height.equalTo(15)
             $0.width.equalTo(23)
-            $0.top.equalToSuperview().offset(254)
+            $0.top.equalToSuperview().offset(244)
         }
         
         r90Label.snp.makeConstraints {
             $0.left.equalToSuperview()
             $0.height.equalTo(15)
             $0.width.equalTo(23)
-            $0.top.equalToSuperview().offset(222)
+            $0.top.equalToSuperview().offset(212)
         }
         
         a0Label.snp.makeConstraints {
@@ -301,7 +301,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             $0.left.equalToSuperview()
             $0.height.equalTo(15)
             $0.width.equalTo(23)
-            $0.top.equalToSuperview().offset(115)
+            $0.top.equalToSuperview().offset(105)
         }
         a100Label.snp.makeConstraints {
             $0.left.equalToSuperview()
@@ -434,11 +434,11 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         a100Label.textAlignment = .right
         r0Label.text = "0"
         r30Label.text = "30"
-        r60Label.text = "60"
-        r90Label.text = "90"
+        r60Label.text = "70"
+        r90Label.text = "100"
         a0Label.text = "0"
         a30Label.text = "30"
-        a60Label.text = "60"
+        a60Label.text = "70"
         a100Label.text = "100"
         r0Label.textColor = alphaColor
         r30Label.textColor = alphaColor
@@ -540,7 +540,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             relaxationSet = set
         }
         chartData(valCount: yVals.count)
-        yRender?.entries = [30, 60, 90, 160, 190, 230]
+        yRender?.entries = [30, 70, 100, 160, 200, 230]
     }
     
     private func chartData(valCount: Int) {

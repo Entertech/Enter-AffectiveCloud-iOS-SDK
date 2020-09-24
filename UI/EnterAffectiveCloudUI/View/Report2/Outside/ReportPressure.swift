@@ -38,7 +38,7 @@ public class PrivateReportPressure: UIView {
     private let numLabel = UILabel()
     private let stateLabel = UILabel()
     public let circleView = ReportSemiCircle2() // 扇形试图
-    private var stateArray:[Int] = [0 ,20, 70, 100] //放松度等级分段
+    public var stateArray:[Int] = [0 ,20, 70, 100] //放松度等级分段
     
     // 状态文字背景色
     public var stateColor = UIColor.colorWithHexString(hexColor: "ffb2c0") {

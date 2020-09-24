@@ -76,9 +76,9 @@ public class PrivateReportRelaxationAndAttention: UIView {
     public var relaxationColor = UIColor.colorWithHexString(hexColor: "5e75ff")
     public var attentionColor = UIColor.colorWithHexString(hexColor: "5fc695")
     
-    private var relaxationStateArray = [0 ,60, 80, 100] //放松度等级分段
+    public var relaxationStateArray = [0 ,60, 80, 100] //放松度等级分段
     
-    private var attentionStateArray = [0 ,60, 80, 100] //注意力等级分段
+    public var attentionStateArray = [0 ,60, 80, 100] //注意力等级分段
     
     public var relaxationStateColor = UIColor.colorWithHexString(hexColor: "abb7ff") {
         willSet {
@@ -136,26 +136,26 @@ public class PrivateReportRelaxationAndAttention: UIView {
         
         relaxationNumberView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalTo(line.snp.top).offset(-25)
+            $0.bottom.equalToSuperview().offset(-25)
         }
         
         relaxationCircleView.snp.makeConstraints {
             $0.height.equalTo(70)
             $0.width.equalTo(130)
             $0.right.equalToSuperview().offset(-16)
-            $0.bottom.equalTo(line.snp.top).offset(-25)
+            $0.bottom.equalToSuperview().offset(-25)
         }
         
         attentionNumberView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().offset(-25)
+            $0.bottom.equalTo(line.snp.top).offset(-25)
         }
         
         attentionCircleView.snp.makeConstraints {
             $0.height.equalTo(70)
             $0.width.equalTo(130)
             $0.right.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-25)
+            $0.bottom.equalTo(line.snp.top).offset(-25)
         }
         
         self.snp.makeConstraints {
