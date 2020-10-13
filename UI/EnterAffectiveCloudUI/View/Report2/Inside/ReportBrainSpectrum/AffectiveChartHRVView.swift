@@ -11,7 +11,7 @@ import Charts
 
 public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     
-    public var interval: Double = 0.4
+    public var interval: Double = 0.2
     
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#FFC56F") {
         willSet {
@@ -427,6 +427,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             let chart = AffectiveChartHRVView()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
+            chart.interval = self.interval
             chart.bgColor = self.bgColor
             chart.lineColor = self.lineColor
             chart.cornerRadius = self.cornerRadius
