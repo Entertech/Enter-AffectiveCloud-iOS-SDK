@@ -22,7 +22,7 @@ public class PrivateReportHRV: UIView {
             dotView.setDotValue(index: Float(newValue))
             for i in 0..<(scaleArray.count-1) {
                 let range = scaleArray[i]..<scaleArray[i+1]
-                if range.contains(lroundf(value)) {
+                if range.contains(lroundf(newValue)) {
                     switch i {
                     case 0:
                         numberView.state = .low
