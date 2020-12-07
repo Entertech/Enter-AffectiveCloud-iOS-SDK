@@ -14,7 +14,7 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
     public var uploadCycle: UInt = 3 {
         willSet {
             if newValue == 0 {
-                interval = 0.4
+                interval = 0.8
             } else {
                 interval = 0.6 * Double(newValue)
             }
