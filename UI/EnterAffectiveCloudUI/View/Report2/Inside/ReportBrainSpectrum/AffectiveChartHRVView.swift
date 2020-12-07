@@ -15,7 +15,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     public var uploadCycle: UInt = 3 {
         willSet {
             if uploadCycle == 0 {
-                interval = 0.4
+                interval = 0.2
             } else {
                 interval = 0.2
             }
