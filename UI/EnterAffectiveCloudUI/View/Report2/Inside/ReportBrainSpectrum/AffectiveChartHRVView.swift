@@ -14,7 +14,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
     /// 数据上传周期，用于计算图表x轴间隔
     public var uploadCycle: UInt = 3 {
         willSet {
-            if uploadCycle == 0 {
+            if newValue == 0 {
                 interval = 0.2
             } else {
                 interval = 0.2

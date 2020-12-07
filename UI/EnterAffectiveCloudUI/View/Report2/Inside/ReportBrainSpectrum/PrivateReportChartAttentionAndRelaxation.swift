@@ -14,7 +14,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     /// 数据上传周期，用于计算图表x轴间隔
     public var uploadCycle: UInt = 3 {
         willSet {
-            if uploadCycle == 0 {
+            if newValue == 0 {
                 interval = 0.4
             } else {
                 interval = 0.6 * Double(newValue)
