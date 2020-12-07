@@ -3,6 +3,7 @@ PODS:
   - Charts (3.4.0):
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
+  - FluentDarkModeKit (1.0.1)
   - GzipSwift (5.1.1)
   - HandyJSON (5.0.3-beta)
   - Moya/Core (14.0.0-beta.6):
@@ -17,7 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
-  - Charts (= 3.4.0)
+  - FluentDarkModeKit
   - GzipSwift
   - HandyJSON (= 5.0.3-beta)
   - Moya/RxSwift (~> 14.0.0-beta.5)
@@ -30,6 +31,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Charts
+    - FluentDarkModeKit
     - GzipSwift
     - HandyJSON
     - Moya
@@ -41,6 +43,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  FluentDarkModeKit: 0c5f31ca81eb058f3e8b6d79b3d08afbe7c40c42
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
   HandyJSON: 88e8ea5f66ab65c3b8768499a1935d0509c460d4
   Moya: d4821fbcb3e784f34d2f82869e6855057a0b85d1
@@ -49,6 +52,6 @@ SPEC CHECKSUMS:
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 1fa3f5b1075ad4c0bc41bb422e1dc8505c6fed88
+PODFILE CHECKSUM: 8595dc8fb998689b030749f8219720dd3f67c3a1
 
 COCOAPODS: 1.9.3

@@ -34,6 +34,7 @@ class CSKwargsJSONModel: HandyJSON {
     var bioTypes: [String]?
     var tolerance: [String:Any]?
     var additional: [String:Any]?
+    var algorithmParam: BiodataAlgorithmParams?
     var storageSettings: CSPersonalInfoJSONModel?
     var app_key: String?
     var sign: String?
@@ -99,6 +100,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.storageSettings <-- "storage_settings"
         mapper <<<
             self.coherenceServices <-- "coherence"
+        mapper <<<
+            self.algorithmParam <-- "algorithm_params"
     }
 }
 
@@ -251,9 +254,20 @@ public class CSBiodataEEGJsonModel: HandyJSON {
     public var waveLeft: [Float]?
     public var alpha: Float?
     public var belta: Float?
-    public  var theta: Float?
+    public var theta: Float?
     public var delta: Float?
     public var gamma: Float?
+    public var alphaLeft: Float?
+    public var beltaLeft: Float?
+    public var thetaLeft: Float?
+    public var deltaLeft: Float?
+    public var gammaLeft: Float?
+    public var qualityLeft: Float?
+    public var alphaRight: Float?
+    public var beltaRight: Float?
+    public var thetaRight: Float?
+    public var deltaRight: Float?
+    public var gammaRight: Float?
     public var quality: Float?
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
@@ -273,6 +287,26 @@ public class CSBiodataEEGJsonModel: HandyJSON {
             self.gamma <-- "eeg_gamma_power"
         mapper <<<
             self.quality <-- "eeg_quality"
+        mapper <<<
+            self.alphaLeft <-- "eegl_alpha_power"
+        mapper <<<
+            self.beltaLeft <-- "eegl_beta_power"
+        mapper <<<
+            self.thetaLeft <-- "eegl_theta_power"
+        mapper <<<
+            self.deltaLeft <-- "eegl_delta_power"
+        mapper <<<
+            self.gammaLeft <-- "eegl_gamma_power"
+        mapper <<<
+            self.alphaRight <-- "eegr_alpha_power"
+        mapper <<<
+            self.beltaRight <-- "eegr_beta_power"
+        mapper <<<
+            self.thetaRight <-- "eegr_theta_power"
+        mapper <<<
+            self.deltaRight <-- "eegr_delta_power"
+        mapper <<<
+            self.gammaRight <-- "eegr_gamma_power"
        
     }
 }
@@ -316,6 +350,16 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
     public var thetaCurve: [Float]?
     public var deltaCurve: [Float]?
     public var gammaCurve: [Float]?
+    public var alphaLeftCurve: [Float]?
+    public var betaLeftCurve: [Float]?
+    public var thetaLeftCurve: [Float]?
+    public var deltaLeftCurve: [Float]?
+    public var gammaLeftCurve: [Float]?
+    public var alphaRightCurve: [Float]?
+    public var betaRightCurve: [Float]?
+    public var thetaRightCurve: [Float]?
+    public var deltaRightCurve: [Float]?
+    public var gammaRightCurve: [Float]?
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -328,7 +372,26 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
             self.deltaCurve <-- "eeg_delta_curve"
         mapper <<<
             self.gammaCurve <-- "eeg_gamma_curve"
-
+        mapper <<<
+            self.alphaLeftCurve <-- "eegl_alpha_curve"
+        mapper <<<
+            self.betaLeftCurve <-- "eegl_beta_curve"
+        mapper <<<
+            self.thetaLeftCurve <-- "eegl_theta_curve"
+        mapper <<<
+            self.deltaLeftCurve <-- "eegl_delta_curve"
+        mapper <<<
+            self.gammaLeftCurve <-- "eegl_gamma_curve"
+        mapper <<<
+            self.alphaRightCurve <-- "eegr_alpha_curve"
+        mapper <<<
+            self.betaRightCurve <-- "eegr_beta_curve"
+        mapper <<<
+            self.thetaRightCurve <-- "eegr_theta_curve"
+        mapper <<<
+            self.deltaRightCurve <-- "eegr_delta_curve"
+        mapper <<<
+            self.gammaRightCurve <-- "eegr_gamma_curve"
     }
 }
 
@@ -592,6 +655,40 @@ public class CSLabelSubmitJSONModel: HandyJSON {
     public var note: [String]?
     public required init() { }
   
+}
+
+public enum FilterMode: String,HandyJSONEnum {
+    case basic
+    case smart
+    case hard
+}
+
+public enum PowerMode: String, HandyJSONEnum {
+    case db
+    case rate
+}
+
+public class AlgorithmParamJSONModel: HandyJSON {
+    //public var eeg:
+    public var tolerance: Int?
+    public var filterMode: FilterMode?
+    public var powerMode: PowerMode?
+    public var channelPower: Bool?
+    public required init() { }
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.filterMode <-- "filter_mode"
+        mapper <<<
+            self.powerMode <-- "power_mode"
+        mapper <<<
+            self.channelPower <-- "channel_power_verbose"
+    }
+    
+}
+
+public class BiodataAlgorithmParams :HandyJSON {
+    public required init() { }
+    public var eeg: AlgorithmParamJSONModel?
 }
 
 

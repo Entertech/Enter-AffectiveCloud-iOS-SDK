@@ -19,7 +19,6 @@
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E81234D7A6200532A46 /* BaseView.swift */; };
 		FA0D4F9223CDAF990084EBD1 /* RealtimeHRVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */; };
-		FA1690C324556EAB00FADC2B /* EnterColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690C224556EAB00FADC2B /* EnterColors.swift */; };
 		FA1690D224567D8300FADC2B /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690CF24567D8300FADC2B /* BalloonMarker.swift */; };
 		FA1690D324567D8300FADC2B /* ValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D024567D8300FADC2B /* ValueMarkerView.swift */; };
 		FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D5245920E000FADC2B /* HighlightIcon.swift */; };
@@ -85,6 +84,13 @@
 		FAB0BC1F23B217F90074C06C /* ChartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0BC1E23B217F90074C06C /* ChartService.swift */; };
 		FAB0BC2323B30A750074C06C /* AffectiveChartHRVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0BC2223B30A750074C06C /* AffectiveChartHRVView.swift */; };
 		FAB0BC2523B31F5A0074C06C /* LimitYAxisRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB0BC2423B31F5A0074C06C /* LimitYAxisRenderer.swift */; };
+		FAB14005257617D40079F785 /* ReportHRVView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB14004257617D40079F785 /* ReportHRVView2.swift */; };
+		FAB1401F25762A030079F785 /* Color+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1401E25762A030079F785 /* Color+Extention.swift */; };
+		FAB14026257646D40079F785 /* HRVChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB14025257646D40079F785 /* HRVChart.swift */; };
+		FAB1402B25777A000079F785 /* AffectiveChartHRVView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1402A25777A000079F785 /* AffectiveChartHRVView2.swift */; };
+		FAB14031257790BF0079F785 /* RhythmsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB14030257790BF0079F785 /* RhythmsChart.swift */; };
+		FAB140662578D51F0079F785 /* ReportBrainwaveRhythms.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */; };
+		FAB1406A2579EB790079F785 /* AffectiveRhythmsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB140692579EB790079F785 /* AffectiveRhythmsView.swift */; };
 		FAB1DF8423E9219D007ADBA3 /* AffectiveChartAttentionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1DF8323E9219C007ADBA3 /* AffectiveChartAttentionView.swift */; };
 		FAB1DF8623E941A9007ADBA3 /* AffectiveChartRelaxationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1DF8523E941A9007ADBA3 /* AffectiveChartRelaxationView.swift */; };
 		FAB3E45F23AC663000A85129 /* ReportViewHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB3E45E23AC663000A85129 /* ReportViewHead.swift */; };
@@ -227,7 +233,6 @@
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHRVView.swift; sourceTree = "<group>"; };
-		FA1690C224556EAB00FADC2B /* EnterColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterColors.swift; sourceTree = "<group>"; };
 		FA1690CF24567D8300FADC2B /* BalloonMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		FA1690D024567D8300FADC2B /* ValueMarkerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueMarkerView.swift; sourceTree = "<group>"; };
 		FA1690D5245920E000FADC2B /* HighlightIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightIcon.swift; sourceTree = "<group>"; };
@@ -292,6 +297,13 @@
 		FAB0BC1E23B217F90074C06C /* ChartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartService.swift; sourceTree = "<group>"; };
 		FAB0BC2223B30A750074C06C /* AffectiveChartHRVView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveChartHRVView.swift; sourceTree = "<group>"; };
 		FAB0BC2423B31F5A0074C06C /* LimitYAxisRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitYAxisRenderer.swift; sourceTree = "<group>"; };
+		FAB14004257617D40079F785 /* ReportHRVView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHRVView2.swift; sourceTree = "<group>"; };
+		FAB1401E25762A030079F785 /* Color+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extention.swift"; sourceTree = "<group>"; };
+		FAB14025257646D40079F785 /* HRVChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HRVChart.swift; sourceTree = "<group>"; };
+		FAB1402A25777A000079F785 /* AffectiveChartHRVView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartHRVView2.swift; sourceTree = "<group>"; };
+		FAB14030257790BF0079F785 /* RhythmsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmsChart.swift; sourceTree = "<group>"; };
+		FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBrainwaveRhythms.swift; sourceTree = "<group>"; };
+		FAB140692579EB790079F785 /* AffectiveRhythmsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveRhythmsView.swift; sourceTree = "<group>"; };
 		FAB1DF8323E9219C007ADBA3 /* AffectiveChartAttentionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffectiveChartAttentionView.swift; sourceTree = "<group>"; };
 		FAB1DF8523E941A9007ADBA3 /* AffectiveChartRelaxationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartRelaxationView.swift; sourceTree = "<group>"; };
 		FAB3E45E23AC663000A85129 /* ReportViewHead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewHead.swift; sourceTree = "<group>"; };
@@ -579,6 +591,9 @@
 		FA56821223AC5E9600FF1A68 /* Report2 */ = {
 			isa = PBXGroup;
 			children = (
+				FAB14024257646AC0079F785 /* ChartView */,
+				FAB14029257779820079F785 /* Inside2 */,
+				FAB140032576172F0079F785 /* Outside2 */,
 				FA7689CF23B0BC90005E4DF7 /* Inside */,
 				FAB3E46823ACAD0900A85129 /* Outside */,
 				FA56821523AC5F7400FF1A68 /* Base */,
@@ -745,6 +760,33 @@
 			path = DemoService;
 			sourceTree = "<group>";
 		};
+		FAB140032576172F0079F785 /* Outside2 */ = {
+			isa = PBXGroup;
+			children = (
+				FAB14004257617D40079F785 /* ReportHRVView2.swift */,
+				FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */,
+			);
+			path = Outside2;
+			sourceTree = "<group>";
+		};
+		FAB14024257646AC0079F785 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				FAB14025257646D40079F785 /* HRVChart.swift */,
+				FAB14030257790BF0079F785 /* RhythmsChart.swift */,
+			);
+			path = ChartView;
+			sourceTree = "<group>";
+		};
+		FAB14029257779820079F785 /* Inside2 */ = {
+			isa = PBXGroup;
+			children = (
+				FAB1402A25777A000079F785 /* AffectiveChartHRVView2.swift */,
+				FAB140692579EB790079F785 /* AffectiveRhythmsView.swift */,
+			);
+			path = Inside2;
+			sourceTree = "<group>";
+		};
 		FAB3E46823ACAD0900A85129 /* Outside */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,7 +866,7 @@
 				FA0A6E81234D7A6200532A46 /* BaseView.swift */,
 				FAC773052355581500FBFA6A /* loading.gif */,
 				FACEDF9223507D370016176C /* NibLoadable.swift */,
-				FA1690C224556EAB00FADC2B /* EnterColors.swift */,
+				FAB1401E25762A030079F785 /* Color+Extention.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1269,7 +1311,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB1406A2579EB790079F785 /* AffectiveRhythmsView.swift in Sources */,
 				FA7689D123B0BD72005E4DF7 /* AverageOfSevenDayView.swift in Sources */,
+				FAB140662578D51F0079F785 /* ReportBrainwaveRhythms.swift in Sources */,
 				FAB0BC2323B30A750074C06C /* AffectiveChartHRVView.swift in Sources */,
 				FA93438C23570AAD00544239 /* ReportModel.swift in Sources */,
 				FA9343A123585CDA00544239 /* PressureReportView.swift in Sources */,
@@ -1277,6 +1321,7 @@
 				FA93438623570A2700544239 /* ReportViewService.swift in Sources */,
 				FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
+				FAB14005257617D40079F785 /* ReportHRVView2.swift in Sources */,
 				FAD3C56723B35A65007E9AE1 /* AffectiveChartHeartRateView.swift in Sources */,
 				FA6FFFA823D0618000A4B16A /* RealtimeCoherenceView.swift in Sources */,
 				FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */,
@@ -1288,8 +1333,8 @@
 				FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */,
 				FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */,
 				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,
-				FA1690C324556EAB00FADC2B /* EnterColors.swift in Sources */,
 				FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */,
+				FAB1402B25777A000079F785 /* AffectiveChartHRVView2.swift in Sources */,
 				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
 				FA7D326624FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift in Sources */,
 				FACEDF99235164720016176C /* RealtimeRelaxationView.swift in Sources */,
@@ -1299,11 +1344,13 @@
 				FAB3E46123AC699500A85129 /* ReportBrainwaveSpectrum.swift in Sources */,
 				FA1690D82459772B00FADC2B /* TwoValueMarkerView.swift in Sources */,
 				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
+				FAB14026257646D40079F785 /* HRVChart.swift in Sources */,
 				FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
 				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
 				FAB0BC1523B1E1180074C06C /* AverageView.swift in Sources */,
 				FAB0BC2523B31F5A0074C06C /* LimitYAxisRenderer.swift in Sources */,
+				FAB14031257790BF0079F785 /* RhythmsChart.swift in Sources */,
 				FA9343992358489800544239 /* AttentionReportView.swift in Sources */,
 				FAD3C56923B3666F007E9AE1 /* AffectiveChartPressureView.swift in Sources */,
 				FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */,
@@ -1320,6 +1367,7 @@
 				FA93439F23585BD600544239 /* PressureChart.swift in Sources */,
 				FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */,
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,
+				FAB1401F25762A030079F785 /* Color+Extention.swift in Sources */,
 				FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */,
 				FAB3E46A23ACAD4D00A85129 /* ReportHRV.swift in Sources */,
 				FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */,
@@ -1476,7 +1524,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1533,7 +1581,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1551,7 +1599,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 112;
+				CURRENT_PROJECT_VERSION = 113;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1566,7 +1614,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1583,7 +1631,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 112;
+				CURRENT_PROJECT_VERSION = 113;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1598,7 +1646,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1614,7 +1662,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 111;
+				CURRENT_PROJECT_VERSION = 112;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1628,7 +1676,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1645,7 +1693,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 111;
+				CURRENT_PROJECT_VERSION = 112;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1659,7 +1707,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

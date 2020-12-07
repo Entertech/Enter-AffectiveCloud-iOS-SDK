@@ -2,7 +2,7 @@ source 'https://cdn.cocoapods.org/'
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'EnterAffectiveCloud' do
   pod 'HandyJSON', '5.0.3-beta'
@@ -16,11 +16,12 @@ end
 target 'EnterAffectiveCloudUI' do
   pod 'RxSwift', '5.1'
   pod 'SnapKit'
-  pod 'Charts', '3.4.0'
+  pod 'Charts'
   pod 'HandyJSON', '5.0.3-beta'
   pod 'SwiftyJSON'
   pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
+  pod 'FluentDarkModeKit'
 end
 
 target 'EnterRealtimeUIDemo' do
@@ -31,6 +32,7 @@ target 'EnterRealtimeUIDemo' do
   pod 'Starscream', '3.1.1'
   pod 'SwiftyJSON'
   pod 'Charts'
+  pod 'FluentDarkModeKit'
 end
 
 target 'EnterReportUIDemo' do
@@ -41,4 +43,5 @@ target 'EnterReportUIDemo' do
   pod 'Starscream', '3.1.1'
   pod 'SwiftyJSON'
   pod 'Charts'
+  pod 'FluentDarkModeKit'
 end

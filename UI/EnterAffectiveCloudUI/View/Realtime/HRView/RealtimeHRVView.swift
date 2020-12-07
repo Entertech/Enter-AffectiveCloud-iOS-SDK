@@ -50,9 +50,9 @@ public class RealtimeHRVView: BaseView {
     public var uploadCycle: UInt = 3 {
         willSet {
             if uploadCycle == 0 {
-                interval = 0.4
+                interval = 0.2
             } else {
-                interval = 0.6 * Double(newValue)
+                interval = 0.2
             }
         }
     }
@@ -117,7 +117,7 @@ public class RealtimeHRVView: BaseView {
     private let bottomMargin: CGFloat = 22
     private let leftMargin: CGFloat = 16
     private let rightMargin: CGFloat = 0
-    private let pointCount = 120
+    private let pointCount = 150
     private var yAxis:CGFloat = 30 // Y轴的动态坐标
     private var waveArray: [Float]?
     private var updateHRV: UpdateHRV?
