@@ -19,4 +19,5 @@ Pod::Spec.new do |s|
   s.dependency 'SnapKit'
   s.dependency 'Charts', '3.4.0'
   s.dependency 'EnterAffectiveCloud', '~> 2.0.0'
+  s.dependency 'FluentDarkModeKit'
 end
