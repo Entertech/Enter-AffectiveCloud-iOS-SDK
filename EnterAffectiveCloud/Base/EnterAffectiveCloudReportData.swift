@@ -141,6 +141,8 @@ public enum ReportScalarType: UInt8 {
  * 0xfb 愉悦度全程记录[0, 100]
  * 0xfc 激活度全程记录[0, 100]
  * 0xfd 和谐度全程记录[0, 100]
+ * 0xfe 睡眠[0, 100]
+ * 0xff 和谐标志 [0, 1]
  */
 public enum ReportDigitalType: UInt8 {
     case retained = 0xf0
@@ -157,6 +159,8 @@ public enum ReportDigitalType: UInt8 {
     case pleasure = 0xfb
     case activate = 0xfc
     case coherence = 0xfd
+    case sleepy = 0xfe
+    case coherenceType = 0xff
 }
 
 extension Data {

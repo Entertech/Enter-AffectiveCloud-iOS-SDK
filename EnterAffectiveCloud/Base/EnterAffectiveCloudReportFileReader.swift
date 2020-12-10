@@ -46,7 +46,7 @@ class EnterAffectiveCloudReportFileReader: DataFileReader {
         return fragments
     }
 
-    private let digitalTypeList: [Byte] = [0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd]
+    private let digitalTypeList: [Byte] = [0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff]
     private func serialize(_ data: Data) -> EnterAffectiveCloudReportData? {
         let bytes = data.allBytes
         var digitalBeginIndex: Int = 0
@@ -120,6 +120,10 @@ class EnterAffectiveCloudReportFileReader: DataFileReader {
                 type = ReportDigitalType.activate
             case 0xfd:
                 type = ReportDigitalType.coherence
+            case 0xfe:
+                type = ReportDigitalType.sleepy
+            case 0xff:
+                type = ReportDigitalType.coherenceType
             default:
                 break
             }
