@@ -615,8 +615,8 @@ public class CSReportArousalJsonModel: HandyJSON {
 public class CSReportCoherenceJsonModel: HandyJSON {
     public var average: Float?
     public var list: [Float]?
-    public var flag: [Int]?
-    public var duration: Int?
+    public var flag: [Float]?
+    public var duration: Float?
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
