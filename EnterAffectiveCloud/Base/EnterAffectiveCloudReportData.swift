@@ -124,6 +124,7 @@ public enum ReportScalarType: UInt8 {
     case activateMin      = 0x15
     case timestamp        = 0x16
     case coherenceAverage = 0x17
+    case coherenceDuration = 0x1f
 }
 
 /*
