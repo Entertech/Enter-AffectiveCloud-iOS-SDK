@@ -298,8 +298,8 @@ class RhythmsChart: LineChartView {
             var initValue = 0
             var initIndex = 0
             for i in stride(from: 0, to: waveArray.columns, by: sample) {
-                if waveArray[j, i] > 0 {
-                    initValue = Int(waveArray[j, i])
+                if waveArray[i, j] > 0 {
+                    initValue = Int(waveArray[i, j])
                     initIndex = i
                     break
                 }
@@ -312,18 +312,18 @@ class RhythmsChart: LineChartView {
                 if i < initIndex{  //为0的为无效数据
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
                 } else {
-                    if waveArray[j, i] == 0 {//为0的为无效数据
+                    if waveArray[i, j] == 0 {//为0的为无效数据
                         yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(notZero)))
                     } else {
-                        if minValue > Int(waveArray[j, i]) {
-                            minValue = Int(waveArray[j, i])
+                        if minValue > Int(waveArray[i, j]) {
+                            minValue = Int(waveArray[i, j])
                         }
-                        if maxValue < Int(waveArray[j, i]) {
-                            maxValue = Int(waveArray[j, i])
+                        if maxValue < Int(waveArray[i, j]) {
+                            maxValue = Int(waveArray[i, j])
                         }
-                        notZero = Int(waveArray[j, i])
+                        notZero = Int(waveArray[i, j])
                       
-                        yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[j, i])))
+                        yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(waveArray[i, j])))
                     }
                     
                 }

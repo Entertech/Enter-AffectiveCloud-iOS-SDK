@@ -12,9 +12,10 @@ public enum AverageName: String {
     case Attention
     case Relaxation
     case Pressure
-    case Heart
+    case Heart = "heart rate"
     case HRV
     case Meditation = "meditation time"
+    case Coherence = "coherence time"
 }
 
 extension AverageName {
@@ -32,6 +33,8 @@ extension AverageName {
             return "心率变异性"
         case .Meditation:
             return "训练时长"
+        case .Coherence:
+            return "和谐时间"
         }
     }
 }
