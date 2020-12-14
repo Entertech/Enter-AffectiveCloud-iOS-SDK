@@ -112,20 +112,20 @@ public class ReportCoherenceView2: UIView {
         }
         
         coherenceTimeLabel.snp.makeConstraints {
-            $0.left.equalToSuperview()
+            $0.left.equalToSuperview().offset(16)
             $0.top.equalTo(coherenceLabel.snp.bottom).offset(4)
         }
         
         chartView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview()
-            $0.bottom.equalTo(minLabel.snp.top).offset(-12)
+            $0.top.equalToSuperview().offset(12)
+            $0.bottom.equalTo(minLabel.snp.top).offset(-6)
         }
         
         minLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-24)
+            $0.bottom.equalToSuperview().offset(-16)
         }
         
     }

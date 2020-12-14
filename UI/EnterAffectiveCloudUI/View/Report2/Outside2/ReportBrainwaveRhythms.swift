@@ -233,7 +233,7 @@ public class ReportBrainwaveRhythms: UIView {
         
         minLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-24)
+            $0.bottom.equalToSuperview().offset(-16)
         }
         
     }
