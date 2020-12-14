@@ -336,7 +336,20 @@ class RhythmsChart: LineChartView {
             set.drawCircleHoleEnabled = false
             set.drawFilledEnabled = false
             set.lineWidth = 2
-            //set.setColor(lineColor)
+            switch j {
+            case 0:
+                set.setColor(gamaColor)
+            case 1:
+                set.setColor(betaColor)
+            case 2:
+                set.setColor(alphaColor)
+            case 3:
+                set.setColor(thetaColor)
+            case 4:
+                set.setColor(deltaColor)
+            default:
+                set.setColor(gamaColor)
+            }
             set.drawIconsEnabled = true
             set.highlightEnabled = true
             set.highlightLineWidth = 2

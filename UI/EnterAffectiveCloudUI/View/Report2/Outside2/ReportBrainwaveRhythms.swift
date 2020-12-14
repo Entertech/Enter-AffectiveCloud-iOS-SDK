@@ -224,7 +224,8 @@ public class ReportBrainwaveRhythms: UIView {
     private func setLayout() {
         
         btnContentView.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalToSuperview().offset(-16)
             $0.top.equalToSuperview().offset(8)
             $0.height.equalTo(28)
         }
@@ -233,7 +234,7 @@ public class ReportBrainwaveRhythms: UIView {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.top.equalToSuperview().offset(0)
-            $0.bottom.equalTo(minLabel.snp.top).offset(-12)
+            $0.bottom.equalTo(minLabel.snp.top).offset(-6)
         }
         
         minLabel.snp.makeConstraints {
