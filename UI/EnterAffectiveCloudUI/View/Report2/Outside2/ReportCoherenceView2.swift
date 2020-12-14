@@ -16,12 +16,10 @@ public class ReportCoherenceView2: UIView {
         willSet {
             let left = currentTime/60
             let remainder = currentTime%60
-            if remainder > 0 {
-                coherenceTimeLabel.text = "\(remainder)min \(left)s"
+
+            coherenceTimeLabel.text = "\(remainder)min \(left)s"
                 
-            } else {
-                coherenceTimeLabel.text = "\(left)s"
-            }
+            
         }
     }
     public var minText: String = "Time(min)" {
@@ -97,7 +95,7 @@ public class ReportCoherenceView2: UIView {
         coherenceLabel.font = UIFont.systemFont(ofSize: 14)
         
         coherenceTimeLabel.textColor = coherenceColor
-        coherenceTimeLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        coherenceTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         
         minLabel.textColor = textColor
         minLabel.font = UIFont.systemFont(ofSize: 12)
@@ -114,8 +112,8 @@ public class ReportCoherenceView2: UIView {
         }
         
         coherenceTimeLabel.snp.makeConstraints {
-            $0.left.equalTo(coherenceLabel.snp.right).offset(6)
-            $0.centerY.equalTo(coherenceLabel.snp.centerY).offset(-2)
+            $0.left.equalToSuperview()
+            $0.top.equalTo(coherenceLabel.snp.bottom).offset(4)
         }
         
         chartView.snp.makeConstraints {
