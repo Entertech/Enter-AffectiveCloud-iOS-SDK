@@ -36,12 +36,12 @@ class HRChart: LineChartView {
     /// 暗色，诸如线条之类的颜色设置
     public var axisColor: UIColor = ColorExtension.textLv1 {
         willSet {
-            let highPercentColor = newValue.changeAlpha(to: 0.8)
+            //let highPercentColor = newValue.changeAlpha(to: 0.8)
             let midPercentColor = newValue.changeAlpha(to: 0.6)
             let lowPercentColor = newValue.changeAlpha(to: 0.2)
             self.xAxis.labelTextColor = midPercentColor
             self.leftAxis.labelTextColor = midPercentColor
-            self.xAxis.axisLineColor = highPercentColor
+            self.xAxis.axisLineColor = midPercentColor
             self.xAxis.gridColor = lowPercentColor
         }
     }
@@ -49,6 +49,12 @@ class HRChart: LineChartView {
     public var animationSpeed: Float = 0 {
         willSet {
             self.animate(xAxisDuration: TimeInterval(animationSpeed))
+        }
+    }
+    
+    public var isNeedLeftLabel: Bool = true {
+        willSet {
+            self.leftAxis.drawLabelsEnabled = newValue
         }
     }
     
@@ -60,7 +66,7 @@ class HRChart: LineChartView {
     /// 平均值的文案
     public var averageText = "Average"
     
-    public var chartTitleText = "HRV"
+    public var chartTitleText = "Heart Rate"
     
     /// 设置平均值
     public var hrvAvg: Float = 0 {

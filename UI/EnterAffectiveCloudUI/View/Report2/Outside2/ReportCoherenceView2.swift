@@ -102,6 +102,8 @@ public class ReportCoherenceView2: UIView {
         minLabel.textAlignment = .center
         minLabel.text = minText
         
+        chartView.isNeedLeftLabel = false
+        
         setLayout()
     }
     
@@ -119,7 +121,7 @@ public class ReportCoherenceView2: UIView {
         chartView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview().offset(12)
+            $0.top.equalToSuperview().offset(16)
             $0.bottom.equalTo(minLabel.snp.top).offset(-6)
         }
         
