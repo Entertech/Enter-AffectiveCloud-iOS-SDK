@@ -294,7 +294,7 @@ class RhythmsChart: LineChartView {
         }
 
         var sets: [LineChartDataSet] = []
-        for j in 0...waveArray.rows {
+        for j in 0..<waveArray.rows {
             var initValue = 0
             var initIndex = 0
             for i in stride(from: 0, to: waveArray.columns, by: sample) {
