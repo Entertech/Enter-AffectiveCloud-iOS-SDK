@@ -10,6 +10,11 @@ import UIKit
 
 public class ReportBrainwaveRhythms: UIView {
 
+    public var uploadCycle = 0 {
+        willSet {
+            chartView.uploadCycle = UInt(newValue)
+        }
+    }
 
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
         willSet {

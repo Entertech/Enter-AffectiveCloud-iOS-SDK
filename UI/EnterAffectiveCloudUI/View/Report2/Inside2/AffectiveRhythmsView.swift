@@ -13,7 +13,7 @@ protocol RhythmsViewDelegate: class {
     func setRhythmsEnable(value: Int)
 }
 
-class AffectiveRhythmsView: UIView, ChartViewDelegate {
+public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
         willSet {
