@@ -9,7 +9,13 @@
 import UIKit
 import Charts
 
-public class AffectiveChartHRVView2: UIView, ChartViewDelegate{
+public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
+    
+    public var uploadCycle = 0 {
+        willSet {
+            chartView.uploadCycle = UInt(newValue)
+        }
+    }
 
     public var currentTime: Int = 0 {
         willSet {
@@ -101,7 +107,7 @@ public class AffectiveChartHRVView2: UIView, ChartViewDelegate{
     
     private let coherenceLabel = UILabel()
     private let coherenceTimeLabel = UILabel()
-    private let chartView = HRVChart()
+    private let chartView = HRChart()
     private let minLabel = UILabel()
     private let dotView = UIView()
     private let breathLabel = UILabel()
@@ -226,7 +232,7 @@ public class AffectiveChartHRVView2: UIView, ChartViewDelegate{
                 // Fallback on earlier versions
                 
             }
-            let chart = AffectiveChartHRVView2()
+            let chart = AffectiveChartCoherenceView2()
             nShowChartView.addSubview(chart)
             chart.chartHead.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             //chart.interval = self.interval

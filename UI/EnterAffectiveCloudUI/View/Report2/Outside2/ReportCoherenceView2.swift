@@ -9,8 +9,9 @@
 import UIKit
 import Charts
 
-public class ReportHRVView2: UIView {
+public class ReportCoherenceView2: UIView {
     
+    /// coherence time
     public var currentTime: Int = 0 {
         willSet {
             let left = currentTime/60
@@ -43,13 +44,20 @@ public class ReportHRVView2: UIView {
         }
     }
     
-    public var hrvList: [Int]? {
+    public var hrList: [Int]? {
         willSet {
             if let list = newValue {
                 chartView.setData(list: list)
             }
         }
     }
+    
+    public var uploadCycle = 0 {
+        willSet {
+            chartView.uploadCycle = UInt(newValue)
+        }
+    }
+    
 
     private var coherenceColor = UIColor.colorWithHexString(hexColor: "#5FC695")
     private var textColor = ColorExtension.textLv1
@@ -59,7 +67,7 @@ public class ReportHRVView2: UIView {
     
     private let coherenceLabel = UILabel()
     private let coherenceTimeLabel = UILabel()
-    private let chartView = HRVChart()
+    private let chartView = HRChart()
     private let minLabel = UILabel()
     
     public init() {

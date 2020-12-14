@@ -9,9 +9,17 @@
 import UIKit
 import Charts
 
-class HRVChart: LineChartView {
-    /// 传入的数组时间间隔
-    public var interval: Double = 0.2
+class HRChart: LineChartView {
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if newValue == 0 {
+                interval = 0.4
+            } else {
+                interval = 0.6 * Double(newValue)
+            }
+        }
+    }
     
     /// 在整个图表显示的最大点数
     public var maxDataCount = 200
@@ -87,7 +95,7 @@ class HRVChart: LineChartView {
     private var valueMarker: ValueMarkerView?
     private var panGesture: UIPanGestureRecognizer?
     private lazy var dotIcon = UIImage.highlightIcon(centerColor: self.lineColor)
-    
+    private var interval = 1.8
     private var timeStamp: Int = 0
     private var sample: Int = 3
     private var listArray: [Int]?
