@@ -87,13 +87,13 @@ public class ReportPressureView2: UIView {
         }
         
         numLabel.snp.makeConstraints {
-            $0.bottom.equalTo(stateLabel.snp.top).offset(-4)
+            $0.bottom.equalTo(stateLabel.snp.top)
             $0.centerX.equalToSuperview()
         }
         
         circleView.snp.makeConstraints {
             $0.left.right.top.equalToSuperview()
-            $0.bottom.equalTo(-36)
+            $0.bottom.equalTo(-24)
         }
         
         titleLabel.snp.makeConstraints {

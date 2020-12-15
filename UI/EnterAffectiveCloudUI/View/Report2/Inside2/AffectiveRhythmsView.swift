@@ -15,6 +15,13 @@ protocol RhythmsViewDelegate: class {
 
 public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 0 {
+        willSet {
+            chartView.uploadCycle = newValue
+        }
+    }
+    
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
         willSet {
             gamaBtn.backgroundColor = newValue.changeAlpha(to: 0.2)
