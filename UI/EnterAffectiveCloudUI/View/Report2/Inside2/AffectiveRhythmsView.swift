@@ -274,7 +274,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         btnContentView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview().offset(8)
+            $0.top.equalToSuperview().offset(48)
             $0.height.equalTo(32)
         }
         
