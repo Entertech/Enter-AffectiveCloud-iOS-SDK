@@ -59,6 +59,8 @@ public class ReportHRVView: UIView {
         self.addSubview(numLabel)
         self.addSubview(mslabel)
         self.addSubview(icon)
+        self.addSubview(titleLabel)
+        self.addSubview(button)
         
         titleLabel.text = "HRV"
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
