@@ -14,6 +14,7 @@
 		D9C117D9B366CA09CBB20CAA /* Pods_EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2DDCCF62CCF550F1687375 /* Pods_EnterAffectiveCloud.framework */; };
 		FA06078E237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 		FA06078F237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FA081222258845FB0064E017 /* ReportHRVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA081221258845FB0064E017 /* ReportHRVView.swift */; };
 		FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */; };
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -230,6 +231,7 @@
 		C005F15AB06AE4592D65462B /* Pods-EnterRealtimeUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterRealtimeUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterRealtimeUIDemo/Pods-EnterRealtimeUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.release.xcconfig"; sourceTree = "<group>"; };
 		F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.release.xcconfig"; sourceTree = "<group>"; };
+		FA081221258845FB0064E017 /* ReportHRVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHRVView.swift; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHRVView.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 			children = (
 				FAB14004257617D40079F785 /* ReportCoherenceView2.swift */,
 				FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */,
+				FA081221258845FB0064E017 /* ReportHRVView.swift */,
 			);
 			path = Outside2;
 			sourceTree = "<group>";
@@ -1364,6 +1367,7 @@
 				FAB1DF8423E9219D007ADBA3 /* AffectiveChartAttentionView.swift in Sources */,
 				FA93439C2358596E00544239 /* RelaxationReportView.swift in Sources */,
 				FA1690D224567D8300FADC2B /* BalloonMarker.swift in Sources */,
+				FA081222258845FB0064E017 /* ReportHRVView.swift in Sources */,
 				FA93439F23585BD600544239 /* PressureChart.swift in Sources */,
 				FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */,
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,

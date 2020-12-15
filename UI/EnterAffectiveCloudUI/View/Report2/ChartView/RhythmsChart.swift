@@ -42,7 +42,7 @@ class RhythmsChart: LineChartView {
             let midPercentColor = newValue.changeAlpha(to: 0.6)
             let lowPercentColor = newValue.changeAlpha(to: 0.2)
             self.xAxis.labelTextColor = midPercentColor
-            self.xAxis.axisLineColor = highPercentColor
+            self.xAxis.axisLineColor = midPercentColor
             self.xAxis.gridColor = lowPercentColor
         }
     }
