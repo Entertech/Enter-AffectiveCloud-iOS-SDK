@@ -15,6 +15,7 @@
 		FA06078E237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 		FA06078F237D533100D0BB30 /* EnterAffectiveCloudUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA081222258845FB0064E017 /* ReportHRVView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA081221258845FB0064E017 /* ReportHRVView2.swift */; };
+		FA0816AB258851A10064E017 /* ReportPressureView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0816AA258851A10064E017 /* ReportPressureView2.swift */; };
 		FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */; };
 		FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA0A6E7D234D71DF00532A46 /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -232,6 +233,7 @@
 		F495365EECC4E771D4AAE7D9 /* Pods-EnterAffectiveCloudUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterAffectiveCloudUI.release.xcconfig"; path = "Target Support Files/Pods-EnterAffectiveCloudUI/Pods-EnterAffectiveCloudUI.release.xcconfig"; sourceTree = "<group>"; };
 		F8B7B824FF846EC70C732FEE /* Pods-EnterReportUIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EnterReportUIDemo.release.xcconfig"; path = "Target Support Files/Pods-EnterReportUIDemo/Pods-EnterReportUIDemo.release.xcconfig"; sourceTree = "<group>"; };
 		FA081221258845FB0064E017 /* ReportHRVView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHRVView2.swift; sourceTree = "<group>"; };
+		FA0816AA258851A10064E017 /* ReportPressureView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPressureView2.swift; sourceTree = "<group>"; };
 		FA0A6E7A234D719B00532A46 /* RealtimeHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHeartRateView.swift; sourceTree = "<group>"; };
 		FA0A6E81234D7A6200532A46 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		FA0D4F9123CDAF990084EBD1 /* RealtimeHRVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeHRVView.swift; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 				FAB14004257617D40079F785 /* ReportCoherenceView2.swift */,
 				FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */,
 				FA081221258845FB0064E017 /* ReportHRVView2.swift */,
+				FA0816AA258851A10064E017 /* ReportPressureView2.swift */,
 			);
 			path = Outside2;
 			sourceTree = "<group>";
@@ -1352,6 +1355,7 @@
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
 				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
 				FAB0BC1523B1E1180074C06C /* AverageView.swift in Sources */,
+				FA0816AB258851A10064E017 /* ReportPressureView2.swift in Sources */,
 				FAB0BC2523B31F5A0074C06C /* LimitYAxisRenderer.swift in Sources */,
 				FAB14031257790BF0079F785 /* RhythmsChart.swift in Sources */,
 				FA9343992358489800544239 /* AttentionReportView.swift in Sources */,

@@ -52,18 +52,27 @@ public class ReportHRVView: UIView {
     private let numLabel = UILabel()
     private let mslabel = UILabel()
     private let icon = UIImageView()
-    
+    private let titleLabel = UILabel()
+    private let button = UIImageView()
     func initFunction() {
         self.backgroundColor = .clear
         self.addSubview(numLabel)
         self.addSubview(mslabel)
         self.addSubview(icon)
+        
+        titleLabel.text = "HRV"
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        titleLabel.textColor = ColorExtension.textLv1
+        
+        button.image = #imageLiteral(resourceName: "right_back")
+        
         numLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         numLabel.textColor = ColorExtension.textLv1
         numLabel.text = "\(value)"
         
         mslabel.font = UIFont.systemFont(ofSize: 12)
         mslabel.textColor = ColorExtension.textLv2
+        mslabel.text = "ms"
         
         numLabel.snp.makeConstraints {
             $0.left.equalTo(16)
@@ -76,8 +85,18 @@ public class ReportHRVView: UIView {
         }
         
         icon.snp.makeConstraints {
-            $0.bottom.equalTo(mslabel)
-            $0.centerY.equalTo(mslabel)
+            $0.bottom.equalTo(mslabel.snp.top)
+            $0.centerX.equalTo(mslabel.snp.centerX)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.left.equalTo(16)
+            $0.top.equalTo(12)
+        }
+        
+        button.snp.makeConstraints {
+            $0.right.equalTo(16)
+            $0.centerY.equalTo(titleLabel.snp.centerY)
         }
     }
 
