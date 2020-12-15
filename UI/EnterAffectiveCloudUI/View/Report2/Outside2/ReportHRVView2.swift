@@ -64,7 +64,7 @@ public class ReportHRVView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = ColorExtension.textLv1
         
-        button.image = #imageLiteral(resourceName: "right_back")
+        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
         
         numLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         numLabel.textColor = ColorExtension.textLv1
