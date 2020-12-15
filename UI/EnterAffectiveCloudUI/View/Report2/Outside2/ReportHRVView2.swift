@@ -21,9 +21,13 @@ public class ReportHRVView: UIView {
             icon.image = newValue
         }
     }
+    
+    public var value: Int = 0 {
+        willSet {
+            numLabel.text = "\(newValue)"
+        }
+    }
  
-    
-    
     public init() {
         super.init(frame: CGRect.zero)
         initFunction()
@@ -56,6 +60,7 @@ public class ReportHRVView: UIView {
         self.addSubview(icon)
         numLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         numLabel.textColor = ColorExtension.textLv1
+        numLabel.text = "\(value)"
         
         mslabel.font = UIFont.systemFont(ofSize: 12)
         mslabel.textColor = ColorExtension.textLv2
