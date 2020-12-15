@@ -83,7 +83,7 @@ public class ReportHRVView: UIView {
         
         mslabel.snp.makeConstraints {
             $0.left.equalTo(numLabel.snp.right).offset(5)
-            $0.bottom.equalTo(-20)
+            $0.bottom.equalTo(-22)
         }
         
         icon.snp.makeConstraints {
@@ -97,7 +97,7 @@ public class ReportHRVView: UIView {
         }
         
         button.snp.makeConstraints {
-            $0.right.equalTo(16)
+            $0.right.equalTo(-16)
             $0.centerY.equalTo(titleLabel.snp.centerY)
         }
     }

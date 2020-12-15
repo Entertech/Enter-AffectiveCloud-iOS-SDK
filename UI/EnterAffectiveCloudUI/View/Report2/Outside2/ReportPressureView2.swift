@@ -40,9 +40,11 @@ class ReportPressureView2: UIView {
     private let stateLabel = UILabel()
     public let circleView = ReportSemiCircle3() // 扇形试图
     public var stateArray:[Int] = [0 ,20, 70, 100] //放松度等级分段
+    private let titleLabel = UILabel()
+    private let button = UIImageView()
     
     // 状态文字背景色
-    public var stateColor = UIColor.colorWithHexString(hexColor: "ffb2c0") {
+    public var stateColor = ColorExtension.red5 {
         willSet {
             stateLabel.backgroundColor = newValue
         }
@@ -81,7 +83,7 @@ class ReportPressureView2: UIView {
             $0.width.equalTo(39)
             $0.height.equalTo(17)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-25)
+            $0.bottom.equalToSuperview().offset(-8)
         }
         
         numLabel.snp.makeConstraints {
@@ -90,10 +92,7 @@ class ReportPressureView2: UIView {
         }
         
         circleView.snp.makeConstraints {
-            $0.width.equalTo(260)
-            $0.height.equalTo(140)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-10)
+            $0.edges.equalToSuperview()
         }
         
         self.snp.makeConstraints  {
@@ -109,8 +108,15 @@ class ReportPressureView2: UIView {
         self.addSubview(numLabel)
         self.addSubview(stateLabel)
         self.addSubview(circleView)
+        self.addSubview(titleLabel)
+        self.addSubview(button)
         
-        numLabel.font = UIFont.systemFont(ofSize: 38, weight: .semibold)
+        numLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        titleLabel.text = "Pressure"
+        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        titleLabel.textColor = ColorExtension.textLv1
+        
+        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
 
         stateLabel.text = state.rawValue
         stateLabel.layer.cornerRadius = 8.5
