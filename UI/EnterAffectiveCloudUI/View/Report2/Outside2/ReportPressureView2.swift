@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReportPressureView2: UIView {
+public class ReportPressureView2: UIView {
 
     public var value:Int =  0 {
         willSet {
