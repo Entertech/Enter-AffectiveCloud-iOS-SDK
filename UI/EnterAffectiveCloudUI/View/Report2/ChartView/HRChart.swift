@@ -142,7 +142,7 @@ class HRChart: LineChartView {
         self.highlightPerTapEnabled = false
         self.highlightPerDragEnabled = false
         
-        valueMarker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 50, height: 47))
+        valueMarker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 100, height: 47))
         valueMarker?.chartView = self
         valueMarker?.titleLabel?.text = chartTitleText
         valueMarker?.titleLabel?.textColor = highPercentColor

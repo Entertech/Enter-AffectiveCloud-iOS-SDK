@@ -281,7 +281,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview().offset(0)
+            $0.top.equalToSuperview().offset(46)
             $0.bottom.equalTo(minLabel.snp.top).offset(-6)
         }
         

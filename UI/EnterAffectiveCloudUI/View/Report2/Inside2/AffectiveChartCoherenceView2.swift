@@ -186,7 +186,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.top.equalTo(coherenceLabel.snp.bottom)
-            $0.bottom.equalTo(minLabel.snp.top).offset(12)
+            $0.bottom.equalTo(minLabel.snp.top).offset(-12)
         }
         
         minLabel.snp.makeConstraints {
