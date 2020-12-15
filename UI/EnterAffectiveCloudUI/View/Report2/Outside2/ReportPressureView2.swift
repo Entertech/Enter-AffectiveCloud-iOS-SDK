@@ -95,11 +95,6 @@ class ReportPressureView2: UIView {
             $0.edges.equalToSuperview()
         }
         
-        self.snp.makeConstraints  {
-            $0.left.right.bottom.equalToSuperview()
-            $0.height.equalTo(172)
-        }
-        
     }
     
     private func initFunction() {
