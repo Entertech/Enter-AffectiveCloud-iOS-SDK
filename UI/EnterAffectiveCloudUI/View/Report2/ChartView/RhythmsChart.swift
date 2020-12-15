@@ -209,7 +209,7 @@ class RhythmsChart: LineChartView {
         leftAxis.gridLineWidth = 1
         leftAxis.gridLineDashPhase = 1
         leftAxis.gridLineDashLengths = [3,2]
-        leftAxis.axisMaxLabels = 5
+        leftAxis.setLabelCount(5, force: true)
         self.rightAxis.enabled = false
         
         let xAxis = self.xAxis

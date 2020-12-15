@@ -126,11 +126,11 @@ public class ReportBrainwaveRhythms: UIView {
         }
     }
     
-    private let gamaBtn = UIButton()
-    private let betaBtn = UIButton()
-    private let alphaBtn = UIButton()
-    private let thetaBtn = UIButton()
-    private let deltaBtn = UIButton()
+    private let gamaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
+    private let betaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
+    private let alphaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
+    private let thetaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
+    private let deltaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
     private let minLabel = UILabel()
     private let chartView = RhythmsChart()
     private let btnContentView = UIStackView()
