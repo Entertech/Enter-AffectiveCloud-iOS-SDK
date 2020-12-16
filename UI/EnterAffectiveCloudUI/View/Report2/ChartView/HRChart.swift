@@ -189,6 +189,11 @@ class HRChart: LineChartView {
         if let value = list {
             sample = value.count / maxDataCount == 0 ? 1 : value.count / maxDataCount
             listArray = value
+            if value.count - paddingArray.count > 0 {
+                for _ in 0..<(value.count-paddingArray.count) {
+                    paddingArray.insert(0, at: 0)
+                }
+            }
             mapDataList()
         }
         
@@ -239,8 +244,8 @@ class HRChart: LineChartView {
                         maxValue = waveArray[i]
                     }
                     notZero = waveArray[i]
-                    if i*9 < paddingArray.count {
-                        if paddingArray[i*9] != 0 {
+                    if i < paddingArray.count {
+                        if paddingArray[i] != 0 {
                             colors.append(paddingLineColor)
                         } else {
                             colors.append(lineColor)
