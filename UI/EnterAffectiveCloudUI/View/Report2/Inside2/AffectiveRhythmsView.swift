@@ -251,7 +251,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartView.maxDataCount = 1000
         chartView.isUserInteractionEnabled = true
         
-        btnContentView.alignment = .center
+        btnContentView.alignment = .fill
         btnContentView.addArrangedSubview(gamaBtn)
         btnContentView.addArrangedSubview(betaBtn)
         btnContentView.addArrangedSubview(alphaBtn)
@@ -261,7 +261,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         btnContentView.backgroundColor = .clear
         btnContentView.distribution = .fillEqually
         btnContentView.spacing = 16
-        btnContentView.translatesAutoresizingMaskIntoConstraints = false
+        //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
         chartHead.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
         

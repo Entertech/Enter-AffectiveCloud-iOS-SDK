@@ -58,9 +58,11 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[0].setColor(.clear)
+                self.data?.dataSets[0].resetColors()
                 
             } else {
                 self.data?.dataSets[0].setColor(gamaColor)
+                self.data?.dataSets[0].resetColors()
             }
         }
     }
@@ -70,8 +72,10 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[1].setColor(.clear)
+                self.data?.dataSets[1].resetColors()
             } else {
                 self.data?.dataSets[1].setColor(betaColor)
+                self.data?.dataSets[1].resetColors()
             }
         }
     }
@@ -81,9 +85,10 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[2].setColor(.clear)
-                
+                self.data?.dataSets[2].resetColors()
             } else {
                 self.data?.dataSets[2].setColor(alphaColor)
+                self.data?.dataSets[2].resetColors()
             }
         }
     }
@@ -93,8 +98,10 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[3].setColor(.clear)
+                self.data?.dataSets[3].resetColors()
             } else {
                 self.data?.dataSets[3].setColor(thetaColor)
+                self.data?.dataSets[3].resetColors()
             }
         }
     }
@@ -104,8 +111,10 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[4].setColor(.clear)
+                self.data?.dataSets[4].resetColors()
             } else {
                 self.data?.dataSets[4].setColor(deltaColor)
+                self.data?.dataSets[4].resetColors()
             }
         }
     }
@@ -340,15 +349,39 @@ class RhythmsChart: LineChartView {
             set.lineWidth = 2
             switch j {
             case 0:
-                set.setColor(gamaColor)
+                if enableGama {
+                    set.setColor(gamaColor)
+                } else {
+                    set.setColor(.clear)
+                }
+                
             case 1:
-                set.setColor(betaColor)
+                if enableBeta {
+                    
+                    set.setColor(betaColor)
+                } else {
+                    set.setColor(.clear)
+                }
             case 2:
-                set.setColor(alphaColor)
+                if enableAlpha {
+                    set.setColor(alphaColor)
+                } else {
+                    set.setColor(.clear)
+                }
             case 3:
-                set.setColor(thetaColor)
+                if enableTheta {
+                    
+                    set.setColor(thetaColor)
+                } else {
+                    set.setColor(.clear)
+                }
             case 4:
-                set.setColor(deltaColor)
+                if enableDelta {
+                    
+                    set.setColor(deltaColor)
+                } else {
+                    set.setColor(.clear)
+                }
             default:
                 set.setColor(gamaColor)
             }

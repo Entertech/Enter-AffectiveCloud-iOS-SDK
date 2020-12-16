@@ -221,7 +221,7 @@ public class ReportBrainwaveRhythms: UIView {
         
         chartView.maxDataCount = 1000
         
-        btnContentView.alignment = .center
+        btnContentView.alignment = .fill
         btnContentView.addArrangedSubview(gamaBtn)
         btnContentView.addArrangedSubview(betaBtn)
         btnContentView.addArrangedSubview(alphaBtn)
@@ -231,7 +231,7 @@ public class ReportBrainwaveRhythms: UIView {
         btnContentView.backgroundColor = .clear
         btnContentView.distribution = .fillEqually
         btnContentView.spacing = 16
-        btnContentView.translatesAutoresizingMaskIntoConstraints = false
+        //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(btnContentView)
         self.addSubview(minLabel)
