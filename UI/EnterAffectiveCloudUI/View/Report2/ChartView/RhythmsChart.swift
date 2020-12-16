@@ -55,66 +55,40 @@ class RhythmsChart: LineChartView {
     
     public lazy var enableGama = true {
         willSet {
-            if !newValue {
-                
-                self.data?.dataSets[0].setColor(.clear)
-                self.data?.dataSets[0].resetColors()
-                
-            } else {
-                self.data?.dataSets[0].setColor(gamaColor)
-                self.data?.dataSets[0].resetColors()
+            if self.data != nil {
+                mapDataList(array2D: brainwave)
             }
         }
     }
     
     public lazy var enableBeta = true {
         willSet {
-            if !newValue {
-                
-                self.data?.dataSets[1].setColor(.clear)
-                self.data?.dataSets[1].resetColors()
-            } else {
-                self.data?.dataSets[1].setColor(betaColor)
-                self.data?.dataSets[1].resetColors()
+            if self.data != nil {
+                mapDataList(array2D: brainwave)
             }
         }
     }
     
     public lazy var enableAlpha = true {
         willSet {
-            if !newValue {
-                
-                self.data?.dataSets[2].setColor(.clear)
-                self.data?.dataSets[2].resetColors()
-            } else {
-                self.data?.dataSets[2].setColor(alphaColor)
-                self.data?.dataSets[2].resetColors()
+            if self.data != nil {
+                mapDataList(array2D: brainwave)
             }
         }
     }
     
     public lazy var enableTheta = true {
         willSet {
-            if !newValue {
-                
-                self.data?.dataSets[3].setColor(.clear)
-                self.data?.dataSets[3].resetColors()
-            } else {
-                self.data?.dataSets[3].setColor(thetaColor)
-                self.data?.dataSets[3].resetColors()
+            if self.data != nil {
+                mapDataList(array2D: brainwave)
             }
         }
     }
     
     public lazy var enableDelta = true {
         willSet {
-            if !newValue {
-                
-                self.data?.dataSets[4].setColor(.clear)
-                self.data?.dataSets[4].resetColors()
-            } else {
-                self.data?.dataSets[4].setColor(deltaColor)
-                self.data?.dataSets[4].resetColors()
+            if self.data != nil {
+                mapDataList(array2D: brainwave)
             }
         }
     }
@@ -249,7 +223,7 @@ class RhythmsChart: LineChartView {
         self.marker = markerView
     }
     
-    
+    private var brainwave: Array2D<Float>?
     /// 设置图标数值
     /// - Parameters:
     ///   - gama: gama description
@@ -268,7 +242,7 @@ class RhythmsChart: LineChartView {
         self.thetaArray = theta
         self.alphaArray = alpha
         self.betaArray = beta
-        let brainwave = brainwaveMapping()
+        brainwave = brainwaveMapping()
         //setDataCount(brainwave)
         mapDataList(array2D: brainwave)
     }
