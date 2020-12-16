@@ -365,8 +365,9 @@ class HRChart: LineChartView {
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
         
         if maxScreenCount > 0 {
-            self.setVisibleXRangeMaximum(Double(maxScreenCount))
-            self.moveViewToX(Double(paddingIndex))
+            self.setVisibleXRangeMaximum(Double(200))
+            
+            self.moveViewToX(Double(paddingIndex - 40 > 0 ? paddingIndex - 40 : paddingIndex))
         }
     }
     
