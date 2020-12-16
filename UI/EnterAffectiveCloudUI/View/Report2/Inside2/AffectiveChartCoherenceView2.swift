@@ -239,7 +239,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
             //chart.bgColor = self.bgColor
             //chart.lineColor = self.lineColor
             //chart.cornerRadius = self.cornerRadius
-            chart.chartView.uploadCycle = self.uploadCycle
+            chart.chartView.uploadCycle = UInt(self.uploadCycle)
             chart.chartView.maxDataCount = 1000
             chart.chartView.maxScreenCount = 0
             chart.textColor = self.textColor
