@@ -240,6 +240,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
             //chart.lineColor = self.lineColor
             //chart.cornerRadius = self.cornerRadius
             chart.chartView.maxDataCount = 1000
+            chart.chartView.maxScreenCount = 0
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.coherenceList = self.coherenceList
