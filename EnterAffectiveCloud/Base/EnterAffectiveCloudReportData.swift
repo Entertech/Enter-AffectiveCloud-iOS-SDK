@@ -11,10 +11,12 @@ import Foundation
 /// ReportData 由标量数据（scalars）和绘图数组组成 (digitals)
 public class EnterAffectiveCloudReportData {
 
+    public var scalarVersion = "1.0.0.0"
     public let scalars: [ReportScalar]
     public let digitals: [ReportDigital]
 
-    public init(scalars: [ReportScalar], digitals: [ReportDigital]) {
+    public init(scalars: [ReportScalar], digitals: [ReportDigital], version: String = "1.0.0.0") {
+        self.scalarVersion = version
         self.scalars = scalars
         self.digitals = digitals
     }

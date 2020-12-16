@@ -57,6 +57,7 @@ class EnterAffectiveCloudReportFileReader: DataFileReader {
                 break
             }
         }
+        
         if digitalBeginIndex == 0 { return nil}
         let scalerRange: Range = 0..<digitalBeginIndex
         let scalarData = data.subdata(in: scalerRange)
@@ -66,7 +67,7 @@ class EnterAffectiveCloudReportFileReader: DataFileReader {
         let digitalData = data.subdata(in: digitalRange)
         let digitals = toReportDigitalWith(data: digitalData)
         if scalars.count == 0, digitals.count == 0 { return nil }
-        return EnterAffectiveCloudReportData(scalars: scalars, digitals: digitals)
+        return EnterAffectiveCloudReportData(scalars: scalars, digitals: digitals, version: self.dataVersion)
     }
 
     // 解析标量数据
