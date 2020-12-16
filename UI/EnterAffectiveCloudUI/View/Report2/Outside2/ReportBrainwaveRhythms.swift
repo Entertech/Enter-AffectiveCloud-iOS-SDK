@@ -59,15 +59,19 @@ public class ReportBrainwaveRhythms: UIView {
         }
     }
     
+    public weak var delegate: RhythmsViewDelegate?
+    
     ///伽马线是否可用
     public lazy var gamaEnable: Bool = true {
         willSet {
             if newValue {
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
                 chartView.enableGama = true
+                delegate?.setRhythmsEnable(value: 1 << 1)
             } else {
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
                 chartView.enableGama = false
+                delegate?.setRhythmsEnable(value: 1)
             }
         }
     }
@@ -77,9 +81,11 @@ public class ReportBrainwaveRhythms: UIView {
             if newValue {
                 betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
                 chartView.enableBeta = true
+                delegate?.setRhythmsEnable(value: 1<<3)
             } else {
                 betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
                 chartView.enableBeta = false
+                delegate?.setRhythmsEnable(value: 1<<2)
             }
         }
     }
@@ -89,9 +95,11 @@ public class ReportBrainwaveRhythms: UIView {
             if newValue {
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
                 chartView.enableAlpha = true
+                delegate?.setRhythmsEnable(value: 1<<5)
             } else {
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
                 chartView.enableAlpha = false
+                delegate?.setRhythmsEnable(value: 1<<4)
             }
         }
     }
@@ -101,9 +109,11 @@ public class ReportBrainwaveRhythms: UIView {
             if newValue {
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
                 chartView.enableTheta = true
+                delegate?.setRhythmsEnable(value: 1<<7)
             } else {
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
                 chartView.enableTheta = false
+                delegate?.setRhythmsEnable(value: 1<<6)
             }
         }
     }
@@ -113,9 +123,11 @@ public class ReportBrainwaveRhythms: UIView {
             if newValue {
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
                 chartView.enableDelta = true
+                delegate?.setRhythmsEnable(value: 1<<9)
             } else {
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
                 chartView.enableDelta = false
+                delegate?.setRhythmsEnable(value: 1<<8)
             }
         }
     }
@@ -160,6 +172,7 @@ public class ReportBrainwaveRhythms: UIView {
         gamaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
         
         betaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
@@ -169,6 +182,7 @@ public class ReportBrainwaveRhythms: UIView {
         betaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         betaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        betaBtn.addTarget(self, action: #selector(betaAction(_:)), for: .touchUpInside)
         
         alphaBtn.backgroundColor = alphaColor.changeAlpha(to: 0.2)
         alphaBtn.setTitle("α", for: .normal)
@@ -178,6 +192,7 @@ public class ReportBrainwaveRhythms: UIView {
         alphaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         alphaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        alphaBtn.addTarget(self, action: #selector(alphaAction(_:)), for: .touchUpInside)
         
         thetaBtn.backgroundColor = thetaColor.changeAlpha(to: 0.2)
         thetaBtn.setTitle("θ", for: .normal)
@@ -187,6 +202,7 @@ public class ReportBrainwaveRhythms: UIView {
         thetaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         thetaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        thetaBtn.addTarget(self, action: #selector(thetaAction(_:)), for: .touchUpInside)
         
         deltaBtn.backgroundColor = deltaColor.changeAlpha(to: 0.2)
         deltaBtn.setTitle("δ", for: .normal)
@@ -196,11 +212,14 @@ public class ReportBrainwaveRhythms: UIView {
         deltaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         deltaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        deltaBtn.addTarget(self, action: #selector(deltaAction(_:)), for: .touchUpInside)
         
         minLabel.textColor = textColor
         minLabel.font = UIFont.systemFont(ofSize: 12)
         minLabel.textAlignment = .center
         minLabel.text = minText
+        
+        chartView.maxDataCount = 1000
         
         btnContentView.alignment = .center
         btnContentView.addArrangedSubview(gamaBtn)
@@ -212,6 +231,7 @@ public class ReportBrainwaveRhythms: UIView {
         btnContentView.backgroundColor = .clear
         btnContentView.distribution = .fillEqually
         btnContentView.spacing = 16
+        btnContentView.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(btnContentView)
         self.addSubview(minLabel)
@@ -227,7 +247,7 @@ public class ReportBrainwaveRhythms: UIView {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.top.equalToSuperview().offset(8)
-            $0.height.equalTo(32)
+            $0.height.equalTo(28)
         }
         
         chartView.snp.makeConstraints {
@@ -241,6 +261,9 @@ public class ReportBrainwaveRhythms: UIView {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-16)
         }
+
+        
+        
         
     }
     

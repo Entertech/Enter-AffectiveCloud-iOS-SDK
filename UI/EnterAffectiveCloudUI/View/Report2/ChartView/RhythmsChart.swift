@@ -58,6 +58,7 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[0].setColor(.clear)
+                
             } else {
                 self.data?.dataSets[0].setColor(gamaColor)
             }
@@ -80,6 +81,7 @@ class RhythmsChart: LineChartView {
             if !newValue {
                 
                 self.data?.dataSets[2].setColor(.clear)
+                
             } else {
                 self.data?.dataSets[2].setColor(alphaColor)
             }

@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-protocol RhythmsViewDelegate: class {
+public protocol RhythmsViewDelegate: class {
     func setRhythmsEnable(value: Int)
 }
 
@@ -21,6 +21,8 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             chartView.uploadCycle = newValue
         }
     }
+    
+    public weak var delegate: RhythmsViewDelegate?
     
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
         willSet {
@@ -158,7 +160,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             chartHead.expandBtn.isHidden = !newValue
         }
     }
-    private weak var delegate: RhythmsViewDelegate?
+    
     private let gamaBtn = UIButton()
     private let betaBtn = UIButton()
     private let alphaBtn = UIButton()
@@ -198,6 +200,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         gamaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
         
         betaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
@@ -207,6 +210,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         betaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         betaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        betaBtn.addTarget(self, action: #selector(betaAction(_:)), for: .touchUpInside)
         
         alphaBtn.backgroundColor = alphaColor.changeAlpha(to: 0.2)
         alphaBtn.setTitle("α", for: .normal)
@@ -216,6 +220,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         alphaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         alphaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        alphaBtn.addTarget(self, action: #selector(alphaAction(_:)), for: .touchUpInside)
         
         thetaBtn.backgroundColor = thetaColor.changeAlpha(to: 0.2)
         thetaBtn.setTitle("θ", for: .normal)
@@ -225,6 +230,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         thetaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         thetaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        thetaBtn.addTarget(self, action: #selector(thetaAction(_:)), for: .touchUpInside)
         
         deltaBtn.backgroundColor = deltaColor.changeAlpha(to: 0.2)
         deltaBtn.setTitle("δ", for: .normal)
@@ -234,6 +240,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         deltaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
         deltaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        deltaBtn.addTarget(self, action: #selector(deltaAction(_:)), for: .touchUpInside)
         
         minLabel.textColor = textColor
         minLabel.font = UIFont.systemFont(ofSize: 12)
@@ -254,7 +261,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         btnContentView.backgroundColor = .clear
         btnContentView.distribution = .fillEqually
         btnContentView.spacing = 16
-        
+        btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
         chartHead.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
         
