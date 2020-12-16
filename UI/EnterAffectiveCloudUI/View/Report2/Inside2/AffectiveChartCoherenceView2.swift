@@ -71,7 +71,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
     public var coherenceList: [Int]? {
         willSet {
             if let list = newValue {
-                chartView.setData(list: list)
+                chartView.setPadding(list: list)
             }
         }
     }

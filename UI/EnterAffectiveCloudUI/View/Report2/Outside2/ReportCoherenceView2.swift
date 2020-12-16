@@ -17,7 +17,7 @@ public class ReportCoherenceView2: UIView {
             let left = newValue/60
             let remainder = newValue%60
 
-            coherenceTimeLabel.text = "\(remainder)min \(left)s"
+            coherenceTimeLabel.text = "\(left)min \(remainder)s"
                 
             
         }
@@ -37,7 +37,7 @@ public class ReportCoherenceView2: UIView {
     public var coherenceList: [Int]? {
         willSet {
             if let list = newValue {
-                chartView.setData(list: list)
+                chartView.setPadding(list: list)
             }
         }
     }
