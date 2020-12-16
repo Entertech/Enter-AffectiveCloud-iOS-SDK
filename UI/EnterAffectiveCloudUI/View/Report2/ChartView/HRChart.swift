@@ -359,13 +359,13 @@ class HRChart: LineChartView {
         
         self.xAxis.axisMinimum = 0
         self.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-        //self.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        self.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
         
         self.maxVisibleCount = valueCount + 1
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
         
         if maxScreenCount > 0 {
-            self.setVisibleXRange(minXRange: 100, maxXRange: 200)
+            self.setVisibleXRange(minXRange: 100, maxXRange: 150)
             
             self.moveViewToX(Double(paddingIndex - 40 > 0 ? paddingIndex - 40 : paddingIndex))
         }
