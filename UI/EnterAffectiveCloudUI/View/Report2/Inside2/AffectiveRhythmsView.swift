@@ -354,7 +354,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             //chart.bgColor = self.bgColor
             //chart.lineColor = self.lineColor
             //chart.cornerRadius = self.cornerRadius
-            chart.chartView.uploadCycle = 0
+            chart.chartView.uploadCycle = self.uploadCycle
             chart.chartView.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.isChartScale = true

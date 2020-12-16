@@ -447,6 +447,7 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate, UIGestureRec
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
             chart.maxDataCount = 500
+            chart.uploadCycle = self.uploadCycle
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.title = self.title

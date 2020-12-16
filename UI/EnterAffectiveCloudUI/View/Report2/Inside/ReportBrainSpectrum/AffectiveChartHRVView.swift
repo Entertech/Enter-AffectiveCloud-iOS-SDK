@@ -184,6 +184,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         
         chartView = LineChartView()
         yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
+        
         chartView?.leftYAxisRenderer = yRender!
         chartView?.delegate = self
         chartView?.backgroundColor = .clear
@@ -438,6 +439,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
             let chart = AffectiveChartHRVView()
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
+            chart.uploadCycle = uploadCycle
             chart.bgColor = self.bgColor
             chart.lineColor = self.lineColor
             chart.cornerRadius = self.cornerRadius

@@ -625,6 +625,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             chart.isChartScale = true
             chart.attentionColor = self.attentionColor
             chart.relaxationColor = self.relaxationColor
+            chart.uploadCycle = self.uploadCycle    
             chart.highlightLineColor = self.highlightLineColor
             chart.markerBackgroundColor = self.markerBackgroundColor
             chart.chartView?.highlightPerTapEnabled = false

@@ -443,6 +443,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
+            chart.uploadCycle = self.uploadCycle
             chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.lineColor = self.lineColor

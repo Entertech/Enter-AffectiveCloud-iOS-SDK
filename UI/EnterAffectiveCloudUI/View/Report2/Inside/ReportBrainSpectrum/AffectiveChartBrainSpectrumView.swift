@@ -532,6 +532,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             nShowChartView.addSubview(chart)
             chart.chartHead?.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
             chart.bgColor = self.bgColor
+            chart.uploadCycle = self.uploadCycle
             chart.cornerRadius = self.cornerRadius
             chart.sample = self.sample
             chart.maxDataCount = 500

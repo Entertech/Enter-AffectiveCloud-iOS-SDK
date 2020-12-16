@@ -354,6 +354,7 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
             chart.cornerRadius = self.cornerRadius
             chart.title = self.title
             chart.maxDataCount = 1000
+            chart.uploadCycle = self.uploadCycle
             chart.textColor = self.textColor
             chart.lineColor = self.lineColor
             chart.isChartScale = true

@@ -441,6 +441,7 @@ public class AffectiveChartCoherenceView: UIView, ChartViewDelegate, UIGestureRe
             chart.bgColor = self.bgColor
             chart.lineColor = self.lineColor
             chart.cornerRadius = self.cornerRadius
+            chart.uploadCycle = self.uploadCycle
             chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.isChartScale = true

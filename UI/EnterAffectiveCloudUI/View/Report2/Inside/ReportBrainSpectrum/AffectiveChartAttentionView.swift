@@ -351,6 +351,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
             chart.bgColor = self.bgColor
             chart.cornerRadius = self.cornerRadius
             chart.title = self.title
+            chart.uploadCycle = self.uploadCycle
             chart.maxDataCount = 1000
             chart.textColor = self.textColor
             chart.lineColor = self.lineColor
