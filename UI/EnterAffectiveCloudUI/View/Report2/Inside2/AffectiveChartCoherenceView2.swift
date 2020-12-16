@@ -252,6 +252,8 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
             //chart.chartView.markerBackgroundColor = self.markerBackgroundColor
             chart.hrvAvg = self.hrvAvg
             chart.title = self.title
+            
+            chart.chartView.setPadding(list: coherenceList ?? [])
             chart.chartView.setData(list: hrvList)
             let label = UILabel()
             label.text = zoomText

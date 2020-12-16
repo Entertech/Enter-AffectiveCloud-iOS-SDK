@@ -214,6 +214,7 @@ class HRChart: LineChartView {
         guard let waveArray = listArray else {
             return
         }
+        
         var colors: [UIColor] = [] //废弃
         var initValue = 0
         var initIndex = 0
@@ -224,6 +225,7 @@ class HRChart: LineChartView {
                 break
             }
         }
+        var paddingIndex = 0
         var minValue = 100
         var maxValue = 0
         var yVals: [ChartDataEntry] = []
@@ -246,6 +248,10 @@ class HRChart: LineChartView {
                     notZero = waveArray[i]
                     if i < paddingArray.count {
                         if paddingArray[i] != 0 {
+                            if paddingIndex == 0 {
+                                paddingIndex = yVals.count-1
+                            }
+                            
                             colors.append(paddingLineColor)
                         } else {
                             colors.append(lineColor)
@@ -335,12 +341,12 @@ class HRChart: LineChartView {
             labelArray.append(minLabel+8)
         }
         yRender?.entries = labelArray
-        setLimitLine(yVals.count, labelArray)
+        setLimitLine(yVals.count, labelArray, paddingIndex)
     }
     
     
     private var timeApart: [Int] = []
-    private func setLimitLine(_ valueCount: Int, _ yLabels: [Int]) {
+    private func setLimitLine(_ valueCount: Int, _ yLabels: [Int], _ paddingIndex: Int = 0) {
         guard valueCount > 1 else {
             return
         }
@@ -354,9 +360,14 @@ class HRChart: LineChartView {
         self.xAxis.axisMinimum = 0
         self.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         self.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
-        self.maxVisibleCount = maxScreenCount != 0 ? maxScreenCount : valueCount + 1
-        //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
+        
+        self.maxVisibleCount = valueCount + 1
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
+        
+        if maxScreenCount > 0 {
+            self.setVisibleXRangeMaximum(Double(maxScreenCount))
+            self.moveViewToX(Double(paddingIndex))
+        }
     }
     
     
