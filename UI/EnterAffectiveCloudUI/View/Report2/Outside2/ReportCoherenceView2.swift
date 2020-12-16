@@ -14,8 +14,8 @@ public class ReportCoherenceView2: UIView {
     /// coherence time
     public var currentTime: Int = 0 {
         willSet {
-            let left = currentTime/60
-            let remainder = currentTime%60
+            let left = newValue/60
+            let remainder = newValue%60
 
             coherenceTimeLabel.text = "\(remainder)min \(left)s"
                 

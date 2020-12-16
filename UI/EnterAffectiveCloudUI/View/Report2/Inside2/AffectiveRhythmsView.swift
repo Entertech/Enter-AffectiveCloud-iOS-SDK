@@ -258,7 +258,6 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         btnContentView.addArrangedSubview(thetaBtn)
         btnContentView.addArrangedSubview(deltaBtn)
         btnContentView.axis = .horizontal
-        btnContentView.backgroundColor = .clear
         btnContentView.distribution = .fillEqually
         btnContentView.spacing = 16
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false

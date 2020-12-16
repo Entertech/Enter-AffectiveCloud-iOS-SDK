@@ -133,7 +133,7 @@ class HRChart: LineChartView {
         self.gridBackgroundColor = .clear
         self.drawBordersEnabled = false
         self.chartDescription?.enabled = false
-        self.pinchZoomEnabled = false
+        self.pinchZoomEnabled = true
         self.scaleXEnabled = false
         self.scaleYEnabled = false
         self.legend.enabled = false
