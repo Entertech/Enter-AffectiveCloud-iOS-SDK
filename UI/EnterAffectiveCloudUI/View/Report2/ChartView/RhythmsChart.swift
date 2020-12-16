@@ -54,7 +54,7 @@ class RhythmsChart: LineChartView {
     }
     
     public lazy var enableGama = true {
-        willSet {
+        didSet {
             if self.data != nil {
                 mapDataList(array2D: brainwave)
             }
@@ -62,7 +62,7 @@ class RhythmsChart: LineChartView {
     }
     
     public lazy var enableBeta = true {
-        willSet {
+        didSet {
             if self.data != nil {
                 mapDataList(array2D: brainwave)
             }
@@ -70,7 +70,7 @@ class RhythmsChart: LineChartView {
     }
     
     public lazy var enableAlpha = true {
-        willSet {
+        didSet {
             if self.data != nil {
                 mapDataList(array2D: brainwave)
             }
@@ -78,7 +78,7 @@ class RhythmsChart: LineChartView {
     }
     
     public lazy var enableTheta = true {
-        willSet {
+        didSet {
             if self.data != nil {
                 mapDataList(array2D: brainwave)
             }
@@ -86,7 +86,7 @@ class RhythmsChart: LineChartView {
     }
     
     public lazy var enableDelta = true {
-        willSet {
+        didSet {
             if self.data != nil {
                 mapDataList(array2D: brainwave)
             }
