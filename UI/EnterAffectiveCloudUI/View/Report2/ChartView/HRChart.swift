@@ -207,7 +207,7 @@ class HRChart: LineChartView {
         }
     }
     
-    
+    var paddingIndex = 0
     /// 把数据映射到图表上
     /// - Parameter waveArray: 数据
     private func mapDataList() {
@@ -225,7 +225,7 @@ class HRChart: LineChartView {
                 break
             }
         }
-        var paddingIndex = 0
+        
         var minValue = 100
         var maxValue = 0
         var yVals: [ChartDataEntry] = []
