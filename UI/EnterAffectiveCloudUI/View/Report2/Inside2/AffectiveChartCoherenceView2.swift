@@ -356,11 +356,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
         coherenceTimeLabel.isHidden = bIsHidden
         
     }
-    
-    public func setChartScale() {
-        chartView.setChartScale()
-    }
-
+ 
 }
 
 
