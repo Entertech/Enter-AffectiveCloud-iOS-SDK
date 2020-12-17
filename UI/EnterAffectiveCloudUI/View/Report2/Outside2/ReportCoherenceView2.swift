@@ -56,6 +56,10 @@ public class ReportCoherenceView2: UIView {
         }
     }
     
+    public func setChartScale() {
+        chartView.setChartScale()
+    }
+    
 
     private var coherenceColor = UIColor.colorWithHexString(hexColor: "#5FC695")
     private var textColor = ColorExtension.textLv1
