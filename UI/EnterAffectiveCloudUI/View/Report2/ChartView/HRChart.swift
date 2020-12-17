@@ -364,11 +364,15 @@ class HRChart: LineChartView {
         self.maxVisibleCount = valueCount + 1
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
         
+
+    }
+    
+    public func setChartScale() {
         if maxScreenCount > 0 {
-            self.setVisibleXRange(minXRange: 100, maxXRange: 150)
+            self.setVisibleXRange(minXRange: 150, maxXRange: 150)
             
-            //self.moveViewToX(Double(paddingIndex - 40 > 0 ? paddingIndex - 40 : paddingIndex))
-            self.moveViewToX(Double(100))
+            self.moveViewToX(Double(paddingIndex - 60 > 0 ? paddingIndex - 60 : paddingIndex))
+            
         }
     }
     
