@@ -367,7 +367,8 @@ class HRChart: LineChartView {
         if maxScreenCount > 0 {
             self.setVisibleXRange(minXRange: 100, maxXRange: 150)
             
-            self.moveViewToX(Double(paddingIndex - 40 > 0 ? paddingIndex - 40 : paddingIndex))
+            //self.moveViewToX(Double(paddingIndex - 40 > 0 ? paddingIndex - 40 : paddingIndex))
+            self.moveViewToX(Double(100))
         }
     }
     
