@@ -355,7 +355,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             //chart.lineColor = self.lineColor
             //chart.cornerRadius = self.cornerRadius
             chart.chartView.uploadCycle = self.uploadCycle
-            chart.chartView.maxDataCount = 1000
+            chart.chartView.maxDataCount = 200
             chart.textColor = self.textColor
             chart.isChartScale = true
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))

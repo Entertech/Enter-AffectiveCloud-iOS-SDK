@@ -187,7 +187,7 @@ class HRChart: LineChartView {
         }
         
         if let value = list {
-            sample = value.count / maxDataCount == 0 ? 1 : value.count / maxDataCount
+            sample = value.count / maxDataCount + 1
             listArray = value
             if value.count - paddingArray.count > 0 {
                 for _ in 0..<(value.count-paddingArray.count) {

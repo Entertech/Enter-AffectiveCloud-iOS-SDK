@@ -159,7 +159,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
         
         chartView.delegate = self
         chartView.maxScreenCount = 200
-        chartView.maxDataCount = 1000
+        chartView.maxDataCount = 200
         chartView.isUserInteractionEnabled = true
         
         chartHead.titleText = title
