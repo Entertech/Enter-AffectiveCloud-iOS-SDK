@@ -370,7 +370,10 @@ class RhythmsChart: LineChartView {
         let data = LineChartData(dataSets: sets)
         self.data = data
         // 设置坐标轴
-        setLimitLine(waveArray.columns)
+        if sets.count > 0 {
+            
+            setLimitLine(sets[0].count)
+        }
     }
     
     
