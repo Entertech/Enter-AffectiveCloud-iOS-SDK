@@ -22,7 +22,7 @@ class HRChart: LineChartView {
     }
     
     /// 在整个图表显示的最大点数
-    public var maxDataCount = 1000
+    public var maxDataCount = 500
     
     /// 整个屏幕显示的点数
     public var maxScreenCount = 0

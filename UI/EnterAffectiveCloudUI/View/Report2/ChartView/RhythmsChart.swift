@@ -23,7 +23,7 @@ class RhythmsChart: LineChartView {
     }
     
     /// 在整个图表显示的最大点数
-    public var maxDataCount = 200
+    public var maxDataCount = 500
     
     /// 整个屏幕显示的点数. 0表示不限制
     public var maxScreenCount = 0
