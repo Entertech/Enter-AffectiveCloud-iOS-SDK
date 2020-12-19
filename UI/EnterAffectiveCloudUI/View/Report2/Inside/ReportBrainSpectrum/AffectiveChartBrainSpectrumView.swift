@@ -498,7 +498,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
 
         chartView?.xAxis.axisMinimum = 0
         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-        chartView?.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        chartView?.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         chartView?.maxVisibleCount = valueCount * 5 + 1
         self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
         self.chartView?.leftAxis.valueFormatter = YValueFormatter()

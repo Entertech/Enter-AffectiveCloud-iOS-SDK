@@ -391,7 +391,7 @@ class RhythmsChart: LineChartView {
         
         self.xAxis.axisMinimum = 0
         self.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-        self.setVisibleXRangeMinimum(100) //限制屏幕最少显示100个点
+        self.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         self.maxVisibleCount = maxScreenCount != 0 ? maxScreenCount*5 : valueCount*5 + 1
         //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)

@@ -202,7 +202,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
         
-        betaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
+        betaBtn.backgroundColor = betaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
         betaBtn.setTitleColor(betaColor, for: .normal)
         betaBtn.layer.cornerRadius = 14
@@ -248,7 +248,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         minLabel.text = minText
         
         chartView.delegate = self
-        chartView.maxDataCount = 1000
+        chartView.maxDataCount = 300
         chartView.isUserInteractionEnabled = true
         
         btnContentView.alignment = .fill
@@ -264,8 +264,8 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartHead.titleText = title
         chartHead.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
         
-//        let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-//        chartView.addGestureRecognizer(pressGesture)//添加长按事件
+        let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        chartView.addGestureRecognizer(pressGesture)//添加长按事件
         
         self.addSubview(chartView)
         self.addSubview(btnContentView)

@@ -570,7 +570,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         
         chartView?.xAxis.axisMinimum = 0
         chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-        chartView?.setVisibleXRangeMinimum(100)//限制屏幕最少显示100个点
+        chartView?.setVisibleXRangeMinimum(20)//限制屏幕最少显示100个点
         chartView?.maxVisibleCount = valueCount*2 + 1
         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
         

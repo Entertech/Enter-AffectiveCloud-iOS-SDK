@@ -96,7 +96,7 @@ public class ReportCoherenceView2: UIView {
         
         coherenceTimeLabel.textColor = coherenceColor
         coherenceTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        
+        coherenceTimeLabel.text = "0min 0s"
         minLabel.textColor = textColor
         minLabel.font = UIFont.systemFont(ofSize: 12)
         minLabel.textAlignment = .center
