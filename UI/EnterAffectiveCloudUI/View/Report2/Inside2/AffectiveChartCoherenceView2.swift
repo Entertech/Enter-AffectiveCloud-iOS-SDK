@@ -145,7 +145,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
         
         coherenceTimeLabel.textColor = paddingLineColor
         coherenceTimeLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        
+        coherenceTimeLabel.text = "0min 0s"
         minLabel.textColor = textColor
         minLabel.font = UIFont.systemFont(ofSize: 12)
         minLabel.textAlignment = .center
