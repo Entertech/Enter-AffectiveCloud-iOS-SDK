@@ -21,12 +21,9 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
         willSet {
             let left = currentTime/60
             let remainder = currentTime%60
-            if remainder > 0 {
-                coherenceTimeLabel.text = "\(remainder)min \(left)s"
+            coherenceTimeLabel.text = "\(left)min \(remainder)s"
                 
-            } else {
-                coherenceTimeLabel.text = "\(left)s"
-            }
+            
         }
     }
     
