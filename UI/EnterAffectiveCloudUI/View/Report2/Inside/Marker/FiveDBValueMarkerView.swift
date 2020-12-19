@@ -8,7 +8,7 @@
 
 import UIKit
 import Charts
-
+/// 分贝数据
 class FiveDBValueMarkerView: MarkerView {
 
     public var titleLabelArray: [UILabel] = []
@@ -102,7 +102,7 @@ class FiveDBValueMarkerView: MarkerView {
         if let index = index, index != -1 {
             for i in 0..<5 {
                 let entry1 = chartView?.data?.dataSets[i].entryForIndex(index)
-                labelArray[i].text = String.init(format: "%d", entry1!.y)
+                labelArray[i].text = String.init(format: "%d", Int(entry1!.y))
                 
             }
         }

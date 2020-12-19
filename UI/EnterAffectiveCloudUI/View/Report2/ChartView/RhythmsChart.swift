@@ -208,7 +208,7 @@ class RhythmsChart: LineChartView {
         xAxis.drawAxisLineEnabled = true
         xAxis.axisLineWidth = 1
         
-        markerView = FiveDBValueMarkerView(frame: CGRect(x: 0, y: 0, width: 292, height: 47))
+        markerView = FiveDBValueMarkerView(frame: CGRect(x: 0, y: 0, width: 332, height: 47))
         markerView?.chartView = self
         markerView?.titleLabelArray[0].text = "γ"
         markerView?.titleLabelArray[1].text = "β"

@@ -8,7 +8,7 @@
 
 import UIKit
 import Charts
-
+/// 百分比数据
 class FiveValueMarkerView: MarkerView {
 
     public var titleLabelArray: [UILabel] = []
