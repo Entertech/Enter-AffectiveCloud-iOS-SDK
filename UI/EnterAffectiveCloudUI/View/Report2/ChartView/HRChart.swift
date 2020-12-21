@@ -134,7 +134,7 @@ class HRChart: LineChartView {
         self.drawBordersEnabled = false
         self.chartDescription?.enabled = false
         self.pinchZoomEnabled = true
-        self.scaleXEnabled = false
+        self.scaleXEnabled = true
         self.scaleYEnabled = false
         self.legend.enabled = false
         //self.animate(xAxisDuration: 0.5)
@@ -364,8 +364,8 @@ class HRChart: LineChartView {
         if maxScreenCount > 0 {
             //let range = Double(maxScreenCount) / Double(valueCount * sample) * self.xRange > self.xRange ? self.xRange : Double(maxScreenCount) / Double(valueCount * sample) * self.xRange
             //self.setVisibleXRangeMaximum(range)
-            let value = Double(paddingIndex)/Double(valueCount)*self.xRange
-            self.moveViewToX(value-30)
+//            let value = Double(paddingIndex)/Double(valueCount)*self.xRange
+//            self.moveViewToX(value-30)
             
         }
     }
