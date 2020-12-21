@@ -134,7 +134,7 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    public var attributeText: NSAttributedString {
+    public var attributeText: NSAttributedString? {
         didSet {
             chart.averageNumLabel.attributedText = attributeText
         }
