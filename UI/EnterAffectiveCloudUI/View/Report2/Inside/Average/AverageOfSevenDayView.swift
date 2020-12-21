@@ -10,6 +10,47 @@ import UIKit
 
 public class PrivateAverageOfSevenDayView: UIView {
     
+    public var valuesSpect: [Int] = [] {
+        willSet {
+
+                for i in 0..<valueViews.count {
+                    valueViews[i].removeFromSuperview()
+                    valueLabels[i].removeFromSuperview()
+                }
+                valueViews.removeAll()
+                valueLabels.removeAll()
+                _values = newValue
+                //let total = newValue.reduce(0, +)
+                //averageValue = lroundf(Float(total) / Float(newValue.count))
+                for (i,_) in newValue.enumerated() {
+                    let bar = UIView()
+                    let numLabel = UILabel()
+                    // 设置bar
+                    if i == 0 {
+                        bar.backgroundColor = currentBarColor
+                        numLabel.backgroundColor = numBgColor
+                    } else {
+                        bar.backgroundColor = barColor
+                        numLabel.isHidden = true
+                    }
+                    
+                    bar.layer.cornerRadius = 4
+                    bar.layer.masksToBounds = true
+                    valueViews.append(bar)
+                    
+                    // 设置bar上面的label
+                    numLabel.font = UIFont.systemFont(ofSize: 11)
+                    numLabel.text = "\(newValue[i] / 60)"
+                    numLabel.layer.cornerRadius = 4
+                    numLabel.layer.masksToBounds = true
+                    numLabel.textAlignment = .center
+                    numLabel.textColor = numTextColor
+                    valueLabels.append(numLabel)
+                }
+                barLayout()
+        }
+    }
+    
     public var values: [Int] = [] {
         willSet {
 
@@ -20,8 +61,8 @@ public class PrivateAverageOfSevenDayView: UIView {
                 valueViews.removeAll()
                 valueLabels.removeAll()
                 _values = newValue
-                let total = newValue.reduce(0, +)
-                averageValue = lroundf(Float(total) / Float(newValue.count))
+                //let total = newValue.reduce(0, +)
+                //averageValue = lroundf(Float(total) / Float(newValue.count))
                 for (i,_) in newValue.enumerated() {
                     let bar = UIView()
                     let numLabel = UILabel()
@@ -129,7 +170,7 @@ public class PrivateAverageOfSevenDayView: UIView {
         }
     }
     
-    private var averageValue:Int = 0 {
+    public var averageValue:Int = 0 {
         willSet {
             averageNumLabel.text = "\(newValue)"
         }
