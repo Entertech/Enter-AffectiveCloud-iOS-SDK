@@ -40,7 +40,7 @@ public class PrivateAverageOfSevenDayView: UIView {
                     
                     // 设置bar上面的label
                     numLabel.font = UIFont.systemFont(ofSize: 11)
-                    numLabel.text = "\(newValue[i] / 60)"
+                    numLabel.text = String.init(format: "%.1f", Float(newValue[i]) / 60.0)
                     numLabel.layer.cornerRadius = 4
                     numLabel.layer.masksToBounds = true
                     numLabel.textAlignment = .center

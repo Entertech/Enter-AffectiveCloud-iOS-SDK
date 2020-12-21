@@ -77,21 +77,23 @@ public class PrivateAverageView: UIView {
             if newValue.count > 0 {
                 
                 if let name = categoryName {
-                    chart.valuesSpect = newValue
+                    
                     let total = newValue.reduce(0, +)
                     let averageValueTemp = Float(total) / Float(newValue.count)
                     
                     if name == .Coherence {
-                        let min = Int(total/60)
-                        let sec = Int(total)%60
+                        chart.valuesSpect = newValue
+                        let min = Int(averageValueTemp/60)
+                        let sec = Int(averageValueTemp)%60
                         let attributedText = NSMutableAttributedString(string:"\(min)min \(sec)s")
                         let style = NSMutableParagraphStyle()
                         style.alignment = .left
                         style.lineSpacing = 5
                         let minLen = ceil(log10(Double(min)))
                         let secLen = ceil(log10(Double(sec)))
-                        attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular)], range: NSMakeRange(Int(minLen), 4))
-                        attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular)], range: NSMakeRange(Int(minLen)+4+Int(secLen), 1))
+                        attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen), 4))
+
+                        attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen)+4+Int(secLen), 1))
                         attributedText.addAttributes([NSAttributedString.Key.paragraphStyle: style], range: NSMakeRange(0, attributedText.length))
                         chart.averageNumLabel.attributedText = attributedText
                     } else {
