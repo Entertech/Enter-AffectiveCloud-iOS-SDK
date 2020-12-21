@@ -89,8 +89,8 @@ public class PrivateAverageView: UIView {
                         let style = NSMutableParagraphStyle()
                         style.alignment = .left
                         style.lineSpacing = 5
-                        let minLen = ceil(log10(Double(min)))
-                        let secLen = ceil(log10(Double(sec)))
+                        let minLen = min == 0 ? 1 : ceil(log10(Double(min)))
+                        let secLen = sec == 0 ? 1 : ceil(log10(Double(sec)))
                         attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen), 4))
 
                         attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen)+4+Int(secLen), 1))
