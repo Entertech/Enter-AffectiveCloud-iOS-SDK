@@ -356,7 +356,7 @@ class HRChart: LineChartView {
         
         self.xAxis.axisMinimum = 0
         self.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
-        self.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
+        //self.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         
         self.maxVisibleCount = valueCount + 1
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
@@ -372,8 +372,8 @@ class HRChart: LineChartView {
     
  
     public func setMaxRange() {
-            //self.setVisibleXRangeMaximum(Double(list.count))
-            self.setVisibleXRange(minXRange: 20, maxXRange: self.xRange)
+            self.setVisibleXRangeMaximum(self.xRange)
+            //self.setVisibleXRange(minXRange: 20, maxXRange: self.xRange)
         
     }
     
