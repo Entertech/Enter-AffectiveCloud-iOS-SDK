@@ -22,9 +22,9 @@ public class ReportHRVView: UIView {
         }
     }
     
-    public var value: Int = 0 {
+    public var value: Float = 0 {
         willSet {
-            numLabel.text = "\(newValue)"
+            numLabel.text = String.init(format: "%.1f", newValue)
         }
     }
  

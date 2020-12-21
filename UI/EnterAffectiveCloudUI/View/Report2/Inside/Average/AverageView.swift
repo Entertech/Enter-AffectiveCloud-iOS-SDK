@@ -134,6 +134,13 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var attributeText: NSAttributedString {
+        didSet {
+            chart.averageNumLabel.attributedText = attributeText
+        }
+        
+    }
+    
     public var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
         willSet {
             chart.currentBarColor = newValue

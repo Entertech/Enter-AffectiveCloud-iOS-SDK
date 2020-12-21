@@ -140,7 +140,7 @@ public class PrivateAverageOfSevenDayView: UIView {
     
     private let averageLine = UIView()
     private let averageLabel = UILabel()
-    private let averageNumLabel = UILabel()
+    public let averageNumLabel = UILabel()
     private let unitLabel = UILabel()
     private let lastLabel = UILabel()
     private var _values: [Int]?

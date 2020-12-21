@@ -143,8 +143,6 @@ class RhythmsChart: LineChartView {
     public var deltaArray: [Float]? = []
     public var thetaArray: [Float]? = []
 
-    
-    
     private var interval = 1.8
     private var timeStamp = 0
     private var sample = 3
@@ -280,6 +278,31 @@ class RhythmsChart: LineChartView {
 
         var sets: [LineChartDataSet] = []
         for j in 0..<waveArray.rows {
+            switch j {
+            case 0:
+                if !enableGama {
+                    continue
+                }
+            case 1:
+                if !enableBeta {
+                    continue
+                }
+            case 2:
+                if !enableAlpha {
+                    continue
+                }
+            case 3:
+                if !enableTheta {
+                    continue
+                }
+            case 4:
+                if !enableDelta {
+                    continue
+                }
+            default:
+                break
+            }
+            
             var initValue = 0
             var initIndex = 0
             for i in stride(from: 0, to: waveArray.columns, by: sample) {
