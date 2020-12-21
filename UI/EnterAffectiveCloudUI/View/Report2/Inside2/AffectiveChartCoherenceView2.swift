@@ -98,6 +98,12 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
         }
     }
     
+    public var maxScreenCount = 200 {
+        willSet {
+            chartView.maxScreenCount = newValue
+        }
+    }
+    
     
     //MARK:- Private UI
     private var isChartScale = false {
@@ -164,7 +170,6 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
         breathLabel.font = UIFont.systemFont(ofSize: 12)
         
         chartView.delegate = self
-        chartView.maxScreenCount = 200
         chartView.maxDataCount = 500
         chartView.isUserInteractionEnabled = true
         
