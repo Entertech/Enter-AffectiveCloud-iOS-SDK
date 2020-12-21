@@ -303,7 +303,7 @@ public class ReportSemiCircle3: UIView {
             needleLayer.lineWidth = w1/8
             needleLayer.strokeColor = UIColor.colorWithHexString(hexColor: "FF6682").cgColor
             needleLayer.strokeStart = currentValue / (largeValue - smallValue)
-            needleLayer.strokeEnd = currentValue / (largeValue - smallValue) + 0.003
+            needleLayer.strokeEnd = currentValue / (largeValue - smallValue) + 0.01
             needleLayer.lineCap = .butt
             needleLayer.path = circlePath?.cgPath
             self.layer.addSublayer(needleLayer)
