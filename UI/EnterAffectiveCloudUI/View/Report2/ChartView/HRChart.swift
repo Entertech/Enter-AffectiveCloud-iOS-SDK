@@ -272,7 +272,7 @@ class HRChart: LineChartView {
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
-        set.lineWidth = 2
+        set.lineWidth = 1.5
         //set.setColor(lineColor)
         set.colors = colors
         set.drawIconsEnabled = true
