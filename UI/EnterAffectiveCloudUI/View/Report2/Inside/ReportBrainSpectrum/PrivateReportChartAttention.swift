@@ -287,7 +287,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
-        set.lineWidth = 2
+        set.lineWidth = 1.5
         set.setColor(lineColor)
         set.drawIconsEnabled = true
         set.highlightEnabled = true

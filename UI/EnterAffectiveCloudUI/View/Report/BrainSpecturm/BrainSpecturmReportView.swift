@@ -540,7 +540,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = true
         set.drawValuesEnabled = false
-        set.lineWidth = 1
+        set.lineWidth = 1.5
         set.setColor(color)
         set.fillAlpha = 1
         set.fillColor = color

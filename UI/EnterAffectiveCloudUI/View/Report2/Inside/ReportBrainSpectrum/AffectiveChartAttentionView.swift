@@ -269,7 +269,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = true
-        set.lineWidth = 1
+        set.lineWidth = 1.5
         set.setColor(.clear)
         set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
         set.fillAlpha = 1.0

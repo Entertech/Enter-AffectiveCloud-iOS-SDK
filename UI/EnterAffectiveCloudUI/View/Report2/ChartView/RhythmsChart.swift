@@ -320,7 +320,7 @@ class RhythmsChart: LineChartView {
             set.drawCirclesEnabled = false
             set.drawCircleHoleEnabled = false
             set.drawFilledEnabled = false
-            set.lineWidth = 1
+            set.lineWidth = 1.5
             switch j {
             case 0:
                 if enableGama {
