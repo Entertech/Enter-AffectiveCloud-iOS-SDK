@@ -89,6 +89,15 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
     
     public var zoomText = "Zoom in on the curve and slide to view it."
     
+    public var showAll = false {
+        willSet {
+            if newValue {
+                
+                chartView.setMaxRange()
+            }
+        }
+    }
+    
     
     //MARK:- Private UI
     private var isChartScale = false {
