@@ -372,7 +372,7 @@ class HRChart: LineChartView {
  
     public func setMaxRange() {
         if let list = listArray {
-            self.setVisibleXRangeMaximum(list.count)
+            self.setVisibleXRangeMaximum(Double(list.count))
             
         }
     }
