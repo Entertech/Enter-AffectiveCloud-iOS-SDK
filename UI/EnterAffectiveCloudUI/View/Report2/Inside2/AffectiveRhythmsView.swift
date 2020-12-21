@@ -350,10 +350,11 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             let chart = AffectiveRhythmsView()
             nShowChartView.addSubview(chart)
             chart.chartHead.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
-            //chart.interval = self.interval
-            //chart.bgColor = self.bgColor
-            //chart.lineColor = self.lineColor
-            //chart.cornerRadius = self.cornerRadius
+            chart.alphaEnable = self.alphaEnable
+            chart.betaEnable = self.betaEnable
+            chart.deltaEnable = self.deltaEnable
+            chart.thetaEnable = self.thetaEnable
+            chart.gamaEnable = self.gamaEnable
             chart.chartView.uploadCycle = self.uploadCycle
             chart.chartView.maxDataCount = 500
             chart.textColor = self.textColor
