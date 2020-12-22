@@ -361,6 +361,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             chart.isChartScale = true
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
             chart.isZoomed = true
+            chart.btnContentView.spacing = 32
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView.highlightPerTapEnabled = false
             chart.chartView.highlightPerDragEnabled = false
