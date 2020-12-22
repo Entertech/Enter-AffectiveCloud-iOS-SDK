@@ -24,7 +24,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
                                  UIColor.colorWithHexString(hexColor: "#5E75FF")
         ] {
         willSet {
-            guard newValue.count != 5 else {
+            guard newValue.count == 5 else {
                 return
             }
             for i in 0..<5 {
