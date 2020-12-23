@@ -295,9 +295,6 @@ public class ReportBrainwaveRhythms: UIView {
             $0.bottom.equalToSuperview().offset(-16)
         }
 
-        
-        
-        
     }
     
     public func setData(gamaList: [Float], betaList: [Float], alphaList: [Float], thetaList: [Float], deltaList: [Float]) {

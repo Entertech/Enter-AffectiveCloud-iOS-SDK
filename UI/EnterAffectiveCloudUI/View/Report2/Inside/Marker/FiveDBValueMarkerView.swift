@@ -71,15 +71,15 @@ class FiveDBValueMarkerView: MarkerView {
             dotArray.append(dot)
             
             
-            let lineView = UIView(frame: CGRect.init(x: 0, y: 0, width: 2, height: 32))
-            if #available(iOS 13.0, *) {
-                lineView.backgroundColor = .systemGray3
-            } else {
-                lineView.backgroundColor = .gray
-            }
-            lineView.layer.cornerRadius = 0.5
-            lineView.layer.masksToBounds = true
-            stackView.addSubview(lineView)
+//            let lineView = UIView(frame: CGRect.init(x: 0, y: 0, width: 2, height: 32))
+//            if #available(iOS 13.0, *) {
+//                lineView.backgroundColor = .systemGray3
+//            } else {
+//                lineView.backgroundColor = .gray
+//            }
+//            lineView.layer.cornerRadius = 0.5
+//            lineView.layer.masksToBounds = true
+//            stackView.addSubview(lineView)
         }
         self.addSubview(stackView)
         
