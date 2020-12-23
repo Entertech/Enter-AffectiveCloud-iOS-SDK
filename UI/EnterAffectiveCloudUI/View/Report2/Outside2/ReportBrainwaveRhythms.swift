@@ -306,7 +306,7 @@ public class ReportBrainwaveRhythms: UIView {
     
     @objc
     private func gamaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && gamaEnable else {
+        if btnEnableCount == 1 && gamaEnable {
             return
         }
         gamaEnable = !gamaEnable
@@ -314,28 +314,28 @@ public class ReportBrainwaveRhythms: UIView {
     
     @objc
     private func betaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && betaEnable else {
+        if btnEnableCount == 1 && betaEnable {
             return
         }
         betaEnable = !betaEnable
     }
     @objc
     private func alphaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && alphaEnable else {
+        if btnEnableCount == 1 && alphaEnable {
             return
         }
         alphaEnable = !alphaEnable
     }
     @objc
     private func thetaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && thetaEnable else {
+        if btnEnableCount == 1 && thetaEnable {
             return
         }
         thetaEnable = !thetaEnable
     }
     @objc
     private func deltaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && deltaEnable else {
+        if btnEnableCount == 1 && deltaEnable {
             return
         }
         deltaEnable = !deltaEnable  

@@ -324,7 +324,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     @objc
     private func gamaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && gamaEnable else {
+        if btnEnableCount == 1 && gamaEnable  {
             return
         }
         gamaEnable = !gamaEnable
@@ -332,28 +332,28 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     @objc
     private func betaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && betaEnable else {
+        if btnEnableCount == 1 && betaEnable  {
             return
         }
         betaEnable = !betaEnable
     }
     @objc
     private func alphaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && alphaEnable else {
+        if btnEnableCount == 1 && alphaEnable  {
             return
         }
         alphaEnable = !alphaEnable
     }
     @objc
     private func thetaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && thetaEnable else {
+        if btnEnableCount == 1 && thetaEnable  {
             return
         }
         thetaEnable = !thetaEnable
     }
     @objc
     private func deltaAction(_ sender: UIButton) {
-        guard btnEnableCount > 1 && deltaEnable else {
+        if btnEnableCount == 1 && deltaEnable  {
             return
         }
         deltaEnable = !deltaEnable
@@ -473,7 +473,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartView.highlightValue(nil)
         //chartHead.isHidden = false
         setItemHidden(false)
-        for j in 0...btnEnableCount {
+        for j in 0..<btnEnableCount {
             
             for i in 0..<chartView.data!.dataSets[j].entryCount {
                 chartView.data?.dataSets[j].entryForIndex(i)?.icon = nil
@@ -504,7 +504,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             lineEable.append(4)
         }
         
-        for j in 0...lineEable.count {
+        for j in 0..<lineEable.count {
             
             for i in 0..<chartView.data!.dataSets[j].entryCount {
                 chartView.data?.dataSets[j].entryForIndex(i)?.icon = nil
@@ -555,7 +555,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     public func chartValueNothingSelected(_ chartView: ChartViewBase) {
         //chartHead.isHidden = false
-        for j in 0...4 {
+        for j in 0..<btnEnableCount {
             
             for i in 0..<chartView.data!.dataSets[j].entryCount {
                 chartView.data?.dataSets[j].entryForIndex(i)?.icon = nil
