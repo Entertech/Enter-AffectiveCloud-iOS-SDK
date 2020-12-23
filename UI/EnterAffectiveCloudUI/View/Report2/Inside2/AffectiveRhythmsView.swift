@@ -71,12 +71,10 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var gamaEnable: Bool = true {
         willSet {
             if newValue {
-                buttonEnableCount += 1
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
                 chartView.enableGama = true
                 delegate?.setRhythmsEnable(value: 1<<1)
             } else {
-                buttonEnableCount -= 1
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
                 chartView.enableGama = false
                 delegate?.setRhythmsEnable(value: 1)
@@ -87,12 +85,10 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var betaEnable: Bool = true {
         willSet {
             if newValue {
-                buttonEnableCount += 1
                 betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
                 chartView.enableBeta = true
                 delegate?.setRhythmsEnable(value: 1<<3)
             } else {
-                buttonEnableCount -= 1
                 betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
                 chartView.enableBeta = false
                 delegate?.setRhythmsEnable(value: 1<<2)
@@ -103,12 +99,10 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var alphaEnable: Bool = true {
         willSet {
             if newValue {
-                buttonEnableCount += 1
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
                 chartView.enableAlpha = true
                 delegate?.setRhythmsEnable(value: 1<<5)
             } else {
-                buttonEnableCount -= 1
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
                 chartView.enableAlpha = false
                 delegate?.setRhythmsEnable(value: 1<<4)
@@ -119,12 +113,10 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var thetaEnable: Bool = true {
         willSet {
             if newValue {
-                buttonEnableCount += 1
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
                 chartView.enableTheta = true
                 delegate?.setRhythmsEnable(value: 1<<7)
             } else {
-                buttonEnableCount -= 1
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
                 chartView.enableTheta = false
                 delegate?.setRhythmsEnable(value: 1<<6)
@@ -135,12 +127,10 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var deltaEnable: Bool = true {
         willSet {
             if newValue {
-                buttonEnableCount += 1
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
                 chartView.enableDelta = true
                 delegate?.setRhythmsEnable(value: 1<<9)
             } else {
-                buttonEnableCount -= 1
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
                 chartView.enableDelta = false
                 delegate?.setRhythmsEnable(value: 1<<8)
@@ -162,7 +152,27 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     }
     
     public var zoomText = "Zoom in on the curve and slide to view it."
-    private var buttonEnableCount = 5
+    private var btnEnableCount: Int {
+        get {
+            var count = 0
+            if gamaEnable {
+                count += 1
+            }
+            if betaEnable {
+                count += 1
+            }
+            if alphaEnable {
+                count += 1
+            }
+            if thetaEnable {
+                count += 1
+            }
+            if deltaEnable {
+                count += 1
+            }
+            return count
+        }
+    }
     //MARK:- Private UI
     private var isChartScale = false {
         willSet {
@@ -314,7 +324,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     @objc
     private func gamaAction(_ sender: UIButton) {
-        guard buttonEnableCount > 2 && gamaEnable else {
+        guard btnEnableCount > 1 && gamaEnable else {
             return
         }
         gamaEnable = !gamaEnable
@@ -322,28 +332,28 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     @objc
     private func betaAction(_ sender: UIButton) {
-        guard buttonEnableCount > 2 && betaEnable else {
+        guard btnEnableCount > 1 && betaEnable else {
             return
         }
         betaEnable = !betaEnable
     }
     @objc
     private func alphaAction(_ sender: UIButton) {
-        guard buttonEnableCount > 2 && alphaEnable else {
+        guard btnEnableCount > 1 && alphaEnable else {
             return
         }
         alphaEnable = !alphaEnable
     }
     @objc
     private func thetaAction(_ sender: UIButton) {
-        guard buttonEnableCount > 2 && thetaEnable else {
+        guard btnEnableCount > 1 && thetaEnable else {
             return
         }
         thetaEnable = !thetaEnable
     }
     @objc
     private func deltaAction(_ sender: UIButton) {
-        guard buttonEnableCount > 2 && deltaEnable else {
+        guard btnEnableCount > 1 && deltaEnable else {
             return
         }
         deltaEnable = !deltaEnable
