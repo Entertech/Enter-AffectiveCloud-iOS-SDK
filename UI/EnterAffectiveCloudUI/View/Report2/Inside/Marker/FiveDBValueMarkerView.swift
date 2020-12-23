@@ -40,7 +40,7 @@ class FiveDBValueMarkerView: MarkerView {
             // Fallback on earlier versions
             self.backgroundColor = .systemGray
         }
-        let stackView = UIStackView()
+        let stackView = UIStackView(frame: self.bounds)
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.spacing = 1
@@ -81,9 +81,7 @@ class FiveDBValueMarkerView: MarkerView {
 //            stackView.addSubview(lineView)
         }
         self.addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+
         self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
         let path = UIBezierPath(roundedRect: CGRect(x: frame.width/2-1, y: frame.height, width: 2, height: 4), cornerRadius: 1)
