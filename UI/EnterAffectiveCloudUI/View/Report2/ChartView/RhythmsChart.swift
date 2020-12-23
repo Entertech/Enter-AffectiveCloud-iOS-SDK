@@ -175,7 +175,7 @@ class RhythmsChart: LineChartView {
         self.drawBordersEnabled = false
         self.chartDescription?.enabled = false
         self.pinchZoomEnabled = false
-        self.scaleXEnabled = false
+        self.scaleXEnabled = true
         self.scaleYEnabled = false
         self.legend.enabled = false
         self.isUserInteractionEnabled = false
