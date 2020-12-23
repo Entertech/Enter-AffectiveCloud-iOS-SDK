@@ -44,9 +44,9 @@ class FiveDBValueMarkerView: MarkerView {
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.spacing = 1
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         for _ in 0..<valueCount {
-            let bgView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 49, height: 47))
+            let bgView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 47))
             let titleLabel = UILabel(frame: CGRect.init(x: 26, y: 4, width: 10, height: 14))
             let label = UILabel(frame: CGRect.init(x: 2, y: 23, width: 45, height: 16))
             let dot = UILabel(frame: CGRect.init(x: 12, y: 8, width: 8, height: 8))
