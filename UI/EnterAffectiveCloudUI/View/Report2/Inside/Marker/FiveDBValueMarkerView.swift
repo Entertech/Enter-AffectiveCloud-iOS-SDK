@@ -26,7 +26,6 @@ class FiveDBValueMarkerView: MarkerView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUI(frame)
     }
     
     required init?(coder: NSCoder) {
@@ -34,7 +33,7 @@ class FiveDBValueMarkerView: MarkerView {
         //setUI()
     }
     
-    private func setUI(_ frame: CGRect) {
+    public func setUI() {
         if #available(iOS 13.0, *) {
             self.backgroundColor = .systemGray5
         } else {

@@ -390,6 +390,8 @@ class RhythmsChart: LineChartView {
         let data = LineChartData(dataSets: sets)
         self.data = data
         markerView = FiveDBValueMarkerView(frame: CGRect(x: 0, y: 0, width: 50*waveNum.count, height: 47))
+        markerView?.valueCount = waveNum.count
+        markerView?.setUI()
         markerView?.chartView = self
         for (i,e) in waveNum.enumerated() {
             switch e {
