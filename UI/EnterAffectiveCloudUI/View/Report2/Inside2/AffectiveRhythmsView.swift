@@ -473,7 +473,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartView.highlightValue(nil)
         //chartHead.isHidden = false
         setItemHidden(false)
-        for j in 0...buttonEnableCount/2 {
+        for j in 0...btnEnableCount {
             
             for i in 0..<chartView.data!.dataSets[j].entryCount {
                 chartView.data?.dataSets[j].entryForIndex(i)?.icon = nil
