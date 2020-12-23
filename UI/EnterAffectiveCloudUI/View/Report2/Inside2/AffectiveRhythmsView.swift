@@ -71,10 +71,12 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var gamaEnable: Bool = true {
         willSet {
             if newValue {
+                buttonEnableCount += 1
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
                 chartView.enableGama = true
                 delegate?.setRhythmsEnable(value: 1<<1)
             } else {
+                buttonEnableCount -= 1
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
                 chartView.enableGama = false
                 delegate?.setRhythmsEnable(value: 1)
@@ -85,10 +87,12 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var betaEnable: Bool = true {
         willSet {
             if newValue {
+                buttonEnableCount += 1
                 betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
                 chartView.enableBeta = true
                 delegate?.setRhythmsEnable(value: 1<<3)
             } else {
+                buttonEnableCount -= 1
                 betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
                 chartView.enableBeta = false
                 delegate?.setRhythmsEnable(value: 1<<2)
@@ -99,10 +103,12 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var alphaEnable: Bool = true {
         willSet {
             if newValue {
+                buttonEnableCount += 1
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
                 chartView.enableAlpha = true
                 delegate?.setRhythmsEnable(value: 1<<5)
             } else {
+                buttonEnableCount -= 1
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
                 chartView.enableAlpha = false
                 delegate?.setRhythmsEnable(value: 1<<4)
@@ -113,10 +119,12 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var thetaEnable: Bool = true {
         willSet {
             if newValue {
+                buttonEnableCount += 1
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
                 chartView.enableTheta = true
                 delegate?.setRhythmsEnable(value: 1<<7)
             } else {
+                buttonEnableCount -= 1
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
                 chartView.enableTheta = false
                 delegate?.setRhythmsEnable(value: 1<<6)
@@ -127,10 +135,12 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     public lazy var deltaEnable: Bool = true {
         willSet {
             if newValue {
+                buttonEnableCount += 1
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
                 chartView.enableDelta = true
                 delegate?.setRhythmsEnable(value: 1<<9)
             } else {
+                buttonEnableCount -= 1
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
                 chartView.enableDelta = false
                 delegate?.setRhythmsEnable(value: 1<<8)
@@ -152,7 +162,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     }
     
     public var zoomText = "Zoom in on the curve and slide to view it."
-    
+    private var buttonEnableCount = 5
     //MARK:- Private UI
     private var isChartScale = false {
         willSet {
@@ -304,23 +314,38 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     
     @objc
     private func gamaAction(_ sender: UIButton) {
+        guard buttonEnableCount > 2 && gamaEnable else {
+            return
+        }
         gamaEnable = !gamaEnable
     }
     
     @objc
     private func betaAction(_ sender: UIButton) {
+        guard buttonEnableCount > 2 && betaEnable else {
+            return
+        }
         betaEnable = !betaEnable
     }
     @objc
     private func alphaAction(_ sender: UIButton) {
+        guard buttonEnableCount > 2 && alphaEnable else {
+            return
+        }
         alphaEnable = !alphaEnable
     }
     @objc
     private func thetaAction(_ sender: UIButton) {
+        guard buttonEnableCount > 2 && thetaEnable else {
+            return
+        }
         thetaEnable = !thetaEnable
     }
     @objc
     private func deltaAction(_ sender: UIButton) {
+        guard buttonEnableCount > 2 && deltaEnable else {
+            return
+        }
         deltaEnable = !deltaEnable
     }
     
@@ -438,7 +463,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartView.highlightValue(nil)
         //chartHead.isHidden = false
         setItemHidden(false)
-        for j in 0...4 {
+        for j in 0...buttonEnableCount/2 {
             
             for i in 0..<chartView.data!.dataSets[j].entryCount {
                 chartView.data?.dataSets[j].entryForIndex(i)?.icon = nil
@@ -451,7 +476,25 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             //chartHead.isHidden = true
             setItemHidden(true)
         }
-        for j in 0...4 {
+        
+        var lineEable = [Int]()
+        if gamaEnable {
+            lineEable.append(0)
+        }
+        if betaEnable {
+            lineEable.append(1)
+        }
+        if alphaEnable {
+            lineEable.append(2)
+        }
+        if thetaEnable {
+            lineEable.append(3)
+        }
+        if deltaEnable {
+            lineEable.append(4)
+        }
+        
+        for j in 0...lineEable.count {
             
             for i in 0..<chartView.data!.dataSets[j].entryCount {
                 chartView.data?.dataSets[j].entryForIndex(i)?.icon = nil
@@ -459,24 +502,44 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         }
         var index = chartView.data?.dataSets[0].entryIndex(entry: entry)
         if index == nil || index == -1 {
-            index = chartView.data?.dataSets[1].entryIndex(entry: entry)
+            if let dataCount = chartView.data?.dataSets.count, dataCount > 1 {
+                index = chartView.data?.dataSets[1].entryIndex(entry: entry)
+            }
         }
         if index == nil || index == -1 {
-            index = chartView.data?.dataSets[2].entryIndex(entry: entry)
+            if let dataCount = chartView.data?.dataSets.count, dataCount > 2 {
+                index = chartView.data?.dataSets[2].entryIndex(entry: entry)
+            }
         }
         if index == nil || index == -1 {
-            index = chartView.data?.dataSets[3].entryIndex(entry: entry)
+            if let dataCount = chartView.data?.dataSets.count, dataCount > 3 {
+                index = chartView.data?.dataSets[3].entryIndex(entry: entry)
+            }
         }
         if index == nil || index == -1 {
-            index = chartView.data?.dataSets[4].entryIndex(entry: entry)
+            if let dataCount = chartView.data?.dataSets.count, dataCount > 4 {
+                index = chartView.data?.dataSets[4].entryIndex(entry: entry)
+            }
         }
         
         if let index = index {
-            chartView.data?.dataSets[0].entryForIndex(index)?.icon = gamaIcon
-            chartView.data?.dataSets[1].entryForIndex(index)?.icon = betaIcon
-            chartView.data?.dataSets[2].entryForIndex(index)?.icon = alphaIcon
-            chartView.data?.dataSets[3].entryForIndex(index)?.icon = thetaIcon
-            chartView.data?.dataSets[4].entryForIndex(index)?.icon = deltaIcon
+            for (i,e) in lineEable.enumerated() {
+                switch e {
+                case 0:
+                    chartView.data?.dataSets[i].entryForIndex(index)?.icon = gamaIcon
+                case 1:
+                    chartView.data?.dataSets[i].entryForIndex(index)?.icon = betaIcon
+                case 2:
+                    chartView.data?.dataSets[i].entryForIndex(index)?.icon = alphaIcon
+                case 3:
+                    chartView.data?.dataSets[i].entryForIndex(index)?.icon = thetaIcon
+                case 4:
+                    chartView.data?.dataSets[i].entryForIndex(index)?.icon = deltaIcon
+                default:
+                    break
+                }
+            }
+            
         }
     }
     

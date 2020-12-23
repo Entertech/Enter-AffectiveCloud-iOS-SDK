@@ -205,20 +205,7 @@ class RhythmsChart: LineChartView {
         xAxis.drawGridLinesEnabled = false
         xAxis.drawAxisLineEnabled = true
         xAxis.axisLineWidth = 1
-        
-        markerView = FiveDBValueMarkerView(frame: CGRect(x: 0, y: 0, width: 242, height: 47))
-        markerView?.chartView = self
-        markerView?.titleLabelArray[0].text = "γ"
-        markerView?.titleLabelArray[1].text = "β"
-        markerView?.titleLabelArray[2].text = "α"
-        markerView?.titleLabelArray[3].text = "θ"
-        markerView?.titleLabelArray[4].text = "δ"
-        markerView?.dotArray[0].backgroundColor = gamaColor
-        markerView?.dotArray[1].backgroundColor = betaColor
-        markerView?.dotArray[2].backgroundColor = alphaColor
-        markerView?.dotArray[3].backgroundColor = thetaColor
-        markerView?.dotArray[4].backgroundColor = deltaColor
-        self.marker = markerView
+
     }
     
     private var brainwave: Array2D<Float>?
@@ -275,29 +262,39 @@ class RhythmsChart: LineChartView {
         guard let waveArray = array2D else {
             return
         }
-
+        var waveNum = [Int]()
         var sets: [LineChartDataSet] = []
         for j in 0..<waveArray.rows {
             switch j {
             case 0:
                 if !enableGama {
                     continue
+                } else {
+                    waveNum.append(0)
                 }
             case 1:
                 if !enableBeta {
                     continue
+                } else {
+                    waveNum.append(1)
                 }
             case 2:
                 if !enableAlpha {
                     continue
+                }else {
+                    waveNum.append(2)
                 }
             case 3:
                 if !enableTheta {
                     continue
+                } else {
+                    waveNum.append(3)
                 }
             case 4:
                 if !enableDelta {
                     continue
+                } else {
+                    waveNum.append(4)
                 }
             default:
                 break
@@ -392,6 +389,31 @@ class RhythmsChart: LineChartView {
         }
         let data = LineChartData(dataSets: sets)
         self.data = data
+        markerView = FiveDBValueMarkerView(frame: CGRect(x: 0, y: 0, width: 50*waveNum.count, height: 47))
+        markerView?.chartView = self
+        for (i,e) in waveNum.enumerated() {
+            switch e {
+            case 0:
+                markerView?.titleLabelArray[i].text = "γ"
+                markerView?.dotArray[i].backgroundColor = gamaColor
+            case 1:
+                markerView?.titleLabelArray[i].text = "β"
+                markerView?.dotArray[i].backgroundColor = betaColor
+            case 2:
+                markerView?.titleLabelArray[i].text = "α"
+                markerView?.dotArray[i].backgroundColor = alphaColor
+            case 3:
+                markerView?.titleLabelArray[i].text = "θ"
+                markerView?.dotArray[i].backgroundColor = thetaColor
+            case 4:
+                markerView?.titleLabelArray[i].text = "δ"
+                markerView?.dotArray[i].backgroundColor = deltaColor
+            default:
+                break
+            }
+        }
+        
+        self.marker = markerView
         // 设置坐标轴
         if sets.count > 0 {
             

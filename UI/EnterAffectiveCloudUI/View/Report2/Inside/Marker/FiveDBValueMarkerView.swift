@@ -14,6 +14,8 @@ class FiveDBValueMarkerView: MarkerView {
     public var titleLabelArray: [UILabel] = []
     public var labelArray: [UILabel] = []
     public var dotArray: [UIView] = []
+    public var lineArray: [UIView] = []
+    public var valueCount = 0
     public var lineColor: UIColor? {
         willSet {
             lineLayer.strokeColor = newValue!.cgColor
@@ -39,42 +41,51 @@ class FiveDBValueMarkerView: MarkerView {
             // Fallback on earlier versions
             self.backgroundColor = .systemGray
         }
-        for i in 0..<5 {
-            
-            let titleLabel = UILabel(frame: CGRect(x: 28+48*i, y: 4, width: 22, height: 15))
-            let label = UILabel(frame: CGRect(x: 8+48*i, y: 23, width: 40, height: 21))
-            let dot = UILabel(frame: CGRect(x: 16+48*i, y: 8, width: 8, height: 8))
+        let sFrame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
+        let stackView = UIStackView(frame: sFrame)
+        stackView.alignment = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 1
+        stackView.distribution = .equalSpacing
+        for _ in 0..<valueCount {
+            let bgView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 49, height: 47))
+            let titleLabel = UILabel(frame: CGRect.init(x: 26, y: 4, width: 10, height: 14))
+            let label = UILabel(frame: CGRect.init(x: 2, y: 23, width: 45, height: 16))
+            let dot = UILabel(frame: CGRect.init(x: 12, y: 8, width: 8, height: 8))
             
             dot.layer.cornerRadius = 4
             dot.layer.masksToBounds = true
             dot.backgroundColor = .red
             
             titleLabel.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+            titleLabel.textAlignment = .center
             
             label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             label.textAlignment = .center
             
-            self.addSubview(titleLabel)
-            self.addSubview(label)
-            self.addSubview(dot)
+            bgView.addSubview(titleLabel)
+            bgView.addSubview(label)
+            bgView.addSubview(dot)
+            stackView.addArrangedSubview(bgView)
             titleLabelArray.append(titleLabel)
             labelArray.append(label)
             dotArray.append(dot)
             
-            if i < 4 { // 中间线段
-                let lineView = UIView(frame: CGRect(x: 48+48*i, y: 8, width: 1, height: Int(frame.height-16.0)))
-                if #available(iOS 13.0, *) {
-                    lineView.backgroundColor = .systemGray3
-                } else {
-                    lineView.backgroundColor = .gray
-                }
-                lineView.layer.cornerRadius = 0.5
-                lineView.layer.masksToBounds = true
-                self.addSubview(lineView)
+            
+            let lineView = UIView(frame: CGRect.init(x: 0, y: 0, width: 2, height: 32))
+            if #available(iOS 13.0, *) {
+                lineView.backgroundColor = .systemGray3
+            } else {
+                lineView.backgroundColor = .gray
             }
-
+            lineView.layer.cornerRadius = 0.5
+            lineView.layer.masksToBounds = true
+            stackView.addSubview(lineView)
         }
+        self.addSubview(stackView)
+        
         self.layer.cornerRadius = 4
+        self.layer.masksToBounds = true
         let path = UIBezierPath(roundedRect: CGRect(x: frame.width/2-1, y: frame.height, width: 2, height: 4), cornerRadius: 1)
         
         lineLayer.path = path.cgPath
@@ -88,19 +99,28 @@ class FiveDBValueMarkerView: MarkerView {
     override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         var index = chartView?.data?.dataSets[0].entryIndex(entry: entry)
         if index == -1 || index == nil {
-             index = chartView?.data?.dataSets[1].entryIndex(entry: entry)
+            if let dataSets = chartView?.data?.dataSets, dataSets.count > 1 {
+                index = chartView?.data?.dataSets[1].entryIndex(entry: entry)
+            }
+             
         }
         if index == -1 || index == nil {
-             index = chartView?.data?.dataSets[2].entryIndex(entry: entry)
+            if let dataSets = chartView?.data?.dataSets, dataSets.count > 2 {
+                index = chartView?.data?.dataSets[2].entryIndex(entry: entry)
+            }
         }
         if index == -1 || index == nil {
-             index = chartView?.data?.dataSets[3].entryIndex(entry: entry)
+            if let dataSets = chartView?.data?.dataSets, dataSets.count > 3 {
+                index = chartView?.data?.dataSets[3].entryIndex(entry: entry)
+            }
         }
         if index == -1 || index == nil {
-             index = chartView?.data?.dataSets[4].entryIndex(entry: entry)
+            if let dataSets = chartView?.data?.dataSets, dataSets.count > 4 {
+                index = chartView?.data?.dataSets[4].entryIndex(entry: entry)
+            }
         }
         if let index = index, index != -1 {
-            for i in 0..<5 {
+            for i in 0..<valueCount {
                 let entry1 = chartView?.data?.dataSets[i].entryForIndex(index)
                 labelArray[i].text = String.init(format: "%d", Int(entry1!.y))
                 
