@@ -85,12 +85,14 @@ public class PrivateAverageView: UIView {
                         chart.valuesSpect = newValue
                         let min = Int(averageValueTemp/60)
                         let sec = Int(averageValueTemp)%60
+                        let minStr = "\(min)"
+                        let secStr = "\(sec)"
                         let attributedText = NSMutableAttributedString(string:"\(min)min \(sec)s")
                         let style = NSMutableParagraphStyle()
                         style.alignment = .left
                         style.lineSpacing = 5
-                        let minLen = min == 0 ? 1 : ceil(log10(Double(min)))
-                        let secLen = sec == 0 ? 1 : ceil(log10(Double(sec)))
+                        let minLen = minStr.count
+                        let secLen = secStr.count
                         attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen), 4))
 
                         attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen)+4+Int(secLen), 1))
