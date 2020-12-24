@@ -218,7 +218,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         gamaBtn.layer.cornerRadius = 12
         gamaBtn.adjustsImageWhenHighlighted = false
         gamaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
+        gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
         
@@ -228,7 +228,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         betaBtn.layer.cornerRadius = 12
         betaBtn.adjustsImageWhenHighlighted = false
         betaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
+        betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         betaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         betaBtn.addTarget(self, action: #selector(betaAction(_:)), for: .touchUpInside)
         
@@ -238,7 +238,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         alphaBtn.layer.cornerRadius = 12
         alphaBtn.adjustsImageWhenHighlighted = false
         alphaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
+        alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         alphaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         alphaBtn.addTarget(self, action: #selector(alphaAction(_:)), for: .touchUpInside)
         
@@ -248,7 +248,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         thetaBtn.layer.cornerRadius = 12
         thetaBtn.adjustsImageWhenHighlighted = false
         thetaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
+        thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         thetaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         thetaBtn.addTarget(self, action: #selector(thetaAction(_:)), for: .touchUpInside)
         
@@ -258,7 +258,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         deltaBtn.layer.cornerRadius = 12
         deltaBtn.adjustsImageWhenHighlighted = false
         deltaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
+        deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         deltaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         deltaBtn.addTarget(self, action: #selector(deltaAction(_:)), for: .touchUpInside)
         
