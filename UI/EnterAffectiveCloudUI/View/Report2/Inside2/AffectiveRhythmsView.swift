@@ -181,11 +181,11 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         }
     }
     
-    private let gamaBtn = UIButton()
-    private let betaBtn = UIButton()
-    private let alphaBtn = UIButton()
-    private let thetaBtn = UIButton()
-    private let deltaBtn = UIButton()
+    private let gamaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
+    private let betaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
+    private let alphaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
+    private let thetaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
+    private let deltaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let minLabel = UILabel()
     private let chartView = RhythmsChart()
     private let btnContentView = UIStackView()
@@ -396,7 +396,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             chart.isChartScale = true
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
             chart.isZoomed = true
-            chart.btnContentView.spacing = 32
+            chart.btnContentView.distribution = .fillEqually
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView.highlightPerTapEnabled = false
             chart.chartView.highlightPerDragEnabled = false
