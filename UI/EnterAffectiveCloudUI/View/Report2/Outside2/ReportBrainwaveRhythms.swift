@@ -263,7 +263,7 @@ public class ReportBrainwaveRhythms: UIView {
         btnContentView.axis = .horizontal
         btnContentView.backgroundColor = .clear
         btnContentView.distribution = .fillEqually
-        btnContentView.spacing = (UIScreen.main.bounds.width - 32 - 44*5)/4
+        btnContentView.spacing = (UIScreen.main.bounds.width - 64 - 44*5)/4
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(btnContentView)
