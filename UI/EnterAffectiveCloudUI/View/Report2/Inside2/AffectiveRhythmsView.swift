@@ -301,7 +301,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.top.equalToSuperview().offset(48)
-            $0.height.equalTo(32)
+            $0.height.equalTo(24)
         }
         
         chartView.snp.makeConstraints {
@@ -396,7 +396,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             chart.isChartScale = true
             chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
             chart.isZoomed = true
-            chart.btnContentView.distribution = .fillEqually
+            chart.btnContentView.distribution = .fillProportionally
             chart.isHiddenNavigationBar = isHiddenNavigationBar
             chart.chartView.highlightPerTapEnabled = false
             chart.chartView.highlightPerDragEnabled = false

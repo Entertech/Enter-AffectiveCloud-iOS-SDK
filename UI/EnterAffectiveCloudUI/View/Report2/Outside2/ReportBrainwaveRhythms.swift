@@ -280,7 +280,7 @@ public class ReportBrainwaveRhythms: UIView {
             $0.left.equalToSuperview().offset(16)
             $0.right.equalToSuperview().offset(-16)
             $0.top.equalToSuperview().offset(8)
-            $0.height.equalTo(28)
+            $0.height.equalTo(24)
         }
         
         chartView.snp.makeConstraints {
