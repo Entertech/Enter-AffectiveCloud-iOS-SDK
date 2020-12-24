@@ -279,7 +279,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         btnContentView.addArrangedSubview(deltaBtn)
         btnContentView.axis = .horizontal
         btnContentView.distribution = .fillEqually
-        btnContentView.spacing = 16
+        btnContentView.spacing = (UIScreen.main.bounds.width - 32 - 44*5)/4
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
         chartHead.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
