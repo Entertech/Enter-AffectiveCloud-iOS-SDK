@@ -28,7 +28,7 @@ public class ReportCoherenceView2: UIView {
         }
     }
     
-    public var coherenceText: String = "Coherence Time:" {
+    public var coherenceText: String = "Coherence Time" {
         willSet {
             coherenceLabel.text = newValue
         }
@@ -91,7 +91,7 @@ public class ReportCoherenceView2: UIView {
         self.addSubview(minLabel)
         
         coherenceLabel.textColor = textColor
-        coherenceLabel.text = "Coherence Time:"
+        coherenceLabel.text = "Coherence Time"
         coherenceLabel.font = UIFont.systemFont(ofSize: 14)
         
         coherenceTimeLabel.textColor = coherenceColor

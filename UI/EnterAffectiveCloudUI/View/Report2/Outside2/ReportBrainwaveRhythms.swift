@@ -200,7 +200,7 @@ public class ReportBrainwaveRhythms: UIView {
         gamaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         gamaBtn.setTitle("γ", for: .normal)
         gamaBtn.setTitleColor(gamaColor, for: .normal)
-        gamaBtn.layer.cornerRadius = 14
+        gamaBtn.layer.cornerRadius = 12
         gamaBtn.adjustsImageWhenHighlighted = false
         gamaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
@@ -210,7 +210,7 @@ public class ReportBrainwaveRhythms: UIView {
         betaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
         betaBtn.setTitleColor(betaColor, for: .normal)
-        betaBtn.layer.cornerRadius = 14
+        betaBtn.layer.cornerRadius = 12
         betaBtn.adjustsImageWhenHighlighted = false
         betaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
@@ -220,7 +220,7 @@ public class ReportBrainwaveRhythms: UIView {
         alphaBtn.backgroundColor = alphaColor.changeAlpha(to: 0.2)
         alphaBtn.setTitle("α", for: .normal)
         alphaBtn.setTitleColor(alphaColor, for: .normal)
-        alphaBtn.layer.cornerRadius = 14
+        alphaBtn.layer.cornerRadius = 12
         alphaBtn.adjustsImageWhenHighlighted = false
         alphaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
@@ -230,7 +230,7 @@ public class ReportBrainwaveRhythms: UIView {
         thetaBtn.backgroundColor = thetaColor.changeAlpha(to: 0.2)
         thetaBtn.setTitle("θ", for: .normal)
         thetaBtn.setTitleColor(thetaColor, for: .normal)
-        thetaBtn.layer.cornerRadius = 14
+        thetaBtn.layer.cornerRadius = 12
         thetaBtn.adjustsImageWhenHighlighted = false
         thetaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
@@ -240,7 +240,7 @@ public class ReportBrainwaveRhythms: UIView {
         deltaBtn.backgroundColor = deltaColor.changeAlpha(to: 0.2)
         deltaBtn.setTitle("δ", for: .normal)
         deltaBtn.setTitleColor(deltaColor, for: .normal)
-        deltaBtn.layer.cornerRadius = 14
+        deltaBtn.layer.cornerRadius = 12
         deltaBtn.adjustsImageWhenHighlighted = false
         deltaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
         deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: -5)
@@ -252,7 +252,7 @@ public class ReportBrainwaveRhythms: UIView {
         minLabel.textAlignment = .center
         minLabel.text = minText
         
-        chartView.maxDataCount = 1000
+        chartView.maxDataCount = 500
         
         btnContentView.alignment = .fill
         btnContentView.addArrangedSubview(gamaBtn)
