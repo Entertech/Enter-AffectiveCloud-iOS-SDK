@@ -588,7 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				FA56821223AC5E9600FF1A68 /* Report2 */,
-				FAC773082355CB1A00FBFA6A /* Report */,
+				FAC773082355CB1A00FBFA6A /* Report1 */,
 				FAC773072355CADB00FBFA6A /* Realtime */,
 				FACEDF872350100F0016176C /* Base */,
 			);
@@ -599,8 +599,6 @@
 			isa = PBXGroup;
 			children = (
 				FAB14024257646AC0079F785 /* ChartView */,
-				FAB14029257779820079F785 /* Inside2 */,
-				FAB140032576172F0079F785 /* Outside2 */,
 				FA7689CF23B0BC90005E4DF7 /* Inside */,
 				FAB3E46823ACAD0900A85129 /* Outside */,
 				FA56821523AC5F7400FF1A68 /* Base */,
@@ -635,7 +633,7 @@
 			children = (
 				FA1690D4245920BF00FADC2B /* Icon */,
 				FA1690CD24567D2700FADC2B /* Marker */,
-				FAB0BC1623B1FB620074C06C /* ReportBrainSpectrum */,
+				FAB0BC1623B1FB620074C06C /* InsideChart */,
 				FA7689D223B0BFE7005E4DF7 /* Average */,
 			);
 			path = Inside;
@@ -743,12 +741,31 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
-		FAB0BC1623B1FB620074C06C /* ReportBrainSpectrum */ = {
+		FAAB8FE425A2F66900B8349D /* ancient */ = {
 			isa = PBXGroup;
 			children = (
-				FAB0BC2223B30A750074C06C /* AffectiveChartHRVView.swift */,
 				FAB0BC1723B1FC6B0074C06C /* AffectiveChartBrainSpectrumView.swift */,
 				FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */,
+			);
+			path = ancient;
+			sourceTree = "<group>";
+		};
+		FAAB8FE525A2F74500B8349D /* ancient */ = {
+			isa = PBXGroup;
+			children = (
+				FAB3E46023AC699500A85129 /* ReportBrainwaveSpectrum.swift */,
+				FA7689C723B053D5005E4DF7 /* ReportHR.swift */,
+			);
+			path = ancient;
+			sourceTree = "<group>";
+		};
+		FAB0BC1623B1FB620074C06C /* InsideChart */ = {
+			isa = PBXGroup;
+			children = (
+				FAAB8FE425A2F66900B8349D /* ancient */,
+				FAB1402A25777A000079F785 /* AffectiveChartCoherenceView2.swift */,
+				FAB140692579EB790079F785 /* AffectiveRhythmsView.swift */,
+				FAB0BC2223B30A750074C06C /* AffectiveChartHRVView.swift */,
 				FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */,
 				FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */,
 				FAB1DF8523E941A9007ADBA3 /* AffectiveChartRelaxationView.swift */,
@@ -756,7 +773,7 @@
 				FA3ADDAD246D1D9500ADA921 /* AffectiveChartCoherenceView.swift */,
 				FAB523B824A2E03900563048 /* PrivateReportChartAttention.swift */,
 			);
-			path = ReportBrainSpectrum;
+			path = InsideChart;
 			sourceTree = "<group>";
 		};
 		FAB0BC1D23B217DA0074C06C /* DemoService */ = {
@@ -767,15 +784,13 @@
 			path = DemoService;
 			sourceTree = "<group>";
 		};
-		FAB140032576172F0079F785 /* Outside2 */ = {
+		FAB140032576172F0079F785 /* special */ = {
 			isa = PBXGroup;
 			children = (
-				FAB14004257617D40079F785 /* ReportCoherenceView2.swift */,
-				FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */,
 				FA081221258845FB0064E017 /* ReportHRVView2.swift */,
 				FA0816AA258851A10064E017 /* ReportPressureView2.swift */,
 			);
-			path = Outside2;
+			path = special;
 			sourceTree = "<group>";
 		};
 		FAB14024257646AC0079F785 /* ChartView */ = {
@@ -787,21 +802,14 @@
 			path = ChartView;
 			sourceTree = "<group>";
 		};
-		FAB14029257779820079F785 /* Inside2 */ = {
-			isa = PBXGroup;
-			children = (
-				FAB1402A25777A000079F785 /* AffectiveChartCoherenceView2.swift */,
-				FAB140692579EB790079F785 /* AffectiveRhythmsView.swift */,
-			);
-			path = Inside2;
-			sourceTree = "<group>";
-		};
 		FAB3E46823ACAD0900A85129 /* Outside */ = {
 			isa = PBXGroup;
 			children = (
-				FAB3E46023AC699500A85129 /* ReportBrainwaveSpectrum.swift */,
+				FAB140032576172F0079F785 /* special */,
+				FAAB8FE525A2F74500B8349D /* ancient */,
+				FAB14004257617D40079F785 /* ReportCoherenceView2.swift */,
+				FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */,
 				FAB3E46923ACAD4D00A85129 /* ReportHRV.swift */,
-				FA7689C723B053D5005E4DF7 /* ReportHR.swift */,
 				FA7689CB23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift */,
 				FA7689CD23B08ABC005E4DF7 /* ReportPressure.swift */,
 				FA3ADDAB246D19FD00ADA921 /* ReportCoherence.swift */,
@@ -848,7 +856,7 @@
 			path = Realtime;
 			sourceTree = "<group>";
 		};
-		FAC773082355CB1A00FBFA6A /* Report */ = {
+		FAC773082355CB1A00FBFA6A /* Report1 */ = {
 			isa = PBXGroup;
 			children = (
 				FA93439D23585B9500544239 /* Pressure */,
@@ -858,7 +866,7 @@
 				FA9343912357F43800544239 /* HeartRate */,
 				FAC773092355CB9100FBFA6A /* BrainSpecturm */,
 			);
-			path = Report;
+			path = Report1;
 			sourceTree = "<group>";
 		};
 		FAC773092355CB9100FBFA6A /* BrainSpecturm */ = {

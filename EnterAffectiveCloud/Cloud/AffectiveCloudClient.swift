@@ -73,11 +73,6 @@ public class AffectiveCloudClient {
     //MARK: - session
     /// start cloud service.
     /// start succeed you will get `sessionCreate(response: CSResponseJSONModel)` response  in CSResponseDelegate
-    ///
-    /// - Parameter appKey: your app key from Cloud Service platform
-    /// - Parameter appSecret: your app secret from Cloud Service platform
-    /// - Parameter userName: your username from Cloud Service platform
-    /// - Parameter userID: the unique ID of your app user
     public func createAndAuthenticateSession() {
         self.cloudService?.sessionCreate()
     }
@@ -94,10 +89,15 @@ public class AffectiveCloudClient {
     }
 
     //MARK: - biodata
+    
     /// start biodata services with parameter
     /// - Parameters:
     ///   - services: biodata services. ps: .eeg and .hr
-    ///   - tolerance: 0-4
+    ///   - tolerance: 0-4, default 2
+    ///   - uploadCycle: upload interval, default 3 (3*0.6second)
+    ///   - filterMode: filterMode
+    ///   - powerMode: powerMode
+    ///   - channelPowerVerbose: channelPowerVerbose
     public func initBiodataServices(services: BiodataTypeOptions, tolerance: Int? = 2, uploadCycle:UInt = 3, filterMode: FilterMode? = .smart, powerMode: PowerMode? = .rate, channelPowerVerbose: Bool? = false) {
         self.cloudService?.uploadCycle = Int(uploadCycle)
         if uploadCycle == 0 {
@@ -231,18 +231,17 @@ public class AffectiveCloudClient {
     /// you will get the analyzed data in `biodataSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func subscribeBiodataServices(services: BiodataParameterOptions) {
-        //self.cloudService.biodataSubscribe(parameters: services)
         self.cloudService?.bioSubscription = services
     }
 
-    /// unsubscribe the specificed service
+    /// Unsubscribe the specificed service
     /// cloud service will stop response the analyzed data in the service.
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func unsubscribeBiodataServices(services: BiodataParameterOptions) {
         self.cloudService?.biodataUnSubscribe(parameters: services)
     }
 
-    /// generate the report according your service
+    /// Generate the report according your service
     /// you will get the report data in `biodataReport(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: biodata service .  reference: `BiodataSubscribeOptions`
     public func getBiodataReport(services: BiodataTypeOptions) {
@@ -254,38 +253,38 @@ public class AffectiveCloudClient {
     /// start emotion(affective) services with parameter
     /// - Parameter services: emotion services list: like: .attention  .relaxation  .pleasure  .pressure and .arousal
     public func startAffectiveDataServices(services: AffectiveDataServiceOptions) {
-        //self.cloudService.emotionStart(services: services)
         self.cloudService?.affectiveService = services
     }
 
-    /// generate the report according your service
+    /// Generate the report according your service
     /// you will get the report data in `affectiveReport(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: emotion serivce
     public func getAffectiveDataReport(services: AffectiveDataServiceOptions) {
         self.cloudService?.emotionReport(services: services)
     }
 
-    /// By subscribing the specificed service
+    /// By subscribing the affective service
     /// you will get the analyzed data in `affectiveSubscribe(response: CSResponseJSONModel)` in CSResponseDelegate
     /// - Parameter services: emotion service
     public func subscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
-        //self.cloudService.emotionSubscribe(services: services)
         self.cloudService?.affectiveSubscription = services
     }
 
-    /// unsubscribe the specificed service
+    /// Unsubscribe the affective service
     /// cloud service will stop response the analyzed data with the specified service.
     /// - Parameter services: emotion services
     public func unsubscribeAffectiveDataServices(services: AffectiveDataSubscribeOptions) {
         self.cloudService?.emotionUnSubscribe(services: services)
     }
 
-    /// close emotion service with the sepecified service
+    /// Close Affective service with the sepecified service
     /// - Parameter services: emotion services
     public func finishAffectiveDataServices(services: AffectiveDataServiceOptions) {
         self.cloudService?.emotionClose(services: services)
     }
     
+    /// Experiment tag
+    /// - Parameter rec: tag infomation struct array
     public func submitTag(rec: [CSLabelSubmitJSONModel]) {
         self.cloudService?.biodataTagSubmit(recArray: rec)
     }
