@@ -192,10 +192,10 @@ class LimitYAxisRenderer: YAxisRenderer {
                     
                     context.addPath(path.cgPath)
                     if #available(iOS 13.0, *) {
-                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.8).cgColor)
+                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.6).cgColor)
                         l.valueTextColor = .label
                     } else {
-                        context.setFillColor(UIColor.white.changeAlpha(to: 0.8).cgColor)
+                        context.setFillColor(UIColor.white.changeAlpha(to: 0.6).cgColor)
                         l.valueTextColor = .black
                         // Fallback on earlier versions
                     }
@@ -215,10 +215,10 @@ class LimitYAxisRenderer: YAxisRenderer {
                     
                     context.addPath(path.cgPath)
                     if #available(iOS 13.0, *) {
-                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.8).cgColor)
+                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.6).cgColor)
                         l.valueTextColor = .label
                     } else {
-                        context.setFillColor(UIColor.white.changeAlpha(to: 0.8).cgColor)
+                        context.setFillColor(UIColor.white.changeAlpha(to: 0.6).cgColor)
                         l.valueTextColor = .black
                         // Fallback on earlier versions
                     }
