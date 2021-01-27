@@ -1,3 +1,5 @@
+[English Readme](/README_EN.md)
+
 # Enter-AffectiveCloud-iOS-SDK
 
 ## 目录
