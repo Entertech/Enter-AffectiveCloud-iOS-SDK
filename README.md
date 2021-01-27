@@ -1,17 +1,17 @@
 # Enter-AffectiveCloud-iOS-SDK
 
-# 目录
+## 目录
 
 - [Enter-AffectiveCloud-iOS-SDK](#enter-affectivecloud-ios-sdk)
-- [目录](#%e7%9b%ae%e5%bd%95)
-- [SDK 说明](#sdk-%e8%af%b4%e6%98%8e)
-  - [Demo演示](#demo%e6%bc%94%e7%a4%ba)
-  - [结构说明](#%e7%bb%93%e6%9e%84%e8%af%b4%e6%98%8e)
-  - [安装集成](#%e5%ae%89%e8%a3%85%e9%9b%86%e6%88%90)
-    - [版本需求](#%e7%89%88%e6%9c%ac%e9%9c%80%e6%b1%82)
+  - [目录](#目录)
+  - [SDK 说明](#sdk-说明)
+  - [Demo演示](#demo演示)
+  - [结构说明](#结构说明)
+  - [安装集成](#安装集成)
+    - [版本需求](#版本需求)
     - [Cocoapods](#cocoapods)
 
-# SDK 说明
+## SDK 说明
 
 回车情感云可以根据用户的脑波数据和心率数据来进行高级情绪情感数据分析的一个云算法平台，同时能给出包括：放松度、注意力、愉悦值，压力值、激动度（内测）在内的多种情绪情感值。详情请查看[官网](https://www.entertech.cn)。
 
@@ -45,8 +45,8 @@
 source 'git@github.com:EnterTech/PodSpecs.git'
 
 target 'Your Target' do
-    pod 'EnterAffectiveCloud', '~> 1.4.0'
-    pod 'EnterAffectiveCloudUI', '~> 1.4.0'  #(可选)
+    pod 'EnterAffectiveCloud', '~> 2.2.0'
+    pod 'EnterAffectiveCloudUI', '~> 2.2.0'  #(可选)
 end
 ```
 运行 `pod  install` 安装命令.

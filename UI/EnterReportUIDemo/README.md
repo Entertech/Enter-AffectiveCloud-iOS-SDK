@@ -1,3 +1,5 @@
+[English Readme](/README_EN.md)
+
 # 情感云报表数据UI Demo
 
 - [情感云报表数据UI Demo](#%e6%83%85%e6%84%9f%e4%ba%91%e6%8a%a5%e8%a1%a8%e6%95%b0%e6%8d%aeui-demo)
