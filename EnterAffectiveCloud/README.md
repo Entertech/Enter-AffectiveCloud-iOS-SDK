@@ -1,4 +1,4 @@
-[English Readme](/README_EN.md)
+[English Readme](/EnterAffectiveCloud/README_EN.md)
 
 # Enter AffectiiveCloud iOS SDK
 
