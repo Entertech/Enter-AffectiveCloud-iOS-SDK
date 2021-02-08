@@ -28,7 +28,7 @@ In order to facilitate your rapid development of the iOS platform, we provide th
 - [EnterAffectiveCloud](EnterAffectiveCloud/) Provides an interface to provide brainwave data and heart rate data to the algorithm platform, and can calculate a variety of affective values.
 - [EnterAffectiveCloudUI](UI/EnterAffectiveCloudUI/) Various UI modules are provided to display real-time data and report data (optional).
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/6.png" width="500">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/6_en.png" width="500">
 
 ## Installation
 
