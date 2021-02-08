@@ -1,4 +1,4 @@
-[English Readme](/EnterAffectiveCloud/README_EN.md)
+[English Readme](/EnterAffectiveCloudUI/README_EN.md)
 
 # 情感云数据标准UI
 
