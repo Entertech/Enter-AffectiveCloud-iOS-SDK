@@ -10,8 +10,6 @@ This SDK integrates a UI library, which includes a real-time data UI and a repor
 
 ## Structure
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/7.png" width="500">
-
 How to quickly access the UI library, please check:
 - [Affective Cloud Data Standard UI](EnterAffectiveCloudUI/)
 
