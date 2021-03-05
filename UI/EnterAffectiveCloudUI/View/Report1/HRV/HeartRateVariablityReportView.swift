@@ -128,7 +128,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "心率变异性"
+        titleLabel?.text = "HRV"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -148,7 +148,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         bgView?.addSubview(yLabel!)
         
         xLabel = UILabel()
-        xLabel?.text = "时间(分钟)"
+        xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
         xLabel?.textColor = alphaColor

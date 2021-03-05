@@ -149,7 +149,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "脑电波频谱"
+        titleLabel?.text = "Brainwave Rhythms"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -161,7 +161,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(infoBtn!)
         
         yLabel = UILabel.init()
-        yLabel?.text = "各个频段脑电波占比 (%)"
+        yLabel?.text = "Percent (%)"
         yLabel?.font = UIFont.systemFont(ofSize: 12)
         yLabel?.textColor = alphaColor
         yLabel?.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
@@ -169,7 +169,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(yLabel!)
         
         xLabel = UILabel()
-        xLabel?.text = "时间(分钟)"
+        xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
         xLabel?.textColor = alphaColor

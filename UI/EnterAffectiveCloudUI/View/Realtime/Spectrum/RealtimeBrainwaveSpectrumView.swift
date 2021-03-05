@@ -139,7 +139,7 @@ public class RealtimeBrainwaveSpectrumView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "脑波频谱"
+    private let titleText = "Brainwave Rhythms"
     private let disposeBag = DisposeBag()
     private var updateSpectrum: UpdateBrainwaveSpectrum?
     private var isFirstData = true

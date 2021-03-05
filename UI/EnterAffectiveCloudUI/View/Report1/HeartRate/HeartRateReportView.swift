@@ -94,21 +94,21 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
     
     public var minValue = 0 {
         willSet {
-            minLabel?.text = "最小: \(newValue)"
+            minLabel?.text = "Min: \(newValue)"
             minBpmLabel?.isHidden = false
         }
     }
     
     public var maxValue = 0 {
         willSet {
-            maxLabel?.text = "最大: \(newValue)"
+            maxLabel?.text = "Max: \(newValue)"
             maxBpmLabel?.isHidden = false
         }
     }
     
     public var avgValue = 0 {
         willSet {
-            avgLabel?.text = "平均: \(newValue)"
+            avgLabel?.text = "Avg: \(newValue)"
             avgBpmLabel?.isHidden = false
         }
     }
@@ -175,7 +175,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(chartBackgroundView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "心率"
+        titleLabel?.text = "Heart Rate"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -187,7 +187,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(infoBtn!)
         
         yLabel = UILabel.init()
-        yLabel?.text = "心率(bpm)"
+        yLabel?.text = "Heart Rate(bpm)"
         yLabel?.font = UIFont.systemFont(ofSize: 12)
         yLabel?.textColor = firstTextColor
         yLabel?.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
@@ -195,7 +195,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(yLabel!)
         
         xLabel = UILabel()
-        xLabel?.text = "时间(分钟)"
+        xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
         xLabel?.textColor = firstTextColor
@@ -277,19 +277,19 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         bgView?.addSubview(highDot!)
         
         lowLabel = UILabel()
-        lowLabel?.text = "低"
+        lowLabel?.text = "low"
         lowLabel?.font = UIFont.systemFont(ofSize: 12)
         lowLabel?.textColor = firstTextColor
         bgView?.addSubview(lowLabel!)
         
         middleLabel = UILabel()
-        middleLabel?.text = "中"
+        middleLabel?.text = ""
         middleLabel?.font = UIFont.systemFont(ofSize: 12)
         middleLabel?.textColor = firstTextColor
         bgView?.addSubview(middleLabel!)
         
         highLabel = UILabel()
-        highLabel?.text = "高"
+        highLabel?.text = "high"
         highLabel?.font = UIFont.systemFont(ofSize: 12)
         highLabel?.textColor = firstTextColor
         bgView?.addSubview(highLabel!)

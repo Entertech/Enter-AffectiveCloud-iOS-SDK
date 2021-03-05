@@ -110,7 +110,7 @@ public class RealtimeAttentionView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "注意力"
+    private let titleText = "Attention"
     private let disposeBag = DisposeBag()
     
     //MARK:- Private UI

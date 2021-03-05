@@ -57,7 +57,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
          }
      }
     /// title
-    public var title: String = "注意力变化" {
+    public var title: String = "Attention" {
         willSet {
             chartHead?.titleText = newValue
         }
@@ -188,7 +188,7 @@ public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRe
         
         marker = ValueMarkerView(frame: CGRect(x: 0, y: 0, width: 76, height: 47))
         marker?.chartView = chartView
-        marker?.titleLabel?.text = "注意力"
+        marker?.titleLabel?.text = "Attention"
         marker?.titleLabel?.textColor = alphaColor
         marker?.dot?.backgroundColor = lineColor
         chartView?.marker = marker

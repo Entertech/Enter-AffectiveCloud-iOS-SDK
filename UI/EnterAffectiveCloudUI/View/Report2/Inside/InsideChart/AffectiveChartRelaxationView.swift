@@ -91,7 +91,7 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
         }
     }
     
-    public var title: String = "放松度" {
+    public var title: String = "Relaxation" {
         willSet {
             chartHead?.titleText = newValue
         }

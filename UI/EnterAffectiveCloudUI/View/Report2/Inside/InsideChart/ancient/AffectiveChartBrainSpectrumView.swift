@@ -109,7 +109,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
         }
     }
     
-    public var title: String = "脑波频谱" {
+    public var title: String = "Brainwave Rhythms" {
         willSet {
             chartHead?.titleText = newValue
         }

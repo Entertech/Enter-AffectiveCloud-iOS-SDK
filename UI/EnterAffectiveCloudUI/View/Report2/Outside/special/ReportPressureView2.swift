@@ -24,7 +24,7 @@ public class ReportPressureView2: UIView {
             }
         }
     }
-    // 状态
+    //state
     public var state: PrivateReportState = .nor{
         willSet {
             if language == .ch {
@@ -38,19 +38,19 @@ public class ReportPressureView2: UIView {
     public var language = LanguageEnum.en
     private let numLabel = UILabel()
     private let stateLabel = UILabel()
-    public let circleView = ReportSemiCircle3() // 扇形试图
-    public var stateArray:[Int] = [0 ,20, 70, 100] //放松度等级分段
+    public let circleView = ReportSemiCircle3()
+    public var stateArray:[Int] = [0 ,20, 70, 100] 
     private let titleLabel = UILabel()
     private let button = UIImageView()
     
-    // 状态文字背景色
+    // state label background color
     public var stateColor = ColorExtension.red5 {
         willSet {
             stateLabel.backgroundColor = newValue
         }
     }
     
-    // 状态文字颜色
+    // state text color
     public var stateTextColor = UIColor.colorWithHexString(hexColor: "7f5960") {
         willSet {
             stateLabel.textColor = newValue

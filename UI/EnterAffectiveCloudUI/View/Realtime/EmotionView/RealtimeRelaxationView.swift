@@ -107,7 +107,7 @@ public class RealtimeRelaxationView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "放松度"
+    private let titleText = "Relaxation"
     private let disposeBag = DisposeBag()
     
     //MARK:- Private UI

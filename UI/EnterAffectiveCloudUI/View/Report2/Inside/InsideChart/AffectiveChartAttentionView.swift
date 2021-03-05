@@ -89,7 +89,7 @@ public class AffectiveChartAttentionView: UIView, ChartViewDelegate {
         }
     }
     
-    public var title: String = "注意力" {
+    public var title: String = "Attention" {
         willSet {
             chartHead?.titleText = newValue
         }

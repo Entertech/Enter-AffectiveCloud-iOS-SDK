@@ -4,11 +4,8 @@
   - [Demo](#demo)
   - [Real-time Data UI](#real-time-data-ui)
     - [How To Use](#how-to-use)
-    - [Real-time HeartRate View](#real-time-heartrate-view)
-  - [Report Data UI](#report-data-ui)
     - [How To Use](#how-to-use-1)
     - [Horizontal Zoom Report](#horizontal-zoom-report)
-    - [All View](#all-view)
   - [Affective Cloud UI API](#affective-cloud-ui-api)
 
 To facilitate user access, we provide a standard template for data display UI, which is divided into real-time data UI and report data UI.
@@ -42,15 +39,7 @@ hrView.snp.makeConstraints {
 // start observe
 hrView.observe()
 ```
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/hr_screenshoot.png" width="300">
-
-### Real-time HeartRate View
-
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/WechatIMG1.jpeg" width="300">
-
-## Report Data UI
-
-Take the attention report as an example to show how to access the report UI.
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/HeartRate2.png" width="300">
 
 ### How To Use
 
@@ -80,25 +69,15 @@ the function `setDataFromModel` has two parameters
 | attention | [Int] | The attention array             |
 | timestamp | Int      | Service start time  |
 
-No timestamp:
-
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/image-20191014142421740.png" width="300">
-
 With timestamp:
 
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/attention_with_timstamp.png" width="300">
+<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/Attention2.png" width="300">
 
 ### Horizontal Zoom Report
 
 Click the zoom in button in the upper right corner to get a horizontal report.
 
 <img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_C67F3DC6DCDB-1.jpeg" width="600">
-
-### All View
-
-After customization, the following effects can be made:
-
-<img src="https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK/blob/master/img/IMG_5034.JPG" width="300">
 
 ## Affective Cloud UI API
 

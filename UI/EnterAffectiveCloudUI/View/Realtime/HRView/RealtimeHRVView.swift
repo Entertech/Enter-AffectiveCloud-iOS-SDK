@@ -177,7 +177,7 @@ public class RealtimeHRVView: BaseView {
         
         titleLabel.font = UIFont(name: textFont, size: 14)
         titleLabel.textColor = mainColor
-        titleLabel.text = "心率变异性"
+        titleLabel.text = "HRV"
         
         infoBtn.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         infoBtn.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)

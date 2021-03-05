@@ -67,7 +67,7 @@ public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRe
          }
      }
     /// title
-    public var title: String = "心率" {
+    public var title: String = "Heart Rate" {
         willSet {
             chartHead?.titleText = newValue
         }

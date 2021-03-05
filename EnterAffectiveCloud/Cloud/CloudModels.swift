@@ -118,7 +118,7 @@ public class AffectiveCloudResponseJSONModel: HandyJSON {
             self.message <-- "msg"
     }
 
-    // ugly imp: 用来给业务层访问 data 字段对应的 model。
+   
     public var dataModel: HandyJSON? {
         return self.deserilizedStringToJsonModel(dic: self.data ?? ["": ""])
     }
@@ -200,7 +200,7 @@ public class CSResponseDataJSONModel: HandyJSON {
 
 
 /*
- *  订阅状态返回的服务数据列表
+ *  subscription
  */
 public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
     public var eegServiceList: [String]?
@@ -221,7 +221,7 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
     }
 }
 
-/* 脑电生物信号实时分析结果
+/* Realtime Biodata
  * eeg: 实时脑电数据
  * hr: 实时心率数据
  */
@@ -237,7 +237,7 @@ public class CSBiodataProcessJSONModel: HandyJSON {
     }
 }
 
-/* 情感云实时返回的脑电分析结果
+/* Realtime brain rhythm
  *
  * waveRight: 脑电波片段：右通道。数组长度 100 (-2.4 * e6 ~ 2.4 * e6)
  * waveLeft: 脑电波片段：左通道。数组长度 100 (-2.4 * e6 ~ 2.4 * e6)
@@ -311,7 +311,7 @@ public class CSBiodataEEGJsonModel: HandyJSON {
     }
 }
 
-/* 情感云实时返回的心率分析结果
+/* Realtime hear rate
  *
  * hr: 心率值
  * hrv: 心率变异性
@@ -323,7 +323,7 @@ public class CSBiodataHRJsonModel: HandyJSON {
     public required init() {}
 }
 
-/* 生物信号报表
+/* Biodata Report
  *
  * eeg: 脑电综合报表
  * hr: 心率综合报表
@@ -335,7 +335,7 @@ public class CSBiodataReportJsonModel: HandyJSON {
     public required init() {}
 }
 
-/*  情感云 `脑电` 综合分析数据报表
+/* Brain rhythm Report
  *
  * alphaCurve: 脑电α频段能量变化曲线
  * betaCurve: 脑电β频段能量变化曲线
@@ -395,7 +395,7 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
     }
 }
 
-/*  情感云 `心率` 综合分析数据报表
+/*  Heart Rate Report
  *
  * average:心率平均值
  * max: 心率最大值
@@ -479,7 +479,7 @@ public class CSAffectiveJsonModel: HandyJSON {
     public var coherence: Float?
 }
 
-/* 情感计算实时分析结果
+/* Realtime affective
  *
  * attention: 注意力值（0 ~ 100）
  * relaxation: 放松度值（0 ~100）
@@ -507,7 +507,7 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
 }
 
 
-/* 情感云综合分析结果
+/* Affective Report
  *
  * attention: 注意力
  * relaxation: 放松度

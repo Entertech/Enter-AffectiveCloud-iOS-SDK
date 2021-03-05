@@ -72,20 +72,20 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
     
     public var maxValue: Int = 0 {
         didSet {
-            maxLabel?.text = "最大: \(maxValue)"
+            maxLabel?.text = "Max: \(maxValue)"
             
         }
     }
     
     public var minValue: Int = 0 {
         didSet {
-            minLabel?.text = "最小: \(minValue)"
+            minLabel?.text = "Min: \(minValue)"
         }
     }
     
     public var avgValue: Int = 0 {
         didSet {
-            avgLabel?.text = "平均: \(avgValue)"
+            avgLabel?.text = "Avg: \(avgValue)"
         }
     }
 
@@ -141,7 +141,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "专注度"
+        titleLabel?.text = "Attention"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -153,7 +153,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         bgView?.addSubview(infoBtn!)
         
         yLabel = UILabel.init()
-        yLabel?.text = "专注度"
+        yLabel?.text = "Attention"
         yLabel?.font = UIFont.systemFont(ofSize: 12)
         yLabel?.textColor = alphaColor
         yLabel?.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
@@ -161,7 +161,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         bgView?.addSubview(yLabel!)
         
         xLabel = UILabel()
-        xLabel?.text = "时间(分钟)"
+        xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
         xLabel?.textColor = alphaColor

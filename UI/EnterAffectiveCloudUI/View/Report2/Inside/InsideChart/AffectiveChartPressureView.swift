@@ -91,7 +91,7 @@ public class AffectiveChartPressureView: UIView, ChartViewDelegate, UIGestureRec
         }
     }
     /// title
-    public var title: String = "压力值" {
+    public var title: String = "Pressure" {
         willSet {
             chartHead?.titleText = newValue
         }

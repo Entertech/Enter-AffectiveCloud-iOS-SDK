@@ -27,7 +27,7 @@ let client = AffectiveCloudClient(websocketURLString: yourURL, appKey: yourAppKe
 
 ```
 
-| 参数               | 类型   | 说明                                  |
+| Parameter               | Type   | Description                                  |
 | ------------------ | ------ | ------------------------------------- |
 | websocketURLString | String | Affective Cloud websocket url           |
 | appKey             | String | Affective Cloud app key, contact the administrator    |
@@ -69,10 +69,10 @@ func hrData() {
 ### Get Report
 
 ```swift
-// 获取生物数据报表
+// get biodata report
 self.client.getBiodataReport(services: [.EEG, .HeartRate])
 
-// 获取情感数据报表
+// get affective data report
 self.client.getAffectiveDataReport(services: [.relaxation, .attention, .pressure, .pleasure])
 
 ```
@@ -95,10 +95,9 @@ func biodataServicesSubscribe(client: AffectiveCloudClient, response: AffectiveC
     if let data = response.dataModel as? CSBiodataProcessJSONModel {
         if let eeg = data.eeg {
         // eeg.waveLeft, eeg.waveRight, eeg.alpha..
-        // 在此获取您需要的脑波数据
         }
         if let hr = data.hr {
-        // 在此获取您需要的心率数据
+        // heart wave
         }
     }
 }

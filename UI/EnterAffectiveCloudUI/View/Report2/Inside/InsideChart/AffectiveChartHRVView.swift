@@ -84,7 +84,7 @@ public class AffectiveChartHRVView: UIView, ChartViewDelegate, UIGestureRecogniz
         }
     }
     /// 标题
-    public var title: String = "心率变异性（HRV）" {
+    public var title: String = "HRV" {
         willSet {
             chartHead?.titleText = newValue
         }

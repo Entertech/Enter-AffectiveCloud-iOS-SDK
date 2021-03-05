@@ -116,7 +116,7 @@ public class PressureReportView: BaseView {
         self.addSubview(bgView!)
         
         titleLabel = UILabel()
-        titleLabel?.text = "压力值"
+        titleLabel?.text = "Pressure"
         titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel?.textAlignment = .left
         titleLabel?.textColor = mainColor
@@ -128,7 +128,7 @@ public class PressureReportView: BaseView {
         bgView?.addSubview(infoBtn!)
         
         xLabel = UILabel()
-        xLabel?.text = "时间(分钟)"
+        xLabel?.text = "Time(min)"
         xLabel?.textAlignment = .center
         xLabel?.font = UIFont.systemFont(ofSize: 12)
         xLabel?.textColor = alphaColor
@@ -140,13 +140,13 @@ public class PressureReportView: BaseView {
         bgView?.addSubview(chartView!)
         
         lowLabel = UILabel()
-        lowLabel?.text = "低"
+        lowLabel?.text = "Low"
         lowLabel?.textColor = alphaColor
         lowLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(lowLabel!)
         
         highLabel = UILabel()
-        highLabel?.text = "高"
+        highLabel?.text = "High"
         highLabel?.textColor = alphaColor
         highLabel?.font = UIFont.systemFont(ofSize: 12)
         bgView?.addSubview(highLabel!)

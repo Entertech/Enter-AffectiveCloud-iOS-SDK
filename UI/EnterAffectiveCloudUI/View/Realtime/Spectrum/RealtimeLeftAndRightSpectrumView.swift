@@ -106,7 +106,7 @@ public class RealtimeLeftAndRightSpectrumView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "脑波频谱"
+    private let titleText = "Brainwave Rhythms"
     private let disposeBag = DisposeBag()
     private var leftSpectrum: UpdateBrainwaveSpectrum?
     private var rightSpectrum: UpdateBrainwaveSpectrum?
