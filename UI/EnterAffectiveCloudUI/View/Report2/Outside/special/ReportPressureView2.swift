@@ -92,7 +92,14 @@ public class ReportPressureView2: UIView {
         }
         
         circleView.snp.makeConstraints {
-            $0.left.right.top.equalToSuperview()
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                $0.left.equalToSuperview().offset(60)
+                $0.right.equalToSuperview().offset(-60)
+                $0.top.equalTo(20)
+            } else {
+                $0.left.right.top.equalToSuperview()
+            }
+            
             $0.bottom.equalTo(-24)
         }
         
