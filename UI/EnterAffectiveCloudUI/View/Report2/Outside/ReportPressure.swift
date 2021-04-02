@@ -89,8 +89,13 @@ public class PrivateReportPressure: UIView {
         }
         
         circleView.snp.makeConstraints {
-            $0.width.equalTo(260)
-            $0.height.equalTo(140)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                $0.width.equalTo(160)
+                $0.height.equalTo(86)
+            } else {
+                $0.width.equalTo(260)
+                $0.height.equalTo(140)
+            }
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().offset(-10)
         }
