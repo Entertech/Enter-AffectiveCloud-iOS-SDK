@@ -844,7 +844,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                     do {
                         try data.write(to: self.logUrl!, options: .atomic)
                         //try logStr.write(toFile: url, atomically: true, encoding: .utf8)
-                    } catch let error as Error {
+                    } catch let error {
                         print("log erorr \(error.localizedDescription)")
                     }
                     

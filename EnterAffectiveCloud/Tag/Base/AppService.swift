@@ -13,9 +13,10 @@ import Moya
 import HandyJSON
 
 
-public class TagService: NSObject {
-    public static let shared = TagService()
+public class AppService: NSObject {
+    public static let shared = AppService()
     public var token: String?
+    public var cloudVersion: String = "v1"
 }
 
 extension ObservableType where Element == Response {

@@ -9,8 +9,8 @@
 import Moya
 
 enum AppInfoAPI {
-    case list(String)
-    case read(String, Int)
+    case list
+    case read(Int)
 }
 
 extension AppInfoAPI: TargetType {
@@ -20,10 +20,10 @@ extension AppInfoAPI: TargetType {
     
     var path: String {
         switch self {
-        case .list(let version):
-            return "/\(version)/appInfo/"
-        case .read(let version,let id):
-            return "/\(version)/appInfo/\(id)"
+        case .list:
+            return "/\(AppService.shared.cloudVersion)/appInfo/"
+        case .read(let id):
+            return "/\(AppService.shared.cloudVersion)/appInfo/\(id)"
         }
     }
     
@@ -40,7 +40,7 @@ extension AppInfoAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        if let accessToken = TagService.shared.token {
+        if let accessToken = AppService.shared.token {
             return ["Authorization" : "JWT "+accessToken]
         }
         return nil

@@ -83,7 +83,7 @@ open class DataFileWriter: DataFileWritable {
         header.append(contentsOf: self.convertChecksum())
         header.append(contentsOf: self.convertTimestamp())
         header.append(contentsOf: Bytes(repeating: 0, count: 12)) // 保留位
-        return Data(bytes: header)
+        return Data.init(header)
     }
 
     // MARK: - 转换文件头属性

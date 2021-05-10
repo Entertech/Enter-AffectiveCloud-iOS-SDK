@@ -38,7 +38,7 @@ class RhythmsChart: LineChartView {
     /// 暗色，诸如线条之类的颜色设置
     public var axisColor: UIColor = ColorExtension.textLv1 {
         willSet {
-            let highPercentColor = newValue.changeAlpha(to: 0.8)
+            //let highPercentColor = newValue.changeAlpha(to: 0.8)
             let midPercentColor = newValue.changeAlpha(to: 0.6)
             let lowPercentColor = newValue.changeAlpha(to: 0.2)
             self.xAxis.labelTextColor = midPercentColor

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 /// cloud services response delegate
 /// you can handle or display cloud data in your UI level use this delegate
-public protocol AffectiveCloudResponseDelegate: class {
+public protocol AffectiveCloudResponseDelegate: AnyObject {
     func websocketState(client: AffectiveCloudClient, state: CSState)
     func websocketConnect(client: AffectiveCloudClient)
     func websocketDisconnect(client: AffectiveCloudClient, error: Error?)

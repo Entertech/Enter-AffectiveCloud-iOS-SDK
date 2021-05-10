@@ -26,7 +26,7 @@
 		FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D5245920E000FADC2B /* HighlightIcon.swift */; };
 		FA1690D82459772B00FADC2B /* TwoValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D72459772B00FADC2B /* TwoValueMarkerView.swift */; };
 		FA1690DA2459909C00FADC2B /* FiveValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1690D92459909C00FADC2B /* FiveValueMarkerView.swift */; };
-		FA19DF632398F6AC0043F679 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF622398F6AC0043F679 /* TagService.swift */; };
+		FA19DF632398F6AC0043F679 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF622398F6AC0043F679 /* AppService.swift */; };
 		FA19DF69239900F40043F679 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF68239900F40043F679 /* BaseAPI.swift */; };
 		FA19DF6B2399015D0043F679 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6A2399015D0043F679 /* TokenModel.swift */; };
 		FA19DF6D239902330043F679 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF6C239902330043F679 /* TokenAPI.swift */; };
@@ -140,6 +140,9 @@
 		FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
 		FAD3C56723B35A65007E9AE1 /* AffectiveChartHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */; };
 		FAD3C56923B3666F007E9AE1 /* AffectiveChartPressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */; };
+		FADD94F12646757E00058649 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F02646757E00058649 /* RecordModel.swift */; };
+		FADD94F326467D7800058649 /* RecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F226467D7800058649 /* RecordAPI.swift */; };
+		FADD94F52648C0E300058649 /* RecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F42648C0E300058649 /* RecordRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,7 +246,7 @@
 		FA1690D5245920E000FADC2B /* HighlightIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightIcon.swift; sourceTree = "<group>"; };
 		FA1690D72459772B00FADC2B /* TwoValueMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoValueMarkerView.swift; sourceTree = "<group>"; };
 		FA1690D92459909C00FADC2B /* FiveValueMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveValueMarkerView.swift; sourceTree = "<group>"; };
-		FA19DF622398F6AC0043F679 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
+		FA19DF622398F6AC0043F679 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		FA19DF68239900F40043F679 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		FA19DF6A2399015D0043F679 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		FA19DF6C239902330043F679 /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
@@ -357,6 +360,9 @@
 		FACEDFF42351BB450016176C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartHeartRateView.swift; sourceTree = "<group>"; };
 		FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartPressureView.swift; sourceTree = "<group>"; };
+		FADD94F02646757E00058649 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
+		FADD94F226467D7800058649 /* RecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAPI.swift; sourceTree = "<group>"; };
+		FADD94F42648C0E300058649 /* RecordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRequest.swift; sourceTree = "<group>"; };
 		FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterRealtimeUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -527,6 +533,7 @@
 				FA19DF6A2399015D0043F679 /* TokenModel.swift */,
 				FA19DF70239DD95B0043F679 /* AppInfoModel.swift */,
 				FA19DF76239DE7160043F679 /* TagModel.swift */,
+				FADD94F02646757E00058649 /* RecordModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -537,6 +544,7 @@
 				FA19DF6C239902330043F679 /* TokenAPI.swift */,
 				FA19DF72239DDAA10043F679 /* AppInfoAPI.swift */,
 				FA19DF78239DEC7F0043F679 /* TagAPI.swift */,
+				FADD94F226467D7800058649 /* RecordAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -547,6 +555,7 @@
 				FA19DF6E239904430043F679 /* TokenRequest.swift */,
 				FA19DF74239DE3ED0043F679 /* AppInfoRequest.swift */,
 				FA19DF7A239DED290043F679 /* TagRequest.swift */,
+				FADD94F42648C0E300058649 /* RecordRequest.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -554,7 +563,7 @@
 		FA19DF67239900930043F679 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				FA19DF622398F6AC0043F679 /* TagService.swift */,
+				FA19DF622398F6AC0043F679 /* AppService.swift */,
 				FA19DF68239900F40043F679 /* BaseAPI.swift */,
 			);
 			path = Base;
@@ -1298,6 +1307,7 @@
 				FABFA4D5230E84EF00ECD83C /* CloudModels.swift in Sources */,
 				FAA5D41025131223005E1536 /* Log.swift in Sources */,
 				FA19DF6F239904430043F679 /* TokenRequest.swift in Sources */,
+				FADD94F12646757E00058649 /* RecordModel.swift in Sources */,
 				FA19DF71239DD95B0043F679 /* AppInfoModel.swift in Sources */,
 				FA19DF73239DDAA10043F679 /* AppInfoAPI.swift in Sources */,
 				FABFA4D4230E84EF00ECD83C /* AffectiveCloudClient.swift in Sources */,
@@ -1311,10 +1321,12 @@
 				FA19DF79239DEC7F0043F679 /* TagAPI.swift in Sources */,
 				FAC3D913237E5442006CE2BC /* FragmentData.swift in Sources */,
 				FAC3D914237E5442006CE2BC /* ReportFileHander.swift in Sources */,
+				FADD94F326467D7800058649 /* RecordAPI.swift in Sources */,
 				FAC3D910237E5442006CE2BC /* EnterAffectiveCloudFileWriter.swift in Sources */,
+				FADD94F52648C0E300058649 /* RecordRequest.swift in Sources */,
 				FA19DF7B239DED290043F679 /* TagRequest.swift in Sources */,
 				FAC3D918237E5442006CE2BC /* DataFileReader.swift in Sources */,
-				FA19DF632398F6AC0043F679 /* TagService.swift in Sources */,
+				FA19DF632398F6AC0043F679 /* AppService.swift in Sources */,
 				FA19DF6D239902330043F679 /* TokenAPI.swift in Sources */,
 				FABFA4D7230E84EF00ECD83C /* AffectiveCloudServices.swift in Sources */,
 				FAA5D41125131223005E1536 /* ToolBox+Ex.swift in Sources */,
@@ -1619,7 +1631,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 114;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1634,7 +1646,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1651,7 +1663,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 114;
 				DEFINES_MODULE = YES;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
@@ -1666,7 +1678,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cn.enter.EnterAffectiveCloud;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1682,7 +1694,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 112;
+				CURRENT_PROJECT_VERSION = 114;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1696,7 +1708,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1713,7 +1725,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 112;
+				CURRENT_PROJECT_VERSION = 114;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5EVD5KXKJ4;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1727,7 +1739,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = cn.entertech.EnterAffectiveCloudUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

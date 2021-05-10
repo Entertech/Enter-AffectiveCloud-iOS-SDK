@@ -9,7 +9,7 @@
 import Moya
 
 enum TagAPI {
-    case list(String)
+    case list
 }
 
 extension TagAPI: TargetType {
@@ -19,8 +19,8 @@ extension TagAPI: TargetType {
     
     var path: String {
         switch self {
-        case .list(let version):
-            return "/\(version)/dataLabelCase/"
+        case .list:
+            return "/\(AppService.shared.cloudVersion)/dataLabelCase/"
         }
     }
     
@@ -37,7 +37,7 @@ extension TagAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        if let accessToken = TagService.shared.token {
+        if let accessToken = AppService.shared.token {
             return ["Authorization" : "JWT "+accessToken]
         }
         return nil

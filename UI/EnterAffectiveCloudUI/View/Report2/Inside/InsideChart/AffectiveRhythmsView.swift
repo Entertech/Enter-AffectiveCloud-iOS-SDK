@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-public protocol RhythmsViewDelegate: class {
+public protocol RhythmsViewDelegate: AnyObject {
     func setRhythmsEnable(value: Int)
 }
 
