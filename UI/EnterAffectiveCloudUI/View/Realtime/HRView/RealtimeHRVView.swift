@@ -35,9 +35,7 @@ class UpdateHRV: HRVValueProtocol {
         if let data = value.dataModel as? CSBiodataProcessJSONModel {
             if let eeg = data.hr {
                 if let hrv = eeg.hrv {
-                    for e in hrv {
-                        self.rxHRVValue.onNext(Int(e))
-                    }
+                    self.rxHRVValue.onNext(Int(hrv))
                 }
             }
         }
