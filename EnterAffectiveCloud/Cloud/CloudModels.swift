@@ -241,6 +241,10 @@ public class CSBiodataProcessJSONModel: HandyJSON {
     public func isNil()-> Bool {
         return (self.eeg == nil)&&(self.hr == nil)
     }
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.hr <-- "hr-v2"
+    }
 }
 
 
@@ -340,6 +344,10 @@ public class CSBiodataReportJsonModel: HandyJSON {
     public var hr: CSBiodataReportHRJsonModel?
 
     public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.hr <-- "hr-v2"
+    }
 }
 
 /* Brain rhythm Report
