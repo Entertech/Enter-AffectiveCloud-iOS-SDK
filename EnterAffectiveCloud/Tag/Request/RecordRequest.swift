@@ -32,8 +32,8 @@ final public class RecordRequest {
     /// - Parameters:
     ///   - userId: The user id you set
     ///   - completionHandler: completionHandler with Result value
-    public func getRecordListByUser(userId: String, completionHandler:@escaping (Result<[RecordModel], Error>) -> Void) {
-        provider.rx.request(.listByUser(userId)).filterSuccessfulStatusCodes().asObservable()
+    public func getRecordListByUser(userId: String, page: Int, pageSize: Int, completionHandler:@escaping (Result<[RecordModel], Error>) -> Void) {
+        provider.rx.request(.listByUser(userId,page,pageSize)).filterSuccessfulStatusCodes().asObservable()
             .mapHandyJsonModelList(RecordModel.self)
             .subscribe { modelList in
                 completionHandler(.success(modelList))

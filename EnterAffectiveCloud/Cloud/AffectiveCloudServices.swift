@@ -177,21 +177,28 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     private func biodataTypeList(with options: BiodataTypeOptions) -> [String] {
         var servicesList = [String]()
         if options.contains(.EEG) {
-            servicesList.append("eeg")
+            servicesList.append(BiodataType.eeg.rawValue)
         }
         if options.contains(.HeartRate) {
-            servicesList.append("hr")
+            servicesList.append(BiodataType.hr.rawValue)
         }
+        if options.contains(.HeartRateV2) {
+            servicesList.append(BiodataType.hr2.rawValue)
+        }
+        
         return servicesList
     }
     
     private func biodataSubscribeList(with options: BiodataParameterOptions) -> [String] {
         var servicesList = [String]()
         if options.contains(.eeg) {
-            servicesList.append("eeg")
+            servicesList.append(BiodataType.eeg.rawValue)
         }
         if options.contains(.hr) {
-            servicesList.append("hr")
+            servicesList.append(BiodataType.hr.rawValue)
+        }
+        if options.contains(.hr_v2) {
+            servicesList.append(BiodataType.hr2.rawValue)
         }
         return servicesList
     }
@@ -199,11 +206,14 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     private func reportTypeString(options: BiodataTypeOptions) -> String {
         var servicesList = [String]()
         if options.contains(.EEG) {
-            servicesList.append("eeg")
+            servicesList.append(BiodataType.eeg.rawValue)
         }
 
         if options.contains(.HeartRate) {
-            servicesList.append("hr")
+            servicesList.append(BiodataType.hr.rawValue)
+        }
+        if options.contains(.HeartRateV2) {
+            servicesList.append(BiodataType.hr2.rawValue)
         }
 
         return servicesList.joined(separator: ",")
@@ -348,6 +358,14 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
                 return
             }
         }
+        if options.contains(.HeartRateV2) {
+            if let flag = self.biodataInitialList?.contains(.HeartRateV2), flag {
+                jsonModel.kwargs?.hrData = hrData
+            } else {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must initial hr biodata service first!")
+                return
+            }
+        }
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -376,6 +394,13 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         if let flag = self.biodataInitialList?.contains(.HeartRate), options.contains(.HeartRate) {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable! generate report failed!")
+                return
+            }
+        }
+        
+        if let flag = self.biodataInitialList?.contains(.HeartRateV2), options.contains(.HeartRateV2) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate v2 service unavailable! generate report failed!")
                 return
             }
         }
@@ -1047,6 +1072,13 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.biodataInitialList?.insert(.HeartRate)
             } else {
                 self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .HeartRate)
+            }
+        }
+        if list.contains("hr-v2") {
+            if let _ = self.biodataInitialList {
+                self.biodataInitialList?.insert(.HeartRateV2)
+            } else {
+                self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .HeartRateV2)
             }
         }
     }

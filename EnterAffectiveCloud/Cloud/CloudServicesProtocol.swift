@@ -61,6 +61,7 @@ protocol BiodataServiceProtocol {
 public extension BiodataTypeOptions {
     static let EEG = BiodataTypeOptions(rawValue: 1 << 0)
     static let HeartRate = BiodataTypeOptions(rawValue: 1 << 1)
+    static let HeartRateV2 = BiodataTypeOptions(rawValue: 1 << 2)
 }
 
 public struct BiodataTypeOptions: OptionSet {
@@ -84,6 +85,7 @@ public extension BiodataParameterOptions {
 //    static let hr_variability = BiodataParameterOptions(rawValue: 1 << 9)
     static let eeg = BiodataParameterOptions(rawValue: 1 << 0)
     static let hr = BiodataParameterOptions(rawValue: 1 << 1)
+    static let hr_v2 = BiodataParameterOptions(rawValue: 1 << 2)
 }
 
 public struct BiodataParameterOptions: OptionSet {

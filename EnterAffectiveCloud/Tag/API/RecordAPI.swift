@@ -9,8 +9,8 @@
 import Moya
 
 enum RecordAPI {
-    case listByUser(String)
-    case listBySession(String)
+    case listByUser(String, Int, Int)
+    case listBySession(String, Int, Int)
     case record(Int)
     case delete(Int)
 }
@@ -52,10 +52,10 @@ extension RecordAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .listByUser(let user):
-            return .requestParameters(parameters: ["user_id":user], encoding: URLEncoding.default)
-        case .listBySession(let sesson):
-            return .requestParameters(parameters: ["session_id":sesson], encoding: URLEncoding.default)
+        case .listByUser(let user,let page, let pageSize):
+            return .requestParameters(parameters: ["user_id":user,"page":page, "page_size":pageSize], encoding: URLEncoding.default)
+        case .listBySession(let sesson, let page, let pageSize):
+            return .requestParameters(parameters: ["session_id":sesson,"page":page, "page_size":pageSize], encoding: URLEncoding.default)
         case .record(_):
             return .requestPlain
         case .delete(_):

@@ -10,6 +10,12 @@ import Foundation
 import HandyJSON
 import SwiftyJSON
 
+enum BiodataType: String {
+    case eeg
+    case hr
+    case hr2 = "hr-v2"
+}
+
 //MARK: Request Models
 public class AffectiveCloudRequestJSONModel: HandyJSON {
     var services: String = ""
@@ -237,6 +243,7 @@ public class CSBiodataProcessJSONModel: HandyJSON {
     }
 }
 
+
 /* Realtime brain rhythm
  *
  * waveRight: 脑电波片段：右通道。数组长度 100 (-2.4 * e6 ~ 2.4 * e6)
@@ -319,7 +326,7 @@ public class CSBiodataEEGJsonModel: HandyJSON {
  */
 public class CSBiodataHRJsonModel: HandyJSON {
     public var hr: Float?
-    public var hrv: [Float]?
+    public var hrv: Float?
     public required init() {}
 }
 

@@ -192,7 +192,7 @@ public class AffectiveCloudClient {
     /// this is necessory if you want to use follow services:
     /// Affective services: .arousal 、.pressure
     /// - Parameter data: the heart data from the hardware
-    public func appendBiodata(hrData: Data) {
+    public func appendBiodata(hrData: Data, options: BiodataTypeOptions = .HeartRateV2) {
         guard let _ = self.cloudService else {return}
         guard let _ = self.sessionId else {return}
         guard self.cloudService!.socket.isConnected else {
@@ -213,7 +213,7 @@ public class AffectiveCloudClient {
         for element in results {
             let data_int = element.map { Int($0) }
             DLog("upload hr data")
-            self.cloudService?.biodataUpload(options: .HeartRate, hrData: data_int)
+            self.cloudService?.biodataUpload(options: options, hrData: data_int)
             if _hrBuffer.count >= _hrBufferSize {
                 _hrBuffer.removeFirst(_hrBufferSize)
             }
