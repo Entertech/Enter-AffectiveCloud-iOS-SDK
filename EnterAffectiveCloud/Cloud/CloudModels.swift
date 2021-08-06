@@ -73,7 +73,7 @@ class CSKwargsJSONModel: HandyJSON {
         mapper <<<
             self.eegData <-- "eeg"
         mapper <<<
-            self.hrData <-- "hr"
+            self.hrData <-- "hr-v2"
         mapper <<<
             self.userID <-- "user_id"
         mapper <<<
