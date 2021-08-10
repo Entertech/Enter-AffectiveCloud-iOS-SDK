@@ -183,6 +183,12 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var meditationTime = 0 {
+        willSet {
+            chart.meditationTime = newValue
+        }
+    }
+    
     public var averageText = "Average" {
         willSet {
             chart.averageText = newValue
