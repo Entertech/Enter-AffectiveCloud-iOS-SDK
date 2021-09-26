@@ -14,6 +14,8 @@ enum BiodataType: String {
     case eeg
     case hr
     case hr2 = "hr-v2"
+    case bcg
+    case mceeg
 }
 
 //MARK: Request Models

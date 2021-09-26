@@ -62,6 +62,8 @@ public extension BiodataTypeOptions {
     static let EEG = BiodataTypeOptions(rawValue: 1 << 0)
     static let HeartRate = BiodataTypeOptions(rawValue: 1 << 1)
     static let HeartRateV2 = BiodataTypeOptions(rawValue: 1 << 2)
+    static let BCG = BiodataTypeOptions(rawValue: 1 << 3)
+    static let MCEEG = BiodataTypeOptions(rawValue: 1 << 4)
 }
 
 public struct BiodataTypeOptions: OptionSet {
@@ -86,6 +88,8 @@ public extension BiodataParameterOptions {
     static let eeg = BiodataParameterOptions(rawValue: 1 << 0)
     static let hr = BiodataParameterOptions(rawValue: 1 << 1)
     static let hr_v2 = BiodataParameterOptions(rawValue: 1 << 2)
+    static let bcg = BiodataParameterOptions(rawValue: 1 << 3)
+    static let mceeg = BiodataParameterOptions(rawValue: 1 << 4)
 }
 
 public struct BiodataParameterOptions: OptionSet {
