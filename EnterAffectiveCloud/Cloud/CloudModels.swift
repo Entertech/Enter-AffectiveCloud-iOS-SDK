@@ -242,7 +242,7 @@ public class CSBiodataProcessJSONModel: HandyJSON {
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.eeg == nil)&&(self.hr == nil)
+        return (self.eeg == nil)&&(self.hr == nil)&&(self.pepr == nil)
     }
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
