@@ -5,7 +5,7 @@ PODS:
   - Charts/Core (3.6.0)
   - FluentDarkModeKit (1.0.3)
   - GzipSwift (5.1.1)
-  - HandyJSON (5.0.3-beta)
+  - HandyJSON (5.0.4-beta)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (14.0.0):
@@ -23,19 +23,17 @@ PODS:
   - RxSwift (5.1.2)
   - SnapKit (5.0.1)
   - Starscream (3.1.1)
-  - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Charts
   - FluentDarkModeKit
   - GzipSwift
-  - HandyJSON (from `https://github.com/alibaba/HandyJSON.git`, branch `develop`)
+  - HandyJSON (~> 5.0.4-beta)
   - Moya/RxSwift
   - PromiseKit
   - RxSwift
   - SnapKit
   - Starscream (= 3.1.1)
-  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
@@ -43,36 +41,25 @@ SPEC REPOS:
     - Charts
     - FluentDarkModeKit
     - GzipSwift
+    - HandyJSON
     - Moya
     - PromiseKit
     - RxSwift
     - SnapKit
     - Starscream
-    - SwiftyJSON
-
-EXTERNAL SOURCES:
-  HandyJSON:
-    :branch: develop
-    :git: https://github.com/alibaba/HandyJSON.git
-
-CHECKOUT OPTIONS:
-  HandyJSON:
-    :commit: 7e3b212c76dd1b1d88bad592ae8b0aa0b0361e29
-    :git: https://github.com/alibaba/HandyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   FluentDarkModeKit: e3fe5d8aa471422480b04b0aa03d83425e3e1826
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
-  HandyJSON: 88e8ea5f66ab65c3b8768499a1935d0509c460d4
+  HandyJSON: a9c67202df97805a0ba4a00e30b50e9a30ac28f3
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: cb68a78c5d196509a890e4477d38ed5472acd1ad
+PODFILE CHECKSUM: 29eec71e68666c2d97e4408f528b6fe148e697ef
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

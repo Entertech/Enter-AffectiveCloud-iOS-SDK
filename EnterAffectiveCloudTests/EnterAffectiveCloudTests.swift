@@ -8,7 +8,6 @@
 
 import XCTest
 import EnterAffectiveCloud
-import HandyJSON
 
 class EnterAffectiveCloudTests: XCTestCase, AffectiveCloudResponseDelegate {
 

@@ -185,6 +185,9 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         if options.contains(.HeartRateV2) {
             servicesList.append(BiodataType.hr2.rawValue)
         }
+        if options.contains(.PEPR) {
+            servicesList.append(BiodataType.pepr.rawValue)
+        }
         
         return servicesList
     }
@@ -200,6 +203,9 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         if options.contains(.hr_v2) {
             servicesList.append(BiodataType.hr2.rawValue)
         }
+        if options.contains(.pepr) {
+            servicesList.append(BiodataType.pepr.rawValue)
+        }
         return servicesList
     }
 
@@ -214,6 +220,10 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         }
         if options.contains(.HeartRateV2) {
             servicesList.append(BiodataType.hr2.rawValue)
+        }
+        
+        if options.contains(.PEPR) {
+            servicesList.append(BiodataType.pepr.rawValue)
         }
 
         return servicesList.joined(separator: ",")

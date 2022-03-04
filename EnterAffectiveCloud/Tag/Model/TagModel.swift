@@ -6,9 +6,9 @@
 //  Copyright © 2019 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import HandyJSON
+import Foundation
 
-final public class TagModel: HandyJSON {
+final public class TagModel: Codable {
     
     public var id: Int?
     public var mode: [TagModeModel]?
@@ -20,7 +20,7 @@ final public class TagModel: HandyJSON {
     required public init() {}
 }
 
-public class TagModeModel: HandyJSON {
+public class TagModeModel: Codable {
     required public init() {}
     
     public var id: Int?
@@ -29,7 +29,7 @@ public class TagModeModel: HandyJSON {
     public var desc: String?
 }
 
-public class TagDescModel: HandyJSON {
+public class TagDescModel: Codable {
     required public init() {}
     
     public var id: Int?
@@ -39,7 +39,7 @@ public class TagDescModel: HandyJSON {
     public var desc: String?
 }
 
-public class DimModel: HandyJSON {
+public class DimModel: Codable {
     required public init() {}
     
     public var id: Int?

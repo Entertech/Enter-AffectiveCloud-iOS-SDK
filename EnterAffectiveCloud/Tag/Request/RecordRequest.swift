@@ -7,7 +7,6 @@
 //
 
 import RxSwift
-import HandyJSON
 import Moya
 import Alamofire
 
@@ -34,7 +33,7 @@ final public class RecordRequest {
     ///   - completionHandler: completionHandler with Result value
     public func getRecordListByUser(userId: String, page: Int, pageSize: Int, completionHandler:@escaping (Result<[RecordModel], Error>) -> Void) {
         provider.rx.request(.listByUser(userId,page,pageSize)).filterSuccessfulStatusCodes().asObservable()
-            .mapHandyJsonModelList(RecordModel.self)
+            .map([RecordModel].self)
             .subscribe { modelList in
                 completionHandler(.success(modelList))
             } onError: { error in
@@ -48,7 +47,7 @@ final public class RecordRequest {
     ///   - completionHandler: completionHandler with Result value
     public func getRecord(recordId: Int, completionHandler:@escaping (Result<RecordModel, Error>) -> Void) {
         provider.rx.request(.record(recordId)).filterSuccessfulStatusCodes().asObservable()
-            .mapHandyJsonModel(RecordModel.self)
+            .map(RecordModel.self)
             .subscribe { model in
                 completionHandler(.success(model))
             } onError: { error in

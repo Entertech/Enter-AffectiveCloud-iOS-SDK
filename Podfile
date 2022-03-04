@@ -7,7 +7,6 @@ platform :ios, '11.0'
 def common
   pod 'RxSwift'
   pod 'HandyJSON', '~> 5.0.4-beta'
-  pod 'SwiftyJSON'
   pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
 end

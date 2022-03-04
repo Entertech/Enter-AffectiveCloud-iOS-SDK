@@ -8,7 +8,6 @@
 
 import Foundation
 import HandyJSON
-import SwiftyJSON
 
 enum BiodataType: String {
     case eeg
@@ -16,6 +15,7 @@ enum BiodataType: String {
     case hr2 = "hr-v2"
     case bcg
     case mceeg
+    case pepr
 }
 
 //MARK: Request Models
@@ -236,6 +236,7 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
 public class CSBiodataProcessJSONModel: HandyJSON {
     public var eeg: CSBiodataEEGJsonModel?
     public var hr: CSBiodataHRJsonModel?
+    public var pepr: CSBiodataPEPRJsonModel?
     public required init() {}
 
     /// all property is nil the isNil: true
@@ -334,6 +335,39 @@ public class CSBiodataHRJsonModel: HandyJSON {
     public var hr: Float?
     public var hrv: Float?
     public required init() {}
+}
+
+/* Realtime hear rate
+ *
+ * 'bcg_wave': [float],  # 脉搏波波形
+ * 'rw_wave': [float],  # 呼吸波波形
+ * 'bcg_quality': int,  # 脉搏波信号质量等级
+ * 'rw_quality': int,  # 呼吸波信号质量等级
+ * 'hr': int,  # 心率
+ * 'rr': int,  # 呼吸率
+ * 'hrv': float  # 心率变异性
+ *
+ */
+public class CSBiodataPEPRJsonModel: HandyJSON {
+    public var bcgQuality: Int?
+    public var rwQuality: Int?
+    public var hr: Int?
+    public var rr: Int?
+    public var hrv: Float?
+    public var bcgWave: [Float]?
+    public var rwWave: [Float]?
+    public required init() {}
+    
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.bcgWave <-- "bcg_wave"
+        mapper <<<
+            self.rwWave <-- "rw_wave"
+        mapper <<<
+            self.bcgQuality <-- "bcg_quality"
+        mapper <<<
+            self.rwQuality <-- "rw_quality"
+    }
 }
 
 /* Biodata Report
