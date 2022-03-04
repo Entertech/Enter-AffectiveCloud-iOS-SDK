@@ -31,7 +31,7 @@ public class AffectiveCloudClient {
         self.websocketConnect()
     }
 
-    public init(websocketURLString: String, appKey: String, appSecret: String, userID: String) {
+    public init(websocketURLString: String, appKey: String?=nil, appSecret: String?=nil, userID: String?=nil) {
         self.cloudService = AffectiveCloudServices(ws: websocketURLString)
         self.cloudService?.client = self
         self.cloudService?.appKey = appKey

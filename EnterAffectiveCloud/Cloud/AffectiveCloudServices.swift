@@ -899,13 +899,16 @@ extension AffectiveCloudServices: WebSocketDelegate {
         }
         self.state = .connected
         self.delegate?.websocketConnect(client: self.client)
-        if let _ = session_id {
-            if !isSessionCreated {
-                sessionRestore()
+        if self.appKey != nil && self.appSecret != nil {
+            if let _ = session_id {
+                if !isSessionCreated {
+                    sessionRestore()
+                }
+            } else {
+                sessionCreate()
             }
-        } else {
-            sessionCreate()
         }
+        
         logService(log: "WS Connect")
     }
 
