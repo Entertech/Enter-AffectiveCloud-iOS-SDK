@@ -337,7 +337,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         }
     }
 
-    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]? = nil, hrData: [Int]? = nil) {
+    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]? = nil, hrData: [Int]? = nil, peprData: [Int]? = nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -373,6 +373,14 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
                 jsonModel.kwargs?.hrData = hrData
             } else {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must initial hr biodata service first!")
+                return
+            }
+        }
+        if options.contains(.PEPR) {
+            if let flag = self.biodataInitialList?.contains(.PEPR), flag {
+                jsonModel.kwargs?.peprData = peprData
+            } else {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Pepr service unavailable: you must initial hr biodata service first!")
                 return
             }
         }
@@ -412,6 +420,12 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate v2 service unavailable! generate report failed!")
                 return
+            }
+        }
+        
+        if let flag = self.biodataInitialList?.contains(.PEPR), options.contains(.PEPR) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Pepr service unavailable! generate report failed!")
             }
         }
 

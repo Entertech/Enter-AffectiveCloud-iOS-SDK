@@ -106,6 +106,7 @@ public class AffectiveCloudClient {
         } else {
             _hrBufferSize = minHrCycle * Int(uploadCycle)
             _eegBufferSize = minEegCycle * Int(uploadCycle)
+            _peprBufferSize = minPeprCycle * Int(uploadCycle)
         }
         self.cloudService?.bioService = services
         let param = BiodataAlgorithmParams()
@@ -219,6 +220,30 @@ public class AffectiveCloudClient {
             }
             
         }
+    }
+    
+    private var minPeprCycle = 225
+    
+    private var _peprBuffer = Data()
+    
+    private var _peprBufferSize = 675
+    
+    public func appendBiodata(peprData: Data, options: BiodataTypeOptions = .PEPR) {
+        guard let cloudService = self.cloudService else {return}
+        guard self.sessionId != nil else {return}
+        guard cloudService.socket.isConnected else {
+            _peprBuffer.removeAll()
+            return
+        }
+        _peprBuffer.append(peprData)
+        if _peprBuffer.count < _peprBufferSize {
+            return
+        }
+        let results = [UInt8](_peprBuffer)
+        let data_int = results.map { Int($0) }
+        _peprBuffer.removeAll()
+        self.cloudService?.biodataUpload(options: options, peprData: data_int)
+        
     }
     
     var sessionId: String? {

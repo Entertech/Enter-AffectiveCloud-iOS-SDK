@@ -35,6 +35,7 @@ public class AffectiveCloudRequestJSONModel: HandyJSON {
 public class CSRequestDataJSONModel: HandyJSON {
     var eeg: [Int]?
     var hr: [Int]?
+    var pepr: [Int]?
     public required init() { }
 }
 
@@ -55,6 +56,7 @@ class CSKwargsJSONModel: HandyJSON {
     var reportType: String?
     var eegData: [Int]?
     var hrData: [Int]?
+    var peprData: [Int]?
     var rec: [CSLabelSubmitJSONModel]?
     var affectiveTypes: [String]?
     var attenionServieces: [String]?
@@ -76,6 +78,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.eegData <-- "eeg"
         mapper <<<
             self.hrData <-- "hr-v2"
+        mapper <<<
+            self.peprData <-- "pepr"
         mapper <<<
             self.userID <-- "user_id"
         mapper <<<
@@ -213,6 +217,7 @@ public class CSResponseDataJSONModel: HandyJSON {
 public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
     public var eegServiceList: [String]?
     public var hrServiceList: [String]?
+    public var peprServiceList: [String]?
     public required init() {}
 
     public func mapping(mapper: HelpingMapper) {
@@ -220,6 +225,8 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
             self.eegServiceList <-- "sub_eeg_fields"
         mapper <<<
             self.hrServiceList <-- "sub_hr_fields"
+        mapper <<<
+            self.peprServiceList <-- "sub_pepr_fields"
     }
 
     /// all property is nil the isNil: true

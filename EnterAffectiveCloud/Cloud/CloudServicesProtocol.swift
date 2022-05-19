@@ -53,7 +53,7 @@ protocol BiodataServiceProtocol {
     mode: [Int]? , cases: [Int]? )
     func biodataSubscribe(parameters options: BiodataParameterOptions)
     func biodataUnSubscribe(parameters options: BiodataParameterOptions)
-    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?)
+    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?, peprData: [Int]?)
     func biodataReport(options: BiodataTypeOptions)
 }
 

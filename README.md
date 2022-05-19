@@ -43,12 +43,11 @@
 添加下面内容到你的 Podfile。
 
 ```
-# 指定 pod 仓库源
-source 'git@github.com:EnterTech/PodSpecs.git'
 
 target 'Your Target' do
-    pod 'EnterAffectiveCloud', '~> 2.2.0'
-    pod 'EnterAffectiveCloudUI', '~> 2.2.0'  #(可选)
+    pod 'EnterAffectiveCloud', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master'
+    #(可选)
+    pod 'EnterAffectiveCloudUI', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master' 
 end
 ```
 运行 `pod  install` 安装命令.

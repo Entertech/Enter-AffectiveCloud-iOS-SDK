@@ -41,11 +41,10 @@ In order to facilitate your rapid development of the iOS platform, we provide th
 Add this to Podfile。
 
 ```
-source 'git@github.com:EnterTech/PodSpecs.git'
-
 target 'Your Target' do
-    pod 'EnterAffectiveCloud', '~> 2.2.0'
-    pod 'EnterAffectiveCloudUI', '~> 2.2.0'  #(optional)
+    pod 'EnterAffectiveCloud', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master'
+    #(optional)
+    pod 'EnterAffectiveCloudUI', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master' 
 end
 ```
 Run `pod  install`.
