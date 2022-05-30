@@ -315,7 +315,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
                 chartView.highlightValue(h)
                 //chartHead.isHidden = true
                 setItemHidden(true)
-                chartView.delegate?.chartValueSelected?(chartView, entry: chartView.data!.entryForHighlight(h!)!, highlight: h!)
+                chartView.delegate?.chartValueSelected?(chartView, entry: chartView.data!.entry(for: h!)!, highlight: h!)
             }
         } else if sender.state == .changed {
             let h = chartView.getHighlightByTouchPoint(sender.location(in: self))
@@ -324,7 +324,7 @@ public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
                 chartView.highlightValue(h)
                 //chartHead.isHidden = true
                 setItemHidden(true)
-                chartView.delegate?.chartValueSelected?(chartView, entry: chartView.data!.entryForHighlight(h)!, highlight: h)
+                chartView.delegate?.chartValueSelected?(chartView, entry: chartView.data!.entry(for: h)!, highlight: h)
             }
         } else if sender.state == .ended {
             chartView.lastHighlighted = nil

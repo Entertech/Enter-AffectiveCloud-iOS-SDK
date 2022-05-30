@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,7 +34,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-s8-Sf7">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpg-s8-Sf7">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ed-VS-blr">
@@ -44,7 +46,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bf-PE-PMW" customClass="AffectiveChartBrainSpectrumView" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="33" y="8" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,7 +60,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z7K-QE-UaL" customClass="AffectiveChartHRVView" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="52" y="61" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,7 +74,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QN3-LZ-qsr" customClass="AffectiveChartHeartRateView" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="71" y="71" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +88,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGD-WA-EOZ" customClass="AffectiveChartPressureView" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="23" y="61" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,7 +102,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gB7-sM-Fls" customClass="AffectiveChartAttentionView" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="90" y="46" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,7 +116,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eEJ-o2-Alz" customClass="AffectiveChartRelaxationView" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="71" y="61" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -128,7 +130,7 @@
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NTv-jy-KLh" customClass="PrivateReportChartAttentionAndRelaxation" customModule="EnterAffectiveCloudUI">
                                                         <rect key="frame" x="89" y="1" width="240" height="128"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -159,7 +161,6 @@
                                             <constraint firstItem="QXv-GZ-BWg" firstAttribute="top" secondItem="XrB-o7-9m7" secondAttribute="bottom" constant="16" id="iVY-A9-sVh"/>
                                             <constraint firstItem="go6-EO-e47" firstAttribute="leading" secondItem="9ed-VS-blr" secondAttribute="leading" constant="16" id="lr5-Rg-zs0"/>
                                             <constraint firstAttribute="trailing" secondItem="go6-EO-e47" secondAttribute="trailing" constant="16" id="n9K-kE-dKY"/>
-                                            <constraint firstAttribute="width" constant="414" id="pgA-CV-Go5"/>
                                             <constraint firstAttribute="height" constant="2100" id="su1-LW-BZw"/>
                                             <constraint firstAttribute="trailing" secondItem="1kn-tx-xm8" secondAttribute="trailing" constant="16" id="t5d-gA-czx"/>
                                         </constraints>
@@ -175,14 +176,15 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="OQQ-O5-ZFF"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="jA6-M6-zXN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jA6-M6-zXN" firstAttribute="trailing" secondItem="Wpg-s8-Sf7" secondAttribute="trailing" id="6yQ-fR-byD"/>
                             <constraint firstItem="Wpg-s8-Sf7" firstAttribute="leading" secondItem="jA6-M6-zXN" secondAttribute="leading" id="hpV-vC-TBw"/>
+                            <constraint firstItem="9ed-VS-blr" firstAttribute="width" secondItem="Tpl-zG-2EP" secondAttribute="width" id="pwo-U0-D4b"/>
                             <constraint firstItem="Wpg-s8-Sf7" firstAttribute="top" secondItem="Tpl-zG-2EP" secondAttribute="topMargin" id="rGO-hT-4IM"/>
                             <constraint firstItem="Wpg-s8-Sf7" firstAttribute="bottom" secondItem="jA6-M6-zXN" secondAttribute="bottom" id="z6Z-ox-boU"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="jA6-M6-zXN"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Psf-ZG-fTZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
@@ -201,4 +203,9 @@
             <point key="canvasLocation" x="1140.5797101449277" y="185.49107142857142"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

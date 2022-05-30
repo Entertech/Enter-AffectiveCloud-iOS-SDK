@@ -133,7 +133,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue), label: "\(averageText): \(newValue)")
             if newValue > 70 {
-                avgLine.labelPosition = .bottomRight
+                avgLine.labelPosition = .rightBottom
             }
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [4, 2]
@@ -149,7 +149,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         willSet  {
             let avgLine = ChartLimitLine(limit: Double(newValue+130), label: "\(averageText): \(newValue)")
             if newValue > 70 {
-                avgLine.labelPosition = .bottomRight
+                avgLine.labelPosition = .rightBottom
             }
             avgLine.lineDashPhase = 0
             avgLine.lineDashLengths = [4, 2]
@@ -352,13 +352,13 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
         self.addSubview(relaxationLabel!)
         
         chartView = LineChartView()
-        yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
+        yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, axis: chartView!.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
         chartView?.leftYAxisRenderer = yRender!
         chartView?.delegate = self
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .clear
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
@@ -568,8 +568,8 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
             timeApart.append(i)
         }
         
-        chartView?.xAxis.axisMinimum = 0
-        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        // chartView?.xAxis.axisMinimum = 0
+        // chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(20)//限制屏幕最少显示100个点
         chartView?.maxVisibleCount = valueCount*2 + 1
         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
@@ -672,7 +672,7 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
     @objc
     private func tapGesture(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self.chartView!))
             if h === nil || h == chartView?.lastHighlighted {
                 chartView?.lastHighlighted = nil
                 chartView?.highlightValue(nil)
@@ -682,15 +682,15 @@ public class PrivateReportChartAttentionAndRelaxation: UIView, ChartViewDelegate
                 chartView?.lastHighlighted = h
                 chartView?.highlightValue(h)
                 setUiHidden(isHidden: true)
-                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entry(for: h!)!, highlight: h!)
             }
         } else if sender.state == .changed {
-            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self.chartView!))
             if let h = h {
                 chartView?.lastHighlighted = h
                 chartView?.highlightValue(h)
                 setUiHidden(isHidden: true)
-                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h)!, highlight: h)
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entry(for: h)!, highlight: h)
             }
         } else if sender.state == .ended {
             chartView?.lastHighlighted = nil

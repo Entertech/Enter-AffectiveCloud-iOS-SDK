@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "lklibrary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ET-LINK/LKLibrary.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "31027f9a597493462ac05d7b889a6b3d68f842b3"
+      }
+    }
+  ],
+  "version" : 2
+}

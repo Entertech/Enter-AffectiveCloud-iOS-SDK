@@ -10,143 +10,73 @@ import Charts
 
 class LimitYAxisRenderer: YAxisRenderer {
     open var entries: [Int]?
-    override init(viewPortHandler: ViewPortHandler, yAxis: YAxis?, transformer: Transformer?) {
-        super.init(viewPortHandler: viewPortHandler, yAxis: yAxis, transformer: transformer)
+    override init(viewPortHandler: ViewPortHandler, axis: YAxis, transformer: Transformer?) {
+        super.init(viewPortHandler: viewPortHandler, axis: axis, transformer: transformer)
     }
 
-    /// draws the y-axis labels to the screen
-     open override func renderAxisLabels(context: CGContext)
-     {
-         guard let yAxis = self.axis as? YAxis else { return }
-         
-         if !yAxis.isEnabled || !yAxis.isDrawLabelsEnabled
-         {
-             return
-         }
-         
-         let xoffset = yAxis.xOffset
-         let yoffset = yAxis.labelFont.lineHeight / 2.5 + yAxis.yOffset
-         
-         let dependency = yAxis.axisDependency
-         let labelPosition = yAxis.labelPosition
-         
-         var xPos = CGFloat(0.0)
-         
-         var textAlign: NSTextAlignment
-         
-         if dependency == .left
-         {
-             if labelPosition == .outsideChart
-             {
-                 textAlign = .right
-                 xPos = viewPortHandler.offsetLeft - xoffset
-             }
-             else
-             {
-                 textAlign = .left
-                 xPos = viewPortHandler.offsetLeft + xoffset
-             }
-             
-         }
-         else
-         {
-             if labelPosition == .outsideChart
-             {
-                 textAlign = .left
-                 xPos = viewPortHandler.contentRight + xoffset
-             }
-             else
-             {
-                 textAlign = .right
-                 xPos = viewPortHandler.contentRight - xoffset
-             }
-         }
-         
-         etDrawYLabels(
-             context: context,
-             fixedPosition: xPos,
-             positions: transformedPositions(),
-             offset: yoffset - yAxis.labelFont.lineHeight,
-             textAlign: textAlign)
-     }
-    
-    override func transformedPositions() -> [CGPoint] {
-        guard let yAxis = self.axis as? YAxis,
-            let transformer = self.transformer, let entries = entries
+    override func transformedPositions() -> [CGPoint]
+    {
+        guard let entries = entries
             else { return [CGPoint]() }
+        guard let transformer = self.transformer else { return [] }
         
+//        var positions = axis.entries.map { CGPoint(x: 0.0, y: $0) }
         var positions = [CGPoint]()
-        positions.reserveCapacity(yAxis.entryCount)
         
         for i in stride(from: 0, to: entries.count, by: 1)
         {
             positions.append(CGPoint(x: 0.0, y: Double(entries[i])))
         }
-
         transformer.pointValuesToPixel(&positions)
         
         return positions
     }
     
- 
-    func etDrawYLabels(
+    override func drawYLabels(
         context: CGContext,
         fixedPosition: CGFloat,
         positions: [CGPoint],
         offset: CGFloat,
-        textAlign: NSTextAlignment)
+        textAlign: TextAlignment)
     {
-        guard
-            let yAxis = self.axis as? YAxis, let entries = entries
+        guard let entries = entries
             else { return }
-        
-        let labelFont = yAxis.labelFont
-        let labelTextColor = yAxis.labelTextColor
+        let labelFont = axis.labelFont
+        let labelTextColor = axis.labelTextColor
         
         let from = 0
         let to = entries.count
         
-        for i in stride(from: from, to: to, by: 1)
+        let xOffset = axis.labelXOffset
+        
+        for i in from..<to
         {
             let text = "\(entries[i])"
-            ChartUtils.drawText(
-                context: context,
-                text: text,
-                point: CGPoint(x: fixedPosition, y: positions[i].y + offset),
-                align: textAlign,
-                attributes: [.font: labelFont, .foregroundColor: labelTextColor]
-            )
+            context.drawText(text,
+                             at: CGPoint(x: fixedPosition + xOffset, y: positions[i].y + offset),
+                             align: textAlign,
+                             attributes: [.font: labelFont, .foregroundColor: labelTextColor])
         }
     }
+
     
-    override func renderLimitLines(context: CGContext) {
-        guard
-            let yAxis = self.axis as? YAxis,
-            let transformer = self.transformer
-            else { return }
+    override func renderLimitLines(context: CGContext)
+    {
+        guard let transformer = self.transformer else { return }
         
-        let limitLines = yAxis.limitLines
+        let limitLines = axis.limitLines
         
-        if limitLines.count == 0
-        {
-            return
-        }
+        guard !limitLines.isEmpty else { return }
         
         context.saveGState()
+        defer { context.restoreGState() }
         
         let trans = transformer.valueToPixelMatrix
         
         var position = CGPoint(x: 0.0, y: 0.0)
         
-        for i in 0 ..< limitLines.count
+        for l in limitLines where l.isEnabled
         {
-            let l = limitLines[i]
-            
-            if !l.isEnabled
-            {
-                continue
-            }
-            
             context.saveGState()
             defer { context.restoreGState() }
             
@@ -179,87 +109,72 @@ class LimitYAxisRenderer: YAxisRenderer {
             let label = l.label
             
             // if drawing the limit-value label is enabled
-            if l.drawLabelEnabled && label.count > 0
+            guard l.drawLabelEnabled, !label.isEmpty else { continue }
+            
+            let labelLineHeight = l.valueFont.lineHeight
+            
+            let xOffset = 4.0 + l.xOffset
+            let yOffset = l.lineWidth + labelLineHeight + l.yOffset
+            
+            let align: TextAlignment
+            let point: CGPoint
+            
+            switch l.labelPosition
             {
+            case .rightTop:
+                let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 75, y: position.y - yOffset - 4, width: 82, height: 22), cornerRadius: 11)
                 
-                let labelLineHeight = l.valueFont.lineHeight
-                let xOffset: CGFloat = 4.0 + l.xOffset
-                let yOffset: CGFloat = l.lineWidth + labelLineHeight + l.yOffset
+                context.addPath(path.cgPath)
+                if #available(iOS 13.0, *) {
+                    context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.6).cgColor)
+                    l.valueTextColor = .label
+                } else {
+                    context.setFillColor(UIColor.white.changeAlpha(to: 0.6).cgColor)
+                    l.valueTextColor = .black
+                    // Fallback on earlier versions
+                }
+                context.fillPath()
+                align = .right
+                point = CGPoint(x: viewPortHandler.contentRight - xOffset,
+                                y: position.y - yOffset)
                 
-                if l.labelPosition == .topRight
-                {
-                    let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 75, y: position.y - yOffset - 4, width: 82, height: 22), cornerRadius: 11)
-                    
-                    context.addPath(path.cgPath)
-                    if #available(iOS 13.0, *) {
-                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.6).cgColor)
-                        l.valueTextColor = .label
-                    } else {
-                        context.setFillColor(UIColor.white.changeAlpha(to: 0.6).cgColor)
-                        l.valueTextColor = .black
-                        // Fallback on earlier versions
-                    }
-                    context.fillPath()
-                    
-                    ChartUtils.drawText(context: context,
-                        text: label,
-                        point: CGPoint(
-                            x: viewPortHandler.contentRight - xOffset,
-                            y: position.y - yOffset),
-                        align: .right,
-                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
+            case .rightBottom:
+                let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 55, y: position.y + yOffset - 18, width: 62, height: 22), cornerRadius: 11)
+                
+                context.addPath(path.cgPath)
+                if #available(iOS 13.0, *) {
+                    context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.6).cgColor)
+                    l.valueTextColor = .label
+                } else {
+                    context.setFillColor(UIColor.white.changeAlpha(to: 0.6).cgColor)
+                    l.valueTextColor = .black
+                    // Fallback on earlier versions
                 }
-                else if l.labelPosition == .bottomRight
-                {
-                    let path = UIBezierPath(roundedRect: CGRect(x: viewPortHandler.contentRight - xOffset - 55, y: position.y + yOffset - 18, width: 62, height: 22), cornerRadius: 11)
-                    
-                    context.addPath(path.cgPath)
-                    if #available(iOS 13.0, *) {
-                        context.setFillColor(UIColor.systemBackground.changeAlpha(to: 0.6).cgColor)
-                        l.valueTextColor = .label
-                    } else {
-                        context.setFillColor(UIColor.white.changeAlpha(to: 0.6).cgColor)
-                        l.valueTextColor = .black
-                        // Fallback on earlier versions
-                    }
-                    context.fillPath()
-                    
-                    ChartUtils.drawText(context: context,
-                        text: label,
-                        point: CGPoint(
-                            x: viewPortHandler.contentRight - xOffset,
-                            y: position.y + yOffset - labelLineHeight),
-                        align: .right,
-                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
-                }
-                else if l.labelPosition == .topLeft
-                {
-                    ChartUtils.drawText(context: context,
-                        text: label,
-                        point: CGPoint(
-                            x: viewPortHandler.contentLeft + xOffset,
-                            y: position.y - yOffset),
-                        align: .left,
-                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
-                }
-                else
-                {
-                    ChartUtils.drawText(context: context,
-                        text: label,
-                        point: CGPoint(
-                            x: viewPortHandler.contentLeft + xOffset,
-                            y: position.y + yOffset - labelLineHeight),
-                        align: .left,
-                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
-                }
+                context.fillPath()
+                align = .right
+                point = CGPoint(x: viewPortHandler.contentRight - xOffset,
+                                y: position.y + yOffset - labelLineHeight)
+                
+            case .leftTop:
+                align = .left
+                point = CGPoint(x: viewPortHandler.contentLeft + xOffset,
+                                y: position.y - yOffset)
+                
+            case .leftBottom:
+                align = .left
+                point = CGPoint(x: viewPortHandler.contentLeft + xOffset,
+                                y: position.y + yOffset - labelLineHeight)
             }
+            
+            context.drawText(label,
+                             at: point,
+                             align: align,
+                             attributes: [.font: l.valueFont, .foregroundColor: l.valueTextColor])
         }
-        
-        context.restoreGState()
     }
 }
 /// Y轴描述
-public class YValueFormatter: NSObject, IAxisValueFormatter {
+public class YValueFormatter: NSObject, AxisValueFormatter {
     
     /// 初始化
     ///

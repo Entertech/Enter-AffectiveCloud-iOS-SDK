@@ -159,7 +159,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .clear
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
@@ -417,8 +417,8 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
             timeApart.append(i)
         }
         
-        chartView?.xAxis.axisMinimum = 0
-        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        // chartView?.xAxis.axisMinimum = 0
+        // chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         
         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
@@ -446,7 +446,7 @@ public class HeartRateVariablityReportView: BaseView, ChartViewDelegate  {
 }
 
 /// Y轴描述
-public class HRVValueFormatter: NSObject, IAxisValueFormatter {
+public class HRVValueFormatter: NSObject, AxisValueFormatter {
     private var labels: [Int : String] = [50: "50", 100: "100", 150: "150"];
     
     /// 初始化
@@ -466,7 +466,7 @@ public class HRVValueFormatter: NSObject, IAxisValueFormatter {
 }
 
 /// X轴描述
-public class HRVXValueFormatter: NSObject, IAxisValueFormatter {
+public class HRVXValueFormatter: NSObject, AxisValueFormatter {
     private var values: [Double] = [];
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()

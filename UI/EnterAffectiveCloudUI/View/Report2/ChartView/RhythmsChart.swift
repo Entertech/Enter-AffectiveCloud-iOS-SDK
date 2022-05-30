@@ -173,7 +173,7 @@ class RhythmsChart: LineChartView {
         self.backgroundColor = .clear
         self.gridBackgroundColor = .clear
         self.drawBordersEnabled = false
-        self.chartDescription?.enabled = false
+        self.chartDescription.enabled = false
         self.pinchZoomEnabled = false
         self.scaleXEnabled = true
         self.scaleYEnabled = false

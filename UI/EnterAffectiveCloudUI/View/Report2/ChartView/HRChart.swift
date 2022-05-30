@@ -127,12 +127,12 @@ class HRChart: LineChartView {
         let midPercentColor = axisColor.changeAlpha(to: 0.6)
         let lowPercentColor = axisColor.changeAlpha(to: 0.2)
         
-        yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, yAxis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
+        yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
         self.backgroundColor = .clear
         self.gridBackgroundColor = .clear
         self.drawBordersEnabled = false
-        self.chartDescription?.enabled = false
+        self.chartDescription.enabled = false
         self.pinchZoomEnabled = true
         self.scaleXEnabled = true
         self.scaleYEnabled = false
@@ -354,8 +354,8 @@ class HRChart: LineChartView {
             timeApart.append(i)
         }
         
-        self.xAxis.axisMinimum = 0
-        self.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+ 
+
         self.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         
         self.maxVisibleCount = valueCount + 1

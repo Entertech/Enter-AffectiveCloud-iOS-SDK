@@ -165,7 +165,7 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .white
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.setScaleEnabled(false)
         chartView?.legend.enabled = false
@@ -313,7 +313,7 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
         set.drawValuesEnabled = false
         set.lineWidth = 0.5
         set.setColor(.clear)
-        set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
+        set.fill = LinearGradientFill(gradient: chartFillColor!, angle: 270)
         set.fillAlpha = 1.0
         
         let uselessSet = LineChartDataSet(entries: uselessVals, label: "")
@@ -328,7 +328,7 @@ public class RelaxationReportView: BaseView, ChartViewDelegate {
         let whiteColorSpace = CGColorSpaceCreateDeviceRGB()
         let whiteLocations:[CGFloat] = [1.0]
         let grayColor = CGGradient(colorSpace: whiteColorSpace, colorComponents: whiteComponents, locations: whiteLocations, count: 1)
-        uselessSet.fill = Fill(linearGradient: grayColor!, angle: 270)
+        uselessSet.fill = LinearGradientFill(gradient: grayColor!, angle: 270)
         uselessSet.fillAlpha = 1.0
         
         let data = LineChartData(dataSets: [uselessSet, set])

@@ -172,7 +172,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .white
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
@@ -432,7 +432,8 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         set.drawValuesEnabled = false
         set.lineWidth = 0.5
         set.setColor(.clear)
-        set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
+        set.fill = LinearGradientFill(gradient: chartFillColor!, angle: 270)
+        
         set.fillAlpha = 1.0
         
         let uselessSet = LineChartDataSet(entries: uselessVals, label: "")
@@ -447,7 +448,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         let whiteColorSpace = CGColorSpaceCreateDeviceRGB()
         let whiteLocations:[CGFloat] = [1.0]
         let grayColor = CGGradient(colorSpace: whiteColorSpace, colorComponents: whiteComponents, locations: whiteLocations, count: 1)
-        uselessSet.fill = Fill(linearGradient: grayColor!, angle: 270)
+        uselessSet.fill = LinearGradientFill(gradient: grayColor!, angle: 270)
         uselessSet.fillAlpha = 1.0
         
         let data = LineChartData(dataSets: [uselessSet, set])
@@ -465,8 +466,8 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
         for i in stride(from: 0, to: Int(timeCount), by: minTime) {
             time.append(i)
         }
-        chartView?.xAxis.axisMinimum = 0
-        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        // chartView?.xAxis.axisMinimum = 0
+        // chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
 
         self.chartView?.xAxis.valueFormatter = OtherXValueFormatter(time, timeStamp)
@@ -493,7 +494,7 @@ public class AttentionReportView: BaseView, ChartViewDelegate{
 }
 
 /// Y轴描述
-public class OtherValueFormatter: NSObject, IAxisValueFormatter {
+public class OtherValueFormatter: NSObject, AxisValueFormatter {
     private var labels: [Int : String] = [25: "25", 50: "50", 75: "75", 100: "100"];
     
     /// 初始化
@@ -514,7 +515,7 @@ public class OtherValueFormatter: NSObject, IAxisValueFormatter {
 }
 
 /// X轴描述
-public class OtherXValueFormatter: NSObject, IAxisValueFormatter {
+public class OtherXValueFormatter: NSObject, AxisValueFormatter {
     private var values: [Double] = [];
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()

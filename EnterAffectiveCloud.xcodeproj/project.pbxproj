@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -58,11 +58,9 @@
 		FA7689CC23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689CB23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift */; };
 		FA7689CE23B08ABC005E4DF7 /* ReportPressure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689CD23B08ABC005E4DF7 /* ReportPressure.swift */; };
 		FA7689D123B0BD72005E4DF7 /* AverageOfSevenDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689D023B0BD72005E4DF7 /* AverageOfSevenDayView.swift */; };
+		FA7C3A43283E363D00A52338 /* StatisticBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C3A42283E363D00A52338 /* StatisticBarChart.swift */; };
 		FA7D326624FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */; };
 		FA7D326824FDED21005792D3 /* LeftAndRightSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */; };
-		FA92233F27FD730A001D30D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA92233E27FD730A001D30D3 /* README.md */; };
-		FA92234127FD7364001D30D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA92234027FD7364001D30D3 /* README.md */; };
-		FA92234327FD7480001D30D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA92234227FD7480001D30D3 /* README.md */; };
 		FA9231A9236BD07B00A50C64 /* EnterAffectiveCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */; };
 		FA9231AB236BD07B00A50C64 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA93435B2356E59B00544239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93435A2356E59B00544239 /* AppDelegate.swift */; };
@@ -141,6 +139,8 @@
 		FACEDFF02351BB450016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEF2351BB450016176C /* Assets.xcassets */; };
 		FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFF12351BB450016176C /* LaunchScreen.storyboard */; };
 		FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
+		FAD2890B283F2879003886A5 /* LKLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = FAD2890A283F2879003886A5 /* LKLibrary */; };
+		FAD2890D283F28A4003886A5 /* StatisticBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD2890C283F28A4003886A5 /* StatisticBuilder.swift */; };
 		FAD3C56723B35A65007E9AE1 /* AffectiveChartHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */; };
 		FAD3C56923B3666F007E9AE1 /* AffectiveChartPressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */; };
 		FADD94F12646757E00058649 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F02646757E00058649 /* RecordModel.swift */; };
@@ -279,11 +279,9 @@
 		FA7689CB23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRelaxationAndAttention.swift; sourceTree = "<group>"; };
 		FA7689CD23B08ABC005E4DF7 /* ReportPressure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPressure.swift; sourceTree = "<group>"; };
 		FA7689D023B0BD72005E4DF7 /* AverageOfSevenDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageOfSevenDayView.swift; sourceTree = "<group>"; };
+		FA7C3A42283E363D00A52338 /* StatisticBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticBarChart.swift; sourceTree = "<group>"; };
 		FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeLeftAndRightSpectrumView.swift; sourceTree = "<group>"; };
 		FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAndRightSpectrumView.swift; sourceTree = "<group>"; };
-		FA92233E27FD730A001D30D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		FA92234027FD7364001D30D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		FA92234227FD7480001D30D3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FA9231A6236BD07B00A50C64 /* EnterAffectiveCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnterAffectiveCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudTests.swift; sourceTree = "<group>"; };
 		FA9231AA236BD07B00A50C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -364,6 +362,7 @@
 		FACEDFEF2351BB450016176C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FACEDFF22351BB450016176C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FACEDFF42351BB450016176C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAD2890C283F28A4003886A5 /* StatisticBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticBuilder.swift; sourceTree = "<group>"; };
 		FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartHeartRateView.swift; sourceTree = "<group>"; };
 		FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartPressureView.swift; sourceTree = "<group>"; };
 		FADD94F02646757E00058649 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
@@ -386,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */,
+				FAD2890B283F2879003886A5 /* LKLibrary in Frameworks */,
 				51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,7 +617,6 @@
 				FA7689CF23B0BC90005E4DF7 /* Inside */,
 				FAB3E46823ACAD0900A85129 /* Outside */,
 				FA56821523AC5F7400FF1A68 /* Base */,
-				FA92234027FD7364001D30D3 /* README.md */,
 			);
 			path = Report2;
 			sourceTree = "<group>";
@@ -662,6 +661,15 @@
 				FAB0BC1423B1E1180074C06C /* AverageView.swift */,
 			);
 			path = Average;
+			sourceTree = "<group>";
+		};
+		FA7C3A41283E35D500A52338 /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+				FA7C3A42283E363D00A52338 /* StatisticBarChart.swift */,
+				FAD2890C283F28A4003886A5 /* StatisticBuilder.swift */,
+			);
+			path = Statistic;
 			sourceTree = "<group>";
 		};
 		FA9231A7236BD07B00A50C64 /* EnterAffectiveCloudTests */ = {
@@ -778,6 +786,7 @@
 		FAB0BC1623B1FB620074C06C /* InsideChart */ = {
 			isa = PBXGroup;
 			children = (
+				FA7C3A41283E35D500A52338 /* Statistic */,
 				FAAB8FE425A2F66900B8349D /* ancient */,
 				FAB1402A25777A000079F785 /* AffectiveChartCoherenceView2.swift */,
 				FAB140692579EB790079F785 /* AffectiveRhythmsView.swift */,
@@ -814,7 +823,6 @@
 			children = (
 				FAB14025257646D40079F785 /* HRChart.swift */,
 				FAB14030257790BF0079F785 /* RhythmsChart.swift */,
-				FA92234227FD7480001D30D3 /* README.md */,
 			);
 			path = ChartView;
 			sourceTree = "<group>";
@@ -882,7 +890,6 @@
 				FA93439423581AB200544239 /* HRV */,
 				FA9343912357F43800544239 /* HeartRate */,
 				FAC773092355CB9100FBFA6A /* BrainSpecturm */,
-				FA92233E27FD730A001D30D3 /* README.md */,
 			);
 			path = Report1;
 			sourceTree = "<group>";
@@ -993,6 +1000,8 @@
 			dependencies = (
 			);
 			name = EnterAffectiveCloud;
+			packageProductDependencies = (
+			);
 			productName = EnterAffectiveCloud;
 			productReference = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1014,6 +1023,9 @@
 				FA0A6E7F234D71DF00532A46 /* PBXTargetDependency */,
 			);
 			name = EnterAffectiveCloudUI;
+			packageProductDependencies = (
+				FAD2890A283F2879003886A5 /* LKLibrary */,
+			);
 			productName = EnterAffectiveCloudUI;
 			productReference = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1117,6 +1129,9 @@
 				Base,
 			);
 			mainGroup = B7E125C6230559590072DF22;
+			packageReferences = (
+				FAD28909283F2879003886A5 /* XCRemoteSwiftPackageReference "LKLibrary" */,
+			);
 			productRefGroup = B7E125D1230559590072DF22 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1142,11 +1157,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA92234127FD7364001D30D3 /* README.md in Resources */,
 				FAC773042355580C00FBFA6A /* heart.gif in Resources */,
 				FACEDF89235034FE0016176C /* Assets.xcassets in Resources */,
-				FA92234327FD7480001D30D3 /* README.md in Resources */,
-				FA92233F27FD730A001D30D3 /* README.md in Resources */,
 				FAC773062355581500FBFA6A /* loading.gif in Resources */,
 				FA6FFFA523D05A0F00A4B16A /* SurveyorsRodView.xib in Resources */,
 			);
@@ -1368,6 +1380,7 @@
 				FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */,
 				FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */,
 				FAB523B924A2E03900563048 /* PrivateReportChartAttention.swift in Sources */,
+				FAD2890D283F28A4003886A5 /* StatisticBuilder.swift in Sources */,
 				FA3ADDAE246D1D9500ADA921 /* AffectiveChartCoherenceView.swift in Sources */,
 				FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */,
 				FA3ADDAC246D19FD00ADA921 /* ReportCoherence.swift in Sources */,
@@ -1386,6 +1399,7 @@
 				FA1690D82459772B00FADC2B /* TwoValueMarkerView.swift in Sources */,
 				FACEDFA82351730A0016176C /* BrainwaveView.swift in Sources */,
 				FAB14026257646D40079F785 /* HRChart.swift in Sources */,
+				FA7C3A43283E363D00A52338 /* StatisticBarChart.swift in Sources */,
 				FA61A818258DCDB9003F27AD /* FiveDBValueMarkerView.swift in Sources */,
 				FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
@@ -1568,7 +1582,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1625,7 +1639,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1937,6 +1951,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FAD28909283F2879003886A5 /* XCRemoteSwiftPackageReference "LKLibrary" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ET-LINK/LKLibrary.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FAD2890A283F2879003886A5 /* LKLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAD28909283F2879003886A5 /* XCRemoteSwiftPackageReference "LKLibrary" */;
+			productName = LKLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B7E125C7230559590072DF22 /* Project object */;
 }

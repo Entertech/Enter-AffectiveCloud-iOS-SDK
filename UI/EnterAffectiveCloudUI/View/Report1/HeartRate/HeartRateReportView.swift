@@ -207,7 +207,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .clear
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.isUserInteractionEnabled = false
         chartView?.setScaleEnabled(false)
@@ -235,7 +235,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
         topChart?.backgroundColor = .clear
         topChart?.gridBackgroundColor = .clear
         topChart?.drawBordersEnabled = false
-        topChart?.chartDescription?.enabled = false
+        topChart?.chartDescription.enabled = false
         topChart?.pinchZoomEnabled = false
         topChart?.isUserInteractionEnabled = false
         topChart?.legend.enabled = false
@@ -555,7 +555,7 @@ public class HeartRateReportView: BaseView, ChartViewDelegate {
 }
 
 /// Y轴描述
-public class HRValueFormatter: NSObject, IAxisValueFormatter {
+public class HRValueFormatter: NSObject, AxisValueFormatter {
     private var labels: [Int : String] = [60: "60", 90: "90"];
     
     /// 初始化
@@ -575,7 +575,7 @@ public class HRValueFormatter: NSObject, IAxisValueFormatter {
 }
 
 /// X轴描述
-public class HeartValueFormatter: NSObject, IAxisValueFormatter {
+public class HeartValueFormatter: NSObject, AxisValueFormatter {
     private var values: [Double] = [];
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()

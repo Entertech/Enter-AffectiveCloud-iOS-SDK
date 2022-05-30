@@ -2,7 +2,7 @@ source 'https://cdn.cocoapods.org/'
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
-platform :ios, '11.0'
+platform :ios, '12.0'
 
 def common
   pod 'RxSwift'
@@ -13,7 +13,7 @@ end
 
 def ui
   pod 'SnapKit'
-  pod 'Charts'
+  pod 'Charts', :git => "https://github.com/ET-LINK/Charts.git", :branch => 'enter/round_corner_bar'
   pod 'FluentDarkModeKit'
 end
 

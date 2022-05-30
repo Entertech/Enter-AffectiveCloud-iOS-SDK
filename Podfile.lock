@@ -1,8 +1,9 @@
 PODS:
   - Alamofire (5.4.3)
-  - Charts (3.6.0):
-    - Charts/Core (= 3.6.0)
-  - Charts/Core (3.6.0)
+  - Charts (4.0.2):
+    - Charts/Core (= 4.0.2)
+  - Charts/Core (4.0.2):
+    - SwiftAlgorithms (~> 1.0)
   - FluentDarkModeKit (1.0.3)
   - GzipSwift (5.1.1)
   - HandyJSON (5.0.4-beta)
@@ -23,9 +24,10 @@ PODS:
   - RxSwift (5.1.2)
   - SnapKit (5.0.1)
   - Starscream (3.1.1)
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
-  - Charts
+  - Charts (from `https://github.com/ET-LINK/Charts.git`, branch `enter/round_corner_bar`)
   - FluentDarkModeKit
   - GzipSwift
   - HandyJSON (~> 5.0.4-beta)
@@ -38,7 +40,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Charts
     - FluentDarkModeKit
     - GzipSwift
     - HandyJSON
@@ -47,10 +48,21 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - Starscream
+    - SwiftAlgorithms
+
+EXTERNAL SOURCES:
+  Charts:
+    :branch: enter/round_corner_bar
+    :git: https://github.com/ET-LINK/Charts.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: 7c193976eb5d70851641f76d7a163b6067520557
+    :git: https://github.com/ET-LINK/Charts.git
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
   FluentDarkModeKit: e3fe5d8aa471422480b04b0aa03d83425e3e1826
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
   HandyJSON: a9c67202df97805a0ba4a00e30b50e9a30ac28f3
@@ -59,7 +71,8 @@ SPEC CHECKSUMS:
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 29eec71e68666c2d97e4408f528b6fe148e697ef
+PODFILE CHECKSUM: a2f6404e83372ee80ed0b187d30a0ab512dd73f1
 
 COCOAPODS: 1.11.2
