@@ -20,11 +20,28 @@
                     </tabBar>
                     <connections>
                         <segue destination="eRv-Rg-Qwh" kind="relationship" relationship="viewControllers" id="FQG-x1-RO8"/>
+                        <segue destination="K3A-jq-Pgc" kind="relationship" relationship="viewControllers" id="L5P-eR-0kZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-28" y="-320"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="1dB-s2-gWz">
+            <objects>
+                <viewController id="K3A-jq-Pgc" customClass="ThirdVersionViewController" customModule="EnterReportUIDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vni-DN-ixy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="kAm-2R-WF1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="PXQ-Mh-aj3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b7d-oO-Xt6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993" y="-583"/>
         </scene>
         <!--Item-->
         <scene sceneID="52t-IF-gDQ">
