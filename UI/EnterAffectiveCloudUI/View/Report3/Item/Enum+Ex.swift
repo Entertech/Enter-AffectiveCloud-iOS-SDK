@@ -19,7 +19,7 @@ public protocol AffectiveCharts3FormatType {
     var format: String{get}
 }
 
-public enum AffectiveCharts3FormatOptional: AffectiveCharts3FormatType {
+public enum AffectiveCharts3FormatOptional: String, AffectiveCharts3FormatType {
     
     case session
     case month
@@ -60,9 +60,10 @@ public enum AffectiveCharts3FormatOptional: AffectiveCharts3FormatType {
 }
 
 
-public enum AffectiveCharts3ChartType {
+public enum AffectiveCharts3ChartType: String {
     case coherece
     case common
+    case rhythms
     
     var session: String {
         switch self {
@@ -70,15 +71,32 @@ public enum AffectiveCharts3ChartType {
             return "TOTAL"
         case .common:
             return "AVERAGE"
+        case .rhythms:
+            return "Average Percentage".uppercased()
         }
     }
     
     var month: String {
-        return "DAILY AVERAGE"
+        switch self {
+        case .coherece:
+            return "DAILY AVERAGE"
+        case .common:
+            return "DAILY AVERAGE"
+        case .rhythms:
+            return "Daily Average Percentage".uppercased()
+        }
+        
     }
     
     var year: String {
-        return "MONTHLY AVERAGE"
+        switch self {
+        case .coherece:
+            return "DAILY AVERAGE"
+        case .common:
+            return "MONTHLY AVERAGE"
+        case .rhythms:
+            return "Monthly Average Percentage".uppercased()
+        }
     }
 
 }

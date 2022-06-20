@@ -21,8 +21,18 @@ class AffectiveCharts3ExpandHeaderView: UIView {
     weak var delegate: AffectiveCharts3ExpandDelegate?
     func setTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
+        var title = ""
+        switch self.theme.style {
+        case .session:
+            title = theme.chartType.session
+        case .month:
+            title = theme.chartType.month
+        case .year:
+            title = theme.chartType.year
+            
+        }
         infoView.setLabelColor(color: ColorExtension.textLv2)
-            .setAverageLabel(value: theme.averageText)
+            .setAverageLabel(value: title)
             .setAverageNumLabel(value: theme.averageValue, color: theme.themeColor)
             .setUnit(theme.unitText)
             .setTime(from: theme.startTime, to: theme.endTime, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)

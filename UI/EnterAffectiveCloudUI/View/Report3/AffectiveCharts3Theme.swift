@@ -18,7 +18,7 @@ public struct AffectiveChart3Theme {
     
     public var themeColor: UIColor = .red
     
-    public var averageText: String = "AVERAGE"
+    public var chartType: AffectiveCharts3ChartType = .common
     
     public var averageValue: String = ""
     

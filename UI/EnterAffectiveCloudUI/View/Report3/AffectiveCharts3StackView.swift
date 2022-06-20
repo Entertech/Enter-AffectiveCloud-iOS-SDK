@@ -20,7 +20,7 @@ public class AffectiveCharts3StackView: UIView {
     private let infoView = AffectiveCharts3ExpandRhythmView()
     private let chartView = AffectiveCharts3RhythmsStackView()
     private var startDate: Date!
-    private var style: AffectiveCharts3FormatOptional = .session
+    internal var theme: AffectiveChart3Theme!
     public weak var delegate: AffectiveCharts3RhythmsLineDelegate?
     
     private var panValue:CGFloat = 0
@@ -29,9 +29,9 @@ public class AffectiveCharts3StackView: UIView {
     var rhythmsLinesStore = 0
     
 
-    public func build(gamma:[Double]?, beta: [Double]?, alpha: [Double]?, theta: [Double]?, delta: [Double]?) {
+    public func build(value: Array2D<Double>) {
 
-        chartView.setData(gama: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta)
+        chartView.setData(value: value)
     }
 
     
@@ -41,10 +41,10 @@ public class AffectiveCharts3StackView: UIView {
         return self
     }
     
-    public func setParam(type: AffectiveCharts3FormatOptional, startDate: Date) -> Self {
-        self.style = type
-        infoView.style = type
-        self.startDate = startDate
+    public func setParam(theme: AffectiveChart3Theme!) -> Self {
+        self.theme = theme
+        infoView.style = theme.style
+        self.startDate = theme.startDate
 
         self.addSubview(chartView)
         self.addSubview(infoView)
@@ -58,7 +58,7 @@ public class AffectiveCharts3StackView: UIView {
         infoView.setUI(isAlreadShow: isFullScreen)
             .setLayout()
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        chartView.setProperty(type: self.style, startDate: startDate)
+        chartView.setProperty(type: theme.style, startDate: startDate)
         chartView.addGestureRecognizer(pressGesture)//添加长按事件
         chartView.delegate = self
         chartView.dateSouce = infoView
@@ -160,6 +160,10 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
                 view.frame.size.width = view.frame.size.width*scale
                 view.frame.origin.y = 0
                 view.frame.origin.x =  -(orginFrame.height-orginSelfFrame.height)*scale+orginSelfFrame.origin.y
+                if theme.style == .session {
+                    self.chartView.dragEnabled = true
+                    chartView.scaleXEnabled = true
+                }
                 
             } else {
                 sv?.isScrollEnabled = true
@@ -175,6 +179,10 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
                 self.snp.updateConstraints {
                     $0.leading.equalToSuperview().offset(16)
                     $0.trailing.equalToSuperview().offset(-16)
+                }
+                if theme.style == .session {
+                    self.chartView.dragEnabled = false
+                    chartView.scaleXEnabled = false
                 }
                 
             }
@@ -192,7 +200,7 @@ extension AffectiveCharts3StackView: ChartViewDelegate {
             if self.panValue >= 15 {
                 let leftValue = self.chartView.lowestVisibleX
                 var aim = 0.0
-                if self.style == .month {
+                if self.theme.style == .month {
                     let date = self.startDate.getDayAfter(days: Int(round(leftValue)))
                     if let day = date?.get(.day) {
                         aim = round(leftValue - Double(day) + 1.0)
@@ -212,7 +220,7 @@ extension AffectiveCharts3StackView: ChartViewDelegate {
             } else if self.panValue < -15 {
                 let rightValue = self.chartView.highestVisibleX
                 var aim = 0.0
-                if self.style == .month {
+                if self.theme.style == .month {
                     let date = self.startDate.getDayAfter(days: Int(round(rightValue)))
                     if let day = date?.get(.day) {
                         aim = round(rightValue - Double(day) + 1.0)

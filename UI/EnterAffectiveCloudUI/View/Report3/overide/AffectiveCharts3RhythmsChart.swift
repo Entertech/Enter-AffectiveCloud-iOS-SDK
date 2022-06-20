@@ -195,14 +195,8 @@ class AffectiveCharts3RhythmsChart: LineChartView {
     ///   - theta: theta description
     ///   - delta: delta description
     ///   - timestamp: 起始时间戳
-    public func setData(gama: [Double]?, beta: [Double]?, alpha: [Double]?,theta: [Double]?, delta: [Double]?) {
+    public func setData(value: Array2D<Double>) {
         
-        self.gamaArray = gama
-        self.deltaArray = delta
-        self.thetaArray = theta
-        self.alphaArray = alpha
-        self.betaArray = beta
-        brainwave = brainwaveMapping()
         //setDataCount(brainwave)
         mapDataList(array2D: brainwave)
     }
