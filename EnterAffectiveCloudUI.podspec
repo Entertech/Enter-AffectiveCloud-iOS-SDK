@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.resources = "UI/EnterAffectiveCloudUI/**/*.{xcassets,gif}"
   s.dependency 'RxSwift'
   s.dependency 'SnapKit'
-  s.dependency 'Charts', '~> 3.4.0'
+  s.dependency 'Charts', '~> 4.0.0'
   s.dependency 'EnterAffectiveCloud', '~> 2.2.1'
   s.dependency 'FluentDarkModeKit'
 end
