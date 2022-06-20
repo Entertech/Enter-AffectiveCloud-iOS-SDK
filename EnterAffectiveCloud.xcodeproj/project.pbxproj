@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -165,7 +165,6 @@
 		FACEDFF02351BB450016176C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFEF2351BB450016176C /* Assets.xcassets */; };
 		FACEDFF32351BB450016176C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FACEDFF12351BB450016176C /* LaunchScreen.storyboard */; };
 		FACEE0002354298B0016176C /* EnterAffectiveCloudUI.framework in Resources */ = {isa = PBXBuildFile; fileRef = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */; };
-		FAD2890B283F2879003886A5 /* LKLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = FAD2890A283F2879003886A5 /* LKLibrary */; };
 		FAD2890D283F28A4003886A5 /* StatisticBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD2890C283F28A4003886A5 /* StatisticBuilder.swift */; };
 		FAD3C56723B35A65007E9AE1 /* AffectiveChartHeartRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56623B35A65007E9AE1 /* AffectiveChartHeartRateView.swift */; };
 		FAD3C56923B3666F007E9AE1 /* AffectiveChartPressureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3C56823B3666F007E9AE1 /* AffectiveChartPressureView.swift */; };
@@ -437,7 +436,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA0A6E7C234D71DF00532A46 /* EnterAffectiveCloud.framework in Frameworks */,
-				FAD2890B283F2879003886A5 /* LKLibrary in Frameworks */,
 				51E6231EF38AAA19500234FB /* Pods_EnterAffectiveCloudUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1134,7 +1132,6 @@
 			);
 			name = EnterAffectiveCloudUI;
 			packageProductDependencies = (
-				FAD2890A283F2879003886A5 /* LKLibrary */,
 			);
 			productName = EnterAffectiveCloudUI;
 			productReference = FA55EA4E234C273A00C148BF /* EnterAffectiveCloudUI.framework */;
@@ -1240,7 +1237,6 @@
 			);
 			mainGroup = B7E125C6230559590072DF22;
 			packageReferences = (
-				FAD28909283F2879003886A5 /* XCRemoteSwiftPackageReference "LKLibrary" */,
 			);
 			productRefGroup = B7E125D1230559590072DF22 /* Products */;
 			projectDirPath = "";
@@ -2087,25 +2083,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		FAD28909283F2879003886A5 /* XCRemoteSwiftPackageReference "LKLibrary" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ET-LINK/LKLibrary.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		FAD2890A283F2879003886A5 /* LKLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FAD28909283F2879003886A5 /* XCRemoteSwiftPackageReference "LKLibrary" */;
-			productName = LKLibrary;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B7E125C7230559590072DF22 /* Project object */;
 }
