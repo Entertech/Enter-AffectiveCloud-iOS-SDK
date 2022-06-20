@@ -27,15 +27,17 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     private let timeFont = UIFont.systemFont(ofSize: 12, weight: .regular)
     private let lableViewHeight: CGFloat = 66
     private var theme: AffectiveChart3Theme!
-    private var interval: Double = 0.6
+    private var anotherArray: [Int] = []
     init(theme: AffectiveChart3Theme) {
         super.init(frame: CGRect.zero)
         self.theme = theme
         setUI()
     }
     
-    func addInterval(value: Double) {
-        self.interval = value
+    
+    
+    func addInterval(anotherArray: [Int]) {
+        self.anotherArray.append(contentsOf: anotherArray)
     }
     
   
@@ -118,11 +120,23 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         
         let entryY = Int(entry.y)
         if theme.tagValue.count > 0 || theme.unitText.count > 0 {
-            numlabel.text = String.init(format: "%d", entryY)
+            if let dataSets = chartView?.data?.dataSets, dataSets.count > 1 {
+                var index = dataSets[0].entryIndex(entry: entry)
+                if index == -1 {
+                     index = dataSets[1].entryIndex(entry: entry)
+                }
+                numlabel.text = "\(Int(round(dataSets[0].entryForIndex(index)?.y ?? 0)))"
+            } else {
+                numlabel.text = String.init(format: "%d", entryY)
+            }
+            
         } else {
-            if theme.tagSeparation.count > 0 {
-                let index = Int(entry.x / interval)
-                if theme.tagSeparation[index] > 0 {
+            if anotherArray.count > 0 {
+                var index = 0
+                if let dataSets = chartView?.data?.dataSets {
+                    index = dataSets.first?.entryIndex(entry: entry) ?? 0
+                }
+                if anotherArray[index] > 0 {
                     numlabel.text = "Coherent"
                 } else {
                     numlabel.text = "Incoherent"
@@ -143,7 +157,21 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
 
 
         lk_formatter.dateFormat = theme.style.format
-        timeLabel.text = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(entry.x)+theme.startTime))
+        switch theme.style {
+        case .session:
+            timeLabel.text = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(entry.x)+theme.startTime))
+        case .month:
+            if let date = theme.startDate.getDayAfter(days: Int(round(entry.x))) {
+                timeLabel.text = lk_formatter.string(from: date)
+            }
+            
+        case .year:
+            if let date = theme.startDate.getMonthAfter(month: Int(round(entry.x))) {
+                timeLabel.text = lk_formatter.string(from: date)
+            }
+            
+        }
+        
         let titleWidht = titleLabel.text?.width(withConstrainedHeight: 14, font: titleFont)
         let numWidth = numlabel.text?.width(withConstrainedHeight: 28, font: numberFont)
         let timeWidth = timeLabel.text?.width(withConstrainedHeight: 17, font: timeFont)
@@ -171,12 +199,13 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
                 unitLabel.isHidden = false
 
             }
-            
-            if numWidth+unitWidth+2 > timeWidth {
+            let maxWidth = timeWidth > titleWidht ? timeWidth : titleWidht
+            if numWidth+unitWidth+2 > maxWidth {
                 labelBg.frame.size.width = numWidth+unitWidth+18
             } else {
-                labelBg.frame.size.width = timeWidth+16
+                labelBg.frame.size.width = maxWidth+16
             }
+            
             
         }
         layoutIfNeeded()

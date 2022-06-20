@@ -6,8 +6,7 @@
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
 public enum AffectiveCharts3CohereceState: String {
     case low = "Low"
     case nor = "Normal"

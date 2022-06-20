@@ -9,22 +9,17 @@
 import Charts
 
 class AffectiveCharts3CandleCommonView: CombinedChartView {
-    var theme: AffectiveChart3Theme! {
-        didSet {
-            let marker = AffectiveCharts3CommonMarkerView(theme: theme)
-            marker.chartView = self
-            self.marker = marker
-        }
-    }
+    var theme: AffectiveChart3Theme!
     weak var dataSouceChanged: AffectiveCharts3ChartChanged?
     private var yRender: LimitYAxisRenderer?
     internal var lastXValue: Double = 0
     internal var dataList: [Double] = []
     internal var lowDataList: [Double] = []
     internal var highDataList: [Double] = []
-    
-    init() {
+
+    init(theme: AffectiveChart3Theme) {
         super.init(frame: CGRect.zero)
+        self.theme = theme
         self.drawOrder = [
                                DrawOrder.candle.rawValue,
                                DrawOrder.line.rawValue
@@ -39,6 +34,10 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.highlightPerDragEnabled = false
         self.dragDecelerationEnabled = false
         self.extraTopOffset = 92
+        self.legend.enabled = false
+        let marker = AffectiveCharts3CommonMarkerView(theme: theme)
+        marker.chartView = self
+        self.marker = marker
         switch theme.style {
         case .session:
             self.dragEnabled = false
@@ -60,7 +59,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.leftAxis.gridLineDashPhase = 2.0
         self.leftAxis.gridLineDashLengths = [3.0, 2.0]
         self.leftAxis.drawAxisLineEnabled = false
-        
+    
         self.rightAxis.enabled = false
         
         self.xAxis.labelTextColor = ColorExtension.textLv2
@@ -73,10 +72,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.axisMaxLabels = 8
-        
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
-        longPressGesture.minimumPressDuration = 0.3
-        self.addGestureRecognizer(longPressGesture)
+
         
         yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
@@ -94,7 +90,8 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         
         data.candleData = generateCandleData(low: low, high: high)
         data.lineData = generateLineData(average)
-//        chartView.xAxis.axisMaximum = data.xMax + 0.25
+        self.xAxis.axisMinimum = -0.5
+        self.xAxis.axisMaximum = data.xMax + 0.5
         self.data = data
         if theme.style == .month {
             self.setVisibleXRangeMaximum(31)
@@ -108,6 +105,10 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
             self.moveViewToX(last.x)
             self.lastXValue = last.x
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2) {
+            self.overloadY()
+        }
     }
     
     private func generateLineData(_ average: [Double]) -> LineChartData {
@@ -120,6 +121,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         
         let set = LineChartDataSet(entries: entries, label: "Line DataSet")
         set.setColor(theme.themeColor)
+        set.setCircleColor(theme.themeColor)
         set.lineWidth = 2
         set.circleRadius = 3
         set.circleHoleRadius = 2
@@ -141,14 +143,14 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         }
         
         let set = CandleChartDataSet(entries: entries, label: "Candle DataSet")
-        set.setColor(theme.themeColor)
-        set.decreasingColor = theme.themeColor
-        set.shadowColor = theme.themeColor
+        set.setColor(ColorExtension.lineLight)
+        set.decreasingColor = ColorExtension.lineLight
+        set.shadowColor = ColorExtension.lineLight
         set.drawValuesEnabled = false
         if theme.style == .month {
-            set.barSpace = 0.6
+            set.barSpace = 0.2
         } else {
-            set.barSpace = 0.8
+            set.barSpace = 0.1
         }
         
         set.barCornerRadius = 50
@@ -267,25 +269,3 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
 
 }
 
-extension AffectiveCharts3CandleCommonView {
-    @objc
-    private func longPressGesture(_ sender: UILongPressGestureRecognizer) {
-        guard let h = self.getHighlightByTouchPoint(sender.location(in: self)) else {return}
-        if sender.state == .began {
-            if h == self.lastHighlighted {
-                self.lastHighlighted = nil
-                self.highlightValue(nil)
-            } else {
-                self.lastHighlighted = h
-                self.highlightValue(h, callDelegate: true)
-            }
-        } else if sender.state == .changed {
-            self.lastHighlighted = h
-            self.highlightValue(h, callDelegate: true)
-        } else if sender.state == .ended {
-            self.lastHighlighted = nil
-            self.highlightValue(nil)
-        }
-    }
-    
-}

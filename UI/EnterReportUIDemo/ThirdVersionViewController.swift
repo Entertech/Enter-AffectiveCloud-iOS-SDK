@@ -15,19 +15,19 @@ class ThirdVersionViewController: UIViewController {
 
     let common = AffectiveCharts3Pressure()
 //    let rhythms = AffectiveCharts3StackView()
-    let bar = AffectiveCharts3BarCommonView()
+    let bar = AffectiveCharts3CandleView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let vcViewHeight = self.view.frame.height
         self.view.addSubview(common)
 //        self.view.addSubview(rhythms)
         self.view.addSubview(bar)
         common.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(8)
+            $0.leading.equalToSuperview().offset(64)
             $0.trailing.equalToSuperview().offset(-16)
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            $0.height.equalTo(273)
+            $0.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
         }
         
 //        rhythms.snp.makeConstraints {
@@ -40,8 +40,8 @@ class ThirdVersionViewController: UIViewController {
         bar.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(common.snp.bottomMargin)
-            make.height.equalTo(273)
+            make.top.equalTo(common.snp.bottom).offset(16)
+            make.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
         }
         
         let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
@@ -83,21 +83,21 @@ class ThirdVersionViewController: UIViewController {
                     .build()
             }
             
-//            guard let gamma = service.model.gama?.map({ value in
-//                return Double(value*100)
-//            }) else {return}
-//            guard let beta = service.model.beta?.map({ value in
-//                return Double(value*100)
-//            }) else {return}
-//            guard let alpha = service.model.alpha?.map({ value in
-//                return Double(value*100)
-//            }) else {return}
-//            guard let theta = service.model.theta?.map({ value in
-//                return Double(value*100)
-//            }) else {return}
-//            guard let delta = service.model.delta?.map({ value in
-//                return Double(value*100)
-//            }) else {return}
+            guard let gamma = service.model.gama?.map({ value in
+                return Double(value*100)
+            }) else {return}
+            guard let beta = service.model.beta?.map({ value in
+                return Double(value*100)
+            }) else {return}
+            guard let alpha = service.model.alpha?.map({ value in
+                return Double(value*100)
+            }) else {return}
+            guard let theta = service.model.theta?.map({ value in
+                return Double(value*100)
+            }) else {return}
+            guard let delta = service.model.delta?.map({ value in
+                return Double(value*100)
+            }) else {return}
 //
 //
 //            rhythms
@@ -106,8 +106,8 @@ class ThirdVersionViewController: UIViewController {
 //                .build(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta)
 //
             var barTheme = AffectiveChart3Theme()
-            barTheme.style = .year  
-            barTheme.themeColor = .green
+            barTheme.style = .month
+            barTheme.themeColor = .red
             barTheme.startTime = timeStamp
             barTheme.endTime = timeStamp
             barTheme.chartName = "Coherence".uppercased()
@@ -121,7 +121,7 @@ class ThirdVersionViewController: UIViewController {
                 bar.setTheme(barTheme)
                     .setProperty()
                     .setLayout()
-                    .build(array: array)
+                    .build(low: gamma, high: beta, average: alpha)
             }
 
         }

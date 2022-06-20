@@ -53,9 +53,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.axisMaxLabels = 8
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
-        longPressGesture.minimumPressDuration = 0.3
-        self.addGestureRecognizer(longPressGesture)
+
         switch theme.style {
         case .session:
             self.dragEnabled = false
@@ -109,10 +107,11 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
                 data.barWidth = 0.8
             }
             self.data = data
+            
         }
         if theme.style == .month {
             self.setVisibleXRangeMaximum(31)
-        } else {
+        } else if theme.style == .year {
             self.setVisibleXRangeMaximum(12)
         }
 
@@ -241,25 +240,4 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     
 }
 
-extension AffectiveCharts3RoundCornerBar {
-    @objc
-    private func longPressGesture(_ sender: UILongPressGestureRecognizer) {
-        guard let h = self.getHighlightByTouchPoint(sender.location(in: self)) else {return}
-        if sender.state == .began {
-            if h == self.lastHighlighted {
-                self.lastHighlighted = nil
-                self.highlightValue(nil)
-            } else {
-                self.lastHighlighted = h
-                self.highlightValue(h, callDelegate: true)
-            }
-        } else if sender.state == .changed {
-            self.lastHighlighted = h
-            self.highlightValue(h, callDelegate: true)
-        } else if sender.state == .ended {
-            self.lastHighlighted = nil
-            self.highlightValue(nil)
-        }
-    }
-    
-}
+

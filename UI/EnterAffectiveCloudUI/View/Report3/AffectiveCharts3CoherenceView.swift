@@ -10,16 +10,11 @@ import UIKit
 import Charts
 
 public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
-    private var coherenceValue: [Int]!
-    
-    public func setCoherence(value: [Int]) -> Self {
-        self.coherenceValue = value
-        return self
-    }
+
     
     public override func setMarker() -> Self {
         let marker = AffectiveCharts3CommonMarkerView(theme: theme)
-        marker.addInterval(value: self.interval)
+        marker.addInterval(anotherArray: coherenceValue)
         marker.chartView = chartView
         chartView.marker = marker
         

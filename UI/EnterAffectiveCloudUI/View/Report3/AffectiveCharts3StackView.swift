@@ -132,48 +132,52 @@ extension AffectiveCharts3StackView: RhythmsViewDelegate {
 
 extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
-        if flag {
-            
-            let vc = self.parentViewController()!
-            if let navi = vc.navigationController {
-                 if !navi.navigationBar.isHidden {
-                     vc.navigationController?.setNavigationBarHidden(true, animated: true)
-                 }
-             }
-            
-            let nShowChartView = UIView()
-            vc.view.addSubview(nShowChartView)
-            nShowChartView.backgroundColor = ColorExtension.bgZ1
-            let chart = AffectiveCharts3StackView()
-            nShowChartView.addSubview(chart)
-
-            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
-            chart.isFullScreen = true
-            chart
-                .setParam(type: self.style, startDate: self.startDate)
-                .setRhythmLineEnable(value: rhythmsLinesStore)
-                .build(gamma: chartView.gamaArray, beta: chartView.betaArray, alpha: chartView.alphaArray, theta: chartView.thetaArray, delta: chartView.deltaArray)
-            
-            chart.chartView.enableScale = true
-            nShowChartView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-            }
-            
-            chart.snp.remakeConstraints {
-                $0.width.equalTo(nShowChartView.snp.height).offset(-88)
-                $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                $0.center.equalTo(vc.view!.snp.center)
-            }
-            
-        } else {
-            let view = self.superview!
-
-            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-            
+        if let vc = self.parentViewController(), let view = vc.view {
+            var sv: UIScrollView?
             for e in view.subviews {
-                e.removeFromSuperview()
+                if e.isKind(of: UIScrollView.self) {
+                    sv = e as? UIScrollView
+                    break
+                }
             }
-            view.removeFromSuperview()
+            
+            let orginFrame = view.frame
+            let orginSelfFrame = view.convert(self.chartView.frame, from: self)
+            let bHeight = UIScreen.main.bounds.height
+            let bWidth = UIScreen.main.bounds.width
+            if flag {
+                sv?.isScrollEnabled = false
+                self.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(64)
+                    $0.trailing.equalToSuperview().offset(-44)
+                }
+                vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                vc.tabBarController?.tabBar.isHidden = true
+                view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
+                view.frame.size.height = bHeight
+                
+                let scale = bWidth/orginSelfFrame.height
+                view.frame.size.width = view.frame.size.width*scale
+                view.frame.origin.y = 0
+                view.frame.origin.x =  -(orginFrame.height-orginSelfFrame.height)*scale+orginSelfFrame.origin.y
+                
+            } else {
+                sv?.isScrollEnabled = true
+                view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+
+                view.frame.origin.y = 0
+                view.frame.origin.x = 0
+                view.frame.size.width = bWidth
+                view.frame.size.height = bHeight
+                
+                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+
+                self.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(16)
+                    $0.trailing.equalToSuperview().offset(-16)
+                }
+                
+            }
         }
     }
     
@@ -191,12 +195,15 @@ extension AffectiveCharts3StackView: ChartViewDelegate {
                 if self.style == .month {
                     let date = self.startDate.getDayAfter(days: Int(round(leftValue)))
                     if let day = date?.get(.day) {
-                        aim = round(leftValue - Double(day) + 1.0)-0.2
-                        
+                        aim = round(leftValue - Double(day) + 1.0)
+                        aim -= 0.1
                     }
                 } else {
-                    let offset = Int(leftValue) % 12
-                    aim = round(leftValue - Double(offset))-0.1
+                    let date = self.startDate.getMonthAfter(month: Int(round(leftValue)))
+                    if let day = date?.get(.month) {
+                        aim = round(leftValue - Double(day) + 1.0)
+                        aim -= 0.2
+                    }
                 }
                 
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.2, easingOption: .easeInCubic)
@@ -208,11 +215,15 @@ extension AffectiveCharts3StackView: ChartViewDelegate {
                 if self.style == .month {
                     let date = self.startDate.getDayAfter(days: Int(round(rightValue)))
                     if let day = date?.get(.day) {
-                        aim = round(rightValue - Double(day) + 1.0)-0.3
+                        aim = round(rightValue - Double(day) + 1.0)
+                        aim -= 0.1
                     }
                 } else {
-                    let offset = Int(rightValue) % 12
-                    aim = round(rightValue + Double(offset))-0.4
+                    let date = self.startDate.getMonthAfter(month: Int(round(rightValue)))
+                    if let day = date?.get(.month) {
+                        aim = round(rightValue - Double(day) + 1.0)
+                        aim -= 0.2
+                    }
                 }
 
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.2, easingOption: .easeInCubic)

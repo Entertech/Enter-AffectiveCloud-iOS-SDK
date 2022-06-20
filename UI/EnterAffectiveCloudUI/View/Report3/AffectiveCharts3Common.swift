@@ -28,7 +28,14 @@ public class AffectiveCharts3LineCommonView: UIView {
     internal var separateY: [Int] = []
     internal var sample = 3
     internal var maxDataCount = 100
-    public var isFullScreen = false
+    internal var isFullScreen = false
+    internal var coherenceValue: [Int] = []
+    
+    public func setCoherence(value: [Int]) -> Self {
+        self.coherenceValue.append(contentsOf: value)
+        return self
+    }
+    
     /// 数据上传周期，用于计算图表x轴间隔
     public var uploadCycle: UInt = 1 {
         willSet {
@@ -66,7 +73,18 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
-        chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
+        switch theme.style {
+        case .session:
+            chartView.dragEnabled = false
+            chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
+        case .month:
+            chartView.dragEnabled = true
+            chartView.xAxis.valueFormatter = AffectiveCharts3DayValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+        case .year:
+            chartView.dragEnabled = true
+            chartView.xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+
+        }
         
         return self
     }
@@ -171,7 +189,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         
         chartView.leftYAxisRenderer = yRender
         chartView.delegate = self
-        chartView.backgroundColor = .red
+        chartView.backgroundColor = .clear
         chartView.animate(xAxisDuration: 0.5)
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
@@ -265,51 +283,59 @@ extension AffectiveCharts3LineCommonView: ChartViewDelegate {
 extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
         
-        if flag {
-            
-            let vc = self.parentViewController()!
-            if let navi = vc.navigationController {
-                 if !navi.navigationBar.isHidden {
-                     vc.navigationController?.setNavigationBarHidden(true, animated: true)
-                 }
-             }
-            
-            let nShowChartView = UIView()
-            vc.view.addSubview(nShowChartView)
-            nShowChartView.backgroundColor = ColorExtension.bgZ1
-            let chart = AffectiveCharts3LineCommonView()
-            nShowChartView.addSubview(chart)
-
-            chart.maxDataCount = 500
-            chart.uploadCycle = self.uploadCycle
-            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
-            chart.isFullScreen = true
-            chart.setTheme(self.theme)
-                .setLayout()
-                .setData(self.dataSorce)
-                .setChartProperty()
-                .setMarker()
-                .build()
-            
-            nShowChartView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-            }
-            
-            chart.snp.remakeConstraints {
-                $0.width.equalTo(nShowChartView.snp.height).offset(-88)
-                $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                $0.center.equalTo(vc.view!.snp.center)
-            }
-            
-        } else {
-            let view = self.superview!
-
-            view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-            
+        if let vc = self.parentViewController(), let view = vc.view {
+            var sv: UIScrollView?
             for e in view.subviews {
-                e.removeFromSuperview()
+                if e.isKind(of: UIScrollView.self) {
+                    sv = e as? UIScrollView
+                    break
+                }
             }
-            view.removeFromSuperview()
+            
+            let orginFrame = view.frame
+            let orginSelfFrame = view.convert(self.chartView.frame, from: self)
+            let bHeight = UIScreen.main.bounds.height
+            let bWidth = UIScreen.main.bounds.width
+            if flag {
+                sv?.isScrollEnabled = false
+                self.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(64)
+                    $0.trailing.equalToSuperview().offset(-44)
+                }
+                vc.navigationController?.setNavigationBarHidden(true, animated: true)
+                vc.tabBarController?.tabBar.isHidden = true
+                view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
+                view.frame.size.height = bHeight
+                
+                let scale = bWidth/orginSelfFrame.height
+                view.frame.size.width = view.frame.size.width*scale
+                view.frame.origin.y = 0
+                view.frame.origin.x =  -(orginFrame.height-orginSelfFrame.height)*scale+orginSelfFrame.origin.y
+                if theme.style == .session {
+                    self.chartView.dragEnabled = true
+                    chartView.scaleXEnabled = true
+                }
+                
+            } else {
+                sv?.isScrollEnabled = true
+                view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+
+                view.frame.origin.y = 0
+                view.frame.origin.x = 0
+                view.frame.size.width = bWidth
+                view.frame.size.height = bHeight
+                if theme.style == .session {
+                    self.chartView.dragEnabled = false
+                    chartView.scaleXEnabled = false
+                }
+                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
+
+                self.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(16)
+                    $0.trailing.equalToSuperview().offset(-16)
+                }
+                
+            }
         }
         
     }

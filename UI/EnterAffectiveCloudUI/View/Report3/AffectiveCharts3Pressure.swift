@@ -10,13 +10,16 @@ import UIKit
 import Charts
 
 public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
-    
+    private let front1View = UIView()
+    private let front2View = UIView()
     public override func setTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
         titleView.setTheme(theme)
             .build(isAlreadShow: isFullScreen)
         titleView.delegate = self
         self.backgroundColor = ColorExtension.bgZ1
+        front1View.backgroundColor = ColorExtension.bgZ1
+        front2View.backgroundColor = ColorExtension.bgZ1
         chartView.leftAxis.labelTextColor = ColorExtension.textLv2
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.leftAxis.gridColor = ColorExtension.lineLight
@@ -40,7 +43,18 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
-        chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
+        switch theme.style {
+        case .session:
+            chartView.dragEnabled = false
+            chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
+        case .month:
+            chartView.dragEnabled = true
+            chartView.xAxis.valueFormatter = AffectiveCharts3DayValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+        case .year:
+            chartView.dragEnabled = true
+            chartView.xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+
+        }
         return self
     }
     
@@ -63,6 +77,33 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         
     }
     
+    public override func setLayout() -> Self {
+        self.addSubview(chartView)
+        self.addSubview(titleView)
+        self.addSubview(front1View)
+        self.addSubview(front2View)
+        front1View.snp.makeConstraints {
+            $0.top.leading.equalTo(chartView)
+            $0.width.equalTo(9)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-16)
+        }
+        front2View.snp.makeConstraints {
+            $0.top.trailing.equalTo(chartView)
+            $0.width.equalTo(9)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-16)
+        }
+        chartView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        titleView.snp.makeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.height.equalTo(90)
+        }
+        chartView.extraTopOffset = 92
+        
+        return self
+    }
+    
     public override func setChartProperty() -> Self {
         chartView.delegate = self
         chartView.backgroundColor = .clear
@@ -70,8 +111,6 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.drawGridBackgroundEnabled = true
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
-        chartView.borderColor = .green
-        chartView.borderLineWidth = 2
         chartView.chartDescription.enabled = false
         chartView.pinchZoomEnabled = false
         chartView.scaleXEnabled = isFullScreen
@@ -121,11 +160,24 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         }
         let set = LineChartDataSet(entries: yVals, label: "")
         set.mode = .linear
-        set.drawCirclesEnabled = false
-        set.drawCircleHoleEnabled = false
+
+        if theme.style == .month {
+            set.drawCirclesEnabled = true
+            set.drawCircleHoleEnabled = true
+        } else if theme.style == .year {
+            set.drawCirclesEnabled = true
+            set.drawCircleHoleEnabled = true
+        } else {
+            set.drawCirclesEnabled = false
+            set.drawCircleHoleEnabled = false
+        }
         set.drawFilledEnabled = false
         set.lineWidth = 2
         set.setColor(theme.themeColor)
+        set.setCircleColor(theme.themeColor)
+        set.circleRadius = 3
+        set.circleHoleRadius = 2
+        set.circleHoleColor = ColorExtension.white
         set.drawIconsEnabled = false
         set.highlightEnabled = true
         set.highlightLineWidth = 2
@@ -134,6 +186,11 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         chartView.data = data
+        if theme.style == .month {
+            chartView.setVisibleXRangeMaximum(31)
+        } else if theme.style == .year {
+            chartView.setVisibleXRangeMaximum(12)
+        }
     }
 }
 

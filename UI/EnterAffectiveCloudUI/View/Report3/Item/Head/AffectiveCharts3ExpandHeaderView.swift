@@ -57,6 +57,13 @@ class AffectiveCharts3ExpandHeaderView: UIView {
     
     @objc func expandAction(_ sender: UIButton) {
         delegate?.expand(flag: isNotShowExpand)
+        isNotShowExpand = !isNotShowExpand
+        if isNotShowExpand {
+            expandBtn.setImage(UIImage.loadImage(name: "expand", any: classForCoder), for: .normal)
+        } else {
+            
+            expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
+        }
     }
     
 }

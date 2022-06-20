@@ -1,8 +1,8 @@
 //
-//  AffectiveCharts3BarCommonView.swift
+//  AffectiveCharts3CandleView.swift
 //  EnterAffectiveCloudUI
 //
-//  Created by Enter on 2022/6/17.
+//  Created by Enter on 2022/6/18.
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
@@ -10,11 +10,10 @@ import UIKit
 import Charts
 import SnapKit
 
-
-public class AffectiveCharts3BarCommonView: UIView {
+public class AffectiveCharts3CandleView: UIView {
     internal var theme: AffectiveChart3Theme!
     internal let titleView = AffectiveCharts3ExpandHeaderView()
-    internal var chartView: AffectiveCharts3RoundCornerBar!
+    internal var chartView: AffectiveCharts3CandleCommonView!
     internal var isFullScreen = false
     
     private var panValue:CGFloat = 0
@@ -24,7 +23,7 @@ public class AffectiveCharts3BarCommonView: UIView {
         self.theme = theme
         self.startDate = Date.init(timeIntervalSince1970: theme.startTime)
         self.backgroundColor = ColorExtension.bgZ1
-        chartView = AffectiveCharts3RoundCornerBar(theme: theme)
+        chartView = AffectiveCharts3CandleCommonView(theme: theme)
         chartView.theme = theme
         titleView.setTheme(theme).build(isAlreadShow: isFullScreen)
         return self
@@ -36,7 +35,7 @@ public class AffectiveCharts3BarCommonView: UIView {
         titleView.delegate = self
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressGesture(_:)))
         longPressGesture.minimumPressDuration = 0.3
-        chartView.addGestureRecognizer(longPressGesture)
+        self.addGestureRecognizer(longPressGesture)
         return self
     }
     
@@ -54,12 +53,12 @@ public class AffectiveCharts3BarCommonView: UIView {
         return self
     }
     
-    public func build(array: [Double]) {
-        chartView.setDataCount(value: array)
+    public func build(low: [Double], high: [Double], average: [Double]) {
+        chartView.setDataCount(low: low, high: high, average: average)
     }
 }
 
-extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
+extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
         if let vc = self.parentViewController(), let view = vc.view {
             var sv: UIScrollView?
@@ -107,10 +106,11 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 }
                 
             }
+            
         }
     }
 }
-extension AffectiveCharts3BarCommonView: ChartViewDelegate {
+extension AffectiveCharts3CandleView: ChartViewDelegate {
     public func chartViewDidEndPanning(_ chartView: ChartViewBase) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
             self.bIsCalculatePan = true
@@ -173,7 +173,8 @@ extension AffectiveCharts3BarCommonView: ChartViewDelegate {
     }
 }
 
-extension AffectiveCharts3BarCommonView {
+
+extension AffectiveCharts3CandleView {
     @objc
     private func longPressGesture(_ sender: UILongPressGestureRecognizer) {
         guard let h = chartView.getHighlightByTouchPoint(sender.location(in: self)) else {return}
