@@ -12,8 +12,14 @@ import Charts
 public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     private let front1View = UIView()
     private let front2View = UIView()
+    private var panValue:CGFloat = 0
+    private var bIsCalculatePan = false
+    private var startDate: Date!
+    private var lastXValue: Double = 0
+    weak var dataSouceChanged: AffectiveCharts3ChartChanged?
     public override func setTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
+        self.startDate = theme.startDate
         titleView.setTheme(theme)
             .build(isAlreadShow: isFullScreen)
         titleView.delegate = self
@@ -43,18 +49,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
-        switch theme.style {
-        case .session:
-            chartView.dragEnabled = false
-            chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
-        case .month:
-            chartView.dragEnabled = true
-            chartView.xAxis.valueFormatter = AffectiveCharts3DayValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
-        case .year:
-            chartView.dragEnabled = true
-            chartView.xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
 
-        }
         return self
     }
     
@@ -132,6 +127,20 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         let locations:[CGFloat] = [0.0, 1.0]
         guard let gradient = CGGradient(colorSpace: colorSpace,colorComponents: colorComponents,locations: locations,count: 2) else { return self}
         chartView.gridGradient = gradient
+        switch theme.style {
+        case .session:
+            chartView.dragEnabled = false
+            chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
+        case .month:
+            self.dataSouceChanged = titleView
+            chartView.dragEnabled = true
+            chartView.xAxis.valueFormatter = AffectiveCharts3DayValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+        case .year:
+            self.dataSouceChanged = titleView
+            chartView.dragEnabled = true
+            chartView.xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+
+        }
         
         return self
     }
@@ -188,10 +197,197 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.data = data
         if theme.style == .month {
             chartView.setVisibleXRangeMaximum(31)
+            if let last = yVals.last {
+                self.chartView.moveViewToX(last.x)
+                self.lastXValue = last.x
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
+                self.overloadY()
+            })
         } else if theme.style == .year {
             chartView.setVisibleXRangeMaximum(12)
+            if let last = yVals.last {
+                self.chartView.moveViewToX(last.x)
+                self.lastXValue = last.x
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
+                self.overloadY()
+            })
         }
     }
 }
 
+extension AffectiveCharts3Pressure: ChartViewDelegate {
+    public func chartViewDidEndPanning(_ chartView: ChartViewBase) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+            self.bIsCalculatePan = true
+            if self.panValue >= 15 {
+                let leftValue = self.chartView.lowestVisibleX
+                var aim = 0.0
+                if self.theme.style == .month {
+                    let date = self.startDate.getDayAfter(days: Int(round(leftValue)))
+                    if let day = date?.get(.day) {
+                        aim = round(leftValue - Double(day) + 1.0)
+                        aim -= 0.3
+                    }
+                } else {
+                    let date = self.startDate.getMonthAfter(month: Int(round(leftValue)))
+                    if let day = date?.get(.month) {
+                        aim = round(leftValue - Double(day) + 1.0)
+                        aim -= 0.4
+                    }
+                }
+                self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
+                self.lastXValue = aim
+            } else if self.panValue < -15 {
+                let rightValue = self.chartView.highestVisibleX
+                var aim = 0.0
+                if self.theme.style == .month {
+                    let date = self.startDate.getDayAfter(days: Int(round(rightValue)))
+                    if let day = date?.get(.day) {
+                        aim = round(rightValue - Double(day) + 1.0)
+                        aim -= 0.3
+                    }
+                } else {
+                    let date = self.startDate.getMonthAfter(month: Int(round(rightValue)))
+                    if let day = date?.get(.month) {
+                        aim = round(rightValue - Double(day) + 1.0)
+                        aim -= 0.4
+                    }
+                }
+                self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
+                self.lastXValue = aim
+            } else {
+                self.chartView.moveViewToAnimated(xValue: self.lastXValue, yValue: 0, axis: .left, duration: 0.1, easingOption: .easeInCubic)
+            }
+            self.panValue = 0
+            self.bIsCalculatePan = false
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.6) {
+            self.overloadY()
+        }
+        
+    }
+    
+    public func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+        if !bIsCalculatePan {
+            
+            panValue += dX
+        } else {
+            
+        }
+    }
+    
+    
+    func overloadY() {
+        let leftX = Int(round(self.chartView.lowestVisibleX) - self.chartView.chartXMin)
+        let rightX = Int(round(self.chartView.highestVisibleX) - self.chartView.chartXMin)
+        var maxValue: Double = 0
+        for i in leftX..<rightX {
+            if let value = self.chartView.lineData?.dataSets.first?.entryForIndex(i) {
+                if value.y > maxValue {
+                    maxValue = value.y
+                }
+            }
+        }
+        setYLable(maxY: maxValue)
+    }
+    
+    private func setYLable(maxY: Double) {
+        var gotIt: Double = 0
+        var part: Int = 0
+        var limitArray: [Int] = []
+        for i in 0...10 {
+            let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
 
+            for e in 4...5 {
+                if value % e == 0 && (value / e) % 5 == 0{
+                    
+                    gotIt = Double(value)
+                    part = e
+                    break
+                }
+            }
+            if gotIt > 0 {
+                break
+            }
+        }
+        
+        guard part > 1 else {return}
+        self.chartView.leftAxis.removeAllLimitLines()
+        
+        let partValue = Int(gotIt)/(part)
+        for i in 0...part {
+            let yAxis = partValue*i
+//            print("maxAxis:\(yAxis)  part:\(i)")
+            limitArray.append(yAxis)
+            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
+            limitLine.drawLabelEnabled = false
+            limitLine.lineWidth = 1
+            limitLine.lineDashLengths = [3, 2]
+            limitLine.lineColor = ColorExtension.lineLight
+            self.chartView.leftAxis.addLimitLine(limitLine)
+        }
+
+
+        yRender?.entries = limitArray
+        self.chartView.setVisibleYRangeMaximum(gotIt, axis: .left)
+        self.chartView.setVisibleYRangeMinimum(gotIt, axis: .left)
+        if theme.style == .month {
+            self.chartView.moveViewTo(xValue: self.chartView.lowestVisibleX, yValue: gotIt/2, axis: .left)
+        } else {
+            self.chartView.moveViewTo(xValue: self.chartView.lowestVisibleX, yValue: gotIt/2, axis: .left)
+        }
+        
+        let time = self.calculatAverageTime()
+        let ave = self.calculatAverage()
+        self.dataSouceChanged?.update(single: ave, mult: nil, from: time.0, to: time.1)
+    }
+    
+    internal func calculatAverageTime() -> (Double, Double) {
+        let left = round(self.chartView.lowestVisibleX)
+        let right = round(self.chartView.highestVisibleX)
+        switch theme.style {
+        case .session:
+            
+            let fromTime = self.theme.startTime + left
+            let toTime = self.theme.startTime + right
+            return (fromTime, toTime)
+        case .month:
+            guard let fromTime = self.theme.startDate.getDayAfter(days: Int(left))?.timeIntervalSince1970 else {
+                return (0.0, 0.0)}
+            guard let toTime = self.theme.startDate.getDayAfter(days: Int(right))?.timeIntervalSince1970 else {
+                return (0.0, 0.0)}
+            return (fromTime, toTime)
+        case .year:
+            guard let fromTime = self.theme.startDate.getMonthAfter(month: Int(left))?.timeIntervalSince1970 else {
+                return (0.0, 0.0)}
+            guard let toTime = self.theme.startDate.getMonthAfter(month: Int(right))?.timeIntervalSince1970 else {
+                return (0.0, 0.0)}
+            return (fromTime, toTime)
+        }
+
+    }
+    
+    internal func calculatAverage() -> Int {
+
+        let left = round(self.chartView.lowestVisibleX)
+        let right = round(self.chartView.highestVisibleX)
+        
+        let leftIndex = Int(left)
+        let count = Int(right-left)
+        
+        if leftIndex+count <= dataSorce.count {
+            var sum = 0.0
+            for i in leftIndex..<leftIndex+count {
+                sum += Double(dataSorce[i])
+            }
+            let ave = Int(round(sum / Double(count)))
+            return ave
+        } else {
+            return 0
+        }
+    }
+    
+}

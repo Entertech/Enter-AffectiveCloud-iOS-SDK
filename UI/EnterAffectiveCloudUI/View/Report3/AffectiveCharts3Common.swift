@@ -188,7 +188,6 @@ public class AffectiveCharts3LineCommonView: UIView {
         yRender = LimitYAxisRenderer(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         
         chartView.leftYAxisRenderer = yRender
-        chartView.delegate = self
         chartView.backgroundColor = .clear
         chartView.animate(xAxisDuration: 0.5)
         chartView.gridBackgroundColor = .clear
@@ -275,10 +274,6 @@ extension AffectiveCharts3LineCommonView {
     }
 }
 
-
-extension AffectiveCharts3LineCommonView: ChartViewDelegate {
-    
-}
 
 extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
