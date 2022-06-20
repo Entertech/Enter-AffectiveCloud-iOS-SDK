@@ -53,7 +53,18 @@ public class AffectiveCharts3CandleView: UIView {
         return self
     }
     
-    public func build(low: [Double], high: [Double], average: [Double]) {
+    public func build(candle: Array2D<Double>, average: [Double]) {
+        guard candle.rows > 2 else {return}
+        var low: [Double] = []
+        var high: [Double] = []
+
+            for j in 0..<candle.columns {
+                
+                low.append(candle[j, 0])
+                high.append(candle[j, 1])
+                
+            }
+        
         chartView.setDataCount(low: low, high: high, average: average)
     }
 }
