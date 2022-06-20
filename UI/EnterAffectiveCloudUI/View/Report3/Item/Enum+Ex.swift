@@ -64,15 +64,17 @@ public enum AffectiveCharts3ChartType: String {
     case coherece
     case common
     case rhythms
+    case heartRate
+    case pressure
     
     var session: String {
         switch self {
         case .coherece:
             return "TOTAL"
-        case .common:
-            return "AVERAGE"
         case .rhythms:
             return "Average Percentage".uppercased()
+        default:
+            return "AVERAGE"
         }
     }
     
@@ -80,10 +82,10 @@ public enum AffectiveCharts3ChartType: String {
         switch self {
         case .coherece:
             return "DAILY AVERAGE"
-        case .common:
-            return "DAILY AVERAGE"
         case .rhythms:
             return "Daily Average Percentage".uppercased()
+        default:
+            return "DAILY AVERAGE"
         }
         
     }
@@ -92,10 +94,10 @@ public enum AffectiveCharts3ChartType: String {
         switch self {
         case .coherece:
             return "DAILY AVERAGE"
-        case .common:
-            return "MONTHLY AVERAGE"
         case .rhythms:
             return "Monthly Average Percentage".uppercased()
+        default:
+            return "MONTHLY AVERAGE"
         }
     }
 
