@@ -118,7 +118,7 @@ public class PrivateReportNumberView: UIView {
     func initFunction() {
         self.backgroundColor = .clear
         
-        numberText.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        numberText.font = UIFont(name: "SFProRounded-Bold", size: 40)
         numberText.textAlignment = .center
         self.addSubview(numberText)
         

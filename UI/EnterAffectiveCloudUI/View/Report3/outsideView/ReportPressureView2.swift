@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class ReportPressureView2: UIView {
+public class PressureIntroView: UIView {
 
     public var value:Int =  0 {
         willSet {
-            numLabel.text = "\(newValue)"
-            circleView.currentValue = CGFloat(newValue)
-            circleView.drawLayer()
+            
+//            circleView.currentValue = CGFloat(newValue)
+//            circleView.drawLayer()
             if newValue >= stateArray[0] && newValue <= stateArray[1] {
                 state = .low
             } else if newValue >= stateArray[1] && newValue <= stateArray[2] {
@@ -22,6 +22,7 @@ public class ReportPressureView2: UIView {
             } else  {
                 state = .high
             }
+            numLabel.text = "\(state.rawValue)"
         }
     }
     //state
@@ -42,6 +43,7 @@ public class ReportPressureView2: UIView {
     public var stateArray:[Int] = [0 ,20, 70, 100] 
     private let titleLabel = UILabel()
     private let button = UIImageView()
+    private let bgImage = UIImageView()
     
     // state label background color
     public var stateColor = ColorExtension.red5 {
@@ -116,15 +118,23 @@ public class ReportPressureView2: UIView {
     }
     
     private func initFunction() {
-        self.backgroundColor = .clear
-        
+        self.backgroundColor = ColorExtension.bgZ1
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
+        self.addSubview(bgImage)
         self.addSubview(numLabel)
         self.addSubview(stateLabel)
         self.addSubview(circleView)
         self.addSubview(titleLabel)
         self.addSubview(button)
         
-        numLabel.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        bgImage.image = UIImage.init(named: "type_red_blue")
+        bgImage.contentMode = .scaleAspectFill
+        self.bgImage.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        numLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         titleLabel.text = "Pressure"
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = ColorExtension.textLv1
@@ -138,6 +148,7 @@ public class ReportPressureView2: UIView {
         stateLabel.backgroundColor = stateColor
         stateLabel.textColor = stateTextColor
         stateLabel.textAlignment = .center
+        stateLabel.isHidden = true
     }
 
 }
