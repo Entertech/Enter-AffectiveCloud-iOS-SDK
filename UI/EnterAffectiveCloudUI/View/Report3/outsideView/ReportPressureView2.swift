@@ -128,7 +128,7 @@ public class PressureIntroView: UIView {
         self.addSubview(titleLabel)
         self.addSubview(button)
         
-        bgImage.image = UIImage.init(named: "type_red_blue")
+        bgImage.image = UIImage.loadImage(name: "type_red_blue", any: classForCoder)
         bgImage.contentMode = .scaleAspectFill
         self.bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -139,7 +139,7 @@ public class PressureIntroView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = ColorExtension.textLv1
         
-        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
+//        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
 
         stateLabel.text = state.rawValue
         stateLabel.layer.cornerRadius = 8.5

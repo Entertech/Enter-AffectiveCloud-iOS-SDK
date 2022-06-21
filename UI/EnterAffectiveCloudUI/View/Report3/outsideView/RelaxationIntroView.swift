@@ -102,9 +102,9 @@ class RelaxationIntroView: UIView {
         self.addSubview(relaxationCircleView)
         
         header.titleText = "Relaxation"
-        header.image = UIImage.init(named: "relaxation")
+        header.image = UIImage.loadImage(name: "relaxation", any: classForCoder)
         
-        bgImage.image = UIImage.init(named: "type_blue_green")
+        bgImage.image = UIImage.loadImage(name: "type_blue_green", any: classForCoder)
         bgImage.contentMode = .scaleAspectFill
         self.bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()

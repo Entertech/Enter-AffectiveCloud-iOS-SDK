@@ -30,9 +30,9 @@ class HeartRateIntroView: UIView {
         self.addSubview(valueLabel)
         self.addSubview(unitLabel)
         headView.titleText = "Heart Rate"
-        headView.image = UIImage.init(named: "heart")
+        headView.image = UIImage.loadImage(name: "heart", any: classForCoder)
         
-        bgImagaView.image = UIImage.init(named: "type_red_blue")
+        bgImagaView.image = UIImage.loadImage(name: "type_red_blue", any: classForCoder)
         bgImagaView.contentMode = .scaleAspectFill
         self.bgImagaView.snp.makeConstraints {
             $0.edges.equalToSuperview()

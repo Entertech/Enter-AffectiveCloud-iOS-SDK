@@ -32,9 +32,9 @@ public class CoherenceIntroView: UIView {
         self.addSubview(valueLabel)
         self.addSubview(unitLabel)
         headView.titleText = "Coherence Time"
-        headView.image = UIImage.init(named: "coherence")
+        headView.image = UIImage.loadImage(name: "coherence", any: classForCoder)
         
-        bgImagaView.image = UIImage.init(named: "type_yellow_green")
+        bgImagaView.image = UIImage.loadImage(name: "type_yellow_green", any: classForCoder)
         bgImagaView.contentMode = .scaleAspectFill
         self.bgImagaView.snp.makeConstraints {
             $0.edges.equalToSuperview()

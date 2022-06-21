@@ -66,7 +66,7 @@ public class HRVIntroView: UIView {
         self.addSubview(titleLabel)
         self.addSubview(button)
         
-        bgImage.image = UIImage.init(named: "type_yellow_green")
+        bgImage.image = UIImage.loadImage(name: "type_yellow_green", any: classForCoder)
         bgImage.contentMode = .scaleAspectFill
         self.bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -76,7 +76,6 @@ public class HRVIntroView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = ColorExtension.textLv1
         
-        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
         
         numLabel.font = UIFont(name: "SFProRounded-Bold", size: 40)
         numLabel.textColor = ColorExtension.textLv1

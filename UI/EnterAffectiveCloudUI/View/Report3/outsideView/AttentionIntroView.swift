@@ -102,9 +102,9 @@ class AttentionIntroView: UIView {
         self.addSubview(attentionCircleView)
         
         header.titleText = "attention"
-        header.image = UIImage.init(named: "attention")
+        header.image = UIImage.loadImage(name: "attention", any: classForCoder)
         
-        bgImage.image = UIImage.init(named: "type_blue_green")
+        bgImage.image = UIImage.loadImage(name: "type_blue_green", any: classForCoder)
         bgImage.contentMode = .scaleAspectFill
         self.bgImage.snp.makeConstraints {
             $0.edges.equalToSuperview()

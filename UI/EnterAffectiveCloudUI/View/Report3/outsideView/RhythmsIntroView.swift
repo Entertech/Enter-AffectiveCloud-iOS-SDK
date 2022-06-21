@@ -77,9 +77,9 @@ class RhythmsIntroView: UIView {
         addSubview(deltaNumLabel)
         addSubview(deltaPercentLabel)
         headView.titleText = "Brainwave Rhythms"
-        headView.image = UIImage.init(named: "brainwave")
+        headView.image = UIImage.loadImage(name: "brainwave", any: classForCoder)
         
-        bgImagaView.image = UIImage.init(named: "type_yellow_green")
+        bgImagaView.image = UIImage.loadImage(name: "type_yellow_green", any: classForCoder)
         bgImagaView.contentMode = .scaleAspectFill
         self.bgImagaView.snp.makeConstraints {
             $0.edges.equalToSuperview()
