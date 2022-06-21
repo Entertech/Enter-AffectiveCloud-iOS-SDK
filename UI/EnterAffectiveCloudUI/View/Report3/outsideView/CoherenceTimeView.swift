@@ -22,7 +22,22 @@ public class CoherenceIntroView: UIView {
     let valueLabel = UILabel()
     let unitLabel = UILabel()
     
-    public func setup() {
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        setup()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    private func setup() {
         self.backgroundColor = ColorExtension.bgZ1
         self.layer.cornerRadius = 8
         self.layer.masksToBounds = true

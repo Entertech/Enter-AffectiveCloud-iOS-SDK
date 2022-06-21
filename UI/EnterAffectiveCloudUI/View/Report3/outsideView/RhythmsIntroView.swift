@@ -19,6 +19,20 @@ class RhythmsIntroView: UIView {
             deltaNumLabel.text = "\(value.4)"
         }
     }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        setup()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
     
     public var gammaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
     public var betaColor = UIColor.colorWithHexString(hexColor: "#58B9E0")

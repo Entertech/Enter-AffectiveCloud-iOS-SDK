@@ -15,6 +15,21 @@ class HeartRateIntroView: UIView {
             valueLabel.text = "\(value)"
         }
     }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        setup()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
 
     let bgImagaView = UIImageView()
     let headView = PrivateReportViewHead()
