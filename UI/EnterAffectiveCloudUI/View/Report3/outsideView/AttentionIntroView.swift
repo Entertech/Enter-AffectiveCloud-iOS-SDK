@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AttentionIntroView: UIView {
+public class AttentionIntroView: UIView {
 
     // 最大值
     public var largeValue = 100 {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeartRateIntroView: UIView {
+public class HeartRateIntroView: UIView {
 
     public var value: Int = 0 {
         didSet {

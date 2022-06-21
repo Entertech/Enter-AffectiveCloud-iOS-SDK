@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RhythmsIntroView: UIView {
+public class RhythmsIntroView: UIView {
 
     public var value: (Int, Int, Int, Int, Int) = (0, 0, 0, 0, 0) {
         didSet {

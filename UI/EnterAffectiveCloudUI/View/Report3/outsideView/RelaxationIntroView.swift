@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RelaxationIntroView: UIView {
+public class RelaxationIntroView: UIView {
 
     // 最大值
     public var largeValue = 100 {
