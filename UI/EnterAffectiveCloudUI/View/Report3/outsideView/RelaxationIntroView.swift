@@ -103,7 +103,7 @@ public class RelaxationIntroView: UIView {
         
         header.titleText = "Relaxation"
         header.image = UIImage.loadImage(name: "relaxation", any: classForCoder)
-        
+        header.btnImage = nil
         bgImage.image = UIImage.loadImage(name: "type_blue_green", any: classForCoder)
         bgImage.contentMode = .scaleAspectFill
         self.bgImage.snp.makeConstraints {

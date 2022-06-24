@@ -92,7 +92,7 @@ public class RhythmsIntroView: UIView {
         addSubview(deltaPercentLabel)
         headView.titleText = "Brainwave Rhythms"
         headView.image = UIImage.loadImage(name: "brainwave", any: classForCoder)
-        
+        headView.btnImage = nil
         bgImagaView.image = UIImage.loadImage(name: "type_yellow_green", any: classForCoder)
         bgImagaView.contentMode = .scaleAspectFill
         self.bgImagaView.snp.makeConstraints {

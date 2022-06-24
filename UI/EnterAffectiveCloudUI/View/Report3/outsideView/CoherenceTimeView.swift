@@ -48,7 +48,7 @@ public class CoherenceIntroView: UIView {
         self.addSubview(unitLabel)
         headView.titleText = "Coherence Time"
         headView.image = UIImage.loadImage(name: "coherence", any: classForCoder)
-        
+        headView.btnImage = nil
         bgImagaView.image = UIImage.loadImage(name: "type_yellow_green", any: classForCoder)
         bgImagaView.contentMode = .scaleAspectFill
         self.bgImagaView.snp.makeConstraints {

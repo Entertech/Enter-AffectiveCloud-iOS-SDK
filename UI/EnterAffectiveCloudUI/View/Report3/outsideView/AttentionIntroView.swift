@@ -103,7 +103,7 @@ public class AttentionIntroView: UIView {
         
         header.titleText = "attention"
         header.image = UIImage.loadImage(name: "attention", any: classForCoder)
-        
+        header.btnImage = nil
         bgImage.image = UIImage.loadImage(name: "type_blue_green", any: classForCoder)
         bgImage.contentMode = .scaleAspectFill
         self.bgImage.snp.makeConstraints {

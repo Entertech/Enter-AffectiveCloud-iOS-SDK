@@ -46,7 +46,7 @@ public class HeartRateIntroView: UIView {
         self.addSubview(unitLabel)
         headView.titleText = "Heart Rate"
         headView.image = UIImage.loadImage(name: "heart", any: classForCoder)
-        
+        headView.btnImage = nil
         bgImagaView.image = UIImage.loadImage(name: "type_red_blue", any: classForCoder)
         bgImagaView.contentMode = .scaleAspectFill
         self.bgImagaView.snp.makeConstraints {
