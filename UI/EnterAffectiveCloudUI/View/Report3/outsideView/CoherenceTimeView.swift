@@ -56,7 +56,7 @@ public class CoherenceIntroView: UIView {
         }
         
         valueLabel.textColor = ColorExtension.textLv1
-        valueLabel.font = UIFont(name: "SFProRounded-Bold", size: 40)
+        valueLabel.font = .rounded(ofSize: 40, weight: .bold)
         valueLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-16)

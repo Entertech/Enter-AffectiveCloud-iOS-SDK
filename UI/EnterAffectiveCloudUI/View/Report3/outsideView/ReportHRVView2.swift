@@ -77,7 +77,7 @@ public class HRVIntroView: UIView {
         titleLabel.textColor = ColorExtension.textLv1
         
         
-        numLabel.font = UIFont(name: "SFProRounded-Bold", size: 40)
+        numLabel.font = .rounded(ofSize: 40, weight: .bold)
         numLabel.textColor = ColorExtension.textLv1
         numLabel.text = "\(value)"
         

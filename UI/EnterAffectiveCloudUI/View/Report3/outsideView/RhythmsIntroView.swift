@@ -39,7 +39,7 @@ public class RhythmsIntroView: UIView {
     public var alphaColor = UIColor.colorWithHexString(hexColor: "#F7C77E")
     public var thetaColor = UIColor.colorWithHexString(hexColor: "#5FC695")
     public var deltaColor = UIColor.colorWithHexString(hexColor: "#5E75FF")
-    public var numFont = UIFont(name: "SFProRounded-Semibold", size: 18)
+    public var numFont = UIFont.rounded(ofSize: 18, weight: .semibold)
     public var percentFont = UIFont.systemFont(ofSize: 14, weight: .semibold)
     public var lineColor = ColorExtension.lineLight
 
