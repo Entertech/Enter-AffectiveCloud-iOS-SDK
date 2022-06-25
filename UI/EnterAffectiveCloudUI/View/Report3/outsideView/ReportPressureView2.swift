@@ -97,13 +97,13 @@ public class PressureIntroView: UIView {
             if UIDevice.current.userInterfaceIdiom == .pad {
                 $0.width.equalTo(200)
                 $0.centerX.equalToSuperview()
-                $0.top.equalTo(40)
+                $0.top.equalTo(32)
             } else {
                 $0.left.right.equalToSuperview()
-                $0.top.equalTo(40)
+                $0.top.equalTo(32)
             }
             
-            $0.bottom.equalTo(-24)
+            $0.bottom.equalTo(-4)
         }
         
         titleLabel.snp.makeConstraints {
