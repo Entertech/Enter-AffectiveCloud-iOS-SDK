@@ -83,6 +83,7 @@
 		FA6FFFA523D05A0F00A4B16A /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */; };
 		FA6FFFA623D05A0F00A4B16A /* RodDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA323D05A0F00A4B16A /* RodDot.swift */; };
 		FA6FFFA823D0618000A4B16A /* RealtimeCoherenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA723D0618000A4B16A /* RealtimeCoherenceView.swift */; };
+		FA72424B2866FDA100B12B32 /* MeditationTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72424A2866FDA100B12B32 /* MeditationTimeView.swift */; };
 		FA7689C623ACB387005E4DF7 /* ReportNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C523ACB387005E4DF7 /* ReportNumberView.swift */; };
 		FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C723B053D5005E4DF7 /* ReportHR.swift */; };
 		FA7689CA23B0595A005E4DF7 /* ReportSemiCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7689C923B0595A005E4DF7 /* ReportSemiCircle.swift */; };
@@ -334,6 +335,7 @@
 		FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
 		FA6FFFA323D05A0F00A4B16A /* RodDot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RodDot.swift; sourceTree = "<group>"; };
 		FA6FFFA723D0618000A4B16A /* RealtimeCoherenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeCoherenceView.swift; sourceTree = "<group>"; };
+		FA72424A2866FDA100B12B32 /* MeditationTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeditationTimeView.swift; sourceTree = "<group>"; };
 		FA7689C523ACB387005E4DF7 /* ReportNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportNumberView.swift; sourceTree = "<group>"; };
 		FA7689C723B053D5005E4DF7 /* ReportHR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportHR.swift; sourceTree = "<group>"; };
 		FA7689C923B0595A005E4DF7 /* ReportSemiCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSemiCircle.swift; sourceTree = "<group>"; };
@@ -696,6 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				FA31DE15286162F800459091 /* CoherenceTimeView.swift */,
+				FA72424A2866FDA100B12B32 /* MeditationTimeView.swift */,
 				FA31DE172861691900459091 /* HeartRateIntroView.swift */,
 				FA31DE1928616B4000459091 /* RhythmsIntroView.swift */,
 				FA081221258845FB0064E017 /* ReportHRVView2.swift */,
@@ -1548,6 +1551,7 @@
 				FA04A4DC2859DDF9007FA849 /* AffectiveCharts3ExpandRhythmView.swift in Sources */,
 				FA61A818258DCDB9003F27AD /* FiveDBValueMarkerView.swift in Sources */,
 				FA31DE1C286176E000459091 /* RelaxationIntroView.swift in Sources */,
+				FA72424B2866FDA100B12B32 /* MeditationTimeView.swift in Sources */,
 				FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */,
 				FA04A4C728597641007FA849 /* HourXFormatter.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
