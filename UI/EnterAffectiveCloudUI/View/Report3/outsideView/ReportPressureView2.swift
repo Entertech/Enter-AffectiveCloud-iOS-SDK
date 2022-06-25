@@ -85,7 +85,7 @@ public class PressureIntroView: UIView {
             $0.width.equalTo(39)
             $0.height.equalTo(17)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-8)
+            $0.bottom.equalToSuperview().offset(0)
         }
         
         numLabel.snp.makeConstraints {

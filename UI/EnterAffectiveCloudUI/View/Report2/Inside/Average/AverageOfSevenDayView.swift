@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class PrivateAverageOfSevenDayView: UIView {
+class PrivateAverageOfSevenDayView: UIView {
     
     public var valuesSpect: [Int] = [] {
         willSet {
