@@ -246,7 +246,7 @@ public class RhythmsIntroView: UIView {
             $0.centerY.equalTo(thetaImage.snp.centerY)
         }
         deltaImage.snp.makeConstraints {
-            $0.leading.equalTo(split3.snp.trailing).offset(4)
+            $0.leading.equalTo(split4.snp.trailing).offset(4)
             $0.bottom.equalToSuperview().offset(-16)
             $0.width.equalTo(16)
             $0.height.equalTo(20)
