@@ -88,7 +88,7 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
                 view.frame.size.height = bHeight
                 view.frame.origin.y = 0
-                view.frame.origin.x = -orginFrame.height+bWidth+96
+                view.frame.origin.x = -orginFrame.height+bWidth+110
                 
             } else {
                 sv?.isScrollEnabled = true
