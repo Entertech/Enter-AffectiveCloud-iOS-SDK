@@ -15,7 +15,7 @@ class ThirdVersionViewController: UIViewController {
 
     let common = AffectiveCharts3Pressure()
 //    let rhythms = AffectiveCharts3StackView()
-    let bar = AffectiveCharts3CandleView()
+    let bar = AffectiveCharts3BarCommonView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,12 +106,11 @@ class ThirdVersionViewController: UIViewController {
 //                .build(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta)
 //
             var barTheme = AffectiveChart3Theme()
-            barTheme.style = .month
+            barTheme.style = .year
             barTheme.themeColor = .red
             barTheme.startTime = timeStamp
             barTheme.endTime = timeStamp
             barTheme.chartName = "Coherence".uppercased()
-            barTheme.averageText = "Total".uppercased()
             barTheme.averageValue = "\(service.model.relaxationAvg ?? 0)"
             barTheme.unitText = "min"
             if let relaxation = service.model.relaxation {
@@ -121,7 +120,7 @@ class ThirdVersionViewController: UIViewController {
                 bar.setTheme(barTheme)
                     .setProperty()
                     .setLayout()
-                    .build(low: gamma, high: beta, average: alpha)
+                    .build(array: array)
             }
 
         }

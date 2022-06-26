@@ -121,13 +121,13 @@ extension AffectiveCharts3BarCommonView: ChartViewDelegate {
                     let date = self.startDate.getDayAfter(days: Int(round(leftValue)))
                     if let day = date?.get(.day) {
                         aim = round(leftValue - Double(day) + 1.0)
-                        aim -= 0.1
+                        aim -= 0.3
                     }
                 } else {
                     let date = self.startDate.getMonthAfter(month: Int(round(leftValue)))
                     if let day = date?.get(.month) {
                         aim = round(leftValue - Double(day) + 1.0)
-                        aim -= 0.1
+                        aim -= 0.4
                     }
                 }
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
@@ -139,13 +139,13 @@ extension AffectiveCharts3BarCommonView: ChartViewDelegate {
                     let date = self.startDate.getDayAfter(days: Int(round(rightValue)))
                     if let day = date?.get(.day) {
                         aim = round(rightValue - Double(day) + 1.0)
-                        aim -= 0.1
+                        aim -= 0.3
                     }
                 } else {
                     let date = self.startDate.getMonthAfter(month: Int(round(rightValue)))
                     if let day = date?.get(.month) {
                         aim = round(rightValue - Double(day) + 1.0)
-                        aim -= 0.1
+                        aim -= 0.4
                     }
                 }
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
