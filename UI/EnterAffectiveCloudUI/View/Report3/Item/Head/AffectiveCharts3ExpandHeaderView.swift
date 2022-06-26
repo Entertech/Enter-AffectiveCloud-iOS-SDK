@@ -96,7 +96,7 @@ class AffectiveCharts3HeaderInfoView: UIView {
     private let timeLabel = UILabel()
     private let tagLabel = UILabel()
     private var labelColor: UIColor = .label
-    
+    private var type: AffectiveCharts3FormatOptional = .session
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -129,8 +129,12 @@ class AffectiveCharts3HeaderInfoView: UIView {
         let dateFrom = Date.init(timeIntervalSince1970: round(from))
         let dateTo = Date.init(timeIntervalSince1970: round(to))
         
-        if Calendar.current.component(.day, from: dateFrom) == 1 {
-            lk_formatter.dateFormat = "MMM yyyy"
+        if Calendar.current.component(.day, from: dateFrom) == 1 && type != .session {
+            var str = "yyyy"
+            if type == .month {
+                str = "MMM yyyy"
+            }
+            lk_formatter.dateFormat = str
             let time = lk_formatter.string(from: dateFrom)
             timeLabel.text = time
             timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
