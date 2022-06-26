@@ -91,7 +91,6 @@ extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
                     $0.trailing.equalToSuperview().offset(-44)
                 }
                 vc.navigationController?.setNavigationBarHidden(true, animated: true)
-                vc.tabBarController?.tabBar.isHidden = true
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
                 view.frame.size.height = bHeight
                 

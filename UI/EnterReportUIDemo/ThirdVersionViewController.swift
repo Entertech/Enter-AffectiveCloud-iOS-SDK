@@ -13,6 +13,7 @@ import SnapKit
 
 class ThirdVersionViewController: UIViewController {
 
+    let contentView = UIView()
     let common = AffectiveCharts3Pressure()
 //    let rhythms = AffectiveCharts3StackView()
     let bar = AffectiveCharts3BarCommonView()
@@ -20,13 +21,21 @@ class ThirdVersionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let vcViewHeight = self.view.frame.height
+        self.view.addSubview(contentView)
+        
         self.view.addSubview(common)
 //        self.view.addSubview(rhythms)
-        self.view.addSubview(bar)
+        self.contentView.addSubview(bar)
+        contentView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(0)
+            $0.trailing.equalToSuperview().offset(0)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.height.equalTo(311)
+        }
         common.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(64)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(contentView.snp.bottom)
             $0.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
         }
         
@@ -38,10 +47,8 @@ class ThirdVersionViewController: UIViewController {
 //        }
         
         bar.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(common.snp.bottom).offset(16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
+            make.top.equalToSuperview().offset(32)
+            make.bottom.leading.trailing.equalToSuperview()
         }
         
         let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
