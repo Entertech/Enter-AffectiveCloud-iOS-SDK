@@ -249,7 +249,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
     
     internal func calculatAverage() -> Int {
 
-        let left = round(self.lowestVisibleX)
+        let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
         let right = round(self.highestVisibleX)
         
         let leftIndex = Int(left)

@@ -294,7 +294,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         let left = self.lowestVisibleX
         let right = self.highestVisibleX
         
-        let leftIndex = Int(round(left / interval))
+        let leftIndex = Int(round(left / interval)) < 0 ? 0 : Int(round(left / interval))
         let count = Int(round((right-left) / interval))
         
         if leftIndex+count <= gamma.count {

@@ -375,7 +375,7 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
         let left = round(self.chartView.lowestVisibleX)
         let right = round(self.chartView.highestVisibleX)
         
-        let leftIndex = Int(left)
+        let leftIndex = Int(left) < 0 ? 0 : Int(left)
         let count = Int(right-left)
         
         if leftIndex+count <= dataSorce.count {

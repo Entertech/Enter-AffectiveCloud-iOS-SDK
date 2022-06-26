@@ -89,7 +89,7 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 view.frame.size.height = bHeight
                 view.frame.origin.y = 0
                 view.frame.origin.x = -orginFrame.height+bWidth
-                
+                self.chartView.moveViewToX(chartView.last)
             } else {
                 sv?.isScrollEnabled = true
                 sv?.setContentOffset(.zero, animated: true)

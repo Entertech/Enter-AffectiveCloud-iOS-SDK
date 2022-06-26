@@ -78,7 +78,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    var last: Double = 0
     func setDataCount(value: [Double]) {
         dataList.removeAll()
         dataList.append(contentsOf: value)
@@ -119,6 +119,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         if let last = yVals.last {
             self.moveViewToX(last.x)
             self.lastXValue = last.x
+            self.last = last.x
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
             self.overloadY()
@@ -126,6 +127,8 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         
         
     }
+    
+    
     
     func overloadY() {
         let leftX = Int(round(self.lowestVisibleX) - self.chartXMin)
@@ -219,7 +222,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     
     internal func calculatAverage() -> Int {
 
-        let left = round(self.lowestVisibleX)
+        let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
         let right = round(self.highestVisibleX)
         
         let leftIndex = Int(left)
