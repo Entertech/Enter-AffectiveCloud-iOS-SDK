@@ -61,7 +61,7 @@ public class AffectiveCharts3BarCommonView: UIView {
 
 extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
-        if let vc = self.parentViewController(), let view = vc.view, let parent = self.superview{
+        if let vc = self.parentViewController(), let view = vc.view, let parent = self.superview?.superview{
             var sv: UIScrollView?
             for e in view.subviews {
                 if e.isKind(of: UIScrollView.self) {
@@ -69,7 +69,6 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                     break
                 }
             }
-            
             
             let orginFrame = view.frame
             let bHeight = UIScreen.main.bounds.height
@@ -99,9 +98,10 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 view.frame.origin.x = 0
                 view.frame.size.width = bWidth
                 view.frame.size.height = bHeight
-                
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(311)
+                }
                 self.snp.updateConstraints {
                     $0.leading.equalToSuperview().offset(16)
                     $0.trailing.equalToSuperview().offset(-16)
