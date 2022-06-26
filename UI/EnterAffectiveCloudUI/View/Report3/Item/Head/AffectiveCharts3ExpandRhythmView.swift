@@ -25,8 +25,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
                 title = "Average Percentage".uppercased()
             case .month:
                 title = "Daily Average Percentage".uppercased()
+                expandBtn.isHidden = true
             case .year:
                 title = "Monthly Average Percentage".uppercased()
+                expandBtn.isHidden = true
             }
             _ = infoView.setUI(title: title).setLayout()
         }
@@ -171,7 +173,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         
         let dateFrom = Date(timeIntervalSince1970: round(timeFrom))
 
-        if Calendar.current.component(.day, from: dateFrom) == 1 {
+        if Calendar.current.component(.day, from: dateFrom) == 1 && style != .session {
             lk_formatter.dateFormat = "MMM yyyy"
             let time = lk_formatter.string(from: dateFrom)
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)

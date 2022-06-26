@@ -27,9 +27,10 @@ class AffectiveCharts3ExpandHeaderView: UIView {
             title = theme.chartType.session
         case .month:
             title = theme.chartType.month
+            expandBtn.isHidden = true
         case .year:
             title = theme.chartType.year
-            
+            expandBtn.isHidden = true
         }
         infoView.setLabelColor(color: ColorExtension.textLv2)
             .setAverageLabel(value: title)

@@ -24,9 +24,10 @@ public class AffectiveCharts3BarCommonView: UIView {
         self.theme = theme
         self.startDate = Date.init(timeIntervalSince1970: theme.startTime)
         self.backgroundColor = ColorExtension.bgZ1
+        titleView.setTheme(theme).build(isAlreadShow: isFullScreen)
         chartView = AffectiveCharts3RoundCornerBar(theme: theme)
         chartView.theme = theme
-        titleView.setTheme(theme).build(isAlreadShow: isFullScreen)
+        
         return self
     }
     

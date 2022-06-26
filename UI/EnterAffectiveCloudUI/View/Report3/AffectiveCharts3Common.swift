@@ -278,7 +278,7 @@ extension AffectiveCharts3LineCommonView {
 extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
         
-        if let vc = self.parentViewController(), let view = vc.view {
+        if let vc = self.parentViewController(), let view = vc.view, let parent = self.superview?.superview{
             var sv: UIScrollView?
             for e in view.subviews {
                 if e.isKind(of: UIScrollView.self) {
@@ -288,46 +288,33 @@ extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
             }
             
             let orginFrame = view.frame
-            let orginSelfFrame = view.convert(self.chartView.frame, from: self)
             let bHeight = UIScreen.main.bounds.height
             let bWidth = UIScreen.main.bounds.width
             if flag {
+                sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
                 sv?.isScrollEnabled = false
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(64)
-                    $0.trailing.equalToSuperview().offset(-44)
+
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(bWidth)
                 }
                 vc.navigationController?.setNavigationBarHidden(true, animated: true)
                 vc.tabBarController?.tabBar.isHidden = true
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
                 view.frame.size.height = bHeight
-                
-                let scale = bWidth/orginSelfFrame.height
-                view.frame.size.width = view.frame.size.width*scale
                 view.frame.origin.y = 0
-                view.frame.origin.x =  -(orginFrame.height-orginSelfFrame.height)*scale+orginSelfFrame.origin.y
-                if theme.style == .session {
-                    self.chartView.dragEnabled = true
-                    chartView.scaleXEnabled = true
-                }
-                
+                view.frame.origin.x = -orginFrame.height+bWidth
             } else {
                 sv?.isScrollEnabled = true
+                sv?.setContentOffset(.zero, animated: true)
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
 
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
                 view.frame.size.width = bWidth
                 view.frame.size.height = bHeight
-                if theme.style == .session {
-                    self.chartView.dragEnabled = false
-                    chartView.scaleXEnabled = false
-                }
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(16)
-                    $0.trailing.equalToSuperview().offset(-16)
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(311)
                 }
                 
             }
