@@ -119,7 +119,6 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         if let last = yVals.last {
             self.moveViewToX(last.x)
             self.lastXValue = last.x
-            self.last = last.x
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
             self.overloadY()

@@ -76,10 +76,7 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
             if flag {
                 sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
                 sv?.isScrollEnabled = false
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(64)
-                    $0.trailing.equalToSuperview().offset(-44)
-                }
+
                 parent.snp.updateConstraints {
                     $0.height.equalTo(bWidth)
                 }
@@ -89,7 +86,6 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 view.frame.size.height = bHeight
                 view.frame.origin.y = 0
                 view.frame.origin.x = -orginFrame.height+bWidth
-                self.chartView.moveViewToX(chartView.last)
             } else {
                 sv?.isScrollEnabled = true
                 sv?.setContentOffset(.zero, animated: true)
@@ -102,10 +98,6 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
                 parent.snp.updateConstraints {
                     $0.height.equalTo(311)
-                }
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(16)
-                    $0.trailing.equalToSuperview().offset(-16)
                 }
                 
             }
