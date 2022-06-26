@@ -74,7 +74,7 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
             let bHeight = UIScreen.main.bounds.height
             let bWidth = UIScreen.main.bounds.width
             if flag {
-                sv?.setContentOffset(.zero, animated: true)
+                sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
                 sv?.isScrollEnabled = false
                 self.snp.updateConstraints {
                     $0.leading.equalToSuperview().offset(64)
@@ -92,6 +92,7 @@ extension AffectiveCharts3BarCommonView: AffectiveCharts3ExpandDelegate {
                 
             } else {
                 sv?.isScrollEnabled = true
+                sv?.setContentOffset(.zero, animated: true)
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
 
                 view.frame.origin.y = 0
