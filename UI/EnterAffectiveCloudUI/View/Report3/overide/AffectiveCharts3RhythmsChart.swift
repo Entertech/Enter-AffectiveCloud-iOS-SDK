@@ -198,7 +198,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
     public func setData(value: Array2D<Double>) {
         
         //setDataCount(brainwave)
-        mapDataList(array2D: brainwave)
+        mapDataList(array2D: value)
     }
     
     internal func brainwaveMapping() -> Array2D<Double>? {
