@@ -206,7 +206,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
 
-        betaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
+        betaBtn.backgroundColor = betaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
         betaBtn.setTitleColor(betaColor, for: .normal)
         betaBtn.layer.cornerRadius = 12
