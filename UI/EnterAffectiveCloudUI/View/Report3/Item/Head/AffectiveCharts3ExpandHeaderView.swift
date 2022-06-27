@@ -34,6 +34,7 @@ class AffectiveCharts3ExpandHeaderView: UIView {
         }
         infoView.setLabelColor(color: ColorExtension.textLv2)
             .setAverageLabel(value: title)
+            .setType(type: theme.style)
             .setAverageNumLabel(value: theme.averageValue, color: theme.themeColor)
             .setUnit(theme.unitText)
             .setTime(from: theme.startTime, to: theme.endTime, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
@@ -149,6 +150,11 @@ class AffectiveCharts3HeaderInfoView: UIView {
             timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             timeLabel.textColor = labelColor
         }
+        return self
+    }
+    
+    func setType(type: AffectiveCharts3FormatOptional) -> Self {
+        self.type = type
         return self
     }
     
