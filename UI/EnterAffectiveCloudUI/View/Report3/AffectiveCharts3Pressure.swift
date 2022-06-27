@@ -80,12 +80,12 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         front1View.snp.makeConstraints {
             $0.top.leading.equalTo(chartView)
             $0.width.equalTo(9)
-            $0.bottom.equalTo(chartView.snp.bottom).offset(-16)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-11)
         }
         front2View.snp.makeConstraints {
             $0.top.trailing.equalTo(chartView)
             $0.width.equalTo(9)
-            $0.bottom.equalTo(chartView.snp.bottom).offset(-16)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-11)
         }
         chartView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -281,64 +281,10 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
     
     
     func overloadY() {
-        let leftX = Int(round(self.chartView.lowestVisibleX) - self.chartView.chartXMin)
-        let rightX = Int(round(self.chartView.highestVisibleX) - self.chartView.chartXMin)
-        var maxValue: Double = 0
-        for i in leftX..<rightX {
-            if let value = self.chartView.lineData?.dataSets.first?.entryForIndex(i) {
-                if value.y > maxValue {
-                    maxValue = value.y
-                }
-            }
-        }
-        setYLable(maxY: maxValue)
+        setYLable(maxY: 0)
     }
     
     private func setYLable(maxY: Double) {
-        var gotIt: Double = 0
-        var part: Int = 0
-        var limitArray: [Int] = []
-        for i in 0...10 {
-            let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
-
-            for e in 4...5 {
-                if value % e == 0 && (value / e) % 5 == 0{
-                    
-                    gotIt = Double(value)
-                    part = e
-                    break
-                }
-            }
-            if gotIt > 0 {
-                break
-            }
-        }
-        
-        guard part > 1 else {return}
-        self.chartView.leftAxis.removeAllLimitLines()
-        
-        let partValue = Int(gotIt)/(part)
-        for i in 0...part {
-            let yAxis = partValue*i
-//            print("maxAxis:\(yAxis)  part:\(i)")
-            limitArray.append(yAxis)
-            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
-            limitLine.drawLabelEnabled = false
-            limitLine.lineWidth = 1
-            limitLine.lineDashLengths = [3, 2]
-            limitLine.lineColor = ColorExtension.lineLight
-            self.chartView.leftAxis.addLimitLine(limitLine)
-        }
-
-
-        yRender?.entries = limitArray
-        self.chartView.setVisibleYRangeMaximum(gotIt, axis: .left)
-        self.chartView.setVisibleYRangeMinimum(gotIt, axis: .left)
-        if theme.style == .month {
-            self.chartView.moveViewTo(xValue: self.chartView.lowestVisibleX, yValue: gotIt/2, axis: .left)
-        } else {
-            self.chartView.moveViewTo(xValue: self.chartView.lowestVisibleX, yValue: gotIt/2, axis: .left)
-        }
         
         let time = self.calculatAverageTime()
         let ave = self.calculatAverage()
