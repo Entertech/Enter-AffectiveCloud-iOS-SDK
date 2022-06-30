@@ -381,7 +381,9 @@ class AffectiveCharts3ExpandRhythmView: UIView {
 extension AffectiveCharts3ExpandRhythmView: AffectiveCharts3ChartChanged {
     func update(single: Int?, mult: (Int, Int, Int, Int, Int)?, from: Double, to: Double) {
         guard let mult = mult else {return}
+        
         self.setRhythms(gamma: mult.0, beta: mult.1, alpha: mult.2, theta: mult.3, delta: mult.4, timeFrom: from, timeTo: to)
+        infoView.isHidden = false
     }
     
     
@@ -492,7 +494,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         deltaNumLabel.text = "--"
         deltaPercentLabel.textColor = deltaColor
         deltaPercentLabel.font = percentFont
-
+        self.isHidden = true
         return self
     }
 
@@ -546,26 +548,36 @@ class AffectiveCharts3RhythmsInfoView: UIView {
     public func setRhythms(gamma: Int, beta: Int, alpha: Int, theta: Int, delta: Int, time: String) -> CGFloat {
         if gamma > 0 {
             gammaNumLabel.text = "\(gamma)"
+        } else if gamma == 0 {
+            gammaNumLabel.text = "--"
         } else {
             gammaEnable = false
         }
         if beta > 0 {
-            betaNumLabel.text = "\(beta)"
+            betaNumLabel.text = "\(gamma)"
+        } else if gamma == 0 {
+            betaNumLabel.text = "--"
         } else {
             betaEnable = false
         }
         if alpha > 0 {
-            alphaNumLabel.text = "\(alpha)"
+            alphaNumLabel.text = "\(gamma)"
+        } else if gamma == 0 {
+            alphaNumLabel.text = "--"
         } else {
             alphaEnable = false
         }
         if theta > 0 {
-            thetaNumLabel.text = "\(theta)"
+            thetaNumLabel.text = "\(gamma)"
+        } else if gamma == 0 {
+            thetaNumLabel.text = "--"
         } else {
             thetaEnable = false
         }
-        if delta > 0 {
-            deltaNumLabel.text = "\(delta)"
+        if delta == 100 {
+            deltaNumLabel.text = "--"
+        } else if gamma > 0 {
+            deltaNumLabel.text = "\(gamma)"
         } else {
             deltaEnable = false
         }
