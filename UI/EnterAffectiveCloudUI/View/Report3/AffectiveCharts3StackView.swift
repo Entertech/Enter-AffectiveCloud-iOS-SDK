@@ -101,29 +101,29 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandRhythmProtocol {
     public func selectLines(lines: Int) {
         delegate?.setLines(value: lines)
         if lines >> 0 & 1 == 1 {
-            chartView.enableGama = false
-        } else {
             chartView.enableGama = true
+        } else {
+            chartView.enableGama = false
         }
         if lines >> 1 & 1 == 1 {
-            chartView.enableBeta = false
-        } else {
             chartView.enableBeta = true
+        } else {
+            chartView.enableBeta = false
         }
         if lines >> 2 & 1 == 1 {
-            chartView.enableAlpha = false
-        } else {
             chartView.enableAlpha = true
+        } else {
+            chartView.enableAlpha = false
         }
         if lines >> 3 & 1 == 1 {
-            chartView.enableTheta = false
-        } else {
             chartView.enableTheta = true
+        } else {
+            chartView.enableTheta = false
         }
         if lines >> 4 & 1 == 1 {
-            chartView.enableDelta = false
-        } else {
             chartView.enableDelta = true
+        } else {
+            chartView.enableDelta = false
         }
 
     }
