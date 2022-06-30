@@ -102,6 +102,27 @@ extension AverageName {
             }
         }
     }
+    
+    var unit: String {
+        get {
+            switch self {
+            case .Attention:
+                return "min"
+            case .Relaxation:
+                return "min"
+            case .Pressure:
+                return "min"
+            case .Heart:
+                return "bpm"
+            case .HRV:
+                return "ms"
+            case .Meditation:
+                return "min"
+            case .Coherence:
+                return "min"
+            }
+        }
+    }
 }
 
 public enum AverageCompare: String {
@@ -144,28 +165,8 @@ public class PrivateAverageView: UIView {
                 let name = categoryName
                 let total = newValue.reduce(0, +)
                 let averageValueTemp = Float(total) / Float(newValue.count)
-                
-                if name == .Coherence {
-                    chart.valuesSpect = newValue
-                    let min = Int(averageValueTemp/60)
-                    let sec = Int(averageValueTemp)%60
-                    let minStr = "\(min)"
-                    let secStr = "\(sec)"
-                    let attributedText = NSMutableAttributedString(string:"\(min)min \(sec)s")
-                    let style = NSMutableParagraphStyle()
-                    style.alignment = .left
-                    style.lineSpacing = 5
-                    let minLen = minStr.count
-                    let secLen = secStr.count
-                    attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen), 4))
-                    
-                    attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen)+4+Int(secLen), 1))
-                    attributedText.addAttributes([NSAttributedString.Key.paragraphStyle: style], range: NSMakeRange(0, attributedText.length))
-                    chart.averageNumLabel.attributedText = attributedText
-                } else {
-                    chart.values = newValue
-                    chart.averageValue = lroundf(Float(total) / Float(newValue.count))
-                }
+                chart.values = newValue
+                chart.averageValue = Int(ceilf(Float(total) / Float(newValue.count)))
                 
                 let averageValue = lroundf(averageValueTemp)
                 let current = newValue.first!
@@ -292,6 +293,7 @@ public class PrivateAverageView: UIView {
             chart.lastSevenTime = "Last 7 times"
             chart.currentBarColor = newValue.theme
             icon.tintColor = newValue.theme
+            chart.unitText = newValue.unit
         }
     }
     

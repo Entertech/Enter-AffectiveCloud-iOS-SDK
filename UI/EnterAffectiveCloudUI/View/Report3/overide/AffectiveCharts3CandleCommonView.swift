@@ -257,10 +257,14 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         
         if leftIndex+count <= dataList.count {
             var sum = 0.0
+            var num = 0
             for i in leftIndex..<leftIndex+count {
+                if dataList[i] > 0 {
+                    num += 1
+                }
                 sum += dataList[i]
             }
-            let ave = Int(round(sum / Double(count)))
+            let ave = Int(ceil(sum / Double(num > 0 ? num : 1)))
             return ave
         } else {
             return 0

@@ -326,10 +326,14 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
         
         if leftIndex+count <= dataSorce.count {
             var sum = 0.0
+            var num = 0
             for i in leftIndex..<leftIndex+count {
+                if dataSorce[i] > 0 {
+                    num += 1
+                }
                 sum += Double(dataSorce[i])
             }
-            let ave = Int(round(sum / Double(count)))
+            let ave = Int(ceil(sum / Double(num > 0 ? num : 1)))
             return ave
         } else {
             return 0
