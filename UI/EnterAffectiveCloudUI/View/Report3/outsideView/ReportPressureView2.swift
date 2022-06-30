@@ -23,7 +23,7 @@ public class PressureIntroView: UIView {
                 text = "Low"
             }
             numLabel.text = text
-            circleView.currentValue = CGFloat(value)
+            circleView.currentValue = CGFloat(newValue)
         }
     }
 
