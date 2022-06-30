@@ -97,34 +97,35 @@ public class AffectiveCharts3StackView: UIView {
     
 }
 
-extension AffectiveCharts3StackView: RhythmsViewDelegate {
-    public func setRhythmsEnable(value: Int) {
-        delegate?.setLines(value: value)
-        switch value {
-        case 1:
+extension AffectiveCharts3StackView: AffectiveCharts3ExpandRhythmProtocol {
+    public func selectLines(lines: Int) {
+        delegate?.setLines(value: lines)
+        if lines >> 0 & 1 == 1 {
             chartView.enableGama = false
-        case 2:
+        } else {
             chartView.enableGama = true
-        case 4:
-            chartView.enableBeta = false
-        case 8:
-            chartView.enableBeta = true
-        case 16:
-            chartView.enableAlpha = false
-        case 32:
-            chartView.enableAlpha = true
-        case 64:
-            chartView.enableTheta = false
-        case 128:
-            chartView.enableTheta = true
-        case 256:
-            chartView.enableDelta = false
-        case 512:
-            chartView.enableDelta = true
-        default:
-            break
-            
         }
+        if lines >> 1 & 1 == 1 {
+            chartView.enableBeta = false
+        } else {
+            chartView.enableBeta = true
+        }
+        if lines >> 2 & 1 == 1 {
+            chartView.enableAlpha = false
+        } else {
+            chartView.enableAlpha = true
+        }
+        if lines >> 3 & 1 == 1 {
+            chartView.enableTheta = false
+        } else {
+            chartView.enableTheta = true
+        }
+        if lines >> 4 & 1 == 1 {
+            chartView.enableDelta = false
+        } else {
+            chartView.enableDelta = true
+        }
+
     }
     
     

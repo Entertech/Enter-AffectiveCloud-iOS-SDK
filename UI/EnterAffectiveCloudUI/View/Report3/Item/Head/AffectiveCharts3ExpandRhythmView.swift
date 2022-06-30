@@ -7,6 +7,9 @@
 //
 
 import UIKit
+public protocol AffectiveCharts3ExpandRhythmProtocol: AnyObject {
+    func selectLines(lines: Int)
+}
 
 class AffectiveCharts3ExpandRhythmView: UIView {
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
@@ -15,7 +18,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public var thetaColor = UIColor.colorWithHexString(hexColor: "#5FC695")
     public var deltaColor = UIColor.colorWithHexString(hexColor: "#5E75FF")
 
-    public weak var delegate: RhythmsViewDelegate?
+    public weak var delegate: AffectiveCharts3ExpandRhythmProtocol?
     public weak var expandDelegate: AffectiveCharts3ExpandDelegate?
     public var style = AffectiveCharts3FormatOptional.session {
         didSet {
@@ -34,15 +37,17 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         }
     }
     private var isNotShowExpand = true
+    private var lines = 31
     /// 伽马线是否可用
     public lazy var gamaEnable: Bool = true {
         willSet {
             if newValue {
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 1)
+             
             } else {
+                
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1)
+                
             }
         }
     }
@@ -52,10 +57,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 3)
+                
             } else {
                 betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 2)
+                
             }
         }
     }
@@ -65,10 +70,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 5)
+                
             } else {
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 4)
+               
             }
         }
     }
@@ -78,10 +83,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 7)
+            
             } else {
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 6)
+               
             }
         }
     }
@@ -91,10 +96,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 9)
+             
             } else {
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 8)
+                
             }
         }
     }
@@ -142,6 +147,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     }
 
     public func setLineEnable(value: Int) {
+        self.lines = value
         if value >> 0 & 1 == 1 {
             gamaEnable = true
         } else {
@@ -302,6 +308,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         gamaEnable = !gamaEnable
+        if gamaEnable {
+            lines += 1
+        } else {
+            lines -= 1
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -310,6 +322,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         betaEnable = !betaEnable
+        if betaEnable {
+            lines += 2
+        } else {
+            lines -= 2
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -318,6 +336,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         alphaEnable = !alphaEnable
+        if alphaEnable {
+            lines += 4
+        } else {
+            lines -= 4
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -326,6 +350,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         thetaEnable = !thetaEnable
+        if thetaEnable {
+            lines += 8
+        } else {
+            lines -= 8
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -334,6 +364,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         deltaEnable = !deltaEnable
+        if deltaEnable {
+            lines += 16
+        } else {
+            lines -= 16
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc func expandAction(_ sender: UIButton) {

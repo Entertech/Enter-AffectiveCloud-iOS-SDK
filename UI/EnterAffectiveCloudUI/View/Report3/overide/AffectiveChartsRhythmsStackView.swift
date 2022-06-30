@@ -250,7 +250,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         
         self.marker = markerView
         markerView.chartView = self
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+10) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.3) {
             let time = self.calculatAverageTime()
             let ave = self.calculatAverage()
             self.dateSouce?.update(single: nil, mult: ave, from: time.0, to: time.1)
