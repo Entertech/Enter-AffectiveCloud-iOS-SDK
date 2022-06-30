@@ -41,37 +41,12 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         }
     }
     
-    public lazy var enableGama = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
+    public lazy var enableGama = true
     
-    public lazy var enableBeta = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
+    public lazy var enableBeta = true
+    public lazy var enableAlpha = true
     
-    public lazy var enableAlpha = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
-    
-    public lazy var enableTheta = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
+    public lazy var enableTheta = true
     
     public lazy var enableDelta = true {
         didSet {
@@ -196,7 +171,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
     ///   - delta: delta description
     ///   - timestamp: 起始时间戳
     public func setData(value: Array2D<Double>) {
-        
+        brainwave = value
         //setDataCount(brainwave)
         mapDataList(array2D: value)
     }
