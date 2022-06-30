@@ -83,7 +83,20 @@ class AffectiveCharts3ExpandHeaderView: UIView {
 extension AffectiveCharts3ExpandHeaderView: AffectiveCharts3ChartChanged {
     func update(single: Int?, mult: (Int, Int, Int, Int, Int)?, from: Double, to: Double) {
         guard let single = single else {return}
-        _ = self.infoView.setAverageNumLabel(value: "\(single)", color: theme.themeColor)
+        var numText = "\(single)"
+        if self.theme.chartType == .pressure {
+            
+            if single > 75 {
+                numText = AffectiveCharts3CohereceState.high.rawValue
+            } else if single > 50 {
+                numText = AffectiveCharts3CohereceState.ele.rawValue
+            } else if single > 25 {
+                numText = AffectiveCharts3CohereceState.nor.rawValue
+            } else {
+                numText = AffectiveCharts3CohereceState.low.rawValue
+            }
+        }
+        _ = self.infoView.setAverageNumLabel(value: numText, color: theme.themeColor)
             .setTime(from: from, to: to, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
     }
     
