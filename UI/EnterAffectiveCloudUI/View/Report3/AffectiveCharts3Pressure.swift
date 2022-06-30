@@ -57,7 +57,12 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         dataSorce.append(contentsOf: array)
         
         //计算抽样
-        sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
+        if theme.style == .session {
+            sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
+        } else {
+            sample = 1
+        }
+        
         
         chartView.leftAxis.axisMaximum = Double(100)
         chartView.leftAxis.axisMinimum = Double(0)
