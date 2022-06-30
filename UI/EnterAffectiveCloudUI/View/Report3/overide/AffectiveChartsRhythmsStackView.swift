@@ -108,22 +108,32 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             case 0:
                 if !enableGama {
                     continue
+                } else {
+                    
                 }
             case 1:
                 if !enableBeta {
                     continue
+                } else {
+                    
                 }
             case 2:
                 if !enableAlpha {
                     continue
+                } else {
+                    
                 }
             case 3:
                 if !enableTheta {
                     continue
+                } else {
+                    
                 }
             case 4:
                 if !enableDelta {
                     continue
+                } else {
+                    
                 }
             default:
                 break
@@ -143,6 +153,20 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             var yVals: [ChartDataEntry] = []
             var notZero: Int = 0
             for i in stride(from: 0, to: waveArray.columns, by: sample) {
+                switch j {
+                case 0:
+                    gamaArray?.append(waveArray[i, j])
+                case 1:
+                    betaArray?.append(waveArray[i, j])
+                case 2:
+                    alphaArray?.append(waveArray[i, j])
+                case 3:
+                    thetaArray?.append(waveArray[i, j])
+                case 4:
+                    deltaArray?.append(waveArray[i, j])
+                default:
+                    break
+                }
                 if i < initIndex{  //为0的为无效数据
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
                 } else {
