@@ -12,35 +12,26 @@ public class PressureIntroView: UIView {
 
     public var value:Int =  0 {
         willSet {
-            
-//            circleView.currentValue = CGFloat(newValue)
-//            circleView.drawLayer()
-            if newValue >= stateArray[0] && newValue <= stateArray[1] {
-                state = .low
-            } else if newValue >= stateArray[1] && newValue <= stateArray[2] {
-                state = .nor
-            } else  {
-                state = .high
-            }
-            numLabel.text = "\(state.rawValue)"
-        }
-    }
-    //state
-    public var state: PrivateReportState = .nor{
-        willSet {
-            if language == .ch {
-                stateLabel.text = newValue.ch
+            var text = ""
+            if newValue >= stateArray[3] {
+                text = "High"
+            } else if newValue >= stateArray[2] {
+                text = "Elevalted"
+            } else if newValue >= stateArray[1] {
+                text = "Normal"
             } else {
-                stateLabel.text = newValue.rawValue
+                text = "Low"
             }
-            
+            numLabel.text = text
+            circleView.currentValue = CGFloat(value)
         }
     }
+
     public var language = LanguageEnum.en
     private let numLabel = UILabel()
     private let stateLabel = UILabel()
     public let circleView = ReportSemiCircle3()
-    public var stateArray:[Int] = [0 ,20, 70, 100] 
+    public var stateArray:[Int] = [0 ,25, 50, 75, 100]
     private let titleLabel = UILabel()
     private let button = UIImageView()
     private let bgImage = UIImageView()
@@ -135,14 +126,13 @@ public class PressureIntroView: UIView {
             $0.edges.equalToSuperview()
         }
         
-        numLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        titleLabel.text = "Pressure"
+        numLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        titleLabel.text = "Stress"
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = ColorExtension.textLv1
         
 //        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
 
-        stateLabel.text = state.rawValue
         stateLabel.layer.cornerRadius = 8.5
         stateLabel.layer.masksToBounds = true
         stateLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
