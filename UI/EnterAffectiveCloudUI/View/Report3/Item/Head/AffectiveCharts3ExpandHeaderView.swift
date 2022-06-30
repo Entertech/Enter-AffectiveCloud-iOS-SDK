@@ -143,18 +143,20 @@ class AffectiveCharts3HeaderInfoView: UIView {
     func setTime(from: TimeInterval, to: TimeInterval, startFormatter: String, endFormatter: String) -> Self {
         let dateFrom = Date.init(timeIntervalSince1970: round(from))
         let dateTo = Date.init(timeIntervalSince1970: round(to))
-        
-        if Calendar.current.component(.day, from: dateFrom) == 1 && type != .session {
-            var str = "yyyy"
-            if type == .month {
-                str = "MMM yyyy"
-            }
+        if type == .month && Calendar.current.component(.day, from: dateFrom) == 1 {
+            let str = "MMM yyyy"
             lk_formatter.dateFormat = str
             let time = lk_formatter.string(from: dateFrom)
             timeLabel.text = time
             timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             timeLabel.textColor = labelColor
-
+        } else if type == .year && Calendar.current.component(.month, from: dateFrom) == 1{
+            let str = "yyyy"
+            lk_formatter.dateFormat = str
+            let time = lk_formatter.string(from: dateFrom)
+            timeLabel.text = time
+            timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+            timeLabel.textColor = labelColor
         } else {
             lk_formatter.dateFormat = startFormatter
             timeLabel.text = lk_formatter.string(from: dateFrom)

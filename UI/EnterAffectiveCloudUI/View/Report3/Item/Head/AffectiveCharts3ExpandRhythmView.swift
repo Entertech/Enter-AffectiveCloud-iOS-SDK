@@ -178,12 +178,15 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public func setRhythms(gamma: Int, beta: Int, alpha: Int, theta: Int, delta: Int, timeFrom: TimeInterval, timeTo: TimeInterval) {
         
         let dateFrom = Date(timeIntervalSince1970: round(timeFrom))
-
-        if Calendar.current.component(.day, from: dateFrom) == 1 && style != .session {
+        
+        if style == .month && Calendar.current.component(.day, from: dateFrom) == 1 {
             lk_formatter.dateFormat = "MMM yyyy"
             let time = lk_formatter.string(from: dateFrom)
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
-
+        } else if style == .year && Calendar.current.component(.month, from: dateFrom) == 1 {
+            lk_formatter.dateFormat = "yyyy"
+            let time = lk_formatter.string(from: dateFrom)
+            _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
         } else {
             lk_formatter.dateFormat = style.fromFormat
             let fromText = lk_formatter.string(from: dateFrom)
@@ -193,7 +196,6 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             let time = fromText + toText
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
         }
-        infoView.isHidden = false
     }
 
     /// ui
@@ -270,7 +272,6 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
         }
         expandBtn.addTarget(self, action: #selector(expandAction(_:)), for: .touchUpInside)
-        infoView.isHidden = true
         
 
         addSubview(btnContentView)
@@ -444,6 +445,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         gammaImage.image = UIImage.loadImage(name: "gamma", any: classForCoder)
         gammaNumLabel.textColor = gammaColor
         gammaNumLabel.font = numFont
+        gammaNumLabel.text = "--"
         gammaPercentLabel.textColor = gammaColor
         gammaPercentLabel.font = percentFont
 
@@ -454,6 +456,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         betaImage.image = UIImage.loadImage(name: "beta", any: classForCoder)
         betaNumLabel.textColor = betaColor
         betaNumLabel.font = numFont
+        betaNumLabel.text = "--"
         betaPercentLabel.textColor = betaColor
         betaPercentLabel.font = percentFont
 
@@ -464,6 +467,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         alphaImage.image = UIImage.loadImage(name: "alpha", any: classForCoder)
         alphaNumLabel.textColor = alphaColor
         alphaNumLabel.font = numFont
+        alphaNumLabel.text = "--"
         alphaPercentLabel.textColor = alphaColor
         alphaPercentLabel.font = percentFont
 
@@ -474,6 +478,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         thetaImage.image = UIImage.loadImage(name: "theta", any: classForCoder)
         thetaNumLabel.textColor = thetaColor
         thetaNumLabel.font = numFont
+        thetaNumLabel.text = "--"
         thetaPercentLabel.textColor = thetaColor
         thetaPercentLabel.font = percentFont
 
@@ -484,6 +489,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         deltaImage.image = UIImage.loadImage(name: "delta", any: classForCoder)
         deltaNumLabel.textColor = deltaColor
         deltaNumLabel.font = numFont
+        deltaNumLabel.text = "--"
         deltaPercentLabel.textColor = deltaColor
         deltaPercentLabel.font = percentFont
 
