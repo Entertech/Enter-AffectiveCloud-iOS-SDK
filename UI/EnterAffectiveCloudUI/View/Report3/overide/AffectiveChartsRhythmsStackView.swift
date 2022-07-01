@@ -329,17 +329,21 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             var alphaSum = 0.0
             var thetaSum = 0.0
             var deltaSum = 0.0
+            var validCount = 0
             for i in leftIndex..<leftIndex+count {
+                if alpha[i] > 0 {
+                    validCount += 1
+                }
                 gammaSum += gamma[i]
                 betaSum += beta[i]
                 alphaSum += alpha[i]
                 thetaSum += theta[i]
                 deltaSum += delta[i]
             }
-            let gammaEve = Int(round(gammaSum / Double(gamma.count)))
-            let betaEve = Int(round(betaSum / Double(gamma.count)))
-            let alphaEve = Int(round(alphaSum / Double(gamma.count)))
-            let thetaEve = Int(round(thetaSum / Double(gamma.count)))
+            let gammaEve = Int(round(gammaSum / Double(validCount)))
+            let betaEve = Int(round(betaSum / Double(validCount)))
+            let alphaEve = Int(round(alphaSum / Double(validCount)))
+            let thetaEve = Int(round(thetaSum / Double(validCount)))
             let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
             return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
         } else {
