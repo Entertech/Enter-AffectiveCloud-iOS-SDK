@@ -554,30 +554,30 @@ class AffectiveCharts3RhythmsInfoView: UIView {
             gammaEnable = false
         }
         if beta > 0 {
-            betaNumLabel.text = "\(gamma)"
-        } else if gamma == 0 {
+            betaNumLabel.text = "\(beta)"
+        } else if beta == 0 {
             betaNumLabel.text = "--"
         } else {
             betaEnable = false
         }
         if alpha > 0 {
-            alphaNumLabel.text = "\(gamma)"
-        } else if gamma == 0 {
+            alphaNumLabel.text = "\(alpha)"
+        } else if alpha == 0 {
             alphaNumLabel.text = "--"
         } else {
             alphaEnable = false
         }
         if theta > 0 {
-            thetaNumLabel.text = "\(gamma)"
-        } else if gamma == 0 {
+            thetaNumLabel.text = "\(theta)"
+        } else if theta == 0 {
             thetaNumLabel.text = "--"
         } else {
             thetaEnable = false
         }
         if delta == 100 {
             deltaNumLabel.text = "--"
-        } else if gamma > 0 {
-            deltaNumLabel.text = "\(gamma)"
+        } else if delta > 0 {
+            deltaNumLabel.text = "\(delta)"
         } else {
             deltaEnable = false
         }
