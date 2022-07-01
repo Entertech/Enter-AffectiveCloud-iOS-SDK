@@ -35,6 +35,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.dragDecelerationEnabled = false
         self.extraTopOffset = 92
         self.legend.enabled = false
+        self.xAxisRenderer = AffectiveChart3CommonXRender(viewPortHandler: self.viewPortHandler, axis: self.xAxis, transformer: self.getTransformer(forAxis: .left))
         let marker = AffectiveCharts3CommonMarkerView(theme: theme)
         marker.chartView = self
         self.marker = marker

@@ -29,6 +29,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.highlightPerTapEnabled = false
         self.highlightPerDragEnabled = false
         self.dragDecelerationEnabled = false
+        self.xAxisRenderer = AffectiveChart3CommonXRender(viewPortHandler: self.viewPortHandler, axis: self.xAxis, transformer: self.getTransformer(forAxis: .left))
 
         self.extraTopOffset = 92
         self.legend.enabled = false
