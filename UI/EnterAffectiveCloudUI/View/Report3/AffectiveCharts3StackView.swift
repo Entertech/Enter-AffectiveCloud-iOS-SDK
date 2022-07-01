@@ -30,7 +30,7 @@ public class AffectiveCharts3StackView: UIView {
     
 
     public func build(value: Array2D<Double>) {
-
+        guard value.columns > 0 else {return}
         chartView.setData(value: value)
     }
 

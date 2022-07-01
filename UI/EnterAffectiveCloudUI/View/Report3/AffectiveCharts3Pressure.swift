@@ -54,6 +54,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     }
     
     public override func setData(_ array: [Int]) -> Self {
+        guard array.count > 0 else {return}
         dataSorce.append(contentsOf: array)
         
         //计算抽样

@@ -56,6 +56,7 @@ public class AffectiveCharts3BarCommonView: UIView {
     }
     
     public func build(array: [Double]) {
+        guard array.count > 0 else {return}
         chartView.setDataCount(value: array)
     }
 }

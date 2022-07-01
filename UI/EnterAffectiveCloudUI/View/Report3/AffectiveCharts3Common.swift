@@ -98,6 +98,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     }
 
     public func setData(_ array: [Int]) -> Self {
+        guard array.count > 0 else {return self}
         dataSorce.append(contentsOf: array)
         
         //计算抽样
