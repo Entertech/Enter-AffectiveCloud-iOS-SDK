@@ -383,7 +383,7 @@ extension AffectiveCharts3ExpandRhythmView: AffectiveCharts3ChartChanged {
         guard let mult = mult else {return}
         
         self.setRhythms(gamma: mult.0, beta: mult.1, alpha: mult.2, theta: mult.3, delta: mult.4, timeFrom: from, timeTo: to)
-        infoView.isHidden = false
+        
     }
     
     
@@ -494,7 +494,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         deltaNumLabel.text = "--"
         deltaPercentLabel.textColor = deltaColor
         deltaPercentLabel.font = percentFont
-        self.isHidden = true
+        
         return self
     }
 
