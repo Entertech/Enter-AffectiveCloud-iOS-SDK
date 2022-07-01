@@ -541,7 +541,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         deltaNumLabel.frame = CGRect(x: 24.5, y: 18, width: 0, height: 21)
         deltaPercentLabel.frame = CGRect(x: 36.5, y: 22, width: 0, height: 17)
         timeLabel.frame = CGRect(x: 8, y: 39, width: 240, height: 14)
-
+        
         return self
     }
 
@@ -574,7 +574,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         } else {
             thetaEnable = false
         }
-        if delta == 100 {
+        if delta == 100 || delta == 0 {
             deltaNumLabel.text = "--"
         } else if delta > 0 {
             deltaNumLabel.text = "\(delta)"
