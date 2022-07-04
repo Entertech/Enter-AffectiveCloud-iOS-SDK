@@ -53,13 +53,13 @@ public class RelaxationIntroView: UIView {
     public var relaxationStateArray = [0 ,60, 80, 100] //放松度等级分段
     
     
-    public var relaxationStateColor = UIColor.colorWithHexString(hexColor: "abb7ff") {
+    public var relaxationStateColor = ColorExtension.blue5 {
         willSet {
             relaxationNumberView.stateColor = newValue
         }
     }
 
-    public var relaxationStateTextColor = UIColor.colorWithHexString(hexColor: "555b7f") {
+    public var relaxationStateTextColor = ColorExtension.blue2 {
         willSet {
             relaxationNumberView.stateTextColor = newValue
         }
