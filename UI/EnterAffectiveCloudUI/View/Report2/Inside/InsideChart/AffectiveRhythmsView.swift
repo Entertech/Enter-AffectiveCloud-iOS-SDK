@@ -180,7 +180,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             chartHead.expandBtn.isHidden = !newValue
         }
     }
-    
+    private var isLayout = false
     private let gamaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let betaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let alphaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
@@ -197,17 +197,37 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     private lazy var deltaIcon = UIImage.highlightIcon(centerColor: deltaColor)
     public init() {
         super.init(frame: CGRect.zero)
-        setUI()
+        self.addSubview(chartView)
+        self.addSubview(btnContentView)
+        self.addSubview(minLabel)
+        self.addSubview(chartHead)
+        setLayout()
     }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setUI()
+        self.addSubview(chartView)
+        self.addSubview(btnContentView)
+        self.addSubview(minLabel)
+        self.addSubview(chartHead)
+        setLayout()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setUI()
+        self.addSubview(chartView)
+        self.addSubview(btnContentView)
+        self.addSubview(minLabel)
+        self.addSubview(chartHead)
+        setLayout()
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if !isLayout {
+            setUI()
+            isLayout = true
+        }
     }
     
     private func setUI() {
@@ -287,11 +307,8 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         chartView.addGestureRecognizer(pressGesture)//添加长按事件
         
-        self.addSubview(chartView)
-        self.addSubview(btnContentView)
-        self.addSubview(minLabel)
-        self.addSubview(chartHead)
-        setLayout()
+
+        
     }
     
     
