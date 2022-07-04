@@ -161,7 +161,7 @@ public class PrivateAverageView: UIView {
     public var values: [Int] = [] {
         willSet {
             if newValue.count > 0 {
-                
+                self.chart.isHidden = false
                 let name = categoryName
                 let total = newValue.reduce(0, +)
                 let averageValueTemp = Float(total) / Float(newValue.count)
@@ -185,6 +185,8 @@ public class PrivateAverageView: UIView {
                     self.setCompareText(name: name.ch, compare: compareText.ch)
                 }
                     
+            } else {
+                self.chart.isHidden = true
             }
 
         }

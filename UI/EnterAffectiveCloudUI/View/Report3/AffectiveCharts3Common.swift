@@ -75,7 +75,8 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.xAxis.axisMaxLabels = 8
         switch theme.style {
         case .session:
-            chartView.dragEnabled = false
+            chartView.dragEnabled = true
+            chartView.scaleXEnabled = true
             chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
         case .month:
             chartView.dragEnabled = true
