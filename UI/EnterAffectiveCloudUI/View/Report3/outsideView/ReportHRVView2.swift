@@ -24,7 +24,7 @@ public class HRVIntroView: UIView {
     
     public var value: Float = 0 {
         willSet {
-            numLabel.text = "\(Int(ceilf(newValue/60.0)))"
+            numLabel.text = "\(Int(newValue))"
         }
     }
  
