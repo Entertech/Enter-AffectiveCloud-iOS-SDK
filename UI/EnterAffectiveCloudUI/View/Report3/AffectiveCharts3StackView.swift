@@ -37,6 +37,8 @@ public class AffectiveCharts3StackView: UIView {
     
     public func setRhythmLineEnable(value: Int) -> Self {
         infoView.setLineEnable(value: value)
+        let timeInterval = Date().timeIntervalSince1970
+        infoView.setRhythms(gamma: 0, beta: 0, alpha: 0, theta: 0, delta: 0, timeFrom: timeInterval, timeTo: timeInterval)
         rhythmsLinesStore = value
         return self
     }
