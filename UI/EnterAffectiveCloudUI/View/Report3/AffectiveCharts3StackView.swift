@@ -150,7 +150,10 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
             if flag {
                 sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
                 sv?.isScrollEnabled = false
-
+                chartView.snp.updateConstraints {
+                    $0.leading.equalTo(80)
+                    $0.trailing.equalTo(80)
+                }
                 parent.snp.updateConstraints {
                     $0.height.equalTo(bWidth)
                 }
@@ -164,7 +167,10 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
                 sv?.isScrollEnabled = true
                 sv?.setContentOffset(.zero, animated: true)
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-
+                chartView.snp.updateConstraints {
+                    $0.leading.equalTo(0)
+                    $0.trailing.equalTo(0)
+                }
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
                 view.frame.size.width = bWidth
