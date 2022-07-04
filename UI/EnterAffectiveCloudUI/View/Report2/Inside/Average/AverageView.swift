@@ -107,11 +107,11 @@ extension AverageName {
         get {
             switch self {
             case .Attention:
-                return "min"
+                return ""
             case .Relaxation:
-                return "min"
+                return ""
             case .Pressure:
-                return "min"
+                return ""
             case .Heart:
                 return "bpm"
             case .HRV:
