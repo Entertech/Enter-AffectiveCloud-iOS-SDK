@@ -65,7 +65,8 @@ public class AffectiveCharts3StackView: UIView {
         chartView.delegate = self
         chartView.dateSouce = infoView
         chartView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-8)
         }
         return self
     }
@@ -153,6 +154,7 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
                 chartView.snp.updateConstraints {
                     $0.leading.equalTo(80)
                     $0.trailing.equalTo(80)
+                    $0.bottom.equalToSuperview().offset(-32)
                 }
                 parent.snp.updateConstraints {
                     $0.height.equalTo(bWidth)
@@ -170,6 +172,7 @@ extension AffectiveCharts3StackView: AffectiveCharts3ExpandDelegate {
                 chartView.snp.updateConstraints {
                     $0.leading.equalTo(0)
                     $0.trailing.equalTo(0)
+                    $0.bottom.equalToSuperview().offset(-8)
                 }
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
