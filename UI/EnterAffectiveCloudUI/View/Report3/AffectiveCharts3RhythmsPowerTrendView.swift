@@ -246,6 +246,26 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-16)
         }
+        gamaBtn.snp.makeConstraints {
+            $0.width.equalTo(44)
+            $0.height.equalTo(24)
+        }
+        betaBtn.snp.makeConstraints {
+            $0.width.equalTo(44)
+            $0.height.equalTo(24)
+        }
+        alphaBtn.snp.makeConstraints {
+            $0.width.equalTo(44)
+            $0.height.equalTo(24)
+        }
+        thetaBtn.snp.makeConstraints {
+            $0.width.equalTo(44)
+            $0.height.equalTo(24)
+        }
+        deltaBtn.snp.makeConstraints {
+            $0.width.equalTo(44)
+            $0.height.equalTo(24)
+        }
         
         gamaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         gamaBtn.setTitle("γ", for: .normal)
