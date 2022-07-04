@@ -328,7 +328,7 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
        
         btnContentView.alignment = .fill
         btnContentView.axis = .horizontal
-        btnContentView.distribution = .fillEqually
+        btnContentView.distribution = .fill
         btnContentView.spacing = (UIScreen.main.bounds.width - 32 - 44*5)/4
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
