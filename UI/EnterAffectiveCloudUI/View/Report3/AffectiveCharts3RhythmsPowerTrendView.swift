@@ -312,7 +312,8 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         btnContentView.spacing = (UIScreen.main.bounds.width - 32 - 44*5)/4
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
-        chartHead.image = UIImage.init(named: "brainwave")
+        chartHead.image = UIImage.loadImage(name: "brainwave", any: classForCoder)
+        chartHead.btnImage = nil
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         chartView.addGestureRecognizer(pressGesture)//添加长按事件
 
