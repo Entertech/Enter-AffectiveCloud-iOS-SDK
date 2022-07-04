@@ -101,7 +101,7 @@ public class AttentionIntroView: UIView {
         self.addSubview(attentionNumberView)
         self.addSubview(attentionCircleView)
         
-        header.titleText = "attention"
+        header.titleText = "Attention"
         header.image = UIImage.loadImage(name: "attention", any: classForCoder)
         header.btnImage = nil
         bgImage.image = UIImage.loadImage(name: "type_blue_green", any: classForCoder)
