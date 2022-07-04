@@ -41,6 +41,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.leftAxis.gridLineDashPhase = 2.0
         self.leftAxis.gridLineDashLengths = [3.0, 2.0]
         self.leftAxis.drawAxisLineEnabled = false
+        self.leftAxis.drawGridLinesBehindDataEnabled = true
         self.leftAxis.axisMinimum = 0
         self.rightAxis.enabled = false
         
@@ -50,6 +51,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.xAxis.gridLineCap = .round
         self.xAxis.gridLineDashLengths = [2.0, 4.0]
         self.xAxis.axisLineColor = ColorExtension.lineHard
+        self.xAxis.drawGridLinesBehindDataEnabled = true
         self.xAxis.axisLineWidth = 1
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
