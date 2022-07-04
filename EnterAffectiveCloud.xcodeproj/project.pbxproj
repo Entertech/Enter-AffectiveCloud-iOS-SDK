@@ -177,6 +177,7 @@
 		FADD94F12646757E00058649 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F02646757E00058649 /* RecordModel.swift */; };
 		FADD94F326467D7800058649 /* RecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F226467D7800058649 /* RecordAPI.swift */; };
 		FADD94F52648C0E300058649 /* RecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F42648C0E300058649 /* RecordRequest.swift */; };
+		FAF9D3BE2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9D3BD2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +432,7 @@
 		FADD94F02646757E00058649 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
 		FADD94F226467D7800058649 /* RecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAPI.swift; sourceTree = "<group>"; };
 		FADD94F42648C0E300058649 /* RecordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRequest.swift; sourceTree = "<group>"; };
+		FAF9D3BD2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveCharts3RhythmsPowerTrendView.swift; sourceTree = "<group>"; };
 		FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterRealtimeUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -567,6 +569,7 @@
 				FA04A4E1285B0519007FA849 /* AffectiveCharts3StackView.swift */,
 				FA04A4E9285C57F0007FA849 /* AffectiveCharts3BarCommonView.swift */,
 				FA04A4F2285D815F007FA849 /* AffectiveCharts3CandleView.swift */,
+				FAF9D3BD2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift */,
 			);
 			path = Report3;
 			sourceTree = "<group>";
@@ -1567,6 +1570,7 @@
 				FAD3C56923B3666F007E9AE1 /* AffectiveChartPressureView.swift in Sources */,
 				FA04A4D62859C0C4007FA849 /* AffectiveCharts3PressureYRender.swift in Sources */,
 				FA9343932357F48000544239 /* HeartRateReportView.swift in Sources */,
+				FAF9D3BE2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift in Sources */,
 				FAB0BC1823B1FC6B0074C06C /* AffectiveChartBrainSpectrumView.swift in Sources */,
 				FA04A4CD2859A7E6007FA849 /* AffectiveCharts3CoherenceView.swift in Sources */,
 				FAB1DF8623E941A9007ADBA3 /* AffectiveChartRelaxationView.swift in Sources */,

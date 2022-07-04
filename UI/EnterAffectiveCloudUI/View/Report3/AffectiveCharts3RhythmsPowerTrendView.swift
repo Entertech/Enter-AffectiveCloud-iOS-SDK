@@ -9,11 +9,8 @@
 import UIKit
 import Charts
 
-public protocol RhythmsViewDelegate: AnyObject {
-    func setRhythmsEnable(value: Int)
-}
 
-public class AffectiveRhythmsView: UIView, ChartViewDelegate {
+public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     
     /// 数据上传周期，用于计算图表x轴间隔
     public var uploadCycle: UInt = 0 {
@@ -139,7 +136,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     }
     
     /// 标题
-    public var title: String = "Changes during meditation" {
+    public var title: String = "Rhythms Power Trend" {
         willSet {
             chartHead.titleText = newValue
         }
@@ -173,14 +170,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
             return count
         }
     }
-    //MARK:- Private UI
-    private var isChartScale = false {
-        willSet {
-            chartView.scaleXEnabled = newValue
-            chartHead.expandBtn.isHidden = !newValue
-        }
-    }
-    
+
     private let gamaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let betaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let alphaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
@@ -189,7 +179,8 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     private let minLabel = UILabel()
     private let chartView = RhythmsChart()
     private let btnContentView = UIStackView()
-    private let chartHead = PrivateChartViewHead()
+    private let chartHead = PrivateReportViewHead()
+    private let headImage = UIImageView()
     private lazy var gamaIcon = UIImage.highlightIcon(centerColor: gamaColor)
     private lazy var betaIcon = UIImage.highlightIcon(centerColor: betaColor)
     private lazy var alphaIcon = UIImage.highlightIcon(centerColor: alphaColor)
@@ -210,8 +201,52 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         setUI()
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if btnContentView.arrangedSubviews.count == 0 {
+            btnContentView.addArrangedSubview(gamaBtn)
+            btnContentView.addArrangedSubview(betaBtn)
+            btnContentView.addArrangedSubview(alphaBtn)
+            btnContentView.addArrangedSubview(thetaBtn)
+            btnContentView.addArrangedSubview(deltaBtn)
+            
+        }
+    }
+    
     private func setUI() {
-        self.backgroundColor = .clear
+        self.backgroundColor = ColorExtension.bgZ1
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
+        
+        self.addSubview(headImage)
+        self.addSubview(chartView)
+        self.addSubview(btnContentView)
+        self.addSubview(minLabel)
+        self.addSubview(chartHead)
+        self.headImage.snp.makeConstraints {
+            $0.left.right.top.equalToSuperview()
+            $0.height.equalTo(100)
+        }
+        
+        btnContentView.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalToSuperview().offset(-16)
+            $0.top.equalToSuperview().offset(48)
+            $0.height.equalTo(24)
+        }
+        
+        chartView.snp.makeConstraints {
+            $0.left.equalToSuperview().offset(16)
+            $0.right.equalToSuperview().offset(-16)
+            $0.top.equalToSuperview().offset(46)
+            $0.bottom.equalTo(minLabel.snp.top).offset(-6)
+        }
+        
+        minLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-16)
+        }
+        
         gamaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         gamaBtn.setTitle("γ", for: .normal)
         gamaBtn.setTitleColor(gamaColor, for: .normal)
@@ -270,53 +305,24 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         chartView.delegate = self
         chartView.maxDataCount = 300
         chartView.isUserInteractionEnabled = true
-        
+       
         btnContentView.alignment = .fill
-        btnContentView.addArrangedSubview(gamaBtn)
-        btnContentView.addArrangedSubview(betaBtn)
-        btnContentView.addArrangedSubview(alphaBtn)
-        btnContentView.addArrangedSubview(thetaBtn)
-        btnContentView.addArrangedSubview(deltaBtn)
         btnContentView.axis = .horizontal
         btnContentView.distribution = .fillEqually
         btnContentView.spacing = (UIScreen.main.bounds.width - 32 - 44*5)/4
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
-        chartHead.expandBtn.addTarget(self, action: #selector(zoomBtnTouchUpInside(sender:)), for: .touchUpInside)
-        
+        chartHead.image = UIImage.init(named: "brainwave")
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         chartView.addGestureRecognizer(pressGesture)//添加长按事件
-        
-        self.addSubview(chartView)
-        self.addSubview(btnContentView)
-        self.addSubview(minLabel)
-        self.addSubview(chartHead)
-        setLayout()
+
+        headImage.image = UIImage.loadImage(name: "type_blue_yellow", any: classForCoder)
+        headImage.contentMode = .scaleAspectFill
+
+
     }
     
-    
-    private func setLayout() {
-        
-        btnContentView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview().offset(48)
-            $0.height.equalTo(24)
-        }
-        
-        chartView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview().offset(46)
-            $0.bottom.equalTo(minLabel.snp.top).offset(-6)
-        }
-        
-        minLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-16)
-        }
-        
-    }
+
     
     public func setData(gamaList: [Float], betaList: [Float], alphaList: [Float], thetaList: [Float], deltaList: [Float]) {
         chartView.setData(gama: gamaList, beta: betaList, alpha: alphaList, theta: thetaList, delta: deltaList)
@@ -358,81 +364,7 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
         }
         deltaEnable = !deltaEnable
     }
-    
-    fileprivate var isZoomed = false
-    fileprivate var isHiddenNavigationBar = false
-    @objc
-    private func zoomBtnTouchUpInside(sender: UIButton) {
-
-        if !isZoomed {
-            let vc = self.parentViewController()!
-            if let navi = vc.navigationController {
-                 if !navi.navigationBar.isHidden {
-                     isHiddenNavigationBar = true
-                     vc.navigationController?.setNavigationBarHidden(true, animated: true)
-                 }
-             }
-            let view = vc.view
-            let nShowChartView = UIView()
-            nShowChartView.backgroundColor = ColorExtension.bgZ1
-            view?.addSubview(nShowChartView)
-            if #available(iOS 13.0, *) {
-                nShowChartView.backgroundColor = UIColor.systemBackground
-            } else {
-                // Fallback on earlier versions
-                
-            }
-            let chart = AffectiveRhythmsView()
-            nShowChartView.addSubview(chart)
-            chart.chartHead.expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
-            chart.alphaEnable = self.alphaEnable
-            chart.betaEnable = self.betaEnable
-            chart.deltaEnable = self.deltaEnable
-            chart.thetaEnable = self.thetaEnable
-            chart.gamaEnable = self.gamaEnable
-            chart.chartView.uploadCycle = self.uploadCycle
-            chart.chartView.maxDataCount = 500
-            chart.textColor = self.textColor
-            chart.isChartScale = true
-            chart.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
-            chart.isZoomed = true
-            chart.btnContentView.spacing = ((UIScreen.main.bounds.height - 120) - 44 * 5)/4
-            chart.isHiddenNavigationBar = isHiddenNavigationBar
-            chart.chartView.highlightPerTapEnabled = false
-            chart.chartView.highlightPerDragEnabled = false
-            chart.title = self.title
-            chart.chartView.setData(gama: self.chartView.gamaArray, beta: self.chartView.betaArray, alpha: self.chartView.alphaArray, theta: self.chartView.thetaArray, delta: self.chartView.deltaArray)
-            let label = UILabel()
-            label.text = zoomText
-            label.font = UIFont.systemFont(ofSize: 12)
-            chart.chartHead.addSubview(label)
-            label.snp.makeConstraints {
-                $0.right.equalTo(chart.chartHead.expandBtn.snp.left).offset(-12)
-                $0.centerY.equalTo(chart.chartHead.expandBtn.snp.centerY)
-            }
-            nShowChartView.snp.makeConstraints {
-                $0.edges.equalToSuperview()
-            }
-            
-            chart.snp.remakeConstraints {
-                $0.width.equalTo(nShowChartView.snp.height).offset(-88)
-                $0.height.equalTo(nShowChartView.snp.width).offset(-42)
-                $0.center.equalTo(view!.snp.center)
-            }
-            
-        } else {
-            let view = self.superview!
-            if isHiddenNavigationBar {
-                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-            }
-            for e in view.subviews {
-                e.removeFromSuperview()
-            }
-            view.removeFromSuperview()
-        }
-        
-    }
-    
+ 
     @objc
     private func tapGesture(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
@@ -570,3 +502,4 @@ public class AffectiveRhythmsView: UIView, ChartViewDelegate {
     }
 
 }
+
