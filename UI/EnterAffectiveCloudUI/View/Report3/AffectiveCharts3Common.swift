@@ -77,6 +77,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         case .session:
             chartView.dragEnabled = true
             chartView.scaleXEnabled = true
+            chartView.pinchZoomEnabled = true
             chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
         case .month:
             chartView.dragEnabled = true
