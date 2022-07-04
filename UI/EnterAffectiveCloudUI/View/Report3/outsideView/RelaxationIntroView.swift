@@ -50,7 +50,7 @@ public class RelaxationIntroView: UIView {
     
     public var relaxationColor = UIColor.colorWithHexString(hexColor: "5e75ff")
     
-    public var relaxationStateArray = [0 ,60, 80, 100] //放松度等级分段
+    public var relaxationStateArray = [0 ,30, 70, 100] //放松度等级分段
     
     
     public var relaxationStateColor = ColorExtension.blue5 {

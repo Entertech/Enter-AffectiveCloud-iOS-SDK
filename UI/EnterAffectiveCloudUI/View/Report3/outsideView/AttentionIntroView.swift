@@ -50,7 +50,7 @@ public class AttentionIntroView: UIView {
     
     public var attentionColor = ColorExtension.greenPrimary
     
-    public var attentionStateArray = [0 ,60, 80, 100] //放松度等级分段
+    public var attentionStateArray = [0 ,30, 70, 100] //放松度等级分段
     
     
     public var attentionStateColor = ColorExtension.green5 {
