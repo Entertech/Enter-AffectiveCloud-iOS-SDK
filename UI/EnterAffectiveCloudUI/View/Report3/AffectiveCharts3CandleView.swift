@@ -89,7 +89,7 @@ extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
                 sv?.isScrollEnabled = false
                 chartView.snp.updateConstraints {
                     $0.leading.equalToSuperview().offset(80)
-                    $0.trailing.equalToSuperview().offset(80)
+                    $0.trailing.equalToSuperview().offset(-80)
                     $0.bottom.equalToSuperview().offset(-32)
                 }
                 parent.snp.updateConstraints {
