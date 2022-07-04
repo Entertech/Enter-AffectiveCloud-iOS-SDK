@@ -200,12 +200,12 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
             let yAxis = partValue*i
 //            print("maxAxis:\(yAxis)  part:\(i)")
             limitArray.append(yAxis)
-            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
-            limitLine.drawLabelEnabled = false
-            limitLine.lineWidth = 1
-            limitLine.lineDashLengths = [3, 2]
-            limitLine.lineColor = ColorExtension.lineLight
-            self.leftAxis.addLimitLine(limitLine)
+//            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
+//            limitLine.drawLabelEnabled = false
+//            limitLine.lineWidth = 1
+//            limitLine.lineDashLengths = [3, 2]
+//            limitLine.lineColor = ColorExtension.lineLight
+//            self.leftAxis.addLimitLine(limitLine)
         }
 
 
