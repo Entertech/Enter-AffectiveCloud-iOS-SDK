@@ -135,7 +135,9 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.gridGradient = gradient
         switch theme.style {
         case .session:
-            chartView.dragEnabled = false
+            chartView.dragEnabled = true
+            chartView.scaleXEnabled = true
+            chartView.pinchZoomEnabled = true
             chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
         case .month:
             self.dataSouceChanged = titleView
