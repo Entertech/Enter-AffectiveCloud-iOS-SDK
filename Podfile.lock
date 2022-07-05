@@ -57,7 +57,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Charts:
-    :commit: 19b3edbf5415e3b280680c5e1dcc2a4cdf08bd6e
+    :commit: f26427b003cf712d69cf3b76024180181eadf136
     :git: https://github.com/ET-LINK/Charts.git
 
 SPEC CHECKSUMS:

@@ -7,6 +7,7 @@
 //
 
 import Charts
+import UIKit
 
 class AffectiveCharts3CandleCommonView: CombinedChartView {
     var theme: AffectiveChart3Theme!
@@ -90,7 +91,8 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         let data = CombinedChartData()
         
         data.candleData = generateCandleData(low: low, high: high)
-        data.lineData = generateLineData(average)
+        data.lineData = generateLineData(average, min: low)
+        
         self.xAxis.axisMinimum = -0.5
         self.xAxis.axisMaximum = data.xMax + 0.5
         self.data = data
@@ -112,27 +114,38 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         }
     }
     
-    private func generateLineData(_ average: [Double]) -> LineChartData {
+    private func generateLineData(_ average: [Double], min: [Double]) -> LineChartData {
 
         var entries = [ChartDataEntry]()
+        var entriesCircle = [ChartDataEntry]()
         for i in 0..<average.count {
             let entry = ChartDataEntry(x: Double(i), y: average[i])
             entries.append(entry)
+            if min[i] > 0 {
+                entriesCircle.append(entry)
+            }
         }
         
         let set = LineChartDataSet(entries: entries, label: "Line DataSet")
         set.setColor(theme.themeColor)
-        set.setCircleColor(theme.themeColor)
         set.lineWidth = 2
-        set.circleRadius = 3
-        set.circleHoleRadius = 2
-        set.circleHoleColor = ColorExtension.white
+        set.drawCirclesEnabled = false
         set.mode = .linear
         set.drawValuesEnabled = false
-        
         set.axisDependency = .left
         
-        return LineChartData(dataSet: set)
+        let set2 = LineChartDataSet(entries: entriesCircle, label: "Line DataSet 2")
+        set2.setCircleColor(theme.themeColor)
+        set2.circleRadius = 3
+        set2.circleHoleRadius = 2
+        set2.circleHoleColor = ColorExtension.white
+        set2.setColor(theme.themeColor)
+        set2.lineWidth = 2
+        set2.mode = .linear
+        set2.drawValuesEnabled = false
+        set2.axisDependency = .left
+        
+        return LineChartData(dataSets: [set, set2])
     }
     
     private func generateCandleData(low: [Double], high: [Double]) -> CandleChartData {

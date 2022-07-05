@@ -16,7 +16,7 @@ class ThirdVersionViewController: UIViewController {
     let contentView = UIView()
     let common = AffectiveCharts3Pressure()
 //    let rhythms = AffectiveCharts3StackView()
-    let bar = AffectiveCharts3BarCommonView()
+    let bar = AffectiveCharts3CandleView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,23 +112,52 @@ class ThirdVersionViewController: UIViewController {
 //                .setRhythmLineEnable(value: 28)
 //                .build(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta)
 //
+            var values = [Double]()
+            var min = [Double]()
+            var max = [Double]()
+            for (i, e) in alpha.enumerated() {
+                if i > 60 {
+                    break
+                }
+                let random = Int.random(in: 0...1)
+                if random > 0 {
+                    values.append(e)
+                    min.append(delta[i])
+                    max.append(beta[i])
+                } else {
+                    values.append(0.0)
+                    min.append(0.0)
+                    max.append(0.0)
+                }
+            }
             var barTheme = AffectiveChart3Theme()
-            barTheme.style = .year
+            barTheme.style = .month
             barTheme.themeColor = .red
             barTheme.startTime = timeStamp
             barTheme.endTime = timeStamp
-            barTheme.chartName = "Coherence".uppercased()
-            barTheme.averageValue = "\(service.model.relaxationAvg ?? 0)"
-            barTheme.unitText = "min"
-            if let relaxation = service.model.relaxation {
-                let array = relaxation.map { v in
-                    Double(v)
-                }
-                bar.setTheme(barTheme)
-                    .setProperty()
-                    .setLayout()
-                    .build(array: array)
+            barTheme.chartName = "Heart Rate".uppercased()
+            barTheme.averageValue = "\(service.model.heartRateAvg ?? 0)"
+            barTheme.unitText = "bpm"
+            var minAndMax = Array2D(columns: min.count, rows: 2, initialValue: 0.0)
+            for (index, e) in min.enumerated() {
+                minAndMax[index, 0] = e
             }
+            for (index, e) in max.enumerated() {
+                minAndMax[index, 1] = e
+            }
+            bar.setTheme(barTheme)
+                .setProperty()
+                .setLayout()
+                .build(candle: minAndMax, average: values)
+//            if let relaxation = service.model.relaxation {
+//                let array = relaxation.map { v in
+//                    Double(v)
+//                }
+//                bar.setTheme(barTheme)
+//                    .setProperty()
+//                    .setLayout()
+//                    .build(array: array)
+//            }
 
         }
     }
