@@ -59,9 +59,14 @@ public class AffectiveCharts3CandleView: UIView {
         var low: [Double] = []
         var high: [Double] = []
         for j in 0..<candle.columns {
-            
-            low.append(candle[j, 0])
-            high.append(candle[j, 1])
+            var lowTmp = candle[j, 0]
+            var highTmp = candle[j, 1]
+            if highTmp - lowTmp < 8 {
+                lowTmp -= 4
+                highTmp += 4
+            }
+            low.append(lowTmp)
+            high.append(highTmp)
             
         }
 
