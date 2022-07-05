@@ -123,6 +123,8 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
             entries.append(entry)
             if min[i] > 0 {
                 entriesCircle.append(entry)
+            } else {
+                
             }
         }
         
@@ -133,6 +135,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         set.mode = .linear
         set.drawValuesEnabled = false
         set.axisDependency = .left
+        set.highlightEnabled = false
         
         let set2 = LineChartDataSet(entries: entriesCircle, label: "Line DataSet 2")
         set2.setCircleColor(theme.themeColor)
