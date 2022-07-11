@@ -251,10 +251,27 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         self.data = data
         switch style {
         case .session:
-            break
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+                .setTime(start: startDate.timeIntervalSince1970, format: style.format)
+                .setProperty(sample: sample, interval: interval, usePercent: true)
+            
+            self.marker = markerView
+            markerView.chartView = self
         case .month:
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+                .setMonth(month: startDate, format: style.format)
+                .setProperty(sample: sample, interval: interval, usePercent: true)
+            
+            self.marker = markerView
+            markerView.chartView = self
             self.setVisibleXRangeMaximum(31)
         case .year:
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+                .setYear(year: startDate, format: style.format)
+                .setProperty(sample: sample, interval: interval, usePercent: true)
+            
+            self.marker = markerView
+            markerView.chartView = self
             self.setVisibleXRangeMaximum(12)
         }
         if data.dataSetCount > 0 {
@@ -268,12 +285,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         }
         
         
-        let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
-            .setTime(start: startDate.timeIntervalSince1970, format: style.format)
-            .setProperty(sample: sample, interval: interval, usePercent: true)
-        
-        self.marker = markerView
-        markerView.chartView = self
+
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.3) {
             let time = self.calculatAverageTime()
             let ave = self.calculatAverage()
