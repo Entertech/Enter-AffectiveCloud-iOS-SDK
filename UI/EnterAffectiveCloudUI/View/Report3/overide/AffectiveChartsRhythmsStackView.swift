@@ -249,10 +249,23 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         }
         let data = LineChartData(dataSets: sets.reversed())
         self.data = data
+        var ref: [Double] = []
+        if let value = betaArray {
+            ref.append(contentsOf: value)
+        } else if let value = thetaArray {
+            ref.append(contentsOf: value)
+        } else if let value = alphaArray {
+            ref.append(contentsOf: value)
+        } else if let value = gamaArray {
+            ref.append(contentsOf: value)
+        } else if let value = deltaArray {
+            ref.append(contentsOf: value)
+        }
         switch style {
         case .session:
             let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
                 .setTime(start: startDate.timeIntervalSince1970, format: style.format)
+                .setRef(value: ref)
                 .setProperty(sample: sample, interval: interval, usePercent: true)
             
             self.marker = markerView
@@ -260,6 +273,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         case .month:
             let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
                 .setMonth(month: startDate, format: style.format)
+                .setRef(value: ref)
                 .setProperty(sample: sample, interval: interval, usePercent: true)
             
             self.marker = markerView
@@ -268,6 +282,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         case .year:
             let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
                 .setYear(year: startDate, format: style.format)
+                .setRef(value: ref)
                 .setProperty(sample: sample, interval: interval, usePercent: true)
             
             self.marker = markerView

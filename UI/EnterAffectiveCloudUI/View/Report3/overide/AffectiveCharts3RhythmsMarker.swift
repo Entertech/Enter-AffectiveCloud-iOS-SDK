@@ -26,6 +26,7 @@ class AffectiveCharts3RhythmsMarker: MarkerView {
     private var isYear = false
     private var yearStart: Date!
     private var title: String = ""
+    private var ref: [Double] = []
     init(title: String, enableLines: Int) {
         super.init(frame: CGRect.zero)
         self.enableLines = enableLines
@@ -48,6 +49,11 @@ class AffectiveCharts3RhythmsMarker: MarkerView {
         isYear = true
         yearStart = year
         timeFormat = format
+        return self
+    }
+    
+    func setRef(value: [Double]) -> Self{
+        ref.append(contentsOf: value)
         return self
     }
     
@@ -109,18 +115,23 @@ class AffectiveCharts3RhythmsMarker: MarkerView {
                     percentArray[i] = 0
                 }
             }
-            var current = 0
-            for i in (0..<chartData.dataSets.count).reversed() {
-                let value = Int(lround(chartView!.data!.dataSets[i].entryForIndex(index)!.y)) - current
-                for j in (0..<5).reversed() {
-                    if percentArray[j] == 0 {
-                        percentArray[j] = value
-                        break
-                    }
-                }
-                current += value
+            if ref[index] < 1.0 {
                 
+            } else {
+                var current = 0
+                for i in (0..<chartData.dataSets.count).reversed() {
+                    let value = Int(lround(chartView!.data!.dataSets[i].entryForIndex(index)!.y)) - current
+                    for j in (0..<5).reversed() {
+                        if percentArray[j] == 0 {
+                            percentArray[j] = value
+                            break
+                        }
+                    }
+                    current += value
+                    
+                }
             }
+
 
             var time = ""
             if isMonth {
