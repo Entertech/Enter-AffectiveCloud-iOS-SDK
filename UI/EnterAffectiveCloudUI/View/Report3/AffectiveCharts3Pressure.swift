@@ -176,7 +176,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             }
         }
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
+        set.mode = .cubicBezier
 
         if theme.style == .month {
             set.drawCirclesEnabled = true

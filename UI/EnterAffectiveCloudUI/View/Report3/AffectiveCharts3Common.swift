@@ -233,7 +233,7 @@ public class AffectiveCharts3LineCommonView: UIView {
             }
         }
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
+        set.mode = .cubicBezier
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
