@@ -119,7 +119,18 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         
         let entryY = Int(entry.y)
-        if theme.tagValue.count > 0 || theme.unitText.count > 0 {
+        if anotherArray.count > 0 {
+            var index = 0
+            if let dataSets = chartView?.data?.dataSets {
+                index = dataSets.first?.entryIndex(entry: entry) ?? 0
+            }
+            if anotherArray[index] > 0 {
+                numlabel.text = "Coherent"
+            } else {
+                numlabel.text = "Incoherent"
+            }
+        }
+        else  if theme.tagValue.count > 0 || theme.unitText.count > 0 {
             if let dataSets = chartView?.data?.dataSets, dataSets.count > 1 {
                 var index = dataSets[0].entryIndex(entry: entry)
                 if index == -1 {
@@ -131,27 +142,16 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             }
             
         } else {
-            if anotherArray.count > 0 {
-                var index = 0
-                if let dataSets = chartView?.data?.dataSets {
-                    index = dataSets.first?.entryIndex(entry: entry) ?? 0
-                }
-                if anotherArray[index] > 0 {
-                    numlabel.text = "Coherent"
-                } else {
-                    numlabel.text = "Incoherent"
-                }
+            if entryY > 75 {
+                numlabel.text = AffectiveCharts3CohereceState.high.rawValue
+            } else if entryY > 50 {
+                numlabel.text = AffectiveCharts3CohereceState.ele.rawValue
+            } else if entryY > 25 {
+                numlabel.text = AffectiveCharts3CohereceState.nor.rawValue
             } else {
-                if entryY > 75 {
-                    numlabel.text = AffectiveCharts3CohereceState.high.rawValue
-                } else if entryY > 50 {
-                    numlabel.text = AffectiveCharts3CohereceState.ele.rawValue
-                } else if entryY > 25 {
-                    numlabel.text = AffectiveCharts3CohereceState.nor.rawValue
-                } else {
-                    numlabel.text = AffectiveCharts3CohereceState.low.rawValue
-                }
+                numlabel.text = AffectiveCharts3CohereceState.low.rawValue
             }
+            
 
         }
 
