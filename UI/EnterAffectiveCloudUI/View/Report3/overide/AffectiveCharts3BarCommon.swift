@@ -153,8 +153,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         if maxY <= 4 {
             gotIt = 4
             part = 4
-        }
-        if maxY <= 8 {
+        } else if maxY <= 8 {
             gotIt = 8
             part = 4
         } else {
