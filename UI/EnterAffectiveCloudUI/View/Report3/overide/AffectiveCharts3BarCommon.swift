@@ -150,6 +150,10 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         var gotIt: Double = 0
         var part: Int = 0
         var limitArray: [Int] = []
+        if maxY <= 4 {
+            gotIt = 4
+            part = 4
+        }
         if maxY <= 8 {
             gotIt = 8
             part = 4
