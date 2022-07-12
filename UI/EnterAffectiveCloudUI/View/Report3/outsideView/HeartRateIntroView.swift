@@ -48,7 +48,7 @@ public class HeartRateIntroView: UIView {
         headView.image = UIImage.loadImage(name: "heart", any: classForCoder)
         headView.btnImage = nil
         bgImagaView.image = UIImage.loadImage(name: "type_red_blue", any: classForCoder)
-        bgImagaView.contentMode = .scaleAspectFill
+        bgImagaView.contentMode = .scaleToFill
         self.bgImagaView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

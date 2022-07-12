@@ -150,21 +150,27 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         var gotIt: Double = 0
         var part: Int = 0
         var limitArray: [Int] = []
-        for i in 0...10 {
-            let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
+        if maxY <= 8 {
+            gotIt = 8
+            part = 4
+        } else {
+            for i in 0...10 {
+                let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
 
-            for e in 4...5 {
-                if value % e == 0 && (value / e) % 5 == 0{
-                    
-                    gotIt = Double(value)
-                    part = e
+                for e in 4...5 {
+                    if value % e == 0 && (value / e) % 5 == 0{
+                        
+                        gotIt = Double(value)
+                        part = e
+                        break
+                    }
+                }
+                if gotIt > 0 {
                     break
                 }
             }
-            if gotIt > 0 {
-                break
-            }
         }
+
         
         guard part > 1 else {return}
         self.leftAxis.removeAllLimitLines()
