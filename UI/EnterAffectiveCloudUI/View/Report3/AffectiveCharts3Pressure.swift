@@ -29,7 +29,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.leftAxis.labelTextColor = ColorExtension.textLv2
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.leftAxis.gridColor = ColorExtension.lineLight
-        chartView.leftAxis.gridLineWidth = 1
+        chartView.leftAxis.gridLineWidth = 0.5
         chartView.leftAxis.gridLineCap = .round
         chartView.leftAxis.gridLineDashPhase = 2.0
         chartView.leftAxis.gridLineDashLengths = [2.0, 4.0]
@@ -41,7 +41,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
         chartView.xAxis.gridColor = ColorExtension.lineLight
-        chartView.xAxis.gridLineWidth = 1
+        chartView.xAxis.gridLineWidth = 0.5
         chartView.xAxis.gridLineCap = .round
         chartView.xAxis.gridLineDashLengths = [2.0, 4.0]
         chartView.xAxis.axisLineColor = ColorExtension.lineHard

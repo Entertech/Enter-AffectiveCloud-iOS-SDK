@@ -137,7 +137,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLabelsEnabled = false
         leftAxis.gridColor = ColorExtension.lineLight
-        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 1
         leftAxis.gridLineDashLengths = [3, 2]
         leftAxis.setLabelCount(5, force: true)
@@ -153,7 +153,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         xAxis.drawGridLinesEnabled = true
         xAxis.drawAxisLineEnabled = true
-        xAxis.gridLineWidth = 1
+        xAxis.gridLineWidth = 0.5
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
         xAxis.axisLineWidth = 1

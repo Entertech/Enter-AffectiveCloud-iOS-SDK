@@ -56,7 +56,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.leftAxis.labelFont = UIFont.systemFont(ofSize: 11)
         self.leftAxis.labelTextColor = ColorExtension.textLv2
         self.leftAxis.gridColor = ColorExtension.lineLight
-        self.leftAxis.gridLineWidth = 1
+        self.leftAxis.gridLineWidth = 0.5
         self.leftAxis.gridLineCap = .round
         self.leftAxis.gridLineDashPhase = 2.0
         self.leftAxis.gridLineDashLengths = [3.0, 2.0]
@@ -66,7 +66,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         
         self.xAxis.labelTextColor = ColorExtension.textLv2
         self.xAxis.gridColor = ColorExtension.lineLight
-        self.xAxis.gridLineWidth = 1
+        self.xAxis.gridLineWidth = 0.5
         self.xAxis.gridLineCap = .round
         self.xAxis.gridLineDashLengths = [2.0, 4.0]
         self.xAxis.axisLineColor = ColorExtension.lineHard

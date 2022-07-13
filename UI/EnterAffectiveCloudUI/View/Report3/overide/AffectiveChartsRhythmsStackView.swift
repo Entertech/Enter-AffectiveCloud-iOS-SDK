@@ -51,7 +51,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLabelsEnabled = true
         leftAxis.gridColor = ColorExtension.lineLight
-        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 1
         leftAxis.drawGridLinesBehindDataEnabled = false
         leftAxis.gridLineDashLengths = [3, 2]
@@ -74,7 +74,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         xAxis.drawGridLinesBehindDataEnabled = false
         xAxis.drawGridLinesEnabled = true
         xAxis.drawAxisLineEnabled = true
-        xAxis.gridLineWidth = 1
+        xAxis.gridLineWidth = 0.5
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
         xAxis.axisLineWidth = 1
@@ -342,7 +342,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         else {
             return (0, 0, 0, 0, 0)
         }
-        let left = self.lowestVisibleX
+        let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
         let right = self.highestVisibleX
         
         let leftIndex = Int(round(left / interval)) < 0 ? 0 : Int(round(left / interval))
