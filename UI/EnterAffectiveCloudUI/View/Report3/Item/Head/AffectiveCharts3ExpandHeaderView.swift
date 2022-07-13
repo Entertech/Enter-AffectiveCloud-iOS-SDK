@@ -95,6 +95,17 @@ extension AffectiveCharts3ExpandHeaderView: AffectiveCharts3ChartChanged {
             } else {
                 numText = AffectiveCharts3CohereceState.low.rawValue
             }
+        } else if self.theme.chartType == .common && self.theme.tagSeparation.count > 3 {
+            var tag = ""
+            if single > theme.tagSeparation[2] {
+                tag = PrivateReportState.high.rawValue
+            } else if single > theme.tagSeparation[1] {
+                tag = PrivateReportState.nor.rawValue
+            } else {
+                tag = PrivateReportState.low.rawValue
+            }
+            self.infoView.reSetTag(tag)
+            
         }
         _ = self.infoView.setAverageNumLabel(value: numText, color: theme.themeColor)
             .setTime(from: from, to: to, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
@@ -199,6 +210,10 @@ class AffectiveCharts3HeaderInfoView: UIView {
         
     
         return self
+    }
+    
+    func reSetTag(_ tag: String) {
+        tagLabel.text = tag
     }
     
     func build() {
