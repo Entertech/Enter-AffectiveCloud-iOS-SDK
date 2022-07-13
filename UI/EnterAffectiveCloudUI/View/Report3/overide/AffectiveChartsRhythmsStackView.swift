@@ -343,21 +343,25 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             return (0, 0, 0, 0, 0)
         }
         let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
-        let right = ceil(self.highestVisibleX)
+        let right = round(self.highestVisibleX) + 1
         
         let leftIndex = Int(round(left / interval)) < 0 ? 0 : Int(round(left / interval))
         var count = Int(round((right-left) / interval) / Double(sample))
-        if leftIndex+count > gamma.count {
+        
+        var listCount = leftIndex+count
+        
+        if listCount > gamma.count {
             count = gamma.count - leftIndex
+            listCount = gamma.count
         }
-        if leftIndex+count <= gamma.count {
+        if listCount <= gamma.count {
             var gammaSum = 0.0
             var betaSum = 0.0
             var alphaSum = 0.0
             var thetaSum = 0.0
             var deltaSum = 0.0
             var validCount = 0
-            for i in leftIndex..<leftIndex+count {
+            for i in leftIndex..<listCount {
                 if alpha[i] > 0 {
                     validCount += 1
                 }
