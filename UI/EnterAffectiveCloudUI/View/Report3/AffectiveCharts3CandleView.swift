@@ -148,6 +148,10 @@ extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
                     $0.trailing.equalToSuperview().offset(-80)
                     $0.bottom.equalToSuperview().offset(-32)
                 }
+                titleView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(80)
+                    $0.trailing.equalToSuperview().offset(-80)
+                }
                 parent.snp.updateConstraints {
                     $0.height.equalTo(bWidth)
                 }
@@ -165,6 +169,10 @@ extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
                     $0.leading.equalToSuperview().offset(0)
                     $0.trailing.equalToSuperview().offset(0)
                     $0.bottom.equalToSuperview().offset(-8)
+                }
+                titleView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(0)
+                    $0.trailing.equalToSuperview().offset(0)
                 }
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
