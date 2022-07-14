@@ -197,8 +197,6 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
         chartView.chartDescription.enabled = false
-        chartView.pinchZoomEnabled = false
-        chartView.scaleXEnabled = isFullScreen
         chartView.scaleYEnabled = false
         chartView.legend.enabled = false
         chartView.highlightPerTapEnabled = false
@@ -324,8 +322,11 @@ extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
                     $0.trailing.equalToSuperview().offset(0)
                     $0.bottom.equalToSuperview().offset(-8)
                 }
-                $0.leading.equalToSuperview().offset(0)
-                $0.trailing.equalToSuperview().offset(0)
+                titleView.snp.updateConstraints { make in
+                    make.leading.equalToSuperview().offset(0)
+                    make.trailing.equalToSuperview().offset(0)
+                }
+
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
                 view.frame.size.width = bWidth

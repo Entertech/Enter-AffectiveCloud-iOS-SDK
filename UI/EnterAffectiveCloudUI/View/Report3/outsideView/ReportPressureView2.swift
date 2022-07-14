@@ -16,9 +16,9 @@ public class PressureIntroView: UIView {
             if newValue >= stateArray[3] {
                 text = "High"
             } else if newValue >= stateArray[2] {
-                text = "Elevalted"
+                text = "Elev."
             } else if newValue >= stateArray[1] {
-                text = "Normal"
+                text = "Nor."
             } else {
                 text = "Low"
             }
