@@ -111,7 +111,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     public override func setChartProperty() -> Self {
         chartView.delegate = self
         chartView.backgroundColor = .clear
-        chartView.animate(xAxisDuration: 0.2)
+        chartView.animate(xAxisDuration: 0.3)
         chartView.drawGridBackgroundEnabled = true
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
@@ -199,9 +199,9 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         } else {
             var clearVal: [ChartDataEntry] = []
             for i in stride(from: 0, to: dataSorce.count, by: sample) {
-                clearVal.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
+                clearVal.append(ChartDataEntry(x: Double(i), y: Double(dataSorce[i])))
                 if dataSorce[i] > invalidData {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
+                    yVals.append(ChartDataEntry(x: Double(i), y: Double(dataSorce[i])))
                 }
             }
             let set = LineChartDataSet(entries: yVals, label: "")
@@ -244,7 +244,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
                 self.overloadY()
             })
         } else if theme.style == .year {
@@ -253,7 +253,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
                 self.overloadY()
             })
         }
