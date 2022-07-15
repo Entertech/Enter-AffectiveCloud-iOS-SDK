@@ -74,7 +74,8 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.axisMaxLabels = 8
-
+        self.xAxis.granularity = 1
+        self.xAxis.granularityEnabled = true
         
         yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
@@ -123,8 +124,6 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
             entries.append(entry)
             if min[i] > 0 {
                 entriesCircle.append(entry)
-            } else {
-                
             }
         }
         
