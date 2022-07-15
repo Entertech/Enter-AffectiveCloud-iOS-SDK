@@ -155,53 +155,84 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     
     public override func build() {
         let invalidData = 5
-        var initValue = 0 //初始数据
-        var initIndex = 0 //开始有值索引位置
-        for i in stride(from: 0, to: dataSorce.count, by: sample) {
-            let value = dataSorce[i]
-            if value > invalidData && initValue == 0 {
-                initValue = value
-                initIndex = i
-                break
-            }
-        }
         var yVals: [ChartDataEntry] = []
-        for i in stride(from: 0, to: dataSorce.count, by: sample) {
-            if initIndex > i {
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
-            } else {
-                if dataSorce[i] > invalidData { //小于无效值的不做点
+        var data:LineChartData!
+        if theme.style == .session {
+            var initValue = 0 //初始数据
+            var initIndex = 0 //开始有值索引位置
+            for i in stride(from: 0, to: dataSorce.count, by: sample) {
+                let value = dataSorce[i]
+                if value > invalidData && initValue == 0 {
+                    initValue = value
+                    initIndex = i
+                    break
+                }
+            }
+            
+            for i in stride(from: 0, to: dataSorce.count, by: sample) {
+                if initIndex > i {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
+                } else {
+                    if dataSorce[i] > invalidData { //小于无效值的不做点
+                        yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
+                    }
+                }
+            }
+            let set = LineChartDataSet(entries: yVals, label: "")
+            set.mode = .linear
+            set.drawCirclesEnabled = false
+            set.drawCircleHoleEnabled = false
+            set.drawFilledEnabled = false
+            set.lineWidth = 2
+            set.setColor(theme.themeColor)
+            set.drawIconsEnabled = false
+            set.highlightEnabled = true
+            set.highlightLineWidth = 2
+            set.highlightColor = ColorExtension.lineLight
+            set.drawHorizontalHighlightIndicatorEnabled = false
+            set.drawValuesEnabled = false
+            data = LineChartData(dataSet: set)
+            
+        } else {
+            var clearVal: [ChartDataEntry] = []
+            for i in stride(from: 0, to: dataSorce.count, by: sample) {
+                clearVal.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
+                if dataSorce[i] > invalidData {
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
                 }
             }
+            let set = LineChartDataSet(entries: yVals, label: "")
+            set.mode = .linear
+            set.drawCirclesEnabled = true
+            set.drawCircleHoleEnabled = true
+            set.drawFilledEnabled = false
+            set.lineWidth = 2
+            set.setColor(theme.themeColor)
+            set.setCircleColor(theme.themeColor)
+            set.circleRadius = 3
+            set.circleHoleRadius = 2
+            set.circleHoleColor = ColorExtension.white
+            set.drawIconsEnabled = false
+            set.highlightEnabled = true
+            set.highlightLineWidth = 2
+            set.highlightColor = ColorExtension.lineLight
+            set.drawHorizontalHighlightIndicatorEnabled = false
+            set.drawValuesEnabled = false
+            let set2 = LineChartDataSet(entries: clearVal, label: "")
+            set2.mode = .linear
+            set2.drawCirclesEnabled = false
+            set2.drawCircleHoleEnabled = false
+            set2.highlightEnabled = false
+            set2.drawFilledEnabled = false
+            set2.lineWidth = 2
+            set2.setColor(.clear)
+            set2.drawIconsEnabled = false
+            set2.highlightLineWidth = 2
+            set2.highlightColor = ColorExtension.lineLight
+            set2.drawHorizontalHighlightIndicatorEnabled = false
+            set2.drawValuesEnabled = false
         }
-        let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
 
-        if theme.style == .month {
-            set.drawCirclesEnabled = true
-            set.drawCircleHoleEnabled = true
-        } else if theme.style == .year {
-            set.drawCirclesEnabled = true
-            set.drawCircleHoleEnabled = true
-        } else {
-            set.drawCirclesEnabled = false
-            set.drawCircleHoleEnabled = false
-        }
-        set.drawFilledEnabled = false
-        set.lineWidth = 2
-        set.setColor(theme.themeColor)
-        set.setCircleColor(theme.themeColor)
-        set.circleRadius = 3
-        set.circleHoleRadius = 2
-        set.circleHoleColor = ColorExtension.white
-        set.drawIconsEnabled = false
-        set.highlightEnabled = true
-        set.highlightLineWidth = 2
-        set.highlightColor = ColorExtension.lineLight
-        set.drawHorizontalHighlightIndicatorEnabled = false
-        set.drawValuesEnabled = false
-        let data = LineChartData(dataSet: set)
         chartView.data = data
         if theme.style == .month {
             chartView.setVisibleXRangeMaximum(31)
@@ -209,7 +240,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
                 self.overloadY()
             })
         } else if theme.style == .year {
@@ -218,7 +249,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
                 self.overloadY()
             })
         }
@@ -304,7 +335,6 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
         let right = round(self.chartView.highestVisibleX)
         switch theme.style {
         case .session:
-            
             let fromTime = self.theme.startTime + left
             let toTime = self.theme.startTime + right
             return (fromTime, toTime)
