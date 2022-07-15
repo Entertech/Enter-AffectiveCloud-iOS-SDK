@@ -231,6 +231,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             set2.highlightColor = ColorExtension.lineLight
             set2.drawHorizontalHighlightIndicatorEnabled = false
             set2.drawValuesEnabled = false
+            data = LineChartData(dataSets: [set2, set])
         }
 
         chartView.data = data
