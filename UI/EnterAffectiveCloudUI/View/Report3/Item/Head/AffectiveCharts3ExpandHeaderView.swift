@@ -107,6 +107,11 @@ extension AffectiveCharts3ExpandHeaderView: AffectiveCharts3ChartChanged {
             self.infoView.reSetTag(tag)
             
         }
+        if self.theme.style == .month || self.theme.style == .year {
+            if single == 0 {
+                numText = "--"
+            }
+        }
         _ = self.infoView.setAverageNumLabel(value: numText, color: theme.themeColor)
             .setTime(from: from, to: to, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
     }

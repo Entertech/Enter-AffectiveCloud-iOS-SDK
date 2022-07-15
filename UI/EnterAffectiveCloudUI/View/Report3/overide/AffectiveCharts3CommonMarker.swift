@@ -129,6 +129,11 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             } else {
                 numlabel.text = "Incoherent"
             }
+            if theme.style == .year || theme.style == .month {
+                if anotherArray[index] == 0 {
+                    numlabel.text = "--"
+                }
+            }
         }
         else  if theme.tagValue.count > 0 || theme.unitText.count > 0 {
             if let dataSets = chartView?.data?.dataSets, dataSets.count > 1 {
@@ -137,8 +142,18 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
                      index = dataSets[1].entryIndex(entry: entry)
                 }
                 numlabel.text = "\(Int(round(dataSets[0].entryForIndex(index)?.y ?? 0)))"
+                if theme.style == .year || theme.style == .month {
+                    if round(dataSets[0].entryForIndex(index)?.y ?? 0) == 0 {
+                        numlabel.text = "--"
+                    }
+                }
             } else {
                 numlabel.text = String.init(format: "%d", entryY)
+                if theme.style == .year || theme.style == .month {
+                    if entryY == 0 {
+                        numlabel.text = "--"
+                    }
+                }
             }
             
         } else {
@@ -151,10 +166,12 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             } else {
                 numlabel.text = AffectiveCharts3CohereceState.low.rawValue
             }
-            
-
+            if theme.style == .year || theme.style == .month {
+                if entryY == 0 {
+                    numlabel.text = "--"
+                }
+            }
         }
-
 
         lk_formatter.dateFormat = theme.style.format
         switch theme.style {
