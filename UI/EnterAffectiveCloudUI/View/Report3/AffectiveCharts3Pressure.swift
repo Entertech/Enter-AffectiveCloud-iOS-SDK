@@ -49,7 +49,10 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
-
+        if theme.style != .session {
+            chartView.xAxis.granularityEnabled = true
+            chartView.xAxis.granularity = 1
+        }
         return self
     }
     
@@ -268,13 +271,13 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
                     let date = self.startDate.getDayAfter(days: Int(round(leftValue)))
                     if let day = date?.get(.day) {
                         aim = round(leftValue - Double(day) + 1.0)
-                        aim -= 0.3
+                        
                     }
                 } else {
                     let date = self.startDate.getMonthAfter(month: Int(round(leftValue)))
                     if let day = date?.get(.month) {
                         aim = round(leftValue - Double(day) + 1.0)
-                        aim -= 0.4
+                        
                     }
                 }
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
@@ -286,13 +289,13 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
                     let date = self.startDate.getDayAfter(days: Int(round(rightValue)))
                     if let day = date?.get(.day) {
                         aim = round(rightValue - Double(day) + 1.0)
-                        aim -= 0.3
+                       
                     }
                 } else {
                     let date = self.startDate.getMonthAfter(month: Int(round(rightValue)))
                     if let day = date?.get(.month) {
                         aim = round(rightValue - Double(day) + 1.0)
-                        aim -= 0.4
+                        
                     }
                 }
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)

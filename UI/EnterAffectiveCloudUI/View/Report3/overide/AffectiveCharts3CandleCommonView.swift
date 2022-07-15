@@ -157,7 +157,9 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         var entries = [CandleChartDataEntry]()
         for i in 0..<low.count {
             let entry = CandleChartDataEntry(x: Double(i), shadowH: high[i], shadowL: low[i], open: high[i], close: low[i])
-            entries.append(entry)
+            if high[i] > 0 {
+                entries.append(entry)
+            }
         }
         
         let set = CandleChartDataSet(entries: entries, label: "Candle DataSet")
