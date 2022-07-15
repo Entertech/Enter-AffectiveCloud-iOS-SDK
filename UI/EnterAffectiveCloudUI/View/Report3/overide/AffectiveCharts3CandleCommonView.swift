@@ -146,6 +146,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         set2.lineWidth = 2
         set2.mode = .linear
         set2.drawValuesEnabled = false
+        set2.highlightEnabled = true
         set2.axisDependency = .left
         
         return LineChartData(dataSets: [set, set2])

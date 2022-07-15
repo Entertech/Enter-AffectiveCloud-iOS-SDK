@@ -59,70 +59,14 @@ public class AffectiveCharts3CandleView: UIView {
         var low: [Double] = []
         var high: [Double] = []
         for j in 0..<candle.columns {
-            var lowTmp = candle[j, 0]
-            var highTmp = candle[j, 1]
-            if lowTmp > 0 && highTmp - lowTmp < 8 {
-                lowTmp -= 4
-                highTmp += 4
-            }
+            let lowTmp = candle[j, 0]
+            let highTmp = candle[j, 1]
             low.append(lowTmp)
             high.append(highTmp)
             
         }
-        var averageTmp = average
-        var zeroValue = [(Int, Int)]()
-        var tmp: (Int, Int) = (-1, -1)
-        for (i, e) in average.enumerated() {
-            if e < 1 {
-                if tmp.0 < 0 {
-                    tmp.0 = i
-                }
-            } else {
-                if tmp.0 >= 0 && tmp.1 < 0 {
-                    tmp.1 = i-1
-                    zeroValue.append(tmp)
-                    tmp.0 = -1
-                    tmp.1 = -1
-                }
-            }
-        }
-        
-        if zeroValue.count > 0 || (zeroValue.count == 0 && tmp.0 > 0) {
-            if tmp.0 > 0 && tmp.1 < 0 {
-                let max = 0.0
-                let min = average[tmp.0-1]
-                let stride = average.count - tmp.0
-                let avg = (max - min) / Double(stride)
-                for s in tmp.0..<average.count {
-                    averageTmp[s] = min + avg*Double(s-tmp.0+1)
-                }
-            }
-            for e in zeroValue {
-                if e.0 == 0 {
-                    let max = average[e.1+1]
-                    let min = 0.0
-                    let avg = (max - min) / Double(e.1-e.0+1)
-                    for s in e.0...e.1 {
-                        averageTmp[s] = min + avg*Double(s-e.0)
-                    }
-                } else {
-                    let max = average[e.1+1]
-                    let min = average[e.0-1]
-                    let avg = (max-min) / Double(e.1-e.0+2)
-                    for s in e.0...e.1 {
-                        averageTmp[s] = min + avg*Double(s-e.0+1)
-                    }
-                }
-            }
-            chartView.setDataCount(low: low, high: high, average: averageTmp)
-        }
-        
-        
 
-        
-        
-        
-        
+        chartView.setDataCount(low: low, high: high, average: average)
     }
 }
 
