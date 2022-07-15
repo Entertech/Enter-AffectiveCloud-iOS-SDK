@@ -156,9 +156,8 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         var entries = [CandleChartDataEntry]()
         for i in 0..<low.count {
             let entry = CandleChartDataEntry(x: Double(i), shadowH: high[i], shadowL: low[i], open: high[i], close: low[i])
-            if high[i] > 0 {
-                entries.append(entry)
-            }
+            entries.append(entry)
+            
         }
         
         let set = CandleChartDataSet(entries: entries, label: "Candle DataSet")
@@ -182,7 +181,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         let rightX = Int(round(self.highestVisibleX) - self.chartXMin)
         var maxValue: Double = 0
         for i in leftX..<rightX {
-            if let value = self.candleData?.dataSets.first?.entryForIndex(i) as? CandleChartDataEntry {
+            if let set = self.candleData?.dataSets.first as? CandleChartDataSet, let value = set.entries[i] as? CandleChartDataEntry {
                 if value.high > maxValue {
                     maxValue = value.high
                 }
@@ -217,14 +216,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         let partValue = Int(gotIt)/(part)
         for i in 0...part {
             let yAxis = partValue*i
-//            print("maxAxis:\(yAxis)  part:\(i)")
             limitArray.append(yAxis)
-//            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
-//            limitLine.drawLabelEnabled = false
-//            limitLine.lineWidth = 1
-//            limitLine.lineDashLengths = [3, 2]
-//            limitLine.lineColor = ColorExtension.lineLight
-//            self.leftAxis.addLimitLine(limitLine)
         }
 
 
