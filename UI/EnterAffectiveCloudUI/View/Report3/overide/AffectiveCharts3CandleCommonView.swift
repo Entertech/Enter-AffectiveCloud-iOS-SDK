@@ -167,6 +167,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         set.decreasingColor = ColorExtension.lineLight
         set.shadowColor = ColorExtension.lineLight
         set.drawValuesEnabled = false
+        set.highlightEnabled = false
         if theme.style == .month {
             set.barSpace = 0.2
         } else {

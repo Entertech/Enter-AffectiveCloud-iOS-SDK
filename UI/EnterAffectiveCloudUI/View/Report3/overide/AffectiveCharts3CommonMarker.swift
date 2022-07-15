@@ -136,26 +136,12 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             }
         }
         else  if theme.tagValue.count > 0 || theme.unitText.count > 0 {
-            if let dataSets = chartView?.data?.dataSets, dataSets.count > 1 {
-                var index = dataSets[0].entryIndex(entry: entry)
-                if index == -1 {
-                     index = dataSets[1].entryIndex(entry: entry)
-                }
-                numlabel.text = "\(Int(round(dataSets[0].entryForIndex(index)?.y ?? 0)))"
-                if theme.style == .year || theme.style == .month {
-                    if round(dataSets[0].entryForIndex(index)?.y ?? 0) == 0 {
-                        numlabel.text = "--"
-                    }
-                }
-            } else {
-                numlabel.text = String.init(format: "%d", entryY)
-                if theme.style == .year || theme.style == .month {
-                    if entryY == 0 {
-                        numlabel.text = "--"
-                    }
+            numlabel.text = String.init(format: "%d", entryY)
+            if theme.style == .year || theme.style == .month {
+                if entryY == 0 {
+                    numlabel.text = "--"
                 }
             }
-            
         } else {
             if entryY > 75 {
                 numlabel.text = AffectiveCharts3CohereceState.high.rawValue
