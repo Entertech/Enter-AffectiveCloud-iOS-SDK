@@ -129,7 +129,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         }
         
         let set = LineChartDataSet(entries: entries, label: "Line DataSet")
-        set.setColor(theme.themeColor)
+        set.setColor(.clear)
         set.lineWidth = 2
         set.drawCirclesEnabled = false
         set.mode = .linear
