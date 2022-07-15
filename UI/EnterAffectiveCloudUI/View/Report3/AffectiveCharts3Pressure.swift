@@ -108,7 +108,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     public override func setChartProperty() -> Self {
         chartView.delegate = self
         chartView.backgroundColor = .clear
-        chartView.animate(xAxisDuration: 0.5)
+        chartView.animate(xAxisDuration: 0.2)
         chartView.drawGridBackgroundEnabled = true
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
@@ -240,7 +240,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5, execute: {
                 self.overloadY()
             })
         } else if theme.style == .year {
@@ -249,7 +249,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5, execute: {
                 self.overloadY()
             })
         }
