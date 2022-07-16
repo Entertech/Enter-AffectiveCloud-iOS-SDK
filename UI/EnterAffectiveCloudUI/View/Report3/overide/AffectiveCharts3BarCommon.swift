@@ -12,7 +12,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     var theme: AffectiveChart3Theme! 
     
     weak var dataSouceChanged: AffectiveCharts3ChartChanged?
-    private var yRender: LimitYAxisRenderer?
+    private var yRender: AffectiveCharts3DynamicYRender?
     internal var lastXValue: Double = 0
     internal var dataList: [Double] = []
     
@@ -56,6 +56,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.axisMaxLabels = 8
+        
 
         switch theme.style {
         case .session:
@@ -74,7 +75,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         marker.chartView = self
         self.marker = marker
         
-        yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
+        yRender = AffectiveCharts3DynamicYRender(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
     }
     

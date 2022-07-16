@@ -12,7 +12,7 @@ import UIKit
 class AffectiveCharts3CandleCommonView: CombinedChartView {
     var theme: AffectiveChart3Theme!
     weak var dataSouceChanged: AffectiveCharts3ChartChanged?
-    private var yRender: LimitYAxisRenderer?
+    private var yRender: AffectiveCharts3DynamicYRender?
     internal var lastXValue: Double = 0
     internal var dataList: [Double] = []
     internal var lowDataList: [Double] = []
@@ -61,7 +61,6 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.leftAxis.gridLineDashPhase = 2.0
         self.leftAxis.gridLineDashLengths = [3.0, 2.0]
         self.leftAxis.drawAxisLineEnabled = false
-    
         self.rightAxis.enabled = false
         
         self.xAxis.labelTextColor = ColorExtension.textLv2
@@ -77,7 +76,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.xAxis.granularity = 1
         self.xAxis.granularityEnabled = true
         
-        yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
+        yRender = AffectiveCharts3DynamicYRender(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
     }
     
@@ -156,12 +155,15 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         var entries = [CandleChartDataEntry]()
         for i in 0..<low.count {
             let entry = CandleChartDataEntry(x: Double(i), shadowH: high[i], shadowL: low[i], open: high[i], close: low[i])
-            entries.append(entry)
+            
+            if high[i] > 0 {
+                entries.append(entry)
+            }
             
         }
         
         let set = CandleChartDataSet(entries: entries, label: "Candle DataSet")
-        set.setColor(ColorExtension.lineLight)
+        set.setColors(ColorExtension.lineLight)
         set.decreasingColor = ColorExtension.lineLight
         set.shadowColor = ColorExtension.lineLight
         set.drawValuesEnabled = false
@@ -178,14 +180,17 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
     
     func overloadY() {
         let leftX = Int(round(self.lowestVisibleX) - self.chartXMin)
-        let rightX = Int(round(self.highestVisibleX) - self.chartXMin)
+        var rightX = Int(round(self.highestVisibleX) - self.chartXMin)
+        if rightX > highDataList.count {
+            rightX = highDataList.count
+        }
         var maxValue: Double = 0
         for i in leftX..<rightX {
-            if let set = self.candleData?.dataSets.first as? CandleChartDataSet, let value = set.entries[i] as? CandleChartDataEntry {
-                if value.high > maxValue {
-                    maxValue = value.high
-                }
+            
+            if highDataList[i] > maxValue {
+                maxValue = highDataList[i]
             }
+            
         }
         setYLable(maxY: maxValue)
     }
@@ -219,7 +224,6 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
             limitArray.append(yAxis)
         }
 
-
         yRender?.entries = limitArray
         self.setVisibleYRangeMaximum(gotIt, axis: .left)
         self.setVisibleYRangeMinimum(gotIt, axis: .left)
@@ -239,7 +243,6 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         let right = round(self.highestVisibleX)
         switch theme.style {
         case .session:
-            
             let fromTime = self.theme.startTime + left
             let toTime = self.theme.startTime + right
             return (fromTime, toTime)

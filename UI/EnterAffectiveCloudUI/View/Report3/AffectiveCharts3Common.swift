@@ -19,7 +19,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     
     internal var interval = 0.6
     
-    internal var yRender: LimitYAxisRenderer!
+    internal var yRender: AffectiveCharts3DynamicYRender!
     
     internal var dataSorce: [Int] = []
     
@@ -61,6 +61,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.leftAxis.gridLineDashPhase = 2.0
         chartView.leftAxis.gridLineDashLengths = [2.0, 4.0]
         chartView.leftAxis.drawAxisLineEnabled = false
+        chartView.leftAxis.drawGridLinesBehindDataEnabled = true
         chartView.rightAxis.enabled = false
         
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
@@ -70,6 +71,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.xAxis.gridLineDashLengths = [2.0, 4.0]
         chartView.xAxis.axisLineColor = ColorExtension.lineHard
         chartView.xAxis.axisLineWidth = 1
+        
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
@@ -189,7 +191,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     }
     
     public func setChartProperty() -> Self {
-        yRender = LimitYAxisRenderer(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
+        yRender = AffectiveCharts3DynamicYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         
         chartView.leftYAxisRenderer = yRender
         chartView.backgroundColor = .clear
@@ -245,7 +247,9 @@ public class AffectiveCharts3LineCommonView: UIView {
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         chartView.data = data
-        yRender?.entries = separateY
+        yRender?.entries = separateY.filter({ v in
+            v > 0
+        })
     }
 }
 
