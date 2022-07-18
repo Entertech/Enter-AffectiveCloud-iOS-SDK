@@ -185,6 +185,9 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         if options.contains(.HeartRateV2) {
             servicesList.append(BiodataType.hr2.rawValue)
         }
+        if options.contains(.PEPR) {
+            servicesList.append(BiodataType.pepr.rawValue)
+        }
         
         return servicesList
     }
@@ -200,6 +203,9 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         if options.contains(.hr_v2) {
             servicesList.append(BiodataType.hr2.rawValue)
         }
+        if options.contains(.pepr) {
+            servicesList.append(BiodataType.pepr.rawValue)
+        }
         return servicesList
     }
 
@@ -214,6 +220,10 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         }
         if options.contains(.HeartRateV2) {
             servicesList.append(BiodataType.hr2.rawValue)
+        }
+        
+        if options.contains(.PEPR) {
+            servicesList.append(BiodataType.pepr.rawValue)
         }
 
         return servicesList.joined(separator: ",")
@@ -327,7 +337,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         }
     }
 
-    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]? = nil, hrData: [Int]? = nil) {
+    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]? = nil, hrData: [Int]? = nil, peprData: [Int]? = nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -363,6 +373,14 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
                 jsonModel.kwargs?.hrData = hrData
             } else {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must initial hr biodata service first!")
+                return
+            }
+        }
+        if options.contains(.PEPR) {
+            if let flag = self.biodataInitialList?.contains(.PEPR), flag {
+                jsonModel.kwargs?.peprData = peprData
+            } else {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Pepr service unavailable: you must initial hr biodata service first!")
                 return
             }
         }
@@ -402,6 +420,12 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate v2 service unavailable! generate report failed!")
                 return
+            }
+        }
+        
+        if let flag = self.biodataInitialList?.contains(.PEPR), options.contains(.PEPR) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Pepr service unavailable! generate report failed!")
             }
         }
 
@@ -889,13 +913,16 @@ extension AffectiveCloudServices: WebSocketDelegate {
         }
         self.state = .connected
         self.delegate?.websocketConnect(client: self.client)
-        if let _ = session_id {
-            if !isSessionCreated {
-                sessionRestore()
+        if self.appKey != nil && self.appSecret != nil {
+            if let _ = session_id {
+                if !isSessionCreated {
+                    sessionRestore()
+                }
+            } else {
+                sessionCreate()
             }
-        } else {
-            sessionCreate()
         }
+        
         logService(log: "WS Connect")
     }
 

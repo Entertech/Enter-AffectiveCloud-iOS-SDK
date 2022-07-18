@@ -219,6 +219,10 @@ extension UIView {
     func copyView() -> Any {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self))! as Any
     }
+    func copyObject<T:UIView>() throws -> T? {
+        let data = try NSKeyedArchiver.archivedData(withRootObject:self, requiringSecureCoding:false)
+        return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? T
+    }
     
     func parentViewController() -> UIViewController? {
 

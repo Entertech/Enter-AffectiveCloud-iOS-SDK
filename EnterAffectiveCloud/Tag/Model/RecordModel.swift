@@ -6,9 +6,9 @@
 //  Copyright © 2021 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import HandyJSON
+import Foundation
 
-final public class RecordModel: HandyJSON {
+final public class RecordModel: Codable {
     
     public var record_id: Int?
     public var client_id: String?
@@ -26,8 +26,20 @@ final public class RecordModel: HandyJSON {
     public var cas: [Int]?
     required public init() {}
     
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.cas <-- "case"
+    enum CodingKeys: String, CodingKey {
+        case record_id
+        case client_id
+        case session_id
+        case device
+        case data_type
+        case start_time
+        case close_time
+        case rec
+        case sex
+        case age
+        case url
+        case app
+        case mode
+        case cas = "case"
     }
 }

@@ -315,7 +315,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
         chartView?.gridBackgroundColor = .clear
         chartView?.drawGridBackgroundEnabled = true
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
@@ -464,7 +464,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
             color = spectrumColors[4]
         }
         let text = "DataSet \(index)"
-        let set = LineChartDataSet.init(entries: entry, label: text)
+        let set = LineChartDataSet.init(entries: entry!, label: text)
         set.mode = .linear
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
@@ -496,8 +496,8 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
 
         }
 
-        chartView?.xAxis.axisMinimum = 0
-        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        // chartView?.xAxis.axisMinimum = 0
+        // chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         chartView?.maxVisibleCount = valueCount * 5 + 1
         self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
@@ -593,7 +593,7 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
     @objc
     private func tapGesture(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self.chartView!))
             if h === nil || h == chartView?.lastHighlighted {
                 chartView?.lastHighlighted = nil
                 chartView?.highlightValue(nil)
@@ -603,15 +603,15 @@ public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestu
                 chartView?.lastHighlighted = h
                 chartView?.highlightValue(h)
                 chartHead?.isHidden = true
-                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h!)!, highlight: h!)
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entry(for: h!)!, highlight: h!)
             }
         } else if sender.state == .changed {
-            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self))
+            let h = chartView?.getHighlightByTouchPoint(sender.location(in: self.chartView!))
             if let h = h {
                 chartView?.lastHighlighted = h
                 chartView?.highlightValue(h)
                 chartHead?.isHidden = true
-                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entryForHighlight(h)!, highlight: h)
+                chartView?.delegate?.chartValueSelected?(chartView!, entry: chartView!.data!.entry(for: h)!, highlight: h)
             }
         } else if sender.state == .ended {
             chartView?.lastHighlighted = nil

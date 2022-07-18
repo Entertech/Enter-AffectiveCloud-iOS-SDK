@@ -181,7 +181,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
         chartView?.gridBackgroundColor = spectrumColors[4]
         chartView?.drawGridBackgroundEnabled = true
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
@@ -534,7 +534,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
             color = UIColor.clear
         }
         let text = "DataSet \(index)"
-        let set = LineChartDataSet.init(entries: entry, label: text)
+        let set = LineChartDataSet.init(entries: entry!, label: text)
         set.mode = .cubicBezier
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
@@ -567,8 +567,8 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
 //
         }
         
-        chartView?.xAxis.axisMinimum = 0
-        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        // chartView?.xAxis.axisMinimum = 0
+        // chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         
         self.chartView?.xAxis.valueFormatter = DateValueFormatter(time, timeStamp)
@@ -595,7 +595,7 @@ public class BrainSpecturmReportView: BaseView, ChartViewDelegate {
 
 
 /// X轴描述
-class DateValueFormatter: NSObject, IAxisValueFormatter {
+class DateValueFormatter: NSObject, AxisValueFormatter {
     private var values: [Double] = []
     private var timestamp: Int = 0
     private let dateFormatter = DateFormatter()

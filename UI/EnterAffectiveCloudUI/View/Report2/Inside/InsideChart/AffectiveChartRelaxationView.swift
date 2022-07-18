@@ -169,13 +169,13 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
         self.addSubview(xLabel!)
         
         chartView = LineChartView()
-        yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, yAxis: chartView?.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
+        yRender = LimitYAxisRenderer(viewPortHandler: chartView!.viewPortHandler, axis: chartView!.leftAxis, transformer: chartView?.getTransformer(forAxis: .left))
         chartView?.leftYAxisRenderer = yRender!
         chartView?.delegate = self
         chartView?.backgroundColor = .clear
         chartView?.gridBackgroundColor = .clear
         chartView?.drawBordersEnabled = false
-        chartView?.chartDescription?.enabled = false
+        chartView?.chartDescription.enabled = false
         chartView?.pinchZoomEnabled = false
         chartView?.scaleXEnabled = false
         chartView?.scaleYEnabled = false
@@ -272,7 +272,8 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
         set.drawFilledEnabled = true
         set.lineWidth = 1.5
         set.setColor(.clear)
-        set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
+//        set.fill = Fill(linearGradient: chartFillColor!, angle: 270)
+        set.fill = LinearGradientFill(gradient: chartFillColor!, angle: 270)
         set.fillAlpha = 1.0
         set.drawValuesEnabled = false
         
@@ -299,8 +300,8 @@ public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
             timeApart.append(i)
         }
         
-        chartView?.xAxis.axisMinimum = 0
-        chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
+        // chartView?.xAxis.axisMinimum = 0
+        // chartView?.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         chartView?.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
         self.chartView?.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)

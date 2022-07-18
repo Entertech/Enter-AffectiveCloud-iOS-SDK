@@ -12,7 +12,7 @@ import Charts
 class RhythmsChart: LineChartView {
 
     /// 数据上传周期，用于计算图表x轴间隔
-    public var uploadCycle: UInt = 3 {
+    public var uploadCycle: UInt = 1 {
         willSet {
             if newValue == 0 {
                 interval = 0.4
@@ -24,9 +24,6 @@ class RhythmsChart: LineChartView {
     
     /// 在整个图表显示的最大点数
     public var maxDataCount = 500
-    
-    /// 整个屏幕显示的点数. 0表示不限制
-    public var maxScreenCount = 0
     
     /// 背景颜色
     public var bgColor: UIColor = .clear {
@@ -143,7 +140,7 @@ class RhythmsChart: LineChartView {
     public var deltaArray: [Float]? = []
     public var thetaArray: [Float]? = []
 
-    private var interval = 1.8
+    private var interval = 0.6
     private var timeStamp = 0
     private var sample = 3
     private lazy var colors: [UIColor] = [gamaColor, betaColor, alphaColor, thetaColor, deltaColor]
@@ -173,7 +170,7 @@ class RhythmsChart: LineChartView {
         self.backgroundColor = .clear
         self.gridBackgroundColor = .clear
         self.drawBordersEnabled = false
-        self.chartDescription?.enabled = false
+        self.chartDescription.enabled = false
         self.pinchZoomEnabled = false
         self.scaleXEnabled = true
         self.scaleYEnabled = false
@@ -436,10 +433,7 @@ class RhythmsChart: LineChartView {
             timeApart.append(i)
         }
         
-        self.xAxis.axisMinimum = 0
-        self.xAxis.axisMaximum = Double(timeCount) //设置表格的所有点数
         self.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
-        self.maxVisibleCount = maxScreenCount != 0 ? maxScreenCount*5 : valueCount*5 + 1
         //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
         self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
     }

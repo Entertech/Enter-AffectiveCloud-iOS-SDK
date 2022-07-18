@@ -7,7 +7,6 @@
 //
 
 import RxSwift
-import HandyJSON
 import Moya
 import Alamofire
 
@@ -25,7 +24,7 @@ final public class TagRequest {
     lazy var provider = MoyaProvider<TagAPI>(requestClosure: requestTimeoutClosure)
     
     public lazy var list = { () -> Observable<[TagModel]> in
-        return self.provider.rx.request(.list).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModelList(TagModel.self)
+        return self.provider.rx.request(.list).filterSuccessfulStatusCodes().asObservable().map([TagModel].self)
     }
     
     

@@ -8,7 +8,6 @@
 
 import Foundation
 import HandyJSON
-import SwiftyJSON
 
 enum BiodataType: String {
     case eeg
@@ -16,6 +15,7 @@ enum BiodataType: String {
     case hr2 = "hr-v2"
     case bcg
     case mceeg
+    case pepr
 }
 
 //MARK: Request Models
@@ -35,6 +35,7 @@ public class AffectiveCloudRequestJSONModel: HandyJSON {
 public class CSRequestDataJSONModel: HandyJSON {
     var eeg: [Int]?
     var hr: [Int]?
+    var pepr: [Int]?
     public required init() { }
 }
 
@@ -55,6 +56,7 @@ class CSKwargsJSONModel: HandyJSON {
     var reportType: String?
     var eegData: [Int]?
     var hrData: [Int]?
+    var peprData: [Int]?
     var rec: [CSLabelSubmitJSONModel]?
     var affectiveTypes: [String]?
     var attenionServieces: [String]?
@@ -76,6 +78,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.eegData <-- "eeg"
         mapper <<<
             self.hrData <-- "hr-v2"
+        mapper <<<
+            self.peprData <-- "pepr"
         mapper <<<
             self.userID <-- "user_id"
         mapper <<<
@@ -213,6 +217,7 @@ public class CSResponseDataJSONModel: HandyJSON {
 public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
     public var eegServiceList: [String]?
     public var hrServiceList: [String]?
+    public var peprServiceList: [String]?
     public required init() {}
 
     public func mapping(mapper: HelpingMapper) {
@@ -220,6 +225,8 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
             self.eegServiceList <-- "sub_eeg_fields"
         mapper <<<
             self.hrServiceList <-- "sub_hr_fields"
+        mapper <<<
+            self.peprServiceList <-- "sub_pepr_fields"
     }
 
     /// all property is nil the isNil: true
@@ -236,12 +243,13 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
 public class CSBiodataProcessJSONModel: HandyJSON {
     public var eeg: CSBiodataEEGJsonModel?
     public var hr: CSBiodataHRJsonModel?
+    public var pepr: CSBiodataPEPRJsonModel?
     public required init() {}
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.eeg == nil)&&(self.hr == nil)
+        return (self.eeg == nil)&&(self.hr == nil)&&(self.pepr == nil)
     }
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -334,6 +342,39 @@ public class CSBiodataHRJsonModel: HandyJSON {
     public var hr: Float?
     public var hrv: Float?
     public required init() {}
+}
+
+/* Realtime hear rate
+ *
+ * 'bcg_wave': [float],  # 脉搏波波形
+ * 'rw_wave': [float],  # 呼吸波波形
+ * 'bcg_quality': int,  # 脉搏波信号质量等级
+ * 'rw_quality': int,  # 呼吸波信号质量等级
+ * 'hr': int,  # 心率
+ * 'rr': int,  # 呼吸率
+ * 'hrv': float  # 心率变异性
+ *
+ */
+public class CSBiodataPEPRJsonModel: HandyJSON {
+    public var bcgQuality: Int?
+    public var rwQuality: Int?
+    public var hr: Int?
+    public var rr: Int?
+    public var hrv: Float?
+    public var bcgWave: [Float]?
+    public var rwWave: [Float]?
+    public required init() {}
+    
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.bcgWave <-- "bcg_wave"
+        mapper <<<
+            self.rwWave <-- "rw_wave"
+        mapper <<<
+            self.bcgQuality <-- "bcg_quality"
+        mapper <<<
+            self.rwQuality <-- "rw_quality"
+    }
 }
 
 /* Biodata Report

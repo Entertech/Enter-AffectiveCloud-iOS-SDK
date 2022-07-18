@@ -208,7 +208,11 @@ public class ReportSemiCircle2: UIView {
 public class ReportSemiCircle3: UIView {
     public var largeValue:CGFloat = 100
     public var smallValue:CGFloat = 0
-    public var currentValue:CGFloat = 0
+    public var currentValue:CGFloat = 0 {
+        didSet {
+            drawLayer()
+        }
+    }
     public let needleLayer = CAShapeLayer()
     public var gradientLayer: CAGradientLayer = CAGradientLayer()
 
@@ -241,7 +245,7 @@ public class ReportSemiCircle3: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
 
-        drawLayer()
+        
 
     }
     
@@ -308,6 +312,6 @@ public class ReportSemiCircle3: UIView {
             needleLayer.path = circlePath?.cgPath
             self.layer.addSublayer(needleLayer)
         }
-        
+        self.layoutIfNeeded()
     }
 }

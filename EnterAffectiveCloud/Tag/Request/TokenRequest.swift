@@ -7,9 +7,9 @@
 //
 
 import RxSwift
-import HandyJSON
 import Moya
 import Alamofire
+import Foundation
 
 final public class TokenRequest {
 
@@ -29,8 +29,8 @@ final public class TokenRequest {
     
     private lazy var requestToken = {
         (username: String, password: String) -> Observable<TokenModel> in
-        return self.provider.rx.request(.create(username, password)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModel(TokenModel.self)
-        //return self.provider.rx.request(.request(username: username, password: password)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModel(TokenModel.self)
+        return self.provider.rx.request(.create(username, password)).filterSuccessfulStatusCodes().asObservable().map(TokenModel.self)
+
     }
     /// 获取token
     /// - Parameters:
@@ -48,7 +48,10 @@ final public class TokenRequest {
         username.user_id = userId.hashed(.md5)!.uppercased()
         username.timestamp = timestamp
         username.version = version
-        if let userJson = username.toJSONString() {
+        do {
+            let jsonData = try JSONEncoder().encode(username)
+            let userJson = String(decoding: jsonData, as: UTF8.self)
+            
             self.requestToken(userJson, sign).subscribe(onNext: { (model) in
                 AppService.shared.token = model.token
                 completionHandler(.success(()))
@@ -63,7 +66,10 @@ final public class TokenRequest {
             }, onCompleted: {
                 self.state = 1
             }, onDisposed: nil).disposed(by: dispose)
+        }catch {
+            
         }
+        
         
     }
     

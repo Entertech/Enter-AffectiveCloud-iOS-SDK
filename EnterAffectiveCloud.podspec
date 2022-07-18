@@ -17,7 +17,6 @@ Pod::Spec.new do |s|
   s.dependency 'HandyJSON'
   s.dependency 'Starscream', '~> 3.1.1'
   s.dependency 'GzipSwift'
-  s.dependency 'SwiftyJSON'
   s.dependency 'Moya/RxSwift'
   s.dependency 'RxSwift'
 end

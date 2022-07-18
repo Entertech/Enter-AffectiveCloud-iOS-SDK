@@ -6,9 +6,9 @@
 //  Copyright © 2019 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import HandyJSON
+import Foundation
 
-final public class AppInfoModel: HandyJSON  {
+final public class AppInfoModel: Codable  {
     public var app_id: Int?
     public var name: String?
     public var app_key: String?

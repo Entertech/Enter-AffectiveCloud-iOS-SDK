@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 /// cloud services response delegate
 /// you can handle or display cloud data in your UI level use this delegate
@@ -54,7 +53,7 @@ protocol BiodataServiceProtocol {
     mode: [Int]? , cases: [Int]? )
     func biodataSubscribe(parameters options: BiodataParameterOptions)
     func biodataUnSubscribe(parameters options: BiodataParameterOptions)
-    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?)
+    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?, peprData: [Int]?)
     func biodataReport(options: BiodataTypeOptions)
 }
 
@@ -64,6 +63,7 @@ public extension BiodataTypeOptions {
     static let HeartRateV2 = BiodataTypeOptions(rawValue: 1 << 2)
     static let BCG = BiodataTypeOptions(rawValue: 1 << 3)
     static let MCEEG = BiodataTypeOptions(rawValue: 1 << 4)
+    static let PEPR = BiodataTypeOptions(rawValue: 1 << 5)
 }
 
 public struct BiodataTypeOptions: OptionSet {
@@ -75,21 +75,12 @@ public struct BiodataTypeOptions: OptionSet {
 
 /// Biodata Parameter options: eg: eegl_wave, eegr_wave, eeg_alpha_power
 public extension BiodataParameterOptions {
-//    static let eeg_wave_left = BiodataParameterOptions(rawValue: 1 << 0)
-//    static let eeg_wave_right = BiodataParameterOptions(rawValue: 1 << 1)
-//    static let eeg_alpha = BiodataParameterOptions(rawValue: 1 << 2)
-//    static let eeg_beta = BiodataParameterOptions(rawValue: 1 << 3)
-//    static let eeg_theta = BiodataParameterOptions(rawValue: 1 << 4)
-//    static let eeg_delta = BiodataParameterOptions(rawValue: 1 << 5)
-//    static let eeg_gamma = BiodataParameterOptions(rawValue: 1 << 6)
-//    static let eeg_quality = BiodataParameterOptions(rawValue: 1 << 7)
-//    static let hr_value = BiodataParameterOptions(rawValue: 1 << 8)
-//    static let hr_variability = BiodataParameterOptions(rawValue: 1 << 9)
     static let eeg = BiodataParameterOptions(rawValue: 1 << 0)
     static let hr = BiodataParameterOptions(rawValue: 1 << 1)
     static let hr_v2 = BiodataParameterOptions(rawValue: 1 << 2)
     static let bcg = BiodataParameterOptions(rawValue: 1 << 3)
     static let mceeg = BiodataParameterOptions(rawValue: 1 << 4)
+    static let pepr = BiodataParameterOptions(rawValue: 1 << 4)
 }
 
 public struct BiodataParameterOptions: OptionSet {
@@ -148,8 +139,8 @@ public struct AffectiveDataServiceOptions: OptionSet {
 }
 
 public struct CSAffectiveReportOptions: OptionSet {
-    public let rawValue: Int
-    public init(rawValue: Int) {
+    public let rawValue: Int64
+    public init(rawValue: Int64) {
         self.rawValue = rawValue
     }
 }
