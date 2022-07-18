@@ -948,13 +948,6 @@
 			path = DemoService;
 			sourceTree = "<group>";
 		};
-		FAB140032576172F0079F785 /* special */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = special;
-			sourceTree = "<group>";
-		};
 		FAB14024257646AC0079F785 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
@@ -967,7 +960,6 @@
 		FAB3E46823ACAD0900A85129 /* Outside */ = {
 			isa = PBXGroup;
 			children = (
-				FAB140032576172F0079F785 /* special */,
 				FAAB8FE525A2F74500B8349D /* ancient */,
 				FAB14004257617D40079F785 /* ReportCoherenceView2.swift */,
 				FAB140652578D51F0079F785 /* ReportBrainwaveRhythms.swift */,

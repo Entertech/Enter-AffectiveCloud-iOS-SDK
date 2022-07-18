@@ -279,7 +279,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
                 }
                 sum += dataList[i]
             }
-            let ave = Int(ceil(sum / Double(num > 0 ? num : 1)))
+            let ave = Int(sum / Double(num > 0 ? num : 1))
             return ave
         } else {
             return 0
