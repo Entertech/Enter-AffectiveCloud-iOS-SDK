@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class ReportHRVView: UIView {
+public class HRVIntroView: UIView {
 
     public var corner: CGFloat = 0 {
         willSet {
@@ -24,7 +24,7 @@ public class ReportHRVView: UIView {
     
     public var value: Float = 0 {
         willSet {
-            numLabel.text = String.init(format: "%.1f", newValue)
+            numLabel.text = "\(Int(newValue))"
         }
     }
  
@@ -54,21 +54,30 @@ public class ReportHRVView: UIView {
     private let icon = UIImageView()
     private let titleLabel = UILabel()
     private let button = UIImageView()
+    private let bgImage = UIImageView()
     func initFunction() {
-        self.backgroundColor = .clear
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
+        self.backgroundColor = ColorExtension.bgZ1
+        self.addSubview(bgImage)
         self.addSubview(numLabel)
         self.addSubview(mslabel)
         self.addSubview(icon)
         self.addSubview(titleLabel)
         self.addSubview(button)
         
+        bgImage.image = UIImage.loadImage(name: "type_yellow_green", any: classForCoder)
+        bgImage.contentMode = .scaleAspectFill
+        self.bgImage.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         titleLabel.text = "HRV"
         titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         titleLabel.textColor = ColorExtension.textLv1
         
-        button.image = UIImage.loadImage(name: "right_back", any: classForCoder)
         
-        numLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+        numLabel.font = .rounded(ofSize: 40, weight: .bold)
         numLabel.textColor = ColorExtension.textLv1
         numLabel.text = "\(value)"
         

@@ -41,37 +41,12 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         }
     }
     
-    public lazy var enableGama = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
+    public lazy var enableGama = true
     
-    public lazy var enableBeta = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
+    public lazy var enableBeta = true
+    public lazy var enableAlpha = true
     
-    public lazy var enableAlpha = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
-    
-    public lazy var enableTheta = true {
-        didSet {
-            if self.data != nil {
-                mapDataList(array2D: brainwave)
-            }
-        }
-    }
+    public lazy var enableTheta = true
     
     public lazy var enableDelta = true {
         didSet {
@@ -162,7 +137,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLabelsEnabled = false
         leftAxis.gridColor = ColorExtension.lineLight
-        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 1
         leftAxis.gridLineDashLengths = [3, 2]
         leftAxis.setLabelCount(5, force: true)
@@ -178,7 +153,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         xAxis.drawGridLinesEnabled = true
         xAxis.drawAxisLineEnabled = true
-        xAxis.gridLineWidth = 1
+        xAxis.gridLineWidth = 0.5
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
         xAxis.axisLineWidth = 1
@@ -196,9 +171,9 @@ class AffectiveCharts3RhythmsChart: LineChartView {
     ///   - delta: delta description
     ///   - timestamp: 起始时间戳
     public func setData(value: Array2D<Double>) {
-        
+        brainwave = value
         //setDataCount(brainwave)
-        mapDataList(array2D: brainwave)
+        mapDataList(array2D: value)
     }
     
     internal func brainwaveMapping() -> Array2D<Double>? {

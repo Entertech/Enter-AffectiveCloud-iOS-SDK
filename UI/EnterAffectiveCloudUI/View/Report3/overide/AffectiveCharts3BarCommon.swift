@@ -12,7 +12,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     var theme: AffectiveChart3Theme! 
     
     weak var dataSouceChanged: AffectiveCharts3ChartChanged?
-    private var yRender: LimitYAxisRenderer?
+    private var yRender: AffectiveCharts3DynamicYRender?
     internal var lastXValue: Double = 0
     internal var dataList: [Double] = []
     
@@ -29,30 +29,34 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.highlightPerTapEnabled = false
         self.highlightPerDragEnabled = false
         self.dragDecelerationEnabled = false
+        self.xAxisRenderer = AffectiveChart3CommonXRender(viewPortHandler: self.viewPortHandler, axis: self.xAxis, transformer: self.getTransformer(forAxis: .left))
 
         self.extraTopOffset = 92
         self.legend.enabled = false
         self.leftAxis.labelFont = UIFont.systemFont(ofSize: 11)
         self.leftAxis.labelTextColor = ColorExtension.textLv2
         self.leftAxis.gridColor = ColorExtension.lineLight
-        self.leftAxis.gridLineWidth = 1
+        self.leftAxis.gridLineWidth = 0.5
         self.leftAxis.gridLineCap = .round
         self.leftAxis.gridLineDashPhase = 2.0
         self.leftAxis.gridLineDashLengths = [3.0, 2.0]
         self.leftAxis.drawAxisLineEnabled = false
+        self.leftAxis.drawGridLinesBehindDataEnabled = true
         self.leftAxis.axisMinimum = 0
         self.rightAxis.enabled = false
         
         self.xAxis.labelTextColor = ColorExtension.textLv2
         self.xAxis.gridColor = ColorExtension.lineLight
-        self.xAxis.gridLineWidth = 1
+        self.xAxis.gridLineWidth = 0.5
         self.xAxis.gridLineCap = .round
         self.xAxis.gridLineDashLengths = [2.0, 4.0]
         self.xAxis.axisLineColor = ColorExtension.lineHard
+        self.xAxis.drawGridLinesBehindDataEnabled = true
         self.xAxis.axisLineWidth = 1
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.axisMaxLabels = 8
+        
 
         switch theme.style {
         case .session:
@@ -71,14 +75,14 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         marker.chartView = self
         self.marker = marker
         
-        yRender = LimitYAxisRenderer(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
+        yRender = AffectiveCharts3DynamicYRender(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    var last: Double = 0
     func setDataCount(value: [Double]) {
         dataList.removeAll()
         dataList.append(contentsOf: value)
@@ -127,6 +131,8 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         
     }
     
+    
+    
     func overloadY() {
         let leftX = Int(round(self.lowestVisibleX) - self.chartXMin)
         let rightX = Int(round(self.highestVisibleX) - self.chartXMin)
@@ -145,21 +151,30 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         var gotIt: Double = 0
         var part: Int = 0
         var limitArray: [Int] = []
-        for i in 0...10 {
-            let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
+        if maxY <= 4 {
+            gotIt = 4
+            part = 4
+        } else if maxY <= 8 {
+            gotIt = 8
+            part = 4
+        } else {
+            for i in 0...10 {
+                let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
 
-            for e in 4...5 {
-                if value % e == 0 && (value / e) % 5 == 0{
-                    
-                    gotIt = Double(value)
-                    part = e
+                for e in 4...5 {
+                    if value % e == 0 && (value / e) % 5 == 0{
+                        
+                        gotIt = Double(value)
+                        part = e
+                        break
+                    }
+                }
+                if gotIt > 0 {
                     break
                 }
             }
-            if gotIt > 0 {
-                break
-            }
         }
+
         
         guard part > 1 else {return}
         self.leftAxis.removeAllLimitLines()
@@ -169,14 +184,13 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
             let yAxis = partValue*i
 //            print("maxAxis:\(yAxis)  part:\(i)")
             limitArray.append(yAxis)
-            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
-            limitLine.drawLabelEnabled = false
-            limitLine.lineWidth = 1
-            limitLine.lineDashLengths = [3, 2]
-            limitLine.lineColor = ColorExtension.lineLight
-            self.leftAxis.addLimitLine(limitLine)
+//            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
+//            limitLine.drawLabelEnabled = false
+//            limitLine.lineWidth = 1
+//            limitLine.lineDashLengths = [3, 2]
+//            limitLine.lineColor = ColorExtension.lineLight
+//            self.leftAxis.addLimitLine(limitLine)
         }
-
 
         yRender?.entries = limitArray
         self.setVisibleYRangeMaximum(gotIt, axis: .left)
@@ -193,7 +207,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     }
     
     internal func calculatAverageTime() -> (Double, Double) {
-        let left = round(self.lowestVisibleX)
+        let left = round(self.lowestVisibleX) < 0 ? 0 : round(self.lowestVisibleX)
         let right = round(self.highestVisibleX)
         switch theme.style {
         case .session:
@@ -219,7 +233,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     
     internal func calculatAverage() -> Int {
 
-        let left = round(self.lowestVisibleX)
+        let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
         let right = round(self.highestVisibleX)
         
         let leftIndex = Int(left)
@@ -227,10 +241,14 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         
         if leftIndex+count <= dataList.count {
             var sum = 0.0
+            var num = 0
             for i in leftIndex..<leftIndex+count {
+                if dataList[i] > 0 {
+                    num += 1
+                }
                 sum += dataList[i]
             }
-            let ave = Int(round(sum / Double(count)))
+            let ave = Int(ceil(sum / Double(num > 0 ? num : 1)))
             return ave
         } else {
             return 0

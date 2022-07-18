@@ -67,4 +67,48 @@ class AffectiveCharts3PressureYRender: YAxisRenderer {
                     textAlign: textAlign)
     }
 
+    
+    override func renderGridLines(context: CGContext) {
+        guard axis.isEnabled else { return }
+
+        if axis.drawGridLinesEnabled
+        {
+            let positions = transformedPositions()
+            
+            context.saveGState()
+            defer { context.restoreGState() }
+            context.clip(to: self.gridClippingRect)
+            
+            context.setShouldAntialias(axis.gridAntialiasEnabled)
+            context.setStrokeColor(axis.gridColor.cgColor)
+            context.setLineWidth(axis.gridLineWidth)
+            context.setLineCap(axis.gridLineCap)
+            
+            if axis.gridLineDashLengths != nil
+            {
+                context.setLineDash(phase: axis.gridLineDashPhase, lengths: axis.gridLineDashLengths)
+            }
+            else
+            {
+                context.setLineDash(phase: 0.0, lengths: [])
+            }
+            
+            // draw the grid
+            positions.forEach {
+                if $0 != positions.first {
+                    drawGridLine(context: context, position: $0)
+                }
+                
+            }
+        }
+
+        if axis.drawZeroLineEnabled
+        {
+            // draw zero line
+            drawZeroLine(context: context)
+        }
+    }
+    
+
+
 }

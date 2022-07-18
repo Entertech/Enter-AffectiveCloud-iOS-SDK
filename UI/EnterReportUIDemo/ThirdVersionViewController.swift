@@ -13,6 +13,7 @@ import SnapKit
 
 class ThirdVersionViewController: UIViewController {
 
+    let contentView = UIView()
     let common = AffectiveCharts3Pressure()
 //    let rhythms = AffectiveCharts3StackView()
     let bar = AffectiveCharts3CandleView()
@@ -20,13 +21,21 @@ class ThirdVersionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let vcViewHeight = self.view.frame.height
+        self.view.addSubview(contentView)
+        
         self.view.addSubview(common)
 //        self.view.addSubview(rhythms)
-        self.view.addSubview(bar)
+        self.contentView.addSubview(bar)
+        contentView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(0)
+            $0.trailing.equalToSuperview().offset(0)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.height.equalTo(311)
+        }
         common.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(64)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(contentView.snp.bottom)
             $0.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
         }
         
@@ -38,10 +47,8 @@ class ThirdVersionViewController: UIViewController {
 //        }
         
         bar.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(common.snp.bottom).offset(16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
+            make.top.equalToSuperview().offset(32)
+            make.bottom.leading.trailing.equalToSuperview()
         }
         
         let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
@@ -105,24 +112,52 @@ class ThirdVersionViewController: UIViewController {
 //                .setRhythmLineEnable(value: 28)
 //                .build(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta)
 //
+            var values = [Double]()
+            var min = [Double]()
+            var max = [Double]()
+            for (i, e) in alpha.enumerated() {
+                if i > 60 {
+                    break
+                }
+                let random = Int.random(in: 0...1)
+                if random > 0 {
+                    values.append(e)
+                    min.append(delta[i])
+                    max.append(beta[i])
+                } else {
+                    values.append(0.0)
+                    min.append(0.0)
+                    max.append(0.0)
+                }
+            }
             var barTheme = AffectiveChart3Theme()
             barTheme.style = .month
             barTheme.themeColor = .red
             barTheme.startTime = timeStamp
             barTheme.endTime = timeStamp
-            barTheme.chartName = "Coherence".uppercased()
-            barTheme.averageText = "Total".uppercased()
-            barTheme.averageValue = "\(service.model.relaxationAvg ?? 0)"
-            barTheme.unitText = "min"
-            if let relaxation = service.model.relaxation {
-                let array = relaxation.map { v in
-                    Double(v)
-                }
-                bar.setTheme(barTheme)
-                    .setProperty()
-                    .setLayout()
-                    .build(low: gamma, high: beta, average: alpha)
+            barTheme.chartName = "Heart Rate".uppercased()
+            barTheme.averageValue = "\(service.model.heartRateAvg ?? 0)"
+            barTheme.unitText = "bpm"
+            var minAndMax = Array2D(columns: min.count, rows: 2, initialValue: 0.0)
+            for (index, e) in min.enumerated() {
+                minAndMax[index, 0] = e
             }
+            for (index, e) in max.enumerated() {
+                minAndMax[index, 1] = e
+            }
+            bar.setTheme(barTheme)
+                .setProperty()
+                .setLayout()
+                .build(candle: minAndMax, average: values)
+//            if let relaxation = service.model.relaxation {
+//                let array = relaxation.map { v in
+//                    Double(v)
+//                }
+//                bar.setTheme(barTheme)
+//                    .setProperty()
+//                    .setLayout()
+//                    .build(array: array)
+//            }
 
         }
     }

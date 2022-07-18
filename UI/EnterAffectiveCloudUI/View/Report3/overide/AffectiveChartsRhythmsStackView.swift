@@ -51,7 +51,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLabelsEnabled = true
         leftAxis.gridColor = ColorExtension.lineLight
-        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 1
         leftAxis.drawGridLinesBehindDataEnabled = false
         leftAxis.gridLineDashLengths = [3, 2]
@@ -74,7 +74,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         xAxis.drawGridLinesBehindDataEnabled = false
         xAxis.drawGridLinesEnabled = true
         xAxis.drawAxisLineEnabled = true
-        xAxis.gridLineWidth = 1
+        xAxis.gridLineWidth = 0.5
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
         xAxis.axisLineWidth = 1
@@ -108,22 +108,32 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             case 0:
                 if !enableGama {
                     continue
+                } else {
+                    
                 }
             case 1:
                 if !enableBeta {
                     continue
+                } else {
+                    
                 }
             case 2:
                 if !enableAlpha {
                     continue
+                } else {
+                    
                 }
             case 3:
                 if !enableTheta {
                     continue
+                } else {
+                    
                 }
             case 4:
                 if !enableDelta {
                     continue
+                } else {
+                    
                 }
             default:
                 break
@@ -143,6 +153,20 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             var yVals: [ChartDataEntry] = []
             var notZero: Int = 0
             for i in stride(from: 0, to: waveArray.columns, by: sample) {
+                switch j {
+                case 0:
+                    gamaArray?.append(waveArray[i, j])
+                case 1:
+                    betaArray?.append(waveArray[i, j])
+                case 2:
+                    alphaArray?.append(waveArray[i, j])
+                case 3:
+                    thetaArray?.append(waveArray[i, j])
+                case 4:
+                    deltaArray?.append(waveArray[i, j])
+                default:
+                    break
+                }
                 if i < initIndex{  //为0的为无效数据
                     yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
                 } else {
@@ -225,12 +249,44 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         }
         let data = LineChartData(dataSets: sets.reversed())
         self.data = data
+        var ref: [Double] = []
+        if let value = betaArray {
+            ref.append(contentsOf: value)
+        } else if let value = thetaArray {
+            ref.append(contentsOf: value)
+        } else if let value = alphaArray {
+            ref.append(contentsOf: value)
+        } else if let value = gamaArray {
+            ref.append(contentsOf: value)
+        } else if let value = deltaArray {
+            ref.append(contentsOf: value)
+        }
         switch style {
         case .session:
-            break
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+                .setTime(start: startDate.timeIntervalSince1970, format: style.format)
+                .setRef(value: ref)
+                .setProperty(sample: sample, interval: interval, usePercent: true)
+            
+            self.marker = markerView
+            markerView.chartView = self
         case .month:
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+                .setMonth(month: startDate, format: style.format)
+                .setRef(value: ref)
+                .setProperty(sample: sample, interval: interval, usePercent: true)
+            
+            self.marker = markerView
+            markerView.chartView = self
             self.setVisibleXRangeMaximum(31)
         case .year:
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+                .setYear(year: startDate, format: style.format)
+                .setRef(value: ref)
+                .setProperty(sample: sample, interval: interval, usePercent: true)
+            
+            self.marker = markerView
+            markerView.chartView = self
             self.setVisibleXRangeMaximum(12)
         }
         if data.dataSetCount > 0 {
@@ -244,12 +300,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         }
         
         
-        let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
-            .setTime(start: startDate.timeIntervalSince1970, format: style.format)
-            .setProperty(sample: sample, interval: interval, usePercent: true)
-        
-        self.marker = markerView
-        markerView.chartView = self
+
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.3) {
             let time = self.calculatAverageTime()
             let ave = self.calculatAverage()
@@ -291,31 +342,46 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         else {
             return (0, 0, 0, 0, 0)
         }
-        let left = self.lowestVisibleX
-        let right = self.highestVisibleX
+        let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
+        let right = round(self.highestVisibleX) + 1
         
-        let leftIndex = Int(round(left / interval))
-        let count = Int(round((right-left) / interval))
+        let leftIndex = Int(round(left / interval)) < 0 ? 0 : Int(round(left / interval))
+        var count = Int(round((right-left) / interval) / Double(sample))
         
-        if leftIndex+count <= gamma.count {
+        var listCount = leftIndex+count
+        
+        if listCount > gamma.count {
+            count = gamma.count - leftIndex
+            listCount = gamma.count
+        }
+        if listCount <= gamma.count {
             var gammaSum = 0.0
             var betaSum = 0.0
             var alphaSum = 0.0
             var thetaSum = 0.0
             var deltaSum = 0.0
-            for i in leftIndex..<leftIndex+count {
+            var validCount = 0
+            for i in leftIndex..<listCount {
+                if alpha[i] > 0 {
+                    validCount += 1
+                }
                 gammaSum += gamma[i]
                 betaSum += beta[i]
                 alphaSum += alpha[i]
                 thetaSum += theta[i]
                 deltaSum += delta[i]
             }
-            let gammaEve = Int(round(gammaSum / Double(count)))
-            let betaEve = Int(round(betaSum / Double(count)))
-            let alphaEve = Int(round(alphaSum / Double(count)))
-            let thetaEve = Int(round(thetaSum / Double(count)))
-            let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
-            return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
+            if validCount == 0 {
+                return(0, 0, 0, 0, 0)
+            } else {
+                let gammaEve = Int(round(gammaSum / Double(validCount)))
+                let betaEve = Int(round(betaSum / Double(validCount)))
+                let alphaEve = Int(round(alphaSum / Double(validCount)))
+                let thetaEve = Int(round(thetaSum / Double(validCount)))
+                let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
+                return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
+            }
+
         } else {
             return (0, 0, 0, 0, 0)
         }

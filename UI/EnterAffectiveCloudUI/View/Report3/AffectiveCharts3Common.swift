@@ -19,7 +19,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     
     internal var interval = 0.6
     
-    internal var yRender: LimitYAxisRenderer!
+    internal var yRender: AffectiveCharts3DynamicYRender!
     
     internal var dataSorce: [Int] = []
     
@@ -56,26 +56,30 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.leftAxis.labelTextColor = ColorExtension.textLv2
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.leftAxis.gridColor = ColorExtension.lineLight
-        chartView.leftAxis.gridLineWidth = 1
+        chartView.leftAxis.gridLineWidth = 0.5
         chartView.leftAxis.gridLineCap = .round
         chartView.leftAxis.gridLineDashPhase = 2.0
         chartView.leftAxis.gridLineDashLengths = [2.0, 4.0]
         chartView.leftAxis.drawAxisLineEnabled = false
+        chartView.leftAxis.drawGridLinesBehindDataEnabled = true
         chartView.rightAxis.enabled = false
         
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
         chartView.xAxis.gridColor = ColorExtension.lineLight
-        chartView.xAxis.gridLineWidth = 1
+        chartView.xAxis.gridLineWidth = 0.5
         chartView.xAxis.gridLineCap = .round
         chartView.xAxis.gridLineDashLengths = [2.0, 4.0]
         chartView.xAxis.axisLineColor = ColorExtension.lineHard
         chartView.xAxis.axisLineWidth = 1
+        
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
         switch theme.style {
         case .session:
-            chartView.dragEnabled = false
+            chartView.dragEnabled = true
+            chartView.scaleXEnabled = true
+            chartView.pinchZoomEnabled = true
             chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
         case .month:
             chartView.dragEnabled = true
@@ -98,6 +102,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     }
 
     public func setData(_ array: [Int]) -> Self {
+        guard array.count > 0 else {return self}
         dataSorce.append(contentsOf: array)
         
         //计算抽样
@@ -173,7 +178,8 @@ public class AffectiveCharts3LineCommonView: UIView {
         self.addSubview(chartView)
         self.addSubview(titleView)
         chartView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-8)
         }
         titleView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
@@ -185,7 +191,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     }
     
     public func setChartProperty() -> Self {
-        yRender = LimitYAxisRenderer(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
+        yRender = AffectiveCharts3DynamicYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         
         chartView.leftYAxisRenderer = yRender
         chartView.backgroundColor = .clear
@@ -193,8 +199,6 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
         chartView.chartDescription.enabled = false
-        chartView.pinchZoomEnabled = false
-        chartView.scaleXEnabled = isFullScreen
         chartView.scaleYEnabled = false
         chartView.legend.enabled = false
         chartView.highlightPerTapEnabled = false
@@ -229,7 +233,8 @@ public class AffectiveCharts3LineCommonView: UIView {
             }
         }
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
+
+        set.mode = .horizontalBezier
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
@@ -243,7 +248,9 @@ public class AffectiveCharts3LineCommonView: UIView {
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         chartView.data = data
-        yRender?.entries = separateY
+        yRender?.entries = separateY.filter({ v in
+            v > 0
+        })
     }
 }
 
@@ -278,7 +285,7 @@ extension AffectiveCharts3LineCommonView {
 extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
         
-        if let vc = self.parentViewController(), let view = vc.view {
+        if let vc = self.parentViewController(), let view = vc.view, let parent = self.superview?.superview{
             var sv: UIScrollView?
             for e in view.subviews {
                 if e.isKind(of: UIScrollView.self) {
@@ -288,46 +295,50 @@ extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
             }
             
             let orginFrame = view.frame
-            let orginSelfFrame = view.convert(self.chartView.frame, from: self)
             let bHeight = UIScreen.main.bounds.height
             let bWidth = UIScreen.main.bounds.width
             if flag {
+                sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
                 sv?.isScrollEnabled = false
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(64)
-                    $0.trailing.equalToSuperview().offset(-44)
+                chartView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(80)
+                    $0.trailing.equalToSuperview().offset(-80)
+                    $0.bottom.equalToSuperview().offset(-32)
+                }
+                titleView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(80)
+                    $0.trailing.equalToSuperview().offset(-80)
+                }
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(bWidth)
                 }
                 vc.navigationController?.setNavigationBarHidden(true, animated: true)
                 vc.tabBarController?.tabBar.isHidden = true
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
                 view.frame.size.height = bHeight
-                
-                let scale = bWidth/orginSelfFrame.height
-                view.frame.size.width = view.frame.size.width*scale
                 view.frame.origin.y = 0
-                view.frame.origin.x =  -(orginFrame.height-orginSelfFrame.height)*scale+orginSelfFrame.origin.y
-                if theme.style == .session {
-                    self.chartView.dragEnabled = true
-                    chartView.scaleXEnabled = true
-                }
-                
+                view.frame.origin.x = -orginFrame.height+bWidth
             } else {
                 sv?.isScrollEnabled = true
+                sv?.setContentOffset(.zero, animated: true)
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+                chartView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(0)
+                    $0.trailing.equalToSuperview().offset(0)
+                    $0.bottom.equalToSuperview().offset(-8)
+                }
+                titleView.snp.updateConstraints { make in
+                    make.leading.equalToSuperview().offset(0)
+                    make.trailing.equalToSuperview().offset(0)
+                }
 
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
                 view.frame.size.width = bWidth
                 view.frame.size.height = bHeight
-                if theme.style == .session {
-                    self.chartView.dragEnabled = false
-                    chartView.scaleXEnabled = false
-                }
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(16)
-                    $0.trailing.equalToSuperview().offset(-16)
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(311)
                 }
                 
             }

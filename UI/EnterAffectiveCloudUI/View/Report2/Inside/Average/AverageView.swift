@@ -11,7 +11,7 @@ import UIKit
 public enum AverageName: String {
     case Attention
     case Relaxation
-    case Pressure
+    case Pressure = "stress"
     case Heart = "heart rate"
     case HRV
     case Meditation = "meditation time"
@@ -35,6 +35,92 @@ extension AverageName {
             return "训练时长"
         case .Coherence:
             return "和谐时间"
+        }
+    }
+}
+
+extension AverageName {
+    var theme: UIColor {
+        get {
+            switch self {
+            case .Attention:
+                return ColorExtension.greenPrimary
+            case .Relaxation:
+                return ColorExtension.bluePrimary
+            case .Pressure:
+                return ColorExtension.redPrimary
+            case .Heart:
+                return ColorExtension.redPrimary
+            case .HRV:
+                return ColorExtension.yellowPrimary
+            case .Meditation:
+                return ColorExtension.redPrimary
+            case .Coherence:
+                return ColorExtension.greenPrimary
+            }
+        }
+    }
+    
+    var textColor: UIColor {
+        get {
+            switch self {
+            case .Attention:
+                return ColorExtension.green2
+            case .Relaxation:
+                return ColorExtension.blue2
+            case .Pressure:
+                return ColorExtension.red2
+            case .Heart:
+                return ColorExtension.red2
+            case .HRV:
+                return ColorExtension.yellow2
+            case .Meditation:
+                return ColorExtension.red2
+            case .Coherence:
+                return ColorExtension.green2
+            }
+        }
+    }
+    
+    var textBackground: UIColor {
+        get {
+            switch self {
+            case .Attention:
+                return ColorExtension.green5
+            case .Relaxation:
+                return ColorExtension.blue5
+            case .Pressure:
+                return ColorExtension.red5
+            case .Heart:
+                return ColorExtension.red5
+            case .HRV:
+                return ColorExtension.yellow5
+            case .Meditation:
+                return ColorExtension.red5
+            case .Coherence:
+                return ColorExtension.green5
+            }
+        }
+    }
+    
+    var unit: String {
+        get {
+            switch self {
+            case .Attention:
+                return ""
+            case .Relaxation:
+                return ""
+            case .Pressure:
+                return ""
+            case .Heart:
+                return "bpm"
+            case .HRV:
+                return "ms"
+            case .Meditation:
+                return "min"
+            case .Coherence:
+                return "min"
+            }
         }
     }
 }
@@ -75,53 +161,32 @@ public class PrivateAverageView: UIView {
     public var values: [Int] = [] {
         willSet {
             if newValue.count > 0 {
+                self.chart.isHidden = false
+                let name = categoryName
+                let total = newValue.reduce(0, +)
+                let averageValueTemp = Float(total) / Float(newValue.count)
+                chart.values = newValue
+                chart.averageValue = Int(ceilf(Float(total) / Float(newValue.count)))
                 
-                if let name = categoryName {
-                    
-                    let total = newValue.reduce(0, +)
-                    let averageValueTemp = Float(total) / Float(newValue.count)
-                    
-                    if name == .Coherence {
-                        chart.valuesSpect = newValue
-                        let min = Int(averageValueTemp/60)
-                        let sec = Int(averageValueTemp)%60
-                        let minStr = "\(min)"
-                        let secStr = "\(sec)"
-                        let attributedText = NSMutableAttributedString(string:"\(min)min \(sec)s")
-                        let style = NSMutableParagraphStyle()
-                        style.alignment = .left
-                        style.lineSpacing = 5
-                        let minLen = minStr.count
-                        let secLen = secStr.count
-                        attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen), 4))
-
-                        attributedText.addAttributes([NSAttributedString.Key.font:UIFont.systemFont(ofSize: 12, weight: .regular), NSAttributedString.Key.foregroundColor: UIColor.systemGray], range: NSMakeRange(Int(minLen)+4+Int(secLen), 1))
-                        attributedText.addAttributes([NSAttributedString.Key.paragraphStyle: style], range: NSMakeRange(0, attributedText.length))
-                        chart.averageNumLabel.attributedText = attributedText
-                    } else {
-                        chart.values = newValue
-                        chart.averageValue = lroundf(Float(total) / Float(newValue.count))
-                    }
-
-                    let averageValue = lroundf(averageValueTemp)
-                    let current = newValue.first!
-                    var compareText = AverageCompare.equal
-                    icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
-                    if current > averageValue {
-                        compareText = name == .Meditation ? .longer : .higher
-                        icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
-                    } else if current < averageValue {
-                        compareText = name == .Meditation ? .shorter : .lower
-                        icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
-                    }
-                    if language == .en {
-                        self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
-                    } else {
-                        self.setCompareText(name: name.ch, compare: compareText.ch)
-                    }
-                    
+                let averageValue = lroundf(averageValueTemp)
+                let current = newValue.first!
+                var compareText = AverageCompare.equal
+                icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
+                if current > averageValue {
+                    compareText = (name == .Meditation || name == .Coherence) ? .longer : .higher
+                    icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
+                } else if current < averageValue {
+                    compareText = (name == .Meditation || name == .Coherence) ? .shorter : .lower
+                    icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                 }
-
+                if language == .en {
+                    self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
+                } else {
+                    self.setCompareText(name: name.ch, compare: compareText.ch)
+                }
+                    
+            } else {
+                self.chart.isHidden = true
             }
 
         }
@@ -131,26 +196,25 @@ public class PrivateAverageView: UIView {
         willSet {
             if newValue.count > 0 {
                 chart.floatValues = newValue
-                if let name = categoryName {
-                    let total = newValue.reduce(0, +)
-                    let averageValueTemp = Float(total) / Float(newValue.count)
-                    let averageValue = averageValueTemp
-                    let current = newValue.first!
-                    var compareText = AverageCompare.equal
-                    icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
-                    if current > averageValue {
-                        compareText = name == .Meditation ? .longer : .higher
-                        icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
-                    } else if current < averageValue {
-                        compareText = name == .Meditation ? .shorter : .lower
-                        icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
-                    }
-                    if language == .en {
-                        self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
-                    } else {
-                        self.setCompareText(name: name.ch, compare: compareText.ch)
-                    }
+                let name = categoryName
+                let total = newValue.reduce(0, +)
+                let averageValueTemp = Float(total) / Float(newValue.count)
+                let averageValue = averageValueTemp
+                let current = newValue.first!
+                var compareText = AverageCompare.equal
+                icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
+                if current > averageValue {
+                    compareText = (name == .Meditation || name == .Coherence) ? .longer : .higher
+                    icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
                     
+                } else if current < averageValue {
+                    compareText = (name == .Meditation || name == .Coherence) ? .shorter : .lower
+                    icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
+                }
+                if language == .en {
+                    self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
+                } else {
+                    self.setCompareText(name: name.ch, compare: compareText.ch)
                 }
 
             }
@@ -158,14 +222,14 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    public var attributeText: NSAttributedString? {
+    private var attributeText: NSAttributedString? {
         didSet {
             chart.averageNumLabel.attributedText = attributeText
         }
         
     }
     
-    public var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
+    private var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
         willSet {
             chart.currentBarColor = newValue
         }
@@ -177,43 +241,43 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    public var lastSevenTime = "Last 7 times" {
+    private var lastSevenTime = "Last 7 times" {
         willSet {
             chart.lastSevenTime = newValue
         }
     }
     
-    public var meditationTime = 0 {
+    private var meditationTime = 0 {
         willSet {
             chart.meditationTime = newValue
         }
     }
     
-    public var averageText = "Average" {
+    private var averageText = "Average" {
         willSet {
             chart.averageText = newValue
         }
     }
     
-    public var textBgColor: UIColor = .white {
+    private var textBgColor: UIColor = ColorExtension.bgZ2 {
         willSet {
             bgLabel.backgroundColor = newValue
         }
     }
     
-    public var numTextColor: UIColor = .white {
+    private var numTextColor: UIColor = .white {
         willSet {
             chart.numTextColor = newValue
         }
     }
     
-    public var numBgColor: UIColor = .gray {
+    private var numBgColor: UIColor = .gray {
         willSet {
             chart.numBgColor = newValue
         }
     }
     
-    public var barColor: UIColor = .white {
+    private var barColor: UIColor = .white {
         willSet {
             chart.barColor = newValue
         }
@@ -221,7 +285,19 @@ public class PrivateAverageView: UIView {
     
     public var language: LanguageEnum = .en
     
-    public var categoryName: AverageName?
+    public var categoryName: AverageName = .Meditation {
+        willSet {
+            chart.barColor = ColorExtension.lineLight
+            chart.numBgColor = newValue.textBackground
+            chart.numTextColor = newValue.textColor
+            bgLabel.backgroundColor = ColorExtension.bgZ2
+            chart.averageText = "Average"
+            chart.lastSevenTime = "Last 7 times"
+            chart.currentBarColor = newValue.theme
+            icon.tintColor = newValue.theme
+            chart.unitText = newValue.unit
+        }
+    }
     
     private let bgLabel = UIView()
     private let icon = UIImageView()
@@ -274,7 +350,7 @@ public class PrivateAverageView: UIView {
         }
         
         self.snp.makeConstraints {
-            $0.height.equalTo(258)
+            $0.height.equalTo(259)
             $0.left.right.bottom.equalToSuperview()
         }
     }

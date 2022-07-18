@@ -7,6 +7,9 @@
 //
 
 import UIKit
+public protocol AffectiveCharts3ExpandRhythmProtocol: AnyObject {
+    func selectLines(lines: Int)
+}
 
 class AffectiveCharts3ExpandRhythmView: UIView {
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
@@ -15,7 +18,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public var thetaColor = UIColor.colorWithHexString(hexColor: "#5FC695")
     public var deltaColor = UIColor.colorWithHexString(hexColor: "#5E75FF")
 
-    public weak var delegate: RhythmsViewDelegate?
+    public weak var delegate: AffectiveCharts3ExpandRhythmProtocol?
     public weak var expandDelegate: AffectiveCharts3ExpandDelegate?
     public var style = AffectiveCharts3FormatOptional.session {
         didSet {
@@ -25,22 +28,26 @@ class AffectiveCharts3ExpandRhythmView: UIView {
                 title = "Average Percentage".uppercased()
             case .month:
                 title = "Daily Average Percentage".uppercased()
+                expandBtn.isHidden = true
             case .year:
                 title = "Monthly Average Percentage".uppercased()
+                expandBtn.isHidden = true
             }
             _ = infoView.setUI(title: title).setLayout()
         }
     }
     private var isNotShowExpand = true
+    private var lines = 31
     /// 伽马线是否可用
     public lazy var gamaEnable: Bool = true {
         willSet {
             if newValue {
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 1)
+             
             } else {
+                
                 gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1)
+                
             }
         }
     }
@@ -50,10 +57,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 3)
+                
             } else {
                 betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 2)
+                
             }
         }
     }
@@ -63,10 +70,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 5)
+                
             } else {
                 alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 4)
+               
             }
         }
     }
@@ -76,10 +83,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 7)
+            
             } else {
                 thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 6)
+               
             }
         }
     }
@@ -89,10 +96,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         willSet {
             if newValue {
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 9)
+             
             } else {
                 deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
-                delegate?.setRhythmsEnable(value: 1 << 8)
+                
             }
         }
     }
@@ -140,6 +147,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     }
 
     public func setLineEnable(value: Int) {
+        self.lines = value
         if value >> 0 & 1 == 1 {
             gamaEnable = true
         } else {
@@ -170,12 +178,15 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public func setRhythms(gamma: Int, beta: Int, alpha: Int, theta: Int, delta: Int, timeFrom: TimeInterval, timeTo: TimeInterval) {
         
         let dateFrom = Date(timeIntervalSince1970: round(timeFrom))
-
-        if Calendar.current.component(.day, from: dateFrom) == 1 {
+        
+        if style == .month && Calendar.current.component(.day, from: dateFrom) == 1 {
             lk_formatter.dateFormat = "MMM yyyy"
             let time = lk_formatter.string(from: dateFrom)
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
-
+        } else if style == .year && Calendar.current.component(.month, from: dateFrom) == 1 {
+            lk_formatter.dateFormat = "yyyy"
+            let time = lk_formatter.string(from: dateFrom)
+            _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
         } else {
             lk_formatter.dateFormat = style.fromFormat
             let fromText = lk_formatter.string(from: dateFrom)
@@ -185,7 +196,6 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             let time = fromText + toText
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
         }
-        infoView.isHidden = false
     }
 
     /// ui
@@ -204,7 +214,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
 
-        betaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
+        betaBtn.backgroundColor = betaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
         betaBtn.setTitleColor(betaColor, for: .normal)
         betaBtn.layer.cornerRadius = 12
@@ -262,7 +272,6 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
         }
         expandBtn.addTarget(self, action: #selector(expandAction(_:)), for: .touchUpInside)
-        infoView.isHidden = true
         
 
         addSubview(btnContentView)
@@ -300,6 +309,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         gamaEnable = !gamaEnable
+        if gamaEnable {
+            lines += 1
+        } else {
+            lines -= 1
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -308,6 +323,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         betaEnable = !betaEnable
+        if betaEnable {
+            lines += 2
+        } else {
+            lines -= 2
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -316,6 +337,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         alphaEnable = !alphaEnable
+        if alphaEnable {
+            lines += 4
+        } else {
+            lines -= 4
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -324,6 +351,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         thetaEnable = !thetaEnable
+        if thetaEnable {
+            lines += 8
+        } else {
+            lines -= 8
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc
@@ -332,17 +365,32 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             return
         }
         deltaEnable = !deltaEnable
+        if deltaEnable {
+            lines += 16
+        } else {
+            lines -= 16
+        }
+        self.delegate?.selectLines(lines: lines)
     }
 
     @objc func expandAction(_ sender: UIButton) {
         expandDelegate?.expand(flag: isNotShowExpand)
+        isNotShowExpand = !isNotShowExpand
+        if isNotShowExpand {
+            expandBtn.setImage(UIImage.loadImage(name: "expand", any: classForCoder), for: .normal)
+        } else {
+            
+            expandBtn.setImage(UIImage.loadImage(name: "expand_back", any: classForCoder), for: .normal)
+        }
     }
 }
 
 extension AffectiveCharts3ExpandRhythmView: AffectiveCharts3ChartChanged {
     func update(single: Int?, mult: (Int, Int, Int, Int, Int)?, from: Double, to: Double) {
         guard let mult = mult else {return}
+        
         self.setRhythms(gamma: mult.0, beta: mult.1, alpha: mult.2, theta: mult.3, delta: mult.4, timeFrom: from, timeTo: to)
+        
     }
     
     
@@ -406,6 +454,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         gammaImage.image = UIImage.loadImage(name: "gamma", any: classForCoder)
         gammaNumLabel.textColor = gammaColor
         gammaNumLabel.font = numFont
+        gammaNumLabel.text = "--"
         gammaPercentLabel.textColor = gammaColor
         gammaPercentLabel.font = percentFont
 
@@ -416,6 +465,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         betaImage.image = UIImage.loadImage(name: "beta", any: classForCoder)
         betaNumLabel.textColor = betaColor
         betaNumLabel.font = numFont
+        betaNumLabel.text = "--"
         betaPercentLabel.textColor = betaColor
         betaPercentLabel.font = percentFont
 
@@ -426,6 +476,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         alphaImage.image = UIImage.loadImage(name: "alpha", any: classForCoder)
         alphaNumLabel.textColor = alphaColor
         alphaNumLabel.font = numFont
+        alphaNumLabel.text = "--"
         alphaPercentLabel.textColor = alphaColor
         alphaPercentLabel.font = percentFont
 
@@ -436,6 +487,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         thetaImage.image = UIImage.loadImage(name: "theta", any: classForCoder)
         thetaNumLabel.textColor = thetaColor
         thetaNumLabel.font = numFont
+        thetaNumLabel.text = "--"
         thetaPercentLabel.textColor = thetaColor
         thetaPercentLabel.font = percentFont
 
@@ -446,9 +498,10 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         deltaImage.image = UIImage.loadImage(name: "delta", any: classForCoder)
         deltaNumLabel.textColor = deltaColor
         deltaNumLabel.font = numFont
+        deltaNumLabel.text = "--"
         deltaPercentLabel.textColor = deltaColor
         deltaPercentLabel.font = percentFont
-
+        
         return self
     }
 
@@ -495,32 +548,42 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         deltaNumLabel.frame = CGRect(x: 24.5, y: 18, width: 0, height: 21)
         deltaPercentLabel.frame = CGRect(x: 36.5, y: 22, width: 0, height: 17)
         timeLabel.frame = CGRect(x: 8, y: 39, width: 240, height: 14)
-
+        
         return self
     }
 
     public func setRhythms(gamma: Int, beta: Int, alpha: Int, theta: Int, delta: Int, time: String) -> CGFloat {
         if gamma > 0 {
             gammaNumLabel.text = "\(gamma)"
+        } else if gamma == 0 {
+            gammaNumLabel.text = "--"
         } else {
             gammaEnable = false
         }
         if beta > 0 {
             betaNumLabel.text = "\(beta)"
+        } else if beta == 0 {
+            betaNumLabel.text = "--"
         } else {
             betaEnable = false
         }
         if alpha > 0 {
             alphaNumLabel.text = "\(alpha)"
+        } else if alpha == 0 {
+            alphaNumLabel.text = "--"
         } else {
             alphaEnable = false
         }
         if theta > 0 {
             thetaNumLabel.text = "\(theta)"
+        } else if theta == 0 {
+            thetaNumLabel.text = "--"
         } else {
             thetaEnable = false
         }
-        if delta > 0 {
+        if delta == 100 || delta == 0 {
+            deltaNumLabel.text = "--"
+        } else if delta > 0 {
             deltaNumLabel.text = "\(delta)"
         } else {
             deltaEnable = false

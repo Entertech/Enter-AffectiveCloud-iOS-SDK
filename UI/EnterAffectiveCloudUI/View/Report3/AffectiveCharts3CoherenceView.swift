@@ -10,13 +10,10 @@ import UIKit
 import Charts
 
 public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
-
     
     public override func setMarker() -> Self {
-        let marker = AffectiveCharts3CommonMarkerView(theme: theme)
-        marker.addInterval(anotherArray: coherenceValue)
-        marker.chartView = chartView
-        chartView.marker = marker
+
+        
         
         return self
     }
@@ -36,7 +33,9 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         }
         var yVals: [ChartDataEntry] = []
         var colors: [UIColor] = []
+        var cohereceArray = [Int]()
         for i in stride(from: 0, to: dataSorce.count, by: sample) {
+            cohereceArray.append(coherenceValue[i])
             if coherenceValue[i] > 0 {
                 colors.append(theme.themeColor)
             } else {
@@ -50,9 +49,14 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
                 }
             }
         }
+        
+        let marker = AffectiveCharts3CommonMarkerView(theme: theme)
+        marker.addInterval(anotherArray: cohereceArray)
+        marker.chartView = chartView
+        chartView.marker = marker
 
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
+        set.mode = .horizontalBezier
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false

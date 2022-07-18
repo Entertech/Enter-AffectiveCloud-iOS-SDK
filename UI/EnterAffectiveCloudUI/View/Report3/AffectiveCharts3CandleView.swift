@@ -43,7 +43,8 @@ public class AffectiveCharts3CandleView: UIView {
         self.addSubview(chartView)
         self.addSubview(titleView)
         chartView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-8)
         }
         titleView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
@@ -54,24 +55,24 @@ public class AffectiveCharts3CandleView: UIView {
     }
     
     public func build(candle: Array2D<Double>, average: [Double]) {
-        guard candle.rows > 2 else {return}
+        guard candle.rows >= 2 else {return}
         var low: [Double] = []
         var high: [Double] = []
+        for j in 0..<candle.columns {
+            let lowTmp = candle[j, 0]
+            let highTmp = candle[j, 1]
+            low.append(lowTmp)
+            high.append(highTmp)
+            
+        }
 
-            for j in 0..<candle.columns {
-                
-                low.append(candle[j, 0])
-                high.append(candle[j, 1])
-                
-            }
-        
         chartView.setDataCount(low: low, high: high, average: average)
     }
 }
 
 extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
-        if let vc = self.parentViewController(), let view = vc.view {
+        if let vc = self.parentViewController(), let view = vc.view, let parent = self.superview?.superview{
             var sv: UIScrollView?
             for e in view.subviews {
                 if e.isKind(of: UIScrollView.self) {
@@ -81,43 +82,52 @@ extension AffectiveCharts3CandleView: AffectiveCharts3ExpandDelegate {
             }
             
             let orginFrame = view.frame
-            let orginSelfFrame = view.convert(self.chartView.frame, from: self)
             let bHeight = UIScreen.main.bounds.height
             let bWidth = UIScreen.main.bounds.width
             if flag {
+                sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
                 sv?.isScrollEnabled = false
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(64)
-                    $0.trailing.equalToSuperview().offset(-44)
+                chartView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(80)
+                    $0.trailing.equalToSuperview().offset(-80)
+                    $0.bottom.equalToSuperview().offset(-32)
+                }
+                titleView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(80)
+                    $0.trailing.equalToSuperview().offset(-80)
+                }
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(bWidth)
                 }
                 vc.navigationController?.setNavigationBarHidden(true, animated: true)
                 vc.tabBarController?.tabBar.isHidden = true
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
                 view.frame.size.height = bHeight
-                
-                let scale = bWidth/orginSelfFrame.height
-                view.frame.size.width = view.frame.size.width*scale
                 view.frame.origin.y = 0
-                view.frame.origin.x =  -(orginFrame.height-orginSelfFrame.height)*scale+orginSelfFrame.origin.y
-                
+                view.frame.origin.x = -orginFrame.height+bWidth
             } else {
                 sv?.isScrollEnabled = true
+                sv?.setContentOffset(.zero, animated: true)
                 view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-
+                chartView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(0)
+                    $0.trailing.equalToSuperview().offset(0)
+                    $0.bottom.equalToSuperview().offset(-8)
+                }
+                titleView.snp.updateConstraints {
+                    $0.leading.equalToSuperview().offset(0)
+                    $0.trailing.equalToSuperview().offset(0)
+                }
                 view.frame.origin.y = 0
                 view.frame.origin.x = 0
                 view.frame.size.width = bWidth
                 view.frame.size.height = bHeight
-                
                 view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-
-                self.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(16)
-                    $0.trailing.equalToSuperview().offset(-16)
+                parent.snp.updateConstraints {
+                    $0.height.equalTo(311)
                 }
                 
             }
-            
         }
     }
 }

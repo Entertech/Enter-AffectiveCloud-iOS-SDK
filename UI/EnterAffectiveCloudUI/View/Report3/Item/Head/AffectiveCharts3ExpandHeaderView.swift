@@ -27,12 +27,14 @@ class AffectiveCharts3ExpandHeaderView: UIView {
             title = theme.chartType.session
         case .month:
             title = theme.chartType.month
+            expandBtn.isHidden = true
         case .year:
             title = theme.chartType.year
-            
+            expandBtn.isHidden = true
         }
         infoView.setLabelColor(color: ColorExtension.textLv2)
             .setAverageLabel(value: title)
+            .setType(type: theme.style)
             .setAverageNumLabel(value: theme.averageValue, color: theme.themeColor)
             .setUnit(theme.unitText)
             .setTime(from: theme.startTime, to: theme.endTime, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
@@ -81,7 +83,36 @@ class AffectiveCharts3ExpandHeaderView: UIView {
 extension AffectiveCharts3ExpandHeaderView: AffectiveCharts3ChartChanged {
     func update(single: Int?, mult: (Int, Int, Int, Int, Int)?, from: Double, to: Double) {
         guard let single = single else {return}
-        _ = self.infoView.setAverageNumLabel(value: "\(single)", color: theme.themeColor)
+        var numText = "\(single)"
+        if self.theme.chartType == .pressure {
+            
+            if single > 75 {
+                numText = AffectiveCharts3CohereceState.high.rawValue
+            } else if single > 50 {
+                numText = AffectiveCharts3CohereceState.ele.rawValue
+            } else if single > 25 {
+                numText = AffectiveCharts3CohereceState.nor.rawValue
+            } else {
+                numText = AffectiveCharts3CohereceState.low.rawValue
+            }
+        } else if self.theme.chartType == .common && self.theme.tagSeparation.count > 3 {
+            var tag = ""
+            if single > theme.tagSeparation[2] {
+                tag = PrivateReportState.high.rawValue
+            } else if single > theme.tagSeparation[1] {
+                tag = PrivateReportState.nor.rawValue
+            } else {
+                tag = PrivateReportState.low.rawValue
+            }
+            self.infoView.reSetTag(tag)
+            
+        }
+        if self.theme.style == .month || self.theme.style == .year {
+            if single == 0 {
+                numText = "--"
+            }
+        }
+        _ = self.infoView.setAverageNumLabel(value: numText, color: theme.themeColor)
             .setTime(from: from, to: to, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
     }
     
@@ -96,7 +127,7 @@ class AffectiveCharts3HeaderInfoView: UIView {
     private let timeLabel = UILabel()
     private let tagLabel = UILabel()
     private var labelColor: UIColor = .label
-    
+    private var type: AffectiveCharts3FormatOptional = .session
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -128,14 +159,20 @@ class AffectiveCharts3HeaderInfoView: UIView {
     func setTime(from: TimeInterval, to: TimeInterval, startFormatter: String, endFormatter: String) -> Self {
         let dateFrom = Date.init(timeIntervalSince1970: round(from))
         let dateTo = Date.init(timeIntervalSince1970: round(to))
-        
-        if Calendar.current.component(.day, from: dateFrom) == 1 {
-            lk_formatter.dateFormat = "MMM yyyy"
+        if type == .month && Calendar.current.component(.day, from: dateFrom) == 1 {
+            let str = "MMM yyyy"
+            lk_formatter.dateFormat = str
             let time = lk_formatter.string(from: dateFrom)
             timeLabel.text = time
             timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             timeLabel.textColor = labelColor
-
+        } else if type == .year && Calendar.current.component(.month, from: dateFrom) == 1{
+            let str = "yyyy"
+            lk_formatter.dateFormat = str
+            let time = lk_formatter.string(from: dateFrom)
+            timeLabel.text = time
+            timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+            timeLabel.textColor = labelColor
         } else {
             lk_formatter.dateFormat = startFormatter
             timeLabel.text = lk_formatter.string(from: dateFrom)
@@ -144,6 +181,11 @@ class AffectiveCharts3HeaderInfoView: UIView {
             timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             timeLabel.textColor = labelColor
         }
+        return self
+    }
+    
+    func setType(type: AffectiveCharts3FormatOptional) -> Self {
+        self.type = type
         return self
     }
     
@@ -173,6 +215,10 @@ class AffectiveCharts3HeaderInfoView: UIView {
         
     
         return self
+    }
+    
+    func reSetTag(_ tag: String) {
+        tagLabel.text = tag
     }
     
     func build() {

@@ -29,7 +29,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.leftAxis.labelTextColor = ColorExtension.textLv2
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.leftAxis.gridColor = ColorExtension.lineLight
-        chartView.leftAxis.gridLineWidth = 1
+        chartView.leftAxis.gridLineWidth = 0.5
         chartView.leftAxis.gridLineCap = .round
         chartView.leftAxis.gridLineDashPhase = 2.0
         chartView.leftAxis.gridLineDashLengths = [2.0, 4.0]
@@ -41,7 +41,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
         chartView.xAxis.gridColor = ColorExtension.lineLight
-        chartView.xAxis.gridLineWidth = 1
+        chartView.xAxis.gridLineWidth = 0.5
         chartView.xAxis.gridLineCap = .round
         chartView.xAxis.gridLineDashLengths = [2.0, 4.0]
         chartView.xAxis.axisLineColor = ColorExtension.lineHard
@@ -49,15 +49,24 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
-
+        if theme.style != .session {
+            chartView.xAxis.granularityEnabled = true
+            chartView.xAxis.granularity = 1
+        }
         return self
     }
     
     public override func setData(_ array: [Int]) -> Self {
+        guard array.count > 0 else {return self}
         dataSorce.append(contentsOf: array)
         
         //计算抽样
-        sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
+        if theme.style == .session {
+            sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
+        } else {
+            sample = 1
+        }
+        
         
         chartView.leftAxis.axisMaximum = Double(100)
         chartView.leftAxis.axisMinimum = Double(0)
@@ -80,12 +89,12 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         front1View.snp.makeConstraints {
             $0.top.leading.equalTo(chartView)
             $0.width.equalTo(9)
-            $0.bottom.equalTo(chartView.snp.bottom).offset(-16)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-11)
         }
         front2View.snp.makeConstraints {
             $0.top.trailing.equalTo(chartView)
             $0.width.equalTo(9)
-            $0.bottom.equalTo(chartView.snp.bottom).offset(-16)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-11)
         }
         chartView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -102,7 +111,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     public override func setChartProperty() -> Self {
         chartView.delegate = self
         chartView.backgroundColor = .clear
-        chartView.animate(xAxisDuration: 0.5)
+        chartView.animate(xAxisDuration: 0.3)
         chartView.drawGridBackgroundEnabled = true
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
@@ -129,7 +138,9 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.gridGradient = gradient
         switch theme.style {
         case .session:
-            chartView.dragEnabled = false
+            chartView.dragEnabled = true
+            chartView.scaleXEnabled = true
+            chartView.pinchZoomEnabled = true
             chartView.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
         case .month:
             self.dataSouceChanged = titleView
@@ -147,53 +158,85 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     
     public override func build() {
         let invalidData = 5
-        var initValue = 0 //初始数据
-        var initIndex = 0 //开始有值索引位置
-        for i in stride(from: 0, to: dataSorce.count, by: sample) {
-            let value = dataSorce[i]
-            if value > invalidData && initValue == 0 {
-                initValue = value
-                initIndex = i
-                break
-            }
-        }
         var yVals: [ChartDataEntry] = []
-        for i in stride(from: 0, to: dataSorce.count, by: sample) {
-            if initIndex > i {
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
-            } else {
-                if dataSorce[i] > invalidData { //小于无效值的不做点
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
+        var data:LineChartData!
+        if theme.style == .session {
+            var initValue = 0 //初始数据
+            var initIndex = 0 //开始有值索引位置
+            for i in stride(from: 0, to: dataSorce.count, by: sample) {
+                let value = dataSorce[i]
+                if value > invalidData && initValue == 0 {
+                    initValue = value
+                    initIndex = i
+                    break
                 }
             }
-        }
-        let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .linear
-
-        if theme.style == .month {
-            set.drawCirclesEnabled = true
-            set.drawCircleHoleEnabled = true
-        } else if theme.style == .year {
-            set.drawCirclesEnabled = true
-            set.drawCircleHoleEnabled = true
-        } else {
+            
+            for i in stride(from: 0, to: dataSorce.count, by: sample) {
+                if initIndex > i {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
+                } else {
+                    if dataSorce[i] > invalidData { //小于无效值的不做点
+                        yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
+                    }
+                }
+            }
+            let set = LineChartDataSet(entries: yVals, label: "")
+            set.mode = .horizontalBezier
             set.drawCirclesEnabled = false
             set.drawCircleHoleEnabled = false
+            set.drawFilledEnabled = false
+            set.lineWidth = 2
+            set.setColor(theme.themeColor)
+            set.drawIconsEnabled = false
+            set.highlightEnabled = true
+            set.highlightLineWidth = 2
+            set.highlightColor = ColorExtension.lineLight
+            set.drawHorizontalHighlightIndicatorEnabled = false
+            set.drawValuesEnabled = false
+            data = LineChartData(dataSet: set)
+            
+        } else {
+            var clearVal: [ChartDataEntry] = []
+            for i in stride(from: 0, to: dataSorce.count, by: sample) {
+                clearVal.append(ChartDataEntry(x: Double(i), y: Double(dataSorce[i])))
+                if dataSorce[i] > invalidData {
+                    yVals.append(ChartDataEntry(x: Double(i), y: Double(dataSorce[i])))
+                }
+            }
+            let set = LineChartDataSet(entries: yVals, label: "")
+            set.mode = .linear
+            set.drawCirclesEnabled = true
+            set.drawCircleHoleEnabled = true
+            set.drawFilledEnabled = false
+            set.lineWidth = 2
+            set.setColor(theme.themeColor)
+            set.setCircleColor(theme.themeColor)
+            set.circleRadius = 3
+            set.circleHoleRadius = 2
+            set.circleHoleColor = ColorExtension.white
+            set.drawIconsEnabled = false
+            set.highlightEnabled = true
+            set.highlightLineWidth = 2
+            set.highlightColor = ColorExtension.lineLight
+            set.drawHorizontalHighlightIndicatorEnabled = false
+            set.drawValuesEnabled = false
+            let set2 = LineChartDataSet(entries: clearVal, label: "")
+            set2.mode = .linear
+            set2.drawCirclesEnabled = false
+            set2.drawCircleHoleEnabled = false
+            set2.highlightEnabled = false
+            set2.drawFilledEnabled = false
+            set2.lineWidth = 2
+            set2.setColor(.clear)
+            set2.drawIconsEnabled = false
+            set2.highlightLineWidth = 2
+            set2.highlightColor = ColorExtension.lineLight
+            set2.drawHorizontalHighlightIndicatorEnabled = false
+            set2.drawValuesEnabled = false
+            data = LineChartData(dataSets: [set2, set])
         }
-        set.drawFilledEnabled = false
-        set.lineWidth = 2
-        set.setColor(theme.themeColor)
-        set.setCircleColor(theme.themeColor)
-        set.circleRadius = 3
-        set.circleHoleRadius = 2
-        set.circleHoleColor = ColorExtension.white
-        set.drawIconsEnabled = false
-        set.highlightEnabled = true
-        set.highlightLineWidth = 2
-        set.highlightColor = ColorExtension.lineLight
-        set.drawHorizontalHighlightIndicatorEnabled = false
-        set.drawValuesEnabled = false
-        let data = LineChartData(dataSet: set)
+
         chartView.data = data
         if theme.style == .month {
             chartView.setVisibleXRangeMaximum(31)
@@ -201,7 +244,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
                 self.overloadY()
             })
         } else if theme.style == .year {
@@ -210,7 +253,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                 self.chartView.moveViewToX(last.x)
                 self.lastXValue = last.x
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.2, execute: {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.6, execute: {
                 self.overloadY()
             })
         }
@@ -228,13 +271,13 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
                     let date = self.startDate.getDayAfter(days: Int(round(leftValue)))
                     if let day = date?.get(.day) {
                         aim = round(leftValue - Double(day) + 1.0)
-                        aim -= 0.3
+                        
                     }
                 } else {
                     let date = self.startDate.getMonthAfter(month: Int(round(leftValue)))
                     if let day = date?.get(.month) {
                         aim = round(leftValue - Double(day) + 1.0)
-                        aim -= 0.4
+                        
                     }
                 }
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
@@ -246,13 +289,13 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
                     let date = self.startDate.getDayAfter(days: Int(round(rightValue)))
                     if let day = date?.get(.day) {
                         aim = round(rightValue - Double(day) + 1.0)
-                        aim -= 0.3
+                       
                     }
                 } else {
                     let date = self.startDate.getMonthAfter(month: Int(round(rightValue)))
                     if let day = date?.get(.month) {
                         aim = round(rightValue - Double(day) + 1.0)
-                        aim -= 0.4
+                        
                     }
                 }
                 self.chartView.moveViewToAnimated(xValue: aim, yValue: 0, axis: .left, duration: 0.3, easingOption: .easeInCubic)
@@ -281,64 +324,10 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
     
     
     func overloadY() {
-        let leftX = Int(round(self.chartView.lowestVisibleX) - self.chartView.chartXMin)
-        let rightX = Int(round(self.chartView.highestVisibleX) - self.chartView.chartXMin)
-        var maxValue: Double = 0
-        for i in leftX..<rightX {
-            if let value = self.chartView.lineData?.dataSets.first?.entryForIndex(i) {
-                if value.y > maxValue {
-                    maxValue = value.y
-                }
-            }
-        }
-        setYLable(maxY: maxValue)
+        setYLable(maxY: 0)
     }
     
     private func setYLable(maxY: Double) {
-        var gotIt: Double = 0
-        var part: Int = 0
-        var limitArray: [Int] = []
-        for i in 0...10 {
-            let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
-
-            for e in 4...5 {
-                if value % e == 0 && (value / e) % 5 == 0{
-                    
-                    gotIt = Double(value)
-                    part = e
-                    break
-                }
-            }
-            if gotIt > 0 {
-                break
-            }
-        }
-        
-        guard part > 1 else {return}
-        self.chartView.leftAxis.removeAllLimitLines()
-        
-        let partValue = Int(gotIt)/(part)
-        for i in 0...part {
-            let yAxis = partValue*i
-//            print("maxAxis:\(yAxis)  part:\(i)")
-            limitArray.append(yAxis)
-            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
-            limitLine.drawLabelEnabled = false
-            limitLine.lineWidth = 1
-            limitLine.lineDashLengths = [3, 2]
-            limitLine.lineColor = ColorExtension.lineLight
-            self.chartView.leftAxis.addLimitLine(limitLine)
-        }
-
-
-        yRender?.entries = limitArray
-        self.chartView.setVisibleYRangeMaximum(gotIt, axis: .left)
-        self.chartView.setVisibleYRangeMinimum(gotIt, axis: .left)
-        if theme.style == .month {
-            self.chartView.moveViewTo(xValue: self.chartView.lowestVisibleX, yValue: gotIt/2, axis: .left)
-        } else {
-            self.chartView.moveViewTo(xValue: self.chartView.lowestVisibleX, yValue: gotIt/2, axis: .left)
-        }
         
         let time = self.calculatAverageTime()
         let ave = self.calculatAverage()
@@ -350,7 +339,6 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
         let right = round(self.chartView.highestVisibleX)
         switch theme.style {
         case .session:
-            
             let fromTime = self.theme.startTime + left
             let toTime = self.theme.startTime + right
             return (fromTime, toTime)
@@ -375,15 +363,19 @@ extension AffectiveCharts3Pressure: ChartViewDelegate {
         let left = round(self.chartView.lowestVisibleX)
         let right = round(self.chartView.highestVisibleX)
         
-        let leftIndex = Int(left)
+        let leftIndex = Int(left) < 0 ? 0 : Int(left)
         let count = Int(right-left)
         
         if leftIndex+count <= dataSorce.count {
             var sum = 0.0
+            var num = 0
             for i in leftIndex..<leftIndex+count {
+                if dataSorce[i] > 0 {
+                    num += 1
+                }
                 sum += Double(dataSorce[i])
             }
-            let ave = Int(round(sum / Double(count)))
+            let ave = Int(ceil(sum / Double(num > 0 ? num : 1)))
             return ave
         } else {
             return 0
