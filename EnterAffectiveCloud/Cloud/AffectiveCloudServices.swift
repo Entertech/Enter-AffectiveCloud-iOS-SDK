@@ -1014,6 +1014,8 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.isSessionCreated = false
                 self.session_id = nil
                 self.logUrlStr = nil
+                self.appKey = nil
+                self.appSecret = nil
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.initial.rawValue):
                 if let biodata = model.dataModel as? CSResponseDataJSONModel,
                     let list = biodata.biodataList {
