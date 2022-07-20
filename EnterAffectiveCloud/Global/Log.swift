@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 var __isDebug = true
 
 func DLog(_ items: Any...) {

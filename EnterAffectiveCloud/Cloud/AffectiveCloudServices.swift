@@ -29,7 +29,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             }
         }
     }
-    var bIsLog: Bool = false
+    var bIsLogToLocal: Bool = false
     var appKey: String? // could key
     var userID: String?
     var appSecret: String?
@@ -880,7 +880,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
     }
     
     func logService(log: String) {
-        if bIsLog {
+        if bIsLogToLocal {
             if let url = logUrlStr {
                 if logUrl == nil {
                     logUrl = URL.init(fileURLWithPath: url)
@@ -1031,16 +1031,6 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     DLog("log biodata subscribe is \(data)")
                 }
 
-//                if let data = model.dataModel as? CSResponseBiodataSubscribeJSONModel,
-//                    let list = data.eegServiceList {
-//                    self.appendBiodataSubscribeList(list: list)
-//                }
-//
-//                if let data = model.dataModel as? CSResponseBiodataSubscribeJSONModel,
-//                    let list = data.hrServiceList {
-//                    self.appendBiodataSubscribeList(list: list)
-//                }
-
                 self.delegate?.biodataServicesSubscribe(client: self.client, response: model)
                 NotificationCenter.default.post(name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil, userInfo: ["biodataServicesSubscribe":model])
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.submit.rawValue):
@@ -1108,6 +1098,13 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.biodataInitialList?.insert(.HeartRateV2)
             } else {
                 self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .HeartRateV2)
+            }
+        }
+        if list.contains("pepr") {
+            if let _ = self.biodataInitialList {
+                self.biodataInitialList?.insert(.PEPR)
+            } else {
+                self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .PEPR)
             }
         }
     }

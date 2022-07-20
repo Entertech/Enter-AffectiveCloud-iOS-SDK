@@ -15,9 +15,15 @@ public class AffectiveCloudClient {
         }
     }
     
-    public var bIsLog = false {
+    public var bIsLogToLocal = false {
         willSet {
-            self.cloudService?.bIsLog = newValue
+            self.cloudService?.bIsLogToLocal = newValue
+        }
+    }
+    
+    public var bIsLogWhenDebug = true {
+        willSet {
+            __isDebug = newValue
         }
     }
 
