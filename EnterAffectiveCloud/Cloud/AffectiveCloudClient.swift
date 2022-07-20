@@ -185,6 +185,7 @@ public class AffectiveCloudClient {
     private var _hrBuffer = Data()
     /// the standard size of heart rate that upload to cloud service
     private var _hrBufferSize = 9
+    private var _limitDate = Date()
     /// Append heart rate data to cloud service from your hardware
     /// this is necessory if you want to use follow services:
     /// Affective services: .arousal 、.pressure
@@ -200,22 +201,34 @@ public class AffectiveCloudClient {
         if _hrBuffer.count < _hrBufferSize {
             return
         }
-        let startIndex = _hrBuffer.startIndex
-        let results = stride(from: startIndex, to: _hrBuffer.endIndex, by: _hrBufferSize).map({ start -> Data in
-            let range = start..<(start + self._hrBufferSize)
-            let tempData = self._hrBuffer.subdata(in: range)
-            return tempData
-        })
-
-        for element in results {
-            let data_int = element.map { Int($0) }
-            DLog("upload hr data")
-            self.cloudService?.biodataUpload(options: options, hrData: data_int)
-            if _hrBuffer.count >= _hrBufferSize {
-                _hrBuffer.removeFirst(_hrBufferSize)
-            }
-            
+        let current = Date()
+        let stride = abs(current.timeIntervalSince(_limitDate))
+        if stride < 0.6*Double(self.cloudService?.uploadCycle ?? 3) - 0.2 {
+            return
         }
+        let array = [UInt8](_hrBuffer).map { value in
+            return Int(value)
+        }
+        let preArray = Array(array.prefix(_hrBufferSize))
+        self.cloudService?.biodataUpload(options: options, hrData: preArray)
+        _hrBuffer.removeFirst(_hrBufferSize)
+        _limitDate = current
+        
+//        let startIndex = _hrBuffer.startIndex
+//        let results = stride(from: startIndex, to: _hrBuffer.endIndex, by: _hrBufferSize).map({ start -> Data in
+//            let range = start..<(start + self._hrBufferSize)
+//            let tempData = self._hrBuffer.subdata(in: range)
+//            return tempData
+//        })
+//
+//        for element in results {
+//            let data_int = element.map { Int($0) }
+//            DLog("upload hr data")
+//            self.cloudService?.biodataUpload(options: options, hrData: data_int)
+//            if _hrBuffer.count >= _hrBufferSize {
+//                _hrBuffer.removeFirst(_hrBufferSize)
+//            }
+//        }
     }
     
     private var minPeprCycle = 225
