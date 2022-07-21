@@ -42,9 +42,9 @@ Add this to Podfile。
 
 ```
 target 'Your Target' do
-    pod 'EnterAffectiveCloud', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master'
+    pod 'EnterAffectiveCloud'
     #(optional)
-    pod 'EnterAffectiveCloudUI', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master' 
+    pod 'EnterAffectiveCloudUI'
 end
 ```
 Run `pod  install`.
