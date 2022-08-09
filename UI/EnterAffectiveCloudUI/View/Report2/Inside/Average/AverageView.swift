@@ -241,7 +241,7 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    private var lastSevenTime = "Last 7 times" {
+    public var lastSevenTime = "Last 7 times" {
         willSet {
             chart.lastSevenTime = newValue
         }
@@ -253,7 +253,7 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    private var averageText = "Average" {
+    public var averageText = "Average" {
         willSet {
             chart.averageText = newValue
         }
