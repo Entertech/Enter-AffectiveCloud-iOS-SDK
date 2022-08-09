@@ -50,6 +50,8 @@ public class RelaxationIntroView: UIView {
     public var titleText: String = ""  {
         willSet {
             header.titleText = newValue
+            relaxationCircleView.text = newValue
+            relaxationNumberView.language = .ch 
         }
     }
     

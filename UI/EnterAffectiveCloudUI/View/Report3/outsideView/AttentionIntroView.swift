@@ -50,6 +50,8 @@ public class AttentionIntroView: UIView {
     public var titleText: String = ""  {
         willSet {
             header.titleText = newValue
+            attentionCircleView.text = newValue
+            attentionNumberView.language = .ch
         }
     }
     
@@ -117,7 +119,7 @@ public class AttentionIntroView: UIView {
         }
         
         attentionCircleView.shaperColor = attentionColor
-        attentionCircleView.text = "attention"
+        attentionCircleView.text = "Attention"
         
         attentionNumberView.stateColor = attentionStateColor
         attentionNumberView.stateTextColor = attentionStateTextColor
