@@ -15,6 +15,11 @@ public class HeartRateIntroView: UIView {
             valueLabel.text = "\(value)"
         }
     }
+    public var titleText: String = ""  {
+        willSet {
+            headView.titleText = newValue
+        }
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

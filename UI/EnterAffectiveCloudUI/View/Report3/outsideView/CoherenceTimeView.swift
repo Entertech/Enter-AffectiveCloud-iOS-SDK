@@ -16,6 +16,11 @@ public class CoherenceIntroView: UIView {
             valueLabel.text = "\(value)"
         }
     }
+    public var titleText: String = ""  {
+        willSet {
+            headView.titleText = newValue
+        }
+    }
 
     let bgImagaView = UIImageView()
     let headView = PrivateReportViewHead()

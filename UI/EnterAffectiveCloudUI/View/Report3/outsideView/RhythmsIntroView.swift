@@ -19,6 +19,12 @@ public class RhythmsIntroView: UIView {
             deltaNumLabel.text = "\(value.4)"
         }
     }
+    
+    public var titleText: String = ""  {
+        willSet {
+            headView.titleText = newValue
+        }
+    }
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

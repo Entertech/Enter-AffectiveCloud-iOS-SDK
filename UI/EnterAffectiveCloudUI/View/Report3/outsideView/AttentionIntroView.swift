@@ -47,6 +47,12 @@ public class AttentionIntroView: UIView {
         }
     }
     
+    public var titleText: String = ""  {
+        willSet {
+            header.titleText = newValue
+        }
+    }
+    
     
     public var attentionColor = ColorExtension.greenPrimary
     

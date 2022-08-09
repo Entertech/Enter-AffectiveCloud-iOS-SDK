@@ -47,6 +47,12 @@ public class RelaxationIntroView: UIView {
         }
     }
     
+    public var titleText: String = ""  {
+        willSet {
+            header.titleText = newValue
+        }
+    }
+    
     
     public var relaxationColor = UIColor.colorWithHexString(hexColor: "5e75ff")
     

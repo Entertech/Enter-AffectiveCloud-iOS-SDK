@@ -100,7 +100,8 @@ public class AffectiveCloudClient {
     ///   - filterMode: filterMode
     ///   - powerMode: powerMode
     ///   - channelPowerVerbose: channelPowerVerbose
-    public func initBiodataServices(services: BiodataTypeOptions, tolerance: Int? = 2, uploadCycle:UInt = 3, filterMode: FilterMode? = .smart, powerMode: PowerMode? = .rate, channelPowerVerbose: Bool? = false) {
+    ///   - allowSave: allow save your biodata to storage, if you do not want we save data set it false;
+    public func initBiodataServices(services: BiodataTypeOptions, tolerance: Int? = 2, uploadCycle:UInt = 3, filterMode: FilterMode? = .smart, powerMode: PowerMode? = .rate, channelPowerVerbose: Bool? = false, allowSave: Bool = true) {
         self.cloudService?.uploadCycle = Int(uploadCycle)
         if uploadCycle == 0 {
             _hrBufferSize = 2
@@ -127,6 +128,7 @@ public class AffectiveCloudClient {
         }
         param.eeg = eeg
         self.cloudService?.bioEEGParam = param
+        self.cloudService?.allowSave = allowSave
     }
     
     /// set up experiment param

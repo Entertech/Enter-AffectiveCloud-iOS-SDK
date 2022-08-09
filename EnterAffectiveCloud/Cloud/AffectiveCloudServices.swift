@@ -47,7 +47,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     var source: [String: Any]?
     var mode: [Int]?
     var cased: [Int]?
-    
+    var allowSave: Bool = true
     var isSessionCreated = false
     let socket: WebSocket
     var client: AffectiveCloudClient!
@@ -244,7 +244,8 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
                         sn: [String: Any]? = nil,
                         source: [String: Any]? = nil,
                         mode: [Int]? = nil,
-                        cases: [Int]? = nil) {
+                        cases: [Int]? = nil,
+                        allowSave:Bool = true) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -280,7 +281,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
 
         storage.device = sn
         storage.data = source
-        
+        storage.allow = allowSave
         jsonModel.kwargs?.storageSettings = storage
   
         if let jsonString = jsonModel.toJSONString() {
@@ -989,7 +990,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     self.session_id = id
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, param: bioEEGParam, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
+                        self.biodataInitial(options: bioServices, param: bioEEGParam, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased, allowSave: allowSave)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)
@@ -1002,7 +1003,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if model.code == 0 {
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, param: bioEEGParam, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
+                        self.biodataInitial(options: bioServices, param: bioEEGParam, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased, allowSave: allowSave)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)

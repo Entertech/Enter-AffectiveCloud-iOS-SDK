@@ -6,171 +6,226 @@
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import UIKit
 import EnterAffectiveCloud
 import EnterAffectiveCloudUI
+import HandyJSON
 import SnapKit
+import UIKit
+import Accelerate
+
+class Power: HandyJSON {
+    required init() {
+    }
+
+    var gamma: [Float]?
+    var beta: [Float]?
+    var alpha: [Float]?
+    var theta: [Float]?
+    var delta: [Float]?
+}
 
 class ThirdVersionViewController: UIViewController {
-
+    @IBOutlet var stackView: UIStackView!
     let contentView = UIView()
-    let common = AffectiveCharts3Pressure()
-//    let rhythms = AffectiveCharts3StackView()
-    let bar = AffectiveCharts3CandleView()
-    
+    let contentView2 = UIView()
+    let contentView3 = UIView()
+//    let common = AffectiveCharts3Pressure()
+    let rhythms = ReportBrainwaveRhythms()
+    let rhythms2 = ReportBrainwaveRhythms()
+    let rhythms3 = ReportBrainwaveRhythms()
+//    let bar = AffectiveCharts3CandleView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vcViewHeight = self.view.frame.height
-        self.view.addSubview(contentView)
         
-        self.view.addSubview(common)
-//        self.view.addSubview(rhythms)
-        self.contentView.addSubview(bar)
+        stackView.addArrangedSubview(contentView)
+        stackView.addArrangedSubview(contentView2)
+        stackView.addArrangedSubview(contentView3)
         contentView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(0)
-            $0.trailing.equalToSuperview().offset(0)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             $0.height.equalTo(311)
         }
-        common.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(64)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.top.equalTo(contentView.snp.bottom)
-            $0.height.equalTo(self.view.snp.height).multipliedBy(271.0/vcViewHeight)
+        contentView2.snp.makeConstraints {
+            $0.height.equalTo(311)
         }
-        
-//        rhythms.snp.makeConstraints {
-//            $0.leading.equalToSuperview().offset(8)
-//            $0.trailing.equalToSuperview().offset(-16)
-//            $0.top.equalTo(common.snp.bottom).offset(16)
-//            $0.height.equalTo(273)
-//        }
-        
-        bar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
-            make.bottom.leading.trailing.equalToSuperview()
+        contentView3.snp.makeConstraints {
+            $0.height.equalTo(311)
         }
-        
-        let samplePath = Bundle.main.path(forResource: "sample", ofType: "report")
-        if let samplePath = samplePath {
-            let service = ChartService()
-            service.dataOfReport = ReportFileHander.readReportFile(samplePath)
-            let timeStamp = TimeInterval(service.model.timestamp ?? Int(Date().timeIntervalSince1970))
-            
-            var commonTheme = AffectiveChart3Theme()
 
-            commonTheme.startTime = timeStamp
-            commonTheme.endTime = commonTheme.startTime
-            commonTheme.themeColor = .green
-            commonTheme.averageValue = "\(service.model.attentionAvg ?? 10)"
-            commonTheme.style = .session
-//            commonTheme.tagValue = "low"
-//            commonTheme.tagColor = .green.changeAlpha(to: 0.2)
-//            commonTheme.tagTextColor = .black
-            commonTheme.chartName = "ATTENTION"
-//            commonTheme.tagSeparation = [0, 30, 70, 100]
-            
-            
-            if let attention = service.model.attention {
-                var tmp: [Int] = []
-                
-                for e in attention {
-                    if e > 60 {
-                        tmp.append(1)
-                    } else {
-                        tmp.append(0)
+        contentView.addSubview(rhythms)
+        rhythms.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        rhythms.gamaColor = .clear
+        rhythms.betaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
+        rhythms.gamaEnable = true
+        rhythms.betaEnable = true
+        rhythms.deltaEnable = true
+        rhythms.alphaEnable = true
+        rhythms.thetaEnable = true
+        rhythms.setContentHidden(list: [0])
+
+        contentView2.addSubview(rhythms2)
+        rhythms2.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        rhythms2.gamaColor = .clear
+        rhythms2.betaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
+        rhythms2.gamaEnable = true
+        rhythms2.betaEnable = true
+        rhythms2.deltaEnable = true
+        rhythms2.alphaEnable = true
+        rhythms2.thetaEnable = true
+        rhythms2.setContentHidden(list: [0])
+
+        contentView3.addSubview(rhythms3)
+        rhythms3.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        rhythms3.gamaColor = .clear
+        rhythms3.betaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
+        rhythms3.gamaEnable = true
+        rhythms3.betaEnable = true
+        rhythms3.deltaEnable = true
+        rhythms3.alphaEnable = true
+        rhythms3.thetaEnable = true
+        rhythms3.setContentHidden(list: [0])
+
+        if let samplePath = Bundle.main.path(forResource: "eeg_power", ofType: "json") {
+            if let text = try? String(contentsOfFile: samplePath, encoding: .utf8) {
+                let model = Power.deserialize(from: text)
+                var halfSmoothLen = 9
+                var sample = 5
+                for loop in 0 ..< 3 {
+                    var gamma = [Float]()
+                    var beta = [Float]()
+                    var alpha = [Float]()
+                    var theta = [Float]()
+                    var delta = [Float]()
+                    
+                    if loop == 0 {
+                        sample = 1
+                        let recLen = model?.gamma?.count ?? 0
+                        let tmp = recLen / 100
+                        let max = tmp > 16 ? tmp : 16
+                        let min = max > recLen ? recLen : max
+                        halfSmoothLen = min
+                        
+                    } else if loop == 1 {
+                        sample = 2
+                    } else if loop == 2 {
+                        sample = 3
+                    }
+                    if let list = model?.gamma {
+                        var sampleList = [Float]()
+                        for i in stride(from: 0, to: list.count, by: sample) {
+                            sampleList.append(list[i])
+                        }
+                        var curveExpand = [Float]()
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.first ?? 0, count: halfSmoothLen))
+                        curveExpand.append(contentsOf: sampleList)
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.last ?? 0, count: halfSmoothLen))
+                        var curve = Array.init(repeating: Float(0.0), count: sampleList.count)
+                        for (index, e) in sampleList.enumerated() {
+                            curve[index] = vDSP.mean(Array(curveExpand[index...index+halfSmoothLen*2]))
+
+                        }
+                        curve.removeFirst(90)
+                        gamma.append(contentsOf: curve)
+
+                    }
+                    if let list = model?.beta {
+                        var sampleList = [Float]()
+                        for i in stride(from: 0, to: list.count, by: sample) {
+                            sampleList.append(list[i])
+                        }
+                        var curveExpand = [Float]()
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.first ?? 0, count: halfSmoothLen))
+                        curveExpand.append(contentsOf: sampleList)
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.last ?? 0, count: halfSmoothLen))
+                        var curve = Array.init(repeating: Float(0.0), count: sampleList.count)
+                        for (index, e) in sampleList.enumerated() {
+                            curve[index] = vDSP.mean(Array(curveExpand[index...index+halfSmoothLen*2]))
+
+                        }
+                        curve.removeFirst(45)
+                        beta.append(contentsOf: curve)
+                      
+                    }
+                    if let list = model?.alpha {
+                        var sampleList = [Float]()
+                        for i in stride(from: 0, to: list.count, by: sample) {
+                            sampleList.append(list[i])
+                        }
+                        var curveExpand = [Float]()
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.first ?? 0, count: halfSmoothLen))
+                        curveExpand.append(contentsOf: sampleList)
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.last ?? 0, count: halfSmoothLen))
+                        var curve = Array.init(repeating: Float(0.0), count: sampleList.count)
+                        for (index, e) in sampleList.enumerated() {
+                            curve[index] = vDSP.mean(Array(curveExpand[index...index+halfSmoothLen*2]))
+
+                        }
+                        curve.removeFirst(30)
+                        alpha.append(contentsOf: curve)
+                   
+                    }
+                    if let list = model?.theta {
+                        var sampleList = [Float]()
+                        for i in stride(from: 0, to: list.count, by: sample) {
+                            sampleList.append(list[i])
+                        }
+                        var curveExpand = [Float]()
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.first ?? 0, count: halfSmoothLen))
+                        curveExpand.append(contentsOf: sampleList)
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.last ?? 0, count: halfSmoothLen))
+                        var curve = Array.init(repeating: Float(0.0), count: sampleList.count)
+                        for (index, e) in sampleList.enumerated() {
+                            curve[index] = vDSP.mean(Array(curveExpand[index...index+halfSmoothLen*2]))
+
+                        }
+                        theta.append(contentsOf: curve)
+                    }
+                    if let list = model?.delta {
+                        var sampleList = [Float]()
+                        for i in stride(from: 0, to: list.count, by: sample) {
+                            sampleList.append(list[i])
+                        }
+                        var curveExpand = [Float]()
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.first ?? 0, count: halfSmoothLen))
+                        curveExpand.append(contentsOf: sampleList)
+                        curveExpand.append(contentsOf: Array.init(repeating: sampleList.last ?? 0, count: halfSmoothLen))
+                        var curve = Array.init(repeating: Float(0.0), count: sampleList.count)
+                        for (index, e) in sampleList.enumerated() {
+                            curve[index] = vDSP.mean(Array(curveExpand[index...index+halfSmoothLen*2]))
+
+                        }
+                        delta.append(contentsOf: curve)
+                        
+                    }
+                    if loop == 0 {
+                        rhythms.uploadCycle = 1
+                        rhythms.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)
+                    } else if loop == 1 {
+                        rhythms2.uploadCycle = 1
+                        rhythms2.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)
+                    } else if loop == 2 {
+                        rhythms3.uploadCycle = 1
+                        rhythms3.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)
                     }
                 }
-                
-                common.setTheme(commonTheme)
-                    .setLayout()
-                    .setData(attention)
-                    .setChartProperty()
-                    .setMarker()
-                    .build()
             }
-            
-            guard let gamma = service.model.gama?.map({ value in
-                return Double(value*100)
-            }) else {return}
-            guard let beta = service.model.beta?.map({ value in
-                return Double(value*100)
-            }) else {return}
-            guard let alpha = service.model.alpha?.map({ value in
-                return Double(value*100)
-            }) else {return}
-            guard let theta = service.model.theta?.map({ value in
-                return Double(value*100)
-            }) else {return}
-            guard let delta = service.model.delta?.map({ value in
-                return Double(value*100)
-            }) else {return}
-//
-//
-//            rhythms
-//                .setParam(type: .year, startDate: Date.init(timeIntervalSince1970: timeStamp))
-//                .setRhythmLineEnable(value: 28)
-//                .build(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta)
-//
-            var values = [Double]()
-            var min = [Double]()
-            var max = [Double]()
-            for (i, e) in alpha.enumerated() {
-                if i > 60 {
-                    break
-                }
-                let random = Int.random(in: 0...1)
-                if random > 0 {
-                    values.append(e)
-                    min.append(delta[i])
-                    max.append(beta[i])
-                } else {
-                    values.append(0.0)
-                    min.append(0.0)
-                    max.append(0.0)
-                }
-            }
-            var barTheme = AffectiveChart3Theme()
-            barTheme.style = .month
-            barTheme.themeColor = .red
-            barTheme.startTime = timeStamp
-            barTheme.endTime = timeStamp
-            barTheme.chartName = "Heart Rate".uppercased()
-            barTheme.averageValue = "\(service.model.heartRateAvg ?? 0)"
-            barTheme.unitText = "bpm"
-            var minAndMax = Array2D(columns: min.count, rows: 2, initialValue: 0.0)
-            for (index, e) in min.enumerated() {
-                minAndMax[index, 0] = e
-            }
-            for (index, e) in max.enumerated() {
-                minAndMax[index, 1] = e
-            }
-            bar.setTheme(barTheme)
-                .setProperty()
-                .setLayout()
-                .build(candle: minAndMax, average: values)
-//            if let relaxation = service.model.relaxation {
-//                let array = relaxation.map { v in
-//                    Double(v)
-//                }
-//                bar.setTheme(barTheme)
-//                    .setProperty()
-//                    .setLayout()
-//                    .build(array: array)
-//            }
-
         }
     }
-    
 
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destination.
+         // Pass the selected object to the new view controller.
+     }
+     */
 }

@@ -93,6 +93,7 @@
 		FA7C3A43283E363D00A52338 /* StatisticBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C3A42283E363D00A52338 /* StatisticBarChart.swift */; };
 		FA7D326624FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */; };
 		FA7D326824FDED21005792D3 /* LeftAndRightSpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */; };
+		FA8746D7289B7D3F0035BABD /* eeg_power.json in Resources */ = {isa = PBXBuildFile; fileRef = FA8746D6289B7D3F0035BABD /* eeg_power.json */; };
 		FA9231A9236BD07B00A50C64 /* EnterAffectiveCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */; };
 		FA9231AB236BD07B00A50C64 /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA93435B2356E59B00544239 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA93435A2356E59B00544239 /* AppDelegate.swift */; };
@@ -346,6 +347,7 @@
 		FA7C3A42283E363D00A52338 /* StatisticBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticBarChart.swift; sourceTree = "<group>"; };
 		FA7D326524FDE7B0005792D3 /* RealtimeLeftAndRightSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeLeftAndRightSpectrumView.swift; sourceTree = "<group>"; };
 		FA7D326724FDED21005792D3 /* LeftAndRightSpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAndRightSpectrumView.swift; sourceTree = "<group>"; };
+		FA8746D6289B7D3F0035BABD /* eeg_power.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = eeg_power.json; sourceTree = "<group>"; };
 		FA9231A6236BD07B00A50C64 /* EnterAffectiveCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnterAffectiveCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA9231A8236BD07B00A50C64 /* EnterAffectiveCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterAffectiveCloudTests.swift; sourceTree = "<group>"; };
 		FA9231AA236BD07B00A50C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -828,6 +830,7 @@
 				FA9343A42358747900544239 /* sample.report */,
 				FA93435A2356E59B00544239 /* AppDelegate.swift */,
 				FA93435C2356E59B00544239 /* SceneDelegate.swift */,
+				FA8746D6289B7D3F0035BABD /* eeg_power.json */,
 				FA9343622356E59B00544239 /* Main.storyboard */,
 				FA9343652356E59E00544239 /* Assets.xcassets */,
 				FA9343672356E59E00544239 /* LaunchScreen.storyboard */,
@@ -1306,6 +1309,7 @@
 			files = (
 				FA9343692356E59E00544239 /* LaunchScreen.storyboard in Resources */,
 				FA9343A52358747900544239 /* sample.report in Resources */,
+				FA8746D7289B7D3F0035BABD /* eeg_power.json in Resources */,
 				FA9343662356E59E00544239 /* Assets.xcassets in Resources */,
 				FA9343642356E59B00544239 /* Main.storyboard in Resources */,
 			);

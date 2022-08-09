@@ -50,7 +50,7 @@ protocol WebSocketServiceProcotol {
 //MARK: biodata service and type
 protocol BiodataServiceProtocol {
     func biodataInitial(options: BiodataTypeOptions, param: BiodataAlgorithmParams?, sex: String?, age: Int? , sn: [String: Any]?, source: [String: Any]? ,
-    mode: [Int]? , cases: [Int]? )
+    mode: [Int]? , cases: [Int]?, allowSave:Bool)
     func biodataSubscribe(parameters options: BiodataParameterOptions)
     func biodataUnSubscribe(parameters options: BiodataParameterOptions)
     func biodataUpload(options: BiodataTypeOptions, eegData: [Int]?, hrData: [Int]?, peprData: [Int]?)

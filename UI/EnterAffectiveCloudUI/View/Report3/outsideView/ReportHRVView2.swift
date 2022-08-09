@@ -16,6 +16,12 @@ public class HRVIntroView: UIView {
         }
     }
     
+    public var titleText: String = ""  {
+        willSet {
+            headView.titleText = newValue
+        }
+    }
+    
     public var image: UIImage? = nil {
         willSet {
             icon.image = newValue

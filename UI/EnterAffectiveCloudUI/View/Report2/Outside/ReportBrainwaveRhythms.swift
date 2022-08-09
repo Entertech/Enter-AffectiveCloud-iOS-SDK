@@ -297,6 +297,25 @@ public class ReportBrainwaveRhythms: UIView {
 
     }
     
+    public func setContentHidden(list: [Int]) {
+        if list.contains(0) {
+            gamaBtn.isHidden = true
+        }
+        if list.contains(1) {
+            betaBtn.isHidden = true
+        }
+        if list.contains(2) {
+            alphaBtn.isHidden = true
+        }
+        if list.contains(3) {
+            thetaBtn.isHidden = true
+        }
+        if list.contains(4) {
+            deltaBtn.isHidden = true
+        }
+        
+    }
+    
     public func setData(gamaList: [Float], betaList: [Float], alphaList: [Float], thetaList: [Float], deltaList: [Float]) {
         chartView.setData(gama: gamaList, beta: betaList, alpha: alphaList, theta: thetaList, delta: deltaList)
     }

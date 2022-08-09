@@ -13,17 +13,31 @@ public class PressureIntroView: UIView {
     public var value:Int =  0 {
         willSet {
             var text = ""
+            var isCN = false
+            if let text = titleLabel.text {
+                if text.hasPrefix("S") {
+                    isCN = false
+                } else {
+                    isCN = true
+                }
+            }
             if newValue >= stateArray[3] {
-                text = "High"
+                text = isCN ? "高" : "High"
             } else if newValue >= stateArray[2] {
-                text = "Elev."
+                text = isCN ? "偏高" : "Elev."
             } else if newValue >= stateArray[1] {
-                text = "Nor."
+                text = isCN ? "正常" : "Nor."
             } else {
-                text = "Low"
+                text = isCN ? "低" : "Low"
             }
             numLabel.text = text
             circleView.currentValue = CGFloat(newValue)
+        }
+    }
+    
+    public var titleText: String = ""  {
+        willSet {
+            titleLabel.text = newValue
         }
     }
 

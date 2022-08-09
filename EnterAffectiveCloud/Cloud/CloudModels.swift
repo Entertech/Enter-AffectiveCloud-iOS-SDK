@@ -693,6 +693,7 @@ public class CSPersonalInfoJSONModel: HandyJSON {
     var device: [String: Any]?
     var data: [String: Any]?
     var label: CSLabelInfoJSONModel?
+    var allow: Bool = true
     public required init() { }
 }
 
