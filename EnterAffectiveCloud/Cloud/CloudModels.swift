@@ -385,6 +385,7 @@ public class CSBiodataPEPRJsonModel: HandyJSON {
 public class CSBiodataReportJsonModel: HandyJSON {
     public var eeg: CSBiodataReportEEGJsonModel?
     public var hr: CSBiodataReportHRJsonModel?
+    public var pepr: CSBiodataReportPEPRJsonModel?
 
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
@@ -484,6 +485,46 @@ public class CSBiodataReportHRJsonModel: HandyJSON {
             self.hrvList <-- "hrv_rec"
         mapper <<<
             self.hrvAvg <-- "hrv_avg"
+    }
+}
+
+/*  PEPR  Report
+ *
+ * average:心率平均值
+ * max: 心率最大值
+ * min: 心率最小值
+ * hrList: 心率值全程记录
+ * hrvList: 心率变异性全程记录
+ * rrList
+ */
+public class CSBiodataReportPEPRJsonModel: HandyJSON {
+    public var average: Float?
+    public var max: Float?
+    public var min: Float?
+    public var hrList: [Float]?
+    public var hrvList: [Float]?
+    public var hrvAvg : Float?
+    public var rrList: [Float]?
+    public var rrAvg: [Float]?
+    
+    public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.average <-- "hr_avg"
+        mapper <<<
+            self.max <-- "hr_max"
+        mapper <<<
+            self.min <-- "hr_min"
+        mapper <<<
+            self.hrList <-- "hr_rec"
+        mapper <<<
+            self.hrvList <-- "hrv_rec"
+        mapper <<<
+            self.hrvAvg <-- "hrv_avg"
+        mapper <<<
+            self.hrvList <-- "rr_rec"
+        mapper <<<
+            self.hrvAvg <-- "rr_avg"
     }
 }
 
