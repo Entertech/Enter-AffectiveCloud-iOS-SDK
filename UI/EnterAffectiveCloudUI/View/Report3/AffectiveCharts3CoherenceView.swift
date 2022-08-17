@@ -56,7 +56,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         chartView.marker = marker
 
         let set = LineChartDataSet(entries: yVals, label: "")
-        set.mode = .horizontalBezier
+        set.mode = .linear
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
