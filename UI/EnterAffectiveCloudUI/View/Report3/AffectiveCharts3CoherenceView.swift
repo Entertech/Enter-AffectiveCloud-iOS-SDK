@@ -34,7 +34,8 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         var yVals: [ChartDataEntry] = []
         var colors: [UIColor] = []
         var cohereceArray = [Int]()
-        for i in stride(from: 0, to: dataSorce.count, by: sample) {
+        let len = dataSorce.count > coherenceValue.count ? coherenceValue.count : dataSorce.count
+        for i in stride(from: 0, to: len, by: sample) {
             cohereceArray.append(coherenceValue[i])
             if coherenceValue[i] > 0 {
                 colors.append(theme.themeColor)
