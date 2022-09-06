@@ -57,7 +57,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         }
         
         chartView.rightAxis.enabled = false
-        
+        chartView.xAxis.labelHeight = 14
         chartView.xAxis.labelTextColor = colors[0]
         chartView.xAxis.axisMinLabels = 3
         chartView.xAxis.axisMaxLabels = 6
