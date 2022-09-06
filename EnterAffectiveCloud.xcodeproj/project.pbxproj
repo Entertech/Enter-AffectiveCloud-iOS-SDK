@@ -178,6 +178,7 @@
 		FADD94F12646757E00058649 /* RecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F02646757E00058649 /* RecordModel.swift */; };
 		FADD94F326467D7800058649 /* RecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F226467D7800058649 /* RecordAPI.swift */; };
 		FADD94F52648C0E300058649 /* RecordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD94F42648C0E300058649 /* RecordRequest.swift */; };
+		FADE34DC28BEF3B100894A96 /* AffectiveCharts3FlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADE34DB28BEF3B100894A96 /* AffectiveCharts3FlowView.swift */; };
 		FAF9D3BE2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9D3BD2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift */; };
 /* End PBXBuildFile section */
 
@@ -434,6 +435,7 @@
 		FADD94F02646757E00058649 /* RecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordModel.swift; sourceTree = "<group>"; };
 		FADD94F226467D7800058649 /* RecordAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordAPI.swift; sourceTree = "<group>"; };
 		FADD94F42648C0E300058649 /* RecordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRequest.swift; sourceTree = "<group>"; };
+		FADE34DB28BEF3B100894A96 /* AffectiveCharts3FlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveCharts3FlowView.swift; sourceTree = "<group>"; };
 		FAF9D3BD2872C9DB00088AA6 /* AffectiveCharts3RhythmsPowerTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveCharts3RhythmsPowerTrendView.swift; sourceTree = "<group>"; };
 		FF99DC6014F1E6419EE90480 /* Pods_EnterRealtimeUIDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EnterRealtimeUIDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -561,6 +563,7 @@
 		FA04A4BA28585A85007FA849 /* Report3 */ = {
 			isa = PBXGroup;
 			children = (
+				FADE34DA28BEF2E100894A96 /* Analysis */,
 				FA31DE142861629F00459091 /* outsideView */,
 				FA04A4D22859BBB0007FA849 /* overide */,
 				FA04A4C12858636C007FA849 /* Item */,
@@ -1095,6 +1098,14 @@
 			path = EnterRealtimeUIDemo;
 			sourceTree = "<group>";
 		};
+		FADE34DA28BEF2E100894A96 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				FADE34DB28BEF3B100894A96 /* AffectiveCharts3FlowView.swift */,
+			);
+			path = Analysis;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1503,6 +1514,7 @@
 				FAB0BC2323B30A750074C06C /* AffectiveChartHRVView.swift in Sources */,
 				FA93438C23570AAD00544239 /* ReportModel.swift in Sources */,
 				FA31DE1A28616B4000459091 /* RhythmsIntroView.swift in Sources */,
+				FADE34DC28BEF3B100894A96 /* AffectiveCharts3FlowView.swift in Sources */,
 				FA9343A123585CDA00544239 /* PressureReportView.swift in Sources */,
 				FA04A4CF2859AD7E007FA849 /* AffectiveCharts3CohereceState.swift in Sources */,
 				FA7689CE23B08ABC005E4DF7 /* ReportPressure.swift in Sources */,

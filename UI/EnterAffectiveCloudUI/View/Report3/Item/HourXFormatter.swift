@@ -10,13 +10,20 @@ import Foundation
 import Charts
 let daySeconds:Double = 86400
 public class AffectiveCharts3HourValueFormatter: NSObject, AxisValueFormatter {
-    
-    override init() {
-        super.init()
+    private var startDate: Date?
+    init(start: Date? = nil) {
 
+        self.startDate = start
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if let startDate = startDate {
+            let nData = startDate.addingTimeInterval(value)
+            let formatStr = "HH:mm A"
+            lk_formatter.dateFormat = formatStr
+            let value = lk_formatter.string(from: nData)
+            return value
+        }
         return "\(Int(value / 60))"
     }
 }

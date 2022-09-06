@@ -13,8 +13,6 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
     
     public override func setMarker() -> Self {
 
-        
-        
         return self
     }
     
