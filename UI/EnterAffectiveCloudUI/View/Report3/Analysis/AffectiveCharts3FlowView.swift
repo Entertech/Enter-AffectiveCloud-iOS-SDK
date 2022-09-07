@@ -65,7 +65,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         chartView.xAxis.drawGridLinesEnabled = false
         chartView.xAxis.axisLineColor = colors[1]
         chartView.xAxis.axisLineWidth = 1
-        
+        chartView.animate(xAxisDuration: 2, easingOption: .easeInOutCubic)
         chartView.dragEnabled = false
         chartView.scaleXEnabled = false
         chartView.pinchZoomEnabled = false
