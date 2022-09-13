@@ -175,7 +175,7 @@ public class RealtimeBrainwaveView: BaseView {
                     if self.initData {
                         self.initData = false
                         self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
-                        self.brainwaveView.rightData = Array(repeating: 0, count: 200)
+                        //self.brainwaveView.rightData = Array(repeating: 0, count: 200)
                     }
                     if self.bIsNeedUpdateMask {
                         self.dismissMask()
@@ -196,7 +196,7 @@ public class RealtimeBrainwaveView: BaseView {
                 }  else  {
                     if self.initData {
                         self.initData = false
-                        self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
+                        //self.brainwaveView.leftData = Array.init(repeating: 0, count: 200)
                         self.brainwaveView.rightData = Array(repeating: 0, count: 200)
                     }
                     if self.bIsNeedUpdateMask {

@@ -1,3 +1,5 @@
+[English Readme](/UI/EnterAffectiveCloudUI/README_EN.md)
+
 # 情感云数据标准UI
 
 - [情感云数据标准UI](#%e6%83%85%e6%84%9f%e4%ba%91%e6%95%b0%e6%8d%ae%e6%a0%87%e5%87%86ui)

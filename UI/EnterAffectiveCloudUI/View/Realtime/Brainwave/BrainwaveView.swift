@@ -152,11 +152,9 @@ class BrainwaveView: BaseView {
         rightBrain.dashLineColor = color
     }
     
-
-    private let drawingWaveSample = 10
     public func setEEGArray(_ data: [Float],_ leftOrRight: LeftOrRightBrain) {
         
-        let margin = max(data.count / 10, 1)
+        let margin = 10
         for index in stride(from: 0, to: data.count, by: margin) {
             var value = data[index]
             if value > 300 {
@@ -217,8 +215,8 @@ class BrainwaveView: BaseView {
             switch leftOrRight{
             case .left:
                 self.leftLock.lock()
-                if self.leftData!.count > 240 {
-                    self.leftData!.removeSubrange(239...(self.leftData!.count-1))
+                if self.leftData!.count > 280 {
+                    self.leftData!.removeSubrange(279...(self.leftData!.count-1))
                 }
                 else if self.leftData!.count < 200 {
                     self.leftData?.append(0)
@@ -228,8 +226,8 @@ class BrainwaveView: BaseView {
                 self.leftLock.unlock()
             case .right:
                 self.rightLock.lock()
-                if self.rightData!.count > 240 {
-                    self.rightData!.removeSubrange(239...(self.rightData!.count-1))
+                if self.rightData!.count > 280 {
+                    self.rightData!.removeSubrange(279...(self.rightData!.count-1))
                 }
                 else if self.rightData!.count < 200 {
                     self.rightData?.append(0)

@@ -80,8 +80,8 @@ open class BaseView: UIView {
         }
     }
 
-    /// 设备未连接实时数据无法显示时显示提示
-    public func showTip(text: String = "连接设备以显示实时数据") {
+    /// connect tip
+    public func showTip(text: String = "Error tip") {
         dismissMask()
         bIsNeedUpdateMask = false
         let maskView = UIView()

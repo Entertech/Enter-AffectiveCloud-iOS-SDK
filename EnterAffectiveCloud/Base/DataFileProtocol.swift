@@ -18,7 +18,7 @@ public typealias Timestamp = UInt
 /**
  * 数据文件协议
  */
-public protocol DataFileProtocol: class {
+public protocol DataFileProtocol: AnyObject {
     /// 协议版本号
     var protocolVersion: String { get }
     /// 文件头长度

@@ -7,9 +7,9 @@
 //
 
 import RxSwift
-import HandyJSON
 import Moya
 import Alamofire
+import Foundation
 
 final public class TokenRequest {
 
@@ -29,16 +29,17 @@ final public class TokenRequest {
     
     private lazy var requestToken = {
         (username: String, password: String) -> Observable<TokenModel> in
-        return self.provider.rx.request(.create(username, password)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModel(TokenModel.self)
-        //return self.provider.rx.request(.request(username: username, password: password)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModel(TokenModel.self)
+        return self.provider.rx.request(.create(username, password)).filterSuccessfulStatusCodes().asObservable().map(TokenModel.self)
+
     }
     /// 获取token
     /// - Parameters:
-    ///   - appKey: 申请的appkey
-    ///   - userId: 本地用户名的MD5
-    ///   - sessionId: 情感云的session id
-    ///   - version: 情感云版本号
-    public func token(appKey: String, appSecret: String, userId: String, version: String) {
+    ///   - appKey: appkey
+    ///   - appSecret: app secret
+    ///   - userId: user id
+    ///   - version: affective cloud version, example:"v1"
+    public func token(appKey: String, appSecret: String, userId: String, version: String, completionHandler:@escaping (Result<Void, Error>) -> Void) {
+        AppService.shared.cloudVersion = version
         let timestamp = "\(Int(Date().timeIntervalSince1970))"
         let sign = sessionSign(appKey: appKey, appSecret: appSecret, userID: userId, timeStamp: timestamp)
         let username = UsernameModel()
@@ -47,9 +48,13 @@ final public class TokenRequest {
         username.user_id = userId.hashed(.md5)!.uppercased()
         username.timestamp = timestamp
         username.version = version
-        if let userJson = username.toJSONString() {
+        do {
+            let jsonData = try JSONEncoder().encode(username)
+            let userJson = String(decoding: jsonData, as: UTF8.self)
+            
             self.requestToken(userJson, sign).subscribe(onNext: { (model) in
-                TagService.shared.token = model.token
+                AppService.shared.token = model.token
+                completionHandler(.success(()))
             }, onError: {[weak self] (error) in
                 guard let self = self else {return}
                 let err = error as! MoyaError
@@ -57,14 +62,18 @@ final public class TokenRequest {
                     self.state = -1
                     print(String(data: errMsg, encoding: .utf8) as Any)
                 }
+                completionHandler(.failure(error))
             }, onCompleted: {
                 self.state = 1
             }, onDisposed: nil).disposed(by: dispose)
+        }catch {
+            
         }
+        
+        
     }
     
     private func sessionSign(appKey: String, appSecret: String, userID: String, timeStamp: String) -> String {
-
         let hashID = userID.hashed(.md5)!.uppercased()
         let sign_str = String(format: "app_key=%@&app_secret=%@&timestamp=%@&user_id=%@",appKey, appSecret, timeStamp, hashID)
         let sign = sign_str.hashed(.md5)!.uppercased()

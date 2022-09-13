@@ -8,13 +8,22 @@
 
 import Foundation
 import HandyJSON
-import SwiftyJSON
+
+enum BiodataType: String {
+    case eeg
+    case hr
+    case hr2 = "hr-v2"
+    case bcg
+    case mceeg
+    case pepr
+}
 
 //MARK: Request Models
 public class AffectiveCloudRequestJSONModel: HandyJSON {
     var services: String = ""
     var operation: String = ""
     var kwargs: CSKwargsJSONModel?
+    var args: [String]?
     public required init() { }
 
     public func mapping(mapper: HelpingMapper) {
@@ -26,25 +35,28 @@ public class AffectiveCloudRequestJSONModel: HandyJSON {
 public class CSRequestDataJSONModel: HandyJSON {
     var eeg: [Int]?
     var hr: [Int]?
+    var pepr: [Int]?
     public required init() { }
 }
 
 class CSKwargsJSONModel: HandyJSON {
     var bioTypes: [String]?
     var tolerance: [String:Any]?
+    var additional: [String:Any]?
+    var algorithmParam: BiodataAlgorithmParams?
     var storageSettings: CSPersonalInfoJSONModel?
     var app_key: String?
     var sign: String?
     var userID: String?
     var timeStamp: String?
+    var uploadCycle: Int?
     var device: String?
     var data: CSRequestDataJSONModel?
     var sessionID: String?
     var reportType: String?
-    var eegParams: [String]?
-    var hrParams: [String]?
     var eegData: [Int]?
     var hrData: [Int]?
+    var peprData: [Int]?
     var rec: [CSLabelSubmitJSONModel]?
     var affectiveTypes: [String]?
     var attenionServieces: [String]?
@@ -63,19 +75,19 @@ class CSKwargsJSONModel: HandyJSON {
         mapper <<<
             self.sessionID <-- "session_id"
         mapper <<<
-            self.eegParams <-- "eeg"
-        mapper <<<
-            self.hrParams <-- "hr"
-        mapper <<<
             self.eegData <-- "eeg"
         mapper <<<
-            self.hrData <-- "hr"
+            self.hrData <-- "hr-v2"
+        mapper <<<
+            self.peprData <-- "pepr"
         mapper <<<
             self.userID <-- "user_id"
         mapper <<<
             self.bioTypes <-- "bio_data_type"
         mapper <<<
             self.tolerance <-- "bio_data_tolerance"
+        mapper <<<
+            self.additional <-- "additional_data"
         mapper <<<
             self.affectiveTypes <-- "cloud_services"
         mapper <<<
@@ -95,9 +107,13 @@ class CSKwargsJSONModel: HandyJSON {
         mapper <<<
             self.timeStamp <-- "timestamp"
         mapper <<<
+            self.uploadCycle <-- "upload_cycle"
+        mapper <<<
             self.storageSettings <-- "storage_settings"
         mapper <<<
             self.coherenceServices <-- "coherence"
+        mapper <<<
+            self.algorithmParam <-- "algorithm_params"
     }
 }
 
@@ -114,7 +130,7 @@ public class AffectiveCloudResponseJSONModel: HandyJSON {
             self.message <-- "msg"
     }
 
-    // ugly imp: 用来给业务层访问 data 字段对应的 model。
+   
     public var dataModel: HandyJSON? {
         return self.deserilizedStringToJsonModel(dic: self.data ?? ["": ""])
     }
@@ -196,11 +212,12 @@ public class CSResponseDataJSONModel: HandyJSON {
 
 
 /*
- *  订阅状态返回的服务数据列表
+ *  subscription
  */
 public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
     public var eegServiceList: [String]?
     public var hrServiceList: [String]?
+    public var peprServiceList: [String]?
     public required init() {}
 
     public func mapping(mapper: HelpingMapper) {
@@ -208,6 +225,8 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
             self.eegServiceList <-- "sub_eeg_fields"
         mapper <<<
             self.hrServiceList <-- "sub_hr_fields"
+        mapper <<<
+            self.peprServiceList <-- "sub_pepr_fields"
     }
 
     /// all property is nil the isNil: true
@@ -217,23 +236,29 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
     }
 }
 
-/* 脑电生物信号实时分析结果
+/* Realtime Biodata
  * eeg: 实时脑电数据
  * hr: 实时心率数据
  */
 public class CSBiodataProcessJSONModel: HandyJSON {
     public var eeg: CSBiodataEEGJsonModel?
     public var hr: CSBiodataHRJsonModel?
+    public var pepr: CSBiodataPEPRJsonModel?
     public required init() {}
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.eeg == nil)&&(self.hr == nil)
+        return (self.eeg == nil)&&(self.hr == nil)&&(self.pepr == nil)
+    }
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.hr <-- "hr-v2"
     }
 }
 
-/* 情感云实时返回的脑电分析结果
+
+/* Realtime brain rhythm
  *
  * waveRight: 脑电波片段：右通道。数组长度 100 (-2.4 * e6 ~ 2.4 * e6)
  * waveLeft: 脑电波片段：左通道。数组长度 100 (-2.4 * e6 ~ 2.4 * e6)
@@ -250,9 +275,20 @@ public class CSBiodataEEGJsonModel: HandyJSON {
     public var waveLeft: [Float]?
     public var alpha: Float?
     public var belta: Float?
-    public  var theta: Float?
+    public var theta: Float?
     public var delta: Float?
     public var gamma: Float?
+    public var alphaLeft: Float?
+    public var beltaLeft: Float?
+    public var thetaLeft: Float?
+    public var deltaLeft: Float?
+    public var gammaLeft: Float?
+    public var qualityLeft: Float?
+    public var alphaRight: Float?
+    public var beltaRight: Float?
+    public var thetaRight: Float?
+    public var deltaRight: Float?
+    public var gammaRight: Float?
     public var quality: Float?
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
@@ -272,11 +308,31 @@ public class CSBiodataEEGJsonModel: HandyJSON {
             self.gamma <-- "eeg_gamma_power"
         mapper <<<
             self.quality <-- "eeg_quality"
+        mapper <<<
+            self.alphaLeft <-- "eegl_alpha_power"
+        mapper <<<
+            self.beltaLeft <-- "eegl_beta_power"
+        mapper <<<
+            self.thetaLeft <-- "eegl_theta_power"
+        mapper <<<
+            self.deltaLeft <-- "eegl_delta_power"
+        mapper <<<
+            self.gammaLeft <-- "eegl_gamma_power"
+        mapper <<<
+            self.alphaRight <-- "eegr_alpha_power"
+        mapper <<<
+            self.beltaRight <-- "eegr_beta_power"
+        mapper <<<
+            self.thetaRight <-- "eegr_theta_power"
+        mapper <<<
+            self.deltaRight <-- "eegr_delta_power"
+        mapper <<<
+            self.gammaRight <-- "eegr_gamma_power"
        
     }
 }
 
-/* 情感云实时返回的心率分析结果
+/* Realtime hear rate
  *
  * hr: 心率值
  * hrv: 心率变异性
@@ -288,7 +344,40 @@ public class CSBiodataHRJsonModel: HandyJSON {
     public required init() {}
 }
 
-/* 生物信号报表
+/* Realtime hear rate
+ *
+ * 'bcg_wave': [float],  # 脉搏波波形
+ * 'rw_wave': [float],  # 呼吸波波形
+ * 'bcg_quality': int,  # 脉搏波信号质量等级
+ * 'rw_quality': int,  # 呼吸波信号质量等级
+ * 'hr': int,  # 心率
+ * 'rr': int,  # 呼吸率
+ * 'hrv': float  # 心率变异性
+ *
+ */
+public class CSBiodataPEPRJsonModel: HandyJSON {
+    public var bcgQuality: Int?
+    public var rwQuality: Int?
+    public var hr: Int?
+    public var rr: Int?
+    public var hrv: Float?
+    public var bcgWave: [Float]?
+    public var rwWave: [Float]?
+    public required init() {}
+    
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.bcgWave <-- "bcg_wave"
+        mapper <<<
+            self.rwWave <-- "rw_wave"
+        mapper <<<
+            self.bcgQuality <-- "bcg_quality"
+        mapper <<<
+            self.rwQuality <-- "rw_quality"
+    }
+}
+
+/* Biodata Report
  *
  * eeg: 脑电综合报表
  * hr: 心率综合报表
@@ -296,11 +385,16 @@ public class CSBiodataHRJsonModel: HandyJSON {
 public class CSBiodataReportJsonModel: HandyJSON {
     public var eeg: CSBiodataReportEEGJsonModel?
     public var hr: CSBiodataReportHRJsonModel?
+    public var pepr: CSBiodataReportPEPRJsonModel?
 
     public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.hr <-- "hr-v2"
+    }
 }
 
-/*  情感云 `脑电` 综合分析数据报表
+/* Brain rhythm Report
  *
  * alphaCurve: 脑电α频段能量变化曲线
  * betaCurve: 脑电β频段能量变化曲线
@@ -315,6 +409,16 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
     public var thetaCurve: [Float]?
     public var deltaCurve: [Float]?
     public var gammaCurve: [Float]?
+    public var alphaLeftCurve: [Float]?
+    public var betaLeftCurve: [Float]?
+    public var thetaLeftCurve: [Float]?
+    public var deltaLeftCurve: [Float]?
+    public var gammaLeftCurve: [Float]?
+    public var alphaRightCurve: [Float]?
+    public var betaRightCurve: [Float]?
+    public var thetaRightCurve: [Float]?
+    public var deltaRightCurve: [Float]?
+    public var gammaRightCurve: [Float]?
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -327,11 +431,30 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
             self.deltaCurve <-- "eeg_delta_curve"
         mapper <<<
             self.gammaCurve <-- "eeg_gamma_curve"
-
+        mapper <<<
+            self.alphaLeftCurve <-- "eegl_alpha_curve"
+        mapper <<<
+            self.betaLeftCurve <-- "eegl_beta_curve"
+        mapper <<<
+            self.thetaLeftCurve <-- "eegl_theta_curve"
+        mapper <<<
+            self.deltaLeftCurve <-- "eegl_delta_curve"
+        mapper <<<
+            self.gammaLeftCurve <-- "eegl_gamma_curve"
+        mapper <<<
+            self.alphaRightCurve <-- "eegr_alpha_curve"
+        mapper <<<
+            self.betaRightCurve <-- "eegr_beta_curve"
+        mapper <<<
+            self.thetaRightCurve <-- "eegr_theta_curve"
+        mapper <<<
+            self.deltaRightCurve <-- "eegr_delta_curve"
+        mapper <<<
+            self.gammaRightCurve <-- "eegr_gamma_curve"
     }
 }
 
-/*  情感云 `心率` 综合分析数据报表
+/*  Heart Rate Report
  *
  * average:心率平均值
  * max: 心率最大值
@@ -362,6 +485,46 @@ public class CSBiodataReportHRJsonModel: HandyJSON {
             self.hrvList <-- "hrv_rec"
         mapper <<<
             self.hrvAvg <-- "hrv_avg"
+    }
+}
+
+/*  PEPR  Report
+ *
+ * average:心率平均值
+ * max: 心率最大值
+ * min: 心率最小值
+ * hrList: 心率值全程记录
+ * hrvList: 心率变异性全程记录
+ * rrList
+ */
+public class CSBiodataReportPEPRJsonModel: HandyJSON {
+    public var average: Float?
+    public var max: Float?
+    public var min: Float?
+    public var hrList: [Float]?
+    public var hrvList: [Float]?
+    public var hrvAvg : Float?
+    public var rrList: [Float]?
+    public var rrAvg: [Float]?
+    
+    public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.average <-- "hr_avg"
+        mapper <<<
+            self.max <-- "hr_max"
+        mapper <<<
+            self.min <-- "hr_min"
+        mapper <<<
+            self.hrList <-- "hr_rec"
+        mapper <<<
+            self.hrvList <-- "hrv_rec"
+        mapper <<<
+            self.hrvAvg <-- "hrv_avg"
+        mapper <<<
+            self.hrvList <-- "rr_rec"
+        mapper <<<
+            self.hrvAvg <-- "rr_avg"
     }
 }
 
@@ -415,7 +578,7 @@ public class CSAffectiveJsonModel: HandyJSON {
     public var coherence: Float?
 }
 
-/* 情感计算实时分析结果
+/* Realtime affective
  *
  * attention: 注意力值（0 ~ 100）
  * relaxation: 放松度值（0 ~100）
@@ -443,7 +606,7 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
 }
 
 
-/* 情感云综合分析结果
+/* Affective Report
  *
  * attention: 注意力
  * relaxation: 放松度
@@ -551,12 +714,18 @@ public class CSReportArousalJsonModel: HandyJSON {
 public class CSReportCoherenceJsonModel: HandyJSON {
     public var average: Float?
     public var list: [Float]?
+    public var flag: [Float]?
+    public var duration: Float?
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
             self.average <-- "coherence_avg"
         mapper <<<
             self.list <-- "coherence_rec"
+        mapper <<<
+            self.flag <-- "coherence_flag"
+        mapper <<<
+            self.duration <-- "coherence_duration"
     }
 }
 
@@ -565,6 +734,7 @@ public class CSPersonalInfoJSONModel: HandyJSON {
     var device: [String: Any]?
     var data: [String: Any]?
     var label: CSLabelInfoJSONModel?
+    var allow: Bool = true
     public required init() { }
 }
 
@@ -591,6 +761,40 @@ public class CSLabelSubmitJSONModel: HandyJSON {
     public var note: [String]?
     public required init() { }
   
+}
+
+public enum FilterMode: String,HandyJSONEnum {
+    case basic
+    case smart
+    case hard
+}
+
+public enum PowerMode: String, HandyJSONEnum {
+    case db
+    case rate
+}
+
+public class AlgorithmParamJSONModel: HandyJSON {
+    //public var eeg:
+    public var tolerance: Int?
+    public var filterMode: FilterMode?
+    public var powerMode: PowerMode?
+    public var channelPower: Bool?
+    public required init() { }
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.filterMode <-- "filter_mode"
+        mapper <<<
+            self.powerMode <-- "power_mode"
+        mapper <<<
+            self.channelPower <-- "channel_power_verbose"
+    }
+    
+}
+
+public class BiodataAlgorithmParams :HandyJSON {
+    public required init() { }
+    public var eeg: AlgorithmParamJSONModel?
 }
 
 

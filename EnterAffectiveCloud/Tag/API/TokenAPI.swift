@@ -34,7 +34,6 @@ extension TokenAPI : TargetType {
         case let .create(username, password):
             return .requestParameters(parameters: ["username":username, "password":password], encoding: URLEncoding.default)
         }
-
     }
     
     var headers: [String : String]? {

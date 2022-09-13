@@ -29,22 +29,25 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
             }
         }
     }
-    var bIsLog: Bool = false
+    var bIsLogToLocal: Bool = false
     var appKey: String? // could key
     var userID: String?
     var appSecret: String?
     var bioService: BiodataTypeOptions?
     var bioTolerance: [String:Any]?
+    var bioAdditional: [String:Any]?
+    var bioEEGParam: BiodataAlgorithmParams?
     var bioSubscription: BiodataParameterOptions?
     var affectiveService: AffectiveDataServiceOptions?
     var affectiveSubscription: AffectiveDataSubscribeOptions?
+    var uploadCycle: Int = 0
     var sex: String?
     var age: Int?
     var sn: [String: Any]?
     var source: [String: Any]?
     var mode: [Int]?
     var cased: [Int]?
-    
+    var allowSave: Bool = true
     var isSessionCreated = false
     let socket: WebSocket
     var client: AffectiveCloudClient!
@@ -98,6 +101,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         requestModel.kwargs?.sign = sign
         requestModel.kwargs?.userID = userID.hashed(.md5, output: .hex)!.uppercased()
         requestModel.kwargs?.timeStamp = timeStamp
+        requestModel.kwargs?.uploadCycle = self.uploadCycle
 
         if let jsonstring = requestModel.toJSONString() {
             self.webSocketSend(jsonString: jsonstring)
@@ -145,6 +149,7 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
         jsonModel.kwargs?.sign = sign
         jsonModel.kwargs?.userID = userID.hashed(.md5, output: .hex)!.uppercased()
         jsonModel.kwargs?.timeStamp = timeStamp
+        jsonModel.kwargs?.uploadCycle = self.uploadCycle
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -172,73 +177,53 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     private func biodataTypeList(with options: BiodataTypeOptions) -> [String] {
         var servicesList = [String]()
         if options.contains(.EEG) {
-            servicesList.append("eeg")
+            servicesList.append(BiodataType.eeg.rawValue)
         }
         if options.contains(.HeartRate) {
-            servicesList.append("hr")
+            servicesList.append(BiodataType.hr.rawValue)
         }
+        if options.contains(.HeartRateV2) {
+            servicesList.append(BiodataType.hr2.rawValue)
+        }
+        if options.contains(.PEPR) {
+            servicesList.append(BiodataType.pepr.rawValue)
+        }
+        
         return servicesList
     }
-
-    private func biodataParamList(with options: BiodataParameterOptions) -> Set<String> {
-        var parametersList = Set<String>()
-        if options.contains(.eeg_all) {
-            parametersList.insert("eegl_wave")
-            parametersList.insert("eegr_wave")
-            parametersList.insert("eeg_alpha_power")
-            parametersList.insert("eeg_beta_power")
-            parametersList.insert("eeg_theta_power")
-            parametersList.insert("eeg_delta_power")
-            parametersList.insert("eeg_gamma_power")
-            parametersList.insert("eeg_quality")
+    
+    private func biodataSubscribeList(with options: BiodataParameterOptions) -> [String] {
+        var servicesList = [String]()
+        if options.contains(.eeg) {
+            servicesList.append(BiodataType.eeg.rawValue)
         }
-        if options.contains(.eeg_wave_left) {
-            parametersList.insert("eegl_wave")
+        if options.contains(.hr) {
+            servicesList.append(BiodataType.hr.rawValue)
         }
-        if options.contains(.eeg_wave_right) {
-            parametersList.insert("eegr_wave")
+        if options.contains(.hr_v2) {
+            servicesList.append(BiodataType.hr2.rawValue)
         }
-        if options.contains(.eeg_alpha) {
-            parametersList.insert("eeg_alpha_power")
+        if options.contains(.pepr) {
+            servicesList.append(BiodataType.pepr.rawValue)
         }
-        if options.contains(.eeg_beta) {
-            parametersList.insert("eeg_beta_power")
-        }
-        if options.contains(.eeg_theta) {
-            parametersList.insert("eeg_theta_power")
-        }
-        if options.contains(.eeg_delta) {
-            parametersList.insert("eeg_delta_power")
-        }
-        if options.contains(.eeg_gamma) {
-            parametersList.insert("eeg_gamma_power")
-        }
-        if options.contains(.eeg_quality) {
-            parametersList.insert("eeg_quality")
-        }
-
-        if options.contains(.hr_all) {
-            parametersList.insert("hr")
-            parametersList.insert("hrv")
-        }
-        if options.contains(.hr_value) {
-            parametersList.insert("hr")
-        }
-        if options.contains(.hr_variability) {
-            parametersList.insert("hrv")
-        }
-
-        return parametersList
+        return servicesList
     }
 
     private func reportTypeString(options: BiodataTypeOptions) -> String {
         var servicesList = [String]()
         if options.contains(.EEG) {
-            servicesList.append("eeg")
+            servicesList.append(BiodataType.eeg.rawValue)
         }
 
         if options.contains(.HeartRate) {
-            servicesList.append("hr")
+            servicesList.append(BiodataType.hr.rawValue)
+        }
+        if options.contains(.HeartRateV2) {
+            servicesList.append(BiodataType.hr2.rawValue)
+        }
+        
+        if options.contains(.PEPR) {
+            servicesList.append(BiodataType.pepr.rawValue)
         }
 
         return servicesList.joined(separator: ",")
@@ -252,9 +237,15 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
 //MARK: BiodataServiceProtocol imp
 extension AffectiveCloudServices: BiodataServiceProtocol {
 
-    func biodataInitial(options: BiodataTypeOptions, tolerance: [String:Any]?=nil,
-                        sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
-                        mode: [Int]? = nil, cases: [Int]? = nil) {
+    func biodataInitial(options: BiodataTypeOptions,
+                        param: BiodataAlgorithmParams?,
+                        sex: String? = nil,
+                        age: Int? = nil,
+                        sn: [String: Any]? = nil,
+                        source: [String: Any]? = nil,
+                        mode: [Int]? = nil,
+                        cases: [Int]? = nil,
+                        allowSave:Bool = true) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -271,9 +262,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         jsonModel.kwargs = CSKwargsJSONModel()
         let biodataTypes = self.biodataTypeList(with: options)
         jsonModel.kwargs?.bioTypes = biodataTypes
-        if let tolerance = tolerance {
-            jsonModel.kwargs?.tolerance = tolerance
-        }
+        jsonModel.kwargs?.algorithmParam = param
     
         let storage = CSPersonalInfoJSONModel()
         if sex != nil || age != nil {
@@ -292,7 +281,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
 
         storage.device = sn
         storage.data = source
-        
+        storage.allow = allowSave
         jsonModel.kwargs?.storageSettings = storage
   
         if let jsonString = jsonModel.toJSONString() {
@@ -313,38 +302,12 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             return
         }
 
-        //var biodataTypes = [String]()
-        let biodataParamList = self.biodataParamList(with: options)
-        let eegParamList: [String] = biodataParamList.filter { $0.contains("eeg") }
-        let hrParamList: [String] = biodataParamList.filter { $0.contains("hr") }
-//        if eegParamList.count > 0 {
-//            biodataTypes.append("eeg")
-//        }
-//        if hrParamList.count > 0 {
-//            biodataTypes.append("hr")
-//        }
-
-        if let flag = self.biodataInitialList?.contains(.EEG), eegParamList.count > 0 {
-            if !flag {
-                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: EEG service unavailable: you must init eeg biodata service first!")
-                return
-            }
-        }
-
-        if let flag = self.biodataInitialList?.contains(.HeartRate), hrParamList.count > 0 {
-            if !flag {
-                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must init hr biodata service first!")
-                return
-            }
-        }
+        let biodataList = self.biodataSubscribeList(with: options)
 
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.subscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
-        //jsonModel.kwargs?.bioTypes = biodataTypes
-        jsonModel.kwargs?.hrParams = hrParamList
-        jsonModel.kwargs?.eegParams = eegParamList
+        jsonModel.args = biodataList
 
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
@@ -367,9 +330,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.biodata.rawValue
         jsonModel.operation = CSBiodataOperation.unsubscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
-        jsonModel.kwargs?.eegParams = self.biodataParamList(with: options).filter { $0.contains("eeg") }
-        jsonModel.kwargs?.hrParams = self.biodataParamList(with: options).filter { $0.contains("hr") }
+        jsonModel.args = self.biodataSubscribeList(with: options)
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -377,7 +338,7 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
         }
     }
 
-    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]? = nil, hrData: [Int]? = nil) {
+    func biodataUpload(options: BiodataTypeOptions, eegData: [Int]? = nil, hrData: [Int]? = nil, peprData: [Int]? = nil) {
         guard self.socket.isConnected else {
             self.delegate?.error(client: self.client, request: nil, error: .unSocketConnected, message: "CSRequestError: Pleace check socket is connected!")
             return
@@ -405,6 +366,22 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
                 jsonModel.kwargs?.hrData = hrData
             } else {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must initial hr biodata service first!")
+                return
+            }
+        }
+        if options.contains(.HeartRateV2) {
+            if let flag = self.biodataInitialList?.contains(.HeartRateV2), flag {
+                jsonModel.kwargs?.hrData = hrData
+            } else {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable: you must initial hr biodata service first!")
+                return
+            }
+        }
+        if options.contains(.PEPR) {
+            if let flag = self.biodataInitialList?.contains(.PEPR), flag {
+                jsonModel.kwargs?.peprData = peprData
+            } else {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Pepr service unavailable: you must initial hr biodata service first!")
                 return
             }
         }
@@ -437,6 +414,19 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             if !flag {
                 self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate service unavailable! generate report failed!")
                 return
+            }
+        }
+        
+        if let flag = self.biodataInitialList?.contains(.HeartRateV2), options.contains(.HeartRateV2) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Heart rate v2 service unavailable! generate report failed!")
+                return
+            }
+        }
+        
+        if let flag = self.biodataInitialList?.contains(.PEPR), options.contains(.PEPR) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noBiodataService, message: "CSRequestError: Pepr service unavailable! generate report failed!")
             }
         }
 
@@ -521,47 +511,9 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.subscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
-        let paramList = self.subscribeList(options: services)
-        let attentionParams: [String] = paramList.filter { $0.contains("attention") }
-        let relaxationParams: [String]  = paramList.filter { $0.contains("relaxation") }
-        let attentionChildParams: [String] = paramList.filter { $0.contains("attention_chd") }
-        let relaxationChildParams: [String]  = paramList.filter { $0.contains("relaxation_chd") }
-        let pressureParams: [String]  = paramList.filter { $0.contains("pressure") }
-        let pleasureParams: [String] = paramList.filter { $0.contains("pleasure") }
-        let arousalParams: [String] = paramList.filter { $0.contains("arousal") }
-        let coherenceParams: [String] = paramList.filter { $0.contains("coherence")}
-        if attentionParams.count > 0 {
-            jsonModel.kwargs?.attenionServieces = attentionParams
-        }
-
-        if relaxationParams.count > 0 {
-            jsonModel.kwargs?.relaxationServices = relaxationParams
-        }
-        
-        if attentionChildParams.count > 0 {
-            jsonModel.kwargs?.attenionChildServieces = attentionChildParams
-        }
-        
-        if relaxationChildParams.count > 0 {
-            jsonModel.kwargs?.relaxationChildServices = relaxationChildParams
-        }
-
-        if pressureParams.count > 0 {
-            jsonModel.kwargs?.pressureServices = pressureParams
-        }
-
-        if pleasureParams.count > 0 {
-            jsonModel.kwargs?.pleasureServices = pleasureParams
-        }
-
-        if arousalParams.count > 0 {
-            jsonModel.kwargs?.arousalServices = arousalParams
-        }
-        if coherenceParams.count > 0 {
-            jsonModel.kwargs?.coherenceServices = coherenceParams
-        }
-
+        let paramList = self.emotionSubscribeList(options: services)
+        jsonModel.args = paramList
+ 
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
         } else {
@@ -584,46 +536,8 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         let jsonModel = AffectiveCloudRequestJSONModel()
         jsonModel.services = CSServicesType.affective.rawValue
         jsonModel.operation = CSEmotionOperation.unsubscribe.rawValue
-        jsonModel.kwargs = CSKwargsJSONModel()
-        let paramList = self.subscribeList(options: services)
-        let attentionParams: [String] = paramList.filter { $0.contains("attention") }
-        let relaxationParams: [String]  = paramList.filter { $0.contains("relaxation") }
-        let attentionChildParams: [String] = paramList.filter { $0.contains("attention_chd") }
-        let relaxationChildParams: [String]  = paramList.filter { $0.contains("relaxation_chd") }
-        let pressureParams: [String]  = paramList.filter { $0.contains("pressure") }
-        let pleasureParams: [String] = paramList.filter { $0.contains("pleasure") }
-        let arousalParams: [String] = paramList.filter { $0.contains("arousal") }
-        let coherenceParams: [String] = paramList.filter { $0.contains("coherence")}
-        if attentionParams.count > 0 {
-            jsonModel.kwargs?.attenionServieces = attentionParams
-        }
-
-        if relaxationParams.count > 0 {
-            jsonModel.kwargs?.relaxationServices = relaxationParams
-        }
-        
-        if attentionChildParams.count > 0 {
-            jsonModel.kwargs?.attenionChildServieces = attentionChildParams
-        }
-        
-        if relaxationChildParams.count > 0 {
-            jsonModel.kwargs?.relaxationChildServices = relaxationChildParams
-        }
-
-        if pressureParams.count > 0 {
-            jsonModel.kwargs?.pressureServices = pressureParams
-        }
-
-        if pleasureParams.count > 0 {
-            jsonModel.kwargs?.pleasureServices = pleasureParams
-        }
-
-        if arousalParams.count > 0 {
-            jsonModel.kwargs?.arousalServices = arousalParams
-        }
-        if coherenceParams.count > 0 {
-            jsonModel.kwargs?.coherenceServices = coherenceParams
-        }
+        let paramList = self.emotionSubscribeList(options: services)
+        jsonModel.args = paramList
 
         if let jsonString = jsonModel.toJSONString() {
             self.webSocketSend(jsonString: jsonString)
@@ -682,6 +596,43 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
     }
 
     private func serviceList(options: AffectiveDataServiceOptions) -> [String] {
+        var list = [String]()
+        if options.contains(.attention) {
+            list.append("attention")
+        }
+
+        if options.contains(.relaxation) {
+            list.append("relaxation")
+        }
+        
+        if options.contains(.attention_child) {
+            list.append("attention_chd")
+        }
+        
+        if options.contains(.relaxation_child) {
+            list.append("relaxation_chd")
+        }
+
+        if options.contains(.pressure) {
+            list.append("pressure")
+        }
+
+        if options.contains(.pleasure) {
+            list.append("pleasure")
+        }
+
+        if options.contains(.arousal) {
+            list.append("arousal")
+        }
+        
+        if options.contains(.coherence) {
+            list.append("coherence")
+        }
+
+        return list
+    }
+    
+    private func emotionSubscribeList(options: AffectiveDataSubscribeOptions) -> [String] {
         var list = [String]()
         if options.contains(.attention) {
             list.append("attention")
@@ -794,43 +745,6 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.coherence_curve) {
             list.insert("coherence_rec")
         }
-        return list
-    }
-
-    private func subscribeList(options: AffectiveDataSubscribeOptions)-> [String] {
-        var list = [String]()
-        if options.contains(.attention) {
-            list.append("attention")
-        }
-
-        if options.contains(.relaxation) {
-            list.append("relaxation")
-        }
-        
-        if options.contains(.attention_child) {
-            list.append("attention_chd")
-        }
-        
-        if options.contains(.relaxation_child) {
-            list.append("relaxation_chd")
-        }
-
-        if options.contains(.pressure) {
-            list.append("pressure")
-        }
-
-        if options.contains(.pleasure) {
-            list.append("pleasure")
-        }
-
-        if options.contains(.arousal) {
-            list.append("arousal")
-        }
-        
-        if options.contains(.coherence) {
-            list.append("coherence")
-        }
-
         return list
     }
 
@@ -967,7 +881,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
     }
     
     func logService(log: String) {
-        if bIsLog {
+        if bIsLogToLocal {
             if let url = logUrlStr {
                 if logUrl == nil {
                     logUrl = URL.init(fileURLWithPath: url)
@@ -980,7 +894,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                     do {
                         try data.write(to: self.logUrl!, options: .atomic)
                         //try logStr.write(toFile: url, atomically: true, encoding: .utf8)
-                    } catch let error as Error {
+                    } catch let error {
                         print("log erorr \(error.localizedDescription)")
                     }
                     
@@ -1000,13 +914,16 @@ extension AffectiveCloudServices: WebSocketDelegate {
         }
         self.state = .connected
         self.delegate?.websocketConnect(client: self.client)
-        if let _ = session_id {
-            if !isSessionCreated {
-                sessionRestore()
+        if self.appKey != nil && self.appSecret != nil {
+            if let _ = session_id {
+                if !isSessionCreated {
+                    sessionRestore()
+                }
+            } else {
+                sessionCreate()
             }
-        } else {
-            sessionCreate()
         }
+        
         logService(log: "WS Connect")
     }
 
@@ -1073,7 +990,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                     self.session_id = id
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
+                        self.biodataInitial(options: bioServices, param: bioEEGParam, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased, allowSave: allowSave)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)
@@ -1086,7 +1003,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if model.code == 0 {
                     self.isSessionCreated = true
                     if let bioServices = self.bioService  {
-                        self.biodataInitial(options: bioServices, tolerance: self.bioTolerance, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased)
+                        self.biodataInitial(options: bioServices, param: bioEEGParam, sex: sex, age: age, sn: sn, source: source, mode: mode, cases: cased, allowSave: allowSave)
                     }
                     if let affService = self.affectiveService {
                         self.emotionStart(services: affService)
@@ -1098,6 +1015,8 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.isSessionCreated = false
                 self.session_id = nil
                 self.logUrlStr = nil
+                self.appKey = nil
+                self.appSecret = nil
             case (CSServicesType.biodata.rawValue, CSBiodataOperation.initial.rawValue):
                 if let biodata = model.dataModel as? CSResponseDataJSONModel,
                     let list = biodata.biodataList {
@@ -1112,16 +1031,6 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 if let data = model.dataModel as? CSBiodataProcessJSONModel {
                     DLog("log biodata subscribe is \(data)")
                 }
-
-//                if let data = model.dataModel as? CSResponseBiodataSubscribeJSONModel,
-//                    let list = data.eegServiceList {
-//                    self.appendBiodataSubscribeList(list: list)
-//                }
-//
-//                if let data = model.dataModel as? CSResponseBiodataSubscribeJSONModel,
-//                    let list = data.hrServiceList {
-//                    self.appendBiodataSubscribeList(list: list)
-//                }
 
                 self.delegate?.biodataServicesSubscribe(client: self.client, response: model)
                 NotificationCenter.default.post(name: NSNotification.Name.biodataServicesSubscribeNotify, object: nil, userInfo: ["biodataServicesSubscribe":model])
@@ -1183,6 +1092,20 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.biodataInitialList?.insert(.HeartRate)
             } else {
                 self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .HeartRate)
+            }
+        }
+        if list.contains("hr-v2") {
+            if let _ = self.biodataInitialList {
+                self.biodataInitialList?.insert(.HeartRateV2)
+            } else {
+                self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .HeartRateV2)
+            }
+        }
+        if list.contains("pepr") {
+            if let _ = self.biodataInitialList {
+                self.biodataInitialList?.insert(.PEPR)
+            } else {
+                self.biodataInitialList = BiodataTypeOptions(arrayLiteral: .PEPR)
             }
         }
     }

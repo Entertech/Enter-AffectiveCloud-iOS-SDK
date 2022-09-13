@@ -1,54 +1,78 @@
 PODS:
-  - Alamofire (5.0.0-rc.3)
-  - Charts (3.4.0):
-    - Charts/Core (= 3.4.0)
-  - Charts/Core (3.4.0)
+  - Alamofire (5.4.3)
+  - Charts (4.0.2):
+    - Charts/Core (= 4.0.2)
+  - Charts/Core (4.0.2):
+    - SwiftAlgorithms (~> 1.0)
+  - FluentDarkModeKit (1.0.3)
   - GzipSwift (5.1.1)
-  - HandyJSON (5.0.3-beta)
-  - Moya/Core (14.0.0-beta.6):
-    - Alamofire (= 5.0.0-rc.3)
-  - Moya/RxSwift (14.0.0-beta.6):
+  - HandyJSON (5.0.4-beta)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - RxSwift (5.1.0)
+  - PromiseKit (6.13.1):
+    - PromiseKit/CorePromise (= 6.13.1)
+    - PromiseKit/Foundation (= 6.13.1)
+    - PromiseKit/UIKit (= 6.13.1)
+  - PromiseKit/CorePromise (6.13.1)
+  - PromiseKit/Foundation (6.13.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.13.1):
+    - PromiseKit/CorePromise
+  - RxSwift (5.1.2)
   - SnapKit (5.0.1)
   - Starscream (3.1.1)
-  - SwiftyJSON (5.0.0)
+  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
-  - Charts
-  - Charts (= 3.4.0)
+  - Charts (from `https://github.com/ET-LINK/Charts.git`, branch `enter/round_corner_bar`)
+  - FluentDarkModeKit
   - GzipSwift
-  - HandyJSON (= 5.0.3-beta)
-  - Moya/RxSwift (~> 14.0.0-beta.5)
-  - RxSwift (= 5.1)
+  - HandyJSON (~> 5.0.4-beta)
+  - Moya/RxSwift
+  - PromiseKit
+  - RxSwift
   - SnapKit
   - Starscream (= 3.1.1)
-  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Charts
+    - FluentDarkModeKit
     - GzipSwift
     - HandyJSON
     - Moya
+    - PromiseKit
     - RxSwift
     - SnapKit
     - Starscream
-    - SwiftyJSON
+    - SwiftAlgorithms
+
+EXTERNAL SOURCES:
+  Charts:
+    :branch: enter/round_corner_bar
+    :git: https://github.com/ET-LINK/Charts.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: f26427b003cf712d69cf3b76024180181eadf136
+    :git: https://github.com/ET-LINK/Charts.git
 
 SPEC CHECKSUMS:
-  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
-  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  Charts: cfa4e911e6dc289582c2fe011a0e87c03d96727f
+  FluentDarkModeKit: e3fe5d8aa471422480b04b0aa03d83425e3e1826
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
-  HandyJSON: 88e8ea5f66ab65c3b8768499a1935d0509c460d4
-  Moya: d4821fbcb3e784f34d2f82869e6855057a0b85d1
-  RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
+  HandyJSON: a9c67202df97805a0ba4a00e30b50e9a30ac28f3
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
+  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 1fa3f5b1075ad4c0bc41bb422e1dc8505c6fed88
+PODFILE CHECKSUM: a2f6404e83372ee80ed0b187d30a0ab512dd73f1
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.3

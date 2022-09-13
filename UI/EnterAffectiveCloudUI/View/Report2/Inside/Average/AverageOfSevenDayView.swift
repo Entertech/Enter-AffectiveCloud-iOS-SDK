@@ -8,7 +8,48 @@
 
 import UIKit
 
-public class PrivateAverageOfSevenDayView: UIView {
+class PrivateAverageOfSevenDayView: UIView {
+    
+    public var valuesSpect: [Int] = [] {
+        willSet {
+
+                for i in 0..<valueViews.count {
+                    valueViews[i].removeFromSuperview()
+                    valueLabels[i].removeFromSuperview()
+                }
+                valueViews.removeAll()
+                valueLabels.removeAll()
+                _values = newValue
+                //let total = newValue.reduce(0, +)
+                //averageValue = lroundf(Float(total) / Float(newValue.count))
+                for (i,_) in newValue.enumerated() {
+                    let bar = UIView()
+                    let numLabel = UILabel()
+                    // 设置bar
+                    if i == 0 {
+                        bar.backgroundColor = currentBarColor
+                        numLabel.backgroundColor = numBgColor
+                    } else {
+                        bar.backgroundColor = barColor
+                        numLabel.isHidden = true
+                    }
+                    
+                    bar.layer.cornerRadius = 4
+                    bar.layer.masksToBounds = true
+                    valueViews.append(bar)
+                    
+                    // 设置bar上面的label
+                    numLabel.font = UIFont.systemFont(ofSize: 11)
+                    numLabel.text = String.init(format: "%d", Int(ceil(Double(newValue[i]) / 60.0)))
+                    numLabel.layer.cornerRadius = 4
+                    numLabel.layer.masksToBounds = true
+                    numLabel.textAlignment = .center
+                    numLabel.textColor = numTextColor
+                    valueLabels.append(numLabel)
+                }
+                barLayout()
+        }
+    }
     
     public var values: [Int] = [] {
         willSet {
@@ -20,8 +61,8 @@ public class PrivateAverageOfSevenDayView: UIView {
                 valueViews.removeAll()
                 valueLabels.removeAll()
                 _values = newValue
-                let total = newValue.reduce(0, +)
-                averageValue = lroundf(Float(total) / Float(newValue.count))
+                //let total = newValue.reduce(0, +)
+                //averageValue = lroundf(Float(total) / Float(newValue.count))
                 for (i,_) in newValue.enumerated() {
                     let bar = UIView()
                     let numLabel = UILabel()
@@ -98,6 +139,13 @@ public class PrivateAverageOfSevenDayView: UIView {
             }
         }
     }
+    
+    public var meditationTime: Int = 0 {
+        willSet {
+            meditationTimeLabel.text = "\(newValue)min"
+        }
+    }
+    
     public var unitText = "ms" {
         willSet {
             unitLabel.text = newValue
@@ -128,18 +176,18 @@ public class PrivateAverageOfSevenDayView: UIView {
         }
     }
     
-    private var averageValue:Int = 0 {
+    public var averageValue:Int = 0 {
         willSet {
             averageNumLabel.text = "\(newValue)"
         }
     }
-    
+    private let meditationTimeLabel = UILabel()
     private var valueViews:[UIView] = []
     private var valueLabels:[UILabel] = []
     
     private let averageLine = UIView()
     private let averageLabel = UILabel()
-    private let averageNumLabel = UILabel()
+    public let averageNumLabel = UILabel()
     private let unitLabel = UILabel()
     private let lastLabel = UILabel()
     private var _values: [Int]?
@@ -182,6 +230,10 @@ public class PrivateAverageOfSevenDayView: UIView {
             $0.centerY.equalTo(averageNumLabel.snp.centerY).offset(4)
         }
         
+        meditationTimeLabel.snp.makeConstraints {
+            $0.left.equalToSuperview()
+            $0.top.equalToSuperview().offset(8)
+        }
     }
     
     public override func layoutSubviews() {
@@ -195,6 +247,7 @@ public class PrivateAverageOfSevenDayView: UIView {
         self.addSubview(lastLabel)
         self.addSubview(unitLabel)
         self.addSubview(averageLine)
+        self.addSubview(meditationTimeLabel)
         averageLine.backgroundColor = UIColor.colorWithHexString(hexColor: "FB9C98")
         averageLine.layer.cornerRadius = 1
         averageLine.layer.masksToBounds = true
@@ -212,6 +265,7 @@ public class PrivateAverageOfSevenDayView: UIView {
         lastLabel.text = "Last 7 times"
         lastLabel.textColor = UIColor.systemGray
 
+        meditationTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     }
     
     func barLayout() {

@@ -35,7 +35,6 @@ class UpdateHRV: HRVValueProtocol {
         if let data = value.dataModel as? CSBiodataProcessJSONModel {
             if let eeg = data.hr {
                 if let hrv = eeg.hrv {
-                    
                     self.rxHRVValue.onNext(Int(hrv))
                 }
             }
@@ -45,6 +44,17 @@ class UpdateHRV: HRVValueProtocol {
 }
 
 public class RealtimeHRVView: BaseView {
+    /// 数据上传周期，用于计算图表x轴间隔
+    public var uploadCycle: UInt = 3 {
+        willSet {
+            if newValue == 0 {
+                interval = 0.2
+            } else {
+                interval = 0.2
+            }
+        }
+    }
+    
     //MARK:- Public param
     /// 主色调显示
     public var mainColor = UIColor.colorWithHexString(hexColor: "232323")  {
@@ -94,7 +104,7 @@ public class RealtimeHRVView: BaseView {
     //线条颜色
     public var lineColor = UIColor.systemRed
     
-    
+    private var interval = 1.8
     private let titleLabel = UILabel()
     private let infoBtn = UIButton()
     private var height: CGFloat = 0
@@ -105,7 +115,7 @@ public class RealtimeHRVView: BaseView {
     private let bottomMargin: CGFloat = 22
     private let leftMargin: CGFloat = 16
     private let rightMargin: CGFloat = 0
-    private let pointCount = 120
+    private let pointCount = 150
     private var yAxis:CGFloat = 30 // Y轴的动态坐标
     private var waveArray: [Float]?
     private var updateHRV: UpdateHRV?
@@ -126,7 +136,6 @@ public class RealtimeHRVView: BaseView {
         super.init(coder: coder)
         
     }
-    
     
     /// 开启监听
     public func observe() {
@@ -166,7 +175,7 @@ public class RealtimeHRVView: BaseView {
         
         titleLabel.font = UIFont(name: textFont, size: 14)
         titleLabel.textColor = mainColor
-        titleLabel.text = "心率变异性"
+        titleLabel.text = "HRV"
         
         infoBtn.setImage(UIImage.loadImage(name: "icon_info_black", any: classForCoder), for: .normal)
         infoBtn.addTarget(self, action: #selector(infoBtnTouchUpInside), for: .touchUpInside)
@@ -227,19 +236,12 @@ public class RealtimeHRVView: BaseView {
     }
     
     public func appendArray(_ value: Int) {
-        
-//        if let _ = waveArray {
-//            waveArray?.append(Float(value))
-//            waveArray?.remove(at: 0)
-//        } else {
-//            waveArray = Array(repeating: 0.0, count: 200)
-//            waveArray?.append(Float(value))
-//        }
+
         if waveArray == nil {
             waveArray = Array(repeating: 0.0, count: 120)
         }
         if drawLineTimer == nil {
-            drawLineTimer = Timer.init(timeInterval: 0.4, target: self, selector: #selector(timerAction(_:)), userInfo: nil, repeats: true)
+            drawLineTimer = Timer.init(timeInterval: 0.2, target: self, selector: #selector(timerAction(_:)), userInfo: nil, repeats: true)
             RunLoop.current.add(drawLineTimer!, forMode: .common)
             drawLineTimer?.fire()
         }

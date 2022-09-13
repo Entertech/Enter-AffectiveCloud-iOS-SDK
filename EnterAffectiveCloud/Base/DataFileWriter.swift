@@ -10,10 +10,10 @@ import Foundation
 
 open class DataFileWriter: DataFileWritable {
 
-    public internal (set) var protocolVersion: String = "1.0"
+    public internal (set) var protocolVersion: String = "2.0"
     public let headerLength: Byte = 32
     open var fileType: Byte = 0
-    open var dataVersion: String = "1.0.0.0"
+    open var dataVersion: String = "0.0.0.2"
     open private (set) var dataLength: UInt64 = 0
     open private (set) var checksum: UInt16 = 0
     open private (set) var timestamp: Timestamp = unix_time()
@@ -83,7 +83,7 @@ open class DataFileWriter: DataFileWritable {
         header.append(contentsOf: self.convertChecksum())
         header.append(contentsOf: self.convertTimestamp())
         header.append(contentsOf: Bytes(repeating: 0, count: 12)) // 保留位
-        return Data(bytes: header)
+        return Data.init(header)
     }
 
     // MARK: - 转换文件头属性

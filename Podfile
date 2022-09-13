@@ -2,43 +2,39 @@ source 'https://cdn.cocoapods.org/'
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
-platform :ios, '10.0'
+platform :ios, '12.0'
 
-target 'EnterAffectiveCloud' do
-  pod 'HandyJSON', '5.0.3-beta'
-  pod 'SwiftyJSON'
+def common
+  pod 'RxSwift'
+  pod 'HandyJSON', '~> 5.0.4-beta'
   pod 'Starscream', '3.1.1'
   pod 'GzipSwift'
-  pod 'Moya/RxSwift', '~> 14.0.0-beta.5'
-  pod 'RxSwift', '5.1'
+end
+
+def ui
+  pod 'SnapKit'
+  pod 'Charts', :git => "https://github.com/ET-LINK/Charts.git", :branch => 'enter/round_corner_bar'
+  pod 'FluentDarkModeKit'
+end
+
+target 'EnterAffectiveCloud' do
+
+  common
+  pod 'Moya/RxSwift'
+  pod 'PromiseKit'
 end
 
 target 'EnterAffectiveCloudUI' do
-  pod 'RxSwift', '5.1'
-  pod 'SnapKit'
-  pod 'Charts', '3.4.0'
-  pod 'HandyJSON', '5.0.3-beta'
-  pod 'SwiftyJSON'
-  pod 'Starscream', '3.1.1'
-  pod 'GzipSwift'
+  common
+  ui
 end
 
 target 'EnterRealtimeUIDemo' do
-  pod 'RxSwift', '5.1'
-  pod 'SnapKit'
-  pod 'GzipSwift'
-  pod 'HandyJSON', '5.0.3-beta'
-  pod 'Starscream', '3.1.1'
-  pod 'SwiftyJSON'
-  pod 'Charts'
+  common
+  ui
 end
 
 target 'EnterReportUIDemo' do
-  pod 'RxSwift', '5.1'
-  pod 'SnapKit'
-  pod 'GzipSwift'
-  pod 'HandyJSON', '5.0.3-beta'
-  pod 'Starscream', '3.1.1'
-  pod 'SwiftyJSON'
-  pod 'Charts'
+  common
+  ui
 end

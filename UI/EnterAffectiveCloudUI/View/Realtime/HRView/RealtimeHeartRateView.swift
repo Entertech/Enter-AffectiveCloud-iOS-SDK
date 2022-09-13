@@ -124,7 +124,7 @@ public class RealtimeHeartRateView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "心率"
+    private let titleText = "Heart Rate"
     private var maxValue: Int = 0
     private var minValue: Int = 0
     private let disposeBag = DisposeBag()
@@ -282,7 +282,7 @@ public class RealtimeHeartRateView: BaseView {
         bgView.addSubview(heartImageView!)
         
         maxLabel = UILabel()
-        maxLabel?.text = "最大值："
+        maxLabel?.text = "Max:"
         maxLabel?.textAlignment = .right
         maxLabel?.font = UIFont(name: textFont, size: 14)
         maxLabel?.textColor = secondTextColor
@@ -302,7 +302,7 @@ public class RealtimeHeartRateView: BaseView {
         bgView.addSubview(maxBpmLabel!)
         
         minLabel = UILabel()
-        minLabel?.text = "最小值："
+        minLabel?.text = "Min:"
         minLabel?.textAlignment = .right
         minLabel?.font = UIFont(name: textFont, size: 14)
         minLabel?.textColor = secondTextColor

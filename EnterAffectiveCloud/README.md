@@ -1,14 +1,17 @@
+[English Readme](/EnterAffectiveCloud/README_EN.md)
+
 # Enter AffectiiveCloud iOS SDK
 
 - [Enter AffectiiveCloud iOS SDK](#enter-affectiivecloud-ios-sdk)
   - [Demo](#demo)
-  - [快速接入](#%e5%bf%ab%e9%80%9f%e6%8e%a5%e5%85%a5)
-    - [对象初始化](#%e5%af%b9%e8%b1%a1%e5%88%9d%e5%a7%8b%e5%8c%96)
-    - [服务订阅](#%e6%9c%8d%e5%8a%a1%e8%ae%a2%e9%98%85)
-    - [获取报表](#%e8%8e%b7%e5%8f%96%e6%8a%a5%e8%a1%a8)
-    - [实现代理方法](#%e5%ae%9e%e7%8e%b0%e4%bb%a3%e7%90%86%e6%96%b9%e6%b3%95)
-    - [结束情感云](#%e7%bb%93%e6%9d%9f%e6%83%85%e6%84%9f%e4%ba%91)
-  - [情感云API使用说明](#%e6%83%85%e6%84%9f%e4%ba%91api%e4%bd%bf%e7%94%a8%e8%af%b4%e6%98%8e)
+  - [快速接入](#快速接入)
+    - [对象初始化](#对象初始化)
+    - [服务订阅](#服务订阅)
+    - [数据传输](#数据传输)
+    - [获取报表](#获取报表)
+    - [实现代理方法](#实现代理方法)
+    - [结束情感云](#结束情感云)
+  - [情感云API使用说明](#情感云api使用说明)
 
 ## Demo
 
@@ -37,14 +40,14 @@ let client = AffectiveCloudClient(websocketURLString: yourURL, appKey: yourAppKe
 ### 服务订阅
 
 ```swift
-// 请求生物信号数据
-self.client.initBiodataServices(services: [.EEG, .HeartRate])
+// 请求生物信号数据, uploadCycle为情感云计算周期，详情请查看情感云文档初始化生物数据部分
+self.client.initBiodataServices(services: [.EEG, .HeartRate], uploadCycle:3 )
 
 // 请求情感数据
 self.client.startAffectiveDataServices(services: [.attention, .relaxation, .pleasure, .pressure])
 
 // 订阅生物信号
-self.client.subscribeBiodataServices(services: [.eeg_all, .hr_all])
+self.client.subscribeBiodataServices(services: [.eeg, .hr])
 
 // 订阅情感数据
 self.client.subscribeAffectiveDataServices(services: [.attention, .relaxation, .pressure, .pleasure])

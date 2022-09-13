@@ -6,9 +6,9 @@
 //  Copyright © 2019 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import HandyJSON
+import Foundation
 
-final public class UsernameModel: HandyJSON  {
+final public class UsernameModel: Codable  {
     public var app_key: String?
     public var sign: String?
     public var user_id: String?
@@ -17,7 +17,7 @@ final public class UsernameModel: HandyJSON  {
     required public init() {}
 }
 
-final public class TokenModel: HandyJSON {
+final public class TokenModel: Codable {
     public var token: String?
     
     required public init() {}

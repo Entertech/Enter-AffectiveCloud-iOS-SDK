@@ -7,7 +7,6 @@
 //
 
 import RxSwift
-import HandyJSON
 import Moya
 import Alamofire
 
@@ -24,12 +23,12 @@ final public class AppInfoRequest {
     private let dispose = DisposeBag()
     lazy var provider = MoyaProvider<AppInfoAPI>(requestClosure: requestTimeoutClosure)
     
-    public lazy var list = { (version:String) -> Observable<[AppInfoModel]> in
-        return self.provider.rx.request(.list(version)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModelList(AppInfoModel.self)
+    public lazy var list = { () -> Observable<[AppInfoModel]> in
+        return self.provider.rx.request(.list).filterSuccessfulStatusCodes().asObservable().map([AppInfoModel].self)
     }
     
-    public lazy var read = { (version:String, id: Int) -> Observable<AppInfoModel> in
-        return self.provider.rx.request(.read(version, id)).filterSuccessfulStatusCodes().asObservable().mapHandyJsonModel(AppInfoModel.self)
+    public lazy var read = { (id: Int) -> Observable<AppInfoModel> in
+        return self.provider.rx.request(.read(id)).filterSuccessfulStatusCodes().asObservable().map(AppInfoModel.self)
         
     }
     

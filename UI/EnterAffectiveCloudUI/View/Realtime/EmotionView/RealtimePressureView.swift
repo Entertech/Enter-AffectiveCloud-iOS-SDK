@@ -109,7 +109,7 @@ public class RealtimePressureView: BaseView {
     }
     
     //MARK:- Private param
-    private let titleText = "压力值"
+    private let titleText = "Pressure"
     private let disposeBag = DisposeBag()
     
     //MARK:- Private UI

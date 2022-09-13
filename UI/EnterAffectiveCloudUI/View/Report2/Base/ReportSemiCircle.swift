@@ -204,3 +204,114 @@ public class ReportSemiCircle2: UIView {
         
     }
 }
+
+public class ReportSemiCircle3: UIView {
+    public var largeValue:CGFloat = 100
+    public var smallValue:CGFloat = 0
+    public var currentValue:CGFloat = 0 {
+        didSet {
+            drawLayer()
+        }
+    }
+    public let needleLayer = CAShapeLayer()
+    public var gradientLayer: CAGradientLayer = CAGradientLayer()
+
+    public var isShowLine = true
+    
+    public var colors: [Any] = [UIColor.colorWithHexString(hexColor:"5E75FF").cgColor,
+                                UIColor.colorWithHexString(hexColor: "FFB2C0").cgColor]
+    
+    public var bgColor = UIColor.colorWithHexString(hexColor: "f1f5f6")
+    private let shaperColor = UIColor.colorWithHexString(hexColor: "FFB2C0")
+    private var circlePath: UIBezierPath?
+    private let bgLayer: CAShapeLayer = CAShapeLayer()
+    private let shapeLayer = CAShapeLayer()
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        initFunction()
+    }
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+        initFunction()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initFunction()
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+
+        
+
+    }
+    
+    func initFunction() {
+        self.backgroundColor = .clear
+    }
+    
+    func drawLayer() {
+        if let _ = bgLayer.superlayer {
+            bgLayer.removeFromSuperlayer()
+        }
+        if let _ = shapeLayer.superlayer {
+            shapeLayer.removeFromSuperlayer()
+        }
+        if let _ = gradientLayer.superlayer {
+            gradientLayer.removeFromSuperlayer()
+        }
+        if let _ = needleLayer.superlayer {
+            needleLayer.removeFromSuperlayer()
+        }
+        let w1 = self.bounds.width
+        let h1 = self.bounds.height
+        circlePath = UIBezierPath.init(arcCenter: CGPoint(x: w1/2, y: h1-5), radius: w1/3, startAngle: CGFloat.pi*1.05, endAngle: CGFloat.pi*1.95, clockwise: true)
+        
+        bgLayer.frame = self.bounds
+        bgLayer.fillColor = UIColor.clear.cgColor
+        bgLayer.lineWidth = w1/10
+        bgLayer.strokeColor = bgColor.cgColor
+        bgLayer.strokeStart = 0
+        bgLayer.strokeEnd = 1
+        bgLayer.lineCap = .butt
+        bgLayer.path = circlePath?.cgPath
+        self.layer.addSublayer(bgLayer)
+        
+        shapeLayer.frame = self.bounds
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.lineWidth = w1/10
+        shapeLayer.strokeColor = shaperColor.cgColor
+        shapeLayer.strokeStart = 0
+        shapeLayer.strokeEnd = currentValue / (largeValue - smallValue)
+        shapeLayer.lineCap = .butt
+        shapeLayer.path = circlePath?.cgPath
+        self.layer.addSublayer(shapeLayer)
+        
+        
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = colors
+        gradientLayer.locations = [0,1]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        self.layer.addSublayer(gradientLayer)
+        
+        gradientLayer.mask = shapeLayer
+        
+        if isShowLine {
+            
+            needleLayer.frame = self.bounds
+            needleLayer.fillColor = UIColor.clear.cgColor
+            needleLayer.lineWidth = w1/8
+            needleLayer.strokeColor = UIColor.colorWithHexString(hexColor: "FF6682").cgColor
+            needleLayer.strokeStart = currentValue / (largeValue - smallValue)
+            needleLayer.strokeEnd = currentValue / (largeValue - smallValue) + 0.01
+            needleLayer.lineCap = .butt
+            needleLayer.path = circlePath?.cgPath
+            self.layer.addSublayer(needleLayer)
+        }
+        self.layoutIfNeeded()
+    }
+}

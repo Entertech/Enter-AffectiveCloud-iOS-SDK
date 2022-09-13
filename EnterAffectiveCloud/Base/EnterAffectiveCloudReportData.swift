@@ -11,10 +11,12 @@ import Foundation
 /// ReportData 由标量数据（scalars）和绘图数组组成 (digitals)
 public class EnterAffectiveCloudReportData {
 
+    public var scalarVersion = "0.0.0.1"
     public let scalars: [ReportScalar]
     public let digitals: [ReportDigital]
 
-    public init(scalars: [ReportScalar], digitals: [ReportDigital]) {
+    public init(scalars: [ReportScalar], digitals: [ReportDigital], version: String = "0.0.0.1") {
+        self.scalarVersion = version
         self.scalars = scalars
         self.digitals = digitals
     }
@@ -124,6 +126,7 @@ public enum ReportScalarType: UInt8 {
     case activateMin      = 0x15
     case timestamp        = 0x16
     case coherenceAverage = 0x17
+    case coherenceDuration = 0x1f
 }
 
 /*
@@ -141,6 +144,8 @@ public enum ReportScalarType: UInt8 {
  * 0xfb 愉悦度全程记录[0, 100]
  * 0xfc 激活度全程记录[0, 100]
  * 0xfd 和谐度全程记录[0, 100]
+ * 0xfe 睡眠[0, 100]
+ * 0xff 和谐标志 [0, 1]
  */
 public enum ReportDigitalType: UInt8 {
     case retained = 0xf0
@@ -157,6 +162,8 @@ public enum ReportDigitalType: UInt8 {
     case pleasure = 0xfb
     case activate = 0xfc
     case coherence = 0xfd
+    case sleepy = 0xfe
+    case coherenceType = 0xff
 }
 
 extension Data {
