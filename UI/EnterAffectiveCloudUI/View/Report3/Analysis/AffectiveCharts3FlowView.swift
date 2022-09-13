@@ -49,6 +49,10 @@ public class AffectiveCharts3FlowLineView: UIView {
     private let chartView = LineChartView()
     
     func initChart() {
+        self.addSubview(chartView)
+        chartView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         chartView.leftAxis.drawGridLinesEnabled = false
         chartView.leftAxis.drawAxisLineEnabled = false
         chartView.leftAxis.drawGridLinesBehindDataEnabled = true
