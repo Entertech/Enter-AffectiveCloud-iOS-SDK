@@ -22,6 +22,9 @@ public class AffectiveCharts3FlowLineView: UIView {
         self.maxValue = max
         self.minValue = min
         sample = data.count / maxDataCount == 0 ? 1 : data.count / maxDataCount
+        
+        initChart()
+        setLine()
     }
     
     required init?(coder: NSCoder) {
