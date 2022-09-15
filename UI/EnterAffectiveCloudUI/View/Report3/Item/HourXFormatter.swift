@@ -19,7 +19,7 @@ public class AffectiveCharts3HourValueFormatter: NSObject, AxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         if let startDate = startDate {
             let nData = startDate.addingTimeInterval(value)
-            let formatStr = "HH:mm A"
+            let formatStr = "HH:mm a"
             lk_formatter.dateFormat = formatStr
             let value = lk_formatter.string(from: nData)
             return value

@@ -11,7 +11,7 @@ import UIKit
 
 public class AffectiveCharts3FlowLineView: UIView {
     
-    public required init(colors: [UIColor], data: [Double], date: Date?=nil, state: [Int]?=nil, max: Double?=nil, min: Double?=nil) {
+    public required init(colors: [UIColor], data: [Double], labelCount: Int = 3, date: Date?=nil, state: [Int]?=nil, max: Double?=nil, min: Double?=nil) {
         super.init(frame: CGRect.zero)
         guard colors.count >= 3 else {return}
         self.colors.removeAll()
@@ -46,6 +46,8 @@ public class AffectiveCharts3FlowLineView: UIView {
     
     var minValue: Double?
     
+    var lableCount: Int = 3
+    
     private let chartView = LineChartView()
     
     func initChart() {
@@ -56,22 +58,25 @@ public class AffectiveCharts3FlowLineView: UIView {
         chartView.leftAxis.drawGridLinesEnabled = false
         chartView.leftAxis.drawAxisLineEnabled = false
         chartView.leftAxis.drawGridLinesBehindDataEnabled = true
+        chartView.leftAxis.drawLabelsEnabled = false
         if let maxValue = maxValue {
             chartView.leftAxis.axisMaximum = maxValue
         }
         if let minValue = minValue {
             chartView.leftAxis.axisMinimum = minValue
         }
-        
+
         chartView.rightAxis.enabled = false
         chartView.xAxis.labelHeight = 14
+        
         chartView.xAxis.labelTextColor = colors[0]
-        chartView.xAxis.axisMinLabels = 3
-        chartView.xAxis.axisMaxLabels = 6
+        chartView.xAxis.setLabelCount(lableCount, force: true)
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.drawGridLinesEnabled = false
         chartView.xAxis.axisLineColor = colors[1]
         chartView.xAxis.axisLineWidth = 1
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.avoidFirstLastClippingEnabled = true
         chartView.animate(xAxisDuration: 2, easingOption: .easeInOutCubic)
         chartView.dragEnabled = false
         chartView.scaleXEnabled = false
