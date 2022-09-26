@@ -56,7 +56,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.axisMaxLabels = 8
-        self.xAxis.avoidFirstLastClippingEnabled = true
+        
 
         switch theme.style {
         case .session:

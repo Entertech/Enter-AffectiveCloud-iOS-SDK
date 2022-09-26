@@ -78,7 +78,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
         xAxis.axisLineWidth = 1
-        xAxis.avoidFirstLastClippingEnabled = true
+        
         switch style {
         case .session:
             self.dragEnabled = false

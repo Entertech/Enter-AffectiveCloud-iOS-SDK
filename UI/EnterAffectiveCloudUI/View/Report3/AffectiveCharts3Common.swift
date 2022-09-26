@@ -75,7 +75,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
-        chartView.xAxis.avoidFirstLastClippingEnabled = true
+       
         switch theme.style {
         case .session:
             chartView.dragEnabled = true
