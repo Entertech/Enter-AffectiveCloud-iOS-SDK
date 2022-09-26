@@ -90,7 +90,7 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     
     public var textColor = ColorExtension.textLv1 {
         willSet {
-            chartView.axisColor = newValue
+            chartView.xAxis.labelTextColor = newValue
         }
     }
     
