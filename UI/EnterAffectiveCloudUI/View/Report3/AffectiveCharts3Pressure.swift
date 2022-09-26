@@ -49,6 +49,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
+        chartView.xAxis.avoidFirstLastClippingEnabled = true
         if theme.style != .session {
             chartView.xAxis.granularityEnabled = true
             chartView.xAxis.granularity = 1

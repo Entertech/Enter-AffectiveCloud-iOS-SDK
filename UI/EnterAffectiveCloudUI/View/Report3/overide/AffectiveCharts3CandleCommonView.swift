@@ -75,7 +75,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.xAxis.axisMaxLabels = 8
         self.xAxis.granularity = 1
         self.xAxis.granularityEnabled = true
-        
+        self.xAxis.avoidFirstLastClippingEnabled = true
         yRender = AffectiveCharts3DynamicYRender(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
         self.leftYAxisRenderer = yRender!
     }
