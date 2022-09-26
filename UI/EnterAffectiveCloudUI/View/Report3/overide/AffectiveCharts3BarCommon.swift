@@ -55,19 +55,21 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         self.xAxis.axisLineWidth = 1
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
-        self.xAxis.axisMaxLabels = 8
+        
         
 
         switch theme.style {
         case .session:
             self.dragEnabled = false
             xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
+            
         case .month:
             self.dragEnabled = true
             xAxis.valueFormatter = AffectiveCharts3DayValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
         case .year:
             self.dragEnabled = true
             xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
+            xAxis.setLabelCount(12, force: true)
 
         }
         

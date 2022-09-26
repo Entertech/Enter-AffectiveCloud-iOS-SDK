@@ -79,7 +79,7 @@ extension Date {
     }
     
     static func getMonthSymble(month: Int) -> String {
-        return Calendar.current.veryShortMonthSymbols[month-1]
+        return Calendar.current.shortMonthSymbols[month-1]
     }
     
     func startOfMonth() -> Date {
