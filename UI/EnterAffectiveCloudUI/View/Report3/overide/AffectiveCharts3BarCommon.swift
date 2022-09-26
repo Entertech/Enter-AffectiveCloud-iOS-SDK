@@ -69,7 +69,6 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         case .year:
             self.dragEnabled = true
             xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
-            xAxis.setLabelCount(6, force: true)
 
         }
         

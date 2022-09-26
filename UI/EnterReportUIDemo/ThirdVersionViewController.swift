@@ -30,10 +30,10 @@ class ThirdVersionViewController: UIViewController {
     let contentView2 = UIView()
     let contentView3 = UIView()
 //    let common = AffectiveCharts3Pressure()
-    let rhythms = ReportBrainwaveRhythms()
+//    let rhythms = ReportBrainwaveRhythms()
     let rhythms2 = ReportBrainwaveRhythms()
     let rhythms3 = ReportBrainwaveRhythms()
-//    let bar = AffectiveCharts3CandleView()
+    let bar = AffectiveCharts3BarCommonView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,18 +51,31 @@ class ThirdVersionViewController: UIViewController {
             $0.height.equalTo(311)
         }
 
-        contentView.addSubview(rhythms)
-        rhythms.snp.makeConstraints {
+        contentView.addSubview(bar)
+        bar.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        rhythms.gamaColor = .clear
-        rhythms.betaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
-        rhythms.gamaEnable = true
-        rhythms.betaEnable = true
-        rhythms.deltaEnable = true
-        rhythms.alphaEnable = true
-        rhythms.thetaEnable = true
-        rhythms.setContentHidden(list: [0])
+        
+        var theme = AffectiveChart3Theme()
+        theme.averageValue = "10"
+        theme.startTime = 1635221841
+        theme.endTime = 1664165841
+        theme.chartName = "add"
+        theme.themeColor = .red
+        theme.chartType = .coherece
+        theme.style = .year
+        
+//        rhythms.snp.makeConstraints {
+//            $0.edges.equalToSuperview()
+//        }
+//        rhythms.gamaColor = .clear
+//        rhythms.betaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
+//        rhythms.gamaEnable = true
+//        rhythms.betaEnable = true
+//        rhythms.deltaEnable = true
+//        rhythms.alphaEnable = true
+//        rhythms.thetaEnable = true
+//        rhythms.setContentHidden(list: [0])
 
         contentView2.addSubview(rhythms2)
         rhythms2.snp.makeConstraints {
@@ -205,8 +218,13 @@ class ThirdVersionViewController: UIViewController {
                         
                     }
                     if loop == 0 {
-                        rhythms.uploadCycle = 1
-                        rhythms.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)
+                        
+                        bar.setTheme(theme)
+                            .setProperty()
+                            .setLayout()
+                            .build(array: [0, 0, 10, 15, 20, 21 ,22, 23, 24, 25, 25, 29])
+//                        rhythms.uploadCycle = 1
+//                        rhythms.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)
                     } else if loop == 1 {
                         rhythms2.uploadCycle = 1
                         rhythms2.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)

@@ -50,7 +50,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         case .year:
             self.dragEnabled = true
             xAxis.valueFormatter = AffectiveCharts3MonthValueFormatter(originDate: Date.init(timeIntervalSince1970: theme.startTime))
-            xAxis.setLabelCount(6, force: true)
+            
         }
         
         self.leftAxis.labelFont = UIFont.systemFont(ofSize: 11)
