@@ -93,7 +93,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
             dots[i].snp.makeConstraints {
                 $0.width.height.equalTo(10)
                 $0.top.equalToSuperview().offset(46 + i * 29)
-                $0.right.equalToSuperview().offset(-110)
+                $0.right.equalToSuperview().offset(-92)
             }
 
             texts[i].snp.makeConstraints {
@@ -106,7 +106,7 @@ public class PrivateReportBrainwaveSpectrum: UIView {
             $0.width.height.equalTo(90)
         }
         chartView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(5)
+            $0.left.equalToSuperview()
             $0.width.height.equalTo(200)
             $0.centerY.equalToSuperview()
         }

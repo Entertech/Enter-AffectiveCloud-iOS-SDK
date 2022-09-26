@@ -11,6 +11,7 @@ import Charts
 
 public protocol RhythmsViewDelegate: AnyObject {
     func setRhythmsEnable(value: Int)
+    func expandAction()
 }
 
 public class AffectiveRhythmsView: UIView, ChartViewDelegate {

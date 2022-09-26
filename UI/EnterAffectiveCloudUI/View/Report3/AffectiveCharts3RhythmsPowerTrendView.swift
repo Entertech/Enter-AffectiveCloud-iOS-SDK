@@ -21,45 +21,75 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     
     public weak var delegate: RhythmsViewDelegate?
     
+    public var buttonBackgroundColor = UIColor.white {
+        willSet {
+            gamaBtn.backgroundColor = newValue
+            betaBtn.backgroundColor = newValue
+            alphaBtn.backgroundColor = newValue
+            thetaBtn.backgroundColor = newValue
+            deltaBtn.backgroundColor = newValue
+        }
+    }
+    
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
         willSet {
-            gamaBtn.backgroundColor = newValue.changeAlpha(to: 0.2)
-            gamaBtn.setTitleColor(newValue, for: .normal)
+            gamaBtn.setTitleColor(newValue, for: .selected)
             chartView.gamaColor = newValue
         }
     }
     public var betaColor = UIColor.colorWithHexString(hexColor: "#58B9E0") {
         willSet {
-            betaBtn.backgroundColor = newValue.changeAlpha(to: 0.2)
-            betaBtn.setTitleColor(newValue, for: .normal)
+            betaBtn.setTitleColor(newValue, for: .selected)
             chartView.betaColor = newValue
         }
     }
     public var alphaColor = UIColor.colorWithHexString(hexColor: "#F7C77E") {
         willSet {
-            alphaBtn.backgroundColor = newValue.changeAlpha(to: 0.2)
-            alphaBtn.setTitleColor(newValue, for: .normal)
+            alphaBtn.setTitleColor(newValue, for: .selected)
             chartView.alphaColor = newValue
         }
     }
     public var thetaColor = UIColor.colorWithHexString(hexColor: "#5FC695") {
         willSet {
-            thetaBtn.backgroundColor = newValue.changeAlpha(to: 0.2)
-            thetaBtn.setTitleColor(newValue, for: .normal)
+            thetaBtn.setTitleColor(newValue, for: .selected)
             chartView.thetaColor = newValue
         }
     }
     public var deltaColor = UIColor.colorWithHexString(hexColor: "#5E75FF") {
         willSet {
-            deltaBtn.backgroundColor = newValue.changeAlpha(to: 0.2)
-            deltaBtn.setTitleColor(newValue, for: .normal)
+            deltaBtn.setTitleColor(newValue, for: .selected)
             chartView.deltaColor = newValue
+        }
+    }
+    
+    
+    public var disableColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
+        willSet {
+            
+            gamaBtn.setTitleColor(newValue, for: .normal)
+            betaBtn.setTitleColor(newValue, for: .normal)
+            alphaBtn.setTitleColor(newValue, for: .normal)
+            thetaBtn.setTitleColor(newValue, for: .normal)
+            deltaBtn.setTitleColor(newValue, for: .normal)
+            chartView.gamaColor = newValue
+        }
+    }
+
+    
+    public var axisColor = ColorExtension.textLv1 {
+        willSet {
+            chartView.axisColor = newValue
+        }
+    }
+    
+    public var gridColor = ColorExtension.textLv1 {
+        willSet {
+            chartView.leftAxis.gridColor = newValue
         }
     }
     
     public var textColor = ColorExtension.textLv1 {
         willSet {
-            minLabel.textColor = newValue
             chartView.axisColor = newValue
         }
     }
@@ -68,11 +98,11 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     public lazy var gamaEnable: Bool = true {
         willSet {
             if newValue {
-                gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
+                gamaBtn.isSelected = true
                 chartView.enableGama = true
                 delegate?.setRhythmsEnable(value: 1<<1)
             } else {
-                gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
+                gamaBtn.isSelected = false
                 chartView.enableGama = false
                 delegate?.setRhythmsEnable(value: 1)
             }
@@ -82,11 +112,11 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     public lazy var betaEnable: Bool = true {
         willSet {
             if newValue {
-                betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
+                betaBtn.isSelected = true
                 chartView.enableBeta = true
                 delegate?.setRhythmsEnable(value: 1<<3)
             } else {
-                betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
+                betaBtn.isSelected = false
                 chartView.enableBeta = false
                 delegate?.setRhythmsEnable(value: 1<<2)
             }
@@ -96,11 +126,11 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     public lazy var alphaEnable: Bool = true {
         willSet {
             if newValue {
-                alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
+                alphaBtn.isSelected = true
                 chartView.enableAlpha = true
                 delegate?.setRhythmsEnable(value: 1<<5)
             } else {
-                alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
+                alphaBtn.isSelected = false
                 chartView.enableAlpha = false
                 delegate?.setRhythmsEnable(value: 1<<4)
             }
@@ -110,11 +140,11 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     public lazy var thetaEnable: Bool = true {
         willSet {
             if newValue {
-                thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
+                thetaBtn.isSelected = true
                 chartView.enableTheta = true
                 delegate?.setRhythmsEnable(value: 1<<7)
             } else {
-                thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
+                thetaBtn.isSelected = false
                 chartView.enableTheta = false
                 delegate?.setRhythmsEnable(value: 1<<6)
             }
@@ -124,11 +154,11 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     public lazy var deltaEnable: Bool = true {
         willSet {
             if newValue {
-                deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
+                deltaBtn.isSelected = true
                 chartView.enableDelta = true
                 delegate?.setRhythmsEnable(value: 1<<9)
             } else {
-                deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
+                deltaBtn.isSelected = false
                 chartView.enableDelta = false
                 delegate?.setRhythmsEnable(value: 1<<8)
             }
@@ -142,12 +172,13 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         }
     }
     
-    public var minText: String = "Time(min)" {
+    public var headerBtnImage: UIImage? {
         willSet {
-            minLabel.text = newValue
+            chartHead.barButton.setImage(newValue, for: .normal)
+            chartHead.barButton.addTarget(self, action: #selector(expandAction(_:)), for: .touchUpInside)
         }
     }
-    
+
     public var zoomText = "Zoom in on the curve and slide to view it."
     private var btnEnableCount: Int {
         get {
@@ -176,7 +207,6 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     private let alphaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let thetaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
     private let deltaBtn = UIButton(frame: CGRect.init(x: 0, y: 0, width: 44, height: 24))
-    private let minLabel = UILabel()
     private let chartView = RhythmsChart()
     private let btnContentView = UIStackView()
     private let chartHead = PrivateReportViewHead()
@@ -221,7 +251,6 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         self.addSubview(headImage)
         self.addSubview(chartView)
         self.addSubview(btnContentView)
-        self.addSubview(minLabel)
         self.addSubview(chartHead)
         self.headImage.snp.makeConstraints {
             $0.left.right.top.equalToSuperview()
@@ -236,34 +265,30 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         }
         
         chartView.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalToSuperview().offset(-16)
-            $0.top.equalToSuperview().offset(46)
-            $0.bottom.equalTo(minLabel.snp.top).offset(-6)
-        }
-        
-        minLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.left.equalToSuperview().offset(12)
+            $0.right.equalToSuperview().offset(-12)
+            $0.top.equalToSuperview().offset(32)
             $0.bottom.equalToSuperview().offset(-16)
         }
+
         gamaBtn.snp.makeConstraints {
-            $0.width.equalTo(44)
+            $0.width.equalTo(49)
             $0.height.equalTo(24)
         }
         betaBtn.snp.makeConstraints {
-            $0.width.equalTo(44)
+            $0.width.equalTo(49)
             $0.height.equalTo(24)
         }
         alphaBtn.snp.makeConstraints {
-            $0.width.equalTo(44)
+            $0.width.equalTo(49)
             $0.height.equalTo(24)
         }
         thetaBtn.snp.makeConstraints {
-            $0.width.equalTo(44)
+            $0.width.equalTo(49)
             $0.height.equalTo(24)
         }
         deltaBtn.snp.makeConstraints {
-            $0.width.equalTo(44)
+            $0.width.equalTo(49)
             $0.height.equalTo(24)
         }
         
@@ -316,11 +341,6 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         deltaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         deltaBtn.addTarget(self, action: #selector(deltaAction(_:)), for: .touchUpInside)
-        
-        minLabel.textColor = textColor
-        minLabel.font = UIFont.systemFont(ofSize: 12)
-        minLabel.textAlignment = .center
-        minLabel.text = minText
         
         chartView.delegate = self
         chartView.maxDataCount = 300
@@ -384,6 +404,11 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
             return
         }
         deltaEnable = !deltaEnable
+    }
+    
+    @objc
+    private func expandAction(_ sender: UIButton) {
+        self.delegate?.expandAction()
     }
  
     @objc
@@ -521,6 +546,8 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         self.btnContentView.isHidden = bIsHidden
         
     }
+    
+    
 
 }
 

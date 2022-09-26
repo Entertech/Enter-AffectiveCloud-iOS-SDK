@@ -498,17 +498,17 @@ public class HRVXValueFormatter: NSObject, AxisValueFormatter {
             var date = ""
             
             if isScaled {
-                date = String(format: "%0.1lf", value / 60.0)
+                date = String(format: "%0.1lfm", value / 60.0)
             } else {
                 axis?.entries = self.values
-                date = "\(Int(value / 60))"
+                date = "\(Int(value / 60))m"
             }
             return date
         } else {
             var time = 0
             axis?.entries = self.values
             time = Int(value) + timestamp
-            let date = chartDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            let date = chartDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))+"m"
             return date
         }
     }
