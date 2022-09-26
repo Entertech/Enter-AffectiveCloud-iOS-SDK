@@ -9,6 +9,7 @@
 import Foundation
 import Charts
 let daySeconds:Double = 86400
+let chartDateFormatter = DateFormatter()
 public class AffectiveCharts3HourValueFormatter: NSObject, AxisValueFormatter {
     private var startDate: Date?
     init(start: Date? = nil) {
@@ -24,7 +25,7 @@ public class AffectiveCharts3HourValueFormatter: NSObject, AxisValueFormatter {
             let value = lk_formatter.string(from: nData)
             return value
         }
-        return "\(Int(value / 60))"
+        return "\(Int(value / 60))m"
     }
 }
 
@@ -52,9 +53,9 @@ public class AffectiveCharts3MonthValueFormatter: NSObject, AxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        let month = originDate.getMonthAfter(month: Int(value)) ?? Date()
         
-        return "\(month.get(.month))"
+        chartDateFormatter.dateFormat = "MMM"
+        return chartDateFormatter.string(from: originDate)
         
     }
 }

@@ -469,7 +469,6 @@ public class HRVValueFormatter: NSObject, AxisValueFormatter {
 public class HRVXValueFormatter: NSObject, AxisValueFormatter {
     private var values: [Double] = [];
     private var timestamp: Int = 0
-    private let dateFormatter = DateFormatter()
     private var isScaled = false
     /// 初始化
     ///
@@ -484,14 +483,14 @@ public class HRVXValueFormatter: NSObject, AxisValueFormatter {
         
         self.timestamp = timestamp
         isScaled = false
-        dateFormatter.dateFormat = "HH:mm"
+        chartDateFormatter.dateFormat = "HH:mm"
     }
     
     public init(_ timestamp: Int = 0, _ isScaled: Bool = false) {
         self.isScaled = isScaled
         self.timestamp = timestamp
                
-        dateFormatter.dateFormat = "HH:mm"
+        chartDateFormatter.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
@@ -509,7 +508,7 @@ public class HRVXValueFormatter: NSObject, AxisValueFormatter {
             var time = 0
             axis?.entries = self.values
             time = Int(value) + timestamp
-            let date = dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            let date = chartDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
             return date
         }
     }
