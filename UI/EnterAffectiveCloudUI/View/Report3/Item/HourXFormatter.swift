@@ -53,9 +53,10 @@ public class AffectiveCharts3MonthValueFormatter: NSObject, AxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let month = originDate.getMonthAfter(month: Int(value)) ?? Date()
+        let monthValue = month.get(.month)
         
-        chartDateFormatter.dateFormat = "MMM"
-        return chartDateFormatter.string(from: originDate)
+        return Date.getMonthSymble(month: monthValue)
         
     }
 }
@@ -75,6 +76,10 @@ extension Date {
     
     func getMonthAfter(month: Int) -> Date? {
         return Calendar.current.date(byAdding: DateComponents(month:month), to: self)
+    }
+    
+    static func getMonthSymble(month: Int) -> String {
+        return Calendar.current.monthSymbols[month-1]
     }
     
     func startOfMonth() -> Date {
