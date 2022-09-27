@@ -9,13 +9,20 @@
 import UIKit
 
 public enum AverageName: String {
-    case Attention
-    case Relaxation
+    case Attention = "attention"
+    case Relaxation = "relaxation"
     case Pressure = "stress"
     case Heart = "heart rate"
     case HRV
     case Meditation = "meditation time"
     case Coherence = "coherence time"
+    case Alpha = "α wave percentage"
+    case Beta = "β wave percentage"
+    case Delta = "δ wave percentage"
+    case Theta = "θ wave percentage"
+    case Gamma = "γ wave percentage"
+    case Flow = "flow"
+    case RR = "Respiratory Rate"
 }
 
 extension AverageName {
@@ -35,71 +42,29 @@ extension AverageName {
             return "训练时长"
         case .Coherence:
             return "和谐时间"
+        case .Alpha:
+            return "α波"
+        case .Beta:
+            return "β波"
+        case .Delta:
+            return "δ波"
+        case .Theta:
+            return "θ波"
+        case .Gamma:
+            return "γ波"
+        case .Flow:
+            return "流"
+        case .RR:
+            return "呼吸波"
         }
     }
 }
 
 extension AverageName {
-    var theme: UIColor {
-        get {
-            switch self {
-            case .Attention:
-                return ColorExtension.greenPrimary
-            case .Relaxation:
-                return ColorExtension.bluePrimary
-            case .Pressure:
-                return ColorExtension.redPrimary
-            case .Heart:
-                return ColorExtension.redPrimary
-            case .HRV:
-                return ColorExtension.yellowPrimary
-            case .Meditation:
-                return ColorExtension.redPrimary
-            case .Coherence:
-                return ColorExtension.greenPrimary
-            }
-        }
-    }
     
     var textColor: UIColor {
         get {
-            switch self {
-            case .Attention:
-                return ColorExtension.green2
-            case .Relaxation:
-                return ColorExtension.blue2
-            case .Pressure:
-                return ColorExtension.red2
-            case .Heart:
-                return ColorExtension.red2
-            case .HRV:
-                return ColorExtension.yellow2
-            case .Meditation:
-                return ColorExtension.red2
-            case .Coherence:
-                return ColorExtension.green2
-            }
-        }
-    }
-    
-    var textBackground: UIColor {
-        get {
-            switch self {
-            case .Attention:
-                return ColorExtension.green5
-            case .Relaxation:
-                return ColorExtension.blue5
-            case .Pressure:
-                return ColorExtension.red5
-            case .Heart:
-                return ColorExtension.red5
-            case .HRV:
-                return ColorExtension.yellow5
-            case .Meditation:
-                return ColorExtension.red5
-            case .Coherence:
-                return ColorExtension.green5
-            }
+            return UIColor.label
         }
     }
     
@@ -120,6 +85,20 @@ extension AverageName {
                 return "min"
             case .Coherence:
                 return "min"
+            case .Alpha:
+                return "%"
+            case .Beta:
+                return "%"
+            case .Delta:
+                return "%"
+            case .Theta:
+                return "%"
+            case .Gamma:
+                return "%"
+            case .Flow:
+                return "min"
+            case .RR:
+                return "breaths/min"
             }
         }
     }
@@ -229,9 +208,10 @@ public class PrivateAverageView: UIView {
         
     }
     
-    private var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
+    public var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
         willSet {
             chart.currentBarColor = newValue
+            icon.tintColor = newValue
         }
     }
     
@@ -259,9 +239,21 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var averageNumText = "" {
+        willSet {
+            chart.averageNumLabel.text = averageNumText
+        }
+    }
+    
     private var textBgColor: UIColor = ColorExtension.bgZ2 {
         willSet {
             bgLabel.backgroundColor = newValue
+        }
+    }
+    
+    public var numTextFont: UIFont? {
+        willSet {
+            chart.numTextFont = newValue
         }
     }
     
@@ -277,7 +269,7 @@ public class PrivateAverageView: UIView {
         }
     }
     
-    private var barColor: UIColor = .white {
+    public var barColor: UIColor = .white {
         willSet {
             chart.barColor = newValue
         }
@@ -288,14 +280,12 @@ public class PrivateAverageView: UIView {
     public var categoryName: AverageName = .Meditation {
         willSet {
             chart.barColor = ColorExtension.lineLight
-            chart.numBgColor = newValue.textBackground
+            chart.numBgColor = .clear
             chart.numTextColor = newValue.textColor
             bgLabel.backgroundColor = ColorExtension.bgZ2
             chart.averageText = "Average"
             chart.lastSevenTime = "Last 7 times"
-            chart.currentBarColor = newValue.theme
-            icon.tintColor = newValue.theme
-            chart.unitText = newValue.unit
+            
         }
     }
     

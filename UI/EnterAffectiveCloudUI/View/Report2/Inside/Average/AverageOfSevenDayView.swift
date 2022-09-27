@@ -170,6 +170,12 @@ class PrivateAverageOfSevenDayView: UIView {
     
     public var numTextColor: UIColor = .white
     
+    public var numTextFont: UIFont? {
+        willSet {
+            averageNumLabel.font = numTextFont ?? UIFont.systemFont(ofSize: 20, weight: .semibold)
+        }
+    }
+    
     private var averageFloatValue:Float = 0 {
         willSet {
             averageNumLabel.text = String.init(format: "%.1f", newValue)
