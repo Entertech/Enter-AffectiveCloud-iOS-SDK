@@ -9,7 +9,6 @@
 import Foundation
 import Charts
 let daySeconds:Double = 86400
-let chartDateFormatter = DateFormatter()
 public class AffectiveCharts3HourValueFormatter: NSObject, AxisValueFormatter {
     private var startDate: Date?
     init(start: Date? = nil) {

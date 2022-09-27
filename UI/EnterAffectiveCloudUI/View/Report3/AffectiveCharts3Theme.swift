@@ -13,6 +13,7 @@ public struct AffectiveChart3Theme {
     public init() {
         
     }
+    public var language: LanguageEnum = .en
     
     public var chartName: String = ""
     
@@ -21,12 +22,6 @@ public struct AffectiveChart3Theme {
     public var chartType: AffectiveCharts3ChartType = .common
     
     public var averageValue: String = ""
-    
-    public var tagValue: String = ""
-    
-    public var tagColor: UIColor = .red
-    
-    public var tagTextColor: UIColor = .red
     
     public var startTime: TimeInterval = 0
     

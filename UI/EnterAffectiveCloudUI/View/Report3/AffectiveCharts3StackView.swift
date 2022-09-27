@@ -43,7 +43,19 @@ public class AffectiveCharts3StackView: UIView {
         return self
     }
     
-    public func setParam(theme: AffectiveChart3Theme!) -> Self {
+    public func setParam(theme: AffectiveChart3Theme!, gammaColor:UIColor, betaColor:UIColor, alphaColor:UIColor, thetaColor: UIColor, deltaColor: UIColor, disableColor: UIColor, btnBgColor: UIColor) -> Self {
+        infoView.alphaColor = alphaColor
+        infoView.gamaColor = gammaColor
+        infoView.betaColor = betaColor
+        infoView.thetaColor = thetaColor
+        infoView.deltaColor = deltaColor
+        infoView.disableColor = disableColor
+        infoView.buttonBgColor = btnBgColor
+        chartView.alphaColor = alphaColor
+        chartView.gamaColor = gammaColor
+        chartView.betaColor = betaColor
+        chartView.deltaColor = deltaColor
+        chartView.thetaColor = thetaColor
         self.theme = theme
         infoView.style = theme.style
         self.startDate = theme.startDate
@@ -60,7 +72,7 @@ public class AffectiveCharts3StackView: UIView {
         infoView.setUI(isAlreadShow: isFullScreen)
             .setLayout()
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
-        chartView.setProperty(type: theme.style, startDate: startDate)
+        chartView.setProperty(type: theme.style, startDate: startDate, color: [gammaColor, betaColor, alphaColor, thetaColor, deltaColor])
         chartView.addGestureRecognizer(pressGesture)//添加长按事件
         chartView.delegate = self
         chartView.dateSouce = infoView
@@ -68,6 +80,7 @@ public class AffectiveCharts3StackView: UIView {
             $0.leading.trailing.top.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-8)
         }
+
         return self
     }
     

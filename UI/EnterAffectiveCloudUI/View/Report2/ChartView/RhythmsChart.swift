@@ -185,8 +185,9 @@ class RhythmsChart: LineChartView {
         leftAxis.drawGridLinesEnabled = true
         leftAxis.drawAxisLineEnabled = false
         leftAxis.drawLabelsEnabled = false
+        leftAxis.drawGridLinesBehindDataEnabled = true
         leftAxis.gridColor = lowPercentColor
-        leftAxis.gridLineWidth = 1
+        leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 1
         leftAxis.gridLineDashLengths = [3,2]
         leftAxis.setLabelCount(5, force: true)
@@ -202,6 +203,7 @@ class RhythmsChart: LineChartView {
         xAxis.drawGridLinesEnabled = false
         xAxis.drawAxisLineEnabled = true
         xAxis.axisLineWidth = 1
+        xAxis.avoidFirstLastClippingEnabled = true
 
     }
     

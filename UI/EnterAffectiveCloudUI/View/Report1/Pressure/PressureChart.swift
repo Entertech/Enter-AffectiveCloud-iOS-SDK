@@ -97,10 +97,10 @@ class PressureChart: UIView {
         let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
         
         if timeStamp != 0 {
-            chartDateFormatter.dateFormat = "HH:mm"
+            lk_formatter.dateFormat = "HH:mm"
             for i in stride(from: 0, to: Int(timeCount), by: minTime) {
                 let time = i + timeStamp
-                let date = chartDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+                let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
                 timestamps.append(date)
             }
         } else {

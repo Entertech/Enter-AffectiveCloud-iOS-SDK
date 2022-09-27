@@ -17,7 +17,6 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     public let numlabel: UILabel = UILabel()
     public let unitLabel: UILabel = UILabel()
     public let timeLabel: UILabel = UILabel()
-    public let tagLabel: UILabel = UILabel()
     public let lineView = UIView()
     public let labelBg = UIView()
     private let titleFont = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -59,7 +58,6 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         labelBg.addSubview(numlabel)
         labelBg.addSubview(unitLabel)
         labelBg.addSubview(timeLabel)
-        labelBg.addSubview(tagLabel)
         
         labelBg.layer.cornerRadius = 8
         labelBg.backgroundColor = ColorExtension.bgZ2
@@ -89,15 +87,6 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         unitLabel.textColor = ColorExtension.textLv2
         unitLabel.text = theme.unitText
         unitLabel.isHidden = true
-        
-        tagLabel.frame = CGRect(x: 10, y:28, width: 45, height: 18)
-        tagLabel.font = tagFont
-        tagLabel.textAlignment = .center
-        tagLabel.backgroundColor = theme.tagColor
-        tagLabel.textColor = theme.tagTextColor
-        tagLabel.layer.cornerRadius = 9
-        tagLabel.layer.masksToBounds = true
-        tagLabel.isHidden = true
         
         timeLabel.frame = CGRect(x: 8, y: 49, width: 0, height: 14)
         timeLabel.font = timeFont
@@ -135,7 +124,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
                 }
             }
         }
-        else  if theme.tagValue.count > 0 || theme.unitText.count > 0 {
+        else if theme.unitText.count > 0 || theme.tagSeparation.count > 0 {
             numlabel.text = String.init(format: "%d", entryY)
             if theme.style == .year || theme.style == .month {
                 if entryY == 0 {
@@ -174,17 +163,9 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             }
             
         }
-        
-        let titleWidht = titleLabel.text?.width(withConstrainedHeight: 14, font: titleFont)
-        let numWidth = numlabel.text?.width(withConstrainedHeight: 28, font: numberFont)
-        let timeWidth = timeLabel.text?.width(withConstrainedHeight: 17, font: timeFont)
-        let unitWidth = unitLabel.text?.width(withConstrainedHeight: 20, font: unitFont)
-        if let numWidth = numWidth, let unitWidth = unitWidth, let timeWidth = timeWidth, let titleWidht = titleWidht {
-            titleLabel.frame.size.width = titleWidht
-            timeLabel.frame.size.width = timeWidth
-            numlabel.frame.size.width = numWidth
-            if theme.tagValue.count > 0 {
-                var tag = ""
+        if theme.tagSeparation.count > 0 {
+            var tag = ""
+            if theme.language == .en {
                 if entryY < theme.tagSeparation[1] {
                     tag = PrivateReportState.low.rawValue
                 } else if entryY > theme.tagSeparation[2] {
@@ -192,15 +173,32 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
                 } else {
                     tag = PrivateReportState.nor.rawValue
                 }
-                tagLabel.text = tag
-                tagLabel.frame = CGRect(x: 8+numWidth+4, y: 28, width: 45, height: 18)
-                tagLabel.isHidden = false
+            } else {
+                if entryY < theme.tagSeparation[1] {
+                    tag = PrivateReportState.low.ch
+                } else if entryY > theme.tagSeparation[2] {
+                    tag = PrivateReportState.high.ch
+                } else {
+                    tag = PrivateReportState.nor.ch
+                }
             }
+            unitLabel.text = "(\(tag))"
+
+        }
+        
+        let titleWidht = titleLabel.text?.width(withConstrainedHeight: 14, font: titleFont)
+        let numWidth = numlabel.text?.width(withConstrainedHeight: 28, font: numberFont)
+        let timeWidth = timeLabel.text?.width(withConstrainedHeight: 17, font: timeFont)
+        let unitWidth = unitLabel.text?.width(withConstrainedHeight: 20, font: unitFont)
+        if let numWidth = numWidth, let timeWidth = timeWidth, let titleWidht = titleWidht, let unitWidth = unitWidth {
+            titleLabel.frame.size.width = titleWidht
+            timeLabel.frame.size.width = timeWidth
+            numlabel.frame.size.width = numWidth
+
             
             if theme.unitText.count > 0{
                 unitLabel.frame = CGRect(x: 8+numWidth+2, y: 27, width: unitWidth, height: 21)
                 unitLabel.isHidden = false
-
             }
             let maxWidth = timeWidth > titleWidht ? timeWidth : titleWidht
             if numWidth+unitWidth+2 > maxWidth {

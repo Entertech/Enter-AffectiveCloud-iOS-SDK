@@ -12,11 +12,6 @@ public protocol AffectiveCharts3ExpandRhythmProtocol: AnyObject {
 }
 
 class AffectiveCharts3ExpandRhythmView: UIView {
-    public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
-    public var betaColor = UIColor.colorWithHexString(hexColor: "#58B9E0")
-    public var alphaColor = UIColor.colorWithHexString(hexColor: "#F7C77E")
-    public var thetaColor = UIColor.colorWithHexString(hexColor: "#5FC695")
-    public var deltaColor = UIColor.colorWithHexString(hexColor: "#5E75FF")
 
     public weak var delegate: AffectiveCharts3ExpandRhythmProtocol?
     public weak var expandDelegate: AffectiveCharts3ExpandDelegate?
@@ -26,6 +21,7 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             switch style {
             case .session:
                 title = "Average Percentage".uppercased()
+                expandBtn.isHidden = true
             case .month:
                 title = "Daily Average Percentage".uppercased()
                 expandBtn.isHidden = true
@@ -38,69 +34,92 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     }
     private var isNotShowExpand = true
     private var lines = 31
+    
+    public var buttonBgColor = UIColor.white {
+        willSet {
+            gamaBtn.backgroundColor = newValue
+            betaBtn.backgroundColor = newValue
+            alphaBtn.backgroundColor = newValue
+            thetaBtn.backgroundColor = newValue
+            deltaBtn.backgroundColor = newValue
+        }
+    }
+    
+    public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
+        willSet {
+            gamaBtn.setTitleColor(newValue, for: .selected)
+            infoView.gammaColor = newValue
+        }
+    }
+    public var betaColor = UIColor.colorWithHexString(hexColor: "#58B9E0") {
+        willSet {
+            betaBtn.setTitleColor(newValue, for: .selected)
+            infoView.betaColor = newValue
+        }
+    }
+    public var alphaColor = UIColor.colorWithHexString(hexColor: "#F7C77E") {
+        willSet {
+            alphaBtn.setTitleColor(newValue, for: .selected)
+            infoView.alphaColor = newValue
+        }
+    }
+    public var thetaColor = UIColor.colorWithHexString(hexColor: "#5FC695") {
+        willSet {
+            thetaBtn.setTitleColor(newValue, for: .selected)
+            infoView.thetaColor = newValue
+        }
+    }
+    public var deltaColor = UIColor.colorWithHexString(hexColor: "#5E75FF") {
+        willSet {
+            deltaBtn.setTitleColor(newValue, for: .selected)
+            infoView.deltaColor = newValue
+        }
+    }
+    
+    
+    public var disableColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
+        willSet {
+            
+            gamaBtn.setTitleColor(newValue, for: .normal)
+            betaBtn.setTitleColor(newValue, for: .normal)
+            alphaBtn.setTitleColor(newValue, for: .normal)
+            thetaBtn.setTitleColor(newValue, for: .normal)
+            deltaBtn.setTitleColor(newValue, for: .normal)
+        }
+    }
+    
     /// 伽马线是否可用
     public lazy var gamaEnable: Bool = true {
         willSet {
-            if newValue {
-                gamaBtn.setImage(UIImage.loadImage(name: "icon_choose_red", any: classForCoder), for: .normal)
-             
-            } else {
-                
-                gamaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_red", any: classForCoder), for: .normal)
-                
-            }
+            gamaBtn.isSelected = newValue
         }
     }
 
     /// beta线是否可用
     public lazy var betaEnable: Bool = true {
         willSet {
-            if newValue {
-                betaBtn.setImage(UIImage.loadImage(name: "icon_choose_cyan", any: classForCoder), for: .normal)
-                
-            } else {
-                betaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_cyan", any: classForCoder), for: .normal)
-                
-            }
+            betaBtn.isSelected = newValue
         }
     }
 
     /// alpha线是否可用
     public lazy var alphaEnable: Bool = true {
         willSet {
-            if newValue {
-                alphaBtn.setImage(UIImage.loadImage(name: "icon_choose_yellow", any: classForCoder), for: .normal)
-                
-            } else {
-                alphaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_yellow", any: classForCoder), for: .normal)
-               
-            }
+            alphaBtn.isSelected = newValue
         }
     }
 
     /// theta线是否可用
     public lazy var thetaEnable: Bool = true {
         willSet {
-            if newValue {
-                thetaBtn.setImage(UIImage.loadImage(name: "icon_choose_green", any: classForCoder), for: .normal)
-            
-            } else {
-                thetaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_green", any: classForCoder), for: .normal)
-               
-            }
+            thetaBtn.isSelected = newValue
         }
     }
 
     /// delta线是否可用
     public lazy var deltaEnable: Bool = true {
         willSet {
-            if newValue {
-                deltaBtn.setImage(UIImage.loadImage(name: "icon_choose_blue", any: classForCoder), for: .normal)
-             
-            } else {
-                deltaBtn.setImage(UIImage.loadImage(name: "icon_unchoose_blue", any: classForCoder), for: .normal)
-                
-            }
+            deltaBtn.isSelected = newValue
         }
     }
 
@@ -124,11 +143,11 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         return count
     }
 
-    private let gamaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
-    private let betaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
-    private let alphaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
-    private let thetaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
-    private let deltaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 24))
+    private let gamaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 49, height: 24))
+    private let betaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 49, height: 24))
+    private let alphaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 49, height: 24))
+    private let thetaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 49, height: 24))
+    private let deltaBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 49, height: 24))
     private let btnContentView = UIStackView()
 
     private let expandBtn = UIButton()
@@ -188,12 +207,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             let time = lk_formatter.string(from: dateFrom)
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
         } else {
-            lk_formatter.dateFormat = style.fromFormat
-            let fromText = lk_formatter.string(from: dateFrom)
-            lk_formatter.dateFormat = style.toFormat
-            let dateTo = Date(timeIntervalSince1970: round(timeTo))
-            let toText = lk_formatter.string(from: dateTo)
-            let time = fromText + toText
+//            lk_formatter.dateFormat = style.fromFormat
+//            let fromText = lk_formatter.string(from: dateFrom)
+//            lk_formatter.dateFormat = style.toFormat
+//            let dateTo = Date(timeIntervalSince1970: round(timeTo))
+//            let toText = lk_formatter.string(from: dateTo)
+            let time = ""
             _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
         }
     }
@@ -204,53 +223,33 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public func setUI(isAlreadShow: Bool) -> Self {
         isNotShowExpand = !isAlreadShow
         backgroundColor = .clear
-        gamaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         gamaBtn.setTitle("γ", for: .normal)
-        gamaBtn.setTitleColor(gamaColor, for: .normal)
         gamaBtn.layer.cornerRadius = 12
         gamaBtn.adjustsImageWhenHighlighted = false
-        gamaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
 
-        betaBtn.backgroundColor = betaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
-        betaBtn.setTitleColor(betaColor, for: .normal)
         betaBtn.layer.cornerRadius = 12
         betaBtn.adjustsImageWhenHighlighted = false
-        betaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         betaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         betaBtn.addTarget(self, action: #selector(betaAction(_:)), for: .touchUpInside)
 
-        alphaBtn.backgroundColor = alphaColor.changeAlpha(to: 0.2)
         alphaBtn.setTitle("α", for: .normal)
-        alphaBtn.setTitleColor(alphaColor, for: .normal)
         alphaBtn.layer.cornerRadius = 12
         alphaBtn.adjustsImageWhenHighlighted = false
-        alphaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         alphaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         alphaBtn.addTarget(self, action: #selector(alphaAction(_:)), for: .touchUpInside)
 
-        thetaBtn.backgroundColor = thetaColor.changeAlpha(to: 0.2)
         thetaBtn.setTitle("θ", for: .normal)
-        thetaBtn.setTitleColor(thetaColor, for: .normal)
         thetaBtn.layer.cornerRadius = 12
         thetaBtn.adjustsImageWhenHighlighted = false
-        thetaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         thetaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         thetaBtn.addTarget(self, action: #selector(thetaAction(_:)), for: .touchUpInside)
 
-        deltaBtn.backgroundColor = deltaColor.changeAlpha(to: 0.2)
         deltaBtn.setTitle("δ", for: .normal)
-        deltaBtn.setTitleColor(deltaColor, for: .normal)
         deltaBtn.layer.cornerRadius = 12
         deltaBtn.adjustsImageWhenHighlighted = false
-        deltaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         deltaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         deltaBtn.addTarget(self, action: #selector(deltaAction(_:)), for: .touchUpInside)
 
@@ -262,8 +261,28 @@ class AffectiveCharts3ExpandRhythmView: UIView {
         btnContentView.addArrangedSubview(deltaBtn)
         btnContentView.axis = .horizontal
         btnContentView.backgroundColor = .clear
-        btnContentView.distribution = .fillEqually
-        btnContentView.spacing = (UIScreen.main.bounds.width - 64 - 44 * 5) / 4
+        btnContentView.distribution = .equalSpacing
+        gamaBtn.snp.makeConstraints {
+            $0.width.equalTo(49)
+            $0.height.equalTo(24)
+        }
+        betaBtn.snp.makeConstraints {
+            $0.width.equalTo(49)
+            $0.height.equalTo(24)
+        }
+        alphaBtn.snp.makeConstraints {
+            $0.width.equalTo(49)
+            $0.height.equalTo(24)
+        }
+        thetaBtn.snp.makeConstraints {
+            $0.width.equalTo(49)
+            $0.height.equalTo(24)
+        }
+        deltaBtn.snp.makeConstraints {
+            $0.width.equalTo(49)
+            $0.height.equalTo(24)
+        }
+        
         // btnContentView.translatesAutoresizingMaskIntoConstraints = false
 
         if isNotShowExpand {
@@ -452,6 +471,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         timeLabel.font = textFont
 
         gammaImage.image = UIImage.loadImage(name: "gamma", any: classForCoder)
+        gammaImage.tintColor = gammaColor
         gammaNumLabel.textColor = gammaColor
         gammaNumLabel.font = numFont
         gammaNumLabel.text = "--"
@@ -463,6 +483,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         split1.layer.masksToBounds = true
 
         betaImage.image = UIImage.loadImage(name: "beta", any: classForCoder)
+        betaImage.tintColor = betaColor
         betaNumLabel.textColor = betaColor
         betaNumLabel.font = numFont
         betaNumLabel.text = "--"
@@ -474,6 +495,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         split2.layer.masksToBounds = true
 
         alphaImage.image = UIImage.loadImage(name: "alpha", any: classForCoder)
+        alphaImage.tintColor = alphaColor
         alphaNumLabel.textColor = alphaColor
         alphaNumLabel.font = numFont
         alphaNumLabel.text = "--"
@@ -485,6 +507,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         split3.layer.masksToBounds = true
 
         thetaImage.image = UIImage.loadImage(name: "theta", any: classForCoder)
+        thetaImage.tintColor = thetaColor
         thetaNumLabel.textColor = thetaColor
         thetaNumLabel.font = numFont
         thetaNumLabel.text = "--"
@@ -496,6 +519,7 @@ class AffectiveCharts3RhythmsInfoView: UIView {
         split4.layer.masksToBounds = true
 
         deltaImage.image = UIImage.loadImage(name: "delta", any: classForCoder)
+        deltaImage.tintColor = deltaColor
         deltaNumLabel.textColor = deltaColor
         deltaNumLabel.font = numFont
         deltaNumLabel.text = "--"

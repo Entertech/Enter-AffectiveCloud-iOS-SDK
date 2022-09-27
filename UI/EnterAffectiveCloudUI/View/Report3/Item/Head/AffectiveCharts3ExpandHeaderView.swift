@@ -25,6 +25,7 @@ class AffectiveCharts3ExpandHeaderView: UIView {
         switch self.theme.style {
         case .session:
             title = theme.chartType.session
+            expandBtn.isHidden = true
         case .month:
             title = theme.chartType.month
             expandBtn.isHidden = true
@@ -38,7 +39,6 @@ class AffectiveCharts3ExpandHeaderView: UIView {
             .setAverageNumLabel(value: theme.averageValue, color: theme.themeColor)
             .setUnit(theme.unitText)
             .setTime(from: theme.startTime, to: theme.endTime, startFormatter: theme.style.fromFormat, endFormatter: theme.style.toFormat)
-            .setTag(theme.tagValue, fontColor: theme.tagTextColor, bgColor: theme.tagColor)
             .build()
         return self
     }
@@ -97,14 +97,25 @@ extension AffectiveCharts3ExpandHeaderView: AffectiveCharts3ChartChanged {
             }
         } else if self.theme.chartType == .common && self.theme.tagSeparation.count > 3 {
             var tag = ""
-            if single > theme.tagSeparation[2] {
-                tag = PrivateReportState.high.rawValue
-            } else if single > theme.tagSeparation[1] {
-                tag = PrivateReportState.nor.rawValue
+            if theme.language == .en {
+                if single > theme.tagSeparation[2] {
+                    tag = PrivateReportState.high.rawValue
+                } else if single > theme.tagSeparation[1] {
+                    tag = PrivateReportState.nor.rawValue
+                } else {
+                    tag = PrivateReportState.low.rawValue
+                }
             } else {
-                tag = PrivateReportState.low.rawValue
+                if single > theme.tagSeparation[2] {
+                    tag = PrivateReportState.high.ch
+                } else if single > theme.tagSeparation[1] {
+                    tag = PrivateReportState.nor.ch
+                } else {
+                    tag = PrivateReportState.low.ch
+                }
             }
-            self.infoView.reSetTag(tag)
+
+            self.infoView.update(unit: "(\(tag))")
             
         }
         if self.theme.style == .month || self.theme.style == .year {
@@ -125,7 +136,6 @@ class AffectiveCharts3HeaderInfoView: UIView {
     public let averageNumLabel = UILabel()
     private let unitLabel = UILabel()
     private let timeLabel = UILabel()
-    private let tagLabel = UILabel()
     private var labelColor: UIColor = .label
     private var type: AffectiveCharts3FormatOptional = .session
     override init(frame: CGRect) {
@@ -158,7 +168,7 @@ class AffectiveCharts3HeaderInfoView: UIView {
     
     func setTime(from: TimeInterval, to: TimeInterval, startFormatter: String, endFormatter: String) -> Self {
         let dateFrom = Date.init(timeIntervalSince1970: round(from))
-        let dateTo = Date.init(timeIntervalSince1970: round(to))
+//        let dateTo = Date.init(timeIntervalSince1970: round(to))
         if type == .month && Calendar.current.component(.day, from: dateFrom) == 1 {
             let str = "MMM yyyy"
             lk_formatter.dateFormat = str
@@ -174,12 +184,12 @@ class AffectiveCharts3HeaderInfoView: UIView {
             timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             timeLabel.textColor = labelColor
         } else {
-            lk_formatter.dateFormat = startFormatter
-            timeLabel.text = lk_formatter.string(from: dateFrom)
-            lk_formatter.dateFormat = endFormatter
-            timeLabel.text = "\(timeLabel.text ?? "")\(lk_formatter.string(from: dateTo))"
-            timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-            timeLabel.textColor = labelColor
+//            lk_formatter.dateFormat = startFormatter
+//            timeLabel.text = lk_formatter.string(from: dateFrom)
+//            lk_formatter.dateFormat = endFormatter
+//            timeLabel.text = "\(timeLabel.text ?? "")\(lk_formatter.string(from: dateTo))"
+//            timeLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+//            timeLabel.textColor = labelColor
         }
         return self
     }
@@ -206,28 +216,12 @@ class AffectiveCharts3HeaderInfoView: UIView {
         return self
     }
     
-    func setTag(_ tag: String?, fontColor: UIColor, bgColor: UIColor) -> Self{
-        tagLabel.text = tag
-        tagLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-        tagLabel.textColor = fontColor
-        tagLabel.backgroundColor = bgColor
-        tagLabel.textAlignment = .center
-        
-    
-        return self
-    }
-    
-    func reSetTag(_ tag: String) {
-        tagLabel.text = tag
-    }
-    
     func build() {
         self.backgroundColor = .clear
         self.addSubview(averageLabel)
         self.addSubview(averageNumLabel)
         self.addSubview(unitLabel)
         self.addSubview(timeLabel)
-        self.addSubview(tagLabel)
         
         averageLabel.snp.makeConstraints {
             $0.height.equalTo(14)
@@ -249,19 +243,7 @@ class AffectiveCharts3HeaderInfoView: UIView {
         } else {
             unitLabel.isHidden = true
         }
-        tagLabel.snp.makeConstraints {
-            $0.height.equalTo(18)
-            $0.width.equalTo(48)
-            $0.bottom.equalTo(averageNumLabel.snp.bottom)
-            $0.leading.equalTo(averageNumLabel.snp.trailing).offset(4)
-        }
-        tagLabel.layer.cornerRadius = 9
-        tagLabel.layer.masksToBounds = true
-        if let text = tagLabel.text, text.count > 0 {
-            
-        } else {
-            tagLabel.isHidden = true
-        }
+
         timeLabel.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.height.equalTo(14)
@@ -273,8 +255,8 @@ class AffectiveCharts3HeaderInfoView: UIView {
         averageNumLabel.text = "\(value)"
     }
     
-    func update(tag: String) {
-        tagLabel.text = tag
+    func update(unit: String) {
+        unitLabel.text = unit
     }
     
     func update(date: String?) {

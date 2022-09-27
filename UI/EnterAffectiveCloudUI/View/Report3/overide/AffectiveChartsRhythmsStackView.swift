@@ -16,7 +16,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
     var lastXValue: Double = 0
     weak var dateSouce: AffectiveCharts3ChartChanged?
     
-    public func setProperty(type: AffectiveCharts3FormatOptional, startDate: Date) {
+    public func setProperty(type: AffectiveCharts3FormatOptional, startDate: Date, color: [UIColor]) {
         self.style = type
         switch type {
         case .session:
@@ -30,6 +30,12 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             interval = 1
         }
         self.startDate = startDate
+        guard color.count > 4 else {return}
+        self.gamaColor = color[0]
+        self.betaColor = color[1]
+        self.alphaColor = color[2]
+        self.thetaColor = color[3]
+        self.deltaColor = color[4]
         initChart()
     }
     override func initChart() {
@@ -262,9 +268,10 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         } else if let value = deltaArray {
             ref.append(contentsOf: value)
         }
+        let lineColor = [gamaColor, betaColor, alphaColor, thetaColor, deltaColor]
         switch style {
         case .session:
-            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables, with: lineColor)
                 .setTime(start: startDate.timeIntervalSince1970, format: style.format)
                 .setRef(value: ref)
                 .setProperty(sample: sample, interval: interval, usePercent: true)
@@ -272,7 +279,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             self.marker = markerView
             markerView.chartView = self
         case .month:
-            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables, with: lineColor)
                 .setMonth(month: startDate, format: style.format)
                 .setRef(value: ref)
                 .setProperty(sample: sample, interval: interval, usePercent: true)
@@ -281,7 +288,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             markerView.chartView = self
             self.setVisibleXRangeMaximum(31)
         case .year:
-            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables)
+            let markerView = AffectiveCharts3RhythmsMarker(title: markerTitle, enableLines: lineEnables, with: lineColor)
                 .setYear(year: startDate, format: style.format)
                 .setRef(value: ref)
                 .setProperty(sample: sample, interval: interval, usePercent: true)

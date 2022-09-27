@@ -547,14 +547,14 @@ public class AttentionPrivateXValueFormatter: NSObject, AxisValueFormatter {
         
         self.timestamp = timestamp
         isScaled = false
-        chartDateFormatter.dateFormat = "HH:mm"
+        lk_formatter.dateFormat = "HH:mm"
     }
     
     public init(_ timestamp: Int = 0, _ isScaled: Bool = false) {
         self.isScaled = isScaled
         self.timestamp = timestamp
                
-        chartDateFormatter.dateFormat = "HH:mm"
+        lk_formatter.dateFormat = "HH:mm"
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
@@ -572,7 +572,7 @@ public class AttentionPrivateXValueFormatter: NSObject, AxisValueFormatter {
             var time = 0
             axis?.entries = self.values
             time = Int(value) + timestamp
-            let date = chartDateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
             return date
         }
     }

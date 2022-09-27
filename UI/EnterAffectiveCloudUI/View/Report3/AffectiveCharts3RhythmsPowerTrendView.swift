@@ -31,6 +31,12 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         }
     }
     
+    public var bgColor = UIColor.white {
+        willSet {
+            self.backgroundColor = newValue
+        }
+    }
+    
     public var gamaColor = UIColor.colorWithHexString(hexColor: "#FF6682") {
         willSet {
             gamaBtn.setTitleColor(newValue, for: .selected)
@@ -71,7 +77,6 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
             alphaBtn.setTitleColor(newValue, for: .normal)
             thetaBtn.setTitleColor(newValue, for: .normal)
             deltaBtn.setTitleColor(newValue, for: .normal)
-            chartView.gamaColor = newValue
         }
     }
 
@@ -164,6 +169,8 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
             }
         }
     }
+    
+
     
     /// 标题
     public var title: String = "Rhythms Power Trend" {
@@ -292,53 +299,38 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
             $0.height.equalTo(24)
         }
         
-        gamaBtn.backgroundColor = gamaColor.changeAlpha(to: 0.2)
         gamaBtn.setTitle("γ", for: .normal)
         gamaBtn.setTitleColor(gamaColor, for: .normal)
         gamaBtn.layer.cornerRadius = 12
         gamaBtn.adjustsImageWhenHighlighted = false
-        gamaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        gamaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         gamaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         gamaBtn.addTarget(self, action: #selector(gamaAction(_:)), for: .touchUpInside)
         
-        betaBtn.backgroundColor = betaColor.changeAlpha(to: 0.2)
         betaBtn.setTitle("β", for: .normal)
         betaBtn.setTitleColor(betaColor, for: .normal)
         betaBtn.layer.cornerRadius = 12
         betaBtn.adjustsImageWhenHighlighted = false
-        betaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        betaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         betaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         betaBtn.addTarget(self, action: #selector(betaAction(_:)), for: .touchUpInside)
         
-        alphaBtn.backgroundColor = alphaColor.changeAlpha(to: 0.2)
         alphaBtn.setTitle("α", for: .normal)
         alphaBtn.setTitleColor(alphaColor, for: .normal)
         alphaBtn.layer.cornerRadius = 12
         alphaBtn.adjustsImageWhenHighlighted = false
-        alphaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        alphaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         alphaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         alphaBtn.addTarget(self, action: #selector(alphaAction(_:)), for: .touchUpInside)
         
-        thetaBtn.backgroundColor = thetaColor.changeAlpha(to: 0.2)
         thetaBtn.setTitle("θ", for: .normal)
         thetaBtn.setTitleColor(thetaColor, for: .normal)
         thetaBtn.layer.cornerRadius = 12
         thetaBtn.adjustsImageWhenHighlighted = false
-        thetaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        thetaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         thetaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         thetaBtn.addTarget(self, action: #selector(thetaAction(_:)), for: .touchUpInside)
         
-        deltaBtn.backgroundColor = deltaColor.changeAlpha(to: 0.2)
         deltaBtn.setTitle("δ", for: .normal)
         deltaBtn.setTitleColor(deltaColor, for: .normal)
         deltaBtn.layer.cornerRadius = 12
         deltaBtn.adjustsImageWhenHighlighted = false
-        deltaBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-        deltaBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: -3)
         deltaBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         deltaBtn.addTarget(self, action: #selector(deltaAction(_:)), for: .touchUpInside)
         
@@ -348,8 +340,7 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
        
         btnContentView.alignment = .fill
         btnContentView.axis = .horizontal
-        btnContentView.distribution = .fill
-        btnContentView.spacing = (UIScreen.main.bounds.width - 64 - 44*5)/4
+        btnContentView.distribution = .equalSpacing
         //btnContentView.translatesAutoresizingMaskIntoConstraints = false
         chartHead.titleText = title
         chartHead.image = UIImage.loadImage(name: "brainwave", any: classForCoder)
@@ -357,8 +348,6 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
         let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
         chartView.addGestureRecognizer(pressGesture)//添加长按事件
 
-        headImage.image = UIImage.loadImage(name: "type_blue_yellow", any: classForCoder)
-        headImage.contentMode = .scaleAspectFill
 
 
     }
