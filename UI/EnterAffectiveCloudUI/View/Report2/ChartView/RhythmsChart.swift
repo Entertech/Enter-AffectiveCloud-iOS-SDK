@@ -198,7 +198,7 @@ class RhythmsChart: LineChartView {
         xAxis.labelPosition = .bottom
         xAxis.axisLineColor = highPercentColor
         xAxis.labelTextColor = midPercentColor
-        xAxis.axisMaxLabels = 8
+        xAxis.axisMaxLabels = 6
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         xAxis.drawGridLinesEnabled = false
         xAxis.drawAxisLineEnabled = true
@@ -423,21 +423,14 @@ class RhythmsChart: LineChartView {
     }
     
     
-    private var timeApart: [Int] = []
     private func setLimitLine(_ valueCount: Int) {
         guard valueCount > 1 else {
             return
         }
-        let timeCount = Double(valueCount * sample) * interval
-        let minTime = (Int(timeCount) / 60 / 8 + 1) * 60
-        
-        for i in stride(from: 0, to: Int(timeCount), by: minTime) {
-            timeApart.append(i)
-        }
         
         self.setVisibleXRangeMinimum(20) //限制屏幕最少显示100个点
         //self.chartView?.leftAxis.valueFormatter = YValueFormatter(values: yLabels)
-        self.xAxis.valueFormatter = HRVXValueFormatter(timeApart, timeStamp)
+        self.xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
     }
 
 }
