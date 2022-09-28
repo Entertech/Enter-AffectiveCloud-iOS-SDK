@@ -221,6 +221,12 @@ public class PrivateAverageView: UIView {
         }
     }
     
+    public var unitTextColor: UIColor = .gray {
+        willSet {
+            chart.unitLabel.textColor = newValue
+        }
+    }
+    
     public var lastSevenTime = "Last 7 times" {
         willSet {
             chart.lastSevenTime = newValue
@@ -241,7 +247,7 @@ public class PrivateAverageView: UIView {
     
     public var averageNumText = "" {
         willSet {
-            chart.averageNumLabel.text = averageNumText
+            chart.averageNumLabel.text = newValue
         }
     }
     
@@ -285,7 +291,7 @@ public class PrivateAverageView: UIView {
             bgLabel.backgroundColor = ColorExtension.bgZ2
             chart.averageText = "Average"
             chart.lastSevenTime = "Last 7 times"
-            
+            chart.unitText = newValue.unit
         }
     }
     
