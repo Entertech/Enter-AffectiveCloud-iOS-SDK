@@ -20,7 +20,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     public let lineView = UIView()
     public let labelBg = UIView()
     private let titleFont = UIFont.systemFont(ofSize: 12, weight: .regular)
-    private let numberFont = UIFont(name: "SFProRounded-Bold", size: 24)
+    private let numberFont = UIFont(name: "SFProRounded-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24, weight: .bold)
     private let unitFont = UIFont.systemFont(ofSize: 14, weight: .regular)
     private let tagFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
     private let timeFont = UIFont.systemFont(ofSize: 12, weight: .regular)
