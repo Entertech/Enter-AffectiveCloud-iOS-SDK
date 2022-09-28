@@ -27,6 +27,7 @@ class AffectiveCharts3RhythmsMarker: MarkerView {
     private var yearStart: Date!
     private var title: String = ""
     private var ref: [Double] = []
+    
     init(title: String, enableLines: Int, with: [UIColor]) {
         super.init(frame: CGRect.zero)
         self.enableLines = enableLines

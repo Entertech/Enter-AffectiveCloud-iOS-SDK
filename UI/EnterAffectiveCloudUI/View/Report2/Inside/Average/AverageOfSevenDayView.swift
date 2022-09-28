@@ -172,7 +172,7 @@ class PrivateAverageOfSevenDayView: UIView {
     
     public var numTextFont: UIFont? {
         willSet {
-            averageNumLabel.font = numTextFont ?? UIFont.systemFont(ofSize: 20, weight: .semibold)
+            averageNumLabel.font = newValue ?? UIFont(name: "SFProRounded-Bold", size: 24)
         }
     }
     

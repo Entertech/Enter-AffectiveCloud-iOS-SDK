@@ -161,7 +161,7 @@ class AffectiveCharts3HeaderInfoView: UIView {
     func setAverageNumLabel(value: String, color: UIColor) -> Self {
         averageNumLabel.text = value
         averageNumLabel.textColor = color
-        averageNumLabel.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        averageNumLabel.font = UIFont(name: "SFProRounded-Bold", size: 24)
         return self
     }
     

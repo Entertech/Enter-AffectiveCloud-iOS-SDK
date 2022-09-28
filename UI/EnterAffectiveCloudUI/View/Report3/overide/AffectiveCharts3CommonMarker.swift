@@ -20,10 +20,11 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     public let lineView = UIView()
     public let labelBg = UIView()
     private let titleFont = UIFont.systemFont(ofSize: 12, weight: .regular)
-    private let numberFont = UIFont.systemFont(ofSize: 28, weight: .semibold)
+    private let numberFont = UIFont(name: "SFProRounded-Bold", size: 24)
     private let unitFont = UIFont.systemFont(ofSize: 14, weight: .regular)
     private let tagFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
     private let timeFont = UIFont.systemFont(ofSize: 12, weight: .regular)
+    private let lightTextColor = UIColor.colorWithHexString(hexColor: "080A0E").changeAlpha(to: 0.5)
     private let lableViewHeight: CGFloat = 66
     private var theme: AffectiveChart3Theme!
     private var anotherArray: [Int] = []
@@ -67,7 +68,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         titleLabel.textAlignment = .left
         titleLabel.font = titleFont
         titleLabel.lineBreakMode = .byWordWrapping
-        titleLabel.textColor = ColorExtension.textLv2
+        titleLabel.textColor = lightTextColor
         
         if theme.style == .month {
             titleLabel.text = "Daily Average".uppercased()
@@ -84,7 +85,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         
         unitLabel.frame = CGRect(x: 10, y: 27, width: 0, height: 21)
         unitLabel.font = unitFont
-        unitLabel.textColor = ColorExtension.textLv2
+        unitLabel.textColor = lightTextColor
         unitLabel.text = theme.unitText
         unitLabel.isHidden = true
         
