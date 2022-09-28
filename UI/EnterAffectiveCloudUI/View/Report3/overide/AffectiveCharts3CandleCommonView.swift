@@ -68,8 +68,8 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         self.xAxis.gridLineWidth = 0.5
         self.xAxis.gridLineCap = .round
         self.xAxis.gridLineDashLengths = [2.0, 4.0]
-        self.xAxis.axisLineColor = ColorExtension.lineHard
-        self.xAxis.axisLineWidth = 1
+        self.xAxis.axisLineColor = ColorExtension.lineLight
+        self.xAxis.axisLineWidth = 0.5
         self.xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         self.xAxis.labelPosition = .bottom
         self.xAxis.granularity = 1

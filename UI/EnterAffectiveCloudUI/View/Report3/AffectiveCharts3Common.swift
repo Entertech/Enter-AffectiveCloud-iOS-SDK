@@ -69,8 +69,8 @@ public class AffectiveCharts3LineCommonView: UIView {
         chartView.xAxis.gridLineWidth = 0.5
         chartView.xAxis.gridLineCap = .round
         chartView.xAxis.gridLineDashLengths = [2.0, 4.0]
-        chartView.xAxis.axisLineColor = ColorExtension.lineHard
-        chartView.xAxis.axisLineWidth = 1
+        chartView.xAxis.axisLineColor = ColorExtension.lineLight
+        chartView.xAxis.axisLineWidth = 0.5
         
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom

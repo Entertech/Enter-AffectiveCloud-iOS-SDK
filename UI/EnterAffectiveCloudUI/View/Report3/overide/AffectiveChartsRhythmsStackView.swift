@@ -74,7 +74,8 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         xAxis.labelPosition = .bottom
         xAxis.gridColor = ColorExtension.lineLight
         xAxis.labelTextColor = ColorExtension.textLv2
-        xAxis.axisLineColor = ColorExtension.lineHard
+        xAxis.axisLineColor = ColorExtension.lineLight
+        xAxis.axisLineWidth = 0.5
         xAxis.axisMaxLabels = 8
         xAxis.labelFont = UIFont.systemFont(ofSize: 12)
         xAxis.drawGridLinesBehindDataEnabled = false
@@ -83,7 +84,6 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         xAxis.gridLineWidth = 0.5
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
-        xAxis.axisLineWidth = 1
         
         switch style {
         case .session:
