@@ -83,7 +83,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         numlabel.font = numberFont
         numlabel.textColor = theme.themeColor
         
-        unitLabel.frame = CGRect(x: 10, y: 27, width: 0, height: 21)
+        unitLabel.frame = CGRect(x: 10, y: 23, width: 0, height: 21)
         unitLabel.font = unitFont
         unitLabel.textColor = lightTextColor
         unitLabel.text = theme.unitText
