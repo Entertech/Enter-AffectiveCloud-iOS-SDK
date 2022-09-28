@@ -230,11 +230,11 @@ class AffectiveCharts3HeaderInfoView: UIView {
         averageNumLabel.snp.makeConstraints {
             $0.height.equalTo(28)
             $0.leading.equalToSuperview()
-            $0.top.equalTo(averageLabel.snp.bottom)
+            $0.top.equalTo(averageLabel.snp.bottom).offset(2)
         }
         unitLabel.snp.makeConstraints {
             $0.height.equalTo(21)
-            $0.bottom.equalTo(averageNumLabel.snp.bottom)
+            $0.bottom.equalTo(averageNumLabel.snp.bottom).offset(-2)
             $0.leading.equalTo(averageNumLabel.snp.trailing).offset(2)
 
         }
