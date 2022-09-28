@@ -14,7 +14,7 @@ public enum PrivateReportState: String {
     case high
 }
 
-extension PrivateReportState {
+public extension PrivateReportState {
     var ch: String {
         switch self {
         case .nor:

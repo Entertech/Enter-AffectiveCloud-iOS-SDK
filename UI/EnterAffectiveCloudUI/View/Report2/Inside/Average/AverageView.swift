@@ -25,7 +25,7 @@ public enum AverageName: String {
     case RR = "Respiratory Rate"
 }
 
-extension AverageName {
+public extension AverageName {
     var ch: String {
         switch self {
         case .Attention:
