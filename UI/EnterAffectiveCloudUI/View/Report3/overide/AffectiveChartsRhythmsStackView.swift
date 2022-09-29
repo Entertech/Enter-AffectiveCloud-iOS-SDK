@@ -65,7 +65,6 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         leftAxis.axisMinimum = 0
         leftAxis.labelFont = UIFont.systemFont(ofSize: 12)
         leftAxis.labelTextColor = ColorExtension.textLv2
-        leftAxis.setLabelCount(5, force: true)
         leftAxis.valueFormatter = AffectiveCharts3PercentFormatter()
         self.rightAxis.enabled = false
         
@@ -84,7 +83,7 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         xAxis.gridLineWidth = 0.5
         xAxis.gridLineDashPhase = 1
         xAxis.gridLineDashLengths = [3, 2]
-        
+        xAxis.avoidFirstLastClippingEnabled = true
         switch style {
         case .session:
             self.dragEnabled = false

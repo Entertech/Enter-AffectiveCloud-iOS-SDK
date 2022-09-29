@@ -140,7 +140,6 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 1
         leftAxis.gridLineDashLengths = [3, 2]
-        leftAxis.setLabelCount(5, force: true)
         self.rightAxis.enabled = false
         
         let xAxis = self.xAxis
@@ -158,7 +157,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         xAxis.gridLineDashLengths = [3, 2]
         xAxis.axisLineWidth = 1
         xAxis.valueFormatter = AffectiveCharts3HourValueFormatter()
-
+        xAxis.avoidFirstLastClippingEnabled = true
     }
     
     internal var brainwave: Array2D<Double>?

@@ -37,7 +37,6 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.leftAxis.labelPosition = .insideChart
         chartView.rightAxis.enabled = false
         chartView.leftAxis.valueFormatter = AffectiveCharts3PressureYFormatter()
-        chartView.leftAxis.setLabelCount(5, force: true)
         
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
         chartView.xAxis.gridColor = ColorExtension.lineLight
@@ -49,6 +48,9 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.xAxis.labelPosition = .bottom
         chartView.xAxis.axisMaxLabels = 8
+        chartView.xAxis.avoidFirstLastClippingEnabled = true
+        chartView.xAxis.spaceMax = 0.2
+        chartView.xAxis.spaceMin = 0.2
         if theme.style != .session {
             chartView.xAxis.granularityEnabled = true
             chartView.xAxis.granularity = 1
@@ -193,6 +195,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             set.drawIconsEnabled = false
             set.highlightEnabled = true
             set.highlightLineWidth = 2
+            
             set.highlightColor = ColorExtension.lineLight
             set.drawHorizontalHighlightIndicatorEnabled = false
             set.drawValuesEnabled = false
