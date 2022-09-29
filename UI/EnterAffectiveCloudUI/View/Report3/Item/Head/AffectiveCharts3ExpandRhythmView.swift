@@ -203,6 +203,8 @@ class AffectiveCharts3ExpandRhythmView: UIView {
             lk_formatter.dateFormat = style.toFormat
             let dateTo = Date(timeIntervalSince1970: round(timeTo))
             let toText = lk_formatter.string(from: dateTo)
+            let fromTo = fromText+toText
+            _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: fromTo)
         } else {
 //            lk_formatter.dateFormat = style.fromFormat
 //            let fromText = lk_formatter.string(from: dateFrom)
