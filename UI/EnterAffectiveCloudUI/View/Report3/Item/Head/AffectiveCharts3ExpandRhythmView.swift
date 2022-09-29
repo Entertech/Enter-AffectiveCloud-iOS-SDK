@@ -197,15 +197,12 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public func setRhythms(gamma: Int, beta: Int, alpha: Int, theta: Int, delta: Int, timeFrom: TimeInterval, timeTo: TimeInterval) {
         
         let dateFrom = Date(timeIntervalSince1970: round(timeFrom))
-        
-        if style == .month  {
-            lk_formatter.dateFormat = "MMM yyyy"
-            let time = lk_formatter.string(from: dateFrom)
-            _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
-        } else if style == .year {
-            lk_formatter.dateFormat = "yyyy"
-            let time = lk_formatter.string(from: dateFrom)
-            _ = infoView.setRhythms(gamma: gamma, beta: beta, alpha: alpha, theta: theta, delta: delta, time: time)
+        if style == .month || style == .year {
+            lk_formatter.dateFormat = style.fromFormat
+            let fromText = lk_formatter.string(from: dateFrom)
+            lk_formatter.dateFormat = style.toFormat
+            let dateTo = Date(timeIntervalSince1970: round(timeTo))
+            let toText = lk_formatter.string(from: dateTo)
         } else {
 //            lk_formatter.dateFormat = style.fromFormat
 //            let fromText = lk_formatter.string(from: dateFrom)
