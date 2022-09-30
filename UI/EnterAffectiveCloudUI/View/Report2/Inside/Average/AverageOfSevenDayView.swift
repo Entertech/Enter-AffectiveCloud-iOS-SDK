@@ -67,7 +67,7 @@ class PrivateAverageOfSevenDayView: UIView {
                     let bar = UIView()
                     let numLabel = UILabel()
                     // 设置bar
-                    if i == 0 {
+                    if i == (newValue.count-1) {
                         bar.backgroundColor = currentBarColor
                         numLabel.backgroundColor = numBgColor
                     } else {
@@ -107,7 +107,7 @@ class PrivateAverageOfSevenDayView: UIView {
                     let bar = UIView()
                     let numLabel = UILabel()
                     // 设置bar
-                    if i == 0 {
+                    if i == (newValue.count-1) {
                         bar.backgroundColor = currentBarColor
                         numLabel.backgroundColor = numBgColor
                     } else {
@@ -134,7 +134,7 @@ class PrivateAverageOfSevenDayView: UIView {
     
     public var currentBarColor: UIColor = UIColor.colorWithHexString(hexColor: "FF6682")  {
         willSet {
-            if let view = valueViews.last {
+            if let view = valueViews.first {
                 view.backgroundColor = newValue
             }
         }
