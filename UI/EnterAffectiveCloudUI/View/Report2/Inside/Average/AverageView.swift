@@ -43,17 +43,17 @@ public extension AverageName {
         case .Coherence:
             return "和谐时间"
         case .Alpha:
-            return "α波"
+            return "α波占比"
         case .Beta:
-            return "β波"
+            return "β波占比"
         case .Delta:
-            return "δ波"
+            return "δ波占比"
         case .Theta:
-            return "θ波"
+            return "θ波占比"
         case .Gamma:
-            return "γ波"
+            return "γ波占比"
         case .Flow:
-            return "流"
+            return "心流"
         case .RR:
             return "呼吸波"
         }
@@ -289,8 +289,6 @@ public class PrivateAverageView: UIView {
             chart.numBgColor = .clear
             chart.numTextColor = newValue.textColor
             bgLabel.backgroundColor = ColorExtension.bgZ2
-            chart.averageText = "Average"
-            chart.lastSevenTime = "Last 7 times"
             chart.unitText = newValue.unit
         }
     }

@@ -288,7 +288,7 @@ class PrivateAverageOfSevenDayView: UIView {
         }
 //        let min = _values!.min()!
 //        let max = _values!.max()!
-        for i in 0..<barCount {
+        for i in (0..<barCount).reversed() {
             //let value = _values![barCount-1-i]
             var value: Float = 0
             if let valuesArray = _values {
@@ -304,7 +304,7 @@ class PrivateAverageOfSevenDayView: UIView {
             self.addSubview(label)
             bar.snp.makeConstraints {
                 $0.bottom.equalToSuperview()
-                $0.right.equalToSuperview().offset(-182+29*i)
+                $0.right.equalToSuperview().offset(-25-29*i)
                 $0.width.equalTo(17)
                 if max == min{
                     $0.height.equalTo(64)
