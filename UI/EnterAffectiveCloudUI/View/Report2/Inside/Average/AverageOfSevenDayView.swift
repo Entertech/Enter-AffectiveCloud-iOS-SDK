@@ -288,7 +288,7 @@ class PrivateAverageOfSevenDayView: UIView {
         }
 //        let min = _values!.min()!
 //        let max = _values!.max()!
-        for i in (0..<barCount).reversed() {
+        for i in (0..<barCount) {
             //let value = _values![barCount-1-i]
             var value: Float = 0
             if let valuesArray = _values {
