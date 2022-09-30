@@ -288,14 +288,14 @@ class PrivateAverageOfSevenDayView: UIView {
         }
 //        let min = _values!.min()!
 //        let max = _values!.max()!
-        for i in (0..<barCount) {
+        for i in 0..<barCount {
             //let value = _values![barCount-1-i]
             var value: Float = 0
             if let valuesArray = _values {
-                value = Float(valuesArray[barCount-1-i])
+                value = Float(valuesArray[i])
             }
             if let valuesArray = _floatValues {
-                value = valuesArray[barCount-1-i]
+                value = valuesArray[i]
             }
             
             let label = valueLabels[barCount-1-i] // 顺序是倒着的
