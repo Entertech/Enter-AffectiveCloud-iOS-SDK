@@ -248,6 +248,7 @@ class AffectiveCharts3HeaderInfoView: UIView {
     }
     
     func update(unit: String) {
+        unitLabel.isHidden = false
         unitLabel.text = unit
     }
     

@@ -24,7 +24,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     private let unitFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
     private let tagFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
     private let timeFont = UIFont.systemFont(ofSize: 12, weight: .regular)
-    private let lightTextColor = UIColor.colorWithHexString(hexColor: "080A0E").changeAlpha(to: 0.5)
+    private let lightTextColor = ColorExtension.textLv2
     private let lableViewHeight: CGFloat = 66
     private var theme: AffectiveChart3Theme!
     private var anotherArray: [Int] = []
@@ -71,9 +71,10 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         titleLabel.textColor = lightTextColor
         
         if theme.style == .month {
-            titleLabel.text = "Daily Average".uppercased()
+            
+            titleLabel.text = theme.language == .en ? "Daily Average".uppercased() : "日均值"
         } else if theme.style == .year {
-            titleLabel.text = "Monthly Average".uppercased()
+            titleLabel.text = theme.language == .en ? "Monthly Average".uppercased() : "月均值"
         } else {
             titleLabel.text = theme.chartName.uppercased()
         }
@@ -115,9 +116,9 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
                 index = dataSets.first?.entryIndex(entry: entry) ?? 0
             }
             if anotherArray[index] > 0 {
-                numlabel.text = "Coherent"
+                numlabel.text = theme.language == .en ? "Coherent" : "和谐"
             } else {
-                numlabel.text = "Incoherent"
+                numlabel.text = theme.language == .en ? "Incoherent" : "不和谐"
             }
             if theme.style == .year || theme.style == .month {
                 if anotherArray[index] == 0 {
@@ -134,13 +135,13 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             }
         } else {
             if entryY > 75 {
-                numlabel.text = AffectiveCharts3CohereceState.high.rawValue
+                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.high.rawValue : "高"
             } else if entryY > 50 {
-                numlabel.text = AffectiveCharts3CohereceState.ele.rawValue
+                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.ele.rawValue : "偏高"
             } else if entryY > 25 {
-                numlabel.text = AffectiveCharts3CohereceState.nor.rawValue
+                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.nor.rawValue : "正常"
             } else {
-                numlabel.text = AffectiveCharts3CohereceState.low.rawValue
+                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.low.rawValue : "低"
             }
             if theme.style == .year || theme.style == .month {
                 if entryY == 0 {
@@ -197,7 +198,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             numlabel.frame.size.width = numWidth
 
             
-            if theme.unitText.count > 0{
+            if (unitLabel.text?.count ?? 0) > 0{
                 unitLabel.frame = CGRect(x: 8+numWidth+2, y: 27, width: unitWidth, height: 21)
                 unitLabel.isHidden = false
             }
