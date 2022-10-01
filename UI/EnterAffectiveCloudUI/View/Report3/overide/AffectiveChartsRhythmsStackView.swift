@@ -345,52 +345,84 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
                 let beta = betaArray,
               let alpha = alphaArray,
               let theta = thetaArray,
-              let delta = deltaArray
+              let delta = deltaArray, alpha.count > 0
         else {
             return (0, 0, 0, 0, 0)
         }
-        let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
-        let right = round(self.highestVisibleX) + 1
-        
-        let leftIndex = Int(round(left / interval)) < 0 ? 0 : Int(round(left / interval))
-        var count = Int(round((right-left) / interval) / Double(sample))
-        
-        var listCount = leftIndex+count
-        
-        if listCount > gamma.count {
-            count = gamma.count - leftIndex
-            listCount = gamma.count
-        }
-        if listCount <= gamma.count {
+        switch style {
+        case .session:
             var gammaSum = 0.0
             var betaSum = 0.0
             var alphaSum = 0.0
             var thetaSum = 0.0
             var deltaSum = 0.0
-            var validCount = 0
-            for i in leftIndex..<listCount {
-                if alpha[i] > 0 {
-                    validCount += 1
-                }
+
+            for i in 0..<gamma.count {
+                
                 gammaSum += gamma[i]
                 betaSum += beta[i]
                 alphaSum += alpha[i]
                 thetaSum += theta[i]
                 deltaSum += delta[i]
             }
-            if validCount == 0 {
-                return(0, 0, 0, 0, 0)
-            } else {
-                let gammaEve = Int(round(gammaSum / Double(validCount)))
-                let betaEve = Int(round(betaSum / Double(validCount)))
-                let alphaEve = Int(round(alphaSum / Double(validCount)))
-                let thetaEve = Int(round(thetaSum / Double(validCount)))
-                let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
-                return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
-            }
+            let gammaEve = Int(round(gammaSum / Double(gamma.count)))
+            let betaEve = Int(round(betaSum / Double(beta.count)))
+            let alphaEve = Int(round(alphaSum / Double(alpha.count)))
+            let thetaEve = Int(round(thetaSum / Double(theta.count)))
+            let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
+            return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
 
-        } else {
-            return (0, 0, 0, 0, 0)
+            
+
+        default:
+            let left = self.lowestVisibleX < 0 ? 0 : round(self.lowestVisibleX)
+            let right = round(self.highestVisibleX) + 1
+            
+            let leftIndex = Int(round(left / interval)) < 0 ? 0 : Int(round(left / interval))
+            var count = Int(round((right-left) / interval) / Double(sample))
+            
+            var listCount = leftIndex+count
+            
+            if listCount > gamma.count {
+                count = gamma.count - leftIndex
+                listCount = gamma.count
+            }
+            if listCount <= gamma.count {
+                var gammaSum = 0.0
+                var betaSum = 0.0
+                var alphaSum = 0.0
+                var thetaSum = 0.0
+                var deltaSum = 0.0
+                var validCount = 0
+                var plus = 0
+                if gamma.count - listCount == 1 {
+                    plus = 1
+                }
+                for i in leftIndex..<listCount+plus {
+                    if alpha[i] > 0 {
+                        validCount += 1
+                    }
+                    gammaSum += gamma[i]
+                    betaSum += beta[i]
+                    alphaSum += alpha[i]
+                    thetaSum += theta[i]
+                    deltaSum += delta[i]
+                }
+                if validCount == 0 {
+                    return(0, 0, 0, 0, 0)
+                } else {
+                    let gammaEve = Int(round(gammaSum / Double(validCount)))
+                    let betaEve = Int(round(betaSum / Double(validCount)))
+                    let alphaEve = Int(round(alphaSum / Double(validCount)))
+                    let thetaEve = Int(round(thetaSum / Double(validCount)))
+                    let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
+                    return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
+                }
+
+            } else {
+                return (0, 0, 0, 0, 0)
+            }
         }
+
     }
 }
