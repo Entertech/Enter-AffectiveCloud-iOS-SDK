@@ -53,7 +53,7 @@ public class PrivateReportViewHead: UIView {
             $0.top.equalToSuperview().offset(11)
         }
         titleLabel.snp.makeConstraints {
-            $0.left.equalTo(imageView.snp.right).offset(16)
+            $0.left.equalTo(imageView.snp.right).offset(8)
             $0.centerY.equalTo(imageView.snp.centerY)
         }
         barButton.snp.makeConstraints {
