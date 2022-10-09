@@ -42,10 +42,8 @@ class AffectiveCharts3RhythmsChart: LineChartView {
     }
     
     public lazy var enableGama = true
-    
     public lazy var enableBeta = true
     public lazy var enableAlpha = true
-    
     public lazy var enableTheta = true
     
     public lazy var enableDelta = true {
