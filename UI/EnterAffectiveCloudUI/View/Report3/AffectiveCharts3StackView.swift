@@ -40,6 +40,31 @@ public class AffectiveCharts3StackView: UIView {
         let timeInterval = Date().timeIntervalSince1970
         infoView.setRhythms(gamma: 0, beta: 0, alpha: 0, theta: 0, delta: 0, timeFrom: timeInterval, timeTo: timeInterval)
         rhythmsLinesStore = value
+        if value >> 0 & 1 == 1 {
+            chartView.enableGama = true
+        } else {
+            chartView.enableGama = false
+        }
+        if value >> 1 & 1 == 1 {
+            chartView.enableBeta = true
+        } else {
+            chartView.enableBeta = false
+        }
+        if value >> 2 & 1 == 1 {
+            chartView.enableAlpha = true
+        } else {
+            chartView.enableAlpha = false
+        }
+        if value >> 3 & 1 == 1 {
+            chartView.enableTheta = true
+        } else {
+            chartView.enableTheta = false
+        }
+        if value >> 4 & 1 == 1 {
+            chartView.enableDelta = true
+        } else {
+            chartView.enableDelta = false
+        }
         return self
     }
     
