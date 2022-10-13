@@ -63,7 +63,7 @@ class PrivateAverageOfSevenDayView: UIView {
                 _values = newValue
                 //let total = newValue.reduce(0, +)
                 //averageValue = lroundf(Float(total) / Float(newValue.count))
-                for (i,_) in newValue.enumerated() {
+                for (i,e) in newValue.enumerated() {
                     let bar = UIView()
                     let numLabel = UILabel()
                     // 设置bar
@@ -81,7 +81,7 @@ class PrivateAverageOfSevenDayView: UIView {
                     
                     // 设置bar上面的label
                     numLabel.font = UIFont.systemFont(ofSize: 11)
-                    numLabel.text = "\(newValue[i])"
+                    numLabel.text = "\(e)"
                     numLabel.layer.cornerRadius = 4
                     numLabel.layer.masksToBounds = true
                     numLabel.textAlignment = .center
@@ -121,7 +121,7 @@ class PrivateAverageOfSevenDayView: UIView {
                     
                     // 设置bar上面的label
                     numLabel.font = UIFont.systemFont(ofSize: 11)
-                    numLabel.text = String.init(format: "%.0f", e)
+                    numLabel.text = String.init(format: "%.1f", e)
                     numLabel.layer.cornerRadius = 4
                     numLabel.layer.masksToBounds = true
                     numLabel.textAlignment = .center
