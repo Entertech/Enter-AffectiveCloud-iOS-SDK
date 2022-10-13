@@ -38,6 +38,12 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.rightAxis.enabled = false
         chartView.leftAxis.valueFormatter = AffectiveCharts3PressureYFormatter(lan: language)
         
+        chartView.leftAxis.axisMaximum = Double(100)
+        chartView.leftAxis.axisMinimum = Double(0)
+        chartView.leftAxis.setLabelCount(5, force: true)
+        chartView.leftAxis.drawTopYLabelEntryEnabled = true
+        chartView.leftAxis.drawBottomYLabelEntryEnabled = false
+        
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
         chartView.xAxis.gridColor = ColorExtension.lineLight
         chartView.xAxis.gridLineWidth = 0.5
@@ -69,15 +75,6 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         } else {
             sample = 1
         }
-        
-        
-        chartView.leftAxis.axisMaximum = Double(100)
-        chartView.leftAxis.axisMinimum = Double(0)
-        separateY.append(0)
-        separateY.append(25)
-        separateY.append(50)
-        separateY.append(75)
-        separateY.append(100)
 
         
         return self
