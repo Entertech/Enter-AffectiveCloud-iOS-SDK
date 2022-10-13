@@ -81,7 +81,7 @@ class PrivateAverageOfSevenDayView: UIView {
                     
                     // 设置bar上面的label
                     numLabel.font = UIFont.systemFont(ofSize: 11)
-                    numLabel.text = "\(e)"
+      
                     numLabel.layer.cornerRadius = 4
                     numLabel.layer.masksToBounds = true
                     numLabel.textAlignment = .center
@@ -312,6 +312,10 @@ class PrivateAverageOfSevenDayView: UIView {
                     $0.height.equalTo(28+Float(value-min)/Float(max-min)*100)
                 }
             }
+            if i == 0 {
+                label.text = "\(Int(value))"
+            }
+            label.text = "\(Int(value))"
             label.snp.makeConstraints {
                 $0.bottom.equalTo(bar.snp.top).offset(-4)
                 $0.centerX.equalTo(bar.snp.centerX)
