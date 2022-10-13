@@ -24,13 +24,13 @@ class AffectiveCharts3ExpandHeaderView: UIView {
         var title = ""
         switch self.theme.style {
         case .session:
-            title = theme.averageName
+            title = theme.chartName
             expandBtn.isHidden = true
         case .month:
-            title = theme.averageName
+            title = theme.chartName
             expandBtn.isHidden = true
         case .year:
-            title = theme.averageName
+            title = theme.chartName
             expandBtn.isHidden = true
         }
         infoView.setLabelColor(color: ColorExtension.textLv2)
