@@ -81,8 +81,9 @@ public class AffectiveCharts3StackView: UIView {
         chartView.betaColor = betaColor
         chartView.deltaColor = deltaColor
         chartView.thetaColor = thetaColor
+        chartView.markerTitle = theme.markerName
         self.theme = theme
-        infoView.style = theme.style
+        infoView.theme = theme
         self.startDate = theme.startDate
 
         self.addSubview(chartView)
