@@ -24,13 +24,13 @@ class AffectiveCharts3ExpandHeaderView: UIView {
         var title = ""
         switch self.theme.style {
         case .session:
-            title = theme.chartType.session
+            title = theme.averageName
             expandBtn.isHidden = true
         case .month:
-            title = theme.chartType.month
+            title = theme.averageName
             expandBtn.isHidden = true
         case .year:
-            title = theme.chartType.year
+            title = theme.averageName
             expandBtn.isHidden = true
         }
         infoView.setLabelColor(color: ColorExtension.textLv2)
@@ -87,34 +87,23 @@ extension AffectiveCharts3ExpandHeaderView: AffectiveCharts3ChartChanged {
         if self.theme.chartType == .pressure {
             
             if single > 75 {
-                numText = AffectiveCharts3CohereceState.high.rawValue
+                numText = theme.compareName[3]
             } else if single > 50 {
-                numText = AffectiveCharts3CohereceState.ele.rawValue
+                numText = theme.compareName[2]
             } else if single > 25 {
-                numText = AffectiveCharts3CohereceState.nor.rawValue
+                numText = theme.compareName[1]
             } else {
-                numText = AffectiveCharts3CohereceState.low.rawValue
+                numText = theme.compareName[0]
             }
         } else if self.theme.chartType == .common && self.theme.tagSeparation.count > 3 {
             var tag = ""
-            if theme.language == .en {
-                if single > theme.tagSeparation[2] {
-                    tag = PrivateReportState.high.rawValue
-                } else if single > theme.tagSeparation[1] {
-                    tag = PrivateReportState.nor.rawValue
-                } else {
-                    tag = PrivateReportState.low.rawValue
-                }
+            if single > theme.tagSeparation[2] {
+                tag = theme.compareName[2]
+            } else if single > theme.tagSeparation[1] {
+                tag = theme.compareName[1]
             } else {
-                if single > theme.tagSeparation[2] {
-                    tag = PrivateReportState.high.ch
-                } else if single > theme.tagSeparation[1] {
-                    tag = PrivateReportState.nor.ch
-                } else {
-                    tag = PrivateReportState.low.ch
-                }
+                tag = theme.compareName[0]
             }
-
             self.infoView.update(unit: "(\(tag))")
             
         }

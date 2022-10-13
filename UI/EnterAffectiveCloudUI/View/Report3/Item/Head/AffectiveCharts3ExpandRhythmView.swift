@@ -15,21 +15,9 @@ class AffectiveCharts3ExpandRhythmView: UIView {
 
     public weak var delegate: AffectiveCharts3ExpandRhythmProtocol?
     public weak var expandDelegate: AffectiveCharts3ExpandDelegate?
-    public var style = AffectiveCharts3FormatOptional.session {
-        didSet {
-            var title = ""
-            switch style {
-            case .session:
-                title = "Average Percentage".uppercased()
-                expandBtn.isHidden = true
-            case .month:
-                title = "Daily Average Percentage".uppercased()
-                expandBtn.isHidden = true
-            case .year:
-                title = "Monthly Average Percentage".uppercased()
-                expandBtn.isHidden = true
-            }
-            _ = infoView.setUI(title: title).setLayout()
+    public var theme: AffectiveChart3Theme? {
+        willSet {
+            let _  = infoView.setUI(title: newValue?.chartName ?? "")
         }
     }
     private var isNotShowExpand = true
@@ -197,10 +185,10 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public func setRhythms(gamma: Int, beta: Int, alpha: Int, theta: Int, delta: Int, timeFrom: TimeInterval, timeTo: TimeInterval) {
         
         let dateFrom = Date(timeIntervalSince1970: round(timeFrom))
-        if style == .month || style == .year {
-            lk_formatter.dateFormat = style.fromFormat
+        if theme?.style == .month || theme?.style == .year {
+            lk_formatter.dateFormat = theme?.style.fromFormat ?? ""
             let fromText = lk_formatter.string(from: dateFrom)
-            lk_formatter.dateFormat = style.toFormat
+            lk_formatter.dateFormat = theme?.style.toFormat ?? ""
             let dateTo = Date(timeIntervalSince1970: round(timeTo))
             let toText = lk_formatter.string(from: dateTo)
             let fromTo = fromText+toText

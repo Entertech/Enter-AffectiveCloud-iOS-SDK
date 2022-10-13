@@ -78,6 +78,17 @@ public enum AffectiveCharts3ChartType: String {
         }
     }
     
+    var sessionCh: String {
+        switch self {
+        case .coherece:
+            return "TOTAL"
+        case .rhythms:
+            return "Average Percentage".uppercased()
+        default:
+            return "AVERAGE"
+        }
+    }
+    
     var month: String {
         switch self {
         case .coherece:

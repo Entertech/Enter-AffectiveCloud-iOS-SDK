@@ -70,15 +70,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.textColor = lightTextColor
         
-        if theme.style == .month {
-            
-            titleLabel.text = theme.language == .en ? "Daily Average".uppercased() : "日均值"
-        } else if theme.style == .year {
-            titleLabel.text = theme.language == .en ? "Monthly Average".uppercased() : "月均值"
-        } else {
-            titleLabel.text = theme.chartName.uppercased()
-        }
-        
+        titleLabel.text = theme.markerName
         numlabel.frame = CGRect(x: 8, y: 20, width: 0, height: 28)
         numlabel.textAlignment = .left
         numlabel.font = numberFont
@@ -116,9 +108,9 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
                 index = dataSets.first?.entryIndex(entry: entry) ?? 0
             }
             if anotherArray[index] > 0 {
-                numlabel.text = theme.language == .en ? "Coherent" : "和谐"
+                numlabel.text = theme.compareName[0]
             } else {
-                numlabel.text = theme.language == .en ? "Incoherent" : "不和谐"
+                numlabel.text = theme.compareName[1]
             }
             if theme.style == .year || theme.style == .month {
                 if anotherArray[index] == 0 {
@@ -135,13 +127,13 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             }
         } else {
             if entryY > 75 {
-                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.high.rawValue : "高"
+                numlabel.text = theme.compareName[3]
             } else if entryY > 50 {
-                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.ele.rawValue : "偏高"
+                numlabel.text = theme.compareName[2]
             } else if entryY > 25 {
-                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.nor.rawValue : "正常"
+                numlabel.text = theme.compareName[1]
             } else {
-                numlabel.text = theme.language == .en ? AffectiveCharts3CohereceState.low.rawValue : "低"
+                numlabel.text = theme.compareName[0]
             }
             if theme.style == .year || theme.style == .month {
                 if entryY == 0 {
@@ -167,23 +159,14 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         }
         if theme.tagSeparation.count > 0 {
             var tag = ""
-            if theme.language == .en {
-                if entryY < theme.tagSeparation[1] {
-                    tag = PrivateReportState.low.rawValue
-                } else if entryY > theme.tagSeparation[2] {
-                    tag = PrivateReportState.high.rawValue
-                } else {
-                    tag = PrivateReportState.nor.rawValue
-                }
+            if entryY < theme.tagSeparation[1] {
+                tag = theme.compareName[0]
+            } else if entryY > theme.tagSeparation[2] {
+                tag = theme.compareName[2]
             } else {
-                if entryY < theme.tagSeparation[1] {
-                    tag = PrivateReportState.low.ch
-                } else if entryY > theme.tagSeparation[2] {
-                    tag = PrivateReportState.high.ch
-                } else {
-                    tag = PrivateReportState.nor.ch
-                }
+                tag = theme.compareName[1]
             }
+            
             unitLabel.text = "(\(tag))"
 
         }

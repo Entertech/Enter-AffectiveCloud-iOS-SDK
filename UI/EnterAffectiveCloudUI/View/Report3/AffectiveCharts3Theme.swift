@@ -17,6 +17,12 @@ public struct AffectiveChart3Theme {
     
     public var chartName: String = ""
     
+    public var markerName: String = ""
+    
+    public var averageName: String = ""
+    
+    public var compareName: [String] = []
+    
     public var themeColor: UIColor = .red
     
     public var chartType: AffectiveCharts3ChartType = .common
