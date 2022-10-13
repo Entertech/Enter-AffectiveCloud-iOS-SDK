@@ -17,7 +17,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     private var startDate: Date!
     private var lastXValue: Double = 0
     weak var dataSouceChanged: AffectiveCharts3ChartChanged?
-    public override func setTheme(_ theme: AffectiveChart3Theme) -> Self {
+    public func setTheme(_ theme: AffectiveChart3Theme, language: [String]) -> Self {
         self.theme = theme
         self.startDate = theme.startDate
         titleView.setTheme(theme)
@@ -36,7 +36,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         chartView.leftAxis.drawAxisLineEnabled = false
         chartView.leftAxis.labelPosition = .insideChart
         chartView.rightAxis.enabled = false
-        chartView.leftAxis.valueFormatter = AffectiveCharts3PressureYFormatter()
+        chartView.leftAxis.valueFormatter = AffectiveCharts3PressureYFormatter(lan: language)
         
         chartView.xAxis.labelTextColor = ColorExtension.textLv2
         chartView.xAxis.gridColor = ColorExtension.lineLight

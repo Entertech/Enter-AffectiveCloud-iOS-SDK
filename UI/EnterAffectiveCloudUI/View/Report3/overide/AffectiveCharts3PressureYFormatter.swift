@@ -10,21 +10,22 @@ import Charts
 
 
 public class AffectiveCharts3PressureYFormatter: NSObject, AxisValueFormatter {
-    
-    override init() {
+    var language = ["High", "Elevated", "Normal", "Low"]
+    init(lan: [String]) {
         super.init()
+        self.language = lan
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         var retValue = ""
         if value > 99 {
-            retValue = "High"
+            retValue = language[0]
         } else if value > 74 {
-            retValue = "Elevated"
+            retValue = language[1]
         } else if value > 49 {
-            retValue = "Normal"
+            retValue = language[2]
         } else if value > 24 {
-            retValue = "Low"
+            retValue = language[3]
         }
         return retValue
     }
