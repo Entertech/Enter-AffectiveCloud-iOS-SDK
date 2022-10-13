@@ -136,8 +136,8 @@ class PrivateAverageOfSevenDayView: UIView {
         willSet {
             if let view = valueViews.first {
                 view.backgroundColor = newValue
-                self.averageLine.backgroundColor = newValue
             }
+            self.averageLine.backgroundColor = newValue
         }
     }
     
@@ -255,7 +255,7 @@ class PrivateAverageOfSevenDayView: UIView {
         self.addSubview(unitLabel)
         self.addSubview(averageLine)
         self.addSubview(meditationTimeLabel)
-        averageLine.backgroundColor = UIColor.colorWithHexString(hexColor: "FB9C98")
+        averageLine.backgroundColor = currentBarColor
         averageLine.layer.cornerRadius = 1
         averageLine.layer.masksToBounds = true
         
