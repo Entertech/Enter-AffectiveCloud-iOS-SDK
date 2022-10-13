@@ -211,7 +211,6 @@ public class PrivateAverageView: UIView {
     public var mainColor: UIColor = UIColor.colorWithHexString(hexColor: "EAECF1") {
         willSet {
             chart.currentBarColor = newValue
-            icon.tintColor = newValue
         }
     }
     
