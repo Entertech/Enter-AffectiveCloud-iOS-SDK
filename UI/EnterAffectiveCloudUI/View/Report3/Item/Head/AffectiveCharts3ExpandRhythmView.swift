@@ -17,7 +17,11 @@ class AffectiveCharts3ExpandRhythmView: UIView {
     public weak var expandDelegate: AffectiveCharts3ExpandDelegate?
     public var theme: AffectiveChart3Theme? {
         willSet {
-            let _  = infoView.setUI(title: newValue?.chartName ?? "")
+            DispatchQueue.main.async {
+                self.expandBtn.isHidden = true
+                self.infoView.setUI(title: newValue?.chartName ?? "").setLayout()
+            }
+            
         }
     }
     private var isNotShowExpand = true
