@@ -136,6 +136,7 @@ class PrivateAverageOfSevenDayView: UIView {
         willSet {
             if let view = valueViews.first {
                 view.backgroundColor = newValue
+                self.averageLine.backgroundColor = newValue
             }
         }
     }
