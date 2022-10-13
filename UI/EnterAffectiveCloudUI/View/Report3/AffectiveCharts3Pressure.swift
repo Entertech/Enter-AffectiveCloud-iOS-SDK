@@ -92,12 +92,12 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         front1View.snp.makeConstraints {
             $0.top.leading.equalTo(chartView)
             $0.width.equalTo(9)
-            $0.bottom.equalTo(chartView.snp.bottom).offset(-11)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-9)
         }
         front2View.snp.makeConstraints {
             $0.top.trailing.equalTo(chartView)
             $0.width.equalTo(9)
-            $0.bottom.equalTo(chartView.snp.bottom).offset(-11)
+            $0.bottom.equalTo(chartView.snp.bottom).offset(-9)
         }
         chartView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
