@@ -144,8 +144,9 @@ public class PrivateAverageView: UIView {
                 let name = categoryName
                 let total = newValue.reduce(0, +)
                 let averageValueTemp = Float(total) / Float(newValue.count)
-                chart.values = newValue
                 chart.averageValue = Int(ceilf(Float(total) / Float(newValue.count)))
+                chart.values = newValue
+                
                 
                 let averageValue = lroundf(averageValueTemp)
                 let current = newValue.first!
