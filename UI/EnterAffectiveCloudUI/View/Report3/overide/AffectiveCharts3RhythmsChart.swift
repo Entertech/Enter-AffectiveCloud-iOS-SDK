@@ -203,6 +203,7 @@ class AffectiveCharts3RhythmsChart: LineChartView {
         guard let waveArray = array2D else {
             return
         }
+        
         var waveNum = [Double]()
         var sets: [LineChartDataSet] = []
         for j in 0..<waveArray.rows {

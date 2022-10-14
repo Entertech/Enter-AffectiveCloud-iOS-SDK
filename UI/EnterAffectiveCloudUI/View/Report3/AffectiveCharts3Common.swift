@@ -104,6 +104,7 @@ public class AffectiveCharts3LineCommonView: UIView {
 
     public func setData(_ array: [Int]) -> Self {
         guard array.count > 0 else {return self}
+        dataSorce.removeAll()   
         separateY.removeAll()
         dataSorce.append(contentsOf: array)
         
