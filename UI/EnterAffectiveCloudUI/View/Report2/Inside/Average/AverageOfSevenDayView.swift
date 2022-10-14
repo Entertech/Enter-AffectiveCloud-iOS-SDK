@@ -53,7 +53,7 @@ class PrivateAverageOfSevenDayView: UIView {
     
     public var values: [Int] = [] {
         willSet {
-
+                
                 for i in 0..<valueViews.count {
                     valueViews[i].removeFromSuperview()
                     valueLabels[i].removeFromSuperview()
@@ -258,7 +258,7 @@ class PrivateAverageOfSevenDayView: UIView {
         averageLine.backgroundColor = currentBarColor
         averageLine.layer.cornerRadius = 1
         averageLine.layer.masksToBounds = true
-        
+        averageLine.isHidden = true
         averageLabel.text = "Average"
         averageLabel.textColor = UIColor.systemGray
         averageLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -325,20 +325,37 @@ class PrivateAverageOfSevenDayView: UIView {
             }
         }
         
-        averageLine.snp.makeConstraints {
-            $0.left.right.equalToSuperview()
-            $0.height.equalTo(3)
-            if max == min {
-                $0.bottom.equalToSuperview().offset(-64)
-            } else {
-                if 28 + ((Float(averageValue)-Float(min))/Float(max-min)*100) < 46 {
-                    $0.bottom.equalTo(-46)
+        if averageLine.isHidden {
+            averageLine.isHidden = false
+            averageLine.snp.makeConstraints {
+                $0.left.right.equalToSuperview()
+                $0.height.equalTo(3)
+                if max == min {
+                    $0.bottom.equalToSuperview().offset(-64)
                 } else {
-                    $0.bottom.equalTo(-28-((Float(averageValue)-Float(min))/Float(max-min)*100)).priority(.high)
-                }
+                    if 28 + ((Float(averageValue)-Float(min))/Float(max-min)*100) < 46 {
+                        $0.bottom.equalTo(-46)
+                    } else {
+                        $0.bottom.equalTo(-28-((Float(averageValue)-Float(min))/Float(max-min)*100)).priority(.high)
+                    }
 
+                }
+            }
+        } else {
+            averageLine.snp.updateConstraints {
+                if max == min {
+                    $0.bottom.equalToSuperview().offset(-64)
+                } else {
+                    if 28 + ((Float(averageValue)-Float(min))/Float(max-min)*100) < 46 {
+                        $0.bottom.equalTo(-46)
+                    } else {
+                        $0.bottom.equalTo(-28-((Float(averageValue)-Float(min))/Float(max-min)*100)).priority(.high)
+                    }
+
+                }
             }
         }
+
         self.bringSubviewToFront(averageLine)
         for i in 0..<barCount {
             self.bringSubviewToFront(valueLabels[i])
