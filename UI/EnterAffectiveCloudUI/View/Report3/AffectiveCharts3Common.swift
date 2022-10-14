@@ -32,6 +32,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     internal var coherenceValue: [Int] = []
     
     public func setCoherence(value: [Int]) -> Self {
+        self.coherenceValue.removeAll()
         self.coherenceValue.append(contentsOf: value)
         return self
     }
