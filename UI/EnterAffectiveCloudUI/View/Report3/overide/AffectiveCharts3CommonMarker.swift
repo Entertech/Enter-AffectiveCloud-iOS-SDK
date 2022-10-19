@@ -171,6 +171,10 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
 
         }
         
+        if anotherArray.count > 0 && theme.style == .session {
+            unitLabel.text = ""
+        }
+        
         let titleWidht = titleLabel.text?.width(withConstrainedHeight: 14, font: titleFont)
         let numWidth = numlabel.text?.width(withConstrainedHeight: 28, font: numberFont)
         let timeWidth = timeLabel.text?.width(withConstrainedHeight: 17, font: timeFont)
