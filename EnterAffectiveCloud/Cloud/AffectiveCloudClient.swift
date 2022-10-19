@@ -263,7 +263,8 @@ public class AffectiveCloudClient {
             return
         }
         let results = [UInt8](_peprBuffer)
-        let data_int = results.map { Int($0) }
+        let array = Array(results.prefix(_peprBufferSize))
+        let data_int = array.map { Int($0) }
         _peprBuffer.removeAll()
         self.cloudService?.biodataUpload(options: options, peprData: data_int)
         _limitDate2 = current
