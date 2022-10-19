@@ -244,6 +244,7 @@ public class AffectiveCloudClient {
     private var _peprBuffer = Data()
     
     private var _peprBufferSize = 675
+    private var _limitDate2 = Date()
     
     public func appendBiodata(peprData: Data, options: BiodataTypeOptions = .PEPR) {
         guard let cloudService = self.cloudService else {return}
@@ -256,11 +257,16 @@ public class AffectiveCloudClient {
         if _peprBuffer.count < _peprBufferSize {
             return
         }
+        let current = Date()
+        let stride = abs(current.timeIntervalSince(_limitDate2))
+        if stride < 0.6*Double(self.cloudService?.uploadCycle ?? 3) - 0.2 {
+            return
+        }
         let results = [UInt8](_peprBuffer)
         let data_int = results.map { Int($0) }
         _peprBuffer.removeAll()
         self.cloudService?.biodataUpload(options: options, peprData: data_int)
-        
+        _limitDate2 = current
     }
     
     var sessionId: String? {
