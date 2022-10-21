@@ -171,7 +171,6 @@ public class AffectiveCloudClient {
         if _eegBuffer.count < _eegBufferSize {
             return
         }
-        DLog("append brain data")
         let results = stride(from: _eegBuffer.startIndex, to: _eegBuffer.endIndex, by: _eegBufferSize).map({ start -> Data in
             let range = start..<(start + _eegBufferSize)
             let tempData = _eegBuffer.subdata(in: range)
@@ -249,6 +248,8 @@ public class AffectiveCloudClient {
     public func appendBiodata(peprData: Data, options: BiodataTypeOptions = .PEPR) {
         guard let cloudService = self.cloudService else {return}
         guard self.sessionId != nil else {return}
+
+        
         guard cloudService.socket.isConnected else {
             _peprBuffer.removeAll()
             return
@@ -257,17 +258,27 @@ public class AffectiveCloudClient {
         if _peprBuffer.count < _peprBufferSize {
             return
         }
+
         let current = Date()
-        let stride = abs(current.timeIntervalSince(_limitDate2))
-        if stride < 0.6*Double(self.cloudService?.uploadCycle ?? 3) - 0.2 {
+        let v = abs(current.timeIntervalSince(_limitDate))
+        if v < 0.6*Double(self.cloudService?.uploadCycle ?? 3) - 0.1 {
             return
         }
-        let results = [UInt8](_peprBuffer)
-        let array = Array(results.prefix(_peprBufferSize))
-        let data_int = array.map { Int($0) }
-        _peprBuffer.removeAll()
-        self.cloudService?.biodataUpload(options: options, peprData: data_int)
-        _limitDate2 = current
+        
+        let results = stride(from: _peprBuffer.startIndex, to: _peprBuffer.endIndex, by: _peprBufferSize).map({ start -> Data in
+            let range = start..<(start + _peprBufferSize)
+            let tempData = _peprBuffer.subdata(in: range)
+            return tempData
+        })
+
+        for element in results {
+            let data_int = element.map { Int($0) }
+            cloudService.biodataUpload(options: .PEPR, eegData: data_int)
+            if _peprBuffer.count >= _peprBufferSize {
+                _peprBuffer.removeFirst(_peprBufferSize)
+            }
+        }
+        _limitDate = current
     }
     
     var sessionId: String? {
