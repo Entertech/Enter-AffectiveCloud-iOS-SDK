@@ -407,7 +407,7 @@ extension AffectiveCharts3ExpandRhythmView: AffectiveCharts3ChartChanged {
 }
 
 class AffectiveCharts3RhythmsInfoView: UIView {
-    private let lightTextColor = UIColor.colorWithHexString(hexColor: "080A0E").changeAlpha(to: 0.5)
+    private let lightTextColor = UIColor.label
     public var gammaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
     public var betaColor = UIColor.colorWithHexString(hexColor: "#58B9E0")
     public var alphaColor = UIColor.colorWithHexString(hexColor: "#F7C77E")
