@@ -12,6 +12,8 @@ DateFormatter 创建实例很耗时，如果多次创建 DateFormatter 实例，
 */
 public let lk_formatter = DateFormatter()
 
+public var lk_calendar = Calendar.current
+
 // MARK: - 一、基本扩展
 public extension DateFormatter {
 

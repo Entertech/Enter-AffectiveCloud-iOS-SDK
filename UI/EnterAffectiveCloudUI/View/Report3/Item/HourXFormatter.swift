@@ -61,31 +61,31 @@ public class AffectiveCharts3MonthValueFormatter: NSObject, AxisValueFormatter {
 }
 
 extension Date {
-    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+    func get(_ components: Calendar.Component..., calendar: Calendar = lk_calendar) -> DateComponents {
         return calendar.dateComponents(Set(components), from: self)
     }
 
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+    func get(_ component: Calendar.Component, calendar: Calendar = lk_calendar) -> Int {
         return calendar.component(component, from: self)
     }
     
     func getDayAfter(days: Int) -> Date? {
-        return Calendar.current.date(byAdding: DateComponents(day:days), to: self)
+        return lk_calendar.date(byAdding: DateComponents(day:days), to: self)
     }
     
     func getMonthAfter(month: Int) -> Date? {
-        return Calendar.current.date(byAdding: DateComponents(month:month), to: self)
+        return lk_calendar.date(byAdding: DateComponents(month:month), to: self)
     }
     
     static func getMonthSymble(month: Int) -> String {
-        return Calendar.current.shortMonthSymbols[month-1]
+        return lk_calendar.shortMonthSymbols[month-1]
     }
     
     func startOfMonth() -> Date {
-        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+        return lk_calendar.date(from: lk_calendar.dateComponents([.year, .month], from: lk_calendar.startOfDay(for: self)))!
     }
     
     func endOfMonth() -> Date {
-        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+        return lk_calendar.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
     }
 }
