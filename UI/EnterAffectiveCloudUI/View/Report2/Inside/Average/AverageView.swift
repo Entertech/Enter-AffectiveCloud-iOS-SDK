@@ -39,7 +39,7 @@ public extension AverageName {
         case .HRV:
             return "心率变异性"
         case .Meditation:
-            return "训练时长"
+            return "冥想时间"
         case .Coherence:
             return "和谐时间"
         case .Alpha:
