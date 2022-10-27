@@ -371,7 +371,7 @@ public class PrivateAverageView: UIView {
         case .en:
             text = "The " + name + " is " + compare + " the average of last 7 times."
         case .ch:
-            text = name + compare + "过去7次的平均值"
+            text = name + compare + "最近7次的平均值"
         }
         
         let attributedText = NSMutableAttributedString(string:text)
