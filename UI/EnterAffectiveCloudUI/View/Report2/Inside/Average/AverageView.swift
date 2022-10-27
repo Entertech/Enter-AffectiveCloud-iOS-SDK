@@ -55,7 +55,7 @@ public extension AverageName {
         case .Flow:
             return "心流"
         case .RR:
-            return "呼吸波"
+            return "呼吸率"
         }
     }
 }
