@@ -16,7 +16,8 @@ public class AffectiveCharts3FlowLineView: UIView {
         guard colors.count >= 3 else {return}
         self.colors.removeAll()
         self.colors.append(contentsOf: colors)
-        self.dataSource.append(contentsOf: data)
+        self.dataSource.removeAll()
+        self.dataSource.append(contentsOf: data.smoothData())
         self.state = state
         self.startDate = date
         self.maxValue = max

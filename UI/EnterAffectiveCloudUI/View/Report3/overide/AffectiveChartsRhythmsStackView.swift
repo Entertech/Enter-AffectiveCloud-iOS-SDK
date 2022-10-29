@@ -363,21 +363,31 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
             var alphaSum = 0.0
             var thetaSum = 0.0
             var deltaSum = 0.0
-
-            for i in 0..<gamma.count {
+            let g = gamma.filter({$0 > 0})
+            let b = beta.filter({$0 > 0})
+            let a = alpha.filter({$0 > 0})
+            let t = theta.filter({$0 > 0})
+            let d = delta.filter({$0 > 0})
+            if g.count > 0 && b.count > 0 && a.count > 0 && t.count > 0 && d.count > 0 {
+                for i in 0..<gamma.count {
+                    
+                    gammaSum += g[i]
+                    betaSum += b[i]
+                    alphaSum += a[i]
+                    thetaSum += t[i]
+                    deltaSum += d[i]
+                }
                 
-                gammaSum += gamma[i]
-                betaSum += beta[i]
-                alphaSum += alpha[i]
-                thetaSum += theta[i]
-                deltaSum += delta[i]
+                let gammaEve = Int(ceil(gammaSum / Double(gamma.count)))
+                let betaEve = Int(ceil(betaSum / Double(beta.count)))
+                let alphaEve = Int(ceil(alphaSum / Double(alpha.count)))
+                let thetaEve = Int(ceil(thetaSum / Double(theta.count)))
+                let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
+                return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
+            } else {
+                return (0, 0, 0, 0, 0)
             }
-            let gammaEve = Int(round(gammaSum / Double(gamma.count)))
-            let betaEve = Int(round(betaSum / Double(beta.count)))
-            let alphaEve = Int(round(alphaSum / Double(alpha.count)))
-            let thetaEve = Int(round(thetaSum / Double(theta.count)))
-            let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
-            return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
+            
 
             
 
