@@ -108,17 +108,14 @@ public class AffectiveCharts3FlowLineView: UIView {
                 }
             }
         }
-
-        var yVals: [ChartDataEntry] = []
-        var lineColors: [UIColor] = []
-        
-        
         for i in stride(from: 0, to: len, by: sample) {
             sampleArray.append(dataSource[i])
         }
         
         let smoothArray = sampleArray.smoothData()
 
+        var yVals: [ChartDataEntry] = []
+        var lineColors: [UIColor] = []
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
             
             let value = smoothArray[i]
@@ -135,7 +132,7 @@ public class AffectiveCharts3FlowLineView: UIView {
                     lineColors.append(colors[2])
                 }
                 
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: value))
+                yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: value))
             }
         }
         let set = LineChartDataSet(entries: yVals, label: "")

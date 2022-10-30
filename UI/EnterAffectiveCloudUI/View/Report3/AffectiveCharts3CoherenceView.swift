@@ -18,35 +18,39 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
     
     
     public override func build() {
-        let invalidData = 5
-        var initValue = 0 //初始数据
-        var initIndex = 0 //开始有值索引位置
-        for i in stride(from: 0, to: dataSorce.count, by: sample) {
-            let value = dataSorce[i]
-            if value > invalidData && initValue == 0 {
-                initValue = value
-                initIndex = i
-                break
+        let invalidData = 5.0
+        var stateArray = [Int]()
+        var sampleArray = [Double]()
+        var len = dataSorce.count
+        if coherenceValue.count > 0 {
+            
+            for i in stride(from: 0, to: len, by: sample) {
+                if i > coherenceValue.count-1 {
+                    stateArray.append(0)
+                } else {
+                    stateArray.append(coherenceValue[i])
+                }
             }
         }
+        for i in stride(from: 0, to: len, by: sample) {
+            sampleArray.append(Double(dataSorce[i]))
+        }
+        
+        let smoothArray = sampleArray.smoothData()
         var yVals: [ChartDataEntry] = []
         var colors: [UIColor] = []
-        var cohereceArray = [Int]()
-        let len = dataSorce.count > coherenceValue.count ? coherenceValue.count : dataSorce.count
-        for i in stride(from: 0, to: len, by: sample) {
-            cohereceArray.append(coherenceValue[i])
-            if coherenceValue[i] > 0 {
+        
+        for i in stride(from: 0, to: smoothArray.count, by: 1) {
+            if stateArray[i] > 0 {
                 colors.append(theme.themeColor)
             } else {
                 colors.append(ColorExtension.lineLight)
             }
-            if initIndex > i {
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
-            } else {
-                if dataSorce[i] > invalidData { //小于无效值的不做点
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
-                }
+
+            if smoothArray[i] > invalidData { //小于无效值的不做点
+                yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
             }
+            
         }
         
         let marker = AffectiveCharts3CommonMarkerView(theme: theme)

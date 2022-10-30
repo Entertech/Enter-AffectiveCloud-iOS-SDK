@@ -163,26 +163,23 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         var yVals: [ChartDataEntry] = []
         var data:LineChartData!
         if theme.style == .session {
-            var initValue = 0 //初始数据
-            var initIndex = 0 //开始有值索引位置
+            let invalidData = 5.0
+            var sampleArray = [Double]()
             for i in stride(from: 0, to: dataSorce.count, by: sample) {
-                let value = dataSorce[i]
-                if value > invalidData && initValue == 0 {
-                    initValue = value
-                    initIndex = i
-                    break
-                }
+                sampleArray.append(Double(dataSorce[i]))
             }
             
-            for i in stride(from: 0, to: dataSorce.count, by: sample) {
-                if initIndex > i {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(initValue)))
-                } else {
-                    if dataSorce[i] > invalidData { //小于无效值的不做点
-                        yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i])))
-                    }
+            let smoothArray = sampleArray.smoothData()
+            
+            var yVals: [ChartDataEntry] = []
+            for i in stride(from: 0, to: smoothArray.count, by: 1) {
+
+                if smoothArray[i] > invalidData { //小于无效值的不做点
+                    yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
                 }
+                
             }
+            
             let set = LineChartDataSet(entries: yVals, label: "")
             set.mode = .horizontalBezier
             set.drawCirclesEnabled = false
