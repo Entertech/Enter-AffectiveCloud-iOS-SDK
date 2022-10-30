@@ -21,7 +21,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     
     internal var yRender: AffectiveCharts3DynamicYRender!
     
-    internal var dataSorce: [Int] = []
+    internal var dataSorce: [Double] = []
     
     internal var maxY: Int = 100
     internal var minY: Int = 0
@@ -103,7 +103,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
 
-    public func setData(_ array: [Int]) -> Self {
+    public func setData(_ array: [Double]) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()   
         separateY.removeAll()
@@ -119,8 +119,8 @@ public class AffectiveCharts3LineCommonView: UIView {
             v > 0
         })
         
-        maxValue = noZeroArray.max() ?? 150
-        minValue = noZeroArray.min() ?? 0
+        maxValue = Int(noZeroArray.max() ?? 150.0)
+        minValue = Int(noZeroArray.min() ?? 0.0)
         
         let tempMax5 = (maxValue / 5 + 1) * 5 > 150 ? 150 : (maxValue / 5 + 1) * 5
         let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
@@ -215,8 +215,8 @@ public class AffectiveCharts3LineCommonView: UIView {
     }
     
     public func build() {
-        let invalidData = 5
-        var initValue = 0 //初始数据
+        let invalidData = 5.0
+        var initValue = 0.0 //初始数据
         var initIndex = 0 //开始有值索引位置
         for i in stride(from: 0, to: dataSorce.count, by: sample) {
             let value = dataSorce[i]
