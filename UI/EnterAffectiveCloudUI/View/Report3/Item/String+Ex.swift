@@ -72,23 +72,24 @@ extension Array where Element == Double {
             }
 
             var lastValue = 0.0
+            var tmpData = self
             for e in self {
                 if e > 0 {
                     lastValue = e
-                    newData.append(e)
+                    tmpData.append(e)
                 } else {
                     if lastValue == 0 {
-                        newData.append(firstValue)
+                        tmpData.append(firstValue)
                     } else {
-                        newData.append(lastValue)
+                        tmpData.append(lastValue)
                     }
                 }
             }
-            for i in 0..<self.count {
-                if (i == 0 || i == self.count - 1) {
-                    newData.append(self[i])
+            for i in 0..<tmpData.count {
+                if (i == 0 || i == tmpData.count - 1) {
+                    newData.append(tmpData[i])
                 } else {
-                    let average = (self[i - 1] + self[i] + self[i+1]) / 3.0
+                    let average = (tmpData[i - 1] + tmpData[i] + tmpData[i+1]) / 3.0
                     newData.append(average)
                 }
             }
