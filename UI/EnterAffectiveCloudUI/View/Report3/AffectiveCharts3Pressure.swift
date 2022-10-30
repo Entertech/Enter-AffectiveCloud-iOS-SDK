@@ -68,7 +68,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()
         separateY.removeAll()
-        dataSorce.append(contentsOf: array.smoothData())
+        dataSorce.append(contentsOf: array)
         
         //计算抽样
         if theme.style == .session {

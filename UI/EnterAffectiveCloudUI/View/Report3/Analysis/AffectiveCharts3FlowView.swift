@@ -17,7 +17,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         self.colors.removeAll()
         self.colors.append(contentsOf: colors)
         self.dataSource.removeAll()
-        self.dataSource.append(contentsOf: data.smoothData())
+        self.dataSource.append(contentsOf: data)
         self.state = state
         self.startDate = date
         self.maxValue = max

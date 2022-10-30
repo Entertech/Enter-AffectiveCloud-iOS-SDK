@@ -107,7 +107,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()   
         separateY.removeAll()
-        dataSorce.append(contentsOf: array.smoothData())
+        dataSorce.append(contentsOf: array)
         
         //计算抽样
         sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount

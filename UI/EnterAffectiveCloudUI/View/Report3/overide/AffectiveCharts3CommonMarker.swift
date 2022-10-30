@@ -101,7 +101,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     
     override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         
-        let entryY = Int(entry.y)
+        let entryY = Int(round(entry.y))
         if anotherArray.count > 0 {
             var index = 0
             if let dataSets = chartView?.data?.dataSets {
