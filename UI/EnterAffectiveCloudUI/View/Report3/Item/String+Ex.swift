@@ -72,7 +72,7 @@ extension Array where Element == Double {
             }
 
             var lastValue = 0.0
-            var tmpData = self
+            var tmpData = [Double]()
             for e in self {
                 if e > 0 {
                     lastValue = e
