@@ -54,7 +54,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         }
         
         let marker = AffectiveCharts3CommonMarkerView(theme: theme)
-        marker.addInterval(anotherArray: cohereceArray)
+        marker.addInterval(anotherArray: stateArray)
         marker.chartView = chartView
         chartView.marker = marker
 
