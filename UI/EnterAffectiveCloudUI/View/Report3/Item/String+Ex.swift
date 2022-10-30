@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Accelerate
 
 var zoomText = "Zoom in on the curve and slide to view it."
 extension String {
@@ -48,18 +49,46 @@ extension Array where Element == Int {
 extension Array where Element == Double {
     func smoothData() -> [Double] {
         var newData = [Double]()
-        if (self.count == 0) {
-            return newData
-        } else {
-            for i in 0..<self.count {
-                if (i == 0 || i == self.count - 1) {
-                    newData.append(self[i])
+        var halfSmoothLen = 9
+        let recLen = self.count
+        let tmp = recLen / 100
+        let max = tmp > 16 ? tmp : 16
+        let min = max > recLen ? recLen : max
+        halfSmoothLen = min
+        
+        //无效点处理
+        var firstValue = 0.0
+        for e in self {
+            if e > 0 {
+                firstValue = e
+                break
+            }
+        }
+
+        var lastValue = 0.0
+        for e in self {
+            if e > 0 {
+                lastValue = e
+                newData.append(e)
+            } else {
+                if lastValue == 0 {
+                    newData.append(firstValue)
                 } else {
-                    let average = (Double(self[i - 1] + self[i] + self[i+1]) / 3.0)
-                    newData.append(average)
+                    newData.append(lastValue)
                 }
             }
-            return newData
         }
+        
+        var curveExpand = [Double]()
+        curveExpand.append(contentsOf: Array.init(repeating: newData.first ?? 0, count: halfSmoothLen))
+        curveExpand.append(contentsOf: newData)
+        curveExpand.append(contentsOf: Array.init(repeating: newData.last ?? 0, count: halfSmoothLen))
+        var curve = Array.init(repeating: 0.0, count: newData.count)
+        for i in 0..<newData.count {
+            curve[i] = vDSP.mean(Array(curveExpand[i...i+halfSmoothLen*2]))
+
+        }
+        
+        return curve
     }
 }

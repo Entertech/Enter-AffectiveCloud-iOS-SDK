@@ -95,42 +95,47 @@ public class AffectiveCharts3FlowLineView: UIView {
     
     func setLine() {
         let invalidData = 5.0
-        var initValue = 0.0 //初始数据
-        var initIndex = 0 //开始有值索引位置
-        for i in stride(from: 0, to: dataSource.count, by: sample) {
-            let value = dataSource[i]
-            if value > invalidData && initValue == 0 {
-                initValue = value
-                initIndex = i
-                break
+        var stateArray = [Int]()
+        var sampleArray = [Double]()
+        var len = dataSource.count
+        if let state = state {
+            
+            for i in stride(from: 0, to: len, by: sample) {
+                if i > state.count-1 {
+                    stateArray.append(0)
+                } else {
+                    stateArray.append(state[i])
+                }
             }
         }
+
         var yVals: [ChartDataEntry] = []
         var lineColors: [UIColor] = []
-        var len = dataSource.count
-        if let state = state { // 避免长度不一致
-            if state.count < len {
-                len = state.count
-            }
-        }
+        
+        
         for i in stride(from: 0, to: len, by: sample) {
+            sampleArray.append(dataSource[i])
+        }
+        
+        let smoothArray = sampleArray.smoothData()
+
+        for i in stride(from: 0, to: smoothArray.count, by: 1) {
             
-            if initIndex > i {
-                lineColors.append(.clear)
-                yVals.append(ChartDataEntry(x: Double(i)*interval, y: initValue))
+            let value = smoothArray[i]
+            if value < invalidData {
+                
             } else {
-                let value = dataSource[i]
-                if value < invalidData {
-                    
-                } else {
-                    if let state = state, state[i] > 0 {
+                if stateArray.count > 0 {
+                    if stateArray[i] > 0 {
                         lineColors.append(colors[3])
                     } else {
                         lineColors.append(colors[2])
                     }
-                    
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: value))
+                } else {
+                    lineColors.append(colors[2])
                 }
+                
+                yVals.append(ChartDataEntry(x: Double(i)*interval, y: value))
             }
         }
         let set = LineChartDataSet(entries: yVals, label: "")
