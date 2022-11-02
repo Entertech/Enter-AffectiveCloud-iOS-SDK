@@ -90,7 +90,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         let data = CombinedChartData()
         
         data.candleData = generateCandleData(low: low, high: high)
-        data.lineData = generateLineData(average, min: low)
+        data.lineData = generateLineData(average, max: high)
         
         self.xAxis.axisMinimum = -0.5
         self.xAxis.axisMaximum = data.xMax + 0.5
@@ -113,14 +113,14 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         }
     }
     
-    private func generateLineData(_ average: [Double], min: [Double]) -> LineChartData {
+    private func generateLineData(_ average: [Double], max: [Double]) -> LineChartData {
 
         var entries = [ChartDataEntry]()
         var entriesCircle = [ChartDataEntry]()
         for i in 0..<average.count {
             let entry = ChartDataEntry(x: Double(i), y: average[i])
             entries.append(entry)
-            if min[i] > 0 {
+            if max[i] > 0 {
                 entriesCircle.append(entry)
             }
         }
@@ -181,10 +181,10 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
         let leftX = Int(round(self.lowestVisibleX) - self.chartXMin)
         var rightX = Int(round(self.highestVisibleX) - self.chartXMin)
         if rightX > highDataList.count {
-            rightX = highDataList.count
+            rightX = highDataList.count-1
         }
         var maxValue: Double = 0
-        for i in leftX..<rightX {
+        for i in leftX...rightX {
             
             if highDataList[i] > maxValue {
                 maxValue = highDataList[i]
