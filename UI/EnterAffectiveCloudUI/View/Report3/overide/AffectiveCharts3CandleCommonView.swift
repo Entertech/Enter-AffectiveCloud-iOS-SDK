@@ -180,7 +180,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
     func overloadY() {
         let leftX = Int(round(self.lowestVisibleX) - self.chartXMin)
         var rightX = Int(round(self.highestVisibleX) - self.chartXMin)
-        if rightX > highDataList.count {
+        if rightX >= highDataList.count {
             rightX = highDataList.count-1
         }
         var maxValue: Double = 0

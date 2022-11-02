@@ -137,7 +137,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
     func overloadY() {
         let leftX = Int(round(self.lowestVisibleX) - self.chartXMin)
         var rightX = Int(round(self.highestVisibleX) - self.chartXMin)
-        if rightX > dataList.count {
+        if rightX >= dataList.count {
             rightX = dataList.count-1
         }
         var maxValue: Double = 0
