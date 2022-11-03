@@ -9,7 +9,7 @@
 import UIKit
 public enum AffectiveCharts3CohereceState: String {
     case low = "Low"
-    case nor = "Normal"
+    case nor = "Medium"
     case ele = "Elevated"
     case high = "High"
 

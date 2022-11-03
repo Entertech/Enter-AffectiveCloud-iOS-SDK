@@ -10,7 +10,7 @@ import Charts
 
 
 public class AffectiveCharts3PressureYFormatter: NSObject, AxisValueFormatter {
-    var language = ["High", "Elevated", "Normal", "Low"]
+    var language = ["High", "Elevated", "Medium", "Low"]
     init(lan: [String]) {
         super.init()
         self.language = lan
