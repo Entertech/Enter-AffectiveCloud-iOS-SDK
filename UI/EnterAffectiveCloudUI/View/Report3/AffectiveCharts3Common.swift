@@ -53,7 +53,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         titleView.setTheme(theme)
             .build(isAlreadShow: isFullScreen)
         titleView.delegate = self
-        self.backgroundColor = ColorExtension.bgZ1
+        self.backgroundColor = .clear
         chartView.leftAxis.labelTextColor = ColorExtension.textLv2
         chartView.leftAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .regular)
         chartView.leftAxis.gridColor = ColorExtension.lineLight

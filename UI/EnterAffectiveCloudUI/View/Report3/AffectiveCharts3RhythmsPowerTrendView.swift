@@ -251,7 +251,7 @@ public class AffectiveCharts3RhythmsPowerTrendView: UIView, ChartViewDelegate {
     }
     
     private func setUI() {
-        self.backgroundColor = ColorExtension.bgZ1
+        self.backgroundColor = .clear
         self.layer.cornerRadius = 8
         self.layer.masksToBounds = true
         

@@ -22,7 +22,7 @@ public class AffectiveCharts3CandleView: UIView {
     public func setTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
         self.startDate = Date.init(timeIntervalSince1970: theme.startTime)
-        self.backgroundColor = ColorExtension.bgZ1
+        self.backgroundColor = .clear
         chartView = AffectiveCharts3CandleCommonView(theme: theme)
         chartView.theme = theme
         titleView.setTheme(theme).build(isAlreadShow: isFullScreen)
