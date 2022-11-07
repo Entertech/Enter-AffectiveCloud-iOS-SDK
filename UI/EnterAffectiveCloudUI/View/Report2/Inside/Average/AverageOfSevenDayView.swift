@@ -336,7 +336,7 @@ class PrivateAverageOfSevenDayView: UIView {
                 if 28 + ((Float(averageValue)-Float(min))/Float(max-min)*100) < 46 {
                     $0.bottom.equalTo(-46)
                 } else {
-                    $0.bottom.equalTo(-28-((Float(averageValue)-Float(min))/Float(max-min)*100)).priority(.high)
+                    $0.bottom.equalTo(-28-((Float(averageValue)-Float(min))/Float(max-min)*100))
                 }
                 
             }
