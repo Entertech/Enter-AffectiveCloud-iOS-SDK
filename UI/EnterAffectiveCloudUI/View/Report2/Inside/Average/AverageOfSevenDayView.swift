@@ -215,9 +215,37 @@ class PrivateAverageOfSevenDayView: UIView {
         initFunction()
     }
     
-    public override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        guard let _ = self.superview else { return }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+    func initFunction() {
+        self.backgroundColor = .clear
+        self.addSubview(averageNumLabel)
+        self.addSubview(averageLabel)
+        self.addSubview(lastLabel)
+        self.addSubview(unitLabel)
+        self.addSubview(averageLine)
+        self.addSubview(meditationTimeLabel)
+        averageLine.backgroundColor = currentBarColor
+        averageLine.layer.cornerRadius = 1
+        averageLine.layer.masksToBounds = true
+        averageLabel.text = "Average"
+        averageLabel.textColor = UIColor.systemGray
+        averageLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        
+        averageNumLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        
+        unitLabel.font = UIFont.systemFont(ofSize: 12)
+        unitLabel.textColor = UIColor.systemGray
+        
+        lastLabel.font = UIFont.systemFont(ofSize: 12)
+        lastLabel.text = "Last 7 times"
+        lastLabel.textColor = UIColor.systemGray
+
+        meditationTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        
         lastLabel.snp.makeConstraints {
             $0.left.bottom.equalToSuperview()
         }
@@ -249,37 +277,6 @@ class PrivateAverageOfSevenDayView: UIView {
             $0.left.equalToSuperview()
             $0.top.equalToSuperview().offset(8)
         }
-    }
-    
-    public override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    func initFunction() {
-        self.backgroundColor = .clear
-        self.addSubview(averageNumLabel)
-        self.addSubview(averageLabel)
-        self.addSubview(lastLabel)
-        self.addSubview(unitLabel)
-        self.addSubview(averageLine)
-        self.addSubview(meditationTimeLabel)
-        averageLine.backgroundColor = currentBarColor
-        averageLine.layer.cornerRadius = 1
-        averageLine.layer.masksToBounds = true
-        averageLabel.text = "Average"
-        averageLabel.textColor = UIColor.systemGray
-        averageLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        
-        averageNumLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        
-        unitLabel.font = UIFont.systemFont(ofSize: 12)
-        unitLabel.textColor = UIColor.systemGray
-        
-        lastLabel.font = UIFont.systemFont(ofSize: 12)
-        lastLabel.text = "Last 7 times"
-        lastLabel.textColor = UIColor.systemGray
-
-        meditationTimeLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
     }
     
     func barLayout() {
