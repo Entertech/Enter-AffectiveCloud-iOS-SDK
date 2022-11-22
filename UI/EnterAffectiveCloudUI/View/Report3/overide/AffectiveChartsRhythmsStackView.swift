@@ -428,10 +428,10 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
                 if validCount == 0 {
                     return(0, 0, 0, 0, 0)
                 } else {
-                    let gammaEve = Int(round(gammaSum / Double(validCount)))
-                    let betaEve = Int(round(betaSum / Double(validCount)))
-                    let alphaEve = Int(round(alphaSum / Double(validCount)))
-                    let thetaEve = Int(round(thetaSum / Double(validCount)))
+                    let gammaEve = Int(ceil(gammaSum / Double(validCount)))
+                    let betaEve = Int(ceil(betaSum / Double(validCount)))
+                    let alphaEve = Int(ceil(alphaSum / Double(validCount)))
+                    let thetaEve = Int(ceil(thetaSum / Double(validCount)))
                     let deltaEve = 100 - gammaEve - betaEve - alphaEve - thetaEve
                     return (gammaEve, betaEve, alphaEve, thetaEve, deltaEve)
                 }
