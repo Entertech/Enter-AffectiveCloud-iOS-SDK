@@ -19,6 +19,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
     
     public override func build() {
         let invalidData = 5.0
+        let redColor = UIColor.colorWithHexString(hexColor: "FF6682")
         var stateArray = [Int]()
         var sampleArray = [Double]()
         var len = dataSorce.count
@@ -44,7 +45,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
             if stateArray[i] > 0 {
                 colors.append(theme.themeColor)
             } else {
-                colors.append(ColorExtension.lineLight)
+                colors.append(redColor)
             }
 
             if smoothArray[i] > invalidData { //小于无效值的不做点
