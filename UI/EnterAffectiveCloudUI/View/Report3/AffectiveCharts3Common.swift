@@ -27,7 +27,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     internal var minY: Int = 0
     internal var separateY: [Int] = []
     internal var sample = 3
-    internal var maxDataCount = 50000
+    internal var maxDataCount = 2000
     internal var isFullScreen = false
     internal var coherenceValue: [Int] = []
     

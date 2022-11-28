@@ -32,7 +32,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     internal var sample = 3
-    internal var maxDataCount = 50000
+    internal var maxDataCount = 2000
     internal var interval = 0.6
     
     var colors: [UIColor] = [.black, .lightGray, .red, .green, .blue]
