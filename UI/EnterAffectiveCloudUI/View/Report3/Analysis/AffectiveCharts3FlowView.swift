@@ -22,7 +22,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         self.startDate = date
         self.maxValue = max
         self.minValue = min
-        sample = data.count / maxDataCount == 0 ? 1 : data.count / maxDataCount
+        sample = data.count / maxDataCount == 0 ? 1 : Int(ceilf(Float(data.count) / Float(maxDataCount)))
         
         initChart()
         setLine()

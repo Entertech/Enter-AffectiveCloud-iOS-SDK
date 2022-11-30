@@ -110,7 +110,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         dataSorce.append(contentsOf: array)
         
         //计算抽样
-        sample = array.count / maxDataCount == 0 ? 1 : array.count / maxDataCount
+        sample = array.count / maxDataCount == 0 ? 1 : Int(ceilf(Float(array.count) / Float(maxDataCount)))
         
         // 检索基准为5的倍数的最大最小值
         var maxValue = 0
@@ -233,7 +233,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         }
         let set = LineChartDataSet(entries: yVals, label: "")
 
-        set.mode = .horizontalBezier
+        set.mode = .linear
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false

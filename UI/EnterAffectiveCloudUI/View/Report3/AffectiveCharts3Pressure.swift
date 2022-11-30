@@ -113,7 +113,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     public override func setChartProperty() -> Self {
         chartView.delegate = self
         chartView.backgroundColor = .clear
-        chartView.animate(xAxisDuration: 0.3)
+        chartView.animate(xAxisDuration: 0.5)
         chartView.drawGridBackgroundEnabled = true
         chartView.gridBackgroundColor = .clear
         chartView.drawBordersEnabled = false
@@ -181,7 +181,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             }
             
             let set = LineChartDataSet(entries: yVals, label: "")
-            set.mode = .horizontalBezier
+            set.mode = .linear
             set.drawCirclesEnabled = false
             set.drawCircleHoleEnabled = false
             set.drawFilledEnabled = false
