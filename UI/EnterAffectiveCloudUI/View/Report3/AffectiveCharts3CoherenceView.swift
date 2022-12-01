@@ -11,7 +11,7 @@ import Charts
 
 public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
     
-    public override func setMarker() -> Self {
+    public override func stepFiveSetMarker() -> Self {
 
         return self
     }
