@@ -20,7 +20,7 @@ public class AffectiveCharts3BarCommonView: UIView {
     private var panValue:CGFloat = 0
     private var bIsCalculatePan = false
     private var startDate: Date!
-    public func setTheme(_ theme: AffectiveChart3Theme) -> Self {
+    public func stepOneSetTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
         self.startDate = Date.init(timeIntervalSince1970: theme.startTime)
         self.backgroundColor = .clear
@@ -31,7 +31,7 @@ public class AffectiveCharts3BarCommonView: UIView {
         return self
     }
     
-    public func setProperty() -> Self {
+    public func stepTwoSetProperty() -> Self {
         chartView.dataSouceChanged = titleView
         chartView.delegate = self
         titleView.delegate = self
@@ -41,7 +41,7 @@ public class AffectiveCharts3BarCommonView: UIView {
         return self
     }
     
-    public func setLayout() -> Self {
+    public func stepThreeSetLayout() -> Self {
         self.addSubview(chartView)
         self.addSubview(titleView)
         chartView.snp.makeConstraints {

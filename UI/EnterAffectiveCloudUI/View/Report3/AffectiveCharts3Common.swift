@@ -31,7 +31,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     internal var isFullScreen = false
     internal var coherenceValue: [Int] = []
     
-    public func setCoherence(value: [Int]) -> Self {
+    public func stepTwoMultiSetCoherence(value: [Int]) -> Self {
         self.coherenceValue.removeAll()
         self.coherenceValue.append(contentsOf: value)
         return self
@@ -48,7 +48,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         }
     }
     
-    public func setTheme(_ theme: AffectiveChart3Theme) -> Self {
+    public func stepOneSetTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
         titleView.setTheme(theme)
             .build(isAlreadShow: isFullScreen)
@@ -95,7 +95,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
-    public func setMarker() -> Self {
+    public func stepFiveSetMarker() -> Self {
         let marker = AffectiveCharts3CommonMarkerView(theme: theme)
         marker.chartView = chartView
         chartView.marker = marker
@@ -103,7 +103,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
 
-    public func setData(_ array: [Int]) -> Self {
+    public func stepThreeSetData(_ array: [Int]) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()   
         separateY.removeAll()
@@ -178,7 +178,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
-    public func setLayout() -> Self {
+    public func stepTwoSetLayout() -> Self {
         self.addSubview(chartView)
         self.addSubview(titleView)
         chartView.snp.makeConstraints {
@@ -194,7 +194,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
-    public func setChartProperty() -> Self {
+    public func stepFourSetChartProperty() -> Self {
         yRender = AffectiveCharts3DynamicYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         
         chartView.leftYAxisRenderer = yRender

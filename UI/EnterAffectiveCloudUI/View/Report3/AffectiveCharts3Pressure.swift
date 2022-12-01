@@ -17,7 +17,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     private var startDate: Date!
     private var lastXValue: Double = 0
     weak var dataSouceChanged: AffectiveCharts3ChartChanged?
-    public func setTheme(_ theme: AffectiveChart3Theme, language: [String]) -> Self {
+    public func stepOneSetTheme(_ theme: AffectiveChart3Theme, language: [String]) -> Self {
         self.theme = theme
         self.startDate = theme.startDate
         titleView.setTheme(theme)
@@ -64,7 +64,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         return self
     }
     
-    public override func setData(_ array: [Int]) -> Self {
+    public override func stepThreeSetData(_ array: [Int]) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()
         separateY.removeAll()
@@ -82,7 +82,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         
     }
     
-    public override func setLayout() -> Self {
+    public override func stepTwoSetLayout() -> Self {
         self.addSubview(chartView)
         self.addSubview(titleView)
         self.addSubview(front1View)
@@ -110,7 +110,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         return self
     }
     
-    public override func setChartProperty() -> Self {
+    public override func stepFourSetChartProperty() -> Self {
         chartView.delegate = self
         chartView.backgroundColor = .clear
         chartView.animate(xAxisDuration: 0.5)
