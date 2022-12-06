@@ -30,10 +30,47 @@ public class AffectiveCharts3LineCommonView: UIView {
     internal var maxDataCount = 2000
     internal var isFullScreen = false
     internal var coherenceValue: [Int] = []
+    internal var qualityValue: [Bool] = []
     
     public func stepTwoMultiSetCoherence(value: [Int]) -> Self {
         self.coherenceValue.removeAll()
         self.coherenceValue.append(contentsOf: value)
+        return self
+    }
+    
+    public func setThreeMultiSetQuality(value: [Int]) -> Self {
+        self.qualityValue.removeAll()
+        var qualityTmp = value
+        if self.dataSorce.count > 0 { // 比对数组是否一致
+            if qualityTmp.count < self.dataSorce.count {
+                let len = dataSorce.count - qualityTmp.count
+                let appendMore = Array<Int>.init(repeating: 0, count: len)
+                qualityTmp.append(contentsOf: appendMore)
+            }
+        }
+        var apartCount = 0
+        //分为40, 向上取整
+        if qualityTmp.count < 40 {
+            apartCount = qualityTmp.count
+        } else {
+            apartCount = 40
+        }
+        let devide = Int(ceil(Double(qualityTmp.count) / Double(apartCount)))
+        for i in stride(from: 0, to: qualityTmp.count, by: devide) {
+            var apart = qualityTmp[i..<devide+i]
+            if qualityTmp.count - (i+devide) < devide {
+                apart.append(contentsOf: qualityTmp[i+devide..<qualityTmp.count])
+            }
+            let pass = apart.filter { value in
+                value > 1
+            }
+            let percent = Double(pass.count) / Double(apart.count)
+            if percent > 0.7 {
+                qualityValue.append(true)
+            } else {
+                qualityValue.append(false)
+            }
+        }
         return self
     }
     
@@ -48,6 +85,10 @@ public class AffectiveCharts3LineCommonView: UIView {
         }
     }
     
+    
+    /// 设置主题, 包括颜色, 时间等
+    /// - Parameter theme: AffectiveChart3Theme 主题
+    /// - Returns: self
     public func stepOneSetTheme(_ theme: AffectiveChart3Theme) -> Self {
         self.theme = theme
         titleView.setTheme(theme)
@@ -95,6 +136,9 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
+    
+    /// 设置气泡
+    /// - Returns: self
     public func stepFiveSetMarker() -> Self {
         let marker = AffectiveCharts3CommonMarkerView(theme: theme)
         marker.chartView = chartView
@@ -103,6 +147,10 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
 
+    
+    /// 设置数据
+    /// - Parameter array: 数据
+    /// - Returns: self
     public func stepThreeSetData(_ array: [Int]) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()   
@@ -178,6 +226,9 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
+    
+    /// layout
+    /// - Returns: self
     public func stepTwoSetLayout() -> Self {
         self.addSubview(chartView)
         self.addSubview(titleView)
@@ -194,6 +245,9 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
+    
+    /// 图表属性
+    /// - Returns: self
     public func stepFourSetChartProperty() -> Self {
         yRender = AffectiveCharts3DynamicYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         
@@ -214,8 +268,8 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
-    public func build() {
-        let invalidData = 5.0
+    public func build(isShowQuality: Bool = false) {
+        let invalidData = 1.0
         var sampleArray = [Double]()
         for i in stride(from: 0, to: dataSorce.count, by: sample) {
             sampleArray.append(Double(dataSorce[i]))
@@ -224,12 +278,34 @@ public class AffectiveCharts3LineCommonView: UIView {
         let smoothArray = sampleArray.smoothData()
         
         var yVals: [ChartDataEntry] = []
+        var lineColor: [UIColor] = []
+        var parts = 0.0
+        let devide = qualityValue.count
+        if devide > 0 {
+            parts = Double(smoothArray.count) / Double(devide)
+        }
+        var index = 1
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
+            if isShowQuality && parts > 0.0 { //显示质量
+                if sampleArray[i] < invalidData { //如果为无效数据
+                    lineColor.append(theme.invalidColor)
+                } else { //有效数据判断数据质量
+                    
+                    if Double(index) * parts < Double(i) {
+                        index += 1
+                    }
+                    if index - 1 >= devide {
+                        index = devide
+                    }
+                    if qualityValue[index-1] { //数据质量判断
+                        lineColor.append(theme.themeColor)
+                    } else {
+                        lineColor.append(theme.invalidColor)
+                    }
+                }
 
-            if smoothArray[i] > invalidData { //小于无效值的不做点
-                yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
             }
-            
+            yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
         }
         let set = LineChartDataSet(entries: yVals, label: "")
 
@@ -238,7 +314,12 @@ public class AffectiveCharts3LineCommonView: UIView {
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.lineWidth = 2
-        set.setColor(theme.themeColor)
+        if isShowQuality && parts > 0 {
+            set.colors = lineColor
+        } else {
+            set.setColor(theme.themeColor)
+        }
+        
         set.drawIconsEnabled = false
         set.highlightEnabled = true
         set.highlightLineWidth = 2

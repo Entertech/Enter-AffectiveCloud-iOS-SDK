@@ -35,6 +35,9 @@ public class AffectiveCharts3StackView: UIView {
     }
 
     
+    /// 设置线条是否可用
+    /// - Parameter value: Int 按位计算
+    /// - Returns: self
     public func stepTwoSetRhythmLineEnable(value: Int) -> Self {
         infoView.setLineEnable(value: value)
         let timeInterval = Date().timeIntervalSince1970
@@ -68,6 +71,12 @@ public class AffectiveCharts3StackView: UIView {
         return self
     }
     
+    
+    /// 设置参数
+    /// - Parameters:
+    ///   - theme: 主题
+    ///   - Color。线条颜色, 按钮颜色
+    /// - Returns: self
     public func stepOneSetParam(theme: AffectiveChart3Theme!, gammaColor:UIColor, betaColor:UIColor, alphaColor:UIColor, thetaColor: UIColor, deltaColor: UIColor, disableColor: UIColor, btnBgColor: UIColor) -> Self {
         infoView.alphaColor = alphaColor
         infoView.gamaColor = gammaColor

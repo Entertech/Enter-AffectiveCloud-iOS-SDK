@@ -17,7 +17,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
     }
     
     
-    public override func build() {
+    public override func build(isShowQuality: Bool = false) {
         let invalidData = 5.0
         let redColor = UIColor.colorWithHexString(hexColor: "FF6682")
         var stateArray = [Int]()
@@ -40,17 +40,47 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         let smoothArray = sampleArray.smoothData()
         var yVals: [ChartDataEntry] = []
         var colors: [UIColor] = []
-        
+        var parts = 0.0
+        let devide = qualityValue.count
+        if devide > 0 {
+            parts = Double(smoothArray.count) / Double(devide)
+        }
+        var index = 1
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
-            if stateArray[i] > 0 {
-                colors.append(theme.themeColor)
+
+            if isShowQuality && parts > 0.0 { //显示质量
+                if sampleArray[i] < invalidData { //如果为无效数据
+                    colors.append(theme.invalidColor)
+                } else { //有效数据判断数据质量
+                    
+                    if Double(index) * parts < Double(i) {
+                        index += 1
+                    }
+                    if index - 1 >= devide {
+                        index = devide
+                    }
+                    if qualityValue[index-1] { //数据质量判断
+                        if stateArray[i] > 0 {
+                            colors.append(theme.themeColor)
+                        } else {
+                            colors.append(redColor)
+                        }
+                    } else {
+                        colors.append(theme.invalidColor)
+                    }
+                }
+
             } else {
-                colors.append(redColor)
+                if stateArray[i] > 0 {
+                    colors.append(theme.themeColor)
+                } else {
+                    colors.append(redColor)
+                }
             }
 
-            if smoothArray[i] > invalidData { //小于无效值的不做点
-                yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
-            }
+
+            yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
+            
             
         }
         

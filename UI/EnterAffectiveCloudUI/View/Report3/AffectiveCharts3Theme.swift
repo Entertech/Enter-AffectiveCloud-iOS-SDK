@@ -46,4 +46,6 @@ public struct AffectiveChart3Theme {
     public var endDate: Date {
         return Date.init(timeIntervalSince1970: endTime) 
     }
+    
+    public var invalidColor = UIColor.init(red: 0.031, green: 0.04, blue: 0.055, alpha: 0.2)
 }

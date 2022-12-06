@@ -158,7 +158,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         return self
     }
     
-    public override func build() {
+    public override func build(isShowQuality: Bool = false) {
         let invalidData = 5
         var yVals: [ChartDataEntry] = []
         var data:LineChartData!
@@ -172,11 +172,36 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             let smoothArray = sampleArray.smoothData()
             
             var yVals: [ChartDataEntry] = []
+            var lineColor: [UIColor] = []
+            var parts = 0.0
+            let devide = qualityValue.count
+            if devide > 0 {
+                parts = Double(smoothArray.count) / Double(devide)
+            }
+            var index = 1
             for i in stride(from: 0, to: smoothArray.count, by: 1) {
+                if isShowQuality && parts > 0.0 { //显示质量
+                    if sampleArray[i] < invalidData { //如果为无效数据
+                        lineColor.append(theme.invalidColor)
+                    } else { //有效数据判断数据质量
+                        
+                        if Double(index) * parts < Double(i) {
+                            index += 1
+                        }
+                        if index - 1 >= devide {
+                            index = devide
+                        }
+                        if qualityValue[index-1] { //数据质量判断
+                            lineColor.append(theme.themeColor)
+                        } else {
+                            lineColor.append(theme.invalidColor)
+                        }
+                    }
 
-                if smoothArray[i] > invalidData { //小于无效值的不做点
-                    yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
                 }
+
+                yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
+                
                 
             }
             
@@ -186,7 +211,11 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             set.drawCircleHoleEnabled = false
             set.drawFilledEnabled = false
             set.lineWidth = 2
-            set.setColor(theme.themeColor)
+            if isShowQuality && parts > 0 {
+                set.colors = lineColor
+            } else {
+                set.setColor(theme.themeColor)
+            }
             set.drawIconsEnabled = false
             set.highlightEnabled = true
             set.highlightLineWidth = 2
