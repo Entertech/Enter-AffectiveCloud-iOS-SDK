@@ -47,29 +47,34 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         }
         var index = 1
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
-
-            if isShowQuality && parts > 0.0 { //显示质量
+            if isShowQuality {
                 if sampleArray[i] < invalidData { //如果为无效数据
                     colors.append(theme.invalidColor)
-                } else { //有效数据判断数据质量
-                    
-                    if Double(index) * parts < Double(i) {
-                        index += 1
-                    }
-                    if index - 1 >= devide {
-                        index = devide
-                    }
-                    if qualityValue[index-1] { //数据质量判断
+                } else {
+                    if parts > 0 {
+                        if Double(index) * parts < Double(i) {
+                            index += 1
+                        }
+                        if index - 1 >= devide {
+                            index = devide
+                        }
+                        if qualityValue[index-1] { //数据质量判断
+                            if stateArray[i] > 0 {
+                                colors.append(theme.themeColor)
+                            } else {
+                                colors.append(redColor)
+                            }
+                        } else {
+                            colors.append(theme.invalidColor)
+                        }
+                    } else {
                         if stateArray[i] > 0 {
                             colors.append(theme.themeColor)
                         } else {
                             colors.append(redColor)
                         }
-                    } else {
-                        colors.append(theme.invalidColor)
                     }
                 }
-
             } else {
                 if stateArray[i] > 0 {
                     colors.append(theme.themeColor)

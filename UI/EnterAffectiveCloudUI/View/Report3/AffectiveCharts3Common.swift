@@ -289,25 +289,30 @@ public class AffectiveCharts3LineCommonView: UIView {
         }
         var index = 1
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
-            if isShowQuality && parts > 0.0 { //显示质量
+            if isShowQuality {
                 if sampleArray[i] < invalidData { //如果为无效数据
                     lineColor.append(theme.invalidColor)
                 } else { //有效数据判断数据质量
-                    
-                    if Double(index) * parts < Double(i) {
-                        index += 1
-                    }
-                    if index - 1 >= devide {
-                        index = devide
-                    }
-                    if qualityValue[index-1] { //数据质量判断
-                        lineColor.append(theme.themeColor)
+                    if parts > 0 {
+                        if Double(index) * parts < Double(i) {
+                            index += 1
+                        }
+                        if index - 1 >= devide {
+                            index = devide
+                        }
+                        if qualityValue[index-1] { //数据质量判断
+                            lineColor.append(theme.themeColor)
+                        } else {
+                            lineColor.append(theme.invalidColor)
+                        }
                     } else {
-                        lineColor.append(theme.invalidColor)
+                        lineColor.append(theme.themeColor)
                     }
                 }
-
+            } else {
+                lineColor.append(theme.themeColor)
             }
+
             yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: Double(smoothArray[i])))
         }
         let set = LineChartDataSet(entries: yVals, label: "")
