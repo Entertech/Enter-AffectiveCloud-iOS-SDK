@@ -87,8 +87,6 @@ public class AffectiveCharts3FlowLineView: UIView {
     
     var lableCount: Int = 3
     
-    public var invalidColor = UIColor.init(red: 0.031, green: 0.04, blue: 0.055, alpha: 0.2)
-    
     private let chartView = LineChartView()
     
     func initChart() {
@@ -165,7 +163,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
             if isShowQuality {
                 if sampleArray[i] < invalidData { //如果为无效数据
-                    lineColor.append(invalidColor)
+                    lineColor.append(colors[4])
                 } else {
                     if parts > 0.0 { //显示质量
                         if Double(index) * parts < Double(i) {
@@ -185,7 +183,7 @@ public class AffectiveCharts3FlowLineView: UIView {
                                 lineColor.append(colors[2])
                             }
                         } else {
-                            lineColor.append(invalidColor)
+                            lineColor.append(colors[4])
                         }
                     }
                     
