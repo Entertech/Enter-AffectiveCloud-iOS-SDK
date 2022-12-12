@@ -70,6 +70,9 @@ public class AffectiveCharts3LineCommonView: UIView {
             } else {
                 qualityValue.append(false)
             }
+            if qualityTmp.count - (i+devide) < devide {
+                break
+            }
         }
         return self
     }

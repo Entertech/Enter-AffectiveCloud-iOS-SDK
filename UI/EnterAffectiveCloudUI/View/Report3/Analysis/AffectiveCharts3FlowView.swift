@@ -11,7 +11,7 @@ import UIKit
 
 public class AffectiveCharts3FlowLineView: UIView {
     
-    public required init(colors: [UIColor], data: [Double], labelCount: Int = 3, date: Date?=nil, state: [Int]?=nil, max: Double?=nil, min: Double?=nil, quality: [Int]? = nil) {
+    public required init(colors: [UIColor], data: [Double], labelCount: Int = 3, date: Date?=nil, state: [Int]?=nil, max: Double?=nil, min: Double?=nil, quality: [Int]? = nil, isShowQuality: Bool = false) {
         super.init(frame: CGRect.zero)
         guard colors.count >= 3 else {return}
         self.colors.removeAll()
@@ -22,6 +22,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         self.startDate = date
         self.maxValue = max
         self.minValue = min
+        self.isShowQuality = isShowQuality
         sample = data.count / maxDataCount == 0 ? 1 : Int(ceilf(Float(data.count) / Float(maxDataCount)))
         if let quality = quality {
             self.qualityValue.removeAll()
@@ -54,6 +55,9 @@ public class AffectiveCharts3FlowLineView: UIView {
                 } else {
                     qualityValue.append(false)
                 }
+                if qualityTmp.count - (i+devide) < devide {
+                    break
+                }
             }
         }
         
@@ -68,7 +72,7 @@ public class AffectiveCharts3FlowLineView: UIView {
     internal var maxDataCount = 2000
     internal var interval = 0.6
     internal var qualityValue: [Bool] = []
-    
+    internal var isShowQuality: Bool = false
     var colors: [UIColor] = [.black, .lightGray, .red, .green, .blue]
     
     var state: [Int]?
@@ -159,32 +163,33 @@ public class AffectiveCharts3FlowLineView: UIView {
         }
         var index = 1
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
-            if parts > 0.0 { //显示质量
+            if isShowQuality {
                 if sampleArray[i] < invalidData { //如果为无效数据
                     lineColor.append(invalidColor)
-                } else { //有效数据判断数据质量
-                    
-                    if Double(index) * parts < Double(i) {
-                        index += 1
-                    }
-                    if index - 1 >= devide {
-                        index = devide
-                    }
-                    if qualityValue[index-1] { //数据质量判断
-                        if stateArray.count > 0 {
-                            if stateArray[i] > 0 {
-                                lineColor.append(colors[3])
+                } else {
+                    if parts > 0.0 { //显示质量
+                        if Double(index) * parts < Double(i) {
+                            index += 1
+                        }
+                        if index - 1 >= devide {
+                            index = devide
+                        }
+                        if qualityValue[index-1] { //数据质量判断
+                            if stateArray.count > 0 {
+                                if stateArray[i] > 0 {
+                                    lineColor.append(colors[3])
+                                } else {
+                                    lineColor.append(colors[2])
+                                }
                             } else {
                                 lineColor.append(colors[2])
                             }
                         } else {
-                            lineColor.append(colors[2])
+                            lineColor.append(invalidColor)
                         }
-                    } else {
-                        lineColor.append(invalidColor)
                     }
+                    
                 }
-
             } else {
                 if stateArray.count > 0 {
                     if stateArray[i] > 0 {
