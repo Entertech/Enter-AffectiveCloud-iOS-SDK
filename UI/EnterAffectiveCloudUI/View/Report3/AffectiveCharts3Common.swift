@@ -38,7 +38,7 @@ public class AffectiveCharts3LineCommonView: UIView {
         return self
     }
     
-    public func stepThreeMultiSetQuality(value: [Int]) -> Self {
+    public func stepSixSetQuality(value: [Int]) -> Self {
         self.qualityValue.removeAll()
         var qualityTmp = value
         if self.dataSorce.count > 0 { // 比对数组是否一致
