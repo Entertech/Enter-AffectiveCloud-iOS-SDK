@@ -215,7 +215,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             set.drawCircleHoleEnabled = false
             set.drawFilledEnabled = false
             set.lineWidth = 2
-            if isShowQuality && parts > 0 {
+            if isShowQuality {
                 set.colors = lineColor
             } else {
                 set.setColor(theme.themeColor)

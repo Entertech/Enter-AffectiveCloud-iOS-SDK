@@ -100,7 +100,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.lineWidth = 2
-        set.setColors(colors, alpha: 1)
+        set.colors = colors
         set.drawIconsEnabled = false
         set.highlightEnabled = true
         set.highlightLineWidth = 2
