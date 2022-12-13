@@ -185,6 +185,16 @@ public class AffectiveCharts3FlowLineView: UIView {
                         } else {
                             lineColor.append(colors[4])
                         }
+                    } else {
+                        if stateArray.count > 0 {
+                            if stateArray[i] > 0 {
+                                lineColor.append(colors[3])
+                            } else {
+                                lineColor.append(colors[2])
+                            }
+                        } else {
+                            lineColor.append(colors[2])
+                        }
                     }
                     
                 }
