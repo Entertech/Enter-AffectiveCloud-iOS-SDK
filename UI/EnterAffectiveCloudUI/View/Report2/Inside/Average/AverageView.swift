@@ -160,9 +160,11 @@ public class PrivateAverageView: UIView {
                     icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                 }
                 if language == .en {
-                    self.setCompareText(name: name.rawValue, compare: compareText.rawValue)
+                    let named = otherName == nil ? name.rawValue : otherName ?? ""
+                    self.setCompareText(name: named, compare: compareText.rawValue)
                 } else {
-                    self.setCompareText(name: name.ch, compare: compareText.ch)
+                    let named = otherName == nil ? name.ch : otherName ?? ""
+                    self.setCompareText(name: named, compare: compareText.ch)
                 }
                     
             } else {
@@ -292,6 +294,8 @@ public class PrivateAverageView: UIView {
             chart.unitText = newValue.unit
         }
     }
+    
+    public var otherName: String? = nil
     
     private let bgLabel = UIView()
     private let icon = UIImageView()
