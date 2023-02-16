@@ -630,7 +630,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
         
         if options.contains(.flow) {
-            list.append("flow")
+            list.append("meditation")
         }
 
         return list
@@ -671,7 +671,7 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
         
         if options.contains(.flow) {
-            list.append("flow")
+            list.append("meditation")
         }
 
         return list
@@ -755,14 +755,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         }
         
         if options.contains(.flow_all) {
-            list.insert("flow_avg")
-            list.insert("flow_rec")
+            list.insert("meditation_avg")
+            list.insert("meditation_rec")
         }
         if options.contains(.flow_curve) {
-            list.insert("flow_rec")
+            list.insert("meditation_rec")
         }
         if options.contains(.flow_average) {
-            list.insert("flow_avg")
+            list.insert("meditation_avg")
         }
         return list
     }
@@ -1205,7 +1205,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
             }
         }
         
-        if list.contains("flow") {
+        if list.contains("meditation") {
             if let _ = self.emotionAffectiveInitialList {
                 self.emotionAffectiveInitialList?.insert(.flow)
             } else {

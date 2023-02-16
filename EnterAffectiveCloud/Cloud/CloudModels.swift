@@ -116,7 +116,7 @@ class CSKwargsJSONModel: HandyJSON {
         mapper <<<
             self.algorithmParam <-- "algorithm_params"
         mapper <<<
-            self.flowServices <-- "flow"
+            self.flowServices <-- "meditation"
     }
 }
 
@@ -562,7 +562,7 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
         mapper <<<
             self.coherenceList <-- "sub_coherence_fields"
         mapper <<<
-            self.flowList <-- "sub_flow_fields"
+            self.flowList <-- "sub_meditation_fields"
     }
 
     /// all property is nil the isNil: true
@@ -583,6 +583,10 @@ public class CSAffectiveJsonModel: HandyJSON {
     public var arousal: Float?
     public var coherence: Float?
     public var flow: Float?
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.flow  <-- "meditation"
+    }
 }
 
 /* Realtime affective
@@ -605,6 +609,11 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     public var flow: CSAffectiveJsonModel?
 
     public required init() {}
+    
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.flow <-- "meditation"
+    }
 
     /// all property is nil the isNil: true
     ///
@@ -634,6 +643,11 @@ public class CSAffectiveReportJsonModel: HandyJSON {
     public var coherence: CSReportCoherenceJsonModel?
     public var flow: CSReportFlowJsonModel?
     public required init() {}
+    
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.flow <-- "meditation"
+    }
 }
 
 public class CSReportAttentionJsonModel: HandyJSON {
@@ -666,9 +680,9 @@ public class CSReportFlowJsonModel: HandyJSON {
     public required init() {}
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
-            self.average <-- "flow_avg"
+            self.average <-- "meditation_avg"
         mapper <<<
-            self.list <-- "flow_rec"
+            self.list <-- "meditation_rec"
     }
 }
 
