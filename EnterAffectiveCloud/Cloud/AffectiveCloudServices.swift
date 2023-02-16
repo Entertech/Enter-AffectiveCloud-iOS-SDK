@@ -628,6 +628,10 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.coherence) {
             list.append("coherence")
         }
+        
+        if options.contains(.flow) {
+            list.append("flow")
+        }
 
         return list
     }
@@ -664,6 +668,10 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         
         if options.contains(.coherence) {
             list.append("coherence")
+        }
+        
+        if options.contains(.flow) {
+            list.append("flow")
         }
 
         return list
@@ -745,6 +753,17 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if options.contains(.coherence_curve) {
             list.insert("coherence_rec")
         }
+        
+        if options.contains(.flow_all) {
+            list.insert("flow_avg")
+            list.insert("flow_rec")
+        }
+        if options.contains(.flow_curve) {
+            list.insert("flow_rec")
+        }
+        if options.contains(.flow_average) {
+            list.insert("flow_avg")
+        }
         return list
     }
 
@@ -812,6 +831,14 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
                 return
             }
         }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.flow),
+            subscribeList.contains(.flow) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Flow unvailable, please start flow service first!")
+                return
+            }
+        }
     }
 
     private func checkEmotionAffectiveIsInitial(affectiveList: AffectiveDataServiceOptions) {
@@ -874,7 +901,15 @@ extension AffectiveCloudServices: CSEmotionServiceProcotol {
         if let flag = self.emotionAffectiveInitialList?.contains(.coherence),
             affectiveList.contains(.coherence){
             if !flag {
-                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Coherence unvailable, please start coherence service first!")
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Coherence unvailable, generate report failed!")
+                return
+            }
+        }
+        
+        if let flag = self.emotionAffectiveInitialList?.contains(.flow),
+            affectiveList.contains(.flow) {
+            if !flag {
+                self.delegate?.error(client: self.client, request: nil, error: .noAffectiveService, message: "CSRequestError: Flow unvailable, generate report failed!")
                 return
             }
         }
@@ -1169,5 +1204,14 @@ extension AffectiveCloudServices: WebSocketDelegate {
                 self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .coherence)
             }
         }
+        
+        if list.contains("flow") {
+            if let _ = self.emotionAffectiveInitialList {
+                self.emotionAffectiveInitialList?.insert(.flow)
+            } else {
+                self.emotionAffectiveInitialList = AffectiveDataServiceOptions(arrayLiteral: .flow)
+            }
+        }
+        
     }
 }

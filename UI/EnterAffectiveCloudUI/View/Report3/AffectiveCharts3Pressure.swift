@@ -210,7 +210,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
             }
             
             let set = LineChartDataSet(entries: yVals, label: "")
-            set.mode = .linear
+            set.mode = .horizontalBezier
             set.drawCirclesEnabled = false
             set.drawCircleHoleEnabled = false
             set.drawFilledEnabled = false

@@ -110,6 +110,7 @@ public extension AffectiveDataSubscribeOptions {
     static let relaxation_child = AffectiveDataSubscribeOptions(rawValue: 1 << 6)
     static let sleep = AffectiveDataSubscribeOptions(rawValue: 1 << 7)
     static let coherence = AffectiveDataSubscribeOptions(rawValue: 1 << 8)
+    static let flow = AffectiveDataSubscribeOptions(rawValue: 1 << 9)
 }
 
 public struct AffectiveDataSubscribeOptions: OptionSet {
@@ -129,6 +130,7 @@ public extension AffectiveDataServiceOptions {
     static let relaxation_child = AffectiveDataServiceOptions(rawValue: 1 << 6)
     static let sleep = AffectiveDataServiceOptions(rawValue: 1 << 7)
     static let coherence = AffectiveDataServiceOptions(rawValue: 1 << 8)
+    static let flow = AffectiveDataServiceOptions(rawValue: 1 << 9)
 }
 
 public struct AffectiveDataServiceOptions: OptionSet {
@@ -181,4 +183,8 @@ public extension CSAffectiveReportOptions {
     static let coherence_all = CSAffectiveReportOptions(rawValue: 1 << 24)
     static let coherence_average = CSAffectiveReportOptions(rawValue: 1 << 25)
     static let coherence_curve = CSAffectiveReportOptions(rawValue: 1 << 26)
+    
+    static let flow_all = CSAffectiveReportOptions(rawValue: 1 << 27)
+    static let flow_average = CSAffectiveReportOptions(rawValue: 1 << 28)
+    static let flow_curve = CSAffectiveReportOptions(rawValue: 1 << 29)
 }

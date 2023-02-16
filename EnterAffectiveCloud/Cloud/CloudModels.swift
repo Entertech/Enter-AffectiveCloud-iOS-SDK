@@ -67,6 +67,7 @@ class CSKwargsJSONModel: HandyJSON {
     var pleasureServices: [String]?
     var arousalServices: [String]?
     var coherenceServices: [String]?
+    var flowServices: [String]?
     required init() { }
 
     func mapping(mapper: HelpingMapper) {
@@ -114,6 +115,8 @@ class CSKwargsJSONModel: HandyJSON {
             self.coherenceServices <-- "coherence"
         mapper <<<
             self.algorithmParam <-- "algorithm_params"
+        mapper <<<
+            self.flowServices <-- "flow"
     }
 }
 
@@ -198,7 +201,7 @@ public class CSResponseDataJSONModel: HandyJSON {
     public var pleasureServiceList: [String]?
     public var arousalServiceList: [String]?
     public var coherenceServiceList: [String]?
-
+    public var flowServiceList: [String]?
     public required init() { }
     public func mapping(mapper: HelpingMapper) {
         mapper <<<
@@ -538,6 +541,7 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
     public var pleasureList: [String]?
     public var arousalList: [String]?
     public var coherenceList: [String]?
+    public var flowList: [String]?
     public required init() {}
 
     public func mapping(mapper: HelpingMapper) {
@@ -557,12 +561,14 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
             self.arousalList <-- "sub_arousal_fields"
         mapper <<<
             self.coherenceList <-- "sub_coherence_fields"
+        mapper <<<
+            self.flowList <-- "sub_flow_fields"
     }
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attentionList == nil)&&(self.relaxationList == nil)&&(self.pressureList == nil)&&(self.pleasureList == nil)&&(self.arousalList == nil)&&(self.attentionChildList == nil)&&(self.relaxationChildList == nil)&&(self.coherenceList == nil)
+        return (self.attentionList == nil)&&(self.relaxationList == nil)&&(self.pressureList == nil)&&(self.pleasureList == nil)&&(self.arousalList == nil)&&(self.attentionChildList == nil)&&(self.relaxationChildList == nil)&&(self.coherenceList == nil)&&(self.flowList == nil)
     }
 }
 
@@ -576,6 +582,7 @@ public class CSAffectiveJsonModel: HandyJSON {
     public var pleasure: Float?
     public var arousal: Float?
     public var coherence: Float?
+    public var flow: Float?
 }
 
 /* Realtime affective
@@ -595,13 +602,14 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
     public var pleasure: CSAffectiveJsonModel?
     public var arousal: CSAffectiveJsonModel?
     public var coherence: CSAffectiveJsonModel?
+    public var flow: CSAffectiveJsonModel?
 
     public required init() {}
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attention_chd?.attention_chd == nil)&&(self.relaxation_chd?.relaxation_chd == nil)&&(self.coherence?.coherence == nil)
+        return (self.attention?.attention == nil)&&(self.relaxation?.relaxation == nil)&&(self.pressure?.pressure == nil)&&(self.pleasure?.pleasure == nil)&&(self.arousal?.arousal == nil)&&(self.attention_chd?.attention_chd == nil)&&(self.relaxation_chd?.relaxation_chd == nil)&&(self.coherence?.coherence == nil)&&(self.flow?.flow==nil)
     }
 }
 
@@ -624,6 +632,7 @@ public class CSAffectiveReportJsonModel: HandyJSON {
     public var pleasure: CSReportPleasureJsonModel?
     public var arousal: CSReportArousalJsonModel?
     public var coherence: CSReportCoherenceJsonModel?
+    public var flow: CSReportFlowJsonModel?
     public required init() {}
 }
 
@@ -648,6 +657,18 @@ public class CSReportRelaxtionJsonModel: HandyJSON {
             self.average <-- "relaxation_avg"
         mapper <<<
             self.list <-- "relaxation_rec"
+    }
+}
+
+public class CSReportFlowJsonModel: HandyJSON {
+    public var average: Float?
+    public var list: [Float]?
+    public required init() {}
+    public func mapping(mapper: HelpingMapper) {
+        mapper <<<
+            self.average <-- "flow_avg"
+        mapper <<<
+            self.list <-- "flow_rec"
     }
 }
 
