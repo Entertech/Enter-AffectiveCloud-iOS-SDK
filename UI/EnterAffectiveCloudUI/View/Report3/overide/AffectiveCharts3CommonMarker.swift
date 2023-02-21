@@ -102,7 +102,20 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
     override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         
         let entryY = Int(round(entry.y))
-        if anotherArray.count > 0 {
+        if theme.chartType == .flow {
+            if entryY > 66 {
+                numlabel.text = theme.compareName[2]
+            } else if entryY > 33 {
+                numlabel.text = theme.compareName[1]
+            } else {
+                numlabel.text = theme.compareName[0]
+            }
+            if theme.style == .year || theme.style == .month {
+                if entryY == 0 {
+                    numlabel.text = "--"
+                }
+            }
+        } else if anotherArray.count > 0 { //coherence
             var index = 0
             if let dataSets = chartView?.data?.dataSets {
                 index = dataSets.first?.entryIndex(entry: entry) ?? 0

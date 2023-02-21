@@ -14,3 +14,4 @@ public enum AffectiveCharts3CohereceState: String {
     case high = "High"
 
 }
+
