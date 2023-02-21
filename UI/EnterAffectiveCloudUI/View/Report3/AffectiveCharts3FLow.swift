@@ -12,6 +12,25 @@ import Charts
 public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
     public override func stepThreeSetData(_ array: [Int]) -> Self {
         guard array.count > 0 else {return self}
+        var bIsAddYAxis = false
+        for e in chartView.subviews {
+            if e.isKind(of: UIImageView.classForCoder()) {
+                bIsAddYAxis = true
+                break
+            }
+        }
+        if !bIsAddYAxis {
+            let yAxisLine = UIImageView()
+            yAxisLine.contentMode = .scaleToFill
+            yAxisLine.image = UIImage.loadImage(name: "flow_y", any: classForCoder)
+            chartView.addSubview(yAxisLine)
+            yAxisLine.snp.makeConstraints {
+                $0.leading.equalToSuperview()
+                $0.width.equalTo(4)
+                $0.top.equalToSuperview()
+                $0.bottom.equalToSuperview().offset(-14)
+            }
+        }
         dataSorce.removeAll()
         separateY.removeAll()
         dataSorce.append(contentsOf: array)
