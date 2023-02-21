@@ -87,7 +87,7 @@ public class AffectiveCharts3FlowLineView: UIView {
     
     var lableCount: Int = 3
     
-    private let chartView = LineChartView()
+    public let chartView = LineChartView()
     
     func initChart() {
         self.addSubview(chartView)
