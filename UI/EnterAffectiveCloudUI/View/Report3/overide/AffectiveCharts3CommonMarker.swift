@@ -110,6 +110,7 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
             } else {
                 numlabel.text = theme.compareName[0]
             }
+            unitLabel.text = ""
             if theme.style == .year || theme.style == .month {
                 if entryY == 0 {
                     numlabel.text = "--"
