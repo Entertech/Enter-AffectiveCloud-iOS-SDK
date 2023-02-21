@@ -129,19 +129,7 @@ public class AffectiveCharts3FlowLineView: UIView {
         chartView.legend.enabled = false
         chartView.highlightPerTapEnabled = false
         chartView.highlightPerDragEnabled = false
-        
-        if self.state == nil {
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = chartView.bounds
-            gradientLayer.colors = [self.colors[0].cgColor,
-                                    self.colors[2].cgColor,
-                                    self.colors[2].cgColor]
-            gradientLayer.locations = [ 0.60, 0.61]
-            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-            gradientLayer.endPoint = CGPoint(x:0, y:1)
-            self.layer.addSublayer(gradientLayer)
-            gradientLayer.mask = chartView.layer
-        }
+
     }
     
     func setLine() {
