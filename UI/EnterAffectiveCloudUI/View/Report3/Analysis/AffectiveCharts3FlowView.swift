@@ -139,7 +139,7 @@ public class AffectiveCharts3FlowLineView: UIView {
             gradientLayer.locations = [ 0.60, 0.61]
             gradientLayer.startPoint = CGPoint(x: 0, y: 0)
             gradientLayer.endPoint = CGPoint(x:0, y:1)
-            self.chartView.layer.addSublayer(gradientLayer)
+            self.layer.addSublayer(gradientLayer)
             gradientLayer.mask = chartView.layer
         }
     }
