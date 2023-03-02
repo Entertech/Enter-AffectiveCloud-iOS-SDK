@@ -362,7 +362,7 @@ public class CSBiodataPEPRJsonModel: HandyJSON {
     public var bcgQuality: Int?
     public var rwQuality: Int?
     public var hr: Int?
-    public var rr: Int?
+    public var rr: Float?
     public var hrv: Float?
     public var bcgWave: [Float]?
     public var rwWave: [Float]?
