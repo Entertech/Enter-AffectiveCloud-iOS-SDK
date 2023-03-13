@@ -64,7 +64,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
         return self
     }
     
-    public override func stepThreeSetData(_ array: [Int]) -> Self {
+    public override func stepThreeSetData(_ array: [Double]) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()
         separateY.removeAll()
@@ -159,7 +159,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     }
     
     public override func build(isShowQuality: Bool = false) {
-        let invalidData = 5
+        let invalidData: Double = 5
         var yVals: [ChartDataEntry] = []
         var data:LineChartData!
         if theme.style == .session {

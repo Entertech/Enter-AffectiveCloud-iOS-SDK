@@ -21,7 +21,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     
     internal var yRender: AffectiveCharts3DynamicYRender!
     
-    internal var dataSorce: [Int] = []
+    internal var dataSorce: [Double] = []
     
     internal var maxY: Int = 100
     internal var minY: Int = 0
@@ -154,7 +154,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
-    public func stepThreeSetData(_ array: [Int]) -> Self {
+    public func stepThreeSetData(_ array: [Double]) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()   
         separateY.removeAll()
@@ -164,14 +164,16 @@ public class AffectiveCharts3LineCommonView: UIView {
         sample = array.count / maxDataCount == 0 ? 1 : Int(ceilf(Float(array.count) / Float(maxDataCount)))
         
         // 检索基准为5的倍数的最大最小值
-        var maxValue = 0
-        var minValue = 150
+        var maxValueFloat: Double = 0
+        var minValueFloat: Double = 150
         let noZeroArray = array.filter({ v in
             v > 0
         })
         
-        maxValue = noZeroArray.max() ?? 150
-        minValue = noZeroArray.min() ?? 0
+        maxValueFloat = noZeroArray.max() ?? 150
+        minValueFloat = noZeroArray.min() ?? 0
+        var maxValue = Int(maxValueFloat)
+        var minValue = Int(minValueFloat)
         
         let tempMax5 = (maxValue / 5 + 1) * 5 > 150 ? 150 : (maxValue / 5 + 1) * 5
         let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5

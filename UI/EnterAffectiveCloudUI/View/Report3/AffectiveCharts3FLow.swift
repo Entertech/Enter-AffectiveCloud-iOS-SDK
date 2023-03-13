@@ -10,7 +10,7 @@ import UIKit
 import Charts
 
 public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
-    public override func stepThreeSetData(_ array: [Int]) -> Self {
+    public override func stepThreeSetData(_ array: [Double]) -> Self {
         guard array.count > 0 else {return self}
         var bIsAddYAxis = false
         for e in chartView.subviews {
