@@ -172,61 +172,46 @@ public class AffectiveCharts3LineCommonView: UIView {
         
         maxValueFloat = noZeroArray.max() ?? 150
         minValueFloat = noZeroArray.min() ?? 0
-        var maxValue = Int(maxValueFloat)
+        var maxValue = Int(ceil(maxValueFloat))
         var minValue = Int(minValueFloat)
         
         let tempMax5 = (maxValue / 5 + 1) * 5 > 150 ? 150 : (maxValue / 5 + 1) * 5
         let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
-
-        var bSeparateIsSmall = false
-        if (maxValue - minValue) / 4 >= 2 { // 有时候间距会非常小,这时候需要扩展最大最小值
+        var scaled = 5
+        if (maxValue - minValue) / 4 > 2 { // 有时候间距会非常小,这时候需要扩展最大最小值
             maxValue = tempMax5
             minValue = tempMin5
         } else {
-            // 修改基准为2的倍数
-            let tempMax2 = (maxValue / 2 + 1) * 2 > 150 ? 150 : (maxValue / 2 + 1) * 2
-            let tempMin2 = (minValue / 2 ) * 2 < 0 ? 0 : (minValue / 2) * 2
-            maxValue = tempMax2
-            minValue = tempMin2
-            bSeparateIsSmall = true
+            scaled = 1
         }
         // 开始计算Y分割
-        if !bSeparateIsSmall {
-            let scaled = 5
-            for i in (0...5) {
-                let scale = scaled * i
-                if (minValue-scale) < 0 {
-                    if ((maxValue+scale) - minValue) % 4 == 0 {
-                        chartView.leftAxis.axisMaximum = Double(maxValue+scale)
-                        chartView.leftAxis.axisMinimum = Double(minValue)
-                        separateY.append(minValue)
-                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*3/4)
-                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*2/4)
-                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*1/4)
-                        separateY.append(maxValue+scale)
-                        break
-                    }
-                } else {
-                    if (maxValue - (minValue-scale)) % 4 == 0 {
-                        chartView.leftAxis.axisMaximum = Double(maxValue)
-                        chartView.leftAxis.axisMinimum = Double(minValue-scale)
-                        separateY.append(minValue-scale)
-                        separateY.append(maxValue-(maxValue-minValue+scale)*3/4)
-                        separateY.append(maxValue-(maxValue-minValue+scale)*2/4)
-                        separateY.append(maxValue-(maxValue-minValue+scale)*1/4)
-                        separateY.append(maxValue)
-                        break
-                    }
+
+        
+        for i in (0...5) {
+            let scale = scaled * i
+            if (minValue-scale) < 0 {
+                if ((maxValue+scale) - minValue) % 4 == 0 {
+                    chartView.leftAxis.axisMaximum = Double(maxValue+scale)
+                    chartView.leftAxis.axisMinimum = Double(minValue)
+                    separateY.append(minValue)
+                    separateY.append((maxValue+scale)-(maxValue-minValue+scale)*3/4)
+                    separateY.append((maxValue+scale)-(maxValue-minValue+scale)*2/4)
+                    separateY.append((maxValue+scale)-(maxValue-minValue+scale)*1/4)
+                    separateY.append(maxValue+scale)
+                    break
+                }
+            } else {
+                if (maxValue - (minValue-scale)) % 4 == 0 {
+                    chartView.leftAxis.axisMaximum = Double(maxValue)
+                    chartView.leftAxis.axisMinimum = Double(minValue-scale)
+                    separateY.append(minValue-scale)
+                    separateY.append(maxValue-(maxValue-minValue+scale)*3/4)
+                    separateY.append(maxValue-(maxValue-minValue+scale)*2/4)
+                    separateY.append(maxValue-(maxValue-minValue+scale)*1/4)
+                    separateY.append(maxValue)
+                    break
                 }
             }
-        } else {
-            chartView.leftAxis.axisMaximum = Double(minValue+8)
-            chartView.leftAxis.axisMinimum = Double(minValue)
-            separateY.append(minValue)
-            separateY.append(minValue+2)
-            separateY.append(minValue+4)
-            separateY.append(minValue+6)
-            separateY.append(minValue+8)
         }
         return self
     }
