@@ -47,15 +47,7 @@ extension Array where Element == Int {
 }
 
 extension Array where Element == Double {
-    func smoothData() -> [Double] {
-        
-//        var halfSmoothLen = 9
-//        let recLen = self.count
-//        let tmp = recLen / 100
-//        let max = tmp > 16 ? tmp : 16
-//        let min = max > recLen ? recLen : max
-//        halfSmoothLen = min
-        
+    func smoothData(invalidValue: Double = 0) -> [Double] {
 
         var newData = [Double]()
         if (self.count == 0) {
@@ -63,27 +55,50 @@ extension Array where Element == Double {
         } else {
             
             //无效点处理
-            var firstValue = 0.0
+            var firstValue = invalidValue
+            
             for e in self {
-                if e > 0 {
-                    firstValue = e
-                    break
-                }
-            }
-
-            var lastValue = 0.0
-            var tmpData = [Double]()
-            for e in self {
-                if e > 0 {
-                    lastValue = e
-                    tmpData.append(e)
+                if e < invalidValue {
+                    if e < invalidValue {
+                        firstValue = e
+                        break
+                    }
                 } else {
-                    if lastValue == 0 {
-                        tmpData.append(firstValue)
-                    } else {
-                        tmpData.append(lastValue)
+                    if e > invalidValue {
+                        firstValue = e
+                        break
                     }
                 }
+
+            }
+
+            var lastValue = invalidValue
+            var tmpData = [Double]()
+            for e in self {
+                if invalidValue > 0 {
+                    if e < invalidValue {
+                        lastValue = e
+                        tmpData.append(e)
+                    } else {
+                        if lastValue == invalidValue {
+                            tmpData.append(firstValue)
+                        } else {
+                            tmpData.append(lastValue)
+                        }
+                    }
+                } else {
+                    if e > invalidValue {
+                        lastValue = e
+                        tmpData.append(e)
+                    } else {
+                        if lastValue == invalidValue {
+                            tmpData.append(firstValue)
+                        } else {
+                            tmpData.append(lastValue)
+                        }
+                    }
+                }
+
             }
             for i in 0..<tmpData.count {
                 if (i == 0 || i == tmpData.count - 1) {

@@ -146,12 +146,19 @@ public class AffectiveCharts3FlowLineView: UIView {
                     stateArray.append(state[i])
                 }
             }
+        } else {
+            
         }
         for i in stride(from: 0, to: len, by: sample) {
             sampleArray.append(dataSource[i])
         }
+        var smoothArray: [Double]
+        if stateArray.count > 0 {
+            smoothArray = sampleArray.smoothData()
+        } else {
+            smoothArray = sampleArray.smoothData(invalidValue: 100)
+        }
         
-        let smoothArray = sampleArray.smoothData()
 
         var yVals: [ChartDataEntry] = []
         var lineColor: [UIColor] = []
