@@ -27,8 +27,8 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
             yAxisLine.snp.makeConstraints {
                 $0.leading.equalToSuperview().offset(8)
                 $0.width.equalTo(4)
-                $0.top.equalToSuperview().offset(92)
-                $0.bottom.equalToSuperview().offset(-14)
+                $0.top.equalToSuperview().offset(90)
+                $0.bottom.equalToSuperview().offset(-16)
             }
         }
         dataSorce.removeAll()
