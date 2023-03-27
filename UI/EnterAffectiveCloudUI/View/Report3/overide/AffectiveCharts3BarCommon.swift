@@ -161,6 +161,12 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         } else if maxY <= 8 {
             gotIt = 8
             part = 4
+        } else if maxY <= 12 {
+            gotIt = 12
+            part = 3
+        } else if maxY <= 20 {
+            gotIt = 20
+            part = 4
         } else {
             for i in 0...10 {
                 let value = 10 * Int(round(maxY / 10.0)) + 10 + i*5
@@ -186,14 +192,7 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         let partValue = Int(gotIt)/(part)
         for i in 0...part {
             let yAxis = partValue*i
-//            print("maxAxis:\(yAxis)  part:\(i)")
             limitArray.append(yAxis)
-//            let limitLine = ChartLimitLine.init(limit: Double(yAxis), label: "\(yAxis)")
-//            limitLine.drawLabelEnabled = false
-//            limitLine.lineWidth = 1
-//            limitLine.lineDashLengths = [3, 2]
-//            limitLine.lineColor = ColorExtension.lineLight
-//            self.leftAxis.addLimitLine(limitLine)
         }
 
         yRender?.entries = limitArray

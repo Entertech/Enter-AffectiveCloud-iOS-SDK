@@ -25,7 +25,7 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
             yAxisLine.image = UIImage.loadImage(name: "flow_y", any: classForCoder)
             chartView.addSubview(yAxisLine)
             yAxisLine.snp.makeConstraints {
-                $0.leading.equalToSuperview()
+                $0.leading.equalToSuperview().offset(8)
                 $0.width.equalTo(4)
                 $0.top.equalToSuperview().offset(92)
                 $0.bottom.equalToSuperview().offset(-14)

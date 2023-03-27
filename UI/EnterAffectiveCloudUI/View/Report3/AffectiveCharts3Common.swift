@@ -360,64 +360,6 @@ extension AffectiveCharts3LineCommonView {
 extension AffectiveCharts3LineCommonView: AffectiveCharts3ExpandDelegate {
     func expand(flag: Bool) {
         
-        if let vc = self.parentViewController(), let view = vc.view, let parent = self.superview?.superview{
-            var sv: UIScrollView?
-            for e in view.subviews {
-                if e.isKind(of: UIScrollView.self) {
-                    sv = e as? UIScrollView
-                    break
-                }
-            }
-            
-            let orginFrame = view.frame
-            let bHeight = UIScreen.main.bounds.height
-            let bWidth = UIScreen.main.bounds.width
-            if flag {
-                sv?.setContentOffset(CGPoint(x: 0, y: 36), animated: true)
-                sv?.isScrollEnabled = false
-                chartView.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(80)
-                    $0.trailing.equalToSuperview().offset(-80)
-                    $0.bottom.equalToSuperview().offset(-32)
-                }
-                titleView.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(80)
-                    $0.trailing.equalToSuperview().offset(-80)
-                }
-                parent.snp.updateConstraints {
-                    $0.height.equalTo(bWidth)
-                }
-                vc.navigationController?.setNavigationBarHidden(true, animated: true)
-                vc.tabBarController?.tabBar.isHidden = true
-                view.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi*1/2))
-                view.frame.size.height = bHeight
-                view.frame.origin.y = 0
-                view.frame.origin.x = -orginFrame.height+bWidth
-            } else {
-                sv?.isScrollEnabled = true
-                sv?.setContentOffset(.zero, animated: true)
-                view.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-                chartView.snp.updateConstraints {
-                    $0.leading.equalToSuperview().offset(0)
-                    $0.trailing.equalToSuperview().offset(0)
-                    $0.bottom.equalToSuperview().offset(-8)
-                }
-                titleView.snp.updateConstraints { make in
-                    make.leading.equalToSuperview().offset(0)
-                    make.trailing.equalToSuperview().offset(0)
-                }
-
-                view.frame.origin.y = 0
-                view.frame.origin.x = 0
-                view.frame.size.width = bWidth
-                view.frame.size.height = bHeight
-                view.parentViewController()?.navigationController?.setNavigationBarHidden(false, animated: true)
-                parent.snp.updateConstraints {
-                    $0.height.equalTo(311)
-                }
-                
-            }
-        }
         
     }
     
