@@ -40,10 +40,9 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
         chartView.leftAxis.drawLabelsEnabled = false
         chartView.leftAxis.axisMaximum = Double(100)
         chartView.leftAxis.axisMinimum = Double(0)
-        separateY.append(0)
-        separateY.append(33)
-        separateY.append(66)
-        separateY.append(99)
+        separateY.append(1)
+        separateY.append(32)
+        separateY.append(67)
 
         return self
     }
