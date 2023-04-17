@@ -43,7 +43,7 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
         separateY.append(1)
         separateY.append(32)
         separateY.append(67)
-
+        separateY.append(99)
         return self
     }
     
