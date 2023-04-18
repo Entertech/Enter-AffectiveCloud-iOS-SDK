@@ -104,8 +104,6 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         let entryY = Int(round(entry.y))
         if theme.chartType == .flow {
             if entryY < 34 {
-                numlabel.text = theme.compareName[2]
-            } else if entryY < 66 {
                 numlabel.text = theme.compareName[1]
             } else {
                 numlabel.text = theme.compareName[0]

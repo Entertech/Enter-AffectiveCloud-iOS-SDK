@@ -40,10 +40,25 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
         chartView.leftAxis.drawLabelsEnabled = false
         chartView.leftAxis.axisMaximum = Double(100)
         chartView.leftAxis.axisMinimum = Double(0)
-        separateY.append(1)
-        separateY.append(32)
-        separateY.append(67)
-        separateY.append(99)
+        for e in 1..<4 {
+            var labelName = ""
+            if e == 1 {
+                labelName = theme.compareName[1]
+            } else if e == 3 {
+                labelName = theme.compareName[0]
+            }
+            
+            let avgLine = ChartLimitLine(limit: Double(e)*33.3, label: labelName)
+            avgLine.lineDashPhase = 2.0
+            avgLine.lineDashLengths = [2.0, 4.0]
+            avgLine.lineColor = ColorExtension.lineLight
+            avgLine.lineWidth = 0.5
+            avgLine.valueTextColor = ColorExtension.textLv2
+            avgLine.valueFont = UIFont.systemFont(ofSize: 12)
+            avgLine.labelPosition = .leftBottom
+            chartView.leftAxis.addLimitLine(avgLine)
+        }
+        
         return self
     }
     
@@ -115,8 +130,6 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
         set.gradientPositions = [33, 34]
         let data = LineChartData(dataSet: set)
         chartView.data = data
-        yRender?.entries = separateY.filter({ v in
-            v > 0
-        })
+
     }
 }
