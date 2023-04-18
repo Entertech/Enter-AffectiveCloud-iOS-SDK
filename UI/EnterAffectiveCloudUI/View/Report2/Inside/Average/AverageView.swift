@@ -21,7 +21,7 @@ public enum AverageName: String {
     case Delta = "δ wave percentage"
     case Theta = "θ wave percentage"
     case Gamma = "γ wave percentage"
-    case Flow = "flow"
+    case Flow = "flow time"
     case RR = "Respiratory Rate"
 }
 
@@ -153,10 +153,10 @@ public class PrivateAverageView: UIView {
                 var compareText = AverageCompare.equal
                 icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
                 if current > averageValue {
-                    compareText = (name == .Meditation || name == .Coherence) ? .longer : .higher
+                    compareText = (name == .Meditation || name == .Coherence || name == .Flow) ? .longer : .higher
                     icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
                 } else if current < averageValue {
-                    compareText = (name == .Meditation || name == .Coherence) ? .shorter : .lower
+                    compareText = (name == .Meditation || name == .Coherence || name == .Flow) ? .shorter : .lower
                     icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                 }
                 if language == .en {
@@ -186,11 +186,11 @@ public class PrivateAverageView: UIView {
                 var compareText = AverageCompare.equal
                 icon.image = UIImage.loadImage(name: "equal", any: classForCoder)
                 if current > averageValue {
-                    compareText = (name == .Meditation || name == .Coherence) ? .longer : .higher
+                    compareText = (name == .Meditation || name == .Coherence || name == .Flow) ? .longer : .higher
                     icon.image = UIImage.loadImage(name: "arrow_up", any: classForCoder)
                     
                 } else if current < averageValue {
-                    compareText = (name == .Meditation || name == .Coherence) ? .shorter : .lower
+                    compareText = (name == .Meditation || name == .Coherence || name == .Flow) ? .shorter : .lower
                     icon.image = UIImage.loadImage(name: "arrow_down", any: classForCoder)
                 }
                 if language == .en {
