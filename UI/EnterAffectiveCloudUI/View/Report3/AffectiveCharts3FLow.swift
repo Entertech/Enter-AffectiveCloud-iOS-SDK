@@ -125,7 +125,7 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
         set.highlightColor = ColorExtension.lineLight
         set.drawHorizontalHighlightIndicatorEnabled = false
         set.drawValuesEnabled = false
-        set.colors = [UIColor.colorWithHexString(hexColor: "8b7af3"), UIColor.colorWithHexString(hexColor: "a6a7af")]
+        set.colors = [UIColor.colorWithHexString(hexColor: "8b7af3"), UIColor.colorWithHexString(hexColor: "ffc56f")]
         set.isDrawLineWithGradientEnabled = true
         set.gradientPositions = [33, 34]
         let data = LineChartData(dataSet: set)
