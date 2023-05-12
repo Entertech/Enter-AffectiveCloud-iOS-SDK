@@ -52,7 +52,7 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
             avgLine.lineDashPhase = 2.0
             avgLine.lineDashLengths = [2.0, 4.0]
             avgLine.lineColor = ColorExtension.lineLight
-            avgLine.lineWidth = 0.5
+            avgLine.lineWidth = 1
             avgLine.valueTextColor = ColorExtension.textLv2
             avgLine.valueFont = UIFont.systemFont(ofSize: 12)
             avgLine.labelPosition = .leftBottom
