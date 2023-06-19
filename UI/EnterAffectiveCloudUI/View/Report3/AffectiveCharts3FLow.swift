@@ -63,7 +63,7 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
     }
     
     public override func build(isShowQuality: Bool = false) {
-        let invalidData = 1.0
+        let invalidData = 100.0
         var sampleArray = [Double]()
         for i in stride(from: 0, to: dataSorce.count, by: sample) {
             sampleArray.append(Double(dataSorce[i]))
