@@ -23,15 +23,16 @@ public enum AverageName: String {
     case Gamma = "γ wave percentage"
     case Flow = "flow time"
     case RR = "Respiratory Rate"
+    case Pleasure = "pleasure"
 }
 
 public extension AverageName {
     var ch: String {
         switch self {
         case .Attention:
-            return "注意力"
+            return "专注度"
         case .Relaxation:
-            return "放松度"
+            return "圆满度"
         case .Pressure:
             return "压力值"
         case .Heart:
@@ -53,9 +54,11 @@ public extension AverageName {
         case .Gamma:
             return "γ波占比"
         case .Flow:
-            return "心流"
+            return "智慧度"
         case .RR:
             return "呼吸率"
+        case .Pleasure:
+            return "仁爱度"
         }
     }
 }
@@ -99,6 +102,8 @@ extension AverageName {
                 return "min"
             case .RR:
                 return "breaths/min"
+            case .Pleasure:
+                return ""
             }
         }
     }
