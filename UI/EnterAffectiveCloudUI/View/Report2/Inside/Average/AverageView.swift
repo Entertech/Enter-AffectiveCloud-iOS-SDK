@@ -30,35 +30,35 @@ public extension AverageName {
     var ch: String {
         switch self {
         case .Attention:
-            return "专注度"
+            return "本次专注度"
         case .Relaxation:
-            return "圆满度"
+            return "本次圆满度"
         case .Pressure:
-            return "压力值"
+            return "本次压力值"
         case .Heart:
-            return "心率"
+            return "本次心率"
         case .HRV:
-            return "心率变异性"
+            return "本次心率变异性"
         case .Meditation:
-            return "练习时长"
+            return "本次练习时长"
         case .Coherence:
-            return "和谐时间"
+            return "本次和谐时间"
         case .Alpha:
-            return "α波占比"
+            return "本次α波占比"
         case .Beta:
-            return "β波占比"
+            return "本次β波占比"
         case .Delta:
-            return "δ波占比"
+            return "本次δ波占比"
         case .Theta:
-            return "θ波占比"
+            return "本次θ波占比"
         case .Gamma:
-            return "γ波占比"
+            return "本次γ波占比"
         case .Flow:
-            return "智慧时长"
+            return "本次智慧时长"
         case .RR:
-            return "呼吸率"
+            return "本次呼吸率"
         case .Pleasure:
-            return "仁爱度"
+            return "本次仁爱度"
         }
     }
 }
