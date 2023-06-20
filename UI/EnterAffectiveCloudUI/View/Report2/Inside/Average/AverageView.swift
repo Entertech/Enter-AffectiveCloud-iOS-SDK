@@ -40,7 +40,7 @@ public extension AverageName {
         case .HRV:
             return "心率变异性"
         case .Meditation:
-            return "冥想时间"
+            return "练习时长"
         case .Coherence:
             return "和谐时间"
         case .Alpha:
@@ -54,7 +54,7 @@ public extension AverageName {
         case .Gamma:
             return "γ波占比"
         case .Flow:
-            return "智慧度"
+            return "智慧时长"
         case .RR:
             return "呼吸率"
         case .Pleasure:
