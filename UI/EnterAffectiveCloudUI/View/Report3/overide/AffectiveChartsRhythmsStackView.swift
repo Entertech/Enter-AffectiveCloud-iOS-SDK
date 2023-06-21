@@ -109,7 +109,10 @@ class AffectiveCharts3RhythmsStackView: AffectiveCharts3RhythmsChart {
         thetaArray?.removeAll()
         if style == .month || style == .year {
             sample = 1
+        } else {
+            sample = waveArray.columns / maxDataCount == 0 ? 1 : waveArray.columns / maxDataCount
         }
+        
         let lineEnables = (enableGama ? 1 : 0) + (enableBeta ? 2 : 0) + (enableAlpha ? 4 : 0) + (enableTheta ? 8 : 0) + (enableDelta ? 16 : 0)
         
         var waveNum = [Double].init(repeating: 0, count: waveArray.columns)
