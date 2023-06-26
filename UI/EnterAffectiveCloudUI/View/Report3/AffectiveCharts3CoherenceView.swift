@@ -79,7 +79,7 @@ public class AffectiveCharts3CoherenceView: AffectiveCharts3LineCommonView {
                 if stateArray[i] > 0 {
                     colors.append(theme.themeColor)
                 } else {
-                    colors.append(redColor)
+                    colors.append(theme.invalidColor)
                 }
             }
 
