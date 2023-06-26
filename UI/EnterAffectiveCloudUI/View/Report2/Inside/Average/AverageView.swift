@@ -38,11 +38,11 @@ public extension AverageName {
         case .Heart:
             return "心率"
         case .HRV:
-            return "心率变异性"
+            return "仁爱度"
         case .Meditation:
             return "练习时长"
         case .Coherence:
-            return "和谐时间"
+            return "圆满度"
         case .Alpha:
             return "α波占比"
         case .Beta:
