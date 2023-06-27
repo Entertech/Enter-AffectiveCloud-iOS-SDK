@@ -45,7 +45,7 @@ public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
             if e == 1 {
                 labelName = theme.compareName[1]
             } else if e == 3 {
-                labelName = theme.compareName[0]
+                //labelName = theme.compareName[0]
             }
             
             let avgLine = ChartLimitLine(limit: Double(e)*33.3, label: labelName)
