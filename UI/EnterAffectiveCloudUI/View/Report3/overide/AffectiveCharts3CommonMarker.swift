@@ -103,15 +103,17 @@ class AffectiveCharts3CommonMarkerView: MarkerView {
         
         let entryY = Int(round(entry.y))
         if theme.chartType == .flow {
-            if entryY < 34 {
-                numlabel.text = theme.compareName[1]
-            } else {
-                numlabel.text = theme.compareName[0]
-            }
+
             unitLabel.text = ""
             if theme.style == .year || theme.style == .month {
                 if entryY == 0 {
                     numlabel.text = "--"
+                }
+            } else {
+                if entryY < 34 {
+                    numlabel.text = theme.compareName[1]
+                } else {
+                    numlabel.text = theme.compareName[0]
                 }
             }
         } else if anotherArray.count > 0 { //coherence
