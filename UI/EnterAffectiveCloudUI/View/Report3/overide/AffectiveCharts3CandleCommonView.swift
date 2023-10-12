@@ -6,7 +6,7 @@
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import UIKit
 
 class AffectiveCharts3CandleCommonView: CombinedChartView {

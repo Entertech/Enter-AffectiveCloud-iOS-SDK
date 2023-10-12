@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public protocol RhythmsViewDelegate: AnyObject {
     func setRhythmsEnable(value: Int)

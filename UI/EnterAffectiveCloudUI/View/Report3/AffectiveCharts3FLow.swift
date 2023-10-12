@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveCharts3FLowView: AffectiveCharts3LineCommonView {
     public override func stepThreeSetData(_ array: [Double]) -> Self {

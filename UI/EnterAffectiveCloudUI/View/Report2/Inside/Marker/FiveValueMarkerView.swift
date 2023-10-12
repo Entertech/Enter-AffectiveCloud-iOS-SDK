@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 /// 百分比数据
 class FiveValueMarkerView: MarkerView {
 

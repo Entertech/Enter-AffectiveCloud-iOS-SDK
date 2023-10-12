@@ -6,7 +6,7 @@
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import Charts
+import DGCharts
 
 class AffectiveCharts3RhythmsChart: LineChartView {
     

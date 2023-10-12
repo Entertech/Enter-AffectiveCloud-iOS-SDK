@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveChartPressureView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
 

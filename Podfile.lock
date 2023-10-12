@@ -1,41 +1,39 @@
 PODS:
-  - Alamofire (5.4.3)
-  - Charts (4.1.0):
-    - Charts/Core (= 4.1.0)
-  - Charts/Core (4.1.0):
-    - SwiftAlgorithms (~> 1.0)
-  - FluentDarkModeKit (1.0.3)
+  - Alamofire (5.8.0)
+  - DGCharts (5.0.0):
+    - DGCharts/Core (= 5.0.0)
+  - DGCharts/Core (5.0.0)
+  - FluentDarkModeKit (1.0.4)
   - GzipSwift (5.1.1)
   - HandyJSON (5.0.4-beta)
-  - Moya/Core (14.0.0):
+  - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - Moya/RxSwift (14.0.0):
+  - Moya/RxSwift (15.0.0):
     - Moya/Core
-    - RxSwift (~> 5.0)
-  - PromiseKit (6.13.1):
-    - PromiseKit/CorePromise (= 6.13.1)
-    - PromiseKit/Foundation (= 6.13.1)
-    - PromiseKit/UIKit (= 6.13.1)
-  - PromiseKit/CorePromise (6.13.1)
-  - PromiseKit/Foundation (6.13.1):
+    - RxSwift (~> 6.0)
+  - PromiseKit (8.1.1):
+    - PromiseKit/CorePromise (= 8.1.1)
+    - PromiseKit/Foundation (= 8.1.1)
+    - PromiseKit/UIKit (= 8.1.1)
+  - PromiseKit/CorePromise (8.1.1)
+  - PromiseKit/Foundation (8.1.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.13.1):
+  - PromiseKit/UIKit (8.1.1):
     - PromiseKit/CorePromise
-  - RxSwift (5.1.2)
-  - SnapKit (5.0.1)
+  - RxSwift (6.6.0)
+  - SnapKit (5.6.0)
   - Starscream (3.1.1)
-  - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
-  - Charts (from `https://github.com/ET-LINK/Charts.git`, branch `enter/round_corner_bar`)
+  - "DGCharts (from `git@github.com:ET-LINK/Charts.git`, branch `enter/round_corner_bar`)"
   - FluentDarkModeKit
   - GzipSwift
   - HandyJSON (~> 5.0.4-beta)
   - Moya/RxSwift
-  - PromiseKit
+  - PromiseKit (~> 8.0)
   - RxSwift
   - SnapKit
-  - Starscream (= 3.1.1)
+  - Starscream (~> 3.0)
 
 SPEC REPOS:
   trunk:
@@ -48,31 +46,29 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - Starscream
-    - SwiftAlgorithms
 
 EXTERNAL SOURCES:
-  Charts:
+  DGCharts:
     :branch: enter/round_corner_bar
-    :git: https://github.com/ET-LINK/Charts.git
+    :git: "git@github.com:ET-LINK/Charts.git"
 
 CHECKOUT OPTIONS:
-  Charts:
-    :commit: 6deeea96b179a74c52de47df55cb0eecb567c5d6
-    :git: https://github.com/ET-LINK/Charts.git
+  DGCharts:
+    :commit: 3bcb6cb1d5a42cafcb278f86ec02d5d24759e75b
+    :git: "git@github.com:ET-LINK/Charts.git"
 
 SPEC CHECKSUMS:
-  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
-  Charts: 354f86803d11d9c35de280587fef50d1af063978
-  FluentDarkModeKit: e3fe5d8aa471422480b04b0aa03d83425e3e1826
+  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
+  DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
+  FluentDarkModeKit: b6317653a00329564582884772ec57c4eaad1a1f
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
   HandyJSON: a9c67202df97805a0ba4a00e30b50e9a30ac28f3
-  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
-  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
-  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  PromiseKit: d1be44b474e5acfa16adf007a1f49f104e10fead
+  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: a2f6404e83372ee80ed0b187d30a0ab512dd73f1
+PODFILE CHECKSUM: 1792e8c036a14f497712d70bc2716bf66cb1a027
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.13.0

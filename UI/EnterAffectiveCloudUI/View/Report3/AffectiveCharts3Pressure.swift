@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     private let front1View = UIView()

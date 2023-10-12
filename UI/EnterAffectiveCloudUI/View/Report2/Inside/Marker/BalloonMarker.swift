@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 class BalloonMarker: MarkerImage {
     open var color: UIColor

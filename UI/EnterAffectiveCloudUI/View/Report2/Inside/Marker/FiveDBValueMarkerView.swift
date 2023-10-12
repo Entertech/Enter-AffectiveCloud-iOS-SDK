@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 /// 分贝数据
 class FiveDBValueMarkerView: MarkerView {
 
