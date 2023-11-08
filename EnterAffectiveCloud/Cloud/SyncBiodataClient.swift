@@ -34,7 +34,6 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func start() {
         webSocketConnect()
-        isContinue = true
     }
     
     public func stop() {
@@ -61,6 +60,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncEEG(left: [Float], right: [Float], alpha: Float, beta: Float, theta: Float, delta: Float, gamma: Float, quality: Int) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -89,6 +89,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncHR(hr: Float, hrv: Float) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -109,6 +110,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncPEPR(hr: Float, rr: Float, hrv: Float, bcgWave: [Float], rwWave: [Float], bcgQuality: Int, rwQuality: Int) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -134,6 +136,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncRelaxation(_ data: Float) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -152,6 +155,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncAttention(_ data: Float) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -170,6 +174,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncFlow(_ data: Float) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -188,6 +193,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncCoherence(_ data: Float) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -206,6 +212,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     
     public func syncPressure(_ data: Float) {
         guard self.socket.isConnected else {return}
+        guard isContinue else {return}
         let model = AffectiveCloudResponseJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
@@ -231,6 +238,7 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     }
     
     public func websocketDidDisconnect(socket: Starscream.WebSocketClient, error: Error?) {
+        
         disconnectCount += 1
         if disconnectCount < 10 && isContinue {
             self.webSocketConnect()
@@ -239,6 +247,12 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     }
     
     public func websocketDidReceiveMessage(socket: Starscream.WebSocketClient, text: String) {
+        let json = AffectiveCloudResponseJSONModel.deserialize(from: text)
+        if json?.code == 0 {
+            isContinue = true
+        } else {
+            isContinue = false
+        }
         
     }
     
