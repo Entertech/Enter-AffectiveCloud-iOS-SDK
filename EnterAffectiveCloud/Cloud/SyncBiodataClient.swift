@@ -232,7 +232,10 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     
     public func websocketDidDisconnect(socket: Starscream.WebSocketClient, error: Error?) {
         disconnectCount += 1
-        self.webSocketConnect()
+        if disconnectCount < 10 && isContinue {
+            self.webSocketConnect()
+        }
+        
     }
     
     public func websocketDidReceiveMessage(socket: Starscream.WebSocketClient, text: String) {
