@@ -33,6 +33,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     }
     
     public func start() {
+        guard !socket.isConnected else {return}
         webSocketConnect()
     }
     
