@@ -124,7 +124,7 @@ class CSKwargsJSONModel: HandyJSON {
 public class AffectiveCloudResponseJSONModel: HandyJSON {
     public var code: Int = 0
     public var request: AffectiveCloudRequestJSONModel?
-    private var data: [String: Any]?
+    public var data: [String: Any]?
     var message: String?
     public required init() { }
 
