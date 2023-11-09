@@ -248,7 +248,10 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     public func websocketDidDisconnect(socket: Starscream.WebSocketClient, error: Error?) {
         if let error = error as? WSError {
             DLog("\(error.message)")
-            delegate?.error(message: error.message)
+            if isContinue {
+                delegate?.error(message: error.message)
+            }
+            
         }
         disconnectCount += 1
         if disconnectCount < 10 && isContinue {
