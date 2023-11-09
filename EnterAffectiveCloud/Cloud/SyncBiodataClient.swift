@@ -22,10 +22,15 @@ protocol SyncRealtimeBiodataDelegate {
     func syncPressure(_ data: Float)
 }
 
+public protocol SyncRealtimeBiodataError: AnyObject {
+    func error(message: String)
+}
+
 public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     let socket: WebSocket
     var isContinue = false
     var disconnectCount = 0
+    public weak var delegate: SyncRealtimeBiodataError?
     
     public init(websocketURL: URL) {
         self.socket = WebSocket(url: websocketURL)
@@ -50,9 +55,11 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
 
     private func webSocketSend(jsonString json: String) {
 
+        guard socket.isConnected else {return}
         if let data = json.data(using: .utf8), let compressData =  try? data.gzipped() {
             self.socket.write(data: compressData)
         }
+        
     }
 
     public func webSocketDisConnect() {
@@ -73,7 +80,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         
         let eeg = CSBiodataEEGJsonModel()
         eeg.waveLeft = left
-        eeg.waveLeft = right
+        eeg.waveRight = right
         eeg.alpha = alpha
         eeg.belta = beta
         eeg.theta = theta
@@ -239,7 +246,10 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     }
     
     public func websocketDidDisconnect(socket: Starscream.WebSocketClient, error: Error?) {
-        
+        if let error = error as? WSError {
+            DLog("\(error.message)")
+            delegate?.error(message: error.message)
+        }
         disconnectCount += 1
         if disconnectCount < 10 && isContinue {
             self.webSocketConnect()
@@ -248,17 +258,21 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     }
     
     public func websocketDidReceiveMessage(socket: Starscream.WebSocketClient, text: String) {
-        let json = AffectiveCloudResponseJSONModel.deserialize(from: text)
-        if json?.code == 0 {
-            isContinue = true
-        } else {
-            isContinue = false
-        }
+
         
     }
     
     public func websocketDidReceiveData(socket: Starscream.WebSocketClient, data: Data) {
-        
+        if let unGzipData = try? data.gunzipped() {
+            let text = String(decoding: unGzipData, as: UTF8.self)
+            let json = AffectiveCloudResponseJSONModel.deserialize(from: text)
+            if json?.code == 0 {
+                isContinue = true
+            } else {
+                delegate?.error(message: json?.message ?? "")
+                isContinue = false
+            }
+        }
     }
     
     
