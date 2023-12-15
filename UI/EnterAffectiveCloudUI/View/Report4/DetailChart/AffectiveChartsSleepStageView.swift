@@ -87,15 +87,15 @@ public class AffectiveChartsSleepStageView: UIView {
         }
         remLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(12)
-            $0.top.equalTo(awakeLabel.snp.bottom).offset(12)
+            $0.top.equalTo(awakeLabel.snp.bottom).offset(14)
         }
         lightLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(12)
-            $0.top.equalTo(remLabel.snp.bottom).offset(12)
+            $0.top.equalTo(remLabel.snp.bottom).offset(14)
         }
         deepLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(12)
-            $0.top.equalTo(lightLabel.snp.bottom).offset(12)
+            $0.top.equalTo(lightLabel.snp.bottom).offset(14)
         }
         return self
     }

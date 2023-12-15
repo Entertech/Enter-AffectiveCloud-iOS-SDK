@@ -56,7 +56,6 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
         scaleYEnabled = false
         legend.enabled = false
         highlightPerTapEnabled = false
-
         
     }
 }
