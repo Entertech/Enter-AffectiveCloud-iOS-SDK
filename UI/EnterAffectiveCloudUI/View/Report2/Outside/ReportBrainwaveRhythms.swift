@@ -294,7 +294,6 @@ public class ReportBrainwaveRhythms: UIView {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-16)
         }
-
     }
     
     public func setContentHidden(list: [Int]) {

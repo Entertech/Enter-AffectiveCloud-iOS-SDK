@@ -30,7 +30,7 @@ class ThirdVersionViewController: UIViewController {
     let contentView2 = UIView()
     let contentView3 = UIView()
 //    let common = AffectiveCharts3Pressure()
-//    let rhythms = ReportBrainwaveRhythms()
+    let rhythms = AffectiveChartsSleepBrainwaveView()
     let rhythms2 = ReportBrainwaveRhythms()
     let rhythms3 = ReportBrainwaveRhythms()
     let bar = AffectiveCharts3BarCommonView()
@@ -42,7 +42,7 @@ class ThirdVersionViewController: UIViewController {
         stackView.addArrangedSubview(contentView2)
         stackView.addArrangedSubview(contentView3)
         contentView.snp.makeConstraints {
-            $0.height.equalTo(311)
+            $0.height.equalTo(190)
         }
         contentView2.snp.makeConstraints {
             $0.height.equalTo(311)
@@ -64,18 +64,43 @@ class ThirdVersionViewController: UIViewController {
         theme.themeColor = .red
         theme.chartType = .coherece
         theme.style = .year
+        contentView.addSubview(rhythms)
+        rhythms.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
-//        rhythms.snp.makeConstraints {
-//            $0.edges.equalToSuperview()
-//        }
-//        rhythms.gamaColor = .clear
-//        rhythms.betaColor = UIColor.colorWithHexString(hexColor: "#FF6682")
-//        rhythms.gamaEnable = true
-//        rhythms.betaEnable = true
-//        rhythms.deltaEnable = true
-//        rhythms.alphaEnable = true
-//        rhythms.thetaEnable = true
-//        rhythms.setContentHidden(list: [0])
+        let param = AffectiveChartsSleepParameter()
+        var gammaArray: [Double] = []
+        var betaArray: [Double] = []
+        var alphaArray: [Double] = []
+        var thetaArray: [Double] = []
+        var deltaArray: [Double] = []
+        for index in 0..<54 {
+            gammaArray.append(Double(Int.random(in: 8..<15)))
+            betaArray.append(Double(Int.random(in: 12..<18)))
+            alphaArray.append(Double(Int.random(in: 16..<35)))
+            thetaArray.append(Double(Int.random(in: 15..<25)))
+            deltaArray.append(Double(Int.random(in: 8..<12)))
+        }
+        let start = Date().timeIntervalSince1970
+        let end = start + Double(gammaArray.count * 300)
+        param.start = start
+        param.end = end
+        param.lineColors = [UIColor.colorWithHexString(hexColor: "#FF6682"),
+                            UIColor.colorWithHexString(hexColor: "#3479FF"),
+                            UIColor.colorWithHexString(hexColor: "#FFC56F"),
+                            UIColor.colorWithHexString(hexColor: "#5FC695"),
+                            UIColor.colorWithHexString(hexColor: "#8B7AF3"),
+                            .lightGray, UIColor.colorWithHexString(hexColor: "#F2F2F7")]
+        param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
+        param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
+        param.xGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
+        param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
+        param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
+        rhythms.setData(gamma: gammaArray, beta: betaArray, alpha: alphaArray, theta: thetaArray, delta: deltaArray, param: param)
+            .stepTwoSetLayout()
+            .build()
+        
 
         contentView2.addSubview(rhythms2)
         rhythms2.snp.makeConstraints {
@@ -219,10 +244,7 @@ class ThirdVersionViewController: UIViewController {
                     }
                     if loop == 0 {
                         
-                        bar.setTheme(theme)
-                            .setProperty()
-                            .setLayout()
-                            .build(array: [0, 0, 10, 15, 20, 21 ,22, 23, 24, 25, 25, 29])
+                        
 //                        rhythms.uploadCycle = 1
 //                        rhythms.setData(gamaList: gamma, betaList: beta, alphaList: alpha, thetaList: theta, deltaList: delta)
                     } else if loop == 1 {

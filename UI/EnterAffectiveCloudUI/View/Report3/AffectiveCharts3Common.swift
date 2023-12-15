@@ -156,7 +156,7 @@ public class AffectiveCharts3LineCommonView: UIView {
     /// - Returns: self
     public func stepThreeSetData(_ array: [Double]) -> Self {
         guard array.count > 0 else {return self}
-        dataSorce.removeAll()   
+        dataSorce.removeAll()
         separateY.removeAll()
         dataSorce.append(contentsOf: array)
         

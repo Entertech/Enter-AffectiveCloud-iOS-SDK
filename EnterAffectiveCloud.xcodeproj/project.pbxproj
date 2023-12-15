@@ -61,6 +61,13 @@
 		FA19DF77239DE7160043F679 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF76239DE7160043F679 /* TagModel.swift */; };
 		FA19DF79239DEC7F0043F679 /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF78239DEC7F0043F679 /* TagAPI.swift */; };
 		FA19DF7B239DED290043F679 /* TagRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA19DF7A239DED290043F679 /* TagRequest.swift */; };
+		FA1C70302B2981BD00137D65 /* AffectiveChartsSleepDetailCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C702F2B2981BD00137D65 /* AffectiveChartsSleepDetailCommonView.swift */; };
+		FA1C70332B29965E00137D65 /* AffectiveChartsSleepParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C70322B29965E00137D65 /* AffectiveChartsSleepParameter.swift */; };
+		FA1C70362B299EC600137D65 /* AffectiveChartsSleepStageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C70352B299EC600137D65 /* AffectiveChartsSleepStageView.swift */; };
+		FA1C70382B29B8E800137D65 /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C70372B29B8E800137D65 /* FifthViewController.swift */; };
+		FA1C703A2B2AD17100137D65 /* AffectiveChartsSleepBrainwaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C70392B2AD17100137D65 /* AffectiveChartsSleepBrainwaveView.swift */; };
+		FA1C703C2B2B08A500137D65 /* AffectiveChartsSleepSingleLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C703B2B2B08A500137D65 /* AffectiveChartsSleepSingleLineView.swift */; };
+		FA1C703E2B2BEC9000137D65 /* AffectiveChartsSleepPositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C703D2B2BEC9000137D65 /* AffectiveChartsSleepPositionView.swift */; };
 		FA296EA42383C95B001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
 		FA296EA52383C95B001AE33E /* EnterAffectiveCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FA296EA82383C963001AE33E /* EnterAffectiveCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E125D0230559590072DF22 /* EnterAffectiveCloud.framework */; };
@@ -322,6 +329,13 @@
 		FA19DF76239DE7160043F679 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		FA19DF78239DEC7F0043F679 /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
 		FA19DF7A239DED290043F679 /* TagRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRequest.swift; sourceTree = "<group>"; };
+		FA1C702F2B2981BD00137D65 /* AffectiveChartsSleepDetailCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsSleepDetailCommonView.swift; sourceTree = "<group>"; };
+		FA1C70322B29965E00137D65 /* AffectiveChartsSleepParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsSleepParameter.swift; sourceTree = "<group>"; };
+		FA1C70352B299EC600137D65 /* AffectiveChartsSleepStageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsSleepStageView.swift; sourceTree = "<group>"; };
+		FA1C70372B29B8E800137D65 /* FifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
+		FA1C70392B2AD17100137D65 /* AffectiveChartsSleepBrainwaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsSleepBrainwaveView.swift; sourceTree = "<group>"; };
+		FA1C703B2B2B08A500137D65 /* AffectiveChartsSleepSingleLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsSleepSingleLineView.swift; sourceTree = "<group>"; };
+		FA1C703D2B2BEC9000137D65 /* AffectiveChartsSleepPositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsSleepPositionView.swift; sourceTree = "<group>"; };
 		FA31DE15286162F800459091 /* CoherenceTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoherenceTimeView.swift; sourceTree = "<group>"; };
 		FA31DE172861691900459091 /* HeartRateIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartRateIntroView.swift; sourceTree = "<group>"; };
 		FA31DE1928616B4000459091 /* RhythmsIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmsIntroView.swift; sourceTree = "<group>"; };
@@ -707,6 +721,35 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		FA1C702E2B297FFF00137D65 /* Report4 */ = {
+			isa = PBXGroup;
+			children = (
+				FA1C70342B299EA200137D65 /* DetailChart */,
+				FA1C70312B29963E00137D65 /* Model */,
+			);
+			path = Report4;
+			sourceTree = "<group>";
+		};
+		FA1C70312B29963E00137D65 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA1C70322B29965E00137D65 /* AffectiveChartsSleepParameter.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA1C70342B299EA200137D65 /* DetailChart */ = {
+			isa = PBXGroup;
+			children = (
+				FA1C702F2B2981BD00137D65 /* AffectiveChartsSleepDetailCommonView.swift */,
+				FA1C70352B299EC600137D65 /* AffectiveChartsSleepStageView.swift */,
+				FA1C70392B2AD17100137D65 /* AffectiveChartsSleepBrainwaveView.swift */,
+				FA1C703B2B2B08A500137D65 /* AffectiveChartsSleepSingleLineView.swift */,
+				FA1C703D2B2BEC9000137D65 /* AffectiveChartsSleepPositionView.swift */,
+			);
+			path = DetailChart;
+			sourceTree = "<group>";
+		};
 		FA31DE142861629F00459091 /* outsideView */ = {
 			isa = PBXGroup;
 			children = (
@@ -749,6 +792,7 @@
 		FA55EA65234C286800C148BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA1C702E2B297FFF00137D65 /* Report4 */,
 				FA04A4BA28585A85007FA849 /* Report3 */,
 				FA56821223AC5E9600FF1A68 /* Report2 */,
 				FAC773082355CB1A00FBFA6A /* Report1 */,
@@ -845,6 +889,7 @@
 				FA93436A2356E59E00544239 /* Info.plist */,
 				FAB0BC1B23B2171E0074C06C /* ForthViewController.swift */,
 				FA04A4BD28585B9F007FA849 /* ThirdVersionViewController.swift */,
+				FA1C70372B29B8E800137D65 /* FifthViewController.swift */,
 			);
 			path = EnterReportUIDemo;
 			sourceTree = "<group>";
@@ -1528,6 +1573,7 @@
 				FA7689CE23B08ABC005E4DF7 /* ReportPressure.swift in Sources */,
 				FA93438623570A2700544239 /* ReportViewService.swift in Sources */,
 				FA93439623581B0100544239 /* HeartRateVariablityReportView.swift in Sources */,
+				FA1C703C2B2B08A500137D65 /* AffectiveChartsSleepSingleLineView.swift in Sources */,
 				FA04A4EE285C6B69007FA849 /* AffectiveCharts3DynamicYRender.swift in Sources */,
 				FA04A4C5285869B3007FA849 /* AffectiveChartsDateFomatter.swift in Sources */,
 				FACEDFA1235172F40016176C /* BrainwaveSpectrumView.swift in Sources */,
@@ -1551,6 +1597,7 @@
 				FA04A4F1285C7C85007FA849 /* AffectiveCharts3CandleCommonView.swift in Sources */,
 				FACEDF9523507EDD0016176C /* RealtimeAttentionView.swift in Sources */,
 				FACEDFAA23517B1A0016176C /* RealtimeBrainwaveSpectrumView.swift in Sources */,
+				FA1C703E2B2BEC9000137D65 /* AffectiveChartsSleepPositionView.swift in Sources */,
 				FA1690D6245920E000FADC2B /* HighlightIcon.swift in Sources */,
 				FAB1402B25777A000079F785 /* AffectiveChartCoherenceView2.swift in Sources */,
 				FACEDFA72351730A0016176C /* EEGView.swift in Sources */,
@@ -1567,11 +1614,13 @@
 				FA7C3A43283E363D00A52338 /* StatisticBarChart.swift in Sources */,
 				FA04A4F3285D815F007FA849 /* AffectiveCharts3CandleView.swift in Sources */,
 				FA04A4DC2859DDF9007FA849 /* AffectiveCharts3ExpandRhythmView.swift in Sources */,
+				FA1C70332B29965E00137D65 /* AffectiveChartsSleepParameter.swift in Sources */,
 				FA61A818258DCDB9003F27AD /* FiveDBValueMarkerView.swift in Sources */,
 				FA31DE1C286176E000459091 /* RelaxationIntroView.swift in Sources */,
 				FA72424B2866FDA100B12B32 /* MeditationTimeView.swift in Sources */,
 				FAC9BD6323D3E99400004B70 /* RealtimePleasure.swift in Sources */,
 				FA04A4C728597641007FA849 /* HourXFormatter.swift in Sources */,
+				FA1C703A2B2AD17100137D65 /* AffectiveChartsSleepBrainwaveView.swift in Sources */,
 				FACEDF9323507D370016176C /* NibLoadable.swift in Sources */,
 				FACEDF9B23516BD60016176C /* RealtimePressureView.swift in Sources */,
 				FAB0BC1523B1E1180074C06C /* AverageView.swift in Sources */,
@@ -1590,11 +1639,13 @@
 				FAB0BC1823B1FC6B0074C06C /* AffectiveChartBrainSpectrumView.swift in Sources */,
 				FAB1DF8623E941A9007ADBA3 /* AffectiveChartRelaxationView.swift in Sources */,
 				FAB3E45F23AC663000A85129 /* ReportViewHead.swift in Sources */,
+				FA1C70362B299EC600137D65 /* AffectiveChartsSleepStageView.swift in Sources */,
 				FA04A4EA285C57F0007FA849 /* AffectiveCharts3BarCommonView.swift in Sources */,
 				FA6FFFA623D05A0F00A4B16A /* RodDot.swift in Sources */,
 				FA0A6E7B234D719B00532A46 /* RealtimeHeartRateView.swift in Sources */,
 				FA0A6E82234D7A6200532A46 /* BaseView.swift in Sources */,
 				FAB0BC1A23B20CFF0074C06C /* PrivateChartViewHead.swift in Sources */,
+				FA1C70382B29B8E800137D65 /* FifthViewController.swift in Sources */,
 				FAB1DF8423E9219D007ADBA3 /* AffectiveChartAttentionView.swift in Sources */,
 				FA31DE1E28617A4300459091 /* AttentionIntroView.swift in Sources */,
 				FAE5A89E29BEFF1800639B54 /* AffectiveCharts3CoherenceView.swift in Sources */,
@@ -1608,6 +1659,7 @@
 				FA7689C823B053D5005E4DF7 /* ReportHR.swift in Sources */,
 				FACEDFAC2351A1850016176C /* RealtimeBrainwaveView.swift in Sources */,
 				FAB1401F25762A030079F785 /* Color+Extention.swift in Sources */,
+				FA1C70302B2981BD00137D65 /* AffectiveChartsSleepDetailCommonView.swift in Sources */,
 				FAC7730B2355CBD800FBFA6A /* BrainSpecturmReportView.swift in Sources */,
 				FAB3E46A23ACAD4D00A85129 /* ReportHRV.swift in Sources */,
 				FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */,
