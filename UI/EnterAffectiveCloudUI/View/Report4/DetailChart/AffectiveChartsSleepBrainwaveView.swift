@@ -163,7 +163,8 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
         chartView.addSubview(btnContentView)
         btnContentView.snp.makeConstraints {
             $0.height.equalTo(24)
-            $0.leading.trailing.top.equalToSuperview()
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.trailing.equalToSuperview()
         }
         return self
         
