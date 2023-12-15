@@ -103,14 +103,14 @@ public class AffectiveChartsSleepStageView: UIView {
 
     
     public func build() {
-        guard let colors = chartView.chartParam?.lineColors, colors.count > 4 else {return}
+        guard let colors = chartView.chartParam?.lineColors, colors.count >= 4 else {return}
         let screenWidth = UIScreen.main.bounds.width > 500 ? 500 : UIScreen.main.bounds.width
         var iconWidth = screenWidth / CGFloat(dataSorce.count)+2
         iconWidth = max(iconWidth, 8)
-        awakeImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[1])
-        remImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[2])
-        lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[3])
-        deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[4])
+        awakeImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[0])
+        remImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[1])
+        lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[2])
+        deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[3])
         
         var yVals: [ChartDataEntry] = []
         
@@ -133,7 +133,9 @@ public class AffectiveChartsSleepStageView: UIView {
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
         set.lineWidth = 2
-        set.setColor(colors[0])
+        set.colors = [colors[0].changeAlpha(to: 0.5), colors[1].changeAlpha(to: 0.5), colors[2].changeAlpha(to: 0.5), colors[3].changeAlpha(to: 0.5)]
+        set.isDrawLineWithGradientEnabled = true
+        set.gradientPositions = [6, 4, 2]
         set.drawIconsEnabled = true
         set.highlightEnabled = false
         set.drawValuesEnabled = false

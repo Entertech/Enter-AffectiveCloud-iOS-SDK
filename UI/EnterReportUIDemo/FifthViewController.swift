@@ -22,7 +22,7 @@ class FifthViewController: UIViewController {
             let end = start + Double(array.count * 300)
             param.start = start
             param.end = end
-            param.lineColors = [UIColor.colorWithHexString(hexColor: "#8B7AF3"),
+            param.lineColors = [
                                 UIColor.colorWithHexString(hexColor: "#FFC56F"),
                                 UIColor.colorWithHexString(hexColor: "#3479FF"),
                                 UIColor.colorWithHexString(hexColor: "#8B7AF3"),UIColor.colorWithHexString(hexColor: "#3634A2")]
