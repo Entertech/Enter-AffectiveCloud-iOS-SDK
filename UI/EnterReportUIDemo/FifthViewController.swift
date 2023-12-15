@@ -40,7 +40,7 @@ class FifthViewController: UIViewController {
             stageView.snp.makeConstraints {
                 $0.leading.top.equalTo(32)
                 $0.trailing.equalTo(-32)
-                $0.height.equalTo(132)
+                $0.height.equalTo(126)
             }
         }
         
