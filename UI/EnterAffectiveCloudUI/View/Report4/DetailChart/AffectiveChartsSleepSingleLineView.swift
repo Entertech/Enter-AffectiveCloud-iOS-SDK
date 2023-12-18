@@ -28,7 +28,7 @@ public class AffectiveChartsSleepSingleLineView: UIView {
 
         chartView.leftAxis.drawTopYLabelEntryEnabled = true
         chartView.leftAxis.drawBottomYLabelEntryEnabled = false
-        
+        chartView.leftYAxisRenderer = AffectiveChartsSleepStageYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         return self
     }
     

@@ -87,6 +87,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
         chartView.chartParam = param
         chartView.leftAxis.axisMaxLabels = 5
         chartView.leftAxis.valueFormatter = AffectiveCharts3PercentFormatter()
+        chartView.leftYAxisRenderer = AffectiveChartsSleepStageYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         return self
     }
 
