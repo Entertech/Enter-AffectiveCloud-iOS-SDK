@@ -10,7 +10,7 @@ import UIKit
 import DGCharts
 import SnapKit
 
-class AffectiveChartsSleepPositionView: UIView {
+public class AffectiveChartsSleepPositionView: UIView {
 
     internal let chartView = AffectiveChartsSleepDetailCommonView()
     internal var interval = 1
