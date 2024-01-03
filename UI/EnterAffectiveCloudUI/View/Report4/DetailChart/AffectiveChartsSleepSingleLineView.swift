@@ -70,6 +70,17 @@ public class AffectiveChartsSleepSingleLineView: UIView {
         set.drawValuesEnabled = false
         let data = LineChartData(dataSet: set)
         
+        let max = dataSorce.max() ?? 0
+        let min = dataSorce.min() ?? 0
+        if max == min {
+            chartView.leftAxis.granularity = 1
+            chartView.leftAxis.granularityEnabled = true
+            chartView.leftAxis.setLabelCount(2, force: true)
+        } else if max - min < 2 {
+            chartView.leftAxis.axisMinimum = min - 1 < 0 ? 0 :  min - 1
+            chartView.leftAxis.axisMaximum = max + 1
+        }
+        
         chartView.data = data
     }
 
