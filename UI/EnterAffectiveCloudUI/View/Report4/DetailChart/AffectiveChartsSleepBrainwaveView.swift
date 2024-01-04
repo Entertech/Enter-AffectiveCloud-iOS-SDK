@@ -172,7 +172,8 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     }
     
     public func build() {
-        
+        var minValue:Double = 100
+        var maxValue:Double = 0
         var sets: [LineChartDataSet] = []
         for j in 0..<sourceArray.count {
             
@@ -189,19 +190,36 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             var yVals: [ChartDataEntry] = []
             var notZero: Int = 0
             for i in stride(from: 0, to: sourceArray[j].count, by: 1) {
+                let source = sourceArray[j][i]
+                minValue = min(minValue, source)
+                maxValue = max(maxValue, source)
                 if i < initIndex{  //为0的为无效数据
                     yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(initValue)))
                 } else {
-                    if sourceArray[j][i] == 0 {//为0的为无效数据
+                    if source == 0 {//为0的为无效数据
                         yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(notZero)))
                     } else {
-                        notZero = Int(sourceArray[j][i])
+                        notZero = Int(source)
                       
-                        yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(sourceArray[j][i])))
+                        yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(source)))
                     }
                     
                 }
                 
+            }
+            
+            chartView.leftAxis.drawBottomYLabelEntryEnabled = false
+            if maxValue == minValue {
+                if minValue == 0 {
+                    chartView.leftAxis.axisMinimum = minValue
+                }
+                
+                chartView.leftAxis.granularity = 1
+                chartView.leftAxis.granularityEnabled = true
+                chartView.leftAxis.setLabelCount(3, force: true)
+            } else if maxValue - minValue < 8 {
+                chartView.leftAxis.axisMinimum = minValue - 4 < 0 ? 0 :  minValue - 1
+                chartView.leftAxis.axisMaximum = maxValue + 4
             }
             // 设置chart set
             let set = LineChartDataSet(entries: yVals, label: "")
