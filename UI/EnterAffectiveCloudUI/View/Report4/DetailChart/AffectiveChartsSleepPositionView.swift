@@ -13,32 +13,45 @@ import SnapKit
 public class AffectiveChartsSleepPositionView: UIView {
 
     internal let chartView = AffectiveChartsSleepDetailCommonView()
-    internal var interval = 1
+    internal var interval:Double = 1
     internal var dataSorce: [Double] = []
-    
+    private let limitSize:Double = 240
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
     public func setData(_ array: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()
-        array.forEach { flag in
-            switch flag {
-            case 1: //仰卧
-                dataSorce.append(1)
-            case 2: //俯卧
-                dataSorce.append(3)
-            case 3: //左侧
-                dataSorce.append(7)
-            case 4: //右侧
-                dataSorce.append(5)
-            case 5: //站立
-                dataSorce.append(9)
-            default:
-                break
+        
+        // array如果数量小于500, 将array以array.count:500映射到dataSorce
+        let percent = Double(array.count) / limitSize
+        var stride: Int = 1
+        if percent < 1 {
+            stride = Int(ceil(limitSize / Double(array.count)))
+            interval = Double(array.count)/limitSize
+        }
+        array.forEach { value in
+            for e in 0..<stride {
+                switch value {
+                case 1: //仰卧
+                    dataSorce.append(1)
+                case 2: //俯卧
+                    dataSorce.append(3)
+                case 3: //左侧
+                    dataSorce.append(7)
+                case 4: //右侧
+                    dataSorce.append(5)
+                case 5: //站立
+                    dataSorce.append(9)
+                default:
+                    break
+                }
+                
             }
         }
-    
+        chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
+        
+        chartView.maxVisibleCount = 241
         chartView.chartParam = param
         chartView.leftAxis.axisMinimum = 0
         chartView.leftAxis.axisMaximum = 10
@@ -73,7 +86,7 @@ public class AffectiveChartsSleepPositionView: UIView {
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             let value = dataSorce[i]
        
-            yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(value)))
+            yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(value)))
         }
         let set = LineChartDataSet(entries: yVals, label: "")
         

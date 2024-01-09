@@ -17,7 +17,7 @@ class FifthViewController: UIViewController {
         if true {
             let stageView = AffectiveChartsSleepStageView()
             let param = AffectiveChartsSleepParameter()
-            let array = [0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3]
+            let array = [0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2]
             let start = Date().timeIntervalSince1970
             let end = start + Double(array.count * 300)
             param.start = start
@@ -77,7 +77,7 @@ class FifthViewController: UIViewController {
         if true {
             let stageView = AffectiveChartsSleepPositionView()
             let param = AffectiveChartsSleepParameter()
-            let array = [0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 5, 5, 5, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3]
+            let array = [0, 0, 1, 1, 1, 4, 4, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 3, 3, 3, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2]
             let start = Date().timeIntervalSince1970
             let end = start + Double(array.count * 300)
             param.start = start

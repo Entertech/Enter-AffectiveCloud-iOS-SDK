@@ -13,9 +13,9 @@ import SnapKit
 public class AffectiveChartsSleepStageView: UIView {
     
     internal let chartView = AffectiveChartsSleepDetailCommonView()
-    internal var interval = 1
+    internal var interval: Double = 1
     internal var dataSorce: [Double] = []
-    
+    private let limitSize:Double = 240
     private var awakeImage: UIImage?
     private var remImage: UIImage?
     private var lightImage: UIImage?
@@ -30,17 +30,28 @@ public class AffectiveChartsSleepStageView: UIView {
     public func setData(_ array: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()
+        // array如果数量小于500, 将array以array.count:500映射到dataSorce
+        let percent = Double(array.count) / limitSize
+        var stride: Int = 1
+        if percent < 1 {
+            stride = Int(ceil(limitSize / Double(array.count)))
+            interval = Double(array.count)/limitSize
+        }
         array.forEach { value in
-            if value == 0 || value == 1 {
-                dataSorce.append(7) //清醒
-            } else if value == 4 {
-                dataSorce.append(5) //rem
-            } else if value == 2 {
-                dataSorce.append(3) //浅睡
-            } else if value == 3 {
-                dataSorce.append(1) //深睡
+            for e in 0..<stride {
+                if value == 0 || value == 1 {
+                    dataSorce.append(7) //清醒
+                } else if value == 4 {
+                    dataSorce.append(5) //rem
+                } else if value == 2 {
+                    dataSorce.append(3) //浅睡
+                } else if value == 3 {
+                    dataSorce.append(1) //深睡
+                }
             }
         }
+        chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
+        chartView.maxVisibleCount = 241
         chartView.chartParam = param
         chartView.leftAxis.axisMinimum = 0
         chartView.leftAxis.axisMaximum = 8
@@ -49,8 +60,6 @@ public class AffectiveChartsSleepStageView: UIView {
         chartView.leftAxis.drawBottomYLabelEntryEnabled = false
         chartView.leftAxis.valueFormatter = AffectiveChartsSleepStageYFormatter(lan: param.text)
         chartView.leftYAxisRenderer = AffectiveChartsSleepStageYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
-        chartView.xAxis.spaceMin = 1
-        chartView.xAxis.spaceMax = 1
         awakeLabel.text = param.text[0]
         awakeLabel.textColor = param.yAxisLabelColor
         awakeLabel.font = UIFont.systemFont(ofSize: 10)
@@ -103,43 +112,64 @@ public class AffectiveChartsSleepStageView: UIView {
 
     
     public func build() {
-        guard let colors = chartView.chartParam?.lineColors, colors.count >= 4 else {return}
+        guard let colors = chartView.chartParam?.lineColors else {return}
         let screenWidth = UIScreen.main.bounds.width > 500 ? 500 : UIScreen.main.bounds.width
-        var iconWidth = screenWidth / CGFloat(dataSorce.count)+2
-        iconWidth = max(iconWidth, 8)
-        awakeImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[0])
-        remImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[1])
-        lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[2])
-        deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 2, backgroundColor: colors[3])
+        let iconWidth = screenWidth / CGFloat(limitSize-64)
+
+        awakeImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[0])
+        remImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[1])
+        lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[2])
+        deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[3])
+        
         
         var yVals: [ChartDataEntry] = []
-        
+        var lastValue: Double = 0
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             let value = dataSorce[i]
-            if value == 7 {
-                yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(dataSorce[i]), icon: awakeImage))
-            } else if value == 5 {
-                yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(dataSorce[i]), icon: remImage))
-            } else if value == 3 {
-                yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(dataSorce[i]), icon: lightImage))
-            } else if value == 1 {
-                yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(dataSorce[i]), icon: deepImage))
+            
+            if lastValue != value {
+                if value == 7 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
+                } else if value == 5 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
+                } else if value == 3 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
+                } else if value == 1 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
+                }
+            } else {
+                if value == 7 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: awakeImage))
+                } else if value == 5 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: remImage))
+                } else if value == 3 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: lightImage))
+                } else if value == 1 {
+                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: deepImage))
+                }
             }
+
+            lastValue = value
         }
         let set = LineChartDataSet(entries: yVals, label: "")
-        
-        set.mode = .horizontalBezier
-        set.drawCirclesEnabled = false
-        set.drawCircleHoleEnabled = false
-        set.drawFilledEnabled = false
-        set.lineWidth = 2
-        set.colors = [colors[0].changeAlpha(to: 0.5), colors[1].changeAlpha(to: 0.5), colors[2].changeAlpha(to: 0.5), colors[3].changeAlpha(to: 0.5)]
-        set.isDrawLineWithGradientEnabled = true
-        set.gradientPositions = [6, 4, 2]
-        set.drawIconsEnabled = true
-        set.highlightEnabled = false
-        set.drawValuesEnabled = false
-        let data = LineChartData(dataSet: set)
+//        let strongSet = LineChartDataSet(entries: yVals, label: "")
+        if colors.count >= 4 {
+            set.mode = .stepped
+            set.drawCirclesEnabled = false
+            set.drawCircleHoleEnabled = false
+            set.drawFilledEnabled = false
+            set.lineCapType = .round
+            set.lineWidth = 2
+          
+            set.setColors([colors[0], colors[0], colors[1], colors[2], colors[3]], alpha: 0.5)
+            set.isDrawLineWithGradientEnabled = true
+            set.gradientPositions = [6, 5, 2, 1]
+            set.drawIconsEnabled = true
+            set.highlightEnabled = false
+            set.drawValuesEnabled = false
+        }
+
+        let data = LineChartData(dataSets: [set])
         
         chartView.data = data
     }

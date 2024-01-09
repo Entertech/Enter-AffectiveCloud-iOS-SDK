@@ -209,18 +209,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             }
             
             chartView.leftAxis.drawBottomYLabelEntryEnabled = false
-            if maxValue == minValue {
-                if minValue == 0 {
-                    chartView.leftAxis.axisMinimum = minValue
-                }
-                
-                chartView.leftAxis.granularity = 1
-                chartView.leftAxis.granularityEnabled = true
-                chartView.leftAxis.setLabelCount(3, force: true)
-            } else if maxValue - minValue < 8 {
-                chartView.leftAxis.axisMinimum = minValue - 4 < 0 ? 0 :  minValue - 1
-                chartView.leftAxis.axisMaximum = maxValue + 4
-            }
+
             // 设置chart set
             let set = LineChartDataSet(entries: yVals, label: "")
             set.mode = .linear
@@ -276,6 +265,18 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             set.drawHorizontalHighlightIndicatorEnabled = false
             set.drawValuesEnabled = false
             sets.append(set)
+        }
+        if maxValue == minValue {
+            if minValue == 0 {
+                chartView.leftAxis.axisMinimum = minValue
+            }
+            
+            chartView.leftAxis.granularity = 1
+            chartView.leftAxis.granularityEnabled = true
+            chartView.leftAxis.setLabelCount(3, force: true)
+        } else if maxValue - minValue < 8 {
+            chartView.leftAxis.axisMinimum = minValue - 4 < 0 ? 0 :  minValue - 1
+            chartView.leftAxis.axisMaximum = maxValue + 4
         }
         let data = LineChartData(dataSets: sets)
         chartView.data = data

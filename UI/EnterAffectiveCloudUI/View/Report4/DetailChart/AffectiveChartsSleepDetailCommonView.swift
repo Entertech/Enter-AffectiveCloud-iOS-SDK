@@ -57,6 +57,18 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
         legend.enabled = false
         highlightPerTapEnabled = false
         dragEnabled = false
+        
+    }
+    
+    
+    
+    func resizeArray<T>(array: inout [T], toSize newSize: Int) {
+        guard array.count > newSize else { return } // No need to remove elements if array size is already within the limit
+        
+        while array.count > newSize {
+            let randomIndex = Int(arc4random_uniform(UInt32(array.count)))
+            array.remove(at: randomIndex)
+        }
     }
 }
 
