@@ -15,7 +15,7 @@ public class AffectiveChartsSleepStageView: UIView {
     internal let chartView = AffectiveChartsSleepDetailCommonView()
     internal var interval: Double = 1
     internal var dataSorce: [Double] = []
-    private let limitSize:Double = 240
+    private let limitSize:Double = 301
     private var awakeImage: UIImage?
     private var remImage: UIImage?
     private var lightImage: UIImage?
@@ -34,24 +34,29 @@ public class AffectiveChartsSleepStageView: UIView {
         let percent = Double(array.count) / limitSize
         var stride: Int = 1
         if percent < 1 {
-            stride = Int(ceil(limitSize / Double(array.count)))
-            interval = Double(array.count)/limitSize
+            stride = Int(ceil((limitSize-1) / Double(array.count-1)))
+            interval = (param.end-param.start-300)/300/(limitSize-1)
         }
         array.forEach { value in
-            for e in 0..<stride {
-                if value == 0 || value == 1 {
-                    dataSorce.append(7) //清醒
-                } else if value == 4 {
-                    dataSorce.append(5) //rem
-                } else if value == 2 {
-                    dataSorce.append(3) //浅睡
-                } else if value == 3 {
-                    dataSorce.append(1) //深睡
-                }
+            
+
+            if value == 0 || value == 1 {
+                dataSorce.append(contentsOf:Array(repeating: 7, count: stride))
+                //                    dataSorce.append(7) //清醒
+            } else if value == 4 {
+                dataSorce.append(contentsOf:Array(repeating: 5, count: stride))
+                //                    dataSorce.append(5) //rem
+            } else if value == 2 {
+                dataSorce.append(contentsOf:Array(repeating: 3, count: stride))
+                //                    dataSorce.append(3) //浅睡
+            } else if value == 3 {
+                dataSorce.append(contentsOf:Array(repeating: 1, count: stride))
+                //                    dataSorce.append(1) //深睡
             }
+            
         }
         chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
-        chartView.maxVisibleCount = 241
+        chartView.maxVisibleCount = 302
         chartView.chartParam = param
         chartView.leftAxis.axisMinimum = 0
         chartView.leftAxis.axisMaximum = 8
@@ -126,26 +131,20 @@ public class AffectiveChartsSleepStageView: UIView {
         var lastValue: Double = 0
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             let value = dataSorce[i]
-            
+            let index = Double(i)*interval
             if lastValue != value {
-                if value == 7 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
-                } else if value == 5 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
-                } else if value == 3 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
-                } else if value == 1 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: nil))
-                }
+
+                yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: nil))
+                
             } else {
                 if value == 7 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: awakeImage))
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: awakeImage))
                 } else if value == 5 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: remImage))
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: remImage))
                 } else if value == 3 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: lightImage))
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: lightImage))
                 } else if value == 1 {
-                    yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(dataSorce[i]), icon: deepImage))
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: deepImage))
                 }
             }
 

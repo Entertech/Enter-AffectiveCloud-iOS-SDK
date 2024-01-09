@@ -266,17 +266,20 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             set.drawValuesEnabled = false
             sets.append(set)
         }
+        
         if maxValue == minValue {
             if minValue == 0 {
                 chartView.leftAxis.axisMinimum = minValue
+            } else {
+                chartView.leftAxis.axisMinimum = minValue - 1 < 0 ? 0 :  minValue - 1
+                
             }
-            
+            chartView.leftAxis.axisMaximum = maxValue + 3
             chartView.leftAxis.granularity = 1
             chartView.leftAxis.granularityEnabled = true
-            chartView.leftAxis.setLabelCount(3, force: true)
-        } else if maxValue - minValue < 8 {
-            chartView.leftAxis.axisMinimum = minValue - 4 < 0 ? 0 :  minValue - 1
-            chartView.leftAxis.axisMaximum = maxValue + 4
+        } else if maxValue - minValue < 5 {
+            chartView.leftAxis.axisMinimum = minValue - 1 < 0 ? 0 :  minValue - 1
+            chartView.leftAxis.axisMaximum = maxValue + 3
         }
         let data = LineChartData(dataSets: sets)
         chartView.data = data

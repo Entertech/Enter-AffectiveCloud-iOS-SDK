@@ -75,13 +75,16 @@ public class AffectiveChartsSleepSingleLineView: UIView {
         if max == min {
             if min == 0 {
                 chartView.leftAxis.axisMinimum = min
+            } else {
+                chartView.leftAxis.axisMinimum = min - 1 < 0 ? 0 :  min - 1
+                
             }
+            chartView.leftAxis.axisMaximum = max + 3
             chartView.leftAxis.granularity = 1
             chartView.leftAxis.granularityEnabled = true
-            chartView.leftAxis.setLabelCount(2, force: true)
-        } else if max - min < 2 {
+        } else if max - min < 5 {
             chartView.leftAxis.axisMinimum = min - 1 < 0 ? 0 :  min - 1
-            chartView.leftAxis.axisMaximum = max + 1
+            chartView.leftAxis.axisMaximum = max + 3
         }
         
         chartView.data = data
