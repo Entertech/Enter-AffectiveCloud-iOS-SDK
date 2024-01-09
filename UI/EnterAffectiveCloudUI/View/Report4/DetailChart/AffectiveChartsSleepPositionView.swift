@@ -79,7 +79,8 @@ public class AffectiveChartsSleepPositionView: UIView {
         }
         let set = LineChartDataSet(entries: yVals, label: "")
         
-        set.mode = .horizontalBezier
+        set.mode = .stepped
+        set.lineCapType = .round
         set.drawCirclesEnabled = false
         set.drawCircleHoleEnabled = false
         set.drawFilledEnabled = false
