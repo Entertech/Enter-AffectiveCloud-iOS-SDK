@@ -281,20 +281,20 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             chartView.leftAxis.axisMinimum = minValue - 1 < 0 ? 0 :  minValue - 1
             chartView.leftAxis.axisMaximum = maxValue + 3
         } else if maxValue - minValue < 10 {
+            chartView.leftAxis.axisMinimum = minValue - 3 < 0 ? 0 :  minValue - 3
+            chartView.leftAxis.axisMaximum = maxValue + 3
+        } else if maxValue - minValue < 20 {
             chartView.leftAxis.axisMinimum = minValue - 5 < 0 ? 0 :  minValue - 5
             chartView.leftAxis.axisMaximum = maxValue + 5
-        } else if maxValue - minValue < 20 {
+        } else if maxValue - minValue < 30 {
             chartView.leftAxis.axisMinimum = minValue - 8 < 0 ? 0 :  minValue - 8
             chartView.leftAxis.axisMaximum = maxValue + 8
-        } else if maxValue - minValue < 30 {
-            chartView.leftAxis.axisMinimum = minValue - 12 < 0 ? 0 :  minValue - 12
-            chartView.leftAxis.axisMaximum = maxValue + 12
         } else if maxValue - minValue < 40 {
-            chartView.leftAxis.axisMinimum = minValue - 16 < 0 ? 0 :  minValue - 16
-            chartView.leftAxis.axisMaximum = maxValue + 16
+            chartView.leftAxis.axisMinimum = minValue - 10 < 0 ? 0 :  minValue - 10
+            chartView.leftAxis.axisMaximum = maxValue + 10
         } else if maxValue - minValue < 50 {
-            chartView.leftAxis.axisMinimum = minValue - 20 < 0 ? 0 :  minValue - 20
-            chartView.leftAxis.axisMaximum = maxValue + 20
+            chartView.leftAxis.axisMinimum = minValue - 15 < 0 ? 0 :  minValue - 15
+            chartView.leftAxis.axisMaximum = maxValue + 15
         }
         let data = LineChartData(dataSets: sets)
         chartView.data = data

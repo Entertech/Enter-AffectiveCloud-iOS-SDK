@@ -86,20 +86,20 @@ public class AffectiveChartsSleepSingleLineView: UIView {
             chartView.leftAxis.axisMinimum = min - 1 < 0 ? 0 :  min - 1
             chartView.leftAxis.axisMaximum = max + 3
         } else if max - min < 10 {
+            chartView.leftAxis.axisMinimum = min - 3 < 0 ? 0 :  min - 3
+            chartView.leftAxis.axisMaximum = max + 3
+        } else if max - min < 20 {
             chartView.leftAxis.axisMinimum = min - 5 < 0 ? 0 :  min - 5
             chartView.leftAxis.axisMaximum = max + 5
-        } else if max - min < 20 {
+        } else if max - min < 30 {
             chartView.leftAxis.axisMinimum = min - 8 < 0 ? 0 :  min - 8
             chartView.leftAxis.axisMaximum = max + 8
-        } else if max - min < 30 {
-            chartView.leftAxis.axisMinimum = min - 12 < 0 ? 0 :  min - 12
-            chartView.leftAxis.axisMaximum = max + 12
         } else if max - min < 40 {
-            chartView.leftAxis.axisMinimum = min - 16 < 0 ? 0 :  min - 16
-            chartView.leftAxis.axisMaximum = max + 16
+            chartView.leftAxis.axisMinimum = min - 10 < 0 ? 0 :  min - 10
+            chartView.leftAxis.axisMaximum = max + 10
         } else {
-            chartView.leftAxis.axisMinimum = min - 20 < 0 ? 0 :  min - 20
-            chartView.leftAxis.axisMaximum = max + 20
+            chartView.leftAxis.axisMinimum = min - 15 < 0 ? 0 :  min - 15
+            chartView.leftAxis.axisMaximum = max + 15
         }
         
         chartView.data = data
