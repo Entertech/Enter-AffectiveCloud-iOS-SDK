@@ -70,12 +70,9 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
         self.startInterval = start
         self.endInterval = end
         let fromToValue = end - start
-        var strideValue: Int = 0
-        if fromToValue < 1800 {
+        var strideValue: Int = minStride
+        if fromToValue < 7200  {
             strideValue = minStride
-            
-        } else if fromToValue < 3600 {
-            strideValue = minStride * 2
         } else if fromToValue < 10800 {
             strideValue = minStride * 6
         } else if fromToValue < 21600{
@@ -84,19 +81,22 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
             strideValue = minStride * 24
         }
     
-        
-        let startRemain = Int(start) % strideValue
-        let endRemain = Int(end) % strideValue
-        let from = Int(start) + strideValue - startRemain
-        let to = Int(end) - endRemain
-        for t in stride(from: from, through: to, by: strideValue) {
-            values.append(Double(t))
-        }
+        if strideValue <= minStride {
+            
+        } else {
+            let startRemain = Int(start) % strideValue
+            let endRemain = Int(end) % strideValue
+            let from = Int(start) + strideValue - startRemain
+            let to = Int(end) - endRemain
+            for t in stride(from: from, through: to, by: strideValue) {
+                values.append(Double(t))
+            }
 
-        stdValue = Double(Int(start) % minStride > 150 ? Int(start) + (minStride - Int(start) % minStride) : Int(start) - Int(start) % minStride)
-        values = values.map({
-            round(($0-start)/300)
-        })
+            stdValue = Double(Int(start) % minStride > 150 ? Int(start) + (minStride - Int(start) % minStride) : Int(start) - Int(start) % minStride)
+            values = values.map({
+                round(($0-start)/300)
+            })
+        }
         
         lk_formatter.dateFormat = "HH:mm"
         
@@ -104,13 +104,20 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-     
-        axis?.entries = values
-    
-        var time = 0
-        time = Int(value*300+stdValue)
-        let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
-        return date
+        if values.count > 0 {
+            axis?.entries = values
+        
+            var time = 0
+            time = Int(value*300+stdValue)
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            return date
+        } else {
+            var time = 0
+            time = Int(value*300+startInterval)
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            return date
+        }
+
     }
 }
 
