@@ -296,6 +296,9 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             chartView.leftAxis.axisMinimum = minValue - 15 < 0 ? 0 :  minValue - 15
             chartView.leftAxis.axisMaximum = maxValue + 15
         }
+        if sourceArray.count >= 5 && sourceArray[0].count < 24 {
+            chartView.xAxis.setLabelCount(4, force: false)
+        }
         let data = LineChartData(dataSets: sets)
         chartView.data = data
     }

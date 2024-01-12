@@ -15,6 +15,7 @@ public class AffectiveChartsSleepStageView: UIView {
     internal let chartView = AffectiveChartsSleepDetailCommonView()
     internal var interval: Double = 1
     internal var dataSorce: [Double] = []
+    private var originSource: [Int] = []
     private let limitSize:Double = 301
     private var awakeImage: UIImage?
     private var remImage: UIImage?
@@ -29,6 +30,7 @@ public class AffectiveChartsSleepStageView: UIView {
     /// - Returns: self
     public func setData(_ array: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
+        originSource.append(contentsOf: array)
         dataSorce.removeAll()
         // array如果数量小于500, 将array以array.count:500映射到dataSorce
         let percent = Double(array.count) / limitSize
@@ -167,7 +169,9 @@ public class AffectiveChartsSleepStageView: UIView {
             set.highlightEnabled = false
             set.drawValuesEnabled = false
         }
-
+        if originSource.count < 24 {
+            chartView.xAxis.setLabelCount(4, force: false)
+        }
         let data = LineChartData(dataSets: [set])
         
         chartView.data = data

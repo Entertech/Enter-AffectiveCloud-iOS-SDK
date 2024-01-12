@@ -28,7 +28,7 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
         leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 2.0
         leftAxis.gridLineDashLengths = [2.0, 4.0]
-        leftAxis.drawAxisLineEnabled = true
+        leftAxis.drawAxisLineEnabled = false
         leftAxis.axisLineWidth = 1
         leftAxis.axisLineDashPhase = 4
         leftAxis.axisLineDashLengths = [4.0, 6.0]
