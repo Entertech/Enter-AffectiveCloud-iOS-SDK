@@ -27,7 +27,7 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
         leftAxis.gridColor = param.yGrideLineColor ?? .black
         leftAxis.gridLineWidth = 0.5
         leftAxis.gridLineDashPhase = 2.0
-        leftAxis.gridLineDashLengths = [2.0, 4.0]
+        leftAxis.gridLineDashLengths = [2.0, 2.0]
         leftAxis.drawAxisLineEnabled = false
         leftAxis.axisLineWidth = 1
         leftAxis.axisLineDashPhase = 4

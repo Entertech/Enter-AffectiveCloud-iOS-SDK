@@ -102,7 +102,13 @@ public class AffectiveChartsSleepSingleLineView: UIView {
             chartView.leftAxis.axisMaximum = max + 15
         }
         if yVals.count < 24 {
-            chartView.xAxis.setLabelCount(4, force: false)
+            if yVals.count % 5 == 0 {
+                chartView.xAxis.setLabelCount(5, force: true)
+            } else if yVals.count % 4 == 0 {
+                chartView.xAxis.setLabelCount(4, force: true)
+            } else if yVals.count % 3 == 0 {
+                chartView.xAxis.setLabelCount(3, force: true)
+            }
         }
         chartView.data = data
     }

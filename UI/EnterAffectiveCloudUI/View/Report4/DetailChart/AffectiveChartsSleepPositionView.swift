@@ -94,7 +94,13 @@ public class AffectiveChartsSleepPositionView: UIView {
         set.gradientPositions = [8.01, 8, 6.01, 6, 4.01, 4]
         let data = LineChartData(dataSet: set)
         if yVals.count < 24 {
-            chartView.xAxis.setLabelCount(4, force: false)
+            if yVals.count % 5 == 0 {
+                chartView.xAxis.setLabelCount(5, force: true)
+            } else if yVals.count % 4 == 0 {
+                chartView.xAxis.setLabelCount(4, force: true)
+            } else if yVals.count % 3 == 0 {
+                chartView.xAxis.setLabelCount(3, force: true)
+            }
         }
         chartView.data = data
     }

@@ -170,7 +170,13 @@ public class AffectiveChartsSleepStageView: UIView {
             set.drawValuesEnabled = false
         }
         if originSource.count < 24 {
-            chartView.xAxis.setLabelCount(4, force: false)
+            if originSource.count % 5 == 0 {
+                chartView.xAxis.setLabelCount(5, force: true)
+            } else if originSource.count % 4 == 0 {
+                chartView.xAxis.setLabelCount(4, force: true)
+            } else if originSource.count % 3 == 0 {
+                chartView.xAxis.setLabelCount(3, force: true)
+            }
         }
         let data = LineChartData(dataSets: [set])
         
