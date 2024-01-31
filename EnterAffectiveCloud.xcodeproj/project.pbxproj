@@ -83,6 +83,7 @@
 		FA55EA6B234C726100C148BF /* ToolBox+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */; };
 		FA61A818258DCDB9003F27AD /* FiveDBValueMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA61A817258DCDB9003F27AD /* FiveDBValueMarkerView.swift */; };
 		FA6D2E9523B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */; };
+		FA6DD9C62B6A3A77009DE43D /* AffectiveChartsTrainingTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DD9C52B6A3A77009DE43D /* AffectiveChartsTrainingTargetView.swift */; };
 		FA6FFF9F23D052C700A4B16A /* RealtimeArousalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFF9E23D052C700A4B16A /* RealtimeArousalView.swift */; };
 		FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */; };
 		FA6FFFA523D05A0F00A4B16A /* SurveyorsRodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */; };
@@ -349,6 +350,7 @@
 		FA55EA6A234C726100C148BF /* ToolBox+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToolBox+Ex.swift"; sourceTree = "<group>"; };
 		FA61A817258DCDB9003F27AD /* FiveDBValueMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDBValueMarkerView.swift; sourceTree = "<group>"; };
 		FA6D2E9423B4588B00F68960 /* PrivateReportChartAttentionAndRelaxation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateReportChartAttentionAndRelaxation.swift; sourceTree = "<group>"; };
+		FA6DD9C52B6A3A77009DE43D /* AffectiveChartsTrainingTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffectiveChartsTrainingTargetView.swift; sourceTree = "<group>"; };
 		FA6FFF9E23D052C700A4B16A /* RealtimeArousalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeArousalView.swift; sourceTree = "<group>"; };
 		FA6FFFA123D05A0F00A4B16A /* SurveyorsRodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyorsRodView.swift; sourceTree = "<group>"; };
 		FA6FFFA223D05A0F00A4B16A /* SurveyorsRodView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SurveyorsRodView.xib; sourceTree = "<group>"; };
@@ -1153,6 +1155,7 @@
 			isa = PBXGroup;
 			children = (
 				FADE34DB28BEF3B100894A96 /* AffectiveCharts3FlowView.swift */,
+				FA6DD9C52B6A3A77009DE43D /* AffectiveChartsTrainingTargetView.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -1664,6 +1667,7 @@
 				FAB3E46A23ACAD4D00A85129 /* ReportHRV.swift in Sources */,
 				FA6FFFA423D05A0F00A4B16A /* SurveyorsRodView.swift in Sources */,
 				FA7D326824FDED21005792D3 /* LeftAndRightSpectrumView.swift in Sources */,
+				FA6DD9C62B6A3A77009DE43D /* AffectiveChartsTrainingTargetView.swift in Sources */,
 				FA7689CC23B05ED4005E4DF7 /* ReportRelaxationAndAttention.swift in Sources */,
 				FA7689CA23B0595A005E4DF7 /* ReportSemiCircle.swift in Sources */,
 				FA31DE182861691900459091 /* HeartRateIntroView.swift in Sources */,
