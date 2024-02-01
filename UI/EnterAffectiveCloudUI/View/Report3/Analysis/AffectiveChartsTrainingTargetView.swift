@@ -98,10 +98,9 @@ public class AffectiveChartsTrainingTargetView: UIView {
     }
     
     func setLine() {
-        let invalidData = 1.0
         var stateArray = [Int]()
         var sampleArray = [Double]()
-        var len = dataSource.count
+        let len = dataSource.count
         if let state = state {
             
             for i in stride(from: 0, to: len, by: sample) {
@@ -111,9 +110,8 @@ public class AffectiveChartsTrainingTargetView: UIView {
                     stateArray.append(state[i])
                 }
             }
-        } else {
-            
         }
+
         for i in stride(from: 0, to: len, by: sample) {
             sampleArray.append(dataSource[i])
         }
@@ -121,13 +119,18 @@ public class AffectiveChartsTrainingTargetView: UIView {
         if stateArray.count > 0 {
             smoothArray = sampleArray.smoothData()
         } else {
-            smoothArray = sampleArray.smoothData(invalidValue: 100)
+            if let max = maxValue {
+                smoothArray = sampleArray.smoothData(invalidValue: 100)
+            } else {
+                smoothArray = sampleArray.smoothData()
+            }
+            
         }
         
 
         var yVals: [ChartDataEntry] = []
         var lineColor: [UIColor] = []
-        var index = 1
+   
         for i in stride(from: 0, to: smoothArray.count, by: 1) {
             
             if stateArray.count > 0 {
@@ -139,7 +142,6 @@ public class AffectiveChartsTrainingTargetView: UIView {
             } else {
                 lineColor.append(colors[2])
             }
-            
             
             let value = smoothArray[i]
             yVals.append(ChartDataEntry(x: Double(i*sample)*interval, y: value))
@@ -164,23 +166,58 @@ public class AffectiveChartsTrainingTargetView: UIView {
             return
         }
         if let sep = self.separateValue {
-            if let dataMax = sampleArray.max(), let dataMin = sampleArray.min() {
-                if sep < dataMax && sep > dataMin {
-                    let limitLine = ChartLimitLine(limit: sep, label: "")
-                    limitLine.lineWidth = 2
-                    limitLine.lineColor = colors[2]
-                    limitLine.lineDashLengths = [2, 2]
-                    chartView.leftAxis.addLimitLine(limitLine)
-                    if isLargerSeparate {
-                        set.colors = [colors[2], colors[2], colors[4], colors[4]]
-                        set.isDrawLineWithGradientEnabled = true
-                        set.gradientPositions = [sep, sep-0.01]
-                    } else {
-                        set.colors = [colors[4], colors[4], colors[2], colors[2]]
-                        set.isDrawLineWithGradientEnabled = true
-                        set.gradientPositions = [sep, sep-0.01]
-                    }
+            let limitLine = ChartLimitLine(limit: sep, label: "")
+            limitLine.lineWidth = 2
+            limitLine.lineColor = colors[2]
+            limitLine.lineDashLengths = [2, 2]
+            chartView.leftAxis.addLimitLine(limitLine)
+            
+            var dataMax: Double = 100
+            var dataMin: Double = 0
+            let validArray = sampleArray.filter({$0 > 0})
+            if validArray.count > 0 {
+                if let max = maxValue, let min = minValue {
+                    dataMax = max
+                    dataMin = min
+                } else if let max = validArray.max(), let min = validArray.min() {
+                    dataMax = max
+                    dataMin = min
+                }
+            } else {
+                if let max = maxValue, let min = minValue {
+                    dataMax = max
+                    dataMin = min
+                } else {
+                    dataMax = 0
+                    dataMin = 0
+                }
+            }
 
+            if sep < dataMax && sep > dataMin {
+                if isLargerSeparate {
+                    set.colors = [colors[4], colors[4], colors[2], colors[2]]
+                    set.isDrawLineWithGradientEnabled = true
+                    set.gradientPositions = [dataMin, sep, sep+0.01, dataMax]
+                } else {
+                    set.colors = [colors[2], colors[2], colors[4], colors[4]]
+                    set.isDrawLineWithGradientEnabled = true
+                    set.gradientPositions = [dataMin, sep, sep+0.01, dataMax]
+                }
+
+            } else if sep >= dataMax {
+                chartView.leftAxis.axisMaximum = sep + 5
+                if isLargerSeparate {
+                    set.setColor(colors[4])
+                } else {
+                    set.setColor(colors[2])
+                }
+               
+            } else if sep <= dataMin {
+                chartView.leftAxis.axisMinimum = sep - 5
+                if isLargerSeparate {
+                    set.setColor(colors[2])
+                } else {
+                    set.setColor(colors[4])
                 }
             }
 
