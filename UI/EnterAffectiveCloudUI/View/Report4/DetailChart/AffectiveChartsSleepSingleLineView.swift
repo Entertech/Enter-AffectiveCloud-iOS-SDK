@@ -22,7 +22,7 @@ public class AffectiveChartsSleepSingleLineView: UIView {
     public func setData(_ array: [Double], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
         dataSorce.removeAll()
-        dataSorce.append(contentsOf: array)
+        dataSorce.append(contentsOf: array.smoothData())
         let list = array.filter({$0 > 0})
         chartView.chartParam = param
 
