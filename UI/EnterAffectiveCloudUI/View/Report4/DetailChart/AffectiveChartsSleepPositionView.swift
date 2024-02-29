@@ -88,9 +88,9 @@ public class AffectiveChartsSleepPositionView: UIView {
         set.drawIconsEnabled = false
         set.highlightEnabled = false
         set.drawValuesEnabled = false
-        set.colors = [colors[0], colors[0], colors[1], colors[1], colors[2], colors[2], colors[3]]
+        set.setColors([colors[4],colors[3],colors[2],colors[1],colors[0]], alpha: 0.5)
         set.isDrawLineWithGradientEnabled = true
-        set.gradientPositions = [8.01, 8, 6.01, 6, 4.01, 4]
+        set.gradientPositions = [1, 3, 5, 7, 9]
         let data = LineChartData(dataSet: set)
         if yVals.count < 24 {
             if yVals.count % 5 == 0 {

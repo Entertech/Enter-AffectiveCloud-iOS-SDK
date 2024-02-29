@@ -85,7 +85,7 @@ class FifthViewController: UIViewController {
             param.lineColors = [UIColor.colorWithHexString(hexColor: "#FFC56F"),
                                 UIColor.colorWithHexString(hexColor: "#3479FF"),
                                 UIColor.colorWithHexString(hexColor: "#8B7AF3"),
-                                UIColor.colorWithHexString(hexColor: "#3634A2"),
+                                UIColor.colorWithHexString(hexColor: "#9C47F1"),
                                 UIColor.colorWithHexString(hexColor: "#3634A2")]
             param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
             param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")

@@ -127,9 +127,9 @@ public class AffectiveChartsSleepStageView: UIView {
             set.lineCapType = .round
             set.lineWidth = 1
           
-            set.setColors([colors[0], colors[0], colors[1], colors[2], colors[3]], alpha: 0.5)
+            set.setColors([colors[3], colors[2], colors[1], colors[0]], alpha: 0.5)
             set.isDrawLineWithGradientEnabled = true
-            set.gradientPositions = [6, 5, 2, 1]
+            set.gradientPositions = [1, 3, 5, 7]
             set.drawIconsEnabled = true
             set.highlightEnabled = false
             set.drawValuesEnabled = false
