@@ -73,12 +73,16 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
         var strideValue: Int = minStride
         if fromToValue < 7200  {
             strideValue = minStride
+            lk_formatter.dateFormat = "HH:mm"
         } else if fromToValue < 18000 {
             strideValue = minStride * 6
+            lk_formatter.dateFormat = "HH:mm"
         } else if fromToValue < 36000{
             strideValue = minStride * 12
+            lk_formatter.dateFormat = "HH"
         } else {
             strideValue = minStride * 24
+            lk_formatter.dateFormat = "HH"
         }
     
         if strideValue <= minStride {
@@ -98,7 +102,7 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
             })
         }
         
-        lk_formatter.dateFormat = "HH:mm"
+        
         
         
     }
