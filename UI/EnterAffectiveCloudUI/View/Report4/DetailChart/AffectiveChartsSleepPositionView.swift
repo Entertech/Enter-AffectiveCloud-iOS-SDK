@@ -48,7 +48,6 @@ public class AffectiveChartsSleepPositionView: UIView {
         chartView.leftAxis.drawBottomYLabelEntryEnabled = false
         chartView.leftAxis.labelCount = 5
         chartView.leftAxis.valueFormatter = AffectiveChartsSleepPositionYFormatter(lan: param.text)
-        chartView.leftYAxisRenderer = AffectiveChartsSleepStageYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         return self
     }
     

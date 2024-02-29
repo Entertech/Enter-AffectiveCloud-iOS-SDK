@@ -15,7 +15,7 @@ public class AffectiveChartsSleepSingleLineView: UIView {
     internal let chartView = AffectiveChartsSleepDetailCommonView()
     internal var interval = 1
     internal var dataSorce: [Double] = []
-    
+    internal var separateY: [Int] = []
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
@@ -28,7 +28,6 @@ public class AffectiveChartsSleepSingleLineView: UIView {
 
         chartView.leftAxis.drawTopYLabelEntryEnabled = true
         chartView.leftAxis.drawBottomYLabelEntryEnabled = false
-        chartView.leftYAxisRenderer = AffectiveChartsSleepStageYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         return self
     }
     
@@ -82,24 +81,60 @@ public class AffectiveChartsSleepSingleLineView: UIView {
             chartView.leftAxis.axisMaximum = max + 3
             chartView.leftAxis.granularity = 1
             chartView.leftAxis.granularityEnabled = true
-        } else if max - min < 5 {
-            chartView.leftAxis.axisMinimum = min - 1 < 0 ? 0 :  min - 1
-            chartView.leftAxis.axisMaximum = max + 3
-        } else if max - min < 10 {
-            chartView.leftAxis.axisMinimum = min - 3 < 0 ? 0 :  min - 3
-            chartView.leftAxis.axisMaximum = max + 3
-        } else if max - min < 20 {
-            chartView.leftAxis.axisMinimum = min - 5 < 0 ? 0 :  min - 5
-            chartView.leftAxis.axisMaximum = max + 5
-        } else if max - min < 30 {
-            chartView.leftAxis.axisMinimum = min - 8 < 0 ? 0 :  min - 8
-            chartView.leftAxis.axisMaximum = max + 8
-        } else if max - min < 40 {
-            chartView.leftAxis.axisMinimum = min - 10 < 0 ? 0 :  min - 10
-            chartView.leftAxis.axisMaximum = max + 10
         } else {
-            chartView.leftAxis.axisMinimum = min - 15 < 0 ? 0 :  min - 15
-            chartView.leftAxis.axisMaximum = max + 15
+            separateY.removeAll()
+            var maxValueFloat: Double = 0
+            var minValueFloat: Double = 200
+            let noZeroArray = dataSorce.filter({ v in
+                v > 0
+            })
+            
+            maxValueFloat = noZeroArray.max() ?? 200
+            minValueFloat = noZeroArray.min() ?? 0
+            var maxValue = Int(ceil(maxValueFloat))
+            var minValue = Int(minValueFloat)
+            
+            let tempMax5 = (maxValue / 5 + 1) * 5 > 200 ? 200 : (maxValue / 5 + 1) * 5
+            let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
+            var scaled = 5
+            if (maxValue - minValue) / 4 > 2 { // 有时候间距会非常小,这时候需要扩展最大最小值
+                maxValue = tempMax5
+                minValue = tempMin5
+            } else {
+                scaled = 1
+            }
+            // 开始计算Y分割
+
+            
+            for i in (0...5) {
+                let scale = scaled * i
+                if (minValue-scale) < 0 {
+                    if ((maxValue+scale) - minValue) % 4 == 0 {
+                        chartView.leftAxis.axisMaximum = Double(maxValue+scale)
+                        chartView.leftAxis.axisMinimum = Double(minValue)
+                        separateY.append(minValue)
+                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*3/4)
+                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*2/4)
+                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*1/4)
+                        separateY.append(maxValue+scale)
+                        break
+                    }
+                } else {
+                    if (maxValue - (minValue-scale)) % 4 == 0 {
+                        chartView.leftAxis.axisMaximum = Double(maxValue)
+                        chartView.leftAxis.axisMinimum = Double(minValue-scale)
+                        separateY.append(minValue-scale)
+                        separateY.append(maxValue-(maxValue-minValue+scale)*3/4)
+                        separateY.append(maxValue-(maxValue-minValue+scale)*2/4)
+                        separateY.append(maxValue-(maxValue-minValue+scale)*1/4)
+                        separateY.append(maxValue)
+                        break
+                    }
+                }
+            }
+            chartView.yRender?.entries = separateY.filter({ v in
+                v > 0
+            })
         }
         if yVals.count < 24 {
             if yVals.count % 5 == 0 {

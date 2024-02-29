@@ -73,9 +73,9 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
         var strideValue: Int = minStride
         if fromToValue < 7200  {
             strideValue = minStride
-        } else if fromToValue < 10800 {
+        } else if fromToValue < 18000 {
             strideValue = minStride * 6
-        } else if fromToValue < 21600{
+        } else if fromToValue < 36000{
             strideValue = minStride * 12
         } else {
             strideValue = minStride * 24

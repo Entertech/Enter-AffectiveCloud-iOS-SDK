@@ -19,6 +19,7 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
             }
         }
     }
+    internal var yRender: AffectiveChartsSleepStageYRender!
     
     internal func setupChart(_ param: AffectiveChartsSleepParameter) {
         self.backgroundColor = .clear
@@ -57,7 +58,8 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
         legend.enabled = false
         highlightPerTapEnabled = false
         dragEnabled = false
-        
+        yRender = AffectiveChartsSleepStageYRender(viewPortHandler: self.viewPortHandler, axis: self.leftAxis, transformer: self.getTransformer(forAxis: .left))
+        self.leftYAxisRenderer = yRender
     }
     
     
@@ -72,3 +74,158 @@ public class AffectiveChartsSleepDetailCommonView: LineChartView {
     }
 }
 
+
+class AffectiveChartsSleepStageYRender: YAxisRenderer {
+    open var entries: [Int]?
+    override init(viewPortHandler: ViewPortHandler, axis: YAxis, transformer: Transformer?) {
+        super.init(viewPortHandler: viewPortHandler, axis: axis, transformer: transformer)
+    }
+    
+    override func transformedPositions() -> [CGPoint]
+    {
+        
+        if let entries = entries {
+            guard let transformer = self.transformer else { return [] }
+            
+            var positions = [CGPoint]()
+            
+            for i in stride(from: 0, to: entries.count, by: 1)
+            {
+                positions.append(CGPoint(x: 0.0, y: Double(entries[i])))
+            }
+            transformer.pointValuesToPixel(&positions)
+            
+            return positions
+        } else {
+            return super.transformedPositions()
+            
+        }
+
+
+    }
+
+    /// draws the y-axis labels to the screen
+    override func renderAxisLabels(context: CGContext)
+    {
+        guard
+            axis.isEnabled,
+            axis.isDrawLabelsEnabled
+            else { return }
+        if let entries = entries {
+            axis.entries.removeAll()
+            axis.entries.append(contentsOf: entries.map({Double($0)}))
+        }
+        let xoffset = axis.xOffset
+        let yoffset = axis.labelFont.lineHeight / 2.5 + axis.yOffset
+        
+        let dependency = axis.axisDependency
+        let labelPosition = axis.labelPosition
+        
+        let xPos: CGFloat
+        let textAlign: TextAlignment
+        
+        if dependency == .left
+        {
+            if labelPosition == .outsideChart
+            {
+                textAlign = .right
+                xPos = viewPortHandler.offsetLeft - xoffset
+            }
+            else
+            {
+                textAlign = .left
+                xPos = viewPortHandler.offsetLeft + xoffset
+            }
+        }
+        else
+        {
+            if labelPosition == .outsideChart
+            {
+                textAlign = .left
+                xPos = viewPortHandler.contentRight + xoffset
+            }
+            else
+            {
+                textAlign = .right
+                xPos = viewPortHandler.contentRight - xoffset
+            }
+        }
+        
+        drawYLabels(context: context,
+                    fixedPosition: xPos,
+                    positions: transformedPositions(),
+                    offset: yoffset - axis.labelFont.lineHeight,
+                    textAlign: textAlign)
+    }
+    
+    /// draws the y-labels on the specified x-position
+    override func drawYLabels(
+        context: CGContext,
+        fixedPosition: CGFloat,
+        positions: [CGPoint],
+        offset: CGFloat,
+        textAlign: TextAlignment)
+    {
+        let labelFont = axis.labelFont
+        let labelTextColor = axis.labelTextColor
+        
+        let from = axis.isDrawBottomYLabelEntryEnabled ? 0 : 1
+        let to = axis.isDrawTopYLabelEntryEnabled ? axis.entryCount : (axis.entryCount - 1)
+        
+        let xOffset = axis.labelXOffset
+        var yOffset: CGFloat = 8
+        for i in from..<to
+        {
+            let text = axis.getFormattedLabel(i)
+            context.drawText(text,
+                             at: CGPoint(x: fixedPosition + xOffset, y: positions[i].y + offset + yOffset),
+                             align: textAlign,
+                             attributes: [.font: labelFont, .foregroundColor: labelTextColor])
+        }
+    }
+
+    
+    override func renderGridLines(context: CGContext) {
+        guard axis.isEnabled else { return }
+
+        if axis.drawGridLinesEnabled
+        {
+            let positions = transformedPositions()
+            
+            context.saveGState()
+            defer { context.restoreGState() }
+            context.clip(to: self.gridClippingRect)
+            
+            context.setShouldAntialias(axis.gridAntialiasEnabled)
+            context.setStrokeColor(axis.gridColor.cgColor)
+            context.setLineWidth(axis.gridLineWidth)
+            context.setLineCap(axis.gridLineCap)
+            
+            if axis.gridLineDashLengths != nil
+            {
+                context.setLineDash(phase: axis.gridLineDashPhase, lengths: axis.gridLineDashLengths)
+            }
+            else
+            {
+                context.setLineDash(phase: 0.0, lengths: [])
+            }
+            
+            // draw the grid
+            positions.forEach {
+                if $0 != positions.first {
+                    drawGridLine(context: context, position: $0)
+                }
+                
+            }
+        }
+
+        if axis.drawZeroLineEnabled
+        {
+            // draw zero line
+            drawZeroLine(context: context)
+        }
+    }
+    
+
+
+}

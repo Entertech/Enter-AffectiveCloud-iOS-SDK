@@ -49,7 +49,7 @@ class FifthViewController: UIViewController {
             let param = AffectiveChartsSleepParameter()
             var array = [Double]()
             for e in 0..<64 {
-                array.append(Double(Int.random(in: 50..<80)))
+                array.append(Double(Int.random(in: 50..<84)))
             }
             let start = Date().timeIntervalSince1970
             let end = start + Double(array.count * 300)

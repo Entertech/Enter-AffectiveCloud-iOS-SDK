@@ -31,6 +31,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     private var alphaEnable: Bool = true
     private var thetaEnable: Bool = true
     private var deltaEnable: Bool = true
+    internal var separateY: [Int] = []
     private var btnEnableCount: Int {
         get {
             var count = 0
@@ -87,7 +88,6 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
         chartView.chartParam = param
         chartView.leftAxis.axisMaxLabels = 5
         chartView.leftAxis.valueFormatter = AffectiveCharts3PercentFormatter()
-        chartView.leftYAxisRenderer = AffectiveChartsSleepStageYRender(viewPortHandler: chartView.viewPortHandler, axis: chartView.leftAxis, transformer: chartView.getTransformer(forAxis: .left))
         return self
     }
 
@@ -172,8 +172,8 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     }
     
     public func build() {
-        var minValue:Double = 100
-        var maxValue:Double = 0
+        var minValue:Int = 100
+        var maxValue:Int = 0
         var sets: [LineChartDataSet] = []
         for j in 0..<sourceArray.count {
             
@@ -191,8 +191,8 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
             var notZero: Int = 0
             for i in stride(from: 0, to: sourceArray[j].count, by: 1) {
                 let source = sourceArray[j][i]
-                minValue = min(minValue, source)
-                maxValue = max(maxValue, source)
+                minValue = min(minValue, Int(source))
+                maxValue = max(maxValue, Int(source))
                 if i < initIndex{  //为0的为无效数据
                     yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(initValue)))
                 } else {
@@ -207,7 +207,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
                 }
                 
             }
-            
+            chartView.leftAxis.drawTopYLabelEntryEnabled = true
             chartView.leftAxis.drawBottomYLabelEntryEnabled = false
 
             // 设置chart set
@@ -268,33 +268,50 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
         }
         
         if maxValue == minValue {
-            if minValue == 0 {
-                chartView.leftAxis.axisMinimum = minValue
+            return
+        } else {
+            separateY.removeAll()
+            let tempMax5 = (maxValue / 5 + 1) * 5 > 200 ? 200 : (maxValue / 5 + 1) * 5
+            let tempMin5 = (minValue / 5 ) * 5 < 0 ? 0 : (minValue / 5) * 5
+            var scaled = 5
+            if (maxValue - minValue) / 4 > 2 { // 有时候间距会非常小,这时候需要扩展最大最小值
+                maxValue = tempMax5
+                minValue = tempMin5
             } else {
-                chartView.leftAxis.axisMinimum = minValue - 1 < 0 ? 0 :  minValue - 1
-                
+                scaled = 1
             }
-            chartView.leftAxis.axisMaximum = maxValue + 3
-            chartView.leftAxis.granularity = 1
-            chartView.leftAxis.granularityEnabled = true
-        } else if maxValue - minValue < 5 {
-            chartView.leftAxis.axisMinimum = minValue - 1 < 0 ? 0 :  minValue - 1
-            chartView.leftAxis.axisMaximum = maxValue + 3
-        } else if maxValue - minValue < 10 {
-            chartView.leftAxis.axisMinimum = minValue - 3 < 0 ? 0 :  minValue - 3
-            chartView.leftAxis.axisMaximum = maxValue + 3
-        } else if maxValue - minValue < 20 {
-            chartView.leftAxis.axisMinimum = minValue - 5 < 0 ? 0 :  minValue - 5
-            chartView.leftAxis.axisMaximum = maxValue + 5
-        } else if maxValue - minValue < 30 {
-            chartView.leftAxis.axisMinimum = minValue - 8 < 0 ? 0 :  minValue - 8
-            chartView.leftAxis.axisMaximum = maxValue + 8
-        } else if maxValue - minValue < 40 {
-            chartView.leftAxis.axisMinimum = minValue - 10 < 0 ? 0 :  minValue - 10
-            chartView.leftAxis.axisMaximum = maxValue + 10
-        } else if maxValue - minValue < 50 {
-            chartView.leftAxis.axisMinimum = minValue - 15 < 0 ? 0 :  minValue - 15
-            chartView.leftAxis.axisMaximum = maxValue + 15
+            // 开始计算Y分割
+
+            
+            for i in (0...5) {
+                let scale = scaled * i
+                if (minValue-scale) < 0 {
+                    if ((maxValue+scale) - minValue) % 4 == 0 {
+                        chartView.leftAxis.axisMaximum = Double(maxValue+scale)
+                        chartView.leftAxis.axisMinimum = Double(minValue)
+                        separateY.append(minValue)
+                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*3/4)
+                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*2/4)
+                        separateY.append((maxValue+scale)-(maxValue-minValue+scale)*1/4)
+                        separateY.append(maxValue+scale)
+                        break
+                    }
+                } else {
+                    if (maxValue - (minValue-scale)) % 4 == 0 {
+                        chartView.leftAxis.axisMaximum = Double(maxValue)
+                        chartView.leftAxis.axisMinimum = Double(minValue-scale)
+                        separateY.append(minValue-scale)
+                        separateY.append(maxValue-(maxValue-minValue+scale)*3/4)
+                        separateY.append(maxValue-(maxValue-minValue+scale)*2/4)
+                        separateY.append(maxValue-(maxValue-minValue+scale)*1/4)
+                        separateY.append(maxValue)
+                        break
+                    }
+                }
+            }
+            chartView.yRender?.entries = separateY.filter({ v in
+                v > 0
+            })
         }
         if sourceArray.count >= 5 && sourceArray[0].count < 24 {
             if sourceArray[0].count % 5 == 0 {
