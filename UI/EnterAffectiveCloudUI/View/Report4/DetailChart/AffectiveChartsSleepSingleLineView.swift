@@ -133,7 +133,7 @@ public class AffectiveChartsSleepSingleLineView: UIView {
                 }
             }
             chartView.yRender?.entries = separateY.filter({ v in
-                v > 0
+                v >= 0
             })
         }
         if yVals.count < 24 {

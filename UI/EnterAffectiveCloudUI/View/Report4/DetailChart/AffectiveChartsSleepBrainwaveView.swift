@@ -310,7 +310,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
                 }
             }
             chartView.yRender?.entries = separateY.filter({ v in
-                v > 0
+                v >= 0
             })
         }
         if sourceArray.count >= 5 && sourceArray[0].count < 24 {
