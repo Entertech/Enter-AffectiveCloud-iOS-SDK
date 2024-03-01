@@ -58,7 +58,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     /// - Parameter array: 数据
     /// - Returns: self
     public func setData(gamma: [Double], beta:[Double], alpha: [Double], theta: [Double], delta: [Double], param: AffectiveChartsSleepParameter) -> Self {
-        guard gamma.count > 0 else {return self}
+        
         gammaSouce.removeAll()
         betaSouce.removeAll()
         alphaSouce.removeAll()
@@ -172,6 +172,8 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     }
     
     public func build() {
+        guard let gamaCount = sourceArray.first?.count, gamaCount > 1 else {return}
+        guard let maxGama = sourceArray.first?.max(), maxGama > 0 else {return}
         var minValue:Int = 100
         var maxValue:Int = 0
         var sets: [LineChartDataSet] = []

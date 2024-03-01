@@ -37,8 +37,6 @@ public class AffectiveChartsSleepStageView: UIView {
             interval = (param.end-param.start-300)/300/(limitSize-1)
         }
         array.forEach { value in
-            
-
             if value == 0 || value == 1 {
                 dataSorce.append(contentsOf:Array(repeating: 7, count: stride))
                 //                    dataSorce.append(7) //清醒
@@ -54,16 +52,17 @@ public class AffectiveChartsSleepStageView: UIView {
             }
             
         }
-        chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
-        chartView.maxVisibleCount = 302
         chartView.chartParam = param
-        chartView.leftAxis.axisMinimum = 0
-        chartView.leftAxis.axisMaximum = 8
-        
-        chartView.leftAxis.drawTopYLabelEntryEnabled = true
-        chartView.leftAxis.drawBottomYLabelEntryEnabled = false
-        chartView.leftAxis.valueFormatter = AffectiveChartsSleepStageYFormatter(lan: param.text)
-
+        if dataSorce.count > 0 {
+            chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
+            chartView.maxVisibleCount = 302
+            chartView.leftAxis.axisMinimum = 0
+            chartView.leftAxis.axisMaximum = 8
+            
+            chartView.leftAxis.drawTopYLabelEntryEnabled = true
+            chartView.leftAxis.drawBottomYLabelEntryEnabled = false
+            chartView.leftAxis.valueFormatter = AffectiveChartsSleepStageYFormatter(lan: param.text)
+        }
         return self
     }
     
@@ -77,7 +76,6 @@ public class AffectiveChartsSleepStageView: UIView {
             $0.edges.equalToSuperview()
         }
         
-        chartView.yRender.entries = [0, 2, 4, 6, 8]
         return self
     }
     
@@ -85,9 +83,10 @@ public class AffectiveChartsSleepStageView: UIView {
     
     public func build() {
         guard let colors = chartView.chartParam?.lineColors else {return}
+        guard dataSorce.count > 0 else {return}
         let screenWidth = UIScreen.main.bounds.width > 500 ? 500 : UIScreen.main.bounds.width
         let iconWidth = screenWidth / CGFloat(limitSize-64)
-
+        chartView.yRender.entries = [0, 2, 4, 6, 8]
         awakeImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[0])
         remImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[1])
         lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[2])
