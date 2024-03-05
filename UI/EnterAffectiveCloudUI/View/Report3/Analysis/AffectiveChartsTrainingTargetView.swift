@@ -25,7 +25,6 @@ public class AffectiveChartsTrainingTargetView: UIView {
         self.isLargerSeparate = isLargerSeparate
         sample = data.count / maxDataCount == 0 ? 1 : Int(ceilf(Float(data.count) / Float(maxDataCount)))
         
-        
         initChart()
         setLine()
     }
@@ -135,9 +134,9 @@ public class AffectiveChartsTrainingTargetView: UIView {
             
             if stateArray.count > 0 {
                 if stateArray[i] > 0 {
-                    lineColor.append(colors[3])
-                } else {
                     lineColor.append(colors[2])
+                } else {
+                    lineColor.append(colors[4])
                 }
             } else {
                 lineColor.append(colors[2])
@@ -195,11 +194,11 @@ public class AffectiveChartsTrainingTargetView: UIView {
 
             if sep < dataMax && sep > dataMin {
                 if isLargerSeparate {
-                    set.colors = [colors[4], colors[4], colors[2], colors[2]]
+                    set.colors = [colors[2], colors[2], colors[4], colors[4]]
                     set.isDrawLineWithGradientEnabled = true
                     set.gradientPositions = [dataMin, sep, sep+0.01, dataMax]
                 } else {
-                    set.colors = [colors[2], colors[2], colors[4], colors[4]]
+                    set.colors = [colors[4], colors[4], colors[2], colors[2]]
                     set.isDrawLineWithGradientEnabled = true
                     set.gradientPositions = [dataMin, sep, sep+0.01, dataMax]
                 }
@@ -207,17 +206,17 @@ public class AffectiveChartsTrainingTargetView: UIView {
             } else if sep >= dataMax {
                 chartView.leftAxis.axisMaximum = sep + 5
                 if isLargerSeparate {
-                    set.setColor(colors[4])
-                } else {
                     set.setColor(colors[2])
+                } else {
+                    set.setColor(colors[4])
                 }
                
             } else if sep <= dataMin {
                 chartView.leftAxis.axisMinimum = sep - 5
                 if isLargerSeparate {
-                    set.setColor(colors[2])
-                } else {
                     set.setColor(colors[4])
+                } else {
+                    set.setColor(colors[2])
                 }
             }
 
