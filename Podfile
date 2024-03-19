@@ -5,7 +5,7 @@ platform :ios, '13.0'
 
 def common
   pod 'RxSwift'
-  pod 'HandyJSON', '~> 5.0.4-beta'
+  pod 'SmartCodable'
   pod 'Starscream', '~> 3.0'
   pod 'GzipSwift'
 end

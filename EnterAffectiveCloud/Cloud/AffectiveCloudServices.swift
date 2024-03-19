@@ -8,7 +8,7 @@
 
 import Foundation
 import Starscream
-import HandyJSON
+import SmartCodable
 import Gzip
 
 // web socket services
@@ -43,8 +43,8 @@ class AffectiveCloudServices: WebSocketServiceProcotol {
     var uploadCycle: Int = 0
     var sex: String?
     var age: Int?
-    var sn: [String: Any]?
-    var source: [String: Any]?
+    var sn: [String: String]?
+    var source: [String: String]?
     var mode: [Int]?
     var cased: [Int]?
     var allowSave: Bool = true
@@ -278,9 +278,13 @@ extension AffectiveCloudServices: BiodataServiceProtocol {
             label.cased = cases
             storage.label = label
         }
-
-        storage.device = sn
-        storage.data = source
+        if let sn = sn as? [String: String] {
+            storage.device = sn
+        }
+        if let source = source as? [String: String] {
+            storage.data = source
+        }
+        
         storage.allow = allowSave
         jsonModel.kwargs?.storageSettings = storage
   
@@ -980,7 +984,7 @@ extension AffectiveCloudServices: WebSocketDelegate {
         if let unGzipData = try? data.gunzipped() {
             let text = String(decoding: unGzipData, as: UTF8.self)
             DLog("response data is \(text)")
-            if let responseModel = AffectiveCloudResponseJSONModel.deserialize(from: text) {
+            if let responseModel = AffectiveCloudResponseJSONModel.deserialize(json: text) {
                 if self.handleErrorWithResponse(model: responseModel) { return }
                 self.handleResponse(with: responseModel)
             } else {

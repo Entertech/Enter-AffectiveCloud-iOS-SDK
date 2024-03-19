@@ -9,7 +9,7 @@
 import Foundation
 import Starscream
 import Gzip
-import HandyJSON
+import SmartCodable
 
 protocol SyncRealtimeBiodataDelegate {
     func syncEEG(left: [Float], right: [Float], alpha: Float, beta: Float, theta: Float, delta: Float, gamma: Float, quality: Int)
@@ -88,7 +88,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         eeg.gamma = gamma
         eeg.quality = Float(quality)
         data.eeg = eeg
-        model.data = data.toJSON()
+        model.data = data.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -110,7 +110,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         hrData.hr = hr
         hrData.hrv = hrv
         data.hr = hrData
-        model.data = data.toJSON()
+        model.data = data.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -136,7 +136,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         peprData.bcgQuality = bcgQuality
         peprData.rwQuality = rwQuality
         data.pepr = peprData
-        model.data = data.toJSON()
+        model.data = data.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -155,7 +155,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.relaxation = data
         dataModel.relaxation = valueModel
-        model.data = dataModel.toJSON()
+        model.data = dataModel.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -174,7 +174,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.attention = data
         dataModel.attention = valueModel
-        model.data = dataModel.toJSON()
+        model.data = dataModel.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -193,7 +193,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.flow = data
         dataModel.flow = valueModel
-        model.data = dataModel.toJSON()
+        model.data = dataModel.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -212,7 +212,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.coherence = data
         dataModel.coherence = valueModel
-        model.data = dataModel.toJSON()
+        model.data = dataModel.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -231,7 +231,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.pressure = data
         dataModel.pressure = valueModel
-        model.data = dataModel.toJSON()
+        model.data = dataModel.toJSONString()
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -268,7 +268,7 @@ extension SyncRealtimeBiodata: WebSocketDelegate {
     public func websocketDidReceiveData(socket: Starscream.WebSocketClient, data: Data) {
         if let unGzipData = try? data.gunzipped() {
             let text = String(decoding: unGzipData, as: UTF8.self)
-            let json = AffectiveCloudResponseJSONModel.deserialize(from: text)
+            let json = AffectiveCloudResponseJSONModel.deserialize(json: text)
             if json?.code == 0 {
                 isContinue = true
             } else {

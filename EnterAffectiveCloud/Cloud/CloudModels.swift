@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import HandyJSON
+import SmartCodable
 
 enum BiodataType: String {
     case eeg
@@ -19,39 +19,41 @@ enum BiodataType: String {
 }
 
 //MARK: Request Models
-public class AffectiveCloudRequestJSONModel: HandyJSON {
+public class AffectiveCloudRequestJSONModel: SmartCodable {
     var services: String = ""
     var operation: String = ""
-    var kwargs: CSKwargsJSONModel?
+    @SmartOptional var kwargs: CSKwargsJSONModel?
     var args: [String]?
     public required init() { }
 
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.operation <-- "op"
+    enum CodingKeys: String, CodingKey {
+        case services
+        case operation = "op"
+        case kwargs
+        case args
     }
 }
 
-public class CSRequestDataJSONModel: HandyJSON {
+public class CSRequestDataJSONModel: SmartCodable {
     var eeg: [Int]?
     var hr: [Int]?
     var pepr: [Int]?
     public required init() { }
 }
 
-class CSKwargsJSONModel: HandyJSON {
+class CSKwargsJSONModel: SmartCodable {
     var bioTypes: [String]?
-    var tolerance: [String:Any]?
-    var additional: [String:Any]?
-    var algorithmParam: BiodataAlgorithmParams?
-    var storageSettings: CSPersonalInfoJSONModel?
+    var tolerance: [String:SmartAny]?
+    var additional: [String:SmartAny]?
+    @SmartOptional var algorithmParam: BiodataAlgorithmParams?
+    @SmartOptional var storageSettings: CSPersonalInfoJSONModel?
     var app_key: String?
     var sign: String?
     var userID: String?
     var timeStamp: String?
     var uploadCycle: Int?
     var device: String?
-    var data: CSRequestDataJSONModel?
+    @SmartOptional var data: CSRequestDataJSONModel?
     var sessionID: String?
     var reportType: String?
     var eegData: [Int]?
@@ -70,114 +72,97 @@ class CSKwargsJSONModel: HandyJSON {
     var flowServices: [String]?
     required init() { }
 
-    func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.reportType <-- "gr"
-        mapper <<<
-            self.sessionID <-- "session_id"
-        mapper <<<
-            self.eegData <-- "eeg"
-        mapper <<<
-            self.hrData <-- "hr-v2"
-        mapper <<<
-            self.peprData <-- "pepr"
-        mapper <<<
-            self.userID <-- "user_id"
-        mapper <<<
-            self.bioTypes <-- "bio_data_type"
-        mapper <<<
-            self.tolerance <-- "bio_data_tolerance"
-        mapper <<<
-            self.additional <-- "additional_data"
-        mapper <<<
-            self.affectiveTypes <-- "cloud_services"
-        mapper <<<
-            self.attenionServieces <-- "attention"
-        mapper <<<
-            self.relaxationServices <-- "relaxation"
-        mapper <<<
-            self.attenionChildServieces <-- "attention_chd"
-        mapper <<<
-            self.relaxationChildServices <-- "relaxation_chd"
-        mapper <<<
-            self.pressureServices <-- "pressure"
-        mapper <<<
-            self.pleasureServices <-- "pleasure"
-        mapper <<<
-            self.arousalServices <-- "arousal"
-        mapper <<<
-            self.timeStamp <-- "timestamp"
-        mapper <<<
-            self.uploadCycle <-- "upload_cycle"
-        mapper <<<
-            self.storageSettings <-- "storage_settings"
-        mapper <<<
-            self.coherenceServices <-- "coherence"
-        mapper <<<
-            self.algorithmParam <-- "algorithm_params"
-        mapper <<<
-            self.flowServices <-- "meditation"
+    enum CodingKeys: String, CodingKey {
+        case reportType = "gr"
+        case sessionID = "session_id"
+        case eegData = "eeg"
+        case hrData = "hr-v2"
+        case peprData = "pepr"
+        case userID = "user_id"
+        case bioTypes = "bio_data_type"
+        case tolerance = "bio_data_tolerance"
+        case additional = "additional_data"
+        case affectiveTypes = "cloud_services"
+        case attenionServieces = "attention"
+        case relaxationServices = "relaxation"
+        case attenionChildServieces = "attention_chd"
+        case relaxationChildServices = "relaxation_chd"
+        case pressureServices = "pressure"
+        case pleasureServices = "pleasure"
+        case arousalServices = "arousal"
+        case timeStamp = "timestamp"
+        case uploadCycle = "upload_cycle"
+        case storageSettings = "storage_settings"
+        case coherenceServices = "coherence"
+        case algorithmParam = "algorithm_params"
+        case flowServices = "meditation"
+        case rec
+        case data
+        case device
+        case sign
     }
 }
 
 //MARK: Response Models
-public class AffectiveCloudResponseJSONModel: HandyJSON {
+public class AffectiveCloudResponseJSONModel: SmartCodable {
     public var code: Int = 0
-    public var request: AffectiveCloudRequestJSONModel?
-    public var data: [String: Any]?
+    @SmartOptional public var request: AffectiveCloudRequestJSONModel?
+    public var data: String?
     var message: String?
     public required init() { }
 
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.message <-- "msg"
+    enum CodingKeys: String, CodingKey {
+        case code
+        case request
+        case data
+        case message = "msg"
     }
 
    
-    public var dataModel: HandyJSON? {
-        return self.deserilizedStringToJsonModel(dic: self.data ?? ["": ""])
+    public var dataModel: SmartCodable? {
+        
+        return deserilizedStringToJsonModel(dic: self.data)
     }
 
-    private func deserilizedStringToJsonModel(dic rawString: [String: Any]) -> HandyJSON? {
-        guard let req = request else { return nil }
+    private func deserilizedStringToJsonModel(dic rawString: String?) -> SmartCodable? {
+        guard let rawString = rawString ,let req = request else { return nil }
         switch (req.services, req.operation) {
         case ("session", "create"), ("biodata", "init"), ("affective", "start"),  ("affective", "finish"):
-            if let data = CSResponseDataJSONModel.deserialize(from: rawString) {
+            if let data = CSResponseDataJSONModel.deserialize(json: rawString) {
                 return data
             }
         case ("biodata", "subscribe"):
-            if let biodataProcess = CSBiodataProcessJSONModel.deserialize(from: rawString), !biodataProcess.isNil() {
+            if let biodataProcess = CSBiodataProcessJSONModel.deserialize(json: rawString), !biodataProcess.isNil() {
                 return biodataProcess
             }
 
-            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(from: rawString), !data.isNil() {
+            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(json: rawString), !data.isNil() {
                 return data
             }
 
         case ("biodata", "unsubscribe"):
-            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(from: rawString) {
+            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(json: rawString) {
                 return data
             }
         case ("biodata", "report"):
-            if let biodataReport = CSBiodataReportJsonModel.deserialize(from: rawString) {
+            if let biodataReport = CSBiodataReportJsonModel.deserialize(json: rawString) {
                 return biodataReport
             }
         case ("affective", "subscribe"):
-            DLog(rawString.description)
-            if let responseSubscribe = CSAffectiveSubscribeJsonModel.deserialize(from: rawString), !responseSubscribe.isNil() {
+            if let responseSubscribe = CSAffectiveSubscribeJsonModel.deserialize(json: rawString), !responseSubscribe.isNil() {
                 return responseSubscribe
             }
 
-            if let affectiveProcess = CSAffectiveSubscribeProcessJsonModel.deserialize(from: rawString), !affectiveProcess.isNil() {
+            if let affectiveProcess = CSAffectiveSubscribeProcessJsonModel.deserialize(json: rawString), !affectiveProcess.isNil() {
                 return affectiveProcess
             }
 
         case ("affective", "unsubscribe"):
-            if let response = CSAffectiveSubscribeJsonModel.deserialize(from: rawString) {
+            if let response = CSAffectiveSubscribeJsonModel.deserialize(json: rawString) {
                 return response
             }
         case ("affective", "report"):
-            if let report = CSAffectiveReportJsonModel.deserialize(from: rawString) {
+            if let report = CSAffectiveReportJsonModel.deserialize(json: rawString) {
                 return report
             }
         default:
@@ -189,27 +174,15 @@ public class AffectiveCloudResponseJSONModel: HandyJSON {
 }
 
 // Data model
-public class CSResponseDataJSONModel: HandyJSON {
+public class CSResponseDataJSONModel: SmartCodable {
     public var sessionID: String?
     public var biodataList: [String]?
     public var affectiveList: [String]?
-    public var attentionServiceList: [String]?
-    public var relaxationServiceList: [String]?
-    public var attentionChildServiceList: [String]?
-    public var relaxationChildServiceList: [String]?
-    public var pressureServiceList: [String]?
-    public var pleasureServiceList: [String]?
-    public var arousalServiceList: [String]?
-    public var coherenceServiceList: [String]?
-    public var flowServiceList: [String]?
     public required init() { }
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.sessionID <-- "session_id"
-        mapper <<<
-            self.biodataList <-- "bio_data_type"
-        mapper <<<
-            self.affectiveList <-- "cloud_service"
+    enum CodingKeys: String, CodingKey {
+        case sessionID = "session_id"
+        case biodataList = "bio_data_type"
+        case affectiveList = "cloud_service"
     }
 }
 
@@ -217,25 +190,22 @@ public class CSResponseDataJSONModel: HandyJSON {
 /*
  *  subscription
  */
-public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
+public class CSResponseBiodataSubscribeJSONModel: SmartCodable {
     public var eegServiceList: [String]?
     public var hrServiceList: [String]?
     public var peprServiceList: [String]?
     public required init() {}
 
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.eegServiceList <-- "sub_eeg_fields"
-        mapper <<<
-            self.hrServiceList <-- "sub_hr_fields"
-        mapper <<<
-            self.peprServiceList <-- "sub_pepr_fields"
+    enum CodingKeys: String, CodingKey {
+        case eegServiceList = "sub_eeg_fields"
+        case hrServiceList = "sub_hr_fields"
+        case peprServiceList = "sub_pepr_fields"
     }
 
     /// all property is nil the isNil: true
     ///
     public func isNil()-> Bool {
-        return (self.eegServiceList == nil)&&(self.hrServiceList == nil)
+        return (self.eegServiceList == nil)&&(self.hrServiceList == nil)&&(self.peprServiceList == nil)
     }
 }
 
@@ -243,10 +213,10 @@ public class CSResponseBiodataSubscribeJSONModel: HandyJSON {
  * eeg: 实时脑电数据
  * hr: 实时心率数据
  */
-public class CSBiodataProcessJSONModel: HandyJSON {
-    public var eeg: CSBiodataEEGJsonModel?
-    public var hr: CSBiodataHRJsonModel?
-    public var pepr: CSBiodataPEPRJsonModel?
+public class CSBiodataProcessJSONModel: SmartCodable {
+    @SmartOptional public var eeg: CSBiodataEEGJsonModel?
+    @SmartOptional public var hr: CSBiodataHRJsonModel?
+    @SmartOptional public var pepr: CSBiodataPEPRJsonModel?
     public required init() {}
 
     /// all property is nil the isNil: true
@@ -254,10 +224,13 @@ public class CSBiodataProcessJSONModel: HandyJSON {
     public func isNil()-> Bool {
         return (self.eeg == nil)&&(self.hr == nil)&&(self.pepr == nil)
     }
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.hr <-- "hr-v2"
+
+    enum CodingKeys: String, CodingKey {
+        case hr = "hr-v2"
+        case eeg
+        case pepr
     }
+    
 }
 
 
@@ -273,7 +246,7 @@ public class CSBiodataProcessJSONModel: HandyJSON {
  * eeg_quality: 脑电信号质量进度 (0 ~ 4)，
  *              数值越大信号越好。
  */
-public class CSBiodataEEGJsonModel: HandyJSON {
+public class CSBiodataEEGJsonModel: SmartCodable {
     public var waveRight: [Float]?
     public var waveLeft: [Float]?
     public var alpha: Float?
@@ -294,45 +267,29 @@ public class CSBiodataEEGJsonModel: HandyJSON {
     public var gammaRight: Float?
     public var quality: Float?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.waveLeft <-- "eegl_wave"
-        mapper <<<
-            self.waveRight <-- "eegr_wave"
-        mapper <<<
-            self.alpha <-- "eeg_alpha_power"
-        mapper <<<
-            self.belta <-- "eeg_beta_power"
-        mapper <<<
-            self.theta <-- "eeg_theta_power"
-        mapper <<<
-            self.delta <-- "eeg_delta_power"
-        mapper <<<
-            self.gamma <-- "eeg_gamma_power"
-        mapper <<<
-            self.quality <-- "eeg_quality"
-        mapper <<<
-            self.alphaLeft <-- "eegl_alpha_power"
-        mapper <<<
-            self.beltaLeft <-- "eegl_beta_power"
-        mapper <<<
-            self.thetaLeft <-- "eegl_theta_power"
-        mapper <<<
-            self.deltaLeft <-- "eegl_delta_power"
-        mapper <<<
-            self.gammaLeft <-- "eegl_gamma_power"
-        mapper <<<
-            self.alphaRight <-- "eegr_alpha_power"
-        mapper <<<
-            self.beltaRight <-- "eegr_beta_power"
-        mapper <<<
-            self.thetaRight <-- "eegr_theta_power"
-        mapper <<<
-            self.deltaRight <-- "eegr_delta_power"
-        mapper <<<
-            self.gammaRight <-- "eegr_gamma_power"
-       
+    
+    enum CodingKeys: String, CodingKey {
+        case waveLeft = "eegl_wave"
+        case waveRight = "eegr_wave"
+        case alpha = "eeg_alpha_power"
+        case belta = "eeg_beta_power"
+        case theta = "eeg_theta_power"
+        case delta = "eeg_delta_power"
+        case gamma = "eeg_gamma_power"
+        case quality = "eeg_quality"
+        case alphaLeft = "eegl_alpha_power"
+        case beltaLeft = "eegl_beta_power"
+        case thetaLeft = "eegl_theta_power"
+        case deltaLeft = "eegl_delta_power"
+        case gammaLeft = "eegl_gamma_power"
+        case alphaRight = "eegr_alpha_power"
+        case beltaRight = "eegr_beta_power"
+        case thetaRight = "eegr_theta_power"
+        case deltaRight = "eegr_delta_power"
+        case gammaRight = "eegr_gamma_power"
     }
+    
+    
 }
 
 /* Realtime hear rate
@@ -341,7 +298,7 @@ public class CSBiodataEEGJsonModel: HandyJSON {
  * hrv: 心率变异性
  *
  */
-public class CSBiodataHRJsonModel: HandyJSON {
+public class CSBiodataHRJsonModel: SmartCodable {
     public var hr: Float?
     public var hrv: Float?
     public required init() {}
@@ -358,7 +315,7 @@ public class CSBiodataHRJsonModel: HandyJSON {
  * 'hrv': float  # 心率变异性
  *
  */
-public class CSBiodataPEPRJsonModel: HandyJSON {
+public class CSBiodataPEPRJsonModel: SmartCodable {
     public var bcgQuality: Int?
     public var rwQuality: Int?
     public var hr: Int?
@@ -368,15 +325,14 @@ public class CSBiodataPEPRJsonModel: HandyJSON {
     public var rwWave: [Float]?
     public required init() {}
     
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.bcgWave <-- "bcg_wave"
-        mapper <<<
-            self.rwWave <-- "rw_wave"
-        mapper <<<
-            self.bcgQuality <-- "bcg_quality"
-        mapper <<<
-            self.rwQuality <-- "rw_quality"
+    enum CodingKeys: String, CodingKey {
+        case bcgWave = "bcg_wave"
+        case rwWave = "rw_wave"
+        case bcgQuality = "bcg_quality"
+        case rwQuality = "rw_quality"
+        case hr
+        case rr
+        case hrv
     }
 }
 
@@ -385,15 +341,17 @@ public class CSBiodataPEPRJsonModel: HandyJSON {
  * eeg: 脑电综合报表
  * hr: 心率综合报表
  */
-public class CSBiodataReportJsonModel: HandyJSON {
-    public var eeg: CSBiodataReportEEGJsonModel?
-    public var hr: CSBiodataReportHRJsonModel?
-    public var pepr: CSBiodataReportPEPRJsonModel?
+public class CSBiodataReportJsonModel: SmartCodable {
+    @SmartOptional public var eeg: CSBiodataReportEEGJsonModel?
+    @SmartOptional public var hr: CSBiodataReportHRJsonModel?
+    @SmartOptional public var pepr: CSBiodataReportPEPRJsonModel?
 
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.hr <-- "hr-v2"
+
+    enum CodingKeys: String, CodingKey {
+        case hr = "hr-v2"
+        case eeg
+        case pepr
     }
 }
 
@@ -406,7 +364,7 @@ public class CSBiodataReportJsonModel: HandyJSON {
  * gammaCurve: 脑电γ频段能量变化曲线
  *
  */
-public class CSBiodataReportEEGJsonModel: HandyJSON {
+public class CSBiodataReportEEGJsonModel: SmartCodable {
     public var alphaCurve: [Float]?
     public var betaCurve: [Float]?
     public var thetaCurve: [Float]?
@@ -423,37 +381,23 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
     public var deltaRightCurve: [Float]?
     public var gammaRightCurve: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.alphaCurve <-- "eeg_alpha_curve"
-        mapper <<<
-            self.betaCurve <-- "eeg_beta_curve"
-        mapper <<<
-            self.thetaCurve <-- "eeg_theta_curve"
-        mapper <<<
-            self.deltaCurve <-- "eeg_delta_curve"
-        mapper <<<
-            self.gammaCurve <-- "eeg_gamma_curve"
-        mapper <<<
-            self.alphaLeftCurve <-- "eegl_alpha_curve"
-        mapper <<<
-            self.betaLeftCurve <-- "eegl_beta_curve"
-        mapper <<<
-            self.thetaLeftCurve <-- "eegl_theta_curve"
-        mapper <<<
-            self.deltaLeftCurve <-- "eegl_delta_curve"
-        mapper <<<
-            self.gammaLeftCurve <-- "eegl_gamma_curve"
-        mapper <<<
-            self.alphaRightCurve <-- "eegr_alpha_curve"
-        mapper <<<
-            self.betaRightCurve <-- "eegr_beta_curve"
-        mapper <<<
-            self.thetaRightCurve <-- "eegr_theta_curve"
-        mapper <<<
-            self.deltaRightCurve <-- "eegr_delta_curve"
-        mapper <<<
-            self.gammaRightCurve <-- "eegr_gamma_curve"
+    
+    enum CodingKeys: String, CodingKey {
+        case alphaCurve = "eeg_alpha_curve"
+        case betaCurve = "eeg_beta_curve"
+        case thetaCurve = "eeg_theta_curve"
+        case deltaCurve = "eeg_delta_curve"
+        case gammaCurve = "eeg_gamma_curve"
+        case alphaLeftCurve = "eegl_alpha_curve"
+        case betaLeftCurve = "eegl_beta_curve"
+        case thetaLeftCurve = "eegl_theta_curve"
+        case deltaLeftCurve = "eegl_delta_curve"
+        case gammaLeftCurve = "eegl_gamma_curve"
+        case alphaRightCurve = "eegr_alpha_curve"
+        case betaRightCurve = "eegr_beta_curve"
+        case thetaRightCurve = "eegr_theta_curve"
+        case deltaRightCurve = "eegr_delta_curve"
+        case gammaRightCurve = "eegr_gamma_curve"
     }
 }
 
@@ -466,7 +410,7 @@ public class CSBiodataReportEEGJsonModel: HandyJSON {
  * hrvList: 心率变异性全程记录
 
  */
-public class CSBiodataReportHRJsonModel: HandyJSON {
+public class CSBiodataReportHRJsonModel: SmartCodable {
     public var average: Float?
     public var max: Float?
     public var min: Float?
@@ -475,19 +419,14 @@ public class CSBiodataReportHRJsonModel: HandyJSON {
     public var hrvAvg : Float?
 
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "hr_avg"
-        mapper <<<
-            self.max <-- "hr_max"
-        mapper <<<
-            self.min <-- "hr_min"
-        mapper <<<
-            self.hrList <-- "hr_rec"
-        mapper <<<
-            self.hrvList <-- "hrv_rec"
-        mapper <<<
-            self.hrvAvg <-- "hrv_avg"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "hr_avg"
+        case max = "hr_max"
+        case min = "hr_min"
+        case hrList = "hr_rec"
+        case hrvList = "hrv_rec"
+        case hrvAvg = "hrv_avg"
     }
 }
 
@@ -500,7 +439,7 @@ public class CSBiodataReportHRJsonModel: HandyJSON {
  * hrvList: 心率变异性全程记录
  * rrList
  */
-public class CSBiodataReportPEPRJsonModel: HandyJSON {
+public class CSBiodataReportPEPRJsonModel: SmartCodable {
     public var average: Float?
     public var max: Float?
     public var min: Float?
@@ -511,28 +450,20 @@ public class CSBiodataReportPEPRJsonModel: HandyJSON {
     public var rrAvg: [Float]?
     
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "hr_avg"
-        mapper <<<
-            self.max <-- "hr_max"
-        mapper <<<
-            self.min <-- "hr_min"
-        mapper <<<
-            self.hrList <-- "hr_rec"
-        mapper <<<
-            self.hrvList <-- "hrv_rec"
-        mapper <<<
-            self.hrvAvg <-- "hrv_avg"
-        mapper <<<
-            self.hrvList <-- "rr_rec"
-        mapper <<<
-            self.hrvAvg <-- "rr_avg"
+    enum CodingKeys: String, CodingKey {
+        case average = "hr_avg"
+        case max = "hr_max"
+        case min = "hr_min"
+        case hrList = "hr_rec"
+        case hrvList = "hrv_rec"
+        case hrvAvg = "hrv_avg"
+        case rrList = "rr_rec"
+        case rrAvg = "rr_avg"
     }
 }
 
 //MARK: Affective
-public class CSAffectiveSubscribeJsonModel: HandyJSON {
+public class CSAffectiveSubscribeJsonModel: SmartCodable {
     public var attentionList: [String]?
     public var relaxationList: [String]?
     public var attentionChildList: [String]?
@@ -543,26 +474,17 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
     public var coherenceList: [String]?
     public var flowList: [String]?
     public required init() {}
-
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.attentionList <-- "sub_attention_fields"
-        mapper <<<
-            self.relaxationList <-- "sub_relaxation_fields"
-        mapper <<<
-            self.attentionChildList <-- "sub_attention_chd_fields"
-        mapper <<<
-            self.relaxationChildList <-- "sub_relaxation_chd_fields"
-        mapper <<<
-            self.pressureList <-- "sub_pressure_fields"
-        mapper <<<
-            self.pleasureList <-- "sub_pleasure_fields"
-        mapper <<<
-            self.arousalList <-- "sub_arousal_fields"
-        mapper <<<
-            self.coherenceList <-- "sub_coherence_fields"
-        mapper <<<
-            self.flowList <-- "sub_meditation_fields"
+    
+    enum CodingKeys: String, CodingKey {
+        case attentionList = "sub_attention_fields"
+        case relaxationList = "sub_relaxation_fields"
+        case attentionChildList = "sub_attention_chd_fields"
+        case relaxationChildList = "sub_relaxation_chd_fields"
+        case pressureList = "sub_pressure_fields"
+        case pleasureList = "sub_pleasure_fields"
+        case arousalList = "sub_arousal_fields"
+        case coherenceList = "sub_coherence_fields"
+        case flowList = "sub_meditation_fields"
     }
 
     /// all property is nil the isNil: true
@@ -572,7 +494,7 @@ public class CSAffectiveSubscribeJsonModel: HandyJSON {
     }
 }
 
-public class CSAffectiveJsonModel: HandyJSON {
+public class CSAffectiveJsonModel: SmartCodable {
     public required init() {}
     public var attention: Float?
     public var relaxation: Float?
@@ -583,9 +505,16 @@ public class CSAffectiveJsonModel: HandyJSON {
     public var arousal: Float?
     public var coherence: Float?
     public var flow: Float?
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.flow  <-- "meditation"
+    enum CodingKeys: String, CodingKey {
+        case flow = "meditation"
+        case attention
+        case relaxation
+        case attention_chd
+        case relaxation_chd
+        case pressure
+        case pleasure
+        case arousal
+        case coherence
     }
 }
 
@@ -597,22 +526,29 @@ public class CSAffectiveJsonModel: HandyJSON {
  * pleasure: 愉悦度 (0 ~ 100)
  * arousal: 激活度 (0 ~ 100)
  */
-public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
-    public var attention: CSAffectiveJsonModel?
-    public var relaxation: CSAffectiveJsonModel?
-    public var attention_chd: CSAffectiveJsonModel?
-    public var relaxation_chd: CSAffectiveJsonModel?
-    public var pressure: CSAffectiveJsonModel?
-    public var pleasure: CSAffectiveJsonModel?
-    public var arousal: CSAffectiveJsonModel?
-    public var coherence: CSAffectiveJsonModel?
-    public var flow: CSAffectiveJsonModel?
+public class CSAffectiveSubscribeProcessJsonModel: SmartCodable {
+    @SmartOptional public var attention: CSAffectiveJsonModel?
+    @SmartOptional public var relaxation: CSAffectiveJsonModel?
+    @SmartOptional public var attention_chd: CSAffectiveJsonModel?
+    @SmartOptional public var relaxation_chd: CSAffectiveJsonModel?
+    @SmartOptional public var pressure: CSAffectiveJsonModel?
+    @SmartOptional public var pleasure: CSAffectiveJsonModel?
+    @SmartOptional public var arousal: CSAffectiveJsonModel?
+    @SmartOptional public var coherence: CSAffectiveJsonModel?
+    @SmartOptional public var flow: CSAffectiveJsonModel?
 
     public required init() {}
     
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.flow <-- "meditation"
+    enum CodingKeys: String, CodingKey {
+        case flow = "meditation"
+        case attention
+        case relaxation
+        case attention_chd
+        case relaxation_chd
+        case pressure
+        case pleasure
+        case arousal
+        case coherence
     }
 
     /// all property is nil the isNil: true
@@ -632,204 +568,201 @@ public class CSAffectiveSubscribeProcessJsonModel: HandyJSON {
  * arousal: 激活度
  *
  */
-public class CSAffectiveReportJsonModel: HandyJSON {
-    public var attention: CSReportAttentionJsonModel?
-    public var relaxation: CSReportRelaxtionJsonModel?
-    public var attentionChild: CSReportAttentionChildJsonModel?
-    public var relaxationChild: CSReportRelaxtionChildJsonModel?
-    public var pressure: CSReportPressureJsonModel?
-    public var pleasure: CSReportPleasureJsonModel?
-    public var arousal: CSReportArousalJsonModel?
-    public var coherence: CSReportCoherenceJsonModel?
-    public var flow: CSReportFlowJsonModel?
+public class CSAffectiveReportJsonModel: SmartCodable {
+    @SmartOptional public var attention: CSReportAttentionJsonModel?
+    @SmartOptional public var relaxation: CSReportRelaxtionJsonModel?
+    @SmartOptional public var attentionChild: CSReportAttentionChildJsonModel?
+    @SmartOptional public var relaxationChild: CSReportRelaxtionChildJsonModel?
+    @SmartOptional public var pressure: CSReportPressureJsonModel?
+    @SmartOptional public var pleasure: CSReportPleasureJsonModel?
+    @SmartOptional public var arousal: CSReportArousalJsonModel?
+    @SmartOptional public var coherence: CSReportCoherenceJsonModel?
+    @SmartOptional public var flow: CSReportFlowJsonModel?
     public required init() {}
     
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.flow <-- "meditation"
+    enum CodingKeys: String, CodingKey {
+        case flow = "meditation"
+        case attention
+        case relaxation
+        case attentionChild = "attention_chd"
+        case relaxationChild = "relaxation_chd"
+        case pressure
+        case pleasure
+        case arousal
+        case coherence
     }
 }
 
-public class CSReportAttentionJsonModel: HandyJSON {
+public class CSReportAttentionJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "attention_avg"
-        mapper <<<
-            self.list <-- "attention_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "attention_avg"
+        case list = "attention_rec"
     }
 }
 
-public class CSReportRelaxtionJsonModel: HandyJSON {
+public class CSReportRelaxtionJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "relaxation_avg"
-        mapper <<<
-            self.list <-- "relaxation_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "relaxation_avg"
+        case list = "relaxation_rec"
     }
 }
 
-public class CSReportFlowJsonModel: HandyJSON {
+public class CSReportFlowJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "meditation_avg"
-        mapper <<<
-            self.list <-- "meditation_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "meditation_avg"
+        case list = "meditation_rec"
     }
 }
 
-public class CSReportAttentionChildJsonModel: HandyJSON {
+public class CSReportAttentionChildJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "attention_chd_avg"
-        mapper <<<
-            self.list <-- "attention_chd_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "attention_chd_avg"
+        case list = "attention_chd_rec"
     }
 }
 
-public class CSReportRelaxtionChildJsonModel: HandyJSON {
+public class CSReportRelaxtionChildJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "relaxation_chd_avg"
-        mapper <<<
-            self.list <-- "relaxation_chd_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "relaxation_chd_avg"
+        case list = "relaxation_chd_rec"
     }
 }
 
-public class CSReportPressureJsonModel: HandyJSON {
+public class CSReportPressureJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "pressure_avg"
-        mapper <<<
-            self.list <-- "pressure_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "pressure_avg"
+        case list = "pressure_rec"
     }
 }
 
-public class CSReportPleasureJsonModel: HandyJSON {
+public class CSReportPleasureJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "pleasure_avg"
-        mapper <<<
-            self.list <-- "pleasure_rec"
+
+    enum CodingKeys: String, CodingKey {
+        case average = "pleasure_avg"
+        case list = "pleasure_rec"
     }
 }
 
-public class CSReportArousalJsonModel: HandyJSON {
+public class CSReportArousalJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "arousal_avg"
-        mapper <<<
-            self.list <-- "arousal_rec"
+    enum CodingKeys: String, CodingKey {
+        case average = "arousal_avg"
+        case list = "arousal_rec"
     }
 }
 
-public class CSReportCoherenceJsonModel: HandyJSON {
+public class CSReportCoherenceJsonModel: SmartCodable {
     public var average: Float?
     public var list: [Float]?
     public var flag: [Float]?
     public var duration: Float?
     public required init() {}
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.average <-- "coherence_avg"
-        mapper <<<
-            self.list <-- "coherence_rec"
-        mapper <<<
-            self.flag <-- "coherence_flag"
-        mapper <<<
-            self.duration <-- "coherence_duration"
+    enum CodingKeys: String, CodingKey {
+        case average = "coherence_avg"
+        case list = "coherence_rec"
+        case flag = "coherence_flag"
+        case duration = "coherence_duration"
     }
 }
 
-public class CSPersonalInfoJSONModel: HandyJSON {
-    var user: CSUserInfoJSONModel?
-    var device: [String: Any]?
-    var data: [String: Any]?
-    var label: CSLabelInfoJSONModel?
+public class CSPersonalInfoJSONModel: SmartCodable {
+    @SmartOptional var user: CSUserInfoJSONModel?
+    var device: [String: String]?
+    var data: [String: String]?
+    @SmartOptional var label: CSLabelInfoJSONModel?
     var allow: Bool = true
     public required init() { }
 }
 
-public class CSUserInfoJSONModel: HandyJSON {
+public class CSUserInfoJSONModel: SmartCodable {
     var sex: String?
     var age: Int?
     public required init() { }
 }
 
-public class CSLabelInfoJSONModel: HandyJSON {
+public class CSLabelInfoJSONModel: SmartCodable {
     var mode: [Int]?
     var cased: [Int]?
     public required init() { }
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.cased <-- "case"
+    enum CodingKeys: String, CodingKey {
+        case cased = "case"
+        case mode
     }
 }
 
-public class CSLabelSubmitJSONModel: HandyJSON {
+public class CSLabelSubmitJSONModel: SmartCodable {
     public var st: Int? //start time
     public var et: Int? //end
-    public var tag: [String: Any]?
+    public var tag: [String: SmartAny]?
     public var note: [String]?
     public required init() { }
   
 }
 
-public enum FilterMode: String,HandyJSONEnum {
+public enum FilterMode: String,SmartCaseDefaultable {
+    public static var defaultCase: FilterMode = .basic
+    
     case basic
     case smart
     case hard
 }
 
-public enum PowerMode: String, HandyJSONEnum {
+public enum PowerMode: String, SmartCaseDefaultable {
+    public static var defaultCase: PowerMode = .db
+    
     case db
     case rate
 }
 
-public class AlgorithmParamJSONModel: HandyJSON {
+public class AlgorithmParamJSONModel: SmartCodable {
     //public var eeg:
     public var tolerance: Int?
     public var filterMode: FilterMode?
     public var powerMode: PowerMode?
     public var channelPower: Bool?
     public required init() { }
-    public func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            self.filterMode <-- "filter_mode"
-        mapper <<<
-            self.powerMode <-- "power_mode"
-        mapper <<<
-            self.channelPower <-- "channel_power_verbose"
+
+    enum CodingKeys: String, CodingKey {
+        case filterMode = "filter_mode"
+        case powerMode = "power_mode"
+        case channelPower = "channel_power_verbose"
+        case tolerance
     }
     
 }
 
-public class BiodataAlgorithmParams :HandyJSON {
+public class BiodataAlgorithmParams :SmartCodable {
     public required init() { }
-    public var eeg: AlgorithmParamJSONModel?
+    @SmartOptional public var eeg: AlgorithmParamJSONModel?
 }
 
 

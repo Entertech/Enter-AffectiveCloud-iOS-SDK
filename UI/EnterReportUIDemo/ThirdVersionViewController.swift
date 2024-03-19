@@ -8,12 +8,12 @@
 
 import EnterAffectiveCloud
 import EnterAffectiveCloudUI
-import HandyJSON
+import SmartCodable
 import SnapKit
 import UIKit
 import Accelerate
 
-class Power: HandyJSON {
+class Power: SmartCodable {
     required init() {
     }
 
@@ -132,7 +132,7 @@ class ThirdVersionViewController: UIViewController {
 
         if let samplePath = Bundle.main.path(forResource: "eeg_power", ofType: "json") {
             if let text = try? String(contentsOfFile: samplePath, encoding: .utf8) {
-                let model = Power.deserialize(from: text)
+                let model = Power.deserialize(json: text)
                 var halfSmoothLen = 9
                 var sample = 5
                 for loop in 0 ..< 3 {

@@ -139,7 +139,7 @@ public class AffectiveCloudClient {
     ///   - source: source description for experiment
     ///   - mode: mode description for experiment
     ///   - cases: cases description for experiment
-    public func initExperimentService(sex: String? = nil, age: Int? = nil, sn: [String: Any]? = nil, source: [String: Any]? = nil,
+    public func initExperimentService(sex: String? = nil, age: Int? = nil, sn: [String: String]? = nil, source: [String: String]? = nil,
     mode: [Int]? = nil, cases: [Int]? = nil) {
         self.cloudService?.sex = sex
         self.cloudService?.age = age

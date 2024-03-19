@@ -5,7 +5,6 @@ PODS:
   - DGCharts/Core (5.0.0)
   - FluentDarkModeKit (1.0.4)
   - GzipSwift (5.1.1)
-  - HandyJSON (5.0.4-beta)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (15.0.0):
@@ -21,6 +20,7 @@ PODS:
   - PromiseKit/UIKit (8.1.1):
     - PromiseKit/CorePromise
   - RxSwift (6.6.0)
+  - SmartCodable (2.3.1)
   - SnapKit (5.6.0)
   - Starscream (3.1.1)
 
@@ -28,10 +28,10 @@ DEPENDENCIES:
   - "DGCharts (from `git@github.com:ET-LINK/Charts.git`, branch `enter/round_corner_bar`)"
   - FluentDarkModeKit
   - GzipSwift
-  - HandyJSON (~> 5.0.4-beta)
   - Moya/RxSwift
   - PromiseKit (~> 8.0)
   - RxSwift
+  - SmartCodable
   - SnapKit
   - Starscream (~> 3.0)
 
@@ -40,10 +40,10 @@ SPEC REPOS:
     - Alamofire
     - FluentDarkModeKit
     - GzipSwift
-    - HandyJSON
     - Moya
     - PromiseKit
     - RxSwift
+    - SmartCodable
     - SnapKit
     - Starscream
 
@@ -62,13 +62,13 @@ SPEC CHECKSUMS:
   DGCharts: 6e0cf2644e8f81ad13f04caa8bc18502870a1c54
   FluentDarkModeKit: b6317653a00329564582884772ec57c4eaad1a1f
   GzipSwift: 893f3e48e597a1a4f62fafcb6514220fcf8287fa
-  HandyJSON: a9c67202df97805a0ba4a00e30b50e9a30ac28f3
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   PromiseKit: d1be44b474e5acfa16adf007a1f49f104e10fead
   RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
+  SmartCodable: d309b506d52a120505b60aab83927b9333a4caa9
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 1792e8c036a14f497712d70bc2716bf66cb1a027
+PODFILE CHECKSUM: b3bdbad05754fcef1c00692f4a1eca9e6a7af72f
 
 COCOAPODS: 1.13.0
