@@ -69,7 +69,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncEEG(left: [Float], right: [Float], alpha: Float, beta: Float, theta: Float, delta: Float, gamma: Float, quality: Int) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncBiodataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "biodata"
@@ -88,7 +88,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         eeg.gamma = gamma
         eeg.quality = Float(quality)
         data.eeg = eeg
-        model.data = data.toJSONString()
+        model.data = data
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -98,7 +98,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncHR(hr: Float, hrv: Float) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncBiodataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "biodata"
@@ -110,7 +110,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         hrData.hr = hr
         hrData.hrv = hrv
         data.hr = hrData
-        model.data = data.toJSONString()
+        model.data = data
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -119,7 +119,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncPEPR(hr: Float, rr: Float, hrv: Float, bcgWave: [Float], rwWave: [Float], bcgQuality: Int, rwQuality: Int) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncBiodataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "biodata"
@@ -136,7 +136,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         peprData.bcgQuality = bcgQuality
         peprData.rwQuality = rwQuality
         data.pepr = peprData
-        model.data = data.toJSONString()
+        model.data = data
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -145,7 +145,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncRelaxation(_ data: Float) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncAffectiveDataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "affective"
@@ -155,7 +155,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.relaxation = data
         dataModel.relaxation = valueModel
-        model.data = dataModel.toJSONString()
+        model.data = dataModel
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -164,7 +164,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncAttention(_ data: Float) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncAffectiveDataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "affective"
@@ -174,7 +174,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.attention = data
         dataModel.attention = valueModel
-        model.data = dataModel.toJSONString()
+        model.data = dataModel
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -183,7 +183,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncFlow(_ data: Float) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncAffectiveDataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "affective"
@@ -193,7 +193,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.flow = data
         dataModel.flow = valueModel
-        model.data = dataModel.toJSONString()
+        model.data = dataModel
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -202,7 +202,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncCoherence(_ data: Float) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncAffectiveDataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "affective"
@@ -212,7 +212,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.coherence = data
         dataModel.coherence = valueModel
-        model.data = dataModel.toJSONString()
+        model.data = dataModel
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }
@@ -221,7 +221,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
     public func syncPressure(_ data: Float) {
         guard self.socket.isConnected else {return}
         guard isContinue else {return}
-        let model = AffectiveCloudResponseJSONModel()
+        let model = SyncAffectiveDataJSONModel()
         model.code = 0
         let request = AffectiveCloudRequestJSONModel()
         request.services = "affective"
@@ -231,7 +231,7 @@ public class SyncRealtimeBiodata: SyncRealtimeBiodataDelegate {
         let valueModel = CSAffectiveJsonModel()
         valueModel.pressure = data
         dataModel.pressure = valueModel
-        model.data = dataModel.toJSONString()
+        model.data = dataModel
         if let message = model.toJSONString() {
             webSocketSend(jsonString: message)
         }

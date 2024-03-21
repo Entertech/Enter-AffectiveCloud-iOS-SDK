@@ -104,6 +104,20 @@ class CSKwargsJSONModel: SmartCodable {
     }
 }
 
+public class SyncBiodataJSONModel: SmartCodable {
+    public var code: Int = 0
+    public var request: AffectiveCloudRequestJSONModel?
+    public var data: CSBiodataProcessJSONModel?
+    public required init() { }
+}
+
+public class SyncAffectiveDataJSONModel: SmartCodable {
+    public var code: Int = 0
+    public var request: AffectiveCloudRequestJSONModel?
+    public var data: CSAffectiveSubscribeProcessJsonModel?
+    public required init() { }
+}
+
 //MARK: Response Models
 public class AffectiveCloudResponseJSONModel: SmartCodable {
     public var code: Int = 0
