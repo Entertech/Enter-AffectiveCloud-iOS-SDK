@@ -100,6 +100,7 @@ class CSKwargsJSONModel: SmartCodable {
         case data
         case device
         case sign
+        case app_key
     }
 }
 
