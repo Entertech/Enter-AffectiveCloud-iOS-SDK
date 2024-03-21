@@ -22,7 +22,7 @@ enum BiodataType: String {
 public class AffectiveCloudRequestJSONModel: SmartCodable {
     var services: String = ""
     var operation: String = ""
-    @SmartOptional var kwargs: CSKwargsJSONModel?
+    var kwargs: CSKwargsJSONModel?
     var args: [String]?
     public required init() { }
 
@@ -45,15 +45,15 @@ class CSKwargsJSONModel: SmartCodable {
     var bioTypes: [String]?
     var tolerance: [String:SmartAny]?
     var additional: [String:SmartAny]?
-    @SmartOptional var algorithmParam: BiodataAlgorithmParams?
-    @SmartOptional var storageSettings: CSPersonalInfoJSONModel?
+    var algorithmParam: BiodataAlgorithmParams?
+    var storageSettings: CSPersonalInfoJSONModel?
     var app_key: String?
     var sign: String?
     var userID: String?
     var timeStamp: String?
     var uploadCycle: Int?
     var device: String?
-    @SmartOptional var data: CSRequestDataJSONModel?
+    var data: CSRequestDataJSONModel?
     var sessionID: String?
     var reportType: String?
     var eegData: [Int]?
@@ -106,7 +106,7 @@ class CSKwargsJSONModel: SmartCodable {
 //MARK: Response Models
 public class AffectiveCloudResponseJSONModel: SmartCodable {
     public var code: Int = 0
-    @SmartOptional public var request: AffectiveCloudRequestJSONModel?
+    public var request: AffectiveCloudRequestJSONModel?
     public var data: String?
     var message: String?
     public required init() { }
@@ -214,9 +214,9 @@ public class CSResponseBiodataSubscribeJSONModel: SmartCodable {
  * hr: 实时心率数据
  */
 public class CSBiodataProcessJSONModel: SmartCodable {
-    @SmartOptional public var eeg: CSBiodataEEGJsonModel?
-    @SmartOptional public var hr: CSBiodataHRJsonModel?
-    @SmartOptional public var pepr: CSBiodataPEPRJsonModel?
+    public var eeg: CSBiodataEEGJsonModel?
+    public var hr: CSBiodataHRJsonModel?
+    public var pepr: CSBiodataPEPRJsonModel?
     public required init() {}
 
     /// all property is nil the isNil: true
@@ -342,9 +342,9 @@ public class CSBiodataPEPRJsonModel: SmartCodable {
  * hr: 心率综合报表
  */
 public class CSBiodataReportJsonModel: SmartCodable {
-    @SmartOptional public var eeg: CSBiodataReportEEGJsonModel?
-    @SmartOptional public var hr: CSBiodataReportHRJsonModel?
-    @SmartOptional public var pepr: CSBiodataReportPEPRJsonModel?
+    public var eeg: CSBiodataReportEEGJsonModel?
+    public var hr: CSBiodataReportHRJsonModel?
+    public var pepr: CSBiodataReportPEPRJsonModel?
 
     public required init() {}
 
@@ -527,15 +527,15 @@ public class CSAffectiveJsonModel: SmartCodable {
  * arousal: 激活度 (0 ~ 100)
  */
 public class CSAffectiveSubscribeProcessJsonModel: SmartCodable {
-    @SmartOptional public var attention: CSAffectiveJsonModel?
-    @SmartOptional public var relaxation: CSAffectiveJsonModel?
-    @SmartOptional public var attention_chd: CSAffectiveJsonModel?
-    @SmartOptional public var relaxation_chd: CSAffectiveJsonModel?
-    @SmartOptional public var pressure: CSAffectiveJsonModel?
-    @SmartOptional public var pleasure: CSAffectiveJsonModel?
-    @SmartOptional public var arousal: CSAffectiveJsonModel?
-    @SmartOptional public var coherence: CSAffectiveJsonModel?
-    @SmartOptional public var flow: CSAffectiveJsonModel?
+    public var attention: CSAffectiveJsonModel?
+    public var relaxation: CSAffectiveJsonModel?
+    public var attention_chd: CSAffectiveJsonModel?
+    public var relaxation_chd: CSAffectiveJsonModel?
+    public var pressure: CSAffectiveJsonModel?
+    public var pleasure: CSAffectiveJsonModel?
+    public var arousal: CSAffectiveJsonModel?
+    public var coherence: CSAffectiveJsonModel?
+    public var flow: CSAffectiveJsonModel?
 
     public required init() {}
     
@@ -569,15 +569,15 @@ public class CSAffectiveSubscribeProcessJsonModel: SmartCodable {
  *
  */
 public class CSAffectiveReportJsonModel: SmartCodable {
-    @SmartOptional public var attention: CSReportAttentionJsonModel?
-    @SmartOptional public var relaxation: CSReportRelaxtionJsonModel?
-    @SmartOptional public var attentionChild: CSReportAttentionChildJsonModel?
-    @SmartOptional public var relaxationChild: CSReportRelaxtionChildJsonModel?
-    @SmartOptional public var pressure: CSReportPressureJsonModel?
-    @SmartOptional public var pleasure: CSReportPleasureJsonModel?
-    @SmartOptional public var arousal: CSReportArousalJsonModel?
-    @SmartOptional public var coherence: CSReportCoherenceJsonModel?
-    @SmartOptional public var flow: CSReportFlowJsonModel?
+    public var attention: CSReportAttentionJsonModel?
+    public var relaxation: CSReportRelaxtionJsonModel?
+    public var attentionChild: CSReportAttentionChildJsonModel?
+    public var relaxationChild: CSReportRelaxtionChildJsonModel?
+    public var pressure: CSReportPressureJsonModel?
+    public var pleasure: CSReportPleasureJsonModel?
+    public var arousal: CSReportArousalJsonModel?
+    public var coherence: CSReportCoherenceJsonModel?
+    public var flow: CSReportFlowJsonModel?
     public required init() {}
     
     enum CodingKeys: String, CodingKey {
@@ -695,10 +695,10 @@ public class CSReportCoherenceJsonModel: SmartCodable {
 }
 
 public class CSPersonalInfoJSONModel: SmartCodable {
-    @SmartOptional var user: CSUserInfoJSONModel?
+    var user: CSUserInfoJSONModel?
     var device: [String: String]?
     var data: [String: String]?
-    @SmartOptional var label: CSLabelInfoJSONModel?
+    var label: CSLabelInfoJSONModel?
     var allow: Bool = true
     public required init() { }
 }
@@ -762,7 +762,7 @@ public class AlgorithmParamJSONModel: SmartCodable {
 
 public class BiodataAlgorithmParams :SmartCodable {
     public required init() { }
-    @SmartOptional public var eeg: AlgorithmParamJSONModel?
+    public var eeg: AlgorithmParamJSONModel?
 }
 
 
