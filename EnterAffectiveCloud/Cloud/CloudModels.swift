@@ -122,7 +122,7 @@ public class SyncAffectiveDataJSONModel: SmartCodable {
 public class AffectiveCloudResponseJSONModel: SmartCodable {
     public var code: Int = 0
     public var request: AffectiveCloudRequestJSONModel?
-    public var data: String?
+    public var data: [String: SmartAny]?
     var message: String?
     public required init() { }
 
@@ -139,45 +139,45 @@ public class AffectiveCloudResponseJSONModel: SmartCodable {
         return deserilizedStringToJsonModel(dic: self.data)
     }
 
-    private func deserilizedStringToJsonModel(dic rawString: String?) -> SmartCodable? {
-        guard let rawString = rawString ,let req = request else { return nil }
+    private func deserilizedStringToJsonModel(dic rawDict: [String: SmartAny]?) -> SmartCodable? {
+        guard let rawString = rawDict?.peel ,let req = request else { return nil }
         switch (req.services, req.operation) {
         case ("session", "create"), ("biodata", "init"), ("affective", "start"),  ("affective", "finish"):
-            if let data = CSResponseDataJSONModel.deserialize(json: rawString) {
+            if let data = CSResponseDataJSONModel.deserialize(dict: rawString) {
                 return data
             }
         case ("biodata", "subscribe"):
-            if let biodataProcess = CSBiodataProcessJSONModel.deserialize(json: rawString), !biodataProcess.isNil() {
+            if let biodataProcess = CSBiodataProcessJSONModel.deserialize(dict: rawString), !biodataProcess.isNil() {
                 return biodataProcess
             }
 
-            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(json: rawString), !data.isNil() {
+            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(dict: rawString), !data.isNil() {
                 return data
             }
 
         case ("biodata", "unsubscribe"):
-            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(json: rawString) {
+            if let data = CSResponseBiodataSubscribeJSONModel.deserialize(dict: rawString) {
                 return data
             }
         case ("biodata", "report"):
-            if let biodataReport = CSBiodataReportJsonModel.deserialize(json: rawString) {
+            if let biodataReport = CSBiodataReportJsonModel.deserialize(dict: rawString) {
                 return biodataReport
             }
         case ("affective", "subscribe"):
-            if let responseSubscribe = CSAffectiveSubscribeJsonModel.deserialize(json: rawString), !responseSubscribe.isNil() {
+            if let responseSubscribe = CSAffectiveSubscribeJsonModel.deserialize(dict: rawString), !responseSubscribe.isNil() {
                 return responseSubscribe
             }
 
-            if let affectiveProcess = CSAffectiveSubscribeProcessJsonModel.deserialize(json: rawString), !affectiveProcess.isNil() {
+            if let affectiveProcess = CSAffectiveSubscribeProcessJsonModel.deserialize(dict: rawString), !affectiveProcess.isNil() {
                 return affectiveProcess
             }
 
         case ("affective", "unsubscribe"):
-            if let response = CSAffectiveSubscribeJsonModel.deserialize(json: rawString) {
+            if let response = CSAffectiveSubscribeJsonModel.deserialize(dict: rawString) {
                 return response
             }
         case ("affective", "report"):
-            if let report = CSAffectiveReportJsonModel.deserialize(json: rawString) {
+            if let report = CSAffectiveReportJsonModel.deserialize(dict: rawString) {
                 return report
             }
         default:
