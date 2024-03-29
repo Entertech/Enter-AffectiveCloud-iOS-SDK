@@ -24,14 +24,16 @@ class FifthViewController: UIViewController {
             param.end = end
             param.lineColors = [
                                 UIColor.colorWithHexString(hexColor: "#FFC56F"),
+                                UIColor.colorWithHexString(hexColor: "#8B7AF3"),
                                 UIColor.colorWithHexString(hexColor: "#3479FF"),
-                                UIColor.colorWithHexString(hexColor: "#8B7AF3"),UIColor.colorWithHexString(hexColor: "#3634A2")]
+                                UIColor.colorWithHexString(hexColor: "#365EDA"),
+                                UIColor.colorWithHexString(hexColor: "#3634A2")]
             param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
             param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
             param.xGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
             param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
             param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
-            param.text = ["Awake", "REM", "Light", "Deep"]
+            param.text = ["Awake", "REM", "N1", "N2", "N3"]
             stageView.setData(array, param: param)
                 .stepTwoSetLayout()
                 .build()

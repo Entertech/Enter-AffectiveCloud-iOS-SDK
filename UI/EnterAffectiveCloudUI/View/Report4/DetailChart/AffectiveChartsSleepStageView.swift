@@ -21,7 +21,7 @@ public class AffectiveChartsSleepStageView: UIView {
     private var remImage: UIImage?
     private var lightImage: UIImage?
     private var deepImage: UIImage?
-
+    private var n1Image: UIImage?
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
@@ -37,11 +37,11 @@ public class AffectiveChartsSleepStageView: UIView {
             interval = (param.end-param.start-300)/300/(limitSize-1)
         }
         array.forEach { value in
-            if value == 0 || value == 1 {
-                dataSorce.append(contentsOf:Array(repeating: 7, count: stride))
+            if value == 0 {
+                dataSorce.append(contentsOf:Array(repeating: 9, count: stride))
                 //                    dataSorce.append(7) //清醒
             } else if value == 4 {
-                dataSorce.append(contentsOf:Array(repeating: 5, count: stride))
+                dataSorce.append(contentsOf:Array(repeating: 7, count: stride))
                 //                    dataSorce.append(5) //rem
             } else if value == 2 {
                 dataSorce.append(contentsOf:Array(repeating: 3, count: stride))
@@ -49,6 +49,8 @@ public class AffectiveChartsSleepStageView: UIView {
             } else if value == 3 {
                 dataSorce.append(contentsOf:Array(repeating: 1, count: stride))
                 //                    dataSorce.append(1) //深睡
+            } else if value == 1 {
+                dataSorce.append(contentsOf:Array(repeating: 5, count: stride))
             }
             
         }
@@ -57,7 +59,7 @@ public class AffectiveChartsSleepStageView: UIView {
             chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
             chartView.maxVisibleCount = 302
             chartView.leftAxis.axisMinimum = 0
-            chartView.leftAxis.axisMaximum = 8
+            chartView.leftAxis.axisMaximum = 10
             
             chartView.leftAxis.drawTopYLabelEntryEnabled = true
             chartView.leftAxis.drawBottomYLabelEntryEnabled = false
@@ -86,12 +88,12 @@ public class AffectiveChartsSleepStageView: UIView {
         guard dataSorce.count > 0 else {return}
         let screenWidth = UIScreen.main.bounds.width > 500 ? 500 : UIScreen.main.bounds.width
         let iconWidth = screenWidth / CGFloat(limitSize-64)
-        chartView.yRender.entries = [0, 2, 4, 6, 8]
+        chartView.yRender.entries = [0, 2, 4, 6, 8, 10]
         awakeImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[0])
         remImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[1])
-        lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[2])
-        deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[3])
-        
+        lightImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[3])
+        deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[4])
+        n1Image = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[2])
         
         var yVals: [ChartDataEntry] = []
         var lastValue: Double = 0
@@ -103,10 +105,12 @@ public class AffectiveChartsSleepStageView: UIView {
                 yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: nil))
                 
             } else {
-                if value == 7 {
+                if value == 9 {
                     yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: awakeImage))
-                } else if value == 5 {
+                } else if value == 7 {
                     yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: remImage))
+                } else if value == 5 {
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: n1Image))
                 } else if value == 3 {
                     yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: lightImage))
                 } else if value == 1 {
@@ -128,7 +132,7 @@ public class AffectiveChartsSleepStageView: UIView {
           
             set.setColors([colors[3], colors[2], colors[1], colors[0]], alpha: 0.5)
             set.isDrawLineWithGradientEnabled = true
-            set.gradientPositions = [1, 3, 5, 7]
+            set.gradientPositions = [1, 3, 6, 9]
             set.drawIconsEnabled = true
             set.highlightEnabled = false
             set.drawValuesEnabled = false
@@ -170,7 +174,7 @@ public class AffectiveChartsSleepStageView: UIView {
 
 
 public class AffectiveChartsSleepStageYFormatter: NSObject, AxisValueFormatter {
-    var language = ["Awake", "REM", "Light", "Deep"]
+    var language = ["Awake", "REM", "N1", "N2", "N3"]
     init(lan: [String]) {
         super.init()
         self.language = lan
@@ -179,14 +183,16 @@ public class AffectiveChartsSleepStageYFormatter: NSObject, AxisValueFormatter {
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
 
         var retValue = ""
-        if value == 8 {
+        if value == 10 {
             retValue = language[0]
-        } else if value == 6 {
+        } else if value == 8 {
             retValue = language[1]
-        } else if value == 4 {
+        } else if value == 6 {
             retValue = language[2]
-        } else if value == 2 {
+        } else if value == 4 {
             retValue = language[3]
+        } else if value == 2 {
+            retValue = language[4]
         }
         return retValue
     }
