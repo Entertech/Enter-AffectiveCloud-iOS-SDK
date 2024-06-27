@@ -15,6 +15,7 @@ public class AffectiveChartsSleepStageView: UIView {
     internal let chartView = AffectiveChartsSleepDetailCommonView()
     internal var interval: Double = 1
     internal var dataSorce: [Double] = []
+    internal var qualityList: [Int] = []
     private var originSource: [Int] = []
     private let limitSize:Double = 301
     private var awakeImage: UIImage?
@@ -22,14 +23,17 @@ public class AffectiveChartsSleepStageView: UIView {
     private var lightImage: UIImage?
     private var deepImage: UIImage?
     private var n1Image: UIImage?
+    private var arrayMapper: ArrayMapper!
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
-    public func setData(_ array: [Int], param: AffectiveChartsSleepParameter) -> Self {
+    public func setData(_ array: [Int], _ quality: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
+        self.qualityList.removeAll()
+        self.qualityList.append(contentsOf: quality)
         originSource.append(contentsOf: array)
         dataSorce.removeAll()
-        // array如果数量小于500, 将array以array.count:500映射到dataSorce
+        // array如果数量小于300, 将array以array.count:300映射到dataSorce
         let percent = Double(array.count) / limitSize
         var stride: Int = 1
         if percent < 1 {
@@ -65,6 +69,7 @@ public class AffectiveChartsSleepStageView: UIView {
             chartView.leftAxis.drawBottomYLabelEntryEnabled = false
             chartView.leftAxis.valueFormatter = AffectiveChartsSleepStageYFormatter(lan: param.text)
         }
+        arrayMapper = ArrayMapper(aLength: dataSorce.count, bLength: quality.count)
         return self
     }
     
@@ -95,30 +100,37 @@ public class AffectiveChartsSleepStageView: UIView {
         deepImage = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[4])
         n1Image = createRoundRectangleImage(size: CGSize(width: iconWidth, height: 16), cornerRadius: 1, backgroundColor: colors[2])
         
+        
         var yVals: [ChartDataEntry] = []
         var lastValue: Double = 0
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
+            
             let value = dataSorce[i]
             let index = Double(i)*interval
-            if lastValue != value {
-
-                yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: nil))
-                
-            } else {
-                if value == 9 {
-                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: awakeImage))
-                } else if value == 7 {
-                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: remImage))
-                } else if value == 5 {
-                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: n1Image))
-                } else if value == 3 {
-                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: lightImage))
-                } else if value == 1 {
-                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: deepImage))
+            if qualityList[arrayMapper.mapIndex(i)] == 1 {
+                if lastValue != value {
+                    
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: nil))
+                    
+                } else {
+                    if value == 9 {
+                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: awakeImage))
+                    } else if value == 7 {
+                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: remImage))
+                    } else if value == 5 {
+                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: n1Image))
+                    } else if value == 3 {
+                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: lightImage))
+                    } else if value == 1 {
+                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: deepImage))
+                    }
                 }
+                
+                lastValue = value
+            } else {
+                yVals.append(ChartDataEntry(x: index, y: 9, icon: nil))
             }
-
-            lastValue = value
+                
         }
         let set = LineChartDataSet(entries: yVals, label: "")
 //        let strongSet = LineChartDataSet(entries: yVals, label: "")
@@ -169,7 +181,22 @@ public class AffectiveChartsSleepStageView: UIView {
         UIGraphicsEndImageContext()
         return image
     }
-    
+    struct ArrayMapper {
+        let aLength: Int
+        let bLength: Int
+        let ratio: Double
+
+        init(aLength: Int, bLength: Int) {
+            self.aLength = aLength
+            self.bLength = bLength
+            self.ratio = Double(bLength) / Double(aLength)
+        }
+
+        func mapIndex(_ index: Int) -> Int {
+            let mappedIndex = Int(Double(index) * ratio)
+            return min(mappedIndex, bLength - 1)
+        }
+    }
 }
 
 
