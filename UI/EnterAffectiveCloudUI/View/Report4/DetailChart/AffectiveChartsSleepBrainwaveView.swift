@@ -64,11 +64,20 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
         alphaSouce.removeAll()
         thetaSouce.removeAll()
         deltaSouce.removeAll()
-        gammaSouce.append(contentsOf: gamma)
-        betaSouce.append(contentsOf: beta)
-        alphaSouce.append(contentsOf: alpha)
-        thetaSouce.append(contentsOf: theta)
-        deltaSouce.append(contentsOf: delta)
+        for i in stride(from: 0, to: gamma.count, by: 200) {
+            let gammaTmp = Array(gamma[i..<min(i+200, gamma.count)])
+            let betaTmp = Array(beta[i..<min(i+200, beta.count)])
+            let alphaTmp = Array(alpha[i..<min(i+200, alpha.count)])
+            let thetaTmp = Array(theta[i..<min(i+200, theta.count)])
+            let deltaTmp = Array(delta[i..<min(i+200, delta.count)])
+            gammaSouce.append(gammaTmp.meanOfNonZeroElements())
+            betaSouce.append(betaTmp.meanOfNonZeroElements())
+            alphaSouce.append(alphaTmp.meanOfNonZeroElements())
+            thetaSouce.append(thetaTmp.meanOfNonZeroElements())
+            deltaSouce.append(deltaTmp.meanOfNonZeroElements())
+        }
+        
+
         sourceArray = [gammaSouce, betaSouce, alphaSouce, thetaSouce, deltaSouce]
         gamaBtn.setTitleColor(param.lineColors[0], for: .selected)
         betaBtn.setTitleColor(param.lineColors[1], for: .selected)

@@ -19,11 +19,16 @@ public class AffectiveChartsSleepSingleLineView: UIView {
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
-    public func setData(_ array: [Double], param: AffectiveChartsSleepParameter) -> Self {
+    public func setData(_ array: [Double], strideNum: Int, param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
+        var tmpArray = [Double]()
+        for i in stride(from: 0, to: array.count, by: strideNum) {
+            let pickArray = Array(array[i..<min(i+strideNum, array.count)])
+            tmpArray.append(pickArray.meanOfNonZeroElements())
+        }
         dataSorce.removeAll()
-        dataSorce.append(contentsOf: array.smoothData())
-        let list = array.filter({$0 > 0})
+        dataSorce.append(contentsOf: tmpArray.smoothData())
+        let list = tmpArray.filter({$0 > 0})
         chartView.chartParam = param
 
         chartView.leftAxis.drawTopYLabelEntryEnabled = true

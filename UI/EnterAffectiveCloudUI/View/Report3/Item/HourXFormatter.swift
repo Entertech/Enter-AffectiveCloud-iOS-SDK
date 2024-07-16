@@ -64,24 +64,27 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
     private var startInterval: Double!
     private var endInterval: Double!
     private var values: [Double] = []
-    private let minStride: Int = 300
+    private let minStride: Int = 120
     private var stdValue: Double = 0
     init(start: Double, end: Double) {
         self.startInterval = start
         self.endInterval = end
         let fromToValue = end - start
         var strideValue: Int = minStride
-        if fromToValue < 7200  {
+        if fromToValue < 3600  {
             strideValue = minStride
             lk_formatter.dateFormat = "HH:mm"
+        } else if fromToValue < 7200  {
+            strideValue = minStride * 5
+            lk_formatter.dateFormat = "HH:mm"
         } else if fromToValue < 18000 {
-            strideValue = minStride * 6
+            strideValue = minStride * 15
             lk_formatter.dateFormat = "HH:mm"
         } else if fromToValue < 36000{
-            strideValue = minStride * 12
+            strideValue = minStride * 30
             lk_formatter.dateFormat = "HH"
         } else {
-            strideValue = minStride * 24
+            strideValue = minStride * 60
             lk_formatter.dateFormat = "HH"
         }
     
@@ -96,9 +99,9 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
                 values.append(Double(t))
             }
 
-            stdValue = Double(Int(start) % minStride > 150 ? Int(start) + (minStride - Int(start) % minStride) : Int(start) - Int(start) % minStride)
+            stdValue = Double(Int(start) % minStride > 60 ? Int(start) + (minStride - Int(start) % minStride) : Int(start) - Int(start) % minStride)
             values = values.map({
-                round(($0-start)/300)
+                round(($0-start)/120)
             })
         }
         
@@ -112,12 +115,12 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
             axis?.entries = values
         
             var time = 0
-            time = Int(value*300+stdValue)
+            time = Int(value*120+stdValue)
             let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
             return date
         } else {
             var time = 0
-            time = Int(value*300+startInterval)
+            time = Int(value*120+startInterval)
             let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
             return date
         }

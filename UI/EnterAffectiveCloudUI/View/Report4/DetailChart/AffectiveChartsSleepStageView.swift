@@ -29,18 +29,25 @@ public class AffectiveChartsSleepStageView: UIView {
     /// - Returns: self
     public func setData(_ array: [Int], _ quality: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
+        var tmpArray = [Int]()
+        for i in stride(from: 0, to: array.count, by: 20) {
+            let pickArray = Array(array[i..<min(i+20, array.count)])
+            tmpArray.append(pickArray.getMostFrequentValue() ?? 0)
+        }
+        
         self.qualityList.removeAll()
         self.qualityList.append(contentsOf: quality)
-        originSource.append(contentsOf: array)
+        originSource.append(contentsOf: tmpArray)
         dataSorce.removeAll()
+        
         // array如果数量小于300, 将array以array.count:300映射到dataSorce
-        let percent = Double(array.count) / limitSize
+        let percent = Double(tmpArray.count) / limitSize
         var stride: Int = 1
         if percent < 1 {
-            stride = Int(ceil((limitSize-1) / Double(array.count-1)))
+            stride = Int(ceil((limitSize-1) / Double(tmpArray.count-1)))
             interval = (param.end-param.start-300)/300/(limitSize-1)
         }
-        array.forEach { value in
+        tmpArray.forEach { value in
             if value == 0 {
                 dataSorce.append(contentsOf:Array(repeating: 9, count: stride))
                 //                    dataSorce.append(7) //清醒

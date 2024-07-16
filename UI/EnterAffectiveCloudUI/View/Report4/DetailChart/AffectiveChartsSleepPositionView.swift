@@ -20,9 +20,16 @@ public class AffectiveChartsSleepPositionView: UIView {
     /// - Returns: self
     public func setData(_ array: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
+        
+        var tmpArray = [Int]()
+        for i in stride(from: 0, to: array.count, by: 4) {
+            let pickArray = Array(array[i..<min(i+4, array.count)])
+            tmpArray.append(pickArray.getMostFrequentValue() ?? 0)
+        }
+        
         dataSorce.removeAll()
         
-        array.forEach { value in
+        tmpArray.forEach { value in
             switch value {
             case 1: //仰卧
                 dataSorce.append(1)
