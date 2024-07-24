@@ -13,7 +13,7 @@ import SnapKit
 public class AffectiveChartsSleepStageView: UIView {
     
     internal let chartView = AffectiveChartsSleepDetailCommonView()
-    internal var interval: Double = 1
+    internal var interval: Double = 6
     internal var dataSorce: [Double] = []
     internal var qualityList: [Int] = []
     private var originSource: [Int] = []
@@ -29,24 +29,35 @@ public class AffectiveChartsSleepStageView: UIView {
     /// - Returns: self
     public func setData(_ array: [Int], _ quality: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
+        let needCount = Int(limitSize) - 1
         var tmpArray = [Int]()
-        for i in stride(from: 0, to: array.count, by: 20) {
-            let pickArray = Array(array[i..<min(i+20, array.count)])
-            tmpArray.append(pickArray.getMostFrequentValue() ?? 0)
+        if array.count < needCount {
+            tmpArray.append(contentsOf: array.extendProportionally(to: needCount))
+        } else {
+            let remainder = array.count % needCount
+            var paddedArray: [Int]
+            if remainder > 0 {
+                paddedArray = array.extendProportionally(to: (array.count / needCount + 1) * needCount)
+            } else {
+                paddedArray = array
+            }
+            let strideNum = paddedArray.count / needCount
+            for i in stride(from: 0, to: paddedArray.count, by: strideNum) {
+                let pickArray = Array(paddedArray[i..<min(i+strideNum, paddedArray.count)])
+                tmpArray.append(pickArray.getMostFrequentValue() ?? 0)
+            }
         }
+        
+
         
         self.qualityList.removeAll()
         self.qualityList.append(contentsOf: quality)
         originSource.append(contentsOf: tmpArray)
         dataSorce.removeAll()
         
-        // array如果数量小于300, 将array以array.count:300映射到dataSorce
-        let percent = Double(tmpArray.count) / limitSize
-        var stride: Int = 1
-        if percent < 1 {
-            stride = Int(ceil((limitSize-1) / Double(tmpArray.count-1)))
-            interval = (param.end-param.start-300)/300/(limitSize-1)
-        }
+        let stride: Int = 1
+        let totalTime = Double(6 * array.count)
+        interval = totalTime / Double(needCount)
         tmpArray.forEach { value in
             if value == 0 {
                 dataSorce.append(contentsOf:Array(repeating: 9, count: stride))
@@ -67,8 +78,7 @@ public class AffectiveChartsSleepStageView: UIView {
         }
         chartView.chartParam = param
         if dataSorce.count > 0 {
-            chartView.resizeArray(array: &dataSorce, toSize: Int(limitSize))
-            chartView.maxVisibleCount = 302
+            chartView.maxVisibleCount = Int(limitSize+1)
             chartView.leftAxis.axisMinimum = 0
             chartView.leftAxis.axisMaximum = 10
             
@@ -113,25 +123,21 @@ public class AffectiveChartsSleepStageView: UIView {
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             
             let value = dataSorce[i]
-            let index = Double(i)*interval
+            let index = Double(i)*interval+(chartView.chartParam?.start ?? 0)
             if qualityList[arrayMapper.mapIndex(i)] == 1 {
-                if lastValue != value {
-                    
-                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: nil))
-                    
-                } else {
-                    if value == 9 {
-                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: awakeImage))
-                    } else if value == 7 {
-                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: remImage))
-                    } else if value == 5 {
-                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: n1Image))
-                    } else if value == 3 {
-                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: lightImage))
-                    } else if value == 1 {
-                        yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: deepImage))
-                    }
+                
+                if value == 9 {
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: awakeImage))
+                } else if value == 7 {
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: remImage))
+                } else if value == 5 {
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: n1Image))
+                } else if value == 3 {
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: lightImage))
+                } else if value == 1 {
+                    yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: deepImage))
                 }
+                
                 
                 lastValue = value
             } else {
@@ -235,3 +241,71 @@ public class AffectiveChartsSleepStageYFormatter: NSObject, AxisValueFormatter {
 
 
 
+public class AffectiveChartsSleepStageHourValueFormatter: NSObject, AxisValueFormatter {
+    private var startInterval: Double!
+    private var endInterval: Double!
+    private var values: [Double] = []
+    private let minStride: Int = 300
+    private var stdValue: Double = 0
+    init(start: Double, end: Double) {
+        self.startInterval = start
+        self.endInterval = end
+        let fromToValue = end - start
+        var strideValue: Int = minStride
+        if fromToValue < 1800  {
+            strideValue = minStride
+            lk_formatter.dateFormat = "HH:mm"
+        } else if fromToValue < 7200  {
+            strideValue = minStride * 6
+            lk_formatter.dateFormat = "HH:mm"
+        } else if fromToValue < 18000 {
+            strideValue = minStride * 12
+            lk_formatter.dateFormat = "HH:mm"
+        } else if fromToValue < 36000{
+            strideValue = minStride * 24
+            lk_formatter.dateFormat = "HH"
+        } else {
+            strideValue = minStride * 48
+            lk_formatter.dateFormat = "HH"
+        }
+    
+        if strideValue <= minStride {
+            
+        } else {
+            let startRemain = Int(start) % strideValue
+            let endRemain = Int(end) % strideValue
+            let from = Int(start) + strideValue - startRemain
+            let to = Int(end) - endRemain
+            for t in stride(from: from, through: to, by: strideValue) {
+                values.append(Double(t))
+            }
+
+            stdValue = Double(Int(start) % minStride > 150 ? Int(start) + (minStride - Int(start) % minStride) : Int(start) - Int(start) % minStride)
+            values = values.map({
+                round(($0-start))
+            })
+        }
+        print(stdValue)
+        print(values)
+        
+        
+        
+    }
+    
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if values.count > 0 {
+            axis?.entries = values
+        
+            var time = 0
+            time = Int(value+stdValue)
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            return date
+        } else {
+            var time = 0
+            time = Int(value+startInterval)
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            return date
+        }
+
+    }
+}

@@ -38,6 +38,30 @@ extension Array where Element == Int {
         
         return nil
     }
+    
+    func extendProportionally(to newSize: Int) -> [Element] {
+        guard !isEmpty else { return [] }
+        let totalRatio = Double(newSize) / Double(count)
+        
+        var result: [Element] = []
+        var remainingSlots = newSize
+        
+        for (index, element) in enumerated() {
+            let idealCount = Double(newSize) * Double(index + 1) / Double(count) - Double(result.count)
+            var actualCount = Int(round(idealCount))
+            
+            if index == count - 1 {
+                actualCount = remainingSlots
+            } else {
+                actualCount = Swift.min(actualCount, remainingSlots - (count - index - 1))
+            }
+            
+            result.append(contentsOf: Array(repeating: element, count: actualCount))
+            remainingSlots -= actualCount
+        }
+        
+        return result
+    }
 }
 
 

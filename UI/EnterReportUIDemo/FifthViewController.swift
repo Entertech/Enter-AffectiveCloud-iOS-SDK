@@ -17,9 +17,10 @@ class FifthViewController: UIViewController {
         if true {
             let stageView = AffectiveChartsSleepStageView()
             let param = AffectiveChartsSleepParameter()
-            let array = [0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2]
+            let array = [0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2, 0, 0, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 4, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2]
+            let quality = Array.init(repeating: 1, count: array.count)
             let start = Date().timeIntervalSince1970
-            let end = start + Double(array.count * 300)
+            let end = start + Double(array.count * 6)
             param.start = start
             param.end = end
             param.lineColors = [
@@ -34,7 +35,7 @@ class FifthViewController: UIViewController {
             param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
             param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
             param.text = ["Awake", "REM", "N1", "N2", "N3"]
-            stageView.setData(array, param: param)
+            stageView.setData(array, quality, param: param)
                 .stepTwoSetLayout()
                 .build()
             
@@ -46,67 +47,67 @@ class FifthViewController: UIViewController {
             }
         }
         
-        if true {
-            let stageView = AffectiveChartsSleepSingleLineView()
-            let param = AffectiveChartsSleepParameter()
-            var array = [Double]()
-            for e in 0..<64 {
-                array.append(Double(Int.random(in: 50..<84)))
-            }
-            let start = Date().timeIntervalSince1970
-            let end = start + Double(array.count * 300)
-            param.start = start
-            param.end = end
-            param.lineColors = [UIColor.colorWithHexString(hexColor: "#FF6682")]
-            param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
-            param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
-            param.xGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
-            param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
-            param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
-            stageView.setData(array, param: param)
-                .stepTwoSetLayout()
-                .build()
-            
-            self.view.addSubview(stageView)
-            stageView.snp.makeConstraints {
-                $0.top.equalTo(200)
-                $0.leading.equalTo(32)
-                $0.trailing.equalTo(-32)
-                $0.height.equalTo(132)
-            }
-        }
-        
-        if true {
-            let stageView = AffectiveChartsSleepPositionView()
-            let param = AffectiveChartsSleepParameter()
-            let array = [0, 0, 1, 1, 1, 4, 4, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 3, 3, 3, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2]
-            let start = Date().timeIntervalSince1970
-            let end = start + Double(array.count * 300)
-            param.start = start
-            param.end = end
-            param.lineColors = [UIColor.colorWithHexString(hexColor: "#FFC56F"),
-                                UIColor.colorWithHexString(hexColor: "#3479FF"),
-                                UIColor.colorWithHexString(hexColor: "#8B7AF3"),
-                                UIColor.colorWithHexString(hexColor: "#9C47F1"),
-                                UIColor.colorWithHexString(hexColor: "#3634A2")]
-            param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
-            param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
-            param.xGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
-            param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
-            param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
-            param.text = ["Upright", "Left", "Right", "Back", "Front"]
-            stageView.setData(array, param: param)
-                .stepTwoSetLayout()
-                .build()
-            
-            self.view.addSubview(stageView)
-            stageView.snp.makeConstraints {
-                $0.top.equalTo(350)
-                $0.leading.equalTo(32)
-                $0.trailing.equalTo(-32)
-                $0.height.equalTo(132)
-            }
-        }
+//        if true {
+//            let stageView = AffectiveChartsSleepSingleLineView()
+//            let param = AffectiveChartsSleepParameter()
+//            var array = [Double]()
+//            for e in 0..<64 {
+//                array.append(Double(Int.random(in: 50..<84)))
+//            }
+//            let start = Date().timeIntervalSince1970
+//            let end = start + Double(array.count * 300)
+//            param.start = start
+//            param.end = end
+//            param.lineColors = [UIColor.colorWithHexString(hexColor: "#FF6682")]
+//            param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
+//            param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
+//            param.xGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
+//            param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
+//            param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
+//            stageView.setData(array, param: param)
+//                .stepTwoSetLayout()
+//                .build()
+//            
+//            self.view.addSubview(stageView)
+//            stageView.snp.makeConstraints {
+//                $0.top.equalTo(200)
+//                $0.leading.equalTo(32)
+//                $0.trailing.equalTo(-32)
+//                $0.height.equalTo(132)
+//            }
+//        }
+//        
+//        if true {
+//            let stageView = AffectiveChartsSleepPositionView()
+//            let param = AffectiveChartsSleepParameter()
+//            let array = [0, 0, 1, 1, 1, 4, 4, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 3, 3, 3, 4, 2, 2, 2, 2, 3, 3, 3, 4, 4, 2, 2, 2, 2, 2]
+//            let start = Date().timeIntervalSince1970
+//            let end = start + Double(array.count * 300)
+//            param.start = start
+//            param.end = end
+//            param.lineColors = [UIColor.colorWithHexString(hexColor: "#FFC56F"),
+//                                UIColor.colorWithHexString(hexColor: "#3479FF"),
+//                                UIColor.colorWithHexString(hexColor: "#8B7AF3"),
+//                                UIColor.colorWithHexString(hexColor: "#9C47F1"),
+//                                UIColor.colorWithHexString(hexColor: "#3634A2")]
+//            param.xAxisLabelColor = UIColor.colorWithHexString(hexColor: "#A6A7AF")
+//            param.xAxisLineColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
+//            param.xGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
+//            param.yAxisLabelColor = UIColor.colorWithHexString(hexColor: "#C3C5C8")
+//            param.yGrideLineColor = UIColor.colorWithHexString(hexColor: "#DDE1EB")
+//            param.text = ["Upright", "Left", "Right", "Back", "Front"]
+//            stageView.setData(array, param: param)
+//                .stepTwoSetLayout()
+//                .build()
+//            
+//            self.view.addSubview(stageView)
+//            stageView.snp.makeConstraints {
+//                $0.top.equalTo(350)
+//                $0.leading.equalTo(32)
+//                $0.trailing.equalTo(-32)
+//                $0.height.equalTo(132)
+//            }
+//        }
         
     }
     

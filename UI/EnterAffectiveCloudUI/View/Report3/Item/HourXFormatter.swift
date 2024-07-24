@@ -69,59 +69,26 @@ public class AffectiveChartsSleepHourValueFormatter: NSObject, AxisValueFormatte
     init(start: Double, end: Double) {
         self.startInterval = start
         self.endInterval = end
-        let fromToValue = end - start
-        var strideValue: Int = minStride
-        if fromToValue < 3600  {
-            strideValue = minStride
+        if end - start < 21600 {
             lk_formatter.dateFormat = "HH:mm"
-        } else if fromToValue < 7200  {
-            strideValue = minStride * 5
-            lk_formatter.dateFormat = "HH:mm"
-        } else if fromToValue < 18000 {
-            strideValue = minStride * 15
-            lk_formatter.dateFormat = "HH:mm"
-        } else if fromToValue < 36000{
-            strideValue = minStride * 30
-            lk_formatter.dateFormat = "HH"
         } else {
-            strideValue = minStride * 60
             lk_formatter.dateFormat = "HH"
         }
-    
-        if strideValue <= minStride {
-            
-        } else {
-            let startRemain = Int(start) % strideValue
-            let endRemain = Int(end) % strideValue
-            let from = Int(start) + strideValue - startRemain
-            let to = Int(end) - endRemain
-            for t in stride(from: from, through: to, by: strideValue) {
-                values.append(Double(t))
-            }
-
-            stdValue = Double(Int(start) % minStride > 60 ? Int(start) + (minStride - Int(start) % minStride) : Int(start) - Int(start) % minStride)
-            values = values.map({
-                round(($0-start)/120)
-            })
-        }
-        
-        
-        
-        
+        let result = findDesiredTimes(start: Date(timeIntervalSince1970: start), end: Date(timeIntervalSince1970: end))
+        values = result.map({$0.timeIntervalSince1970})
+        print(start)
+        print(end)
+        print(values)
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         if values.count > 0 {
             axis?.entries = values
-        
-            var time = 0
-            time = Int(value*120+stdValue)
-            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value)))
             return date
         } else {
-            var time = 0
-            time = Int(value*120+startInterval)
-            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(time)))
+            let date = lk_formatter.string(from: Date(timeIntervalSince1970: TimeInterval(value)))
             return date
         }
 
@@ -156,4 +123,65 @@ extension Date {
     func endOfMonth() -> Date {
         return lk_calendar.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
     }
+}
+
+
+enum TimeType {
+    case tenMinutes
+    case thirtyMinutes
+    case oneHour
+    case twoHours
+}
+
+func findDesiredTimes(start: Date, end: Date) -> [Date] {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.hour, .minute], from: start, to: end)
+    let totalMinutes = components.hour! * 60 + components.minute!
+    
+    let timeType: TimeType
+    if totalMinutes < 60 {
+        timeType = .tenMinutes
+    } else if totalMinutes < 180 {
+        timeType = .thirtyMinutes
+    } else if totalMinutes < 360 {
+        timeType = .oneHour
+    } else {
+        timeType = .twoHours
+    }
+    
+    return generateTimeIntervals(start: start, end: end, type: timeType)
+}
+
+func generateTimeIntervals(start: Date, end: Date, type: TimeType) -> [Date] {
+    let calendar = Calendar.current
+    var current = start
+    var result: [Date] = []
+    
+    while current <= end {
+        let minutes = calendar.component(.minute, from: current)
+        let hours = calendar.component(.hour, from: current)
+        
+        switch type {
+        case .tenMinutes:
+            if minutes % 10 == 0 {
+                result.append(current)
+            }
+        case .thirtyMinutes:
+            if minutes % 30 == 0 {
+                result.append(current)
+            }
+        case .oneHour:
+            if minutes == 0 {
+                result.append(current)
+            }
+        case .twoHours:
+            if minutes == 0 && hours % 2 == 0 {
+                result.append(current)
+            }
+        }
+        
+        current = calendar.date(byAdding: .minute, value: 1, to: current)!
+    }
+    
+    return result
 }
