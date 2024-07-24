@@ -41,7 +41,6 @@ extension Array where Element == Int {
     
     func extendProportionally(to newSize: Int) -> [Element] {
         guard !isEmpty else { return [] }
-        let totalRatio = Double(newSize) / Double(count)
         
         var result: [Element] = []
         var remainingSlots = newSize
@@ -62,6 +61,7 @@ extension Array where Element == Int {
         
         return result
     }
+    
 }
 
 
@@ -71,5 +71,50 @@ extension Array where Element == Double {
         guard !nonZeroElements.isEmpty else { return 0 }
         let sum = nonZeroElements.reduce(0, +)
         return sum / Double(nonZeroElements.count)
+    }
+    
+    func extendProportionally(to newSize: Int) -> [Element] {
+        guard !isEmpty else { return [] }
+        
+        var result: [Element] = []
+        var remainingSlots = newSize
+        
+        for (index, element) in enumerated() {
+            let idealCount = Double(newSize) * Double(index + 1) / Double(count) - Double(result.count)
+            var actualCount = Int(round(idealCount))
+            
+            if index == count - 1 {
+                actualCount = remainingSlots
+            } else {
+                actualCount = Swift.min(actualCount, remainingSlots - (count - index - 1))
+            }
+            
+            result.append(contentsOf: Array(repeating: element, count: actualCount))
+            remainingSlots -= actualCount
+        }
+        
+        return result
+    }
+    
+    func resizeTo(_ newSize: Int) -> [Element] {
+        let needCount = newSize
+        var tmpArray = [Element]()
+        if self.count < needCount {
+            tmpArray.append(contentsOf: self.extendProportionally(to: needCount))
+        } else {
+            let remainder = self.count % needCount
+            var paddedArray: [Element]
+            if remainder > 0 {
+                paddedArray = self.extendProportionally(to: (self.count / needCount + 1) * needCount)
+            } else {
+                paddedArray = self
+            }
+            let strideNum = paddedArray.count / needCount
+            for i in stride(from: 0, to: paddedArray.count, by: strideNum) {
+                let pickArray = Array(paddedArray[i..<Swift.min(i+strideNum, paddedArray.count)])
+                tmpArray.append(pickArray.meanOfNonZeroElements())
+            }
+        }
+        return tmpArray
     }
 }

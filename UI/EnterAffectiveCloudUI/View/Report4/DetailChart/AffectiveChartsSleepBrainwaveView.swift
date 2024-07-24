@@ -19,7 +19,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     private let deltaBtn = UIButton()
     private let btnContentView = UIStackView()
     internal let chartView = AffectiveChartsSleepDetailCommonView()
-    internal var interval = 1
+    internal var interval = 0.6
     internal var gammaSouce: [Double] = []
     internal var betaSouce: [Double] = []
     internal var alphaSouce: [Double] = []
@@ -32,6 +32,7 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
     private var thetaEnable: Bool = true
     private var deltaEnable: Bool = true
     internal var separateY: [Int] = []
+    internal var limitSize: Double = 300
     private var btnEnableCount: Int {
         get {
             var count = 0
@@ -64,19 +65,16 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
         alphaSouce.removeAll()
         thetaSouce.removeAll()
         deltaSouce.removeAll()
-        for i in stride(from: 0, to: gamma.count, by: 200) {
-            let gammaTmp = Array(gamma[i..<min(i+200, gamma.count)])
-            let betaTmp = Array(beta[i..<min(i+200, beta.count)])
-            let alphaTmp = Array(alpha[i..<min(i+200, alpha.count)])
-            let thetaTmp = Array(theta[i..<min(i+200, theta.count)])
-            let deltaTmp = Array(delta[i..<min(i+200, delta.count)])
-            gammaSouce.append(gammaTmp.meanOfNonZeroElements())
-            betaSouce.append(betaTmp.meanOfNonZeroElements())
-            alphaSouce.append(alphaTmp.meanOfNonZeroElements())
-            thetaSouce.append(thetaTmp.meanOfNonZeroElements())
-            deltaSouce.append(deltaTmp.meanOfNonZeroElements())
-        }
         
+        let needCount = Int(limitSize) - 1
+  
+        gammaSouce.append(contentsOf: gamma.resizeTo(needCount))
+        betaSouce.append(contentsOf: beta.resizeTo(needCount))
+        alphaSouce.append(contentsOf: alpha.resizeTo(needCount))
+        thetaSouce.append(contentsOf: theta.resizeTo(needCount))
+        deltaSouce.append(contentsOf: delta.resizeTo(needCount))
+        
+        interval = Double(gamma.count) * 0.6 / Double(needCount)
 
         sourceArray = [gammaSouce, betaSouce, alphaSouce, thetaSouce, deltaSouce]
         gamaBtn.setTitleColor(param.lineColors[0], for: .selected)
@@ -204,15 +202,16 @@ public class AffectiveChartsSleepBrainwaveView: UIView {
                 let source = sourceArray[j][i]
                 minValue = min(minValue, Int(source))
                 maxValue = max(maxValue, Int(source))
+                let index = Double(i)*interval+(chartView.chartParam?.start ?? 0)+interval
                 if i < initIndex{  //为0的为无效数据
-                    yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(initValue)))
+                    yVals.append(ChartDataEntry(x: index, y: Double(initValue)))
                 } else {
                     if source == 0 {//为0的为无效数据
-                        yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(notZero)))
+                        yVals.append(ChartDataEntry(x: index, y: Double(notZero)))
                     } else {
                         notZero = Int(source)
                       
-                        yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(source)))
+                        yVals.append(ChartDataEntry(x: index, y: Double(source)))
                     }
                     
                 }

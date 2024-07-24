@@ -119,11 +119,11 @@ public class AffectiveChartsSleepStageView: UIView {
         
         
         var yVals: [ChartDataEntry] = []
-        var lastValue: Double = 0
+        
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             
             let value = dataSorce[i]
-            let index = Double(i)*interval+(chartView.chartParam?.start ?? 0)
+            let index = Double(i)*interval+(chartView.chartParam?.start ?? 0)+interval
             if qualityList[arrayMapper.mapIndex(i)] == 1 {
                 
                 if value == 9 {
@@ -138,8 +138,6 @@ public class AffectiveChartsSleepStageView: UIView {
                     yVals.append(ChartDataEntry(x: index, y: Double(dataSorce[i]), icon: deepImage))
                 }
                 
-                
-                lastValue = value
             } else {
                 yVals.append(ChartDataEntry(x: index, y: 9, icon: nil))
             }

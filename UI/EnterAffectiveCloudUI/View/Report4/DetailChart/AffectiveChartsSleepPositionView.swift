@@ -13,18 +13,32 @@ import SnapKit
 public class AffectiveChartsSleepPositionView: UIView {
 
     internal let chartView = AffectiveChartsSleepDetailCommonView()
-    internal var interval:Double = 1
+    internal var interval:Double = 30
     internal var dataSorce: [Double] = []
+    private let limitSize:Double = 301
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
     public func setData(_ array: [Int], param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
         
+        let needCount = Int(limitSize) - 1
         var tmpArray = [Int]()
-        for i in stride(from: 0, to: array.count, by: 4) {
-            let pickArray = Array(array[i..<min(i+4, array.count)])
-            tmpArray.append(pickArray.getMostFrequentValue() ?? 0)
+        if array.count < needCount {
+            tmpArray.append(contentsOf: array.extendProportionally(to: needCount))
+        } else {
+            let remainder = array.count % needCount
+            var paddedArray: [Int]
+            if remainder > 0 {
+                paddedArray = array.extendProportionally(to: (array.count / needCount + 1) * needCount)
+            } else {
+                paddedArray = array
+            }
+            let strideNum = paddedArray.count / needCount
+            for i in stride(from: 0, to: paddedArray.count, by: strideNum) {
+                let pickArray = Array(paddedArray[i..<min(i+strideNum, paddedArray.count)])
+                tmpArray.append(pickArray.getMostFrequentValue() ?? 0)
+            }
         }
         
         dataSorce.removeAll()
@@ -46,6 +60,10 @@ public class AffectiveChartsSleepPositionView: UIView {
             }
             
         }
+        
+        let totalTime = Double(30 * array.count)
+        interval = totalTime / Double(needCount)
+        
 
         chartView.xAxis.spaceMax = 0.01
         chartView.chartParam = param
@@ -80,8 +98,8 @@ public class AffectiveChartsSleepPositionView: UIView {
         
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             let value = dataSorce[i]
-       
-            yVals.append(ChartDataEntry(x: Double(i)*interval, y: Double(value)))
+            let xValue = Double(i)*interval+(chartView.chartParam?.start ?? 0)+interval
+            yVals.append(ChartDataEntry(x: xValue, y: Double(value)))
         }
         let set = LineChartDataSet(entries: yVals, label: "")
         

@@ -13,19 +13,17 @@ import SnapKit
 public class AffectiveChartsSleepSingleLineView: UIView {
 
     internal let chartView = AffectiveChartsSleepDetailCommonView()
-    internal var interval = 1
+    internal var interval: Double = 1
     internal var dataSorce: [Double] = []
     internal var separateY: [Int] = []
     /// 设置数据
     /// - Parameter array: 数据
     /// - Returns: self
-    public func setData(_ array: [Double], strideNum: Int, param: AffectiveChartsSleepParameter) -> Self {
+    public func setData(_ array: [Double], interval: Double, param: AffectiveChartsSleepParameter) -> Self {
         guard array.count > 0 else {return self}
-        var tmpArray = [Double]()
-        for i in stride(from: 0, to: array.count, by: strideNum) {
-            let pickArray = Array(array[i..<min(i+strideNum, array.count)])
-            tmpArray.append(pickArray.meanOfNonZeroElements())
-        }
+        self.interval = interval
+        var tmpArray = array.resizeTo(300)
+        self.interval = Double(array.count)*interval/300
         dataSorce.removeAll()
         dataSorce.append(contentsOf: tmpArray.smoothData())
         let list = tmpArray.filter({$0 > 0})
@@ -58,8 +56,8 @@ public class AffectiveChartsSleepSingleLineView: UIView {
         
         for i in stride(from: 0, to: dataSorce.count, by: 1) {
             let value = dataSorce[i]
-       
-            yVals.append(ChartDataEntry(x: Double(i*interval), y: Double(value)))
+            let index = Double(i)*interval+(chartView.chartParam?.start ?? 0)+interval
+            yVals.append(ChartDataEntry(x: index, y: Double(value)))
         }
         let set = LineChartDataSet(entries: yVals, label: "")
         
