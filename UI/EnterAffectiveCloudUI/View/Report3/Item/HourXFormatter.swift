@@ -127,6 +127,8 @@ extension Date {
 
 
 enum TimeType {
+    case twoMinutes
+    case fiveMinutes
     case tenMinutes
     case thirtyMinutes
     case oneHour
@@ -139,7 +141,11 @@ func findDesiredTimes(start: Date, end: Date) -> [Date] {
     let totalMinutes = components.hour! * 60 + components.minute!
     
     let timeType: TimeType
-    if totalMinutes < 60 {
+    if totalMinutes < 10 {
+        timeType = .twoMinutes
+    } else if totalMinutes < 30 {
+        timeType = .fiveMinutes
+    } else if totalMinutes < 60 {
         timeType = .tenMinutes
     } else if totalMinutes < 180 {
         timeType = .thirtyMinutes
@@ -176,6 +182,14 @@ func generateTimeIntervals(start: Date, end: Date, type: TimeType) -> [Date] {
             }
         case .twoHours:
             if minutes == 0 && hours % 2 == 0 {
+                result.append(current)
+            }
+        case .twoMinutes:
+            if minutes % 2 == 0 {
+                result.append(current)
+            }
+        case .fiveMinutes:
+            if minutes % 5 == 0 {
                 result.append(current)
             }
         }
