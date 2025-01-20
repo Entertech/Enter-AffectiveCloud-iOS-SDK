@@ -6,7 +6,7 @@
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import Charts
+import DGCharts
 import UIKit
 
 class AffectiveCharts3CandleCommonView: CombinedChartView {
@@ -174,7 +174,7 @@ class AffectiveCharts3CandleCommonView: CombinedChartView {
             set.barSpace = 0.1
         }
         
-        set.barCornerRadius = 50
+//        set.barCornerRadius = 50
         return CandleChartData(dataSet: set)
     }
     

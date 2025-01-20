@@ -18,7 +18,7 @@ public class HRVIntroView: UIView {
     
     public var titleText: String = ""  {
         willSet {
-            headView.titleText = newValue
+            titleLabel.text = newValue
         }
     }
     

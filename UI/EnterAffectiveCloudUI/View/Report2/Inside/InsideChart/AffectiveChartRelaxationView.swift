@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveChartRelaxationView: UIView, ChartViewDelegate {
     /// 数据上传周期，用于计算图表x轴间隔

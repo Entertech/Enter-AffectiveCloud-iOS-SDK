@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 import SnapKit
 
 public class AffectiveChartBrainSpectrumView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate{

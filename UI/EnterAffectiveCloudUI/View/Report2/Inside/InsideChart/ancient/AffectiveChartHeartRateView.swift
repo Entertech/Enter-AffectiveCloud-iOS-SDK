@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveChartHeartRateView: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     

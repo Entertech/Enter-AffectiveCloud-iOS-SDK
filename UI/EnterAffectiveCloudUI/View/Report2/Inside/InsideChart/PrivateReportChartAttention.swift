@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class PrivateReportChartAttention: UIView, ChartViewDelegate, UIGestureRecognizerDelegate {
     public var lineColor: UIColor = UIColor.colorWithHexString(hexColor: "#4B5DCC") {

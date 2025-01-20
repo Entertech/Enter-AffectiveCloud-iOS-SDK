@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
     private let front1View = UIView()
@@ -135,7 +135,7 @@ public class AffectiveCharts3Pressure: AffectiveCharts3LineCommonView {
                     = [startColorComponents[0], startColorComponents[1], startColorComponents[2], startColorComponents[3], endColorComponents[0], endColorComponents[1], endColorComponents[2], endColorComponents[3]]
         let locations:[CGFloat] = [0.0, 1.0]
         guard let gradient = CGGradient(colorSpace: colorSpace,colorComponents: colorComponents,locations: locations,count: 2) else { return self}
-        chartView.gridGradient = gradient
+//        chartView.gridGradient = gradient
         switch theme.style {
         case .session:
             chartView.dragEnabled = true

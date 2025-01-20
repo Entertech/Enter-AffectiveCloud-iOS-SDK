@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charts
+import DGCharts
 let daySeconds:Double = 86400
 public class AffectiveCharts3HourValueFormatter: NSObject, AxisValueFormatter {
     

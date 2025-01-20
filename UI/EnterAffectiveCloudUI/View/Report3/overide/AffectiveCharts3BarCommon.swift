@@ -6,7 +6,7 @@
 //  Copyright © 2022 Hangzhou Enter Electronic Technology Co., Ltd. All rights reserved.
 //
 
-import Charts
+import DGCharts
 
 class AffectiveCharts3RoundCornerBar: BarChartView {
     var theme: AffectiveChart3Theme! 
@@ -95,13 +95,13 @@ class AffectiveCharts3RoundCornerBar: BarChartView {
         var set1: BarChartDataSet! = nil
         if let set = self.data?.first as? BarChartDataSet {
             set1 = set
-            set1.roundedCorners = [.topLeft, .topRight]
+//            set1.roundedCorners = [.topLeft, .topRight]
             set1.replaceEntries(yVals)
             self.data?.notifyDataChanged()
             self.notifyDataSetChanged()
         } else {
             set1 = BarChartDataSet(entries: yVals, label: "The year")
-            set1.roundedCorners = [.topLeft, .topRight]
+//            set1.roundedCorners = [.topLeft, .topRight]
             set1.colors = [theme.themeColor]
             set1.drawValuesEnabled = false
             let data = BarChartData(dataSet: set1)

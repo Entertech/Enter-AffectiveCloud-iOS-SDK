@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import Charts
+import DGCharts
 
 public protocol AffectiveCharts3RhythmsLineDelegate: AnyObject {
     func setLines(value: Int)

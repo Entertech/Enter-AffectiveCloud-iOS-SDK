@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charts
+import DGCharts
 
 public class AffectiveChartCoherenceView2: UIView, ChartViewDelegate{
     
