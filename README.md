@@ -45,9 +45,19 @@
 ```
 
 target 'Your Target' do
-    pod 'EnterAffectiveCloud'
+    pod 'EnterAffectiveCloud', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master'
     #(可选)
-    pod 'EnterAffectiveCloudUI'
+    pod 'EnterAffectiveCloudUI', :git => 'https://github.com/Entertech/Enter-AffectiveCloud-iOS-SDK.git', :branch => 'master'
+end
+
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      end
+    end
+  end
 end
 ```
 运行 `pod  install` 安装命令.
