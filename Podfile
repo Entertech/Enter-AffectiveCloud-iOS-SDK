@@ -13,7 +13,7 @@ end
 
 def ui
   pod 'SnapKit'
-  pod 'Charts', :git => "https://github.com/ET-LINK/Charts.git", :branch => 'enter/round_corner_bar'
+  pod 'DGCharts'
   pod 'FluentDarkModeKit'
 end
 
